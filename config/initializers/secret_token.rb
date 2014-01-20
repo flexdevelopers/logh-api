@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-LoghApi::Application.config.secret_key_base = '77d999814d0a81ab14296a9c87e240fefbc7888af1e24306a97a1f89af2db50840466106204123d7a8b64be8f6c6249a56a8dc407d7d0822d1a95ccc36a6be17'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+LoghApi::Application.config.secret_key_base = secure_token
