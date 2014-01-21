@@ -8,7 +8,7 @@
 # You can use `rake secret` to generate a secure secret key.
 
 # Make sure your secret_key_base is kept private
-# if you're sharing your code publicly.
+# if you are sharing your code publicly.
 require 'securerandom'
 
 def secure_token
