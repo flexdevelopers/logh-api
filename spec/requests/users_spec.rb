@@ -11,4 +11,13 @@ describe 'Users API' do
     end
   end
 
+  describe 'GET /users/:id' do
+    it 'returns a user' do
+      user = FactoryGirl.create(:user)
+      get user_path(user)
+      expect(response).to be_success
+      expect(json['email']).to eq(user.email)
+    end
+  end
+
 end
