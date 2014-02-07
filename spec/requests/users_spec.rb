@@ -4,7 +4,10 @@ describe 'Users API' do
   before { FactoryGirl.create(:api_key) }
 
   describe 'GET /users' do
-    before { FactoryGirl.create_list(:user, 10) }
+    before do
+      User.destroy_all
+      FactoryGirl.create_list(:user, 10)
+    end
     context 'with no api key' do
       it 'returns an unauthorized status' do
         get api_users_path
