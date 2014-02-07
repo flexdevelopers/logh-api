@@ -9,7 +9,7 @@ describe 'Leagues API' do
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
-      get "/api/users/#{user.id}/leagues"
+      get api_user_leagues_path(user)
       expect(response).to be_success
       expect(json.length).to eq(5)
     end
