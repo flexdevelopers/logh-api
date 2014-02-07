@@ -1,6 +1,6 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:show]
-  before_action :set_league, only: [:show]
+  before_action :set_user, only: [:show, :update]
+  before_action :set_league, only: [:show, :update]
 
   def index
     @leagues = League.find_by(user_id: params[:user_id])
@@ -11,6 +11,14 @@ class API::LeaguesController < ApplicationController
     render json: @league
   end
 
+  def update
+    if @league.update_attributes(league_params)
+      head :no_content
+    else
+      render json: @league.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
     def set_user
@@ -19,5 +27,9 @@ class API::LeaguesController < ApplicationController
 
     def set_league
       @league = @user.leagues.find(params[:id])
+    end
+
+    def league_params
+      params.require(:league).permit(:name)
     end
 end
