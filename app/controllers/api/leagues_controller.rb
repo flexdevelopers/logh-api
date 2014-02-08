@@ -1,9 +1,9 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:show, :create, :update]
+  before_action :set_user, only: [:index, :show, :create, :update]
   before_action :set_league, only: [:show, :update]
 
   def index
-    @leagues = League.find_by(user_id: params[:user_id])
+    @leagues = @user.leagues
     render json: @leagues
   end
 
