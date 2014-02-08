@@ -1,5 +1,5 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:show, :create, :update]
   before_action :set_league, only: [:show, :update]
 
   def index
@@ -9,6 +9,15 @@ class API::LeaguesController < ApplicationController
 
   def show
     render json: @league
+  end
+
+  def create
+    @league = @user.leagues.new(league_params)
+    if @league.save
+      render json: @league, status: :created, location: api_user_league_path(@user, @league)
+    else
+      render json: @league.errors, status: :unprocessable_entity
+    end
   end
 
   def update

@@ -26,6 +26,15 @@ describe 'Leagues API' do
     end
   end
 
+  describe 'POST /api/users/:user_id/leagues' do
+    it 'creates a league for a user' do
+      user = FactoryGirl.create(:user)
+      league_params = FactoryGirl.attributes_for(:league)
+      expect { post api_user_leagues_path(user), league: league_params }.to change(League, :count).by(1)
+    end
+
+  end
+
   describe 'PATCH /api/users/:user_id/leagues/:id' do
     it 'updates a league for a user' do
       user = FactoryGirl.create(:user)
