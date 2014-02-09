@@ -1,6 +1,6 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:index, :show, :create, :update]
-  before_action :set_league, only: [:show, :update]
+  before_action :set_user, only: [:index, :show, :create, :update, :destroy]
+  before_action :set_league, only: [:show, :update, :destroy]
 
   def index
     @leagues = @user.leagues
@@ -26,6 +26,11 @@ class API::LeaguesController < ApplicationController
     else
       render json: @league.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @league.destroy
+    head :no_content
   end
 
   private

@@ -46,4 +46,12 @@ describe 'Leagues API' do
       expect(league[:name]).to eq('Good News Bears')
     end
   end
+
+  describe 'DELETE /api/users/:user_id/leagues/:id' do
+    it 'destroys a league for a user' do
+      user = FactoryGirl.create(:user)
+      league = FactoryGirl.create(:league, user: user)
+      expect { delete api_user_league_path(user, league) }.to change(League, :count).by(-1)
+    end
+  end
 end
