@@ -1,5 +1,5 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:index, :show, :create, :update, :destroy]
+  before_action :set_user, only: [:index, :show, :new, :create, :update, :destroy]
   before_action :set_league, only: [:show, :update, :destroy]
 
   def index
@@ -8,6 +8,11 @@ class API::LeaguesController < ApplicationController
   end
 
   def show
+    render json: @league
+  end
+
+  def new
+    @league = @user.leagues.new
     render json: @league
   end
 
