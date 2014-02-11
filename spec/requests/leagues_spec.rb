@@ -4,16 +4,20 @@ describe 'Leagues API' do
 
   describe 'GET /api/users/:user_id/leagues' do
     it 'returns a list of leagues for the specified user' do
+      NUMBER_OF_ACTIVE_LEAGUES = 5
       user = FactoryGirl.create(:user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
-      FactoryGirl.create(:league, user: user)
+      FactoryGirl.create(:league, active: false, user: user)
       get api_user_leagues_path(user)
       expect(response).to be_success
-      expect(json.length).to eq(6)
+      expect(json.length).to eq(NUMBER_OF_ACTIVE_LEAGUES)
+      json.each do |league|
+        expect(league['active']).to be_true
+      end
     end
   end
 

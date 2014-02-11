@@ -3,7 +3,7 @@ class API::LeaguesController < ApplicationController
   before_action :set_league, only: [:show, :update, :destroy]
 
   def index
-    @leagues = @user.leagues
+    @leagues = @user.leagues.active
     render json: @leagues
   end
 
