@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-describe 'Leagues API' do
+describe API::LeaguesController do
 
-  describe 'GET /api/users/:user_id/leagues' do
+  # GET /api/users/:user_id/leagues
+  describe '#index' do
     it 'returns a list of leagues for the specified user' do
       NUMBER_OF_ACTIVE_LEAGUES = 5
       user = FactoryGirl.create(:user)
@@ -21,7 +22,8 @@ describe 'Leagues API' do
     end
   end
 
-  describe 'GET /api/users/:user_id/leagues/:id' do
+  # GET /api/users/:user_id/leagues/:id
+  describe '#show' do
     it 'returns a league for a user' do
       user = FactoryGirl.create(:user)
       league = FactoryGirl.create(:league, user: user)
@@ -31,7 +33,8 @@ describe 'Leagues API' do
     end
   end
 
-  describe 'GET /api/users/:user_id/leagues/new' do
+  # GET /api/users/:user_id/leagues/new
+  describe '#new' do
     it 'returns a new league for a user' do
       user = FactoryGirl.create(:user)
       get new_api_user_league_path(user)
@@ -39,7 +42,8 @@ describe 'Leagues API' do
     end
   end
 
-  describe 'POST /api/users/:user_id/leagues' do
+  # POST /api/users/:user_id/leagues
+  describe '#create' do
     it 'creates a league for a user' do
       user = FactoryGirl.create(:user)
       league_params = FactoryGirl.attributes_for(:league)
@@ -48,7 +52,8 @@ describe 'Leagues API' do
 
   end
 
-  describe 'PATCH /api/users/:user_id/leagues/:id' do
+  # PATCH/PUT /api/users/:user_id/leagues/:id
+  describe '#update' do
     it 'updates a league for a user' do
       user = FactoryGirl.create(:user)
       league = FactoryGirl.create(:league, user: user)
@@ -59,7 +64,8 @@ describe 'Leagues API' do
     end
   end
 
-  describe 'DELETE /api/users/:user_id/leagues/:id' do
+  # DELETE /api/users/:user_id/leagues/:id
+  describe '#destroy' do
     it 'destroys a league for a user' do
       user = FactoryGirl.create(:user)
       league = FactoryGirl.create(:league, user: user)

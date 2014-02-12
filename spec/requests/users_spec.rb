@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe 'Users API' do
+describe API::UsersController do
   before { FactoryGirl.create(:api_key) }
 
-  describe 'GET /users' do
+  # GET /api/users
+  describe '#index' do
     before do
       User.destroy_all
       FactoryGirl.create_list(:user, 10)
@@ -23,7 +24,8 @@ describe 'Users API' do
     end
   end
 
-  describe 'GET /users/:id' do
+  # GET /api/users/:id
+  describe '#show' do
     context 'with no api key' do
       it 'returns an unauthorized status' do
         user = FactoryGirl.create(:user)
@@ -41,7 +43,8 @@ describe 'Users API' do
     end
   end
 
-  describe 'GET /users/new' do
+  # GET /api/users/new
+  describe '#new' do
     context 'with no api key' do
       it 'returns an unauthorized status' do
         get new_api_user_path
@@ -56,7 +59,8 @@ describe 'Users API' do
     end
   end
 
-  describe 'POST /users' do
+  # POST /api/users
+  describe '#create' do
     context 'with no api key' do
       it 'does not create a user' do
         user_params = FactoryGirl.attributes_for(:user)
@@ -71,7 +75,8 @@ describe 'Users API' do
     end
   end
 
-  describe 'PATCH /users/:id' do
+  # PATCH/PUT /api/users/:id
+  describe '#update' do
     context 'with no api key' do
       it 'does not update a user' do
         user = FactoryGirl.create(:user)
@@ -92,7 +97,8 @@ describe 'Users API' do
     end
   end
 
-  describe 'DELETE /users/:id' do
+  # DELETE /api/users/:id
+  describe '#destroy' do
     context 'with no api key' do
       it 'does not delete a user' do
         user = FactoryGirl.create(:user)
