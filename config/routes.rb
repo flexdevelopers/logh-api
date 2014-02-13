@@ -1,10 +1,15 @@
 LoghApi::Application.routes.draw do
   namespace :api do
-    resources :users, except: [:edit] do
+    resources :users, only: [:index, :show, :new, :create, :update, :destroy] do
       resources :leagues, only: [:index, :new, :create]
+      resources :teams, only: [:index]
     end
 
-    resources :leagues, only: [:show, :update, :destroy]
+    resources :leagues, only: [:index, :show, :update, :destroy] do
+      resources :teams, only: [:index, :new, :create]
+    end
+
+    resources :teams, only: [:index, :show, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
