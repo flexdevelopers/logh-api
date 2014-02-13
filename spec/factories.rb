@@ -9,6 +9,11 @@ FactoryGirl.define do
     league.association  :user
   end
 
+  factory :team do |team|
+    name              'Fire Breathing Rubber Duckies'
+    team.association  :league
+  end
+
   factory :api_key do
     access_token  'foobaz'
   end
