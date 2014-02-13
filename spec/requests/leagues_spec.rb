@@ -3,17 +3,21 @@ require 'spec_helper'
 describe API::LeaguesController do
 
   # GET /api/leagues
-  #TODO - beef this up
   describe '#index - all leagues' do
     it 'returns a list of all leagues' do
+      FactoryGirl.create(:league, active: true)
+      FactoryGirl.create(:league, active: true)
+      FactoryGirl.create(:league, active: false)
       get api_leagues_path
+      expect(response).to be_success
+      expect(json.length).to eq(3)
     end
   end
 
   # GET /api/users/:user_id/leagues
   describe '#index - user leagues' do
-    it 'returns a list of leagues for the specified user' do
-      NUMBER_OF_ACTIVE_LEAGUES = 5
+    it 'returns a list of active leagues for the specified user' do
+      NUMBER_OF_ACTIVE_LEAGUES_FOR_USER = 5
       user = FactoryGirl.create(:user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
@@ -23,7 +27,7 @@ describe API::LeaguesController do
       FactoryGirl.create(:league, active: false, user: user)
       get api_user_leagues_path(user)
       expect(response).to be_success
-      expect(json.length).to eq(NUMBER_OF_ACTIVE_LEAGUES)
+      expect(json.length).to eq(NUMBER_OF_ACTIVE_LEAGUES_FOR_USER)
       json.each do |league|
         expect(league['active']).to be_true
       end
@@ -31,14 +35,12 @@ describe API::LeaguesController do
   end
 
   # GET /api/leagues/:id
-  # TODO - revisit
   describe '#show' do
     it 'returns a league' do
-      user = FactoryGirl.create(:user)
-      league = FactoryGirl.create(:league, user: user)
+      league = FactoryGirl.create(:league)
       get api_league_path(league)
       expect(response).to be_success
-      expect(json[:name]).should == user[:name]
+      expect(json['name']).should == league[:name]
     end
   end
 
@@ -52,12 +54,11 @@ describe API::LeaguesController do
   end
 
   # POST /api/users/:user_id/leagues
-  # TODO - revisit
   describe '#create' do
     it 'creates a league for a user' do
       user = FactoryGirl.create(:user)
       league_params = FactoryGirl.attributes_for(:league)
-      expect { post api_user_leagues_path(user), league: league_params }.to change(League, :count).by(1)
+      expect { post api_user_leagues_path(user), league: league_params }.to change(user.leagues, :count).by(1)
     end
 
   end
