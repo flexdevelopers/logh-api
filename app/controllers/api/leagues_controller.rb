@@ -2,6 +2,8 @@ class API::LeaguesController < ApplicationController
   before_action :set_user, only: [:new, :create]
   before_action :set_league, only: [:show, :update, :destroy]
 
+  # GET /api/leagues
+  # GET /api/leagues.json
   # GET /api/users/:user_id/leagues
   # GET /api/users/:user_id/leagues.json
   def index
@@ -14,8 +16,8 @@ class API::LeaguesController < ApplicationController
     render json: @leagues
   end
 
-  # GET /api/users/:user_id/leagues/1
-  # GET /api/users/:user_id/leagues/1.json
+  # GET /api/leagues/1
+  # GET /api/leagues/1.json
   def show
     render json: @league
   end
@@ -38,8 +40,8 @@ class API::LeaguesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/users/:user_id/leagues/1
-  # PATCH/PUT /api/users/:user_id/leagues/1.json
+  # PATCH/PUT /api/leagues/1
+  # PATCH/PUT /api/leagues/1.json
   def update
     if @league.update_attributes(league_params)
       head :no_content
@@ -48,8 +50,8 @@ class API::LeaguesController < ApplicationController
     end
   end
 
-  # DELETE /api/users/:user_id/leagues/1
-  # DELETE /api/users/:user_id/leagues/1.json
+  # DELETE /api/leagues/1
+  # DELETE /api/leagues/1.json
   def destroy
     @league.destroy
     head :no_content
