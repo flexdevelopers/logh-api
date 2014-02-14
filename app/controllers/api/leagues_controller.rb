@@ -8,7 +8,7 @@ class API::LeaguesController < ApplicationController
   # GET /api/users/:user_id/leagues.json
   def index
     if @user
-      @leagues = @user.leagues.active
+      @leagues = @user.leagues
     else
       @leagues = League.all
     end

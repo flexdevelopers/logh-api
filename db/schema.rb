@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214040738) do
+ActiveRecord::Schema.define(version: 20140214214210) do
 
   create_table "leagues", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.boolean  "active",     default: true
   end
 
   create_table "teams", force: true do |t|
