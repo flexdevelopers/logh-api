@@ -22,13 +22,6 @@ class API::LeaguesController < ApplicationController
     render json: @league
   end
 
-  # GET /api/users/:user_id/leagues/new
-  # GET /api/users/:user_id/leagues/new.json
-  def new
-    @league = @user.leagues.new
-    render json: @league
-  end
-
   # POST /api/users/:user_id/leagues
   # POST /api/users/:user_id/leagues.json
   def create

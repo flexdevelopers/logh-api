@@ -26,12 +26,6 @@ class API::TeamsController < ApplicationController
     render json: @team
   end
 
-  # GET /api/leagues/:league_id/teams/new
-  # GET /api/leagues/:league_id/teams/new.json
-  def new
-    render json: {}
-  end
-
   # POST /api/leagues/:league_id/teams
   # POST /api/leagues/:league_id/teams.json
   def create

@@ -44,15 +44,6 @@ describe API::LeaguesController do
     end
   end
 
-  # GET /api/users/:user_id/leagues/new
-  describe '#new' do
-    it 'returns a new league for a user' do
-      user = FactoryGirl.create(:user)
-      get new_api_user_league_path(user)
-      expect(response).to be_success
-    end
-  end
-
   # POST /api/users/:user_id/leagues
   describe '#create' do
     it 'creates a league for a user' do

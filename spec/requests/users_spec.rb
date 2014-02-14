@@ -43,22 +43,6 @@ describe API::UsersController do
     end
   end
 
-  # GET /api/users/new
-  describe '#new' do
-    context 'with no api key' do
-      it 'returns an unauthorized status' do
-        get new_api_user_path
-        response.status.should be(401)
-      end
-    end
-    context 'with a valid api key' do
-      it 'returns a new user' do
-        get new_api_user_path, access_token: APIKey.first[:access_token]
-        expect(response).to be_success
-      end
-    end
-  end
-
   # POST /api/users
   describe '#create' do
     context 'with no api key' do

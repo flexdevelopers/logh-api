@@ -15,13 +15,6 @@ class API::UsersController < ApplicationController
     render json: @user
   end
 
-  # GET /api/users/new
-  # GET /api/users/new.json
-  def new
-    @user = User.new
-    render json: @user
-  end
-
   # POST /api/users
   # POST /api/users.json
   def create

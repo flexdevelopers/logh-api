@@ -50,15 +50,6 @@ describe API::TeamsController do
     end
   end
 
-  # GET /api/leagues/:league_id/teams/new
-  describe '#new' do
-    it 'returns a new team for a specified league' do
-      league = FactoryGirl.create(:league)
-      get new_api_league_team_path(league)
-      expect(response).to be_success
-    end
-  end
-
   # POST /api/leagues/:league_id/teams
   describe '#create' do
     it 'creates a team for a specified league' do
