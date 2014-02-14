@@ -7,5 +7,25 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.destroy_all
-User.create(email: 'foo@bar.com', password: 'foobar')
-User.create(email: 'bob@foo.com', password: 'bobfoo')
+League.destroy_all
+Team.destroy_all
+
+user1 = User.create!(email: 'foo@bar.com', password: 'foobar')
+user2 = User.create!(email: 'bob@foo.com', password: 'bobfoo')
+
+5.times do |i|
+  League.create!(name: "Foo League ##{i}", user: user1)
+  League.create!(name: "Bob League ##{i}", user: user2)
+end
+
+user1_league = League.find_by(user: user1)
+5.times do |i|
+  Team.create!(name: "Foo Team ##{i}", league: user1_league)
+end
+
+user2_league = League.find_by(user: user2)
+5.times do |i|
+  Team.create!(name: "Bob Team ##{i}", league: user2_league)
+end
+
+
