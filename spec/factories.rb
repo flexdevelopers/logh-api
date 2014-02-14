@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :user do
     email    'foo@bar.com'
     password 'foobar'
@@ -14,7 +15,4 @@ FactoryGirl.define do
     team.association  :league
   end
 
-  factory :api_key do
-    access_token  'foobaz'
-  end
 end

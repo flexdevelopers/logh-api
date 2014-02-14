@@ -1,6 +1,5 @@
 class API::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :restrict_access
 
   # GET /api/users
   # GET /api/users.json
@@ -44,6 +43,7 @@ class API::UsersController < ApplicationController
   end
 
   private
+
     def set_user
       @user = User.find(params[:id])
     end
@@ -53,8 +53,4 @@ class API::UsersController < ApplicationController
       params.require(:user).permit(:email, :password)
     end
 
-    def restrict_access
-      api_key = APIKey.find_by(access_token: params[:access_token])
-      head :unauthorized unless api_key
-    end
 end
