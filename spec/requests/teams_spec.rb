@@ -46,7 +46,7 @@ describe API::TeamsController do
       team = FactoryGirl.create(:team)
       get api_team_path(team)
       expect(response).to be_success
-      expect(json['name']).should == 'Fire Breathing Rubber Duckies'
+      expect(json['name']).to eq('Fire Breathing Rubber Duckies')
     end
   end
 

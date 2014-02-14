@@ -40,7 +40,7 @@ describe API::LeaguesController do
       league = FactoryGirl.create(:league)
       get api_league_path(league)
       expect(response).to be_success
-      expect(json['name']).should == league[:name]
+      expect(json['name']).to eq(league.name)
     end
   end
 
