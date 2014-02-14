@@ -1,5 +1,5 @@
 class API::LeaguesController < ApplicationController
-  before_action :set_user, only: [:new, :create]
+  before_action :set_user, only: [:index, :create]
   before_action :set_league, only: [:show, :update, :destroy]
 
   # GET /api/leagues
@@ -7,8 +7,7 @@ class API::LeaguesController < ApplicationController
   # GET /api/users/:user_id/leagues
   # GET /api/users/:user_id/leagues.json
   def index
-    if params[:user_id]
-      set_user
+    if @user
       @leagues = @user.leagues.active
     else
       @leagues = League.all
@@ -53,7 +52,7 @@ class API::LeaguesController < ApplicationController
   private
 
     def set_user
-      @user = User.find(params[:user_id])
+      @user = User.find(params[:user_id]) if params[:user_id]
     end
 
     def set_league
