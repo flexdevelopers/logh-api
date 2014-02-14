@@ -4,4 +4,5 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:leagues) }
+  it { should respond_to(:teams) }
 end
