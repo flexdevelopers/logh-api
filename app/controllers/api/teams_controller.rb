@@ -1,6 +1,6 @@
 class API::TeamsController < ApplicationController
   before_action :set_user, only: [:index]
-  before_action :set_league, only: [:index, :new, :create]
+  before_action :set_league, only: [:index, :create]
   before_action :set_team, only: [:show, :update, :destroy]
 
   # GET /api/teams
