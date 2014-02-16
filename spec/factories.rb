@@ -15,4 +15,7 @@ FactoryGirl.define do
     team.association  :league
   end
 
+  factory :pick do
+  end
+
 end
