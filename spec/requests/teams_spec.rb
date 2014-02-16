@@ -54,7 +54,7 @@ describe API::TeamsController do
   describe '#create' do
     it 'creates a team for a specified league' do
       team = FactoryGirl.create(:team)
-      expect { post api_league_teams_path(team.league, team), team: team.attributes }.to change(team.league.teams, :count).by(1)
+      expect { post api_league_teams_path(team.league), team: team.attributes }.to change(team.league.teams, :count).by(1)
     end
   end
 
