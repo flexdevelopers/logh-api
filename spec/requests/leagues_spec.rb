@@ -66,5 +66,11 @@ describe API::LeaguesController do
       league = FactoryGirl.create(:league)
       expect { delete api_league_path(league) }.to change(League, :count).by(-1)
     end
+    it 'destroys all the teams for the destroyed team' do
+      league = FactoryGirl.create(:league)
+      team1 = FactoryGirl.create(:team, league: league)
+      team2 = FactoryGirl.create(:team, league: league)
+      expect { delete api_league_path(league) }.to change(Team, :count).by(-2)
+    end
   end
 end
