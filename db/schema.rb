@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216000008) do
+ActiveRecord::Schema.define(version: 20140216205217) do
 
   create_table "leagues", force: true do |t|
     t.string   "name"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20140216000008) do
     t.integer  "user_id"
     t.string   "password"
     t.integer  "max_teams_per_user", default: 0
+  end
+
+  create_table "picks", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "team_id"
   end
 
   create_table "teams", force: true do |t|
