@@ -1,9 +1,10 @@
 class API::PicksController < ApplicationController
+  before_action :set_team, only: [:index, :create]
+  before_action :set_pick, only: [:show, :update, :destroy]
 
   # GET /api/teams/:team_id/picks
   # GET /api/teams/:team_id/picks.json
   def index
-    @team = Team.find(params[:team_id])
     @picks = @team.picks
     render json: @picks
   end
@@ -11,14 +12,12 @@ class API::PicksController < ApplicationController
   # GET /api/picks/1
   # GET /api/picks/1.json
   def show
-    @pick = Pick.find(params[:id])
     render json: @pick
   end
 
   # POST /api/teams/:team_id/picks
   # POST /api/teams/:team_id/picks.json
   def create
-    @team = Team.find(params[:team_id])
     @pick = @team.picks.new(params[:pick])
     if @pick.save
       render json: @pick, status: :created, location: api_pick_path(@pick)
@@ -30,7 +29,6 @@ class API::PicksController < ApplicationController
   # PATCH/PUT /api/picks/1
   # PATCH/PUT /api/picks/1.json
   def update
-    @pick = Pick.find(params[:id])
     if @pick.update(pick_params)
       head :no_content
     else
@@ -41,15 +39,23 @@ class API::PicksController < ApplicationController
   # DELETE /api/picks/1
   # DELETE /api/picks/1.json
   def destroy
-    @pick = Pick.find(params[:id])
     @pick.destroy
     head :no_content
   end
 
   private
 
+    def set_team
+      @team = Team.find(params[:team_id])
+    end
+
+    def set_pick
+      @pick = Pick.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
     def pick_params
-      params.require(:pick).permit(:team)
+      params.require(:pick).permit()
     end
 
 end
