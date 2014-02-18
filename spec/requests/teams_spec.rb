@@ -75,6 +75,14 @@ describe API::TeamsController do
       team = FactoryGirl.create(:team)
       expect { delete api_team_path(team) }.to change(Team, :count).by(-1)
     end
+    it 'deletes all the picks for the deleted team' do
+      team = FactoryGirl.create(:team)
+      pick1 = FactoryGirl.create(:pick, team: team)
+      pick2 = FactoryGirl.create(:pick, team: team)
+      expect(team.picks).to include(pick1)
+      expect(team.picks).to include(pick2)
+      expect { delete api_team_path(team) }.to change(Pick, :count).by(-2)
+    end
   end
 
 end
