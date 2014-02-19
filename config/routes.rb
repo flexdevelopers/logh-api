@@ -6,10 +6,10 @@ LoghApi::Application.routes.draw do
     end
 
     resources :leagues, only: [:index, :show, :update, :destroy] do
-      resources :teams, only: [:index, :create]
+      resources :teams, only: [:index, :show, :create, :update, :destroy]
     end
 
-    resources :teams, only: [:index, :show, :update, :destroy] do
+    resources :teams, only: [:index] do
       resources :picks, only: [:index, :show, :create, :update, :destroy]
     end
   end

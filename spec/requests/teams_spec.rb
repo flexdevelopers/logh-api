@@ -44,7 +44,7 @@ describe API::TeamsController do
   describe '#show' do
     it 'returns a team' do
       team = FactoryGirl.create(:team)
-      get api_team_path(team)
+      get api_league_team_path(team.league, team)
       expect(response).to be_success
       expect(json['name']).to eq('Fire Breathing Rubber Duckies')
     end
@@ -63,7 +63,7 @@ describe API::TeamsController do
     it 'updates a team' do
       team = FactoryGirl.create(:team)
       team.name = 'Average Joes'
-      patch api_team_path(team), team: team.attributes
+      patch api_league_team_path(team.league, team), team: team.attributes
       team.reload
       expect(team.name).to eq('Average Joes')
     end
@@ -73,7 +73,7 @@ describe API::TeamsController do
   describe '#destroy' do
     it 'deletes a team' do
       team = FactoryGirl.create(:team)
-      expect { delete api_team_path(team) }.to change(Team, :count).by(-1)
+      expect { delete api_league_team_path(team.league, team) }.to change(team.league.teams, :count).by(-1)
     end
     it 'deletes all the picks for the deleted team' do
       team = FactoryGirl.create(:team)
@@ -81,7 +81,7 @@ describe API::TeamsController do
       pick2 = FactoryGirl.create(:pick, team: team)
       expect(team.picks).to include(pick1)
       expect(team.picks).to include(pick2)
-      expect { delete api_team_path(team) }.to change(Pick, :count).by(-2)
+      expect { delete api_league_team_path(team.league, team) }.to change(team.picks, :count).by(-2)
     end
   end
 
