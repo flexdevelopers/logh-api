@@ -26,7 +26,7 @@ class API::LeaguesController < ApplicationController
   def create
     @league = @user.leagues.new(league_params)
     if @league.save
-      render json: @league, status: :created, location: api_league_path(@league)
+      render json: @league, status: :created, location: api_user_league_path(@user, @league)
     else
       render json: @league.errors, status: :unprocessable_entity
     end

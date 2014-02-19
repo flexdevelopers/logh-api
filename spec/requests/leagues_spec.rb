@@ -33,7 +33,7 @@ describe API::LeaguesController do
   describe '#show' do
     it 'returns a league' do
       league = FactoryGirl.create(:league)
-      get api_league_path(league)
+      get api_user_league_path(league.user, league)
       expect(response).to be_success
       expect(json['name']).to eq(league.name)
     end
@@ -54,7 +54,7 @@ describe API::LeaguesController do
     it 'updates a league' do
       league = FactoryGirl.create(:league)
       league.name = 'Good News Bears'
-      patch api_league_path(league), league: league.attributes
+      patch api_user_league_path(league.user, league), league: league.attributes
       league.reload
       expect(league[:name]).to eq('Good News Bears')
     end
@@ -64,13 +64,13 @@ describe API::LeaguesController do
   describe '#destroy' do
     it 'destroys a league' do
       league = FactoryGirl.create(:league)
-      expect { delete api_league_path(league) }.to change(League, :count).by(-1)
+      expect { delete api_user_league_path(league.user, league) }.to change(league.user.leagues, :count).by(-1)
     end
     it 'destroys all the teams for the destroyed team' do
       league = FactoryGirl.create(:league)
       team1 = FactoryGirl.create(:team, league: league)
       team2 = FactoryGirl.create(:team, league: league)
-      expect { delete api_league_path(league) }.to change(Team, :count).by(-2)
+      expect { delete api_user_league_path(league.user, league) }.to change(Team, :count).by(-2)
     end
   end
 end

@@ -1,11 +1,11 @@
 LoghApi::Application.routes.draw do
   namespace :api do
     resources :users, only: [:index, :show, :create, :update, :destroy] do
-      resources :leagues, only: [:index, :create]
+      resources :leagues, only: [:index, :show, :create, :update, :destroy]
       resources :teams, only: [:index]
     end
 
-    resources :leagues, only: [:index, :show, :update, :destroy] do
+    resources :leagues, only: [:index] do
       resources :teams, only: [:index, :show, :create, :update, :destroy]
     end
 
