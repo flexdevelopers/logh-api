@@ -21,7 +21,7 @@ describe API::PicksController do
   describe '#show' do
     it 'returns a pick' do
       pick = FactoryGirl.create(:pick)
-      get api_pick_path(pick)
+      get api_team_pick_path(pick.team, pick)
       expect(response).to be_success
       expect(json['team_id']).to eq(pick.team.id)
     end
@@ -51,7 +51,7 @@ describe API::PicksController do
   describe '#destroy' do
     it 'deletes a pick' do
       pick = FactoryGirl.create(:pick)
-      expect { delete api_pick_path(pick) }.to change(Pick, :count).by(-1)
+      expect { delete api_team_pick_path(pick.team, pick) }.to change(pick.team.picks, :count).by(-1)
     end
   end
 
