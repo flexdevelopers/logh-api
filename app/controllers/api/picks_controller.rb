@@ -20,7 +20,7 @@ class API::PicksController < ApplicationController
   def create
     @pick = @team.picks.new(params[:pick])
     if @pick.save
-      render json: @pick, status: :created, location: api_pick_path(@pick)
+      render json: @pick, status: :created, location: api_team_pick_path(@team, @pick)
     else
       render json: @pick.errors, status: :unprocessable_entity
     end
