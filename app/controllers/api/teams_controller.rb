@@ -1,6 +1,6 @@
 class API::TeamsController < ApplicationController
   before_action :set_user, only: [:index]
-  before_action :set_league, only: [:index, :create]
+  before_action :set_league, only: [:index, :show, :create, :update, :destroy]
   before_action :set_team, only: [:show, :update, :destroy]
 
   # GET /api/teams
@@ -20,8 +20,8 @@ class API::TeamsController < ApplicationController
     render json: @teams
   end
 
-  # GET /api/teams/1
-  # GET /api/teams/1.json
+  # GET /api/leagues/:league_id/teams/1
+  # GET /api/leagues/:league_id/teams/1.json
   def show
     render json: @team
   end
@@ -37,8 +37,8 @@ class API::TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/teams/1
-  # PATCH/PUT /api/teams/1.json
+  # PATCH/PUT /api/leagues/:league_id/teams/1
+  # PATCH/PUT /api/leagues/:league_id/teams/1.json
   def update
     if @team.update_attributes(team_params)
       head :no_content
@@ -47,8 +47,8 @@ class API::TeamsController < ApplicationController
     end
   end
 
-  # DELETE /api/teams/1
-  # DELETE /api/teams/1.json
+  # DELETE /api/leagues/:league_id/teams/1
+  # DELETE /api/leagues/:league_id/teams/1.json
   def destroy
     @team.destroy
     head :no_content
@@ -65,7 +65,7 @@ class API::TeamsController < ApplicationController
     end
 
     def set_team
-      @team = Team.find(params[:id])
+      @team = @league.teams.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
