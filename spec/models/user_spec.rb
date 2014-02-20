@@ -6,11 +6,31 @@ describe User do
   it { should respond_to(:leagues) }
   it { should respond_to(:teams) }
 
-  describe 'without a unique email address' do
-    it 'fails validation' do
+  describe 'when email address is not unique' do
+    it 'should be invalid' do
       user1 = FactoryGirl.create(:user)
       user2 = FactoryGirl.build(:user, email: user1.email.upcase)
       expect(user2).not_to be_valid
+    end
+  end
+
+  describe 'when email format is invalid' do
+    it 'should be invalid' do
+      addresses = %w{user@foo,com user@foo...com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com}
+      addresses.each do |invalid_address|
+        user = FactoryGirl.build(:user, email: invalid_address)
+        expect(user).not_to be_valid
+      end
+    end
+  end
+
+  describe 'when email format is valid' do
+    it 'should be valid' do
+      addresses = %w{user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn}
+      addresses.each do |valid_address|
+        user = FactoryGirl.create(:user, email: valid_address)
+        expect(user).to be_valid
+      end
     end
   end
 end
