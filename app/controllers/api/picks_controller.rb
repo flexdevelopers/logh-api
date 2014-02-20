@@ -1,5 +1,5 @@
 class API::PicksController < ApplicationController
-  before_action :set_team, only: [:index, :create]
+  before_action :set_team, only: [:index, :show, :create, :update, :destroy]
   before_action :set_pick, only: [:show, :update, :destroy]
 
   # GET /api/teams/:team_id/picks
@@ -9,8 +9,8 @@ class API::PicksController < ApplicationController
     render json: @picks
   end
 
-  # GET /api/picks/1
-  # GET /api/picks/1.json
+  # GET /api/teams/:team_id/picks/1
+  # GET /api/teams/:team_id/picks/1.json
   def show
     render json: @pick
   end
@@ -26,8 +26,8 @@ class API::PicksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /api/picks/1
-  # PATCH/PUT /api/picks/1.json
+  # PATCH/PUT /api/teams/:team_id/picks/1
+  # PATCH/PUT /api/teams/:team_id/picks/1.json
   def update
     if @pick.update(pick_params)
       head :no_content
@@ -36,8 +36,8 @@ class API::PicksController < ApplicationController
     end
   end
 
-  # DELETE /api/picks/1
-  # DELETE /api/picks/1.json
+  # DELETE /api/teams/:team_id/picks/1
+  # DELETE /api/teams/:team_id/picks/1.json
   def destroy
     @pick.destroy
     head :no_content
@@ -50,7 +50,7 @@ class API::PicksController < ApplicationController
     end
 
     def set_pick
-      @pick = Pick.find(params[:id])
+      @pick = @team.picks.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
