@@ -42,4 +42,11 @@ describe User do
       expect(user.reload.email).to eq(mixed_case_email.downcase)
     end
   end
+
+  describe 'when password is less than 6 characters' do
+    it 'should be invalid' do
+      user = FactoryGirl.build(:user, password: 'fooba')
+      expect(user).not_to be_valid
+    end
+  end
 end

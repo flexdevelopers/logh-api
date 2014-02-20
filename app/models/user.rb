@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   has_many :teams
 
   validates :email, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX }
+  validates :password, length: { minimum: 6 }
 end
