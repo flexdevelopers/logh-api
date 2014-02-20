@@ -1,10 +1,40 @@
 require 'spec_helper'
 
 describe User do
+  it { should respond_to(:first_name) }
+  it { should respond_to(:last_name) }
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:leagues) }
   it { should respond_to(:teams) }
+
+  describe 'when first name is not present' do
+    it 'should be invalid' do
+      user = FactoryGirl.build(:user, first_name: '')
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe 'when first name is longer than 20 characters' do
+    it 'should be invalid' do
+      user = FactoryGirl.build(:user, first_name: 'a' * 21)
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe 'when last name is not present' do
+    it 'should be invalid' do
+      user = FactoryGirl.build(:user, last_name: '')
+      expect(user).not_to be_valid
+    end
+  end
+
+  describe 'when last name is longer than 20 characters' do
+    it 'should be invalid' do
+      user = FactoryGirl.build(:user, last_name: 'z' * 21)
+      expect(user).not_to be_valid
+    end
+  end
 
   describe 'when email address is not unique' do
     it 'should be invalid' do
