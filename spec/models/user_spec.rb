@@ -33,4 +33,13 @@ describe User do
       end
     end
   end
+
+  describe 'when email has upper case characters' do
+    let(:mixed_case_email) { 'Foo@Bar.com' }
+
+    it 'should be saved as lowercase' do
+      user = FactoryGirl.create(:user, email: mixed_case_email )
+      expect(user.reload.email).to eq(mixed_case_email.downcase)
+    end
+  end
 end
