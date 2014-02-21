@@ -21,39 +21,29 @@ describe User do
   its(:teams) { should be_empty }
 
   context 'when first name is not present' do
-    it 'should be invalid' do
-      user = FactoryGirl.build(:user, first_name: '')
-      expect(user).not_to be_valid
-    end
+    subject(:user) { FactoryGirl.build(:user, first_name: '') }
+    it { should_not be_valid }
   end
 
   context 'when first name is longer than 20 characters' do
-    it 'should be invalid' do
-      user = FactoryGirl.build(:user, first_name: 'a' * 21)
-      expect(user).not_to be_valid
-    end
+    subject(:user) { FactoryGirl.build(:user, first_name: 'a' * 21) }
+    it { should_not be_valid }
   end
 
   context 'when last name is not present' do
-    it 'should be invalid' do
-      user = FactoryGirl.build(:user, last_name: '')
-      expect(user).not_to be_valid
-    end
+    subject(:user) { FactoryGirl.build(:user, last_name: '') }
+    it { should_not be_valid }
   end
 
   context 'when last name is longer than 20 characters' do
-    it 'should be invalid' do
-      user = FactoryGirl.build(:user, last_name: 'z' * 21)
-      expect(user).not_to be_valid
-    end
+    subject(:user) { FactoryGirl.build(:user, last_name: 'z' * 21) }
+    it { should_not be_valid }
   end
 
   context 'when email address is not unique' do
-    it 'should be invalid' do
-      user1 = FactoryGirl.create(:user)
-      user2 = FactoryGirl.build(:user, email: user1.email.upcase)
-      expect(user2).not_to be_valid
-    end
+    let(:user1) { FactoryGirl.create(:user) }
+    subject(:invalid_user) { FactoryGirl.build(:user, email: user1.email.upcase) }
+    it { should_not be_valid }
   end
 
   context 'when email format is invalid' do
@@ -78,18 +68,13 @@ describe User do
 
   context 'when email has upper case characters' do
     let(:mixed_case_email) { 'Foo@Bar.com' }
-
-    it 'should be saved as lowercase' do
-      user = FactoryGirl.create(:user, email: mixed_case_email )
-      expect(user.reload.email).to eq(mixed_case_email.downcase)
-    end
+    subject(:user) { FactoryGirl.create(:user, email: mixed_case_email) }
+    its(:email) { should eq(mixed_case_email.downcase) }
   end
 
   context 'when password is less than 6 characters' do
-    it 'should be invalid' do
-      user = FactoryGirl.build(:user, password: 'fooba')
-      expect(user).not_to be_valid
-    end
+    subject(:user) { FactoryGirl.build(:user, password: 'fooba') }
+    it { should_not be_valid }
   end
 
 end
