@@ -6,9 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Season.destroy_all
+Week.destroy_all
 User.destroy_all
 League.destroy_all
 Team.destroy_all
+
+# create a season
+season = Season.create!(name: '2014-15 NFL Season')
+
+# create 16 weeks for the season
+16.times do |i|
+  Week.create!(number: i + 1, season: season)
+end
 
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar')
 user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo')
