@@ -10,8 +10,8 @@ User.destroy_all
 League.destroy_all
 Team.destroy_all
 
-user1 = User.create!(email: 'foo@bar.com', password: 'foobar')
-user2 = User.create!(email: 'bob@foo.com', password: 'bobfoo')
+user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar')
+user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo')
 
 5.times do |i|
   League.create!(name: "Foo League ##{i}", user: user1)
