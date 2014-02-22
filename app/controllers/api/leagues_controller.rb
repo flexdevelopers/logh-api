@@ -1,4 +1,4 @@
-class API::LeaguesController < ApplicationController
+class API::LeaguesController < API::AuthController
   before_action :set_user
   before_action :set_league, only: [:show, :update, :destroy]
 

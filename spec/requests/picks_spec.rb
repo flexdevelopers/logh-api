@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe API::PicksController do
 
+  before do
+    bypass_http_token_authentication_on API::PicksController
+  end
+
   #GET /api/teams/team_id/picks
   describe '#index - team picks' do
     it 'returns a list of picks for a specified team' do

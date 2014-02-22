@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe API::LeaguesController do
 
+  before do
+    bypass_http_token_authentication_on API::LeaguesController
+  end
+
   # GET /api/leagues
   describe '#index - all leagues' do
     it 'returns a list of all leagues' do

@@ -1,6 +1,10 @@
-require 'spec_helper'
+  require 'spec_helper'
 
 describe API::UsersController do
+
+  before do
+    bypass_http_token_authentication_on API::UsersController
+  end
 
   # GET /api/users
   describe '#index' do
@@ -10,7 +14,7 @@ describe API::UsersController do
     end
     it 'returns a list of users' do
       get api_users_path
-      response.status.should be(200)
+      expect(response).to be_success
       expect(json.length).to eq(10)
     end
   end
