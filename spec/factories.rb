@@ -15,6 +15,7 @@ FactoryGirl.define do
 
   factory :team do |team|
     name              'Fire Breathing Rubber Duckies'
+    team.association  :user
     team.association  :league
   end
 

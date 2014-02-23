@@ -20,4 +20,9 @@ describe Team do
   it { should respond_to(:picks) }
   its(:picks) { should be_empty }
 
+  context 'when user is not present' do
+    subject(:team) { FactoryGirl.build(:team, user: nil) }
+    it { should_not be_valid }
+  end
+
 end
