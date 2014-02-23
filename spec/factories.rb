@@ -21,6 +21,22 @@ FactoryGirl.define do
 
   factory :pick do |pick|
     pick.association  :team
+    pick.association  :week
+  end
+
+  factory :season do
+    name              '2014-15 NFL Season'
+  end
+
+  factory :week do |week|
+    number              1
+    start_date          Time.now
+    end_date            2.days.from_now
+    week.association    :season
+  end
+
+  factory :game do |game|
+    game.association  :week
   end
 
 end
