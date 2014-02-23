@@ -18,7 +18,7 @@ class API::PicksController < API::AuthController
   # POST /api/teams/:team_id/picks
   # POST /api/teams/:team_id/picks.json
   def create
-    @pick = @team.picks.new(params[:pick])
+    @pick = @team.picks.new(pick_params)
     if @pick.save
       render json: @pick, status: :created, location: api_team_pick_path(@team, @pick)
     else
@@ -55,7 +55,7 @@ class API::PicksController < API::AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pick_params
-      params.require(:pick).permit()
+      params.require(:pick).permit(:week_id)
     end
 
 end

@@ -34,9 +34,8 @@ describe API::PicksController do
   #POST /api/teams/team_id/picks
   describe '#create' do
     it 'creates a pick for the specified team' do
-      team = FactoryGirl.create(:team)
-      pick_params = FactoryGirl.attributes_for(:pick)
-      expect { post api_team_picks_path(team), pick: pick_params }.to change(team.picks, :count).by(1)
+      pick = FactoryGirl.create(:pick)
+      expect { post api_team_picks_path(pick.team), pick: pick.attributes }.to change(pick.team.picks, :count).by(1)
       expect(response).to be_success
     end
   end
