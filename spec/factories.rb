@@ -37,6 +37,14 @@ FactoryGirl.define do
 
   factory :game do |game|
     game.association  :week
+    start_datetime    Time.now
+    home_squad        { FactoryGirl.create(:squad) }
+    visiting_squad    { FactoryGirl.create(:squad) }
+  end
+
+  factory :squad do
+    name    'Denver Broncos'
+    abbrev  'DEN'
   end
 
 end
