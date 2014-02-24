@@ -17,7 +17,4 @@ describe Week do
   it { should respond_to(:games) }
   its(:games) { should be_empty }
 
-  it { should respond_to(:picks) }
-  its(:picks) { should be_empty }
-
 end
