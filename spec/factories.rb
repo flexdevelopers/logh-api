@@ -36,10 +36,10 @@ FactoryGirl.define do
   end
 
   factory :game do |game|
-    game.association  :week
-    start_datetime    Time.now
-    home_squad        { FactoryGirl.create(:squad) }
-    visiting_squad    { FactoryGirl.create(:squad) }
+    game.association      :week
+    start_datetime        Time.now
+    home_squad            { FactoryGirl.create(:squad) }
+    visiting_squad        { FactoryGirl.create(:squad) }
   end
 
   factory :loser do |loser|
