@@ -42,6 +42,11 @@ FactoryGirl.define do
     visiting_squad    { FactoryGirl.create(:squad) }
   end
 
+  factory :loser do |loser|
+    loser.association :week
+    loser.association :squad
+  end
+
   factory :squad do
     name    'Denver Broncos'
     abbrev  'DEN'

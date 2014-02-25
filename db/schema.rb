@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223205926) do
+ActiveRecord::Schema.define(version: 20140224234500) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -37,11 +37,18 @@ ActiveRecord::Schema.define(version: 20140223205926) do
     t.integer  "max_teams_per_user", default: 0
   end
 
-  create_table "picks", force: true do |t|
-    t.integer  "team_id"
+  create_table "losers", force: true do |t|
     t.integer  "week_id"
+    t.integer  "squad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "picks", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "team_id"
+    t.integer  "week_id"
   end
 
   create_table "seasons", force: true do |t|
@@ -80,9 +87,9 @@ ActiveRecord::Schema.define(version: 20140223205926) do
     t.integer  "number"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "season_id"
   end
 
 end
