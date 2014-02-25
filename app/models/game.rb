@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
 
       if home_squad_score < visiting_squad_score
         week.losers << Loser.create!(week: week, squad: home_squad)
-      else
+      elsif visiting_squad_score < home_squad_score
         week.losers << Loser.create!(week: week, squad: visiting_squad)
       end
 

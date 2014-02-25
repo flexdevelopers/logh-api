@@ -56,4 +56,13 @@ describe Game do
     end
   end
 
+  context 'when home squad score equals visiting squad score' do
+    subject(:game) { FactoryGirl.create(:game) }
+    it 'should not add either squad to the weeks losers' do
+      game.update(home_squad_score: 14, visiting_squad_score: 14)
+      expect(game.week.losers).not_to include(Loser.find_by(week: game.week, squad: game.home_squad))
+      expect(game.week.losers).not_to include(Loser.find_by(week: game.week, squad: game.visiting_squad))
+    end
+  end
+
 end
