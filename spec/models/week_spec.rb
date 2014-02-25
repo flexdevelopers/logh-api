@@ -18,6 +18,6 @@ describe Week do
   its(:games) { should be_empty }
 
   it { should respond_to(:losers) }
-  its(:losers) { should be_blank }
+  its(:losers) { should be_empty }
 
 end
