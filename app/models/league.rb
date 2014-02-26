@@ -1,4 +1,7 @@
 class League < ActiveRecord::Base
   belongs_to :user
   has_many :teams, dependent: :destroy
+
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :user, presence: true
 end

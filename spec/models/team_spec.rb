@@ -20,7 +20,22 @@ describe Team do
   it { should respond_to(:picks) }
   its(:picks) { should be_empty }
 
-  context 'when user is not present' do
+  context 'when team has no name' do
+    subject(:team) { FactoryGirl.build(:team, name: '') }
+    it { should_not be_valid }
+  end
+
+  context 'when team has a name greater than 20 characters' do
+    subject(:team) { FactoryGirl.build(:team, name: 'a' * 31) }
+    it { should_not be_valid }
+  end
+
+  context 'when team has no league' do
+    subject(:team) { FactoryGirl.build(:team, league: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when team has no user' do
     subject(:team) { FactoryGirl.build(:team, user: nil) }
     it { should_not be_valid }
   end

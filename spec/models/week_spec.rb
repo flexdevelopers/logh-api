@@ -20,4 +20,19 @@ describe Week do
   it { should respond_to(:losers) }
   its(:losers) { should be_empty }
 
+  context 'when week has no number' do
+    subject(:week) { FactoryGirl.build(:week, number: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when week has a number less than 1' do
+    subject(:week) { FactoryGirl.build(:week, number: 0) }
+    it { should_not be_valid }
+  end
+
+  context 'when week has no season' do
+    subject(:week) { FactoryGirl.build(:week, season: nil) }
+    it { should_not be_valid }
+  end
+
 end

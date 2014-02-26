@@ -17,4 +17,19 @@ describe League do
   it { should respond_to(:teams) }
   its(:teams) { should be_empty }
 
+  context 'when league has no name' do
+    subject(:league) { FactoryGirl.build(:league, name: '') }
+    it { should_not be_valid }
+  end
+
+  context 'when league has a name greater than 30 characters' do
+    subject(:league) { FactoryGirl.build(:league, name: 'a' * 31) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has no user' do
+    subject(:league) { FactoryGirl.build(:league, user: nil) }
+    it { should_not be_valid }
+  end
+
 end
