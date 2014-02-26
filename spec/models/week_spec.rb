@@ -14,6 +14,9 @@ describe Week do
   it { should respond_to(:season) }
   its(:season) { should be_nil }
 
+  it { should respond_to(:complete) }
+  its(:complete) { should be_false }
+
   it { should respond_to(:games) }
   its(:games) { should be_empty }
 
