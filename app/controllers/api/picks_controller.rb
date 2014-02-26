@@ -55,7 +55,7 @@ class API::PicksController < API::AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pick_params
-      params.require(:pick).permit(:week_id)
+      params.require(:pick).permit(:week_id, :loser_id)
     end
 
 end

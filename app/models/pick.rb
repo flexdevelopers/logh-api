@@ -5,4 +5,5 @@ class Pick < ActiveRecord::Base
 
   validates :team, presence: true
   validates :week, presence: true
+  validates :loser, presence: true
 end

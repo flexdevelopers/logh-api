@@ -22,6 +22,7 @@ FactoryGirl.define do
   factory :pick do |pick|
     pick.association  :team
     pick.association  :week
+    loser             { FactoryGirl.create(:squad) }
   end
 
   factory :season do

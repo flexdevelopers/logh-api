@@ -24,4 +24,9 @@ describe Pick do
     it { should_not be_valid }
   end
 
+  context 'when loser is not present' do
+    subject(:pick) { FactoryGirl.build(:pick, loser: nil) }
+    it { should_not be_valid }
+  end
+
 end
