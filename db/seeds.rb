@@ -17,22 +17,24 @@ Team.destroy_all
 Pick.destroy_all
 
 # create squads
-bills = Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
-dolphins = Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')
-Squad.create(name: 'New England Patriots', abbrev: 'NEP')
-Squad.create(name: 'New York Jets', abbrev: 'NYJ')
-Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
-Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
+home_squads = []
+visiting_squads = []
+home_squads << Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
+home_squads << Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')
+home_squads << Squad.create(name: 'New England Patriots', abbrev: 'NEP')
+visiting_squads << Squad.create(name: 'New York Jets', abbrev: 'NYJ')
+visiting_squads << Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
+visiting_squads << Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
 
 # create a season
 season = Season.create!(name: '2014-15 NFL Season')
 
-# create 17 weeks for the season
-17.times do |i|
+# create 5 weeks for the season
+5.times do |i|
   week = Week.create!(number: i + 1, start_date: i.week.from_now, season: season)
-  # create 16 games for each week
-  16.times do |i|
-    Game.create!(start_datetime: week.start_date + 1.day, week: week, home_squad: bills, visiting_squad: dolphins )
+  # create 3 games for each week
+  3.times do |i|
+    Game.create!(start_datetime: week.start_date + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
   end
 end
 
@@ -40,20 +42,20 @@ end
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar')
 foo_league = League.create!(name: "Foo League", user: user1)
 3.times do |i|
-  team = Team.create!(name: "#{user1[:first_name]} League ##{i}", league: foo_league, user: user1)
-  # and 5 picks for that team
-  5.times do |i|
-    Pick.create!(team: team, week: Week.find_by(number: i + 1))
+  team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, user: user1)
+  # and 3 picks for that team
+  3.times do |i|
+    Pick.create!(team: team, week: Week.find_by(number: i + 1, season: season), loser: home_squads[i])
   end
 end
 
 # create another user and a few teams for that user
 user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo')
 3.times do |i|
-  team = Team.create!(name: "#{user2[:first_name]} League ##{i}", league: foo_league, user: user2)
-  # and 5 picks for that team
-  5.times do |i|
-    Pick.create!(team: team, week: Week.find_by(number: i + 1))
+  team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, user: user2)
+  # and 3 picks for that team
+  3.times do |i|
+    Pick.create!(team: team, week: Week.find_by(number: i + 1, season: season), loser: visiting_squads[i])
   end
 end
 
