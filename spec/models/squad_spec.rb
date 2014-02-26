@@ -38,4 +38,11 @@ describe Squad do
     it { should_not be_valid }
   end
 
+  context 'when squad has a mixed case abbreviation' do
+    let(:mixed_case_abbrev) { 'Den' }
+    subject(:squad) { FactoryGirl.create(:squad, abbrev: mixed_case_abbrev) }
+    its(:abbrev) { should eq(mixed_case_abbrev.upcase) }
+
+  end
+
 end
