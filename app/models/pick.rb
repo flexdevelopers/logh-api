@@ -6,4 +6,16 @@ class Pick < ActiveRecord::Base
   validates :team, presence: true
   validates :week, presence: true
   validates :loser, presence: true
+
+  def correct=(value)
+    @correct = value
+    update_team
+  end
+
+  private
+
+    def update_team
+      team.alive = @correct
+    end
+
 end

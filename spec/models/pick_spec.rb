@@ -29,4 +29,11 @@ describe Pick do
     it { should_not be_valid }
   end
 
+  context 'when marked as incorrect' do
+    it 'should mark the team as dead' do
+      pick = FactoryGirl.create(:pick)
+      expect { pick.correct = false }.to change(pick.team, :alive).from(true).to(false)
+    end
+  end
+
 end
