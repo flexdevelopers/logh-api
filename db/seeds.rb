@@ -16,6 +16,8 @@ League.destroy_all
 Team.destroy_all
 Pick.destroy_all
 
+Loser.destroy_all
+
 # create squads
 home_squads = []
 visiting_squads = []
@@ -34,7 +36,8 @@ season = Season.create!(name: '2014-15 NFL Season')
   week = Week.create!(number: i + 1, start_date: i.week.from_now, season: season)
   # create 3 games for each week
   3.times do |i|
-    Game.create!(start_datetime: week.start_date + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
+    game = Game.create!(start_datetime: week.start_date + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
+    game.update(home_squad_score: 45, visiting_squad_score: 24)
   end
 end
 
@@ -58,5 +61,4 @@ user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com
     Pick.create!(team: team, week: Week.find_by(number: i + 1, season: season), loser: visiting_squads[i])
   end
 end
-
 
