@@ -8,14 +8,14 @@ class Pick < ActiveRecord::Base
   validates :loser, presence: true
 
   def correct=(value)
-    @correct = value
+    super
     update_team
   end
 
   private
 
     def update_team
-      team.alive = @correct
+      team.update(alive: correct)
     end
 
 end
