@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226165120) do
+ActiveRecord::Schema.define(version: 20140228230759) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20140226165120) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "losers", ["week_id", "squad_id"], name: "index_losers_on_week_id_and_squad_id", unique: true
 
   create_table "picks", force: true do |t|
     t.datetime "created_at"

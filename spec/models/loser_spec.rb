@@ -18,4 +18,11 @@ describe Loser do
     it { should_not be_valid }
   end
 
+  context 'when loser is added twice to a week' do
+    it 'raises an error' do
+      loser1 = FactoryGirl.create(:loser)
+      expect { FactoryGirl.create(:loser, week: loser1.week, squad: loser1.squad) }.to raise_error
+    end
+  end
+
 end
