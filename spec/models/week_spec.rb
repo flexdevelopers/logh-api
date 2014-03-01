@@ -41,4 +41,12 @@ describe Week do
     it { should_not be_valid }
   end
 
+  context 'when week number is added to a season twice' do
+    it 'raises an error' do
+      season = FactoryGirl.create(:season)
+      FactoryGirl.create(:week, number: 1, season: season)
+      expect { FactoryGirl.create(:week, number: 1, season: season) }.to raise_error
+    end
+  end
+
 end

@@ -4,7 +4,7 @@ class Week < ActiveRecord::Base
   has_many :picks
   has_many :losers
 
-  validates :number, presence: true, numericality: { greater_than: 0 }
+  validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
   validates :season, presence: true
 
   def complete=(value)
