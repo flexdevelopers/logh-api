@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303023535) do
+ActiveRecord::Schema.define(version: 20140303031012) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20140303023535) do
     t.string   "password"
     t.integer  "max_teams_per_user", default: 0
   end
+
+  add_index "leagues", ["user_id"], name: "index_leagues_on_user_id"
 
   create_table "losers", force: true do |t|
     t.integer  "week_id"
