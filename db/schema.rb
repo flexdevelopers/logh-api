@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303035146) do
+ActiveRecord::Schema.define(version: 20140303050641) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
 
   create_table "games", force: true do |t|
-    t.datetime "start_datetime"
+    t.datetime "start_datetime",                   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "week_id"
-    t.integer  "home_squad_id"
-    t.integer  "visiting_squad_id"
+    t.integer  "week_id",                          null: false
+    t.integer  "home_squad_id",                    null: false
+    t.integer  "visiting_squad_id",                null: false
     t.integer  "home_squad_score",     default: 0, null: false
     t.integer  "visiting_squad_score", default: 0, null: false
   end
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   add_index "games", ["week_id"], name: "index_games_on_week_id"
 
   create_table "leagues", force: true do |t|
-    t.string   "name"
+    t.string   "name",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "user_id",                        null: false
     t.string   "password"
     t.integer  "max_teams_per_user", default: 0
   end
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   add_index "leagues", ["user_id"], name: "index_leagues_on_user_id"
 
   create_table "losers", force: true do |t|
-    t.integer  "week_id"
-    t.integer  "squad_id"
+    t.integer  "week_id",    null: false
+    t.integer  "squad_id",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   create_table "picks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id"
-    t.integer  "week_id"
-    t.integer  "loser_id"
+    t.integer  "team_id",    null: false
+    t.integer  "week_id",    null: false
+    t.integer  "loser_id",   null: false
     t.boolean  "correct"
   end
 
@@ -69,24 +69,24 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   add_index "picks", ["week_id"], name: "index_picks_on_week_id"
 
   create_table "seasons", force: true do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "squads", force: true do |t|
-    t.string   "name"
-    t.string   "abbrev"
+    t.string   "name",       null: false
+    t.string   "abbrev",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "teams", force: true do |t|
-    t.string   "name"
+    t.string   "name",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "league_id"
-    t.integer  "user_id"
+    t.integer  "league_id",                  null: false
+    t.integer  "user_id",                    null: false
     t.boolean  "alive",      default: true
     t.boolean  "paid",       default: false
   end
@@ -95,23 +95,23 @@ ActiveRecord::Schema.define(version: 20140303035146) do
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "password"
+    t.string   "email",      null: false
+    t.string   "password",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
   create_table "weeks", force: true do |t|
-    t.integer  "number"
+    t.integer  "number",                     null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "season_id"
+    t.integer  "season_id",                  null: false
     t.boolean  "complete",   default: false
   end
 
