@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301224754) do
+ActiveRecord::Schema.define(version: 20140303023535) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true
 
   create_table "games", force: true do |t|
     t.datetime "start_datetime"
