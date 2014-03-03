@@ -4,4 +4,5 @@ class League < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :user, presence: true
+  validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
 end

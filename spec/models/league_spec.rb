@@ -32,4 +32,24 @@ describe League do
     it { should_not be_valid }
   end
 
+  context 'when league has defined no max teams per user' do
+    subject(:league) { FactoryGirl.build(:league, max_teams_per_user: nil) }
+    it { should be_valid }
+  end
+
+  context 'when league has max teams per user greater than zero' do
+    subject(:league) { FactoryGirl.build(:league, max_teams_per_user: 2) }
+    it { should be_valid }
+  end
+
+  context 'when league has max teams per user of zero' do
+    subject(:league) { FactoryGirl.build(:league, max_teams_per_user: 0) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has max teams per user of less than zero' do
+    subject(:league) { FactoryGirl.build(:league, max_teams_per_user: -1) }
+    it { should_not be_valid }
+  end
+
 end
