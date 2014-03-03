@@ -12,13 +12,13 @@ describe Game do
   its(:home_squad) { should be_nil }
 
   it { should respond_to(:home_squad_score) }
-  its(:home_squad_score) { should be_nil }
+  its(:home_squad_score) { should eq(0) }
 
   it { should respond_to(:visiting_squad) }
   its(:visiting_squad) { should be_nil }
 
   it { should respond_to(:visiting_squad_score) }
-  its(:visiting_squad_score) { should be_nil }
+  its(:visiting_squad_score) { should eq(0) }
 
   context 'when it has no week' do
     subject(:game) { FactoryGirl.build(:game, week: nil) }

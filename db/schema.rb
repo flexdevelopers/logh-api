@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303034250) do
+ActiveRecord::Schema.define(version: 20140303035146) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20140303034250) do
     t.integer  "week_id"
     t.integer  "home_squad_id"
     t.integer  "visiting_squad_id"
-    t.integer  "home_squad_score"
-    t.integer  "visiting_squad_score"
+    t.integer  "home_squad_score",     default: 0, null: false
+    t.integer  "visiting_squad_score", default: 0, null: false
   end
 
   add_index "games", ["week_id"], name: "index_games_on_week_id"
