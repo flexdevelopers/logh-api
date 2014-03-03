@@ -40,6 +40,16 @@ describe Game do
     it { should_not be_valid }
   end
 
+  context 'when home squad score is less than zero' do
+    subject(:game) { FactoryGirl.build(:game, home_squad_score: -1) }
+    it { should_not be_valid }
+  end
+
+  context 'when visiting squad score is less than zero' do
+    subject(:game) { FactoryGirl.build(:game, visiting_squad_score: -1) }
+    it { should_not be_valid }
+  end
+
   context 'when visiting squad score is less than home squad score' do
     subject(:game) { FactoryGirl.create(:game) }
     it 'should add visiting squad to the weeks losers' do
