@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303033034) do
+ActiveRecord::Schema.define(version: 20140303033559) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token"
@@ -88,6 +88,9 @@ ActiveRecord::Schema.define(version: 20140303033034) do
     t.boolean  "alive",      default: true
     t.boolean  "paid",       default: false
   end
+
+  add_index "teams", ["league_id"], name: "index_teams_on_league_id"
+  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email"
