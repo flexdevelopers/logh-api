@@ -9,7 +9,7 @@ describe League do
   its(:password) { should be_blank }
 
   it { should respond_to(:max_teams_per_user) }
-  its(:max_teams_per_user) { should be_zero }
+  its(:max_teams_per_user) { should be_nil }
 
   it { should respond_to(:user) }
   its(:user) { should be_nil }
