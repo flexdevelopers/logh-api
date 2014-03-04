@@ -31,7 +31,7 @@ describe API::PicksController do
     end
   end
 
-  #POST /api/teams/team_id/picks
+  #POST /api/teams/team_id/picks?week_id=:week_id&loser_id=:squad_id
   describe '#create' do
     it 'creates a pick for the specified team' do
       pick = FactoryGirl.build(:pick)
