@@ -36,6 +36,18 @@ describe Pick do
     end
   end
 
+  context 'when trying to create 2 picks for a team with the same loser' do
+    it 'should raise an error' do
+      season = FactoryGirl.create(:season)
+      week1 = FactoryGirl.create(:week, number: 1, season: season)
+      week2 = FactoryGirl.create(:week, number: 2, season: season)
+      team = FactoryGirl.create(:team)
+      loser = FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP')
+      FactoryGirl.create(:pick, week: week1, team: team, loser: loser)
+      expect { FactoryGirl.create(:pick, week: week2, team: team, loser: loser) }.to raise_error
+    end
+  end
+
   context 'when marked as incorrect' do
     it 'should mark the team as dead' do
       pick = FactoryGirl.create(:pick)
