@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304051436) do
+ActiveRecord::Schema.define(version: 20140304190034) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token", null: false
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20140304051436) do
     t.datetime "updated_at"
     t.integer  "league_id",                  null: false
     t.integer  "user_id",                    null: false
-    t.boolean  "alive",      default: true
+    t.boolean  "alive",      default: true,  null: false
     t.boolean  "paid",       default: false
   end
 
