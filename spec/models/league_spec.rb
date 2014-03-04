@@ -14,6 +14,9 @@ describe League do
   it { should respond_to(:user) }
   its(:user) { should be_nil }
 
+  it { should respond_to(:season) }
+  its(:season) { should be_nil }
+
   it { should respond_to(:teams) }
   its(:teams) { should be_empty }
 
@@ -29,6 +32,11 @@ describe League do
 
   context 'when league has no user' do
     subject(:league) { FactoryGirl.build(:league, user: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has no season' do
+    subject(:league) { FactoryGirl.build(:league, season: nil) }
     it { should_not be_valid }
   end
 

@@ -21,8 +21,8 @@ class API::LeaguesController < API::AuthController
     render json: @league
   end
 
-  # POST /api/users/:user_id/leagues
-  # POST /api/users/:user_id/leagues.json
+  # POST /api/users/:user_id/leagues?season_id=:season_id
+  # POST /api/users/:user_id/leagues.json?season_id=:season_id
   def create
     @league = @user.leagues.new(league_params)
     if @league.save
@@ -61,6 +61,6 @@ class API::LeaguesController < API::AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def league_params
-      params.require(:league).permit(:name)
+      params.require(:league).permit(:name, :season_id)
     end
 end

@@ -43,12 +43,12 @@ describe API::LeaguesController do
     end
   end
 
-  # POST /api/users/:user_id/leagues
+  # POST /api/users/:user_id/leagues?season_id=:season_id
   describe '#create' do
     it 'creates a league for a user' do
       user = FactoryGirl.create(:user)
-      league_params = FactoryGirl.attributes_for(:league)
-      expect { post api_user_leagues_path(user), league: league_params }.to change(user.leagues, :count).by(1)
+      league = FactoryGirl.build(:league)
+      expect { post api_user_leagues_path(user), league: league.attributes }.to change(user.leagues, :count).by(1)
     end
 
   end
