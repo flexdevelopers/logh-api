@@ -29,6 +29,13 @@ describe Pick do
     it { should_not be_valid }
   end
 
+  context 'when trying to create 2 picks for a team in one week' do
+    it 'should raise an error' do
+      pick1 = FactoryGirl.create(:pick)
+      expect { FactoryGirl.create!(:pick, week: pick1.week, team: pick1.team) }.to raise_error
+    end
+  end
+
   context 'when marked as incorrect' do
     it 'should mark the team as dead' do
       pick = FactoryGirl.create(:pick)
