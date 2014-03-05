@@ -58,4 +58,9 @@ describe Week do
     end
   end
 
+  context 'when complete is not defined' do
+    subject(:week) { FactoryGirl.build(:week, complete: nil) }
+    it { should_not be_valid }
+  end
+
 end

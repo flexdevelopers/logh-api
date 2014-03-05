@@ -6,6 +6,7 @@ class Week < ActiveRecord::Base
 
   validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
   validates :season, presence: true
+  validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
 
   def complete=(value)
     super
