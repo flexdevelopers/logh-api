@@ -32,8 +32,7 @@ FactoryGirl.define do
 
   factory :week do |week|
     number              1
-    start_date          Time.now
-    end_date            2.days.from_now
+    starts_at           Time.now
     week.association    :season
   end
 
