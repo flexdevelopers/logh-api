@@ -33,10 +33,10 @@ season = Season.create!(name: '2014-15 NFL Season')
 
 # create 5 weeks for the season
 5.times do |i|
-  week = Week.create!(number: i + 1, start_date: i.week.from_now, season: season)
+  week = Week.create!(number: i + 1, starts_at: i.week.from_now, season: season)
   # create 3 games for each week
   3.times do |i|
-    game = Game.create!(start_datetime: week.start_date + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
+    game = Game.create!(starts_at: week.starts_at + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
     game.update(home_squad_score: 45, visiting_squad_score: 24)
   end
 end
