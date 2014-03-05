@@ -15,7 +15,7 @@ class Pick < ActiveRecord::Base
   private
 
     def update_team
-      team.update(alive: correct)
+      team.update(alive: correct) if self.correct == false
     end
 
 end

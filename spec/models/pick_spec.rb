@@ -55,4 +55,25 @@ describe Pick do
     end
   end
 
+  describe '#correct' do
+
+    context 'when correct is set to false' do
+      it 'should mark team as dead' do
+        team = FactoryGirl.create(:team, alive: true)
+        pick = FactoryGirl.create(:pick, team: team)
+        expect { pick.correct = false }.to change(team, :alive).from(true).to(false)
+      end
+    end
+
+    context 'when correct is set to true' do
+      it 'should not impact the value of team.alive' do
+        # you can't bring back a team from the dead
+        team = FactoryGirl.create(:team, alive: false)
+        pick = FactoryGirl.create(:pick, team: team)
+        expect { pick.correct = true }.not_to change(team, :alive).from(false).to(true)
+      end
+    end
+
+  end
+
 end
