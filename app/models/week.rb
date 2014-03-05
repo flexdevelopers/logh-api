@@ -17,6 +17,8 @@ class Week < ActiveRecord::Base
   private
 
     def update_picks
+      return if self.complete == false
+
       picks.each do |pick|
         if losers.find_by(squad: pick.loser)
           pick.correct = true

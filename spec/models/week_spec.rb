@@ -65,4 +65,36 @@ describe Week do
     it { should_not be_valid }
   end
 
+  describe '#complete' do
+
+    context 'when complete is false' do
+      it 'should not update pick.correct' do
+        week = FactoryGirl.create(:week)
+        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        week.picks << pick1 << pick2 << pick3
+        week.complete = false
+        expect(pick1.correct).to be_nil
+        expect(pick2.correct).to be_nil
+        expect(pick3.correct).to be_nil
+      end
+    end
+
+    context 'when complete is true' do
+      it 'should update pick.correct' do
+        week = FactoryGirl.create(:week)
+        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        week.picks << pick1 << pick2 << pick3
+        week.complete = true
+        expect(pick1.correct).not_to be_nil
+        expect(pick2.correct).not_to be_nil
+        expect(pick3.correct).not_to be_nil
+      end
+    end
+
+  end
+
 end
