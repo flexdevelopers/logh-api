@@ -5,8 +5,8 @@ describe Game do
   it { should respond_to(:week) }
   its(:week) { should be_nil }
 
-  it { should respond_to(:start_datetime) }
-  its(:start_datetime) { should be_nil }
+  it { should respond_to(:starts_at) }
+  its(:starts_at) { should be_nil }
 
   it { should respond_to(:home_squad) }
   its(:home_squad) { should be_nil }
@@ -26,7 +26,7 @@ describe Game do
   end
 
   context 'when it has no start_datetime' do
-    subject(:game) { FactoryGirl.build(:game, start_datetime: nil) }
+    subject(:game) { FactoryGirl.build(:game, starts_at: nil) }
     it { should_not be_valid }
   end
 

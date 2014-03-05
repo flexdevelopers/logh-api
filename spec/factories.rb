@@ -38,7 +38,7 @@ FactoryGirl.define do
 
   factory :game do |game|
     game.association      :week
-    start_datetime        Time.now
+    starts_at             Time.now
     home_squad            { FactoryGirl.create(:squad) }
     visiting_squad        { FactoryGirl.create(:squad) }
   end

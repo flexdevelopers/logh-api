@@ -6,7 +6,7 @@ class Game < ActiveRecord::Base
   after_update :set_loser
 
   validates :week, presence: true
-  validates :start_datetime, presence: true
+  validates :starts_at, presence: true
   validates :home_squad, presence: true
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad, presence: true
