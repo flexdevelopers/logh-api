@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305031620) do
+ActiveRecord::Schema.define(version: 20140305032134) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token", null: false
@@ -120,5 +120,6 @@ ActiveRecord::Schema.define(version: 20140305031620) do
   end
 
   add_index "weeks", ["number", "season_id"], name: "index_weeks_on_number_and_season_id", unique: true
+  add_index "weeks", ["season_id"], name: "index_weeks_on_season_id"
 
 end
