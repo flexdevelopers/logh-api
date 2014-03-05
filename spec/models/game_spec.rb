@@ -75,4 +75,14 @@ describe Game do
     end
   end
 
+  context 'when game score is updated multiple times with different results' do
+    subject(:game) { FactoryGirl.create(:game) }
+    it 'both opponents should not be marked as losers' do
+      game.update(home_squad_score: 24, visiting_squad_score: 14)
+      game.update(home_squad_score: 14, visiting_squad_score: 24)
+      expect(game.week.losers).to include(Loser.find_by(week: game.week, squad: game.home_squad))
+      expect(game.week.losers).not_to include(Loser.find_by(week: game.week, squad: game.visiting_squad))
+    end
+  end
+
 end
