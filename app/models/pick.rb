@@ -9,13 +9,13 @@ class Pick < ActiveRecord::Base
 
   def correct=(value)
     super
-    update_team
+    kill_team if self.correct == false
   end
 
   private
 
-    def update_team
-      team.update(alive: correct) if self.correct == false
+    def kill_team
+      team.update(alive: false)
     end
 
 end
