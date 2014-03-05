@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305033304) do
+ActiveRecord::Schema.define(version: 20140305033904) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token", null: false
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20140305033304) do
 
   create_table "weeks", force: true do |t|
     t.integer  "number",                     null: false
-    t.datetime "starts_at"
+    t.datetime "starts_at",                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "season_id",                  null: false

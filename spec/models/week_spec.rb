@@ -28,6 +28,11 @@ describe Week do
     it { should_not be_valid }
   end
 
+  context 'when week has no start date/time' do
+    subject(:week) { FactoryGirl.build(:week, starts_at: nil) }
+    it { should_not be_valid }
+  end
+
   context 'when week has a number less than 1' do
     subject(:week) { FactoryGirl.build(:week, number: 0) }
     it { should_not be_valid }

@@ -5,6 +5,7 @@ class Week < ActiveRecord::Base
   has_many :losers
 
   validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
+  validates :starts_at, presence: true
   validates :season, presence: true
   validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
 
