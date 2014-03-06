@@ -38,6 +38,26 @@ describe API::PicksController do
       expect { post api_team_picks_path(pick.team), pick: pick.attributes }.to change(pick.team.picks, :count).by(1)
       expect(response).to be_success
     end
+    context 'when the team tries to make two picks in a week' do
+      it 'should return a validation error' do
+        week1 = FactoryGirl.create(:week, number: 1)
+        team = FactoryGirl.create(:team)
+        squad1 = FactoryGirl.create(:squad)
+        squad2 = FactoryGirl.create(:squad)
+        FactoryGirl.create(:pick, week: week1, team: team, loser: squad1)
+        expect { FactoryGirl.create(:pick, week: week1, team: team, loser: squad2) }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+    context 'when the team tries to use the same loser twice' do
+      it 'should return a validation error' do
+        week1 = FactoryGirl.create(:week, number: 1)
+        week2 = FactoryGirl.create(:week, number: 2)
+        team = FactoryGirl.create(:team)
+        squad = FactoryGirl.create(:squad)
+        FactoryGirl.create(:pick, week: week1, team: team, loser: squad)
+        expect { FactoryGirl.create(:pick, week: week2, team: team, loser: squad) }.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
   end
 
   #PATCH/PUT /api/picks/id

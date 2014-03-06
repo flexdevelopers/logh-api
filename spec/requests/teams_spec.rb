@@ -80,9 +80,11 @@ describe API::TeamsController do
       expect { delete api_league_team_path(team.league, team) }.to change(team.league.teams, :count).by(-1)
     end
     it 'deletes all the picks for the deleted team' do
+      week1 = FactoryGirl.create(:week, number: 1)
+      week2 = FactoryGirl.create(:week, number: 2)
       team = FactoryGirl.create(:team)
-      pick1 = FactoryGirl.create(:pick, team: team)
-      pick2 = FactoryGirl.create(:pick, team: team)
+      pick1 = FactoryGirl.create(:pick, week: week1, team: team)
+      pick2 = FactoryGirl.create(:pick, week: week2, team: team)
       expect(team.picks).to include(pick1)
       expect(team.picks).to include(pick2)
       expect { delete api_league_team_path(team.league, team) }.to change(team.picks, :count).by(-2)
