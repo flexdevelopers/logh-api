@@ -15,8 +15,8 @@ class API::PicksController < API::AuthController
     render json: @pick
   end
 
-  # POST /api/teams/:team_id/picks?week_id=:week_id&loser_id=:squad_id
-  # POST /api/teams/:team_id/picks.json?week_id=:week_id&loser_id=:squad_id
+  # POST /api/teams/:team_id/picks
+  # POST /api/teams/:team_id/picks.json
   def create
     @pick = @team.picks.new(pick_params)
     if @pick.save

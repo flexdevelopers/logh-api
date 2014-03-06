@@ -21,8 +21,8 @@ class API::LeaguesController < API::AuthController
     render json: @league
   end
 
-  # POST /api/users/:user_id/leagues?season_id=:season_id
-  # POST /api/users/:user_id/leagues.json?season_id=:season_id
+  # POST /api/users/:user_id/leagues
+  # POST /api/users/:user_id/leagues.json
   def create
     @league = @user.leagues.new(league_params)
     if @league.save
