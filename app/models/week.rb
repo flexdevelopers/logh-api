@@ -11,13 +11,13 @@ class Week < ActiveRecord::Base
 
   def complete=(value)
     super
-    update_picks
+    mark_picks_correct_or_not if self.complete == true
   end
 
   private
 
-    def update_picks
-      return if self.complete == false
+    def mark_picks_correct_or_not
+      return if self.complete == false # only update if the week is complete
 
       picks.each do |pick|
         if losers.find_by(squad: pick.loser)
