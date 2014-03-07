@@ -18,9 +18,9 @@ class Game < ActiveRecord::Base
     def ensure_no_squad_duplication
       week.games.each do |game|
         if game != self
-          # an exception will roll back the create
-          raise Exception.new if home_squad == game.home_squad || home_squad == game.visiting_squad
-          raise Exception.new if visiting_squad == game.home_squad || visiting_squad == game.visiting_squad
+          game_squads = [ game.home_squad, game.visiting_squad ]
+          # an exception will roll back the create to ensure squads are not duplicated across games
+          raise Exception.new if game_squads.include?(home_squad) || game_squads.include?(visiting_squad)
         end
       end
     end
