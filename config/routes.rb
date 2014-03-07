@@ -12,6 +12,9 @@ LoghApi::Application.routes.draw do
     resources :teams, only: [:index] do
       resources :picks, only: [:index, :show, :create, :update, :destroy]
     end
+    namespace :admin do
+      resources :seasons, only: [:index, :show, :create, :update, :destroy]
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
