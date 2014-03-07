@@ -15,13 +15,13 @@ describe Loser do
 
   context 'when squad is nil' do
     subject(:loser) { FactoryGirl.build(:loser, squad: nil) }
-    it { should_not be_valid }
+    xit { should_not be_valid }
   end
 
   context 'when loser is added twice to a week' do
     it 'raises an error' do
       loser1 = FactoryGirl.create(:loser)
-      expect { FactoryGirl.create(:loser, week: loser1.week, squad: loser1.squad) }.to raise_error
+      expect { FactoryGirl.create(:loser, week: loser1.week, squad: loser1.squad) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 

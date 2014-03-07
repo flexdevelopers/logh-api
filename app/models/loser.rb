@@ -3,5 +3,5 @@ class Loser < ActiveRecord::Base
   belongs_to :squad
 
   validates :week, presence: true
-  validates :squad, presence: true
+  validates :squad, presence: true, uniqueness: { scope: :week }
 end
