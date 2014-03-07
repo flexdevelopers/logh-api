@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
   belongs_to :home_squad, class_name: 'Squad', foreign_key: 'home_squad_id'
   belongs_to :visiting_squad, class_name: 'Squad', foreign_key: 'visiting_squad_id'
 
+  after_create :ensure_no_squad_duplication
   after_update :set_loser
 
   validates :week, presence: true
@@ -13,6 +14,16 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   private
+
+    def ensure_no_squad_duplication
+      week.games.each do |game|
+        if game != self
+          # an exception will roll back the create
+          raise Exception.new if home_squad == game.home_squad || home_squad == game.visiting_squad
+          raise Exception.new if visiting_squad == game.home_squad || visiting_squad == game.visiting_squad
+        end
+      end
+    end
 
     def set_loser
 

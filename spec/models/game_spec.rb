@@ -60,6 +60,16 @@ describe Game do
     end
   end
 
+  context 'when a squad is part of two games in a week' do
+    it 'should throw an error and not add the game to the week' do
+      week = FactoryGirl.create(:week)
+      squad = FactoryGirl.create(:squad)
+      expect { FactoryGirl.create(:game, week: week, home_squad: squad) }.to change(week.games, :count).from(0).to(1)
+      expect { FactoryGirl.create(:game, week: week, visiting_squad: squad) }.to raise_error
+      expect(week.games.length).to eq(1)
+    end
+  end
+
   context 'when home squad score is less than zero' do
     subject(:game) { FactoryGirl.build(:game, home_squad_score: -1) }
     it { should_not be_valid }
