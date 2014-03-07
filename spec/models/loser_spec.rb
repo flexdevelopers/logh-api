@@ -15,7 +15,7 @@ describe Loser do
 
   context 'when squad is nil' do
     subject(:loser) { FactoryGirl.build(:loser, squad: nil) }
-    xit { should_not be_valid }
+    it { should_not be_valid }
   end
 
   context 'when loser is added twice to a week' do

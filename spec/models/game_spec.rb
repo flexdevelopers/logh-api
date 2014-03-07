@@ -32,12 +32,12 @@ describe Game do
 
   context 'when it has no home squad' do
     subject(:game) { FactoryGirl.build(:game, home_squad: nil) }
-    xit { should_not be_valid }
+    it { should_not be_valid }
   end
 
   context 'when it has no visiting squad' do
     subject(:game) { FactoryGirl.build(:game, visiting_squad: nil) }
-    xit { should_not be_valid }
+    it { should_not be_valid }
   end
 
   context 'creating 2 games in a week with the same home squad' do

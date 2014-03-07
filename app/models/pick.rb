@@ -4,8 +4,8 @@ class Pick < ActiveRecord::Base
   belongs_to :loser, class_name: 'Squad', foreign_key: 'loser_id'
 
   validates :week, presence: true
-  validates :team, presence: true, uniqueness: { scope: :week }
-  validates :loser, presence: true, uniqueness: { scope: :team }
+  validates :team_id, presence: true, uniqueness: { scope: :week_id }
+  validates :loser_id, presence: true, uniqueness: { scope: :team_id }
 
   def correct=(value)
     super
