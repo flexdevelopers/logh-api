@@ -32,12 +32,32 @@ describe Game do
 
   context 'when it has no home squad' do
     subject(:game) { FactoryGirl.build(:game, home_squad: nil) }
-    it { should_not be_valid }
+    xit { should_not be_valid }
   end
 
   context 'when it has no visiting squad' do
     subject(:game) { FactoryGirl.build(:game, visiting_squad: nil) }
-    it { should_not be_valid }
+    xit { should_not be_valid }
+  end
+
+  context 'creating 2 games in a week with the same home squad' do
+    # todo: move this into the controller specs when the controller has been created
+    it 'should return a validation error' do
+      week = FactoryGirl.create(:week)
+      squad = FactoryGirl.create(:squad)
+      FactoryGirl.create(:game, week: week, home_squad: squad)
+      expect { FactoryGirl.create(:game, week: week, home_squad: squad) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+  end
+
+  context 'creating 2 games in a week with the same visiting squad' do
+    # todo: move this into the controller specs when the controller has been created
+    it 'should return a validation error' do
+      week = FactoryGirl.create(:week)
+      squad = FactoryGirl.create(:squad)
+      FactoryGirl.create(:game, week: week, visiting_squad: squad)
+      expect { FactoryGirl.create(:game, week: week, visiting_squad: squad) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 
   context 'when home squad score is less than zero' do

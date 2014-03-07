@@ -7,9 +7,9 @@ class Game < ActiveRecord::Base
 
   validates :week, presence: true
   validates :starts_at, presence: true
-  validates :home_squad, presence: true
+  validates :home_squad, presence: true, uniqueness: { scope: :week }
+  validates :visiting_squad, presence: true, uniqueness: { scope: :week }
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :visiting_squad, presence: true
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   private

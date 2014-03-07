@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305043729) do
+ActiveRecord::Schema.define(version: 20140306170658) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token", null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20140305043729) do
     t.integer  "visiting_squad_score", default: 0, null: false
   end
 
+  add_index "games", ["week_id", "home_squad_id"], name: "index_games_on_week_id_and_home_squad_id", unique: true
+  add_index "games", ["week_id", "visiting_squad_id"], name: "index_games_on_week_id_and_visiting_squad_id", unique: true
   add_index "games", ["week_id"], name: "index_games_on_week_id"
 
   create_table "leagues", force: true do |t|
