@@ -32,7 +32,7 @@ describe API::Admin::WeeksController do
   describe "#create" do
     it "creates a week for a season" do
       season = FactoryGirl.create(:season)
-      week_params = FactoryGirl.attributes_for(:week, season: season)
+      week_params = FactoryGirl.attributes_for(:week)
       expect { post api_admin_season_weeks_path(season), week: week_params }.to change(season.weeks, :count).by(1)
       response.should be_success
     end
