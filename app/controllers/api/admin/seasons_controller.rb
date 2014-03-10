@@ -1,4 +1,4 @@
-class API::Admin::SeasonsController < API::AuthController
+class API::Admin::SeasonsController < API::BaseController
 
   before_action :set_season, only: [:show, :update, :destroy]
 

@@ -1,4 +1,4 @@
-class API::UsersController < API::AuthController
+class API::UsersController < API::BaseController
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /api/users
