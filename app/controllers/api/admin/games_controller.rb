@@ -42,7 +42,7 @@ class API::Admin::GamesController < API::AuthController
   private
 
     def game_params
-      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id)
+      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score)
     end
 
     def set_week
