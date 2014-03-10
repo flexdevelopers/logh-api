@@ -39,23 +39,27 @@ describe API::PicksController do
       expect(response).to be_success
     end
     context 'when the team tries to make two picks in a week' do
-      it 'should return a validation error' do
-        week1 = FactoryGirl.create(:week, number: 1)
+      it 'the 2nd pick is not created' do
+        week = FactoryGirl.create(:week, number: 1)
         team = FactoryGirl.create(:team)
         squad1 = FactoryGirl.create(:squad)
         squad2 = FactoryGirl.create(:squad)
-        FactoryGirl.create(:pick, week: week1, team: team, loser: squad1)
-        expect { FactoryGirl.create(:pick, week: week1, team: team, loser: squad2) }.to raise_error(ActiveRecord::RecordInvalid)
+        pick1 = FactoryGirl.create(:pick, week: week, team: team, loser: squad1)
+        pick2_params = FactoryGirl.attributes_for(:pick, week: week, team: team, loser: squad2)
+        expect { post api_team_picks_path(team), pick: pick2_params }.not_to change(week.picks, :count).by(1)
+        expect(response.status).to eq(422) # Unprocessable Entity
       end
     end
-    context 'when the team tries to use the same loser twice' do
-      it 'should return a validation error' do
+    context 'when the team tries make two picks with the same loser' do
+      it 'the 2nd pick is not created' do
         week1 = FactoryGirl.create(:week, number: 1)
         week2 = FactoryGirl.create(:week, number: 2)
         team = FactoryGirl.create(:team)
         squad = FactoryGirl.create(:squad)
-        FactoryGirl.create(:pick, week: week1, team: team, loser: squad)
-        expect { FactoryGirl.create(:pick, week: week2, team: team, loser: squad) }.to raise_error(ActiveRecord::RecordInvalid)
+        week1_pick = FactoryGirl.create(:pick, team: team, week: week1, loser: squad)
+        week2_pick_params = FactoryGirl.attributes_for(:pick, team: team, week: week2, loser: squad)
+        expect { post api_team_picks_path(team), pick: week2_pick_params }.not_to change(team.picks, :count).by(1)
+        expect(response.status).to eq(422) # Unprocessable Entity
       end
     end
   end

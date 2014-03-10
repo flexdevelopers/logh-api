@@ -29,39 +29,12 @@ describe Pick do
     it { should_not be_valid }
   end
 
-  context 'when trying to create 2 picks for a team in one week' do
-    it 'should raise an error' do
-      pick1 = FactoryGirl.create(:pick)
-      expect { FactoryGirl.create!(:pick, week: pick1.week, team: pick1.team) }.to raise_error
-    end
-  end
-
-  context 'when trying to create 2 picks for a team with the same loser' do
-    it 'should raise an error' do
-      season = FactoryGirl.create(:season)
-      week1 = FactoryGirl.create(:week, number: 1, season: season)
-      week2 = FactoryGirl.create(:week, number: 2, season: season)
-      team = FactoryGirl.create(:team)
-      loser = FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP')
-      FactoryGirl.create(:pick, week: week1, team: team, loser: loser)
-      expect { FactoryGirl.create(:pick, week: week2, team: team, loser: loser) }.to raise_error
-    end
-  end
-
-  context 'when marked as incorrect' do
-    it 'should mark the team as dead' do
-      pick = FactoryGirl.create(:pick)
-      expect { pick.correct = false }.to change(pick.team, :alive).from(true).to(false)
-    end
-  end
-
   describe '#correct' do
 
     context 'when correct is set to false' do
       it 'should mark team as dead' do
-        team = FactoryGirl.create(:team, alive: true)
-        pick = FactoryGirl.create(:pick, team: team)
-        expect { pick.correct = false }.to change(team, :alive).from(true).to(false)
+        pick = FactoryGirl.create(:pick)
+        expect { pick.correct = false }.to change(pick.team, :alive).from(true).to(false)
       end
     end
 
