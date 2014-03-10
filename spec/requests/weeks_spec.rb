@@ -30,11 +30,30 @@ describe API::Admin::WeeksController do
 
   # POST /api/admin/seasons/:season_id/weeks
   describe "#create" do
-    it "creates a week for a season" do
-      season = FactoryGirl.create(:season)
-      week_params = FactoryGirl.attributes_for(:week)
-      expect { post api_admin_season_weeks_path(season), week: week_params }.to change(season.weeks, :count).by(1)
-      response.should be_success
+    context 'when all required fields are provided' do
+      it "creates a week for a season" do
+        season = FactoryGirl.create(:season)
+        week_params = FactoryGirl.attributes_for(:week)
+        expect { post api_admin_season_weeks_path(season), week: week_params }.to change(season.weeks, :count).by(1)
+        response.should be_success
+      end
+    end
+    context 'when the same week number is added to 2 different seasons' do
+      it 'creates a week for each season' do
+        season1 = FactoryGirl.create(:season, name: '2014-15 NFL Season')
+        season2 = FactoryGirl.create(:season, name: '2015-16 NFL Season')
+        FactoryGirl.create(:week, number: 1, season: season1)
+        week1_season2_params = FactoryGirl.attributes_for(:week, number: 1, season: season2)
+        expect { post api_admin_season_weeks_path(season2), week: week1_season2_params  }.to change(season2.weeks, :count).by(1)
+      end
+    end
+    context 'when attempting to create 2 weeks in one season with the same week number' do
+      it 'should not create the 2nd week' do
+        season = FactoryGirl.create(:season)
+        FactoryGirl.create(:week, number: 1, season: season)
+        bad_week_params = FactoryGirl.attributes_for(:week, number: 1)
+        expect { post api_admin_season_weeks_path(season), week: bad_week_params }.not_to change(season.weeks, :count).by(1)
+      end
     end
   end
 

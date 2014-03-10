@@ -43,23 +43,6 @@ describe Week do
     it { should_not be_valid }
   end
 
-  context 'when the same week number is added to a season twice' do
-    it 'raises an error' do
-      season = FactoryGirl.create(:season)
-      FactoryGirl.create(:week, number: 1, season: season)
-      expect { FactoryGirl.create(:week, number: 1, season: season) }.to raise_error
-    end
-  end
-
-  context 'when the same week number is added to 2 different seasons' do
-    it 'is created for each season' do
-      season1 = FactoryGirl.create(:season, name: '2014-15 NFL Season')
-      season2 = FactoryGirl.create(:season, name: '2015-16 NFL Season')
-      FactoryGirl.create(:week, number: 1, season: season1)
-      expect { FactoryGirl.create(:week, number: 1, season: season2) }.to change(season2.weeks, :count).by(1)
-    end
-  end
-
   context 'when complete is not defined' do
     subject(:week) { FactoryGirl.build(:week, complete: nil) }
     it { should_not be_valid }
@@ -67,7 +50,7 @@ describe Week do
 
   describe '#complete' do
 
-    context 'when complete is false' do
+    context 'when complete is set to false' do
       it 'should not update pick.correct' do
         week = FactoryGirl.create(:week)
         pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
@@ -81,7 +64,7 @@ describe Week do
       end
     end
 
-    context 'when complete is true' do
+    context 'when complete is set to true' do
       it 'should update pick.correct' do
         week = FactoryGirl.create(:week)
         pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
