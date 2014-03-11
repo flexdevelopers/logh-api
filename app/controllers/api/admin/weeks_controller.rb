@@ -1,4 +1,4 @@
-class API::Admin::WeeksController < API::AuthController
+class API::Admin::WeeksController < API::BaseController
 
   before_action :set_season
   before_action :set_week, only: [:show, :update, :destroy]

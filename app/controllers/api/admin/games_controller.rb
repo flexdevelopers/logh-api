@@ -1,4 +1,4 @@
-class API::Admin::GamesController < API::AuthController
+class API::Admin::GamesController < API::BaseController
 
   before_action :set_week
   before_action :set_game, only: [:show, :update, :destroy]

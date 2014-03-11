@@ -1,4 +1,4 @@
-class API::TeamsController < API::AuthController
+class API::TeamsController < API::BaseController
   before_action :set_user, only: [:index]
   before_action :set_league, only: [:index, :show, :create, :update, :destroy]
   before_action :set_team, only: [:show, :update, :destroy]

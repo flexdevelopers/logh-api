@@ -1,4 +1,4 @@
-class API::AuthController < ApplicationController
+class API::BaseController < ApplicationController
   before_action :authenticate
 
   protected

@@ -1,4 +1,4 @@
-class API::UsersController < API::AuthController
+class API::UsersController < API::BaseController
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /api/users
@@ -50,7 +50,7 @@ class API::UsersController < API::AuthController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
 end

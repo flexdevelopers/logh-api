@@ -1,4 +1,4 @@
-class API::PicksController < API::AuthController
+class API::PicksController < API::BaseController
   before_action :set_team, only: [:index, :show, :create, :update, :destroy]
   before_action :set_pick, only: [:show, :update, :destroy]
 
