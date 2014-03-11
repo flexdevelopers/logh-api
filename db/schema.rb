@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306170658) do
+ActiveRecord::Schema.define(version: 20140311030945) do
 
   create_table "api_keys", force: true do |t|
     t.string   "access_token", null: false
@@ -101,12 +101,12 @@ ActiveRecord::Schema.define(version: 20140306170658) do
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",      null: false
-    t.string   "password",   null: false
+    t.string   "email",           null: false
+    t.string   "password_digest", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name", null: false
-    t.string   "last_name",  null: false
+    t.string   "first_name",      null: false
+    t.string   "last_name",       null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

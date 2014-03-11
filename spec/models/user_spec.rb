@@ -11,14 +11,22 @@ describe User do
   it { should respond_to(:email) }
   its(:email) { should be_blank }
 
+  it { should respond_to(:password_digest) }
+  its(:password_digest) { should be_blank }
+
   it { should respond_to(:password) }
   its(:password) { should be_blank }
+
+  it { should respond_to(:password_confirmation) }
+  its(:password_confirmation) { should be_blank }
 
   it { should respond_to(:leagues) }
   its(:leagues) { should be_empty }
 
   it { should respond_to(:teams) }
   its(:teams) { should be_empty }
+
+  it { should respond_to(:authenticate) }
 
   context 'when first name is not present' do
     subject(:user) { FactoryGirl.build(:user, first_name: '') }
@@ -72,9 +80,35 @@ describe User do
     its(:email) { should eq(mixed_case_email.downcase) }
   end
 
-  context 'when password is less than 6 characters' do
-    subject(:user) { FactoryGirl.build(:user, password: 'fooba') }
+  context 'when password is not present' do
+    subject(:user) { FactoryGirl.build(:user, password: '', password_confirmation: '') }
     it { should_not be_valid }
+  end
+
+  context 'when password is less than 6 characters' do
+    subject(:user) { FactoryGirl.build(:user, password: 'f' * 5, password_confirmation: 'f' * 5) }
+    it { should_not be_valid }
+  end
+
+  context 'when password does not match password confirmation' do
+    subject(:user) { FactoryGirl.build(:user, password: 'foobar', password_confirmation: 'barfoo') }
+    it { should_not be_valid }
+  end
+
+  describe 'return value of authenticate method' do
+    subject(:user) { FactoryGirl.create(:user) }
+    let(:found_user) { User.find_by(email: user.email) }
+
+    context 'with a valid passord' do
+      it { should eq found_user.authenticate(user.password) }
+    end
+
+    context 'with an invalid password' do
+      let(:user_for_invalid_password) { found_user.authenticate('invalid') }
+
+      it { should_not == user_for_invalid_password }
+      specify { expect(user_for_invalid_password).to be_false }
+    end
   end
 
 end

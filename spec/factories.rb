@@ -2,10 +2,11 @@ FactoryGirl.define do
   sequence(:email) { |n| "foo#{n}@bar.com" }
 
   factory :user do
-    first_name  'Billy Bob'
-    last_name   'Thorton'
+    first_name              'Billy Bob'
+    last_name               'Thorton'
     email
-    password 'foobar'
+    password                'foobar'
+    password_confirmation   'foobar'
   end
 
   factory :league do |league|

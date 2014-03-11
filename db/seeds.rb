@@ -42,7 +42,7 @@ season = Season.create!(name: '2014-15 NFL Season')
 end
 
 # create a user and a league for that user and a few teams for that user in that league
-user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar')
+user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
 foo_league = League.create!(name: "Foo League", user: user1, season: season)
 3.times do |i|
   team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, user: user1)
@@ -53,7 +53,7 @@ foo_league = League.create!(name: "Foo League", user: user1, season: season)
 end
 
 # create another user and a few teams for that user
-user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo')
+user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo', password_confirmation: 'bobfoo')
 3.times do |i|
   team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, user: user2)
   # and 3 picks for that team
