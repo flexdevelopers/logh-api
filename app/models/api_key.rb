@@ -1,7 +1,10 @@
 class APIKey < ActiveRecord::Base
   before_validation :generate_access_token, on: :create
 
+  belongs_to :user
+
   validates :access_token, presence: true, uniqueness: true
+  validates :user_id, presence: true, uniqueness: true
 
   private
 
