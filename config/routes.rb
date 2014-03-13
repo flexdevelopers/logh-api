@@ -1,6 +1,6 @@
 LoghApi::Application.routes.draw do
 
-  namespace :api do
+  namespace :api, defaults: {format: :json} do
 
     resources :users, only: [:index, :show, :create, :update, :destroy] do
       resources :leagues, only: [:index, :show, :create, :update, :destroy]
