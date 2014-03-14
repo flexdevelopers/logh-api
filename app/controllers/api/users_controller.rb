@@ -1,4 +1,5 @@
 class API::UsersController < API::BaseController
+  skip_before_filter :authenticate, only: [:create]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /api/users

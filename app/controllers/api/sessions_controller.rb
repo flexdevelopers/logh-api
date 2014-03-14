@@ -1,4 +1,5 @@
 class API::SessionsController < API::BaseController
+  skip_before_filter :authenticate, only: [:create]
 
   # POST /api/sessions
   def create
