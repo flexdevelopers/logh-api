@@ -3,27 +3,28 @@ class API::SessionsController < API::BaseController
 
   # POST /api/sessions
   def create
-    email = session_params[:email].downcase if session_params[:email]
-    password = session_params[:password]
-    user = User.find_by(email: email)
-    if user && user.authenticate(password)
-      session[:user_id] = user.id
-      render json: { message: 'welcome' }, status: :created
-    else
-      render json: { message: 'take a hike' }, status: :unprocessable_entity
+    token =  current_access_token
+    if _session_params[:email]
+      @user = User.find_by(email: _session_params[:email])
+      token.user = @user if _password_valid?
     end
-
+    render json: token
   end
 
   # DELETE /api/sessions/:id
   def destroy
-
+    current_access_token.delete!
+    head :no_content
   end
 
   private
 
-    def session_params
+    def _session_params
       params.require(:session).permit(:email, :password)
+    end
+
+    def _password_valid?
+      @user.authenticate(_session_params[:password])
     end
 
 end
