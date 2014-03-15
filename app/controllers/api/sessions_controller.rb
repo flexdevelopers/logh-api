@@ -3,12 +3,12 @@ class API::SessionsController < API::BaseController
 
   # POST /api/sessions
   def create
-    token =  current_access_token
+    access_token =  current_access_token
     if _session_params[:email]
       @user = User.find_by(email: _session_params[:email])
-      token.user = @user if _password_valid?
+      access_token.user = @user if _password_valid?
     end
-    render json: token
+    render json: { token: access_token.token }
   end
 
   # DELETE /api/sessions/:id
