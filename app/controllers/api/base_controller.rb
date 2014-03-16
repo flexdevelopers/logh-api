@@ -4,7 +4,11 @@ class API::BaseController < ApplicationController
   private
 
     def authenticate
-      _not_authorized unless _authorization_header && current_access_token.valid?
+      _not_authorized unless access_token_validated && signed_in?
+    end
+
+    def access_token_validated
+      _authorization_header && current_access_token.valid?
     end
 
     def signed_in?
