@@ -36,11 +36,6 @@ describe API::UsersController do
       expect { post api_users_path, user: user_params }.to change(User, :count).by(1)
       expect(response).to be_success
     end
-    it 'creates an api key for the user' do
-      user_params = FactoryGirl.attributes_for(:user)
-      post api_users_path, user: user_params
-      expect(APIKey.where(user_id: json['id']).length).to eq(1)
-    end
   end
 
   # PATCH/PUT /api/users/:id
