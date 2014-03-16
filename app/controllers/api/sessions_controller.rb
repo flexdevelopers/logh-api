@@ -8,7 +8,11 @@ class API::SessionsController < API::BaseController
       @user = User.find_by(email: _session_params[:email])
       access_token.user = @user if _password_valid?
     end
-    render json: { token: access_token.token }
+    if signed_in?
+      render json: { token: access_token.token }
+    else
+      _not_authorized
+    end
   end
 
   # DELETE /api/sessions/:id
