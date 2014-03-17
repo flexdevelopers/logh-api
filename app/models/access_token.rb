@@ -39,7 +39,11 @@ class AccessToken
   end
 
   def valid?
-    ttl >= 1
+    !expired?
+  end
+
+  def expired?
+    ttl < 1
   end
 
   def delete!
