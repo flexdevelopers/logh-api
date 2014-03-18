@@ -3,7 +3,8 @@
 describe API::UsersController do
 
   before do
-    bypass_http_token_authentication_on API::UsersController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   # GET /api/users
@@ -13,7 +14,7 @@ describe API::UsersController do
       FactoryGirl.create_list(:user, 10)
     end
     it 'returns a list of users' do
-      get api_users_path
+      get :index
       expect(response).to be_success
       expect(json.length).to eq(10)
     end
@@ -23,7 +24,7 @@ describe API::UsersController do
   describe '#show' do
     it 'returns a user' do
       user = FactoryGirl.create(:user)
-      get api_user_path(user)
+      get :show, id: user.id
       expect(response).to be_success
       expect(json['email']).to eq(user.email)
     end
@@ -33,7 +34,8 @@ describe API::UsersController do
   describe '#create' do
     it 'creates a user' do
       user_params = FactoryGirl.attributes_for(:user)
-      expect { post api_users_path, user: user_params }.to change(User, :count).by(1)
+      expect { post :create, user: user_params }.to change(User, :count).by(1)
+      expect(response).to be_success
     end
   end
 
@@ -42,7 +44,7 @@ describe API::UsersController do
     it 'updates a user' do
       user = FactoryGirl.create(:user)
       user.email = 'bar@foo.com'
-      patch api_user_path(user), user: user.attributes
+      patch :update, id: user.id, user: user.attributes
       user.reload
       user.email.should == 'bar@foo.com'
     end
@@ -52,7 +54,7 @@ describe API::UsersController do
   describe '#destroy' do
     it 'deletes a user' do
       user = FactoryGirl.create(:user)
-      expect { delete api_user_path(user), id: user.id }.to change(User, :count).by(-1)
+      expect { delete :destroy, id: user.id }.to change(User, :count).by(-1)
     end
   end
 

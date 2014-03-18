@@ -3,7 +3,8 @@ require 'spec_helper'
 describe API::TeamsController do
 
   before do
-    bypass_http_token_authentication_on API::TeamsController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   # GET /api/teams
@@ -12,7 +13,7 @@ describe API::TeamsController do
       FactoryGirl.create(:team)
       FactoryGirl.create(:team)
       FactoryGirl.create(:team)
-      get api_teams_path
+      get :index
       expect(response).to be_success
       expect(json.length).to eq(3)
     end
@@ -25,7 +26,7 @@ describe API::TeamsController do
       FactoryGirl.create(:team)
       FactoryGirl.create(:team, league: league)
       FactoryGirl.create(:team, league: league)
-      get api_league_teams_path(league)
+      get :index, league_id: league.id
       expect(response).to be_success
       expect(json.length).to eq(2)
     end
@@ -38,17 +39,17 @@ describe API::TeamsController do
       FactoryGirl.create(:team)
       FactoryGirl.create(:team, user: user)
       FactoryGirl.create(:team, user: user)
-      get api_user_teams_path(user)
+      get :index, user_id: user.id
       expect(response).to be_success
       expect(json.length).to eq(2)
     end
   end
 
-  # GET /api/teams/:id
+  # GET /api/leagues/:league_id/teams/:id
   describe '#show' do
     it 'returns a team' do
       team = FactoryGirl.create(:team)
-      get api_league_team_path(team.league, team)
+      get :show, league_id: team.league.id, id: team.id
       expect(response).to be_success
       expect(json['name']).to eq('Fire Breathing Rubber Duckies')
     end
@@ -58,26 +59,26 @@ describe API::TeamsController do
   describe '#create' do
     it 'creates a team for a specified league' do
       team = FactoryGirl.create(:team)
-      expect { post api_league_teams_path(team.league), team: team.attributes }.to change(team.league.teams, :count).by(1)
+      expect { post :create, league_id: team.league.id, team: team.attributes }.to change(team.league.teams, :count).by(1)
     end
   end
 
-  # PATCH/PUT /api/teams/:id
+  # PATCH/PUT /api/leagues/:league_id/teams/:id
   describe '#update' do
     it 'updates a team' do
       team = FactoryGirl.create(:team)
       team.name = 'Average Joes'
-      patch api_league_team_path(team.league, team), team: team.attributes
+      patch :update, league_id: team.league.id, id: team.id, team: team.attributes
       team.reload
       expect(team.name).to eq('Average Joes')
     end
   end
 
-  # DELETE /api/teams/:id
+  # DELETE /api/leagues/:league_id/teams/:id
   describe '#destroy' do
     it 'deletes a team' do
       team = FactoryGirl.create(:team)
-      expect { delete api_league_team_path(team.league, team) }.to change(team.league.teams, :count).by(-1)
+      expect { delete :destroy, league_id: team.league.id, id: team.id }.to change(team.league.teams, :count).by(-1)
     end
     it 'deletes all the picks for the deleted team' do
       week1 = FactoryGirl.create(:week, number: 1)
@@ -87,7 +88,7 @@ describe API::TeamsController do
       pick2 = FactoryGirl.create(:pick, week: week2, team: team)
       expect(team.picks).to include(pick1)
       expect(team.picks).to include(pick2)
-      expect { delete api_league_team_path(team.league, team) }.to change(team.picks, :count).by(-2)
+      expect { delete :destroy, league_id: team.league.id, id: team.id }.to change(team.picks, :count).by(-2)
     end
   end
 

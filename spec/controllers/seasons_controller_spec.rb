@@ -3,7 +3,8 @@ require 'spec_helper'
 describe API::Admin::SeasonsController do
 
   before do
-    bypass_http_token_authentication_on API::Admin::SeasonsController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   # GET /api/admin/seasons
@@ -11,7 +12,7 @@ describe API::Admin::SeasonsController do
     it 'returns a list of seasons' do
       FactoryGirl.create(:season)
       FactoryGirl.create(:season)
-      get api_admin_seasons_path
+      get :index
       expect(response).to be_success
       expect(json.length).to eq(2)
     end
@@ -21,7 +22,7 @@ describe API::Admin::SeasonsController do
   describe '#show' do
     it 'returns a season' do
       season = FactoryGirl.create(:season)
-      get api_admin_season_path(season)
+      get :show, id: season.id
       expect(response).to be_success
       expect(json['name']).to eq('2014-15 NFL Season')
     end
@@ -31,7 +32,7 @@ describe API::Admin::SeasonsController do
   describe '#create' do
     it 'creates a season' do
       season_params = FactoryGirl.attributes_for(:season)
-      expect { post api_admin_seasons_path(season: season_params) }.to change(Season, :count).by(1)
+      expect { post :create, season: season_params }.to change(Season, :count).by(1)
     end
   end
 
@@ -40,7 +41,7 @@ describe API::Admin::SeasonsController do
     it 'updates a season' do
       season = FactoryGirl.create(:season)
       season.name = 'Foo Bar'
-      patch api_admin_season_path(season), season: season.attributes
+      patch :update, id: season.id, season: season.attributes
       season.reload
       expect(season.name).to eq('Foo Bar')
     end
@@ -50,7 +51,7 @@ describe API::Admin::SeasonsController do
   describe '#destroy' do
     it 'deletes a season' do
       season = FactoryGirl.create(:season)
-      expect { delete api_admin_season_path(season) }.to change(Season, :count).by(-1)
+      expect { delete :destroy, id: season.id }.to change(Season, :count).by(-1)
     end
   end
 

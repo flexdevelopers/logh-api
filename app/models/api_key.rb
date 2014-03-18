@@ -1,14 +1,14 @@
 class APIKey < ActiveRecord::Base
-  before_validation :generate_access_token, on: :create
+  before_validation :_generate_api_key_token, on: :create
 
-  validates :access_token, presence: true, uniqueness: true
+  validates :token, presence: true, uniqueness: true
 
   private
 
-    def generate_access_token
+    def _generate_api_key_token
       begin
-        self.access_token = SecureRandom.hex
-      end while self.class.exists?(access_token: access_token)
+        self.token = SecureRandom.hex
+      end while self.class.exists?(token: token)
     end
 
 end

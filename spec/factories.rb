@@ -9,6 +9,11 @@ FactoryGirl.define do
     password_confirmation   'foobar'
   end
 
+  factory :session do
+    email     'foo@bar.com'
+    password  'foobar'
+  end
+
   factory :league do |league|
     name                'Bad News Bears'
     league.association  :user

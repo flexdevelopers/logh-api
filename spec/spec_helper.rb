@@ -40,5 +40,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include Requests::JsonHelpers, type: :request
+  config.include Requests::JsonHelpers, type: :controller
+  config.include AccessTokenSupport, type: :controller
+
 end
