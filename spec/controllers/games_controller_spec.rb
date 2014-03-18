@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe API::Admin::GamesController, type: :controller do
+describe API::Admin::GamesController do
 
   before do
     request_with_api_token
