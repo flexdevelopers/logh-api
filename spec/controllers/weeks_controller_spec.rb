@@ -3,7 +3,8 @@ require 'spec_helper'
 describe API::Admin::WeeksController do
 
   before do
-    bypass_http_token_authentication_on API::Admin::WeeksController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   # GET /api/admin/seasons/:season_id/weeks

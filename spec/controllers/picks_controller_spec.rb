@@ -3,7 +3,8 @@ require 'spec_helper'
 describe API::PicksController do
 
   before do
-    bypass_http_token_authentication_on API::PicksController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   #GET /api/teams/team_id/picks

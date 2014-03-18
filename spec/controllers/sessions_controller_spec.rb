@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe API::SessionsController do
 
-  before do
-    bypass_http_token_authentication_on API::SessionsController
-  end
-
   # POST /api/sessions
   describe '#create' do
     it 'creates a session' do
@@ -16,6 +12,7 @@ describe API::SessionsController do
     end
   end
 
+  # DELETE /api/sessions/:id
   describe '#destroy' do
 
   end

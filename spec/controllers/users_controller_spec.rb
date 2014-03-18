@@ -3,7 +3,8 @@
 describe API::UsersController do
 
   before do
-    bypass_http_token_authentication_on API::UsersController
+    request_with_api_token
+    sign_in(FactoryGirl.create(:user))
   end
 
   # GET /api/users
