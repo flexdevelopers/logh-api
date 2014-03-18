@@ -12,7 +12,7 @@ describe API::Admin::WeeksController do
       season = FactoryGirl.create(:season)
       FactoryGirl.create(:week, number: 1, season: season)
       FactoryGirl.create(:week, number: 2, season: season)
-      get api_admin_season_weeks_path(season)
+      get :index, season_id: season.id
       response.should be_success
       expect(json.length).to eq(2)
     end
@@ -22,7 +22,7 @@ describe API::Admin::WeeksController do
   describe "#show" do
     it "returns a week" do
       week = FactoryGirl.create(:week, number: 7)
-      get api_admin_season_week_path(week.season, week)
+      get :show, season_id: week.season.id, id: week.id
       response.should be_success
       expect(json['number']).to eq(7)
     end
@@ -34,7 +34,7 @@ describe API::Admin::WeeksController do
       it "creates a week for a season" do
         season = FactoryGirl.create(:season)
         week_params = FactoryGirl.attributes_for(:week)
-        expect { post api_admin_season_weeks_path(season), week: week_params }.to change(season.weeks, :count).by(1)
+        expect { post :create, season_id: season.id, week: week_params }.to change(season.weeks, :count).by(1)
         response.should be_success
       end
     end
@@ -44,7 +44,7 @@ describe API::Admin::WeeksController do
         season2 = FactoryGirl.create(:season, name: '2015-16 NFL Season')
         FactoryGirl.create(:week, number: 1, season: season1)
         week1_season2_params = FactoryGirl.attributes_for(:week, number: 1, season: season2)
-        expect { post api_admin_season_weeks_path(season2), week: week1_season2_params  }.to change(season2.weeks, :count).by(1)
+        expect { post :create, season_id: season2.id, week: week1_season2_params }.to change(season2.weeks, :count).by(1)
       end
     end
     context 'when attempting to create 2 weeks in one season with the same week number' do
@@ -52,7 +52,7 @@ describe API::Admin::WeeksController do
         season = FactoryGirl.create(:season)
         FactoryGirl.create(:week, number: 1, season: season)
         bad_week_params = FactoryGirl.attributes_for(:week, number: 1)
-        expect { post api_admin_season_weeks_path(season), week: bad_week_params }.not_to change(season.weeks, :count).by(1)
+        expect { post :create, season_id: season.id, week: bad_week_params }.not_to change(season.weeks, :count).by(1)
       end
     end
   end
@@ -64,7 +64,7 @@ describe API::Admin::WeeksController do
       week.number = 7
       week.starts_at = Date.today.midnight
       week.complete = true
-      patch api_admin_season_week_path(week.season, week), week: week.attributes
+      patch :update, season_id: week.season.id, id: week.id, week: week.attributes
       response.should be_success
       week.reload
       expect(week.number).to eq(7)
@@ -77,7 +77,7 @@ describe API::Admin::WeeksController do
   describe "#destroy" do
     it "deletes a week" do
       week = FactoryGirl.create(:week)
-      expect { delete api_admin_season_week_path(week.season, week) }.to change(week.season.weeks, :count).by(-1)
+      expect { delete :destroy, season_id: week.season.id, id: week.id }.to change(week.season.weeks, :count).by(-1)
       response.should be_success
     end
   end

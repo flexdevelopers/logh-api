@@ -12,7 +12,7 @@ describe API::LeaguesController do
       FactoryGirl.create(:league)
       FactoryGirl.create(:league)
       FactoryGirl.create(:league)
-      get api_leagues_path
+      get :index
       expect(response).to be_success
       expect(json.length).to eq(3)
     end
@@ -27,54 +27,54 @@ describe API::LeaguesController do
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
       FactoryGirl.create(:league, user: user)
-      get api_user_leagues_path(user)
+      get :index, user_id: user.id
       expect(response).to be_success
       expect(json.length).to eq(5)
     end
   end
 
-  # GET /api/leagues/:id
+  # GET /api/users/:user_id/leagues/:id
   describe '#show' do
     it 'returns a league' do
       league = FactoryGirl.create(:league)
-      get api_user_league_path(league.user, league)
+      get :show, user_id: league.user.id, id: league.id
       expect(response).to be_success
       expect(json['name']).to eq(league.name)
     end
   end
 
-  # POST /api/users/:user_id/leagues?season_id=:season_id
+  # POST /api/users/:user_id/leagues
   describe '#create' do
     it 'creates a league for a user' do
       user = FactoryGirl.create(:user)
       league = FactoryGirl.build(:league)
-      expect { post api_user_leagues_path(user), league: league.attributes }.to change(user.leagues, :count).by(1)
+      expect { post :create, user_id: user.id, league: league.attributes }.to change(user.leagues, :count).by(1)
     end
 
   end
 
-  # PATCH/PUT /api/leagues/:id
+  # PATCH/PUT /api/users/:user_id/leagues/:id
   describe '#update' do
     it 'updates a league' do
       league = FactoryGirl.create(:league)
       league.name = 'Good News Bears'
-      patch api_user_league_path(league.user, league), league: league.attributes
+      patch :update, user_id: league.user.id, id: league.id, league: league.attributes
       league.reload
       expect(league[:name]).to eq('Good News Bears')
     end
   end
 
-  # DELETE /api/leagues/:id
+  # DELETE /api/users/:user_id/leagues/:id
   describe '#destroy' do
     it 'destroys a league' do
       league = FactoryGirl.create(:league)
-      expect { delete api_user_league_path(league.user, league) }.to change(league.user.leagues, :count).by(-1)
+      expect { delete :destroy, user_id: league.user.id, id: league.id }.to change(league.user.leagues, :count).by(-1)
     end
     it 'destroys all the teams for the destroyed team' do
       league = FactoryGirl.create(:league)
       team1 = FactoryGirl.create(:team, league: league)
       team2 = FactoryGirl.create(:team, league: league)
-      expect { delete api_user_league_path(league.user, league) }.to change(Team, :count).by(-2)
+      expect { delete :destroy, user_id: league.user.id, id: league.id }.to change(Team, :count).by(-2)
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe API::Admin::GamesController do
+describe API::Admin::GamesController, type: :controller do
 
   before do
     bypass_http_token_authentication_on API::Admin::GamesController
@@ -12,7 +12,7 @@ describe API::Admin::GamesController do
       week = FactoryGirl.create(:week)
       FactoryGirl.create(:game, week: week)
       FactoryGirl.create(:game, week: week)
-      get api_admin_week_games_path(week)
+      get :index, week_id: week.id
       response.should be_success
       expect(json.length).to eq(2)
     end
@@ -24,7 +24,7 @@ describe API::Admin::GamesController do
       home_squad = FactoryGirl.create(:squad, name: 'Denver Broncos', abbrev: 'DEN')
       visiting_squad = FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP')
       game = FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad)
-      get api_admin_week_game_path(game.week, game)
+      get :show, week_id: game.week.id, id: game.id
       response.should be_success
       expect(json['home_squad_id']).to eq(home_squad.id)
       expect(json['visiting_squad_id']).to eq(visiting_squad.id)
@@ -39,7 +39,7 @@ describe API::Admin::GamesController do
       # todo: this is weird
       game_params[:home_squad_id] = game_params[:home_squad].id
       game_params[:visiting_squad_id] = game_params[:visiting_squad].id
-      expect { post api_admin_week_games_path(week), game: game_params }.to change(week.games, :count).by(1)
+      expect { post :create, week_id: week.id, game: game_params }.to change(week.games, :count).by(1)
       response.should be_success
     end
     context 'when trying to create 2 games in the same week with the same home squad' do
@@ -53,8 +53,8 @@ describe API::Admin::GamesController do
         game2_params = FactoryGirl.attributes_for(:game, week: week, home_squad: squad)
         game2_params[:home_squad_id] = game2_params[:home_squad].id
         game2_params[:visiting_squad_id] = game2_params[:visiting_squad].id
-        expect { post api_admin_week_games_path(week), game: game1_params }.to change(week.games, :count).from(0).to(1)
-        expect { post api_admin_week_games_path(week), game: game2_params }.not_to change(week.games, :count).from(1).to(2)
+        expect { post :create, week_id: week.id, game: game1_params }.to change(week.games, :count).from(0).to(1)
+        expect { post :create, week_id: week.id, game: game2_params }.not_to change(week.games, :count).from(1).to(2)
       end
     end
     context 'when trying to create 2 games in the same week with the same visiting squad' do
@@ -68,8 +68,8 @@ describe API::Admin::GamesController do
         game2_params = FactoryGirl.attributes_for(:game, week: week, visiting_squad: squad)
         game2_params[:home_squad_id] = game2_params[:home_squad].id
         game2_params[:visiting_squad_id] = game2_params[:visiting_squad].id
-        expect { post api_admin_week_games_path(week), game: game1_params }.to change(week.games, :count).from(0).to(1)
-        expect { post api_admin_week_games_path(week), game: game2_params }.not_to change(week.games, :count).from(1).to(2)
+        expect { post :create, week_id: week.id, game: game1_params }.to change(week.games, :count).from(0).to(1)
+        expect { post :create, week_id: week.id, game: game2_params }.not_to change(week.games, :count).from(1).to(2)
       end
     end
     context 'when a squad is part of two games in a week' do
@@ -83,8 +83,8 @@ describe API::Admin::GamesController do
         game2_params = FactoryGirl.attributes_for(:game, week: week, visiting_squad: squad)
         game2_params[:home_squad_id] = game2_params[:home_squad].id
         game2_params[:visiting_squad_id] = game2_params[:visiting_squad].id
-        expect { post api_admin_week_games_path(week), game: game1_params }.to change(week.games, :count).by(1)
-        expect { post api_admin_week_games_path(week), game: game2_params }.to raise_error
+        expect { post :create, week_id: week.id, game: game1_params }.to change(week.games, :count).by(1)
+        expect { post :create, week_id: week.id, game: game2_params }.to raise_error
         expect(week.games.length).to eq(1)
       end
     end
@@ -97,7 +97,7 @@ describe API::Admin::GamesController do
       game = FactoryGirl.create(:game)
       game.home_squad = FactoryGirl.create(:squad, name: 'Seattle Seahawks', abbrev: 'SEA')
       game.visiting_squad = FactoryGirl.create(:squad, name: 'New York Giants', abbrev: 'NYG')
-      patch api_admin_week_game_path(game.week, game), game: game.attributes
+      patch :update, week_id: game.week.id, id: game.id, game: game.attributes
       response.should be_success
       game.reload
       expect(game.home_squad.abbrev).to eq('SEA')
@@ -108,7 +108,7 @@ describe API::Admin::GamesController do
       it 'should add visiting squad to the weeks losers' do
         game[:home_squad_score] = 34
         game[:visiting_squad_score] = 24
-        patch api_admin_week_game_path(game.week, game), game: game.attributes
+        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
         expect(response).to be_success
         expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(1)
         expect(game.week.losers.where(squad: game.home_squad).length).to eq(0)
@@ -119,7 +119,7 @@ describe API::Admin::GamesController do
       it 'should add home squad to the weeks losers' do
         game[:home_squad_score] = 21
         game[:visiting_squad_score] = 28
-        patch api_admin_week_game_path(game.week, game), game: game.attributes
+        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
         expect(response).to be_success
         expect(game.week.losers.where(squad: game.home_squad).length).to eq(1)
         expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
@@ -129,7 +129,7 @@ describe API::Admin::GamesController do
       subject(:game) { FactoryGirl.create(:game) }
       it 'should not add either squad to the weeks losers' do
         game[:home_squad_score] = game[:visiting_squad_score] = 14
-        patch api_admin_week_game_path(game.week, game), game: game.attributes
+        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
         expect(response).to be_success
         expect(game.week.losers.where(squad: game.home_squad).length).to eq(0)
         expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
@@ -140,12 +140,12 @@ describe API::Admin::GamesController do
       it 'both opponents should not be marked as losers' do
         game[:home_squad_score] = 24
         game[:visiting_squad_score] = 14
-        patch api_admin_week_game_path(game.week, game), game: game.attributes
+        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
         expect(response).to be_success
         expect(game.week.losers.find_by(squad: game.visiting_squad)).not_to be_nil
         game[:home_squad_score] = 14
         game[:visiting_squad_score] = 24
-        patch api_admin_week_game_path(game.week, game), game: game.attributes
+        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
         expect(response).to be_success
         expect(game.week.losers.where(squad: game.home_squad).length).to eq(1)
         expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
@@ -158,7 +158,7 @@ describe API::Admin::GamesController do
   describe "#destroy" do
     it "destroys a game" do
       game = FactoryGirl.create(:game)
-      expect { delete api_admin_week_game_path(game.week, game) }.to change(game.week.games, :count).by(-1)
+      expect { delete :destroy, week_id: game.week.id, id: game.id }.to change(game.week.games, :count).by(-1)
       response.should be_success
     end
   end
