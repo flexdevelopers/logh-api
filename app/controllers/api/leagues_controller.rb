@@ -1,11 +1,10 @@
 class API::LeaguesController < API::BaseController
-  before_action :set_user
   before_action :set_league, only: [:show, :update, :destroy]
 
   # GET /api/users/:user_id/leagues
   # GET /api/users/:user_id/leagues.json
   def index
-    render json: @user.leagues
+    render json: current_user.leagues
   end
 
   # GET /api/users/:user_id/leagues/1
@@ -17,9 +16,9 @@ class API::LeaguesController < API::BaseController
   # POST /api/users/:user_id/leagues
   # POST /api/users/:user_id/leagues.json
   def create
-    @league = @user.leagues.new(league_params)
+    @league = current_user.leagues.new(league_params)
     if @league.save
-      render json: @league, status: :created, location: api_user_league_path(@user, @league)
+      render json: @league, status: :created, location: api_user_league_path(current_user, @league)
     else
       render json: @league.errors, status: :unprocessable_entity
     end
@@ -44,12 +43,8 @@ class API::LeaguesController < API::BaseController
 
   private
 
-    def set_user
-      @user = User.find(params[:user_id]) if params[:user_id]
-    end
-
     def set_league
-      @league = @user.leagues.find(params[:id])
+      @league = current_user.leagues.find(params[:id])
     end
 
     def league_params
