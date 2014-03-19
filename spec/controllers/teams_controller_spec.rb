@@ -7,18 +7,6 @@ describe API::TeamsController do
     sign_in(FactoryGirl.create(:user))
   end
 
-  # GET /api/teams
-  describe '#index - all teams' do
-    it 'returns a list of all teams' do
-      FactoryGirl.create(:team)
-      FactoryGirl.create(:team)
-      FactoryGirl.create(:team)
-      get :index
-      expect(response).to be_success
-      expect(json.length).to eq(3)
-    end
-  end
-
   # GET /api/leagues/:league_id/teams
   describe '#index - league teams' do
     it 'returns a list of teams for the specified league' do
@@ -27,19 +15,6 @@ describe API::TeamsController do
       FactoryGirl.create(:team, league: league)
       FactoryGirl.create(:team, league: league)
       get :index, league_id: league.id
-      expect(response).to be_success
-      expect(json.length).to eq(2)
-    end
-  end
-
-  # GET /api/users/:user_id/teams
-  describe '#index - user teams' do
-    it 'returns a list of teams for the specified user' do
-      user = FactoryGirl.create(:user)
-      FactoryGirl.create(:team)
-      FactoryGirl.create(:team, user: user)
-      FactoryGirl.create(:team, user: user)
-      get :index, user_id: user.id
       expect(response).to be_success
       expect(json.length).to eq(2)
     end

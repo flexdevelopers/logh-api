@@ -7,19 +7,6 @@ describe API::UsersController do
     sign_in(FactoryGirl.create(:user))
   end
 
-  # GET /api/users
-  describe '#index' do
-    before do
-      User.destroy_all
-      FactoryGirl.create_list(:user, 10)
-    end
-    it 'returns a list of users' do
-      get :index
-      expect(response).to be_success
-      expect(json.length).to eq(10)
-    end
-  end
-
   # GET /api/users/:id
   describe '#show' do
     it 'returns a user' do
@@ -47,14 +34,6 @@ describe API::UsersController do
       patch :update, id: user.id, user: user.attributes
       user.reload
       user.email.should == 'bar@foo.com'
-    end
-  end
-
-  # DELETE /api/users/:id
-  describe '#destroy' do
-    it 'deletes a user' do
-      user = FactoryGirl.create(:user)
-      expect { delete :destroy, id: user.id }.to change(User, :count).by(-1)
     end
   end
 

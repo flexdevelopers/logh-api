@@ -7,18 +7,6 @@ describe API::LeaguesController do
     sign_in(FactoryGirl.create(:user))
   end
 
-  # GET /api/leagues
-  describe '#index - all leagues' do
-    it 'returns a list of all leagues' do
-      FactoryGirl.create(:league)
-      FactoryGirl.create(:league)
-      FactoryGirl.create(:league)
-      get :index
-      expect(response).to be_success
-      expect(json.length).to eq(3)
-    end
-  end
-
   # GET /api/users/:user_id/leagues
   describe '#index - user leagues' do
     it 'returns a list of leagues for the specified user' do

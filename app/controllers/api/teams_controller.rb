@@ -1,23 +1,11 @@
 class API::TeamsController < API::BaseController
-  before_action :set_user, only: [:index]
   before_action :set_league, only: [:index, :show, :create, :update, :destroy]
   before_action :set_team, only: [:show, :update, :destroy]
 
-  # GET /api/teams
-  # GET /api/teams.json
-  # GET /api/users/:user_id/teams
-  # GET /api/users/:user_id/teams.json
   # GET /api/leagues/:league_id/teams
   # GET /api/leagues/:league_id/teams.json
   def index
-    if @user
-      @teams = @user.teams
-    elsif @league
-      @teams = @league.teams
-    else
-      @teams = Team.all
-    end
-    render json: @teams
+    render json: @league.teams
   end
 
   # GET /api/leagues/:league_id/teams/1
@@ -56,10 +44,6 @@ class API::TeamsController < API::BaseController
 
   private
 
-    def set_user
-      @user = User.find(params[:user_id]) if params[:user_id]
-    end
-
     def set_league
       @league = League.find(params[:league_id]) if params[:league_id]
     end
@@ -68,7 +52,6 @@ class API::TeamsController < API::BaseController
       @team = @league.teams.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :user_id)
     end
