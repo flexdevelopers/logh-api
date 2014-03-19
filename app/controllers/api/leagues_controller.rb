@@ -1,31 +1,31 @@
 class API::LeaguesController < API::BaseController
   before_action :set_league, only: [:show, :update, :destroy]
 
-  # GET /api/users/:user_id/leagues
-  # GET /api/users/:user_id/leagues.json
+  # GET /api.leagues
+  # GET /api/leagues.json
   def index
     render json: current_user.leagues
   end
 
-  # GET /api/users/:user_id/leagues/1
-  # GET /api/users/:user_id/leagues/1.json
+  # GET /api/leagues/1
+  # GET /api/leagues/1.json
   def show
     render json: @league
   end
 
-  # POST /api/users/:user_id/leagues
-  # POST /api/users/:user_id/leagues.json
+  # POST /api/leagues
+  # POST /api/leagues.json
   def create
     @league = current_user.leagues.new(league_params)
     if @league.save
-      render json: @league, status: :created, location: api_user_league_path(current_user, @league)
+      render json: @league, status: :created, location: api_league_path(@league)
     else
       render json: @league.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/users/:user_id/leagues/1
-  # PATCH/PUT /api/users/:user_id/leagues/1.json
+  # PATCH/PUT /api/leagues/1
+  # PATCH/PUT /api/leagues/1.json
   def update
     if @league.update_attributes(league_params)
       head :no_content
@@ -34,8 +34,8 @@ class API::LeaguesController < API::BaseController
     end
   end
 
-  # DELETE /api/users/:user_id/leagues/1
-  # DELETE /api/users/:user_id/leagues/1.json
+  # DELETE /api/leagues/1
+  # DELETE /api/leagues/1.json
   def destroy
     @league.destroy
     head :no_content
