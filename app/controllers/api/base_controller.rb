@@ -23,6 +23,10 @@ class API::BaseController < ApplicationController
       @current_access_token ||= AccessToken.new(_authorization_header)
     end
 
+    def not_found(message = "Not Found")
+      _error(message, 404)
+    end
+
     def _authorization_header
       request.headers['HTTP_AUTHORIZATION']
     end
