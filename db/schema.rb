@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316032542) do
+ActiveRecord::Schema.define(version: 20140320043130) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -36,18 +36,26 @@ ActiveRecord::Schema.define(version: 20140316032542) do
   add_index "games", ["week_id", "visiting_squad_id"], name: "index_games_on_week_id_and_visiting_squad_id", unique: true
   add_index "games", ["week_id"], name: "index_games_on_week_id"
 
+  create_table "league_commishes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "league_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "league_commishes", ["league_id"], name: "index_league_commishes_on_league_id"
+  add_index "league_commishes", ["user_id"], name: "index_league_commishes_on_user_id"
+
   create_table "leagues", force: true do |t|
     t.string   "name",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",            null: false
     t.string   "password"
     t.integer  "max_teams_per_user"
     t.integer  "season_id",          null: false
   end
 
   add_index "leagues", ["season_id"], name: "index_leagues_on_season_id"
-  add_index "leagues", ["user_id"], name: "index_leagues_on_user_id"
 
   create_table "losers", force: true do |t|
     t.integer  "week_id",    null: false

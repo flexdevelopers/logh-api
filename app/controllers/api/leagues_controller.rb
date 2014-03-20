@@ -4,7 +4,7 @@ class API::LeaguesController < API::BaseController
   # GET /api.leagues
   # GET /api/leagues.json
   def index
-    render json: current_user.leagues
+    render json: current_user.managed_leagues
   end
 
   # GET /api/leagues/1
@@ -16,7 +16,8 @@ class API::LeaguesController < API::BaseController
   # POST /api/leagues
   # POST /api/leagues.json
   def create
-    @league = current_user.leagues.new(league_params)
+    @league = League.new(league_params)
+    @league.commishes << current_user
     if @league.save
       render json: @league, status: :created, location: api_league_path(@league)
     else
@@ -44,7 +45,7 @@ class API::LeaguesController < API::BaseController
   private
 
     def set_league
-      @league = current_user.leagues.find(params[:id])
+      @league = current_user.managed_leagues.find(params[:id])
     end
 
     def league_params

@@ -16,7 +16,6 @@ FactoryGirl.define do
 
   factory :league do |league|
     name                'Bad News Bears'
-    league.association  :user
     league.association  :season
   end
 

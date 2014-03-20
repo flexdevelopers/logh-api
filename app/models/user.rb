@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
 
   before_save { email.downcase! }
 
-  has_many :leagues
+  has_many :league_commishes
+  has_many :managed_leagues, through: :league_commishes
+
   has_many :teams
 
   validates :first_name, presence: true, length: { maximum: 20 }

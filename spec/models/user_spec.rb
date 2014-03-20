@@ -20,11 +20,11 @@ describe User do
   it { should respond_to(:password_confirmation) }
   its(:password_confirmation) { should be_blank }
 
-  it { should respond_to(:leagues) }
-  its(:leagues) { should be_empty }
-
   it { should respond_to(:teams) }
   its(:teams) { should be_empty }
+
+  it { should respond_to(:managed_leagues) }
+  its(:managed_leagues) { should be_empty }
 
   it { should respond_to(:authenticate) }
 
