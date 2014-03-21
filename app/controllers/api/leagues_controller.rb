@@ -1,5 +1,5 @@
 class API::LeaguesController < API::BaseController
-  before_action :set_league, only: [:show, :update, :destroy]
+  before_action :_set_league, only: [:show, :update, :destroy]
 
   # GET /api.leagues
   # GET /api/leagues.json
@@ -16,7 +16,7 @@ class API::LeaguesController < API::BaseController
   # POST /api/leagues
   # POST /api/leagues.json
   def create
-    @league = League.new(league_params)
+    @league = League.new(_league_params)
     @league.commishes << current_user
     if @league.save
       render json: @league, status: :created, location: api_league_path(@league)
@@ -28,7 +28,7 @@ class API::LeaguesController < API::BaseController
   # PATCH/PUT /api/leagues/1
   # PATCH/PUT /api/leagues/1.json
   def update
-    if @league.update_attributes(league_params)
+    if @league.update_attributes(_league_params)
       head :no_content
     else
       render json: @league.errors, status: :unprocessable_entity
@@ -44,11 +44,11 @@ class API::LeaguesController < API::BaseController
 
   private
 
-    def set_league
+    def _set_league
       @league = current_user.managed_leagues.find(params[:id])
     end
 
-    def league_params
+    def _league_params
       params.require(:league).permit(:name, :season_id)
     end
 end

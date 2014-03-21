@@ -1,6 +1,6 @@
 class API::Admin::SeasonsController < API::BaseController
 
-  before_action :set_season, only: [:show, :update, :destroy]
+  before_action :_set_season, only: [:show, :update, :destroy]
 
   # GET /api/admin/seasons
   def index
@@ -15,7 +15,7 @@ class API::Admin::SeasonsController < API::BaseController
 
   # POST /api/admin/seasons
   def create
-    @season = Season.new(season_params)
+    @season = Season.new(_season_params)
     if @season.save
       render json: @season, status: :created, location: api_admin_season_path(@season)
     else
@@ -25,7 +25,7 @@ class API::Admin::SeasonsController < API::BaseController
 
   # PATCH/PUT /api/admin/seasons/:id
   def update
-    if @season.update(season_params)
+    if @season.update(_season_params)
       head :no_content
     else
       render json: @season.errors, status: :unprocessable_entity
@@ -40,11 +40,11 @@ class API::Admin::SeasonsController < API::BaseController
 
   private
 
-    def set_season
+    def _set_season
       @season = Season.find(params[:id])
     end
 
-    def season_params
+    def _season_params
       params.require(:season).permit(:name)
     end
 

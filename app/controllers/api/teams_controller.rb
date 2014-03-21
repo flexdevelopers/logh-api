@@ -1,8 +1,8 @@
 class API::TeamsController < API::BaseController
-  before_action :set_league, only: [:index, :show, :create, :update, :destroy]
-  before_action :set_team, only: [:show, :update, :destroy]
-  before_action :verify_league_membership, only: [:index]
-  before_action :verify_team_ownership, only: [:show, :update, :destroy]
+  before_action :_set_league, only: [:index, :show, :create, :update, :destroy]
+  before_action :_set_team, only: [:show, :update, :destroy]
+  before_action :_verify_league_membership, only: [:index]
+  before_action :_verify_team_ownership, only: [:show, :update, :destroy]
 
   # GET /api/leagues/:league_id/teams
   # GET /api/leagues/:league_id/teams.json
@@ -20,7 +20,7 @@ class API::TeamsController < API::BaseController
   # POST /api/leagues/:league_id/teams.json
   def create
     # todo - this need some security if this is a private league
-    @team = @league.teams.new(team_params)
+    @team = @league.teams.new(_team_params)
     @team.coaches << current_user
     if @team.save
       render json: @team, status: :created, location: api_league_team_path(@league, @team)
@@ -32,7 +32,7 @@ class API::TeamsController < API::BaseController
   # PATCH/PUT /api/leagues/:league_id/teams/1
   # PATCH/PUT /api/leagues/:league_id/teams/1.json
   def update
-    if @team.update_attributes(team_params)
+    if @team.update_attributes(_team_params)
       head :no_content
     else
       render json: @team.errors, status: :unprocessable_entity
@@ -48,24 +48,24 @@ class API::TeamsController < API::BaseController
 
   private
 
-    def set_league
-      @league = League.find(params[:league_id]) || not_found()
+    def _set_league
+      @league = League.find(params[:league_id])
     end
 
-    def set_team
-      @team = @league.teams.find(params[:id]) || not_found()
+    def _set_team
+      @team = @league.teams.find(params[:id])
     end
 
-    def verify_league_membership
+    def _verify_league_membership
       current_user_leagues = current_user.teams.map(&:league)
       not_authorized() unless current_user_leagues.include?(@league)
     end
 
-    def verify_team_ownership
+    def _verify_team_ownership
       not_authorized() unless current_user.teams.include?(@team)
     end
 
-    def team_params
+    def _team_params
       params.require(:team).permit(:name)
     end
 

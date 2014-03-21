@@ -1,7 +1,7 @@
 class API::Admin::WeeksController < API::BaseController
 
-  before_action :set_season
-  before_action :set_week, only: [:show, :update, :destroy]
+  before_action :_set_season
+  before_action :_set_week, only: [:show, :update, :destroy]
 
   # GET /api/admin/seasons/:season_id/weeks
   def index
@@ -16,7 +16,7 @@ class API::Admin::WeeksController < API::BaseController
 
   # POST /api/admin/seasons/:season_id/weeks
   def create
-    @week = @season.weeks.new(week_params)
+    @week = @season.weeks.new(_week_params)
     if @week.save
       render json: @week, status: :created, location: api_admin_season_week_path(@season, @week)
     else
@@ -26,7 +26,7 @@ class API::Admin::WeeksController < API::BaseController
 
   # PATCH/PUT /api/admin/seasons/:season_id/weeks/:id
   def update
-    if @week.update(week_params)
+    if @week.update(_week_params)
       head :no_content
     else
       render json: @week.errors, status: :unprocessable_entity
@@ -41,15 +41,15 @@ class API::Admin::WeeksController < API::BaseController
 
   private
 
-    def week_params
+    def _week_params
       params.require(:week).permit(:number, :starts_at, :complete)
     end
 
-    def set_season
+    def _set_season
       @season = Season.find(params[:season_id])
     end
 
-    def set_week
+    def _set_week
       @week = @season.weeks.find(params[:id])
     end
 end

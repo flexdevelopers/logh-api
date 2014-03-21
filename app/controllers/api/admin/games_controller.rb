@@ -1,7 +1,7 @@
 class API::Admin::GamesController < API::BaseController
 
-  before_action :set_week
-  before_action :set_game, only: [:show, :update, :destroy]
+  before_action :_set_week
+  before_action :_set_game, only: [:show, :update, :destroy]
 
   # GET /api/admin/weeks/:week_id/games
   def index
@@ -16,7 +16,7 @@ class API::Admin::GamesController < API::BaseController
 
   # POST /api/admin/weeks/:week_id/games
   def create
-    @game = @week.games.new(game_params)
+    @game = @week.games.new(_game_params)
     if @game.save
       render json: @game, status: :created, location: api_admin_week_game_path(@week, @game)
     else
@@ -26,7 +26,7 @@ class API::Admin::GamesController < API::BaseController
 
   # PUT/PATCH /api/admin/weeks/:week_id/games/:id
   def update
-    if @game.update(game_params)
+    if @game.update(_game_params)
       head :no_content
     else
       render json: @game.errors, status: :unprocessable_entity
@@ -41,15 +41,15 @@ class API::Admin::GamesController < API::BaseController
 
   private
 
-    def game_params
+    def _game_params
       params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score)
     end
 
-    def set_week
+    def _set_week
       @week = Week.find(params[:week_id])
     end
 
-    def set_game
+    def _set_game
       @game = @week.games.find(params[:id])
     end
 
