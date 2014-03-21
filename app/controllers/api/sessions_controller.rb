@@ -11,7 +11,7 @@ class API::SessionsController < API::BaseController
     if signed_in?
       render json: { token: access_token.token }
     else
-      _not_authorized
+      not_authorized()
     end
   end
 

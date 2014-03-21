@@ -58,11 +58,11 @@ class API::TeamsController < API::BaseController
 
     def verify_league_membership
       current_user_leagues = current_user.teams.map(&:league)
-      _not_authorized unless current_user_leagues.include?(@league)
+      not_authorized() unless current_user_leagues.include?(@league)
     end
 
     def verify_team_ownership
-      _not_authorized unless current_user.teams.include?(@team)
+      not_authorized() unless current_user.teams.include?(@team)
     end
 
     def team_params
