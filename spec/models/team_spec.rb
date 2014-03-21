@@ -11,11 +11,11 @@ describe Team do
   it { should respond_to(:paid) }
   its(:paid) { should be_false }
 
+  it { should respond_to(:coaches) }
+  its(:coaches) { should be_empty }
+
   it { should respond_to(:league) }
   its(:league) { should be_nil }
-
-  it { should respond_to(:user) }
-  its(:user) { should be_nil }
 
   it { should respond_to(:picks) }
   its(:picks) { should be_empty }
@@ -32,11 +32,6 @@ describe Team do
 
   context 'league is not present' do
     subject(:team) { FactoryGirl.build(:team, league: nil) }
-    it { should_not be_valid }
-  end
-
-  context 'when user is not present' do
-    subject(:team) { FactoryGirl.build(:team, user: nil) }
     it { should_not be_valid }
   end
 

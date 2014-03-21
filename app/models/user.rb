@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_many :league_commishes
   has_many :managed_leagues, through: :league_commishes
 
-  has_many :teams
+  has_many :team_coaches
+  has_many :teams, through: :team_coaches
 
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
