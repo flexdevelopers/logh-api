@@ -4,7 +4,6 @@ describe API::UsersController do
   let(:user) { FactoryGirl.create(:user) }
 
   before do
-    request_with_api_token
     sign_in(user)
   end
 

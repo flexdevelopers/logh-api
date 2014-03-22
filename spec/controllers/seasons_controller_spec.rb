@@ -3,7 +3,6 @@ require 'spec_helper'
 describe API::Admin::SeasonsController do
 
   before do
-    request_with_api_token
     sign_in(FactoryGirl.create(:user))
   end
 

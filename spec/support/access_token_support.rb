@@ -5,13 +5,13 @@ module AccessTokenSupport
   end
 
   def sign_in(user)
-    api_token.user = user
     request_with_api_token
+    api_token.user = user
   end
 
   def sign_out(user)
-    api_token.user = nil
     request_with_api_token
+    api_token.user = nil
   end
 
   def request_with_api_token
