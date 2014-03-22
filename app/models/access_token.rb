@@ -34,6 +34,7 @@ class AccessToken
   end
 
   def user=(user)
+    return if !user
     _set_with_expire("access_token/#{token}/user_id", user.id)
     @user = user
   end
