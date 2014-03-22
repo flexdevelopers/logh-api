@@ -3,11 +3,9 @@ class API::SessionsController < API::BaseController
 
   # POST /api/sessions
   def create
-    access_token =  current_access_token
-    if _session_params[:email]
-      @user = User.find_by(email: _session_params[:email])
-      access_token.user = @user if _password_valid?
-    end
+    @user = User.find_by(email: _session_params[:email])
+    access_token = current_access_token
+    access_token.user = @user if _password_valid?
     if signed_in?
       render json: { token: access_token.token }
     else
@@ -28,7 +26,7 @@ class API::SessionsController < API::BaseController
     end
 
     def _password_valid?
-      @user.authenticate(_session_params[:password])
+      @user && @user.authenticate(_session_params[:password])
     end
 
 end
