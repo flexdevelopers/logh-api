@@ -1,20 +1,51 @@
 require 'spec_helper'
 
 describe API::SessionsController do
+  let(:user) { FactoryGirl.create(:user) }
 
   # POST /api/sessions
   describe '#create' do
-    it 'creates a session' do
-      user = FactoryGirl.create(:user)
-      session_params = FactoryGirl.attributes_for(:session, email: user.email, password: user.password)
-      post :create, session: session_params
-      expect(response).to be_success
+    context 'when an incorrect email is provided' do
+      let(:session_params) { FactoryGirl.attributes_for(:session, email: 'bad@email.com', password: user.password) }
+      it 'returns unauthorized' do
+        post :create, session: session_params
+        expect(response.status).to eq(401)
+      end
+    end
+    context 'when an incorrect password is provided' do
+      let(:session_params) { FactoryGirl.attributes_for(:session, email: user.email, password: 'badpassword') }
+      it 'returns unauthorized' do
+        post :create, session: session_params
+        expect(response.status).to eq(401)
+      end
+    end
+    context 'when a correct email and password is provided' do
+      it 'returns an access token' do
+        session_params = FactoryGirl.attributes_for(:session, email: user.email, password: user.password)
+        post :create, session: session_params
+        expect(response).to be_success
+        expect(json['token']).not_to be_blank
+      end
     end
   end
 
   # DELETE /api/sessions/:id
   describe '#destroy' do
-
+    context 'when a current access token is sent' do
+      before do
+        sign_in(user)
+      end
+      it 'deletes the access token' do
+        delete :destroy, id: api_token.token
+        expect(response.status).to eq(204)
+      end
+    end
+    context 'when no current access token is sent' do
+      it 'returns unauthorized' do
+        delete :destroy, id: '1234'
+        expect(response.status).to eq(401)
+      end
+    end
   end
 
 end
