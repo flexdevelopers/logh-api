@@ -6,7 +6,9 @@ LoghApi::Application.routes.draw do
 
     resources :users, only: [:show, :create, :update]
 
-    resources :leagues, only: [:index, :show, :create, :update, :destroy]
+    resources :seasons, only: [] do
+      resources :leagues, only: [:index, :show, :create, :update, :destroy]
+    end
 
     resources :leagues, only: [] do
       resources :teams, only: [:index, :show, :create, :update, :destroy]
