@@ -16,6 +16,8 @@ FactoryGirl.define do
 
   factory :league do |league|
     name                'Bad News Bears'
+    password                'foobar'
+    password_confirmation   'foobar'
     league.association  :season
   end
 

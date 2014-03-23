@@ -8,6 +8,12 @@ describe League do
   it { should respond_to(:password) }
   its(:password) { should be_blank }
 
+  it { should respond_to(:password_confirmation) }
+  its(:password_confirmation) { should be_blank }
+
+  it { should respond_to(:password_digest) }
+  its(:password_digest) { should be_blank }
+
   it { should respond_to(:max_teams_per_user) }
   its(:max_teams_per_user) { should be_nil }
 
