@@ -61,4 +61,35 @@ describe League do
     it { should_not be_valid }
   end
 
+  context 'when league has no password' do
+    subject(:league) { FactoryGirl.build(:league, password: nil, password_confirmation: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has a password less than 6 characters' do
+    subject(:league) { FactoryGirl.build(:league, password: 'a' * 5, password_confirmation: 'a' * 5) }
+    it { should_not be_valid }
+  end
+
+  context 'when league password does not match password confirmation' do
+    subject(:league) { FactoryGirl.build(:league, password: 'foobar', password_confirmation: 'barfoo') }
+    it { should_not be_valid }
+  end
+
+  describe 'return value of authenticate method' do
+    subject(:league) { FactoryGirl.create(:league) }
+    let(:found_league) { League.find(league.id) }
+
+    context 'with a valid passord' do
+      it { should eq found_league.authenticate(league.password) }
+    end
+
+    context 'with an invalid password' do
+      let(:league_for_invalid_password) { found_league.authenticate('invalid') }
+
+      it { should_not == league_for_invalid_password }
+      specify { expect(league_for_invalid_password).to be_false }
+    end
+  end
+
 end
