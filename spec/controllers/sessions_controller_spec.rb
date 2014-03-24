@@ -36,7 +36,7 @@ describe API::SessionsController do
         sign_in(user)
       end
       it 'deletes the access token' do
-        delete :destroy, id: api_token.token
+        delete :destroy, id: access_token.token
         expect(response.status).to eq(204)
       end
     end
