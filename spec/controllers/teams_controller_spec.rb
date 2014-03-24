@@ -10,25 +10,14 @@ describe API::TeamsController do
   # GET /api/leagues/:league_id/teams
   describe '#index' do
     let(:league) { FactoryGirl.create(:league) }
-    context 'when the current user belongs to the league' do
-      before do
-        FactoryGirl.create(:team, league: league, coaches: [ current_user ])
-        FactoryGirl.create(:team, league: league, coaches: [ current_user ])
-      end
-      it 'returns a list of teams for the specified league' do
-        get :index, league_id: league.id
-        expect(response).to be_success
-        expect(json.length).to eq(2)
-      end
+    before do
+      FactoryGirl.create(:team, league: league, coaches: [ current_user ])
+      FactoryGirl.create(:team, league: league, coaches: [ current_user ])
     end
-    context 'when the current user does not belong to the league' do
-      before do
-        FactoryGirl.create(:team, league: league, coaches: [])
-      end
-      it 'returns unathorized' do
-        get :index, league_id: league.id
-        expect(response.status).to eq(401)
-      end
+    it 'returns a list of teams for the specified league' do
+      get :index, league_id: league.id
+      expect(response).to be_success
+      expect(json.length).to eq(2)
     end
   end
 
@@ -55,8 +44,16 @@ describe API::TeamsController do
   # POST /api/leagues/:league_id/teams
   describe '#create' do
     let(:team) { FactoryGirl.build(:team) }
-    it 'creates a team for a specified league' do
-      expect { post :create, league_id: team.league.id, team: team.attributes }.to change(current_user.teams, :count).by(1)
+    context 'when a valid league password is provided' do
+      it 'creates a team for a specified league' do
+        expect { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes }.to change(current_user.teams, :count).by(1)
+      end
+    end
+    context 'when an invalid league password is provided' do
+      it 'does not create a team and returns unauthorized' do
+        expect { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes }.to change(current_user.teams, :count).by(0)
+        expect(response.status).to eq(401)
+      end
     end
   end
 
