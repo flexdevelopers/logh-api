@@ -12,7 +12,7 @@ class API::BaseController < ApplicationController
     end
 
     def signed_in?
-      !!current_access_token.user
+        !!current_access_token.user
     end
 
     def current_user
@@ -24,7 +24,7 @@ class API::BaseController < ApplicationController
     end
 
     def not_found(message = "Not Found")
-      _error(message, 404)
+      _error(message, :not_found)
     end
 
     def not_authorized(message = "Not Authorized")
