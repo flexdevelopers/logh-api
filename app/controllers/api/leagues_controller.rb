@@ -1,6 +1,8 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
   before_action :_set_league, only: [:show, :update, :destroy]
+  before_action :_verify_league_membership, only: [:show]
+  before_action :_verify_league_management, only: [:update, :destroy]
 
   # GET /api/seasons/:season_id/leagues
   def index
@@ -46,6 +48,23 @@ class API::LeaguesController < API::BaseController
 
     def _set_league
       @league = @season.leagues.find(params[:id])
+    end
+
+    def _verify_league_membership
+      not_authorized() unless _is_commish_of(@league) || _has_team_in(@league)
+    end
+
+    def _verify_league_management
+      not_authorized() unless _is_commish_of(@league)
+    end
+
+    def _is_commish_of(league)
+      current_user.managed_leagues.include?(league)
+    end
+
+    def _has_team_in(league)
+      current_user_leagues = current_user.teams.map(&:league)
+      current_user_leagues.include?(league)
     end
 
     def _league_params
