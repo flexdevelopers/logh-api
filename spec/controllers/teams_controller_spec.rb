@@ -80,6 +80,46 @@ describe API::TeamsController do
       it { should change(team.league.teams, :count).by(0) }
       it { should change(current_user.teams, :count).by(0) }
     end
+    context 'when max number of teams per user has been met' do
+      let(:league) { FactoryGirl.create(:league, max_teams_per_user: 2) }
+      let(:another_league) { FactoryGirl.create(:league) }
+      let(:team) { FactoryGirl.build(:team) }
+      before do
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+        FactoryGirl.create(:team, league: another_league, coaches: [current_user])
+      end
+      it 'returns unauthorized and does not create a team' do
+        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(0)
+        expect(response.status).to eq(401)
+      end
+    end
+    context 'when max number of teams per user has not been met' do
+      let(:league) { FactoryGirl.create(:league, max_teams_per_user: 3) }
+      let(:another_league) { FactoryGirl.create(:league) }
+      let(:team) { FactoryGirl.build(:team) }
+      before do
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+        FactoryGirl.create(:team, league: another_league, coaches: [current_user])
+      end
+      it 'creates a team' do
+        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(1)
+        expect(response).to be_success
+      end
+    end
+    context 'when max number of teams per user is not defined' do
+      let(:league) { FactoryGirl.create(:league) }
+      let(:team) { FactoryGirl.build(:team, league: league) }
+      before do
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+        FactoryGirl.create(:team, league: league, coaches: [current_user])
+      end
+      it 'creates a team' do
+        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(1)
+        expect(response).to be_success
+      end
+    end
   end
 
   # PATCH/PUT /api/leagues/:league_id/teams/:id

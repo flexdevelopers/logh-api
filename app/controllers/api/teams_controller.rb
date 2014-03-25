@@ -1,8 +1,9 @@
 class API::TeamsController < API::BaseController
   before_action :_set_league
   before_action :_set_team, only: [:show, :update, :destroy]
-  before_action :_verify_league_membership, only: [:index]
   before_action :_verify_team_ownership, only: [:show, :update, :destroy]
+  before_action :_verify_league_membership, only: [:index]
+  before_action :_verify_league_password, only: [:create]
 
   # GET /api/leagues/:league_id/teams
   def index
@@ -16,7 +17,7 @@ class API::TeamsController < API::BaseController
 
   # POST /api/leagues/:league_id/teams
   def create
-    if _league_password_valid?
+    if _can_add_team_to?(@league)
       @team = @league.teams.new(_team_params)
       @team.coaches << current_user
       if @team.save
@@ -54,29 +55,37 @@ class API::TeamsController < API::BaseController
       @team = @league.teams.find(params[:id])
     end
 
-    def _league_password_valid?
-      @league && @league.authenticate(params[:league_password])
+    def _verify_league_password
+      not_authorized() unless @league.authenticate(params[:league_password])
     end
 
     def _verify_league_membership
-      not_authorized() unless _is_commish_of(@league) || _has_team_in(@league)
+      not_authorized() unless _is_commish_of?(@league) || _has_team_in?(@league)
     end
 
     def _verify_team_ownership
-      not_authorized() unless _is_coach_of(@team)
+      not_authorized() unless _is_coach_of?(@team)
     end
 
-    def _is_commish_of(league)
+    def _is_commish_of?(league)
       current_user.managed_leagues.include?(league)
     end
 
-    def _is_coach_of(team)
+    def _is_coach_of?(team)
       current_user.teams.include?(team)
     end
 
-    def _has_team_in(league)
+    def _has_team_in?(league)
       current_user_leagues = current_user.teams.map(&:league)
       current_user_leagues.include?(league)
+    end
+
+    def _can_add_team_to?(league)
+      return true if !league.max_teams_per_user
+      current_user_teams_in_league = current_user.teams.select do |team|
+        team.league.id == league.id
+      end
+      current_user_teams_in_league.count < league.max_teams_per_user
     end
 
     def _team_params
