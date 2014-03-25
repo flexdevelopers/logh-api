@@ -1,22 +1,20 @@
 class API::PicksController < API::BaseController
   before_action :_set_team, only: [:index, :show, :create, :update, :destroy]
   before_action :_set_pick, only: [:show, :update, :destroy]
+  before_action :_verify_team_ownership
 
   # GET /api/teams/:team_id/picks
-  # GET /api/teams/:team_id/picks.json
   def index
     @picks = @team.picks
     render json: @picks
   end
 
   # GET /api/teams/:team_id/picks/1
-  # GET /api/teams/:team_id/picks/1.json
   def show
     render json: @pick
   end
 
   # POST /api/teams/:team_id/picks
-  # POST /api/teams/:team_id/picks.json
   def create
     @pick = @team.picks.new(_pick_params)
     if @pick.save
@@ -27,7 +25,6 @@ class API::PicksController < API::BaseController
   end
 
   # PATCH/PUT /api/teams/:team_id/picks/1
-  # PATCH/PUT /api/teams/:team_id/picks/1.json
   def update
     if @pick.update(_pick_params)
       head :no_content
@@ -37,7 +34,6 @@ class API::PicksController < API::BaseController
   end
 
   # DELETE /api/teams/:team_id/picks/1
-  # DELETE /api/teams/:team_id/picks/1.json
   def destroy
     @pick.destroy
     head :no_content
@@ -51,6 +47,14 @@ class API::PicksController < API::BaseController
 
     def _set_pick
       @pick = @team.picks.find(params[:id])
+    end
+
+    def _verify_team_ownership
+      not_authorized() unless _is_coach_of(@team)
+    end
+
+    def _is_coach_of(team)
+      current_user.teams.include?(team)
     end
 
     def _pick_params
