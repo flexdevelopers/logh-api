@@ -18,14 +18,14 @@ LoghApi::Application.routes.draw do
       resources :picks, only: [:index, :show, :create, :update, :destroy]
     end
 
+    resources :weeks, only:[] do
+      resources :games, only: [:index, :show, :create, :update, :destroy]
+    end
+
     namespace :admin do
 
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
         resources :weeks, only: [:index, :show, :create, :update, :destroy]
-      end
-
-      resources :weeks, only:[] do
-        resources :games, only: [:index, :show, :create, :update, :destroy]
       end
 
     end

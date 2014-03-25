@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe API::Admin::GamesController do
+describe API::GamesController do
 
   before do
     sign_in(FactoryGirl.create(:user))
   end
 
-  # GET /api/admin/weeks/:week_id/games
-  describe "#index" do
-    it "returns games for a week" do
+  # GET /api/weeks/:week_id/games
+  describe '#index' do
+    it 'returns games for a week' do
       week = FactoryGirl.create(:week)
       FactoryGirl.create(:game, week: week)
       FactoryGirl.create(:game, week: week)
@@ -18,9 +18,9 @@ describe API::Admin::GamesController do
     end
   end
 
-  # GET /api/admin/weeks/:week_id/games/:id
-  describe "#show" do
-    it "returns a game" do
+  # GET /api/weeks/:week_id/games/:id
+  describe '#show' do
+    it 'returns a game' do
       home_squad = FactoryGirl.create(:squad, name: 'Denver Broncos', abbrev: 'DEN')
       visiting_squad = FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP')
       game = FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad)
@@ -31,9 +31,9 @@ describe API::Admin::GamesController do
     end
   end
 
-  # POST /api/admin/weeks/:week_id/games
-  describe "#create" do
-    it "creates a game for a week" do
+  # POST /api/weeks/:week_id/games
+  describe '#create' do
+    it 'creates a game for a week' do
       week = FactoryGirl.create(:week)
       game_params = FactoryGirl.attributes_for(:game)
       # todo: this is weird
@@ -91,9 +91,9 @@ describe API::Admin::GamesController do
 
   end
 
-  # PUT/PATCH /api/admin/weeks/:week_id/games/:id
-  describe "#update" do
-    it "updates a game" do
+  # PUT/PATCH /api/weeks/:week_id/games/:id
+  describe '#update' do
+    it 'updates a game' do
       game = FactoryGirl.create(:game)
       game.home_squad = FactoryGirl.create(:squad, name: 'Seattle Seahawks', abbrev: 'SEA')
       game.visiting_squad = FactoryGirl.create(:squad, name: 'New York Giants', abbrev: 'NYG')
@@ -154,9 +154,9 @@ describe API::Admin::GamesController do
 
   end
 
-  # DELETE /api/admin/weeks/:week_id/games/:id
-  describe "#destroy" do
-    it "destroys a game" do
+  # DELETE /api/weeks/:week_id/games/:id
+  describe '#destroy' do
+    it 'destroys a game' do
       game = FactoryGirl.create(:game)
       expect { delete :destroy, week_id: game.week.id, id: game.id }.to change(game.week.games, :count).by(-1)
       response.should be_success
