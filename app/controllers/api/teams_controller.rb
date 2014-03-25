@@ -63,11 +63,15 @@ class API::TeamsController < API::BaseController
     end
 
     def _verify_team_ownership
-      not_authorized() unless current_user.teams.include?(@team)
+      not_authorized() unless _is_coach_of(@team)
     end
 
     def _is_commish_of(league)
       current_user.managed_leagues.include?(league)
+    end
+
+    def _is_coach_of(team)
+      current_user.teams.include?(team)
     end
 
     def _has_team_in(league)
