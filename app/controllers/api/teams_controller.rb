@@ -1,6 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_league
   before_action :_set_team, only: [:show, :update, :destroy]
+  before_action :_verify_league_membership, only: [:index]
   before_action :_verify_team_ownership, only: [:show, :update, :destroy]
 
   # GET /api/leagues/:league_id/teams
@@ -57,8 +58,21 @@ class API::TeamsController < API::BaseController
       @league && @league.authenticate(params[:league_password])
     end
 
+    def _verify_league_membership
+      not_authorized() unless _is_commish_of(@league) || _has_team_in(@league)
+    end
+
     def _verify_team_ownership
       not_authorized() unless current_user.teams.include?(@team)
+    end
+
+    def _is_commish_of(league)
+      current_user.managed_leagues.include?(league)
+    end
+
+    def _has_team_in(league)
+      current_user_leagues = current_user.teams.map(&:league)
+      current_user_leagues.include?(league)
     end
 
     def _team_params

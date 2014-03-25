@@ -9,15 +9,41 @@ describe API::TeamsController do
 
   # GET /api/leagues/:league_id/teams
   describe '#index' do
-    let(:league) { FactoryGirl.create(:league) }
-    before do
-      FactoryGirl.create(:team, league: league, coaches: [ current_user ])
-      FactoryGirl.create(:team, league: league, coaches: [ current_user ])
+    context 'when the current user is a commish of the league' do
+      let(:league) { FactoryGirl.create(:league, commishes: [ current_user ]) }
+      before do
+        FactoryGirl.create(:team, league: league)
+        FactoryGirl.create(:team, league: league)
+      end
+      it 'returns a list of teams for the specified league' do
+        get :index, league_id: league.id
+        expect(response).to be_success
+        expect(json.length).to eq(2)
+      end
     end
-    it 'returns a list of teams for the specified league' do
-      get :index, league_id: league.id
-      expect(response).to be_success
-      expect(json.length).to eq(2)
+    context 'when the current user has a team in the league' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, league: league, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league)
+        FactoryGirl.create(:team, league: league)
+      end
+      it 'returns a list of teams for the specified league' do
+        get :index, league_id: league.id
+        expect(response).to be_success
+        expect(json.length).to eq(3)
+      end
+    end
+    context 'when the current user is not a commish of the league nor has a team in the league' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, league: league)
+        FactoryGirl.create(:team, league: league)
+      end
+      it 'returns unauthorized' do
+        get :index, league_id: league.id
+        expect(response.status).to eq(401)
+      end
     end
   end
 
@@ -45,15 +71,14 @@ describe API::TeamsController do
   describe '#create' do
     let(:team) { FactoryGirl.build(:team) }
     context 'when a valid league password is provided' do
-      it 'creates a team for a specified league' do
-        expect { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes }.to change(current_user.teams, :count).by(1)
-      end
+      subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
+      it { should change(team.league.teams, :count).by(1) }
+      it { should change(current_user.teams, :count).by(1) }
     end
     context 'when an invalid league password is provided' do
-      it 'does not create a team and returns unauthorized' do
-        expect { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes }.to change(current_user.teams, :count).by(0)
-        expect(response.status).to eq(401)
-      end
+      subject(:foo) { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
+      it { should change(team.league.teams, :count).by(0) }
+      it { should change(current_user.teams, :count).by(0) }
     end
   end
 
@@ -75,6 +100,8 @@ describe API::TeamsController do
       it 'returns unauthorized' do
         patch :update, league_id: team.league.id, id: team.id, team: team.attributes
         expect(response.status).to eq(401)
+        team.reload
+        expect(team.name).not_to eq('Average Joes')
       end
     end
   end
@@ -83,10 +110,10 @@ describe API::TeamsController do
   describe '#destroy' do
     context 'when the current user is a coach of the team' do
       let(:team) { FactoryGirl.create(:team, coaches: [current_user]) }
+      subject { -> { delete :destroy, league_id: team.league.id, id: team.id } }
       before { team }
-      it 'deletes the team' do
-        expect { delete :destroy, league_id: team.league.id, id: team.id }.to change(current_user.teams, :count).by(-1)
-      end
+      it { should change(team.league.teams, :count).by(-1) }
+      it { should change(current_user.teams, :count).by(-1) }
       it 'deletes all the picks for the deleted team' do
         week1 = FactoryGirl.create(:week, number: 1)
         week2 = FactoryGirl.create(:week, number: 2)
@@ -100,10 +127,9 @@ describe API::TeamsController do
     context 'when the current user is not a coach of the team' do
       let(:another_user) { FactoryGirl.create(:user) }
       let(:team) { FactoryGirl.create(:team, coaches: [another_user]) }
-      it 'does not delete the team and returns unauthorized' do
-        expect { delete :destroy, league_id: team.league.id, id: team.id }.not_to change(current_user.teams, :count).by(-1)
-        expect(response.status).to eq(401)
-      end
+      subject { -> { delete :destroy, league_id: team.league.id, id: team.id } }
+      it { should change(team.league.teams, :count).by(0) }
+      it { should change(current_user.teams, :count).by(0) }
     end
   end
 
