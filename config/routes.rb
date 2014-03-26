@@ -2,6 +2,8 @@ LoghApi::Application.routes.draw do
 
   namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: {format: :json} do
 
+    match '/docs', to: 'docs#show', via: 'get'
+    
     resources :sessions, only: [:create, :destroy]
 
     resources :users, only: [:show, :create, :update]
