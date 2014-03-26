@@ -1,4 +1,4 @@
-  require 'spec_helper'
+require 'spec_helper'
 
 describe API::UsersController do
   let(:current_user) { FactoryGirl.create(:user, email: 'foo@bar.com') }

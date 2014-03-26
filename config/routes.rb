@@ -24,6 +24,8 @@ LoghApi::Application.routes.draw do
 
     namespace :admin do
 
+      resources :users, only: [:index, :show, :update, :destroy]
+
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
         resources :weeks, only: [:index, :show, :create, :update, :destroy]
       end
