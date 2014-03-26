@@ -1,6 +1,8 @@
 LoghApi::Application.routes.draw do
 
-  namespace :api, defaults: {format: :json} do
+  namespace :api do
+
+    match '/docs', to: 'docs#show', via: 'get'
 
     resources :sessions, only: [:create, :destroy]
 
