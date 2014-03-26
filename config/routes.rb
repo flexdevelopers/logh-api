@@ -22,7 +22,7 @@ LoghApi::Application.routes.draw do
       resources :games, only: [:index, :show]
     end
 
-    namespace :admin do
+    namespace :admin, defaults: {format: :json} do
 
       resources :users, only: [:index, :show, :update, :destroy]
 
@@ -33,6 +33,8 @@ LoghApi::Application.routes.draw do
       resources :weeks, only:[] do
         resources :games, only: [:create, :update, :destroy]
       end
+
+      resources :leagues, only: [:index]
 
     end
 
