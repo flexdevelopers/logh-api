@@ -11,6 +11,8 @@ gem 'rails', '4.0.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'angularjs-rails'
+
 group :development do
   # Use sqlite3 as the development database
   gem 'sqlite3'

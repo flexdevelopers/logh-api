@@ -1,1 +1,6 @@
-<p>API Explorer</p>
+<table ng-controller="DocsController">
+  <tr ng-repeat="league in leagues">
+    <td>{{league.name}}</td>
+    <td>{{league.max_teams_per_user}}</td>
+  </tr>
+</table>
