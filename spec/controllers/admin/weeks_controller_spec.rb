@@ -1,45 +1,50 @@
 require 'spec_helper'
 
 describe API::Admin::WeeksController do
+  let(:current_user_admin) { FactoryGirl.create(:user, email: 'foo@bar.com', admin: true) }
 
   before do
-    sign_in(FactoryGirl.create(:user))
+    sign_in(current_user_admin)
   end
 
   # GET /api/admin/seasons/:season_id/weeks
-  describe "#index" do
-    it "returns weeks for a season" do
-      season = FactoryGirl.create(:season)
-      FactoryGirl.create(:week, number: 1, season: season)
-      FactoryGirl.create(:week, number: 2, season: season)
-      get :index, season_id: season.id
-      response.should be_success
-      expect(json.length).to eq(2)
+  describe '#index' do
+    context 'when an admin requests the weeks for a season' do
+      it 'returns the weeks for the season' do
+        season = FactoryGirl.create(:season)
+        FactoryGirl.create(:week, number: 1, season: season)
+        FactoryGirl.create(:week, number: 2, season: season)
+        get :index, season_id: season.id
+        response.should be_success
+        expect(json.length).to eq(2)
+      end
     end
   end
 
   # GET /api/admin/seasons/:season_id/weeks/:id
-  describe "#show" do
-    it "returns a week" do
-      week = FactoryGirl.create(:week, number: 7)
-      get :show, season_id: week.season.id, id: week.id
-      response.should be_success
-      expect(json['number']).to eq(7)
+  describe '#show' do
+    context 'when an admin request a week for a season' do
+      it 'returns the week' do
+        week = FactoryGirl.create(:week, number: 7)
+        get :show, season_id: week.season.id, id: week.id
+        response.should be_success
+        expect(json['number']).to eq(7)
+      end
     end
   end
 
   # POST /api/admin/seasons/:season_id/weeks
-  describe "#create" do
-    context 'when all required fields are provided' do
-      it "creates a week for a season" do
+  describe '#create' do
+    context 'when an admin attempts to create a week where all required fields are provided' do
+      it 'creates the week for the season' do
         season = FactoryGirl.create(:season)
         week_params = FactoryGirl.attributes_for(:week)
         expect { post :create, season_id: season.id, week: week_params }.to change(season.weeks, :count).by(1)
         response.should be_success
       end
     end
-    context 'when the same week number is added to 2 different seasons' do
-      it 'creates a week for each season' do
+    context 'when an admin attempts to add the same week number to 2 different seasons' do
+      it 'creates the week for each season' do
         season1 = FactoryGirl.create(:season, name: '2014-15 NFL Season')
         season2 = FactoryGirl.create(:season, name: '2015-16 NFL Season')
         FactoryGirl.create(:week, number: 1, season: season1)
@@ -47,7 +52,7 @@ describe API::Admin::WeeksController do
         expect { post :create, season_id: season2.id, week: week1_season2_params }.to change(season2.weeks, :count).by(1)
       end
     end
-    context 'when attempting to create 2 weeks in one season with the same week number' do
+    context 'when an admin attempts to create 2 weeks in one season with the same week number' do
       it 'should not create the 2nd week' do
         season = FactoryGirl.create(:season)
         FactoryGirl.create(:week, number: 1, season: season)
@@ -58,27 +63,31 @@ describe API::Admin::WeeksController do
   end
 
   # PATCH/PUT /api/admin/seasons/:season_id/weeks/:id
-  describe "#update" do
-    it "updates a week" do
-      week = FactoryGirl.create(:week)
-      week.number = 7
-      week.starts_at = Date.today.midnight
-      week.complete = true
-      patch :update, season_id: week.season.id, id: week.id, week: week.attributes
-      response.should be_success
-      week.reload
-      expect(week.number).to eq(7)
-      expect(week.starts_at).to eq(Date.today.midnight)
-      expect(week.complete).to be_true
+  describe '#update' do
+    context 'when an admin attempts to update a week' do
+      it 'updates the week' do
+        week = FactoryGirl.create(:week)
+        week.number = 7
+        week.starts_at = Date.today.midnight
+        week.complete = true
+        patch :update, season_id: week.season.id, id: week.id, week: week.attributes
+        response.should be_success
+        week.reload
+        expect(week.number).to eq(7)
+        expect(week.starts_at).to eq(Date.today.midnight)
+        expect(week.complete).to be_true
+      end
     end
   end
 
   # DELETE /api/admin/seasons/:season_id/weeks/:id
-  describe "#destroy" do
-    it "deletes a week" do
-      week = FactoryGirl.create(:week)
-      expect { delete :destroy, season_id: week.season.id, id: week.id }.to change(week.season.weeks, :count).by(-1)
-      response.should be_success
+  describe '#destroy' do
+    context 'when an admin attempts to delete a week for a season' do
+      it 'deletes the week' do
+        week = FactoryGirl.create(:week)
+        expect { delete :destroy, season_id: week.season.id, id: week.id }.to change(week.season.weeks, :count).by(-1)
+        response.should be_success
+      end
     end
   end
 

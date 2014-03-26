@@ -1,6 +1,6 @@
 class API::Admin::SeasonsController < API::BaseController
-
   before_action :_set_season, only: [:show, :update, :destroy]
+  before_action :_verify_admin
 
   # GET /api/admin/seasons
   def index
@@ -42,6 +42,10 @@ class API::Admin::SeasonsController < API::BaseController
 
     def _set_season
       @season = Season.find(params[:id])
+    end
+
+    def _verify_admin
+      not_authorized() unless current_user.admin?
     end
 
     def _season_params

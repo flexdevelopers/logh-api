@@ -1,7 +1,7 @@
 class API::Admin::WeeksController < API::BaseController
-
   before_action :_set_season
   before_action :_set_week, only: [:show, :update, :destroy]
+  before_action :_verify_admin
 
   # GET /api/admin/seasons/:season_id/weeks
   def index
@@ -51,5 +51,9 @@ class API::Admin::WeeksController < API::BaseController
 
     def _set_week
       @week = @season.weeks.find(params[:id])
+    end
+
+    def _verify_admin
+      not_authorized() unless current_user.admin?
     end
 end
