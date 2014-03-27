@@ -2,7 +2,7 @@ LoghApi::Application.routes.draw do
 
   namespace :api do
 
-    match '/docs', to: 'docs#show', via: 'get'
+    root to: 'docs#index'
 
     resources :sessions, only: [:create, :destroy]
 
