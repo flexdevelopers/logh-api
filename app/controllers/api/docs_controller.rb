@@ -1,5 +1,4 @@
 class API::DocsController < ApplicationController
-  def show
-
+  def index
   end
 end
