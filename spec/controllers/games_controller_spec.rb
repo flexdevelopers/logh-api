@@ -8,10 +8,12 @@ describe API::GamesController do
 
   # GET /api/weeks/:week_id/games
   describe '#index' do
+    let(:week) { FactoryGirl.create(:week) }
+    before do
+      FactoryGirl.create(:game, week: week)
+      FactoryGirl.create(:game, week: week)
+    end
     it 'returns games for a week' do
-      week = FactoryGirl.create(:week)
-      FactoryGirl.create(:game, week: week)
-      FactoryGirl.create(:game, week: week)
       get :index, week_id: week.id
       response.should be_success
       expect(json.length).to eq(2)
@@ -20,10 +22,10 @@ describe API::GamesController do
 
   # GET /api/weeks/:week_id/games/:id
   describe '#show' do
+    let(:home_squad) { FactoryGirl.create(:squad, name: 'Denver Broncos', abbrev: 'DEN') }
+    let(:visiting_squad) { FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP') }
+    let(:game) { FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad) }
     it 'returns a game' do
-      home_squad = FactoryGirl.create(:squad, name: 'Denver Broncos', abbrev: 'DEN')
-      visiting_squad = FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP')
-      game = FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad)
       get :show, week_id: game.week.id, id: game.id
       response.should be_success
       expect(json[:home_squad_id]).to eq(home_squad.id)
