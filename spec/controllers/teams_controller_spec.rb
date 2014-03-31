@@ -54,7 +54,7 @@ describe API::TeamsController do
       it 'returns the team' do
         get :show, league_id: team.league.id, id: team.id
         expect(response).to be_success
-        expect(json['name']).to eq('Fire Breathing Rubber Duckies')
+        expect(json[:name]).to eq('Fire Breathing Rubber Duckies')
       end
     end
     context 'when the current user is not a coach of the team' do

@@ -39,7 +39,7 @@ describe API::PicksController do
       it 'returns the pick for the team' do
         get :show, team_id: pick.team.id, id: pick.id
         expect(response).to be_success
-        expect(json['team_id']).to eq(pick.team.id)
+        expect(json[:team_id]).to eq(pick.team.id)
       end
     end
     context 'when the current user is not a coach of the team' do

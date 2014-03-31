@@ -24,14 +24,14 @@ describe API::Admin::UsersController do
       it 'returns the user' do
         get :show, id: current_user_admin.id
         expect(response).to be_success
-        expect(json['email']).to eq(current_user_admin.email)
+        expect(json[:email]).to eq(current_user_admin.email)
       end
     end
     context 'when an admin requests a user other than the current user' do
       it 'returns the user' do
         get :show, id: another_user.id
         expect(response).to be_success
-        expect(json['email']).to eq(another_user.email)
+        expect(json[:email]).to eq(another_user.email)
       end
     end
   end

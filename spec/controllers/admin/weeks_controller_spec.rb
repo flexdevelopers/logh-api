@@ -28,7 +28,7 @@ describe API::Admin::WeeksController do
         week = FactoryGirl.create(:week, number: 7)
         get :show, season_id: week.season.id, id: week.id
         response.should be_success
-        expect(json['number']).to eq(7)
+        expect(json[:number]).to eq(7)
       end
     end
   end

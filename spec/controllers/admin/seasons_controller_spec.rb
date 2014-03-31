@@ -27,7 +27,7 @@ describe API::Admin::SeasonsController do
         season = FactoryGirl.create(:season)
         get :show, id: season.id
         expect(response).to be_success
-        expect(json['name']).to eq('2014-15 NFL Season')
+        expect(json[:name]).to eq('2014-15 NFL Season')
       end
     end
   end

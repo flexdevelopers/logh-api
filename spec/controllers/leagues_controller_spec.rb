@@ -31,7 +31,7 @@ describe API::LeaguesController do
       it 'returns the league' do
         get :show, season_id: season.id, id: league.id
         expect(response).to be_success
-        expect(json['name']).to eq(league.name)
+        expect(json[:name]).to eq(league.name)
       end
     end
     context 'when the signed in user has a team in the league' do
@@ -40,7 +40,7 @@ describe API::LeaguesController do
       it 'returns the league' do
         get :show, season_id: season.id, id: league.id
         expect(response).to be_success
-        expect(json['name']).to eq(league.name)
+        expect(json[:name]).to eq(league.name)
       end
     end
     context 'when the signed in user has no team in the league and is not a commish of the league' do

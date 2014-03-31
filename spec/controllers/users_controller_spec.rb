@@ -14,7 +14,7 @@ describe API::UsersController do
       it 'returns a user' do
         get :show, id: current_user.id
         expect(response).to be_success
-        expect(json['email']).to eq(current_user.email)
+        expect(json[:email]).to eq(current_user.email)
       end
     end
     context 'when requesting a user other than the signed in user' do

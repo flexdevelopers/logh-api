@@ -26,8 +26,8 @@ describe API::GamesController do
       game = FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad)
       get :show, week_id: game.week.id, id: game.id
       response.should be_success
-      expect(json['home_squad_id']).to eq(home_squad.id)
-      expect(json['visiting_squad_id']).to eq(visiting_squad.id)
+      expect(json[:home_squad_id]).to eq(home_squad.id)
+      expect(json[:visiting_squad_id]).to eq(visiting_squad.id)
     end
   end
 
