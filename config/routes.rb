@@ -1,6 +1,6 @@
 LoghApi::Application.routes.draw do
 
-  namespace :api, defaults: {format: :json} do
+  namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: {format: :json} do
 
     resources :sessions, only: [:create, :destroy]
 
@@ -22,7 +22,7 @@ LoghApi::Application.routes.draw do
       resources :games, only: [:index, :show]
     end
 
-    namespace :admin, defaults: {format: :json} do
+    namespace :admin do
 
       resources :users, only: [:index, :show, :update, :destroy]
 
