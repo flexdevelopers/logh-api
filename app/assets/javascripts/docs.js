@@ -5,5 +5,5 @@ docsAppModule.controller('DocsController', ['$scope', 'League', function($scope,
 }]);
 
 docsAppModule.factory('League', ['$resource', function($resource) {
-    return $resource('/api/seasons/47/leagues'); // just for shits and giggles
+    return $resource('/seasons/47/leagues'); // just for shits and giggles
 }]);
