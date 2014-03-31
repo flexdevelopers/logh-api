@@ -11,6 +11,16 @@ gem 'rails', '4.0.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# Use jquery
+gem 'jquery-rails'
+
+# Use Sass for stylesheets
+gem 'sass-rails', '~> 4.0.0'
+
+# Bootstrap for Sass
+gem 'bootstrap-sass', '~> 3.1.1'
+
+# AngularJS
 gem 'angularjs-rails'
 
 group :development do
