@@ -63,7 +63,7 @@ describe API::Admin::UsersController do
     context 'when an admin attempts to delete the current user' do
       it 'returns unauthorized as you cant delete yourself' do
         expect { delete :destroy, id: current_user_admin.id }.to change(User, :count).by(0)
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
     context 'when an admin deletes another user' do

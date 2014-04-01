@@ -51,11 +51,11 @@ class API::LeaguesController < API::BaseController
     end
 
     def _verify_league_membership
-      not_authorized() unless _is_commish_of(@league) || _has_team_in(@league)
+      forbidden() unless _is_commish_of(@league) || _has_team_in(@league)
     end
 
     def _verify_league_management
-      not_authorized() unless _is_commish_of(@league)
+      forbidden() unless _is_commish_of(@league)
     end
 
     def _is_commish_of(league)

@@ -23,7 +23,7 @@ class API::Admin::UsersController < API::UsersController
   # DELETE /api/admin/users/:id
   def destroy
     if params[:id].to_i == current_user.id
-      not_authorized()
+      forbidden() # deleting the current user is not allowed
       return
     end
     @user.destroy

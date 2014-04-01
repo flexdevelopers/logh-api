@@ -42,7 +42,7 @@ describe API::TeamsController do
       end
       it 'returns unauthorized' do
         get :index, league_id: league.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -62,7 +62,7 @@ describe API::TeamsController do
       let(:team) { FactoryGirl.create(:team, coaches: [ another_user ]) }
       it 'returns unathorized' do
         get :show, league_id: team.league.id, id: team.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -91,7 +91,7 @@ describe API::TeamsController do
       end
       it 'returns unauthorized and does not create a team' do
         expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(0)
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
     context 'when max number of teams per user has not been met' do
@@ -139,7 +139,7 @@ describe API::TeamsController do
       before { team.name = 'Average Joes' }
       it 'returns unauthorized' do
         patch :update, league_id: team.league.id, id: team.id, team: team.attributes
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
         team.reload
         expect(team.name).not_to eq('Average Joes')
       end

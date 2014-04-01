@@ -29,7 +29,7 @@ class API::UsersController < API::BaseController
   private
 
     def _verify_user
-      not_authorized() unless params[:id].to_i == current_user.id
+      forbidden() unless params[:id].to_i == current_user.id
     end
 
     def _user_params

@@ -10,7 +10,7 @@ class API::Admin::LeaguesController < API::LeaguesController
   private
 
   def _verify_admin
-    not_authorized() unless current_user.admin?
+    forbidden() unless current_user.admin?
   end
 
 end

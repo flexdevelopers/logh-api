@@ -50,7 +50,7 @@ class API::PicksController < API::BaseController
     end
 
     def _verify_team_ownership
-      not_authorized() unless _is_coach_of(@team)
+      forbidden() unless _is_coach_of(@team)
     end
 
     def _is_coach_of(team)

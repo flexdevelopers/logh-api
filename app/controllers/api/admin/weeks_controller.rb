@@ -54,6 +54,6 @@ class API::Admin::WeeksController < API::BaseController
     end
 
     def _verify_admin
-      not_authorized() unless current_user.admin?
+      forbidden() unless current_user.admin?
     end
 end

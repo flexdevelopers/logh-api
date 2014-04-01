@@ -23,12 +23,19 @@ class API::BaseController < ApplicationController
       @current_access_token ||= AccessToken.new(_authorization_header)
     end
 
-    def not_found(message = "Not Found")
-      _error(message, :not_found)
-    end
-
+    # 401 - authentication failures
     def not_authorized(message = "Not Authorized")
       _error(message, :unauthorized)
+    end
+
+    #403 - authorization failures
+    def forbidden(message = "Forbidden")
+      _error(message, :forbidden)
+    end
+
+    # 404 - my head if not attached
+    def not_found(message = "Not Found")
+      _error(message, :not_found)
     end
 
     def _authorization_header

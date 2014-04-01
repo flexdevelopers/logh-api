@@ -47,7 +47,7 @@ describe API::LeaguesController do
       let(:league) { FactoryGirl.create(:league, season: season) }
       it 'returns unauthorized' do
         get :show, season_id: season.id, id: league.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -75,7 +75,7 @@ describe API::LeaguesController do
       before { league.name = 'Good News Bears' }
       it 'returns unauthorized and does not update the league' do
         patch :update, season_id: season.id, id: league.id, league: league.attributes
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
         league.reload
         expect(league[:name]).not_to eq('Good News Bears')
       end
@@ -100,7 +100,7 @@ describe API::LeaguesController do
       let(:league) { FactoryGirl.create(:league, season: season) }
       it 'should not delete the league and return unauthorized' do
         expect { delete :destroy, season_id: season.id, id: league.id }.not_to change(League, :count).by(-1)
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end

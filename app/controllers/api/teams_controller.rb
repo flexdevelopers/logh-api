@@ -26,7 +26,7 @@ class API::TeamsController < API::BaseController
         render json: @team.errors, status: :unprocessable_entity
       end
     else
-      not_authorized()
+      forbidden()
     end
   end
 
@@ -56,15 +56,15 @@ class API::TeamsController < API::BaseController
     end
 
     def _verify_league_password
-      not_authorized() unless @league.authenticate(params[:league_password])
+      forbidden() unless @league.authenticate(params[:league_password])
     end
 
     def _verify_league_membership
-      not_authorized() unless _is_commish_of?(@league) || _has_team_in?(@league)
+      forbidden() unless _is_commish_of?(@league) || _has_team_in?(@league)
     end
 
     def _verify_team_ownership
-      not_authorized() unless _is_coach_of?(@team)
+      forbidden() unless _is_coach_of?(@team)
     end
 
     def _is_commish_of?(league)

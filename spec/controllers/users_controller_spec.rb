@@ -20,7 +20,7 @@ describe API::UsersController do
     context 'when requesting a user other than the signed in user' do
       it 'returns unauthorized' do
         get :show, id: another_user.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -49,7 +49,7 @@ describe API::UsersController do
       before { another_user.email = 'newemail@foo.com' }
       it 'returns unauthorized and does not update the user' do
         patch :update, id: another_user.id, user: another_user.attributes
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
         another_user.reload
         another_user.email.should == 'foo@baz.com'
       end

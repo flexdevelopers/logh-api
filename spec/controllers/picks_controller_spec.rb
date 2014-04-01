@@ -27,7 +27,7 @@ describe API::PicksController do
     context 'when the current user is not a coach of the team' do
       it 'returns unauthorized' do
         get :index, team_id: non_coached_team.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -46,7 +46,7 @@ describe API::PicksController do
       let(:pick) { FactoryGirl.create(:pick, team: non_coached_team) }
       it 'returns unauthorized' do
         get :show, team_id: pick.team.id, id: pick.id
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
 
@@ -87,7 +87,7 @@ describe API::PicksController do
       let(:pick) { FactoryGirl.build(:pick, team: non_coached_team) }
       it 'returns unauthorized and does not create the pick' do
         expect { post :create, team_id: pick.team.id, pick: pick.attributes }.to change(pick.team.picks, :count).by(0)
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -106,7 +106,7 @@ describe API::PicksController do
       let(:pick) { FactoryGirl.create(:pick, team: non_coached_team) }
       it 'returns unauthorized' do
         patch :update, team_id: pick.team.id, id: pick.id, pick: pick.attributes
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end
@@ -124,7 +124,7 @@ describe API::PicksController do
       let(:pick) { FactoryGirl.create(:pick, team: non_coached_team) }
       it 'returns unauthorized and does not delete a pick' do
         expect { delete :destroy, team_id: pick.team.id, id: pick.id }.to change(pick.team.picks, :count).by(0)
-        expect(response.status).to eq(401)
+        expect(response.status).to eq(403)
       end
     end
   end

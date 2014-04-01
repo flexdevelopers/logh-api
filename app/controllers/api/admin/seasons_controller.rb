@@ -45,7 +45,7 @@ class API::Admin::SeasonsController < API::BaseController
     end
 
     def _verify_admin
-      not_authorized() unless current_user.admin?
+      forbidden() unless current_user.admin?
     end
 
     def _season_params
