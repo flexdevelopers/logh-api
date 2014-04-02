@@ -1,9 +1,9 @@
 class AccessToken
   TTL = 20.minutes
 
-  def initialize(existing_token = nil, redis = _redis_connection)
+  def initialize(existing_token = nil)
     @token = existing_token || MicroToken.generate(128)
-    @redis = redis
+    @redis = REDIS
     self.last_seen = Time.now unless ttl < 1
   end
 
@@ -67,12 +67,6 @@ class AccessToken
     def _get_user
       user_id = @redis["access_token/#{token}/user_id"]
       User.find(user_id) if user_id
-    end
-
-    def _redis_connection
-      opts = {}
-      opts[:driver] = :hiredis
-      Redis.new(opts)
     end
 
 end

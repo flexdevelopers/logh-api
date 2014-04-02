@@ -39,7 +39,6 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Gems to manage access token authentication
 gem 'redis'
-gem 'hiredis'
 gem 'micro_token'
 
 # Use unicorn as the app server
