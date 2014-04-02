@@ -30,3 +30,11 @@ Non-admin endpoints accessible at http://api.loseorgohome.com:
 - DELETE /teams/:team_id/picks/:id                     destroy pick
 - GET    /weeks/:week_id/games                         week games
 - GET    /weeks/:week_id/games/:id                     show game
+
+All requests (except for creating a user or creating a session (aka logging in)) require an access token sent via the Authorization Header. Get a valid access token by creating a session like this:
+
+- curl -X POST -H "Content-Type: application/json" -d '{"email":"foo@bar.com","password":"foobar"}' http://api.loseorgohome.com/sessions
+
+And then you can do this, for example:
+
+- curl -X POST -H "Content-Type: application/json" -H "Authorization: biglongnastytoken" -d '{"name":"my league","season_id":"44"}' http://api.loseorgohome.com/users/79/leagues
