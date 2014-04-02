@@ -17,6 +17,9 @@ describe League do
   it { should respond_to(:max_teams_per_user) }
   its(:max_teams_per_user) { should be_nil }
 
+  it { should respond_to(:start_week) }
+  its(:start_week) { should be_nil }
+
   it { should respond_to(:season) }
   its(:season) { should be_nil }
 
@@ -38,6 +41,11 @@ describe League do
 
   context 'when league has no season' do
     subject(:league) { FactoryGirl.build(:league, season: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has no start week' do
+    subject(:league) { FactoryGirl.build(:league, start_week: nil) }
     it { should_not be_valid }
   end
 
