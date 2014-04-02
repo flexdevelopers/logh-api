@@ -1,8 +1,8 @@
 == README
 
-This application serves as the public API for LOGH
+This application serves as the stand-alone API for LOGH
 
-Non-admin endpoints:
+Non-admin endpoints accessible at http://api.loseorgohome.com:
 
 - POST   /sessions                                     create session
 - DELETE /sessions/:id                                 destroy session
