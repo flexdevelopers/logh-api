@@ -43,9 +43,9 @@ end
 
 # create a user and a league for that user and a few teams for that user in that league
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
-foo_league = League.create!(name: "Foo League", user: user1, season: season)
+foo_league = League.create!(name: "Foo League", commishes: [user1], season: season, password: 'foobar', password_confirmation: 'foobar')
 3.times do |i|
-  team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, user: user1)
+  team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
   # and 3 picks for that team
   3.times do |i|
     Pick.create!(team: team, week: Week.find_by(number: i + 1, season: season), loser: home_squads[i])
@@ -55,7 +55,7 @@ end
 # create another user and a few teams for that user
 user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo', password_confirmation: 'bobfoo')
 3.times do |i|
-  team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, user: user2)
+  team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
   # and 3 picks for that team
   3.times do |i|
     Pick.create!(team: team, week: Week.find_by(number: i + 1, season: season), loser: visiting_squads[i])
