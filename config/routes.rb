@@ -1,6 +1,8 @@
 LoghApi::Application.routes.draw do
 
-  namespace :api, path: '/', constraints: { subdomain: 'api' }, defaults: {format: :json} do
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+
+    match '/docs', to: 'docs#index', via: 'get'
 
     resources :sessions, only: [:create, :destroy]
 
