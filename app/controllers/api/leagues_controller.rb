@@ -3,6 +3,7 @@ class API::LeaguesController < API::BaseController
   before_action :_set_league, only: [:show, :update, :destroy]
   before_action :_verify_league_membership, only: [:show]
   before_action :_verify_league_management, only: [:update, :destroy]
+  before_action :_verify_start_week, only: [:create]
 
   # GET /api/seasons/:season_id/leagues
   def index
@@ -56,6 +57,11 @@ class API::LeaguesController < API::BaseController
 
     def _verify_league_management
       forbidden() unless _is_commish_of(@league)
+    end
+
+    def _verify_start_week
+      start_week = Week.find(_league_params[:start_week_id])
+      forbidden() unless start_week.starts_at.to_date >= 1.day.from_now.to_date
     end
 
     def _is_commish_of(league)
