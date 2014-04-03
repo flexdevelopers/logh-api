@@ -6,6 +6,7 @@ class League < ActiveRecord::Base
   has_many :commishes, through: :league_commishes
 
   has_many :teams, dependent: :destroy
+  has_many :invitations, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :password, length: { minimum: 6 }, on: :create

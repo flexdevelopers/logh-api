@@ -29,6 +29,9 @@ describe League do
   it { should respond_to(:commishes) }
   its(:commishes) { should be_empty }
 
+  it { should respond_to(:invitations) }
+  its(:invitations) { should be_empty }
+
   context 'when league has no name' do
     subject(:league) { FactoryGirl.build(:league, name: '') }
     it { should_not be_valid }

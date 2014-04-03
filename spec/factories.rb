@@ -60,4 +60,9 @@ FactoryGirl.define do
     abbrev  'DEN'
   end
 
+  factory :invitation do |invitation|
+    invitation.association  :league
+    email                   'foo@bar.com'
+  end
+
 end

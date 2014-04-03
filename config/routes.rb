@@ -14,6 +14,7 @@ LoghApi::Application.routes.draw do
 
     resources :leagues, only: [] do
       resources :teams, only: [:index, :show, :create, :update, :destroy]
+      resources :invitations, only: [:index, :create, :delete]
     end
 
     resources :teams, only: [] do
