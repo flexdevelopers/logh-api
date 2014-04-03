@@ -14,6 +14,9 @@ describe League do
   it { should respond_to(:password_digest) }
   its(:password_digest) { should be_blank }
 
+  it { should respond_to(:public) }
+  its(:public) { should be_true }
+
   it { should respond_to(:max_teams_per_user) }
   its(:max_teams_per_user) { should be_nil }
 

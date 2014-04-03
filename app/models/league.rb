@@ -11,6 +11,7 @@ class League < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 30 }
   validates :password, length: { minimum: 6 }, on: :create
   validates :season, presence: true
+  validates :public, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
 
