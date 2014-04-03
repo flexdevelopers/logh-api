@@ -3,7 +3,7 @@ class API::TeamsController < API::BaseController
   before_action :_set_team, only: [:show, :update, :destroy]
   before_action :_verify_team_ownership, only: [:show, :update, :destroy]
   before_action :_verify_league_membership, only: [:index]
-  before_action :_verify_league_password, only: [:create]
+  before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/leagues/:league_id/teams
   def index
@@ -55,8 +55,8 @@ class API::TeamsController < API::BaseController
       @team = @league.teams.find(params[:id])
     end
 
-    def _verify_league_password
-      forbidden() unless @league.authenticate(params[:league_password])
+    def _verify_league_acceptance
+      forbidden() unless @league.public || (_has_invitation_for?(@league) && _has_valid_password_for?(@league))
     end
 
     def _verify_league_membership
@@ -78,6 +78,14 @@ class API::TeamsController < API::BaseController
     def _has_team_in?(league)
       current_user_leagues = current_user.teams.map(&:league)
       current_user_leagues.include?(league)
+    end
+
+    def _has_invitation_for?(league)
+      league.invitations.find_by(email: current_user.email)
+    end
+
+    def _has_valid_password_for?(league)
+      league.authenticate(params[:league_password])
     end
 
     def _can_add_team_to?(league)

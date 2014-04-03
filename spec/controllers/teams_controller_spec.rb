@@ -69,16 +69,37 @@ describe API::TeamsController do
 
   # POST /api/leagues/:league_id/teams
   describe '#create' do
-    let(:team) { FactoryGirl.build(:team) }
-    context 'when a valid league password is provided' do
-      subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
-      it { should change(team.league.teams, :count).by(1) }
-      it { should change(current_user.teams, :count).by(1) }
+    context 'when a league is private' do
+      let(:league) { FactoryGirl.create(:league, public: false) }
+      context 'and a valid league password is provided and league invitation exists' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        before { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
+        subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
+        it { should change(team.league.teams, :count).by(1) }
+        it { should change(current_user.teams, :count).by(1) }
+      end
+      context 'and an invalid league password is provided but a league invitation exists' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        let(:invitation) { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
+        subject { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
+        it { should change(team.league.teams, :count).by(0) }
+        it { should change(current_user.teams, :count).by(0) }
+      end
+      context 'and no invitation exists for the user but a valid password is provided' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
+        it { should change(team.league.teams, :count).by(0) }
+        it { should change(current_user.teams, :count).by(0) }
+      end
     end
-    context 'when an invalid league password is provided' do
-      subject(:foo) { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
-      it { should change(team.league.teams, :count).by(0) }
-      it { should change(current_user.teams, :count).by(0) }
+    context 'when a league is public' do
+      let(:league) { FactoryGirl.create(:league, public: true) }
+      context 'and an invalid league password is provided and no invitation exists' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        subject { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
+        it { should change(team.league.teams, :count).by(1) }
+        it { should change(current_user.teams, :count).by(1) }
+      end
     end
     context 'when max number of teams per user has been met' do
       let(:league) { FactoryGirl.create(:league, max_teams_per_user: 2) }
