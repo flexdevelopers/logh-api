@@ -21,6 +21,7 @@ class API::TeamsController < API::BaseController
       @team = @league.teams.new(_team_params)
       @team.coaches << current_user
       if @team.save
+        _mark_invitation_accepted() if _has_invitation_for?(@league)
         render json: @team, status: :created, location: api_league_team_path(@league, @team)
       else
         render json: @team.errors, status: :unprocessable_entity
@@ -81,7 +82,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _has_invitation_for?(league)
-      league.invitations.find_by(email: current_user.email)
+      @invitation = league.invitations.find_by(email: current_user.email)
     end
 
     def _has_valid_password_for?(league)
@@ -94,6 +95,10 @@ class API::TeamsController < API::BaseController
         team.league.id == league.id
       end
       current_user_teams_in_league.count < league.max_teams_per_user
+    end
+
+    def _mark_invitation_accepted
+      @invitation.update(accepted_at: Time.now)
     end
 
     def _team_params

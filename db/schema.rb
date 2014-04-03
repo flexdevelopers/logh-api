@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403030003) do
+ActiveRecord::Schema.define(version: 20140403041951) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140403030003) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "accepted_at"
   end
 
   add_index "invitations", ["league_id"], name: "index_invitations_on_league_id"

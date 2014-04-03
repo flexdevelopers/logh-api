@@ -78,6 +78,15 @@ describe API::TeamsController do
         it { should change(team.league.teams, :count).by(1) }
         it { should change(current_user.teams, :count).by(1) }
       end
+      context 'and a valid league password is provided and league invitation exists' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        before { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
+        it 'marks the invitation as accepted' do
+          post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes
+          invitation = league.invitations.find_by(email: current_user.email)
+          expect(invitation.accepted_at).to be_within(2.seconds).of(Time.now)
+        end
+      end
       context 'and an invalid league password is provided but a league invitation exists' do
         let(:team) { FactoryGirl.build(:team, league: league) }
         let(:invitation) { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
