@@ -34,6 +34,12 @@ And then you can do this, for example:
 * PATCH/PUT   /seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, password_confirmation, max_teams_per_user }
 * DELETE      /seasons/:season_id/leagues/:id               [ destroy league ]
 
+##### Invitations
+---
+* GET         /leagues/:league_id/invitations               [ league invitations ]
+* POST        /leagues/:league_id/invitations               [ create invitation ] { email* }
+* DELETE      /leagues/:league_id/invitations/:id           [ destroy invitation ]
+
 ##### Teams
 ---
 * GET         /leagues/:league_id/teams                     [ league teams ]
