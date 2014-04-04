@@ -23,6 +23,9 @@ gem 'bootstrap-sass', '~> 3.1.1'
 # AngularJS
 gem 'angularjs-rails'
 
+#Uglifier
+gem 'uglifier'
+
 group :development do
   # Use sqlite3 as the development database
   gem 'sqlite3'
