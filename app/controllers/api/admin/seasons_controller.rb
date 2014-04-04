@@ -1,6 +1,7 @@
 class API::Admin::SeasonsController < API::BaseController
+  skip_before_filter :authenticate, only: :index
   before_action :_set_season, only: [:show, :update, :destroy]
-  before_action :_verify_admin
+  before_action :_verify_admin, except: :index
 
   # GET /api/admin/seasons
   def index
