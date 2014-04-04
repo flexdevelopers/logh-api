@@ -98,7 +98,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _mark_invitation_accepted
-      @invitation.update(accepted_at: Time.now)
+      @invitation.update(accepted_at: Time.now) unless @invitation.accepted_at
     end
 
     def _team_params
