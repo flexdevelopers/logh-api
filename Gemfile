@@ -56,6 +56,9 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'redis'
 gem 'micro_token'
 
+# Figaro provides a clean and simple way to configure your app and keep the private stuff… private
+gem 'figaro'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

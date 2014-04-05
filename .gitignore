@@ -21,3 +21,6 @@ doc/
 
 # http://redis.io/topics/persistence - RDB is a very compact single-file point-in-time representation of your Redis data
 .rdb
+
+# Ignore application configuration
+/config/application.yml
