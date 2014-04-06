@@ -1,5 +1,5 @@
 class InvitationMailer < ActionMailer::Base
-  default from: 'foo@loseorgohome.com', cc: 'mitchell852@gmail.com'
+  default from: 'no-reply@loseorgohome.com'
 
   def league_invitation(invitation)
     @league = invitation.league
