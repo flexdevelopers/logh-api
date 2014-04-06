@@ -7,9 +7,9 @@ describe InvitationMailer do
     let(:invitation)  { FactoryGirl.create(:invitation, league: league) }
     subject { InvitationMailer.league_invitation(invitation) }
 
-    its(:from) { should include('foo@loseorgohome.com') }
+    its(:from) { should include('no-reply@loseorgohome.com') }
     its(:to) { should include(invitation.email) }
-    its(:subject) { should eq('You are invited!')}
+    its(:subject) { should eq("You are invited, #{invitation.email}!") }
   end
 
 end

@@ -3,7 +3,7 @@ class InvitationMailer < ActionMailer::Base
 
   def league_invitation(invitation)
     @league = invitation.league
-    mail to: invitation.email, subject: 'You are invited!'
+    mail to: invitation.email, subject: "You are invited, #{invitation.email}!"
   end
 
 end
