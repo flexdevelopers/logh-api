@@ -32,6 +32,10 @@ describe API::UsersController do
       expect { post :create, user: user_params }.to change(User, :count).by(1)
       expect(response).to be_success
     end
+    it 'sends a welcome email' do
+      user = FactoryGirl.create(:user)
+      expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
+    end
   end
 
   # PATCH/PUT /api/users/:id
