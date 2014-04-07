@@ -44,6 +44,10 @@ describe API::InvitationsController do
         expect { post :create, league_id: league.id, invitation: invitation.attributes }.to change(league.invitations, :count).by(1)
         expect(response).to be_success
       end
+      it 'sends an inviation email' do
+        invitation = FactoryGirl.create(:invitation)
+        expect(ActionMailer::Base.deliveries.last.to).to include(invitation.email)
+      end
     end
     context 'when the current user is not a commish of the league' do
       let(:league) { FactoryGirl.create(:league, commishes: [ another_user ]) }
