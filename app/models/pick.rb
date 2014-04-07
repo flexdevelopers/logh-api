@@ -1,9 +1,11 @@
 class Pick < ActiveRecord::Base
   belongs_to :team
   belongs_to :week
+  belongs_to :week_type
   belongs_to :loser, class_name: 'Squad', foreign_key: 'loser_id'
 
   validates :week, presence: true
+  validates :week_type, presence: true
   validates :team_id, presence: true, uniqueness: { scope: :week_id }
   validates :loser_id, presence: true, uniqueness: { scope: :team_id }
 

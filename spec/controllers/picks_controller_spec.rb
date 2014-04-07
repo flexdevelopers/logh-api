@@ -67,6 +67,7 @@ describe API::PicksController do
         let(:pick2_params) { FactoryGirl.attributes_for(:pick, week: week, team: coached_team, loser: squad2) }
         before { FactoryGirl.create(:pick, week: week, team: coached_team, loser: squad1) }
         it 'the 2nd pick is not created' do
+          pick2_params[:week_type_id] = pick2_params[:week_type].id
           expect { post :create, team_id: coached_team.id, pick: pick2_params }.not_to change(week.picks, :count).by(1)
           expect(response.status).to eq(422) # Unprocessable Entity
         end

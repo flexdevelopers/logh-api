@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407152852) do
+ActiveRecord::Schema.define(version: 20140407221353) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -83,10 +83,11 @@ ActiveRecord::Schema.define(version: 20140407152852) do
   create_table "picks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "team_id",    null: false
-    t.integer  "week_id",    null: false
-    t.integer  "loser_id",   null: false
+    t.integer  "team_id",      null: false
+    t.integer  "week_id",      null: false
+    t.integer  "loser_id",     null: false
     t.boolean  "correct"
+    t.integer  "week_type_id", null: false
   end
 
   add_index "picks", ["team_id", "loser_id"], name: "index_picks_on_team_id_and_loser_id", unique: true
