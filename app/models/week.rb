@@ -1,5 +1,7 @@
 class Week < ActiveRecord::Base
   belongs_to :season
+  belongs_to :week_type
+
   has_many :games
   has_many :picks
   has_many :losers
@@ -7,6 +9,7 @@ class Week < ActiveRecord::Base
   validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
   validates :starts_at, presence: true
   validates :season, presence: true
+  validates :week_type, presence: true
   validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
 
   def complete=(value)

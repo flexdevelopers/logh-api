@@ -39,6 +39,7 @@ describe API::Admin::WeeksController do
       it 'creates the week for the season' do
         season = FactoryGirl.create(:season)
         week_params = FactoryGirl.attributes_for(:week)
+        week_params[:week_type_id] = week_params[:week_type].id
         expect { post :create, season_id: season.id, week: week_params }.to change(season.weeks, :count).by(1)
         response.should be_success
       end
@@ -49,6 +50,7 @@ describe API::Admin::WeeksController do
         season2 = FactoryGirl.create(:season, name: '2015-16 NFL Season')
         FactoryGirl.create(:week, number: 1, season: season1)
         week1_season2_params = FactoryGirl.attributes_for(:week, number: 1, season: season2)
+        week1_season2_params[:week_type_id] = week1_season2_params[:week_type].id
         expect { post :create, season_id: season2.id, week: week1_season2_params }.to change(season2.weeks, :count).by(1)
       end
     end
@@ -57,6 +59,7 @@ describe API::Admin::WeeksController do
         season = FactoryGirl.create(:season)
         FactoryGirl.create(:week, number: 1, season: season)
         bad_week_params = FactoryGirl.attributes_for(:week, number: 1)
+        bad_week_params[:week_type_id] = bad_week_params[:week_type].id
         expect { post :create, season_id: season.id, week: bad_week_params }.not_to change(season.weeks, :count).by(1)
       end
     end

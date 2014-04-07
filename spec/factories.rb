@@ -40,6 +40,7 @@ FactoryGirl.define do
   factory :week do |week|
     number              1
     starts_at           Time.now
+    week_type           { FactoryGirl.create(:week_type) }
     week.association    :season
   end
 
@@ -63,6 +64,11 @@ FactoryGirl.define do
   factory :invitation do |invitation|
     invitation.association  :league
     email                   'foo@bar.com'
+  end
+
+  factory :week_type do
+    code          'reg'
+    description   'Regular Season'
   end
 
 end

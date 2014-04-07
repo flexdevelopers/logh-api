@@ -6,17 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Season.destroy_all
-Week.destroy_all
-Game.destroy_all
+# Reference data
+WeekType.destroy_all
 Squad.destroy_all
 
-User.destroy_all
-League.destroy_all
-Team.destroy_all
-Pick.destroy_all
-
-Loser.destroy_all
+# create week types
+WeekType.create(code: 'reg', description: 'Regular Season')
+WeekType.create(code: 'play', description: 'Playoff')
 
 # create squads
 home_squads = []
@@ -27,6 +23,19 @@ home_squads << Squad.create(name: 'New England Patriots', abbrev: 'NEP')
 visiting_squads << Squad.create(name: 'New York Jets', abbrev: 'NYJ')
 visiting_squads << Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
 visiting_squads << Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
+
+# Transactional data
+Season.destroy_all
+Week.destroy_all
+Game.destroy_all
+
+User.destroy_all
+League.destroy_all
+Team.destroy_all
+Pick.destroy_all
+
+Loser.destroy_all
+
 
 # create a season
 season = Season.create!(name: '2014-15 NFL Season')

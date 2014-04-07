@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403041951) do
+ActiveRecord::Schema.define(version: 20140407152852) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -140,13 +140,21 @@ ActiveRecord::Schema.define(version: 20140403041951) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
-  create_table "weeks", force: true do |t|
-    t.integer  "number",                     null: false
-    t.datetime "starts_at",                  null: false
+  create_table "week_types", force: true do |t|
+    t.string   "code"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "season_id",                  null: false
-    t.boolean  "complete",   default: false, null: false
+  end
+
+  create_table "weeks", force: true do |t|
+    t.integer  "number",                       null: false
+    t.datetime "starts_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "season_id",                    null: false
+    t.boolean  "complete",     default: false, null: false
+    t.integer  "week_type_id",                 null: false
   end
 
   add_index "weeks", ["number", "season_id"], name: "index_weeks_on_number_and_season_id", unique: true
