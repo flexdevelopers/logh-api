@@ -40,14 +40,14 @@ FactoryGirl.define do
 
   factory :week do |week|
     number              1
-    starts_at           Time.now
+    starts_at           Time.zone.now.to_date + 1.day
     week_type           { FactoryGirl.create(:week_type) }
     week.association    :season
   end
 
   factory :game do |game|
     game.association      :week
-    starts_at             Date.today.midnight
+    starts_at             Time.zone.now.to_date
     home_squad            { FactoryGirl.create(:squad) }
     visiting_squad        { FactoryGirl.create(:squad) }
   end
