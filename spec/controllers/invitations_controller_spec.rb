@@ -48,6 +48,16 @@ describe API::InvitationsController do
         invitation = FactoryGirl.create(:invitation)
         expect(ActionMailer::Base.deliveries.last.to).to include(invitation.email)
       end
+      context 'and the league has already started' do
+        let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+        let(:league) { FactoryGirl.create(:league, start_week: start_week, commishes: [ current_user ]) }
+        let(:invitation) { FactoryGirl.build(:invitation) }
+        it 'does not creates a league invitation' do
+          expect { post :create, league_id: league.id, invitation: invitation.attributes }.to change(league.invitations, :count).by(0)
+          expect(response.status).to eq(403)
+          expect(ActionMailer::Base.deliveries.last.to).not_to include(invitation.email)
+        end
+      end
     end
     context 'when the current user is not a commish of the league' do
       let(:league) { FactoryGirl.create(:league, commishes: [ another_user ]) }

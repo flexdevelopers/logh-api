@@ -2,6 +2,7 @@ class API::InvitationsController < API::BaseController
   before_action :_set_league
   before_action :_set_invitation, only: :destroy
   before_action :_verify_league_management
+  before_action :_verify_league_status
 
   # GET /leagues/:league_id/invitations
   def index
@@ -36,6 +37,10 @@ class API::InvitationsController < API::BaseController
 
     def _verify_league_management
       _is_commish_of?(@league)
+    end
+
+    def _verify_league_status
+      forbidden() if @league.started?
     end
 
     def _is_commish_of?(league)
