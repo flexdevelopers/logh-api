@@ -55,21 +55,21 @@ describe API::LeaguesController do
   # POST /api/seasons/:season_id/leagues
   describe '#create' do
     context 'when the start week start date is in the future' do
-      let(:future_week) { FactoryGirl.create(:week, starts_at: 1.day.from_now) }
+      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: future_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(1) }
       it { should change(current_user.managed_leagues, :count).by(1) }
     end
     context 'when the start week start date is in the past' do
-      let(:old_week) { FactoryGirl.create(:week, starts_at: 1.day.ago) }
+      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.day) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: old_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(0) }
       it { should change(current_user.managed_leagues, :count).by(0) }
     end
     context 'when the start week start date is today' do
-      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.now) }
+      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: old_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(0) }
