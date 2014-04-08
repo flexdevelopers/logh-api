@@ -3,7 +3,7 @@ class API::LeaguesController < API::BaseController
   before_action :_set_league, only: [:show, :update, :destroy]
   before_action :_verify_league_membership, only: [:show]
   before_action :_verify_league_management, only: [:update, :destroy]
-  before_action :_verify_start_week, only: [:create]
+  before_action :_verify_start_week, only: [:create, :update]
 
   # GET /api/seasons/:season_id/leagues
   def index
