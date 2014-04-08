@@ -118,6 +118,12 @@ describe API::TeamsController do
         it { should change(team.league.teams, :count).by(1) }
         it { should change(current_user.teams, :count).by(1) }
       end
+      context 'and no league password is provided' do
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
+        it { should change(team.league.teams, :count).by(1) }
+        it { should change(current_user.teams, :count).by(1) }
+      end
     end
     context 'when the league has already started' do
       let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
