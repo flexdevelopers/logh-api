@@ -16,4 +16,9 @@ class League < ActiveRecord::Base
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
 
   has_secure_password
+
+  def started?
+    start_week.starts_at.to_date <= Time.zone.now.to_date
+  end
+
 end
