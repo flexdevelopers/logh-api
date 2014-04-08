@@ -28,6 +28,7 @@ class API::LeaguesController < API::BaseController
 
   # PATCH/PUT /api/seasons/:season_id/leagues/1
   def update
+    return forbidden() if _has_started()
     if @league.update(_league_params)
       head :no_content
     else
@@ -64,6 +65,10 @@ class API::LeaguesController < API::BaseController
       forbidden() unless start_week.starts_at.to_date > Time.zone.now.to_date
     end
 
+    def _has_started
+      @league.start_week.starts_at.to_date <= Time.zone.now.to_date
+    end
+
     def _is_commish_of(league)
       current_user.managed_leagues.include?(league)
     end
@@ -76,4 +81,5 @@ class API::LeaguesController < API::BaseController
     def _league_params
       params.require(:league).permit(:name, :start_week_id, :password, :password_confirmation)
     end
+
 end

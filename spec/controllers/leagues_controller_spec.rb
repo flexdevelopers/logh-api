@@ -87,28 +87,47 @@ describe API::LeaguesController do
         league.reload
         expect(league[:name]).to eq('Good News Bears')
       end
-      context 'and the start week is changed to a future start week' do
-        let(:current_start_week) { FactoryGirl.create(:week) }
-        let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
-        let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
-        before { league.start_week = new_start_week }
-        it 'updates the start week' do
-          patch :update, season_id: season.id, id: league.id, league: league.attributes
-          expect(response).to be_success
-          league.reload
-          expect(league[:start_week_id]).to eq(new_start_week.id)
+      context 'and the start week has yet to arrive' do
+        context 'and the start week is changed to a future start week' do
+          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.week) }
+          let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
+          before { league.start_week = new_start_week }
+          it 'updates the start week' do
+            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            expect(response).to be_success
+            league.reload
+            expect(league[:start_week_id]).to eq(new_start_week.id)
+          end
+        end
+        context 'and the start week is changed to a past start week' do
+          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+          let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
+          before { league.start_week = new_start_week }
+          it 'updates the start week' do
+            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            expect(response.status).to eq(403)
+            league.reload
+            expect(league[:start_week_id]).to eq(current_start_week.id)
+          end
         end
       end
-      context 'and the start week is changed to a past start week' do
-        let(:current_start_week) { FactoryGirl.create(:week) }
-        let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.day) }
-        let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
-        before { league.start_week = new_start_week }
-        it 'updates the start week' do
-          patch :update, season_id: season.id, id: league.id, league: league.attributes
-          expect(response.status).to eq(403)
-          league.reload
-          expect(league[:start_week_id]).to eq(current_start_week.id)
+      context 'and the start week has passed' do
+        context 'and league name is changed' do
+          let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.week) }
+          let(:league) { FactoryGirl.create(:league, season: season, start_week: start_week, commishes: [ current_user ]) }
+          before {
+            league.name = 'Good News Bears'
+            league.start_week = new_start_week
+          }
+          it 'it does not update the league name' do
+            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            expect(response.status).to eq(403)
+            league.reload
+            expect(league[:name]).to eq('Bad News Bears')
+          end
         end
       end
     end
