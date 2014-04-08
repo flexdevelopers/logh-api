@@ -119,6 +119,14 @@ describe API::TeamsController do
         it { should change(current_user.teams, :count).by(1) }
       end
     end
+    context 'when the league has already started' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+      let(:league) { FactoryGirl.create(:league, start_week: start_week) }
+      let(:team) { FactoryGirl.build(:team, league: league) }
+      subject { -> { post :create, league_id: team.league.id, league_password: 'whatever', team: team.attributes } }
+      it { should change(team.league.teams, :count).by(0) }
+      it { should change(current_user.teams, :count).by(0) }
+    end
     context 'when max number of teams per user has been met' do
       let(:league) { FactoryGirl.create(:league, max_teams_per_user: 2) }
       let(:another_league) { FactoryGirl.create(:league) }

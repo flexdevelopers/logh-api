@@ -17,17 +17,14 @@ class API::TeamsController < API::BaseController
 
   # POST /api/leagues/:league_id/teams
   def create
-    if _can_add_team_to?(@league)
-      @team = @league.teams.new(_team_params)
-      @team.coaches << current_user
-      if @team.save
-        _mark_invitation_accepted() if _has_invitation_for?(@league)
-        render json: @team, status: :created, location: api_league_team_path(@league, @team)
-      else
-        render json: @team.errors, status: :unprocessable_entity
-      end
+    return forbidden() unless !@league.started? && _can_add_team_to?(@league)
+    @team = @league.teams.new(_team_params)
+    @team.coaches << current_user
+    if @team.save
+      _mark_invitation_accepted() if _has_invitation_for?(@league)
+      render json: @team, status: :created, location: api_league_team_path(@league, @team)
     else
-      forbidden()
+      render json: @team.errors, status: :unprocessable_entity
     end
   end
 
