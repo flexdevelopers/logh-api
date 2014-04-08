@@ -75,7 +75,7 @@ class API::LeaguesController < API::BaseController
     end
 
     def _league_params
-      params.require(:league).permit(:name, :start_week_id, :password, :password_confirmation)
+      params.require(:league).permit(:name, :start_week_id, :password, :password_confirmation, :public, :max_teams_per_user)
     end
 
 end

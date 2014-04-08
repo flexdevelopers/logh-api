@@ -81,11 +81,20 @@ describe API::LeaguesController do
   describe '#update' do
     context 'when the signed in user is a commish of the league' do
       let(:league) { FactoryGirl.create(:league, season: season, commishes: [ current_user ]) }
-      before { league.name = 'Good News Bears' }
+      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
+      before {
+        league.name = 'Good News Bears'
+        league.start_week = future_week
+        league.public = false
+        league.max_teams_per_user = 15
+      }
       it 'updates the league' do
         patch :update, season_id: season.id, id: league.id, league: league.attributes
         league.reload
-        expect(league[:name]).to eq('Good News Bears')
+        expect(league.name).to eq('Good News Bears')
+        expect(league.start_week).to eq(future_week)
+        expect(league.public).to be_false
+        expect(league.max_teams_per_user).to eq(15)
       end
       context 'and the start week has yet to arrive' do
         context 'and the start week is changed to a future start week' do
