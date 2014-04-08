@@ -69,15 +69,29 @@ describe API::Admin::GamesController do
 
   # PUT/PATCH /api/admin/weeks/:week_id/games/:id
   describe '#update' do
-    it 'updates a game' do
-      game = FactoryGirl.create(:game)
-      game.home_squad = FactoryGirl.create(:squad, name: 'Seattle Seahawks', abbrev: 'SEA')
-      game.visiting_squad = FactoryGirl.create(:squad, name: 'New York Giants', abbrev: 'NYG')
-      patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-      response.should be_success
-      game.reload
-      expect(game.home_squad.abbrev).to eq('SEA')
-      expect(game.visiting_squad.abbrev).to eq('NYG')
+    context 'when the signed in user is an admin' do
+      let(:week) { FactoryGirl.create(:week) }
+      let(:game) { FactoryGirl.create(:game, week: week) }
+      let(:starts_at) { Time.zone.now.to_date + 2.days }
+      let(:home_squad) { FactoryGirl.create(:squad, name: 'Seattle Seahawks', abbrev: 'SEA') }
+      let(:visiting_squad) { FactoryGirl.create(:squad, name: 'New York Giants', abbrev: 'NYG') }
+      before do
+        game.starts_at = starts_at
+        game.home_squad = home_squad
+        game.visiting_squad = visiting_squad
+        game.home_squad_score = 34
+        game.visiting_squad_score = 27
+      end
+      it 'updates a game' do
+        patch :update, week_id: week.id, id: game.id, game: game.attributes
+        response.should be_success
+        game.reload
+        expect(game.starts_at.to_date).to eq(starts_at.to_date)
+        expect(game.home_squad).to eq(home_squad)
+        expect(game.visiting_squad).to eq(visiting_squad)
+        expect(game.home_squad_score).to eq(34)
+        expect(game.visiting_squad_score).to eq(27)
+      end
     end
     context 'when visiting squad score is less than home squad score' do
       subject(:game) { FactoryGirl.create(:game) }
