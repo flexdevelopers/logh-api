@@ -23,8 +23,8 @@ And then you can do this, for example:
 ##### Users
 ---
 * POST        /users                                       [ create user ] { email*, first_name*, last_name*, password*, password_confirmation* }
-* GET         /users/:id                                   [ show user ]
-* PATCH/PUT   /users/:id                                   [ update user ] { email*, first_name*, last_name*, password, password_confirmation }
+* GET         /users/:id                                   [ show current user ]
+* PATCH/PUT   /users/:id                                   [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
 
 ##### Leagues
 ---
@@ -51,9 +51,9 @@ And then you can do this, for example:
 ##### Picks
 ---
 * GET         /teams/:team_id/picks                         [ team picks ]
-* POST        /teams/:team_id/picks                         [ create pick ] { week_id*, squad_id* }
+* POST        /teams/:team_id/picks                         [ create pick ] { week_id*, week_type_id*, squad_id* }
 * GET         /teams/:team_id/picks/:id                     [ show pick ]
-* PATCH/PUT   /teams/:team_id/picks/:id                     [ update pick ] { week_id*, squad_id* }
+* PATCH/PUT   /teams/:team_id/picks/:id                     [ update pick ] { week_id*, week_type_id*, squad_id* }
 * DELETE      /teams/:team_id/picks/:id                     [ destroy pick ]
 
 ##### Games
@@ -82,9 +82,9 @@ And then you can do this, for example:
 ##### Weeks
 ---
 * GET         /admin/seasons/:season_id/weeks               [ seasons weeks ]
-* POST        /admin/seasons/:season_id/weeks               [ create week ] { number*, starts_at*, complete }
+* POST        /admin/seasons/:season_id/weeks               [ create week ] { number*, starts_at*, week_type_id*, complete }
 * GET         /admin/seasons/:season_id/weeks/:id           [ show week ]
-* PATCH/PUT   /admin/seasons/:season_id/weeks/:id           [ update week ] { number*, starts_at*, complete }
+* PATCH/PUT   /admin/seasons/:season_id/weeks/:id           [ update week ] { number*, starts_at*, week_type_id*, complete }
 * DELETE      /admin/seasons/:season_id/weeks/:id           [ destroy week ]
 
 ##### Games
