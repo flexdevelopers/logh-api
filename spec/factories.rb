@@ -23,8 +23,10 @@ FactoryGirl.define do
   end
 
   factory :team do |team|
-    name              'Fire Breathing Rubber Duckies'
     team.association  :league
+    name              'Fire Breathing Rubber Duckies'
+    alive             true
+    paid              false
   end
 
   factory :pick do |pick|

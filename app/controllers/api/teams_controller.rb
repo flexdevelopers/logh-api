@@ -99,7 +99,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :paid)
     end
 
 end

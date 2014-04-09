@@ -179,11 +179,17 @@ describe API::TeamsController do
   describe '#update' do
     context 'when the current user is a coach of the team' do
       let(:team) { FactoryGirl.create(:team, coaches: [current_user]) }
-      before { team.name = 'Average Joes' }
-      it 'updates the team' do
+      before do
+        team.name = 'Average Joes'
+        team.alive = false
+        team.paid = true
+      end
+      it 'updates the team except for the alive attribute' do
         patch :update, league_id: team.league.id, id: team.id, team: team.attributes
         team.reload
         expect(team.name).to eq('Average Joes')
+        expect(team.alive).to be_true # this field is not updated
+        expect(team.paid).to be_true
       end
     end
     context 'when the current user is not a coach of the team' do

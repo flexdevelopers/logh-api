@@ -43,9 +43,9 @@ And then you can do this, for example:
 ##### Teams
 ---
 * GET         /leagues/:league_id/teams                     [ league teams ]
-* POST        /leagues/:league_id/teams                     [ create team ] { name* }
+* POST        /leagues/:league_id/teams                     [ create team ] { name*, paid }
 * GET         /leagues/:league_id/teams/:id                 [ show team ]
-* PATCH/PUT   /leagues/:league_id/teams/:id                 [ update team ] { name* }
+* PATCH/PUT   /leagues/:league_id/teams/:id                 [ update team ] { name*, paid }
 * DELETE      /leagues/:league_id/teams/:id                 [ destroy team ]
 
 ##### Picks
