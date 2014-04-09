@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409024756) do
+ActiveRecord::Schema.define(version: 20140409025755) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140409024756) do
   end
 
   add_index "league_commishes", ["league_id"], name: "index_league_commishes_on_league_id"
+  add_index "league_commishes", ["user_id", "league_id"], name: "index_league_commishes_on_user_id_and_league_id", unique: true
   add_index "league_commishes", ["user_id"], name: "index_league_commishes_on_user_id"
 
   create_table "leagues", force: true do |t|
