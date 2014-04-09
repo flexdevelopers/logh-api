@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407230911) do
+ActiveRecord::Schema.define(version: 20140409024756) do
 
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
@@ -37,13 +37,14 @@ ActiveRecord::Schema.define(version: 20140407230911) do
   add_index "games", ["week_id"], name: "index_games_on_week_id"
 
   create_table "invitations", force: true do |t|
-    t.integer  "league_id"
-    t.string   "email"
+    t.integer  "league_id",   null: false
+    t.string   "email",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "accepted_at"
   end
 
+  add_index "invitations", ["league_id", "email"], name: "index_invitations_on_league_id_and_email", unique: true
   add_index "invitations", ["league_id"], name: "index_invitations_on_league_id"
 
   create_table "league_commishes", force: true do |t|
