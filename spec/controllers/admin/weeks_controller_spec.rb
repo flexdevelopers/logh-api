@@ -68,16 +68,22 @@ describe API::Admin::WeeksController do
   # PATCH/PUT /api/admin/seasons/:season_id/weeks/:id
   describe '#update' do
     context 'when an admin attempts to update a week' do
-      it 'updates the week' do
-        week = FactoryGirl.create(:week)
+      let(:week) { FactoryGirl.create(:week) }
+      let(:starts_at) { Time.zone.now.to_date }
+      let(:playoff_week_type) { FactoryGirl.create(:playoff_week_type) }
+      before do
         week.number = 7
-        week.starts_at = Date.today.midnight
+        week.starts_at = starts_at
+        week.week_type = playoff_week_type
         week.complete = true
+      end
+      it 'updates the week' do
         patch :update, season_id: week.season.id, id: week.id, week: week.attributes
         response.should be_success
         week.reload
         expect(week.number).to eq(7)
-        expect(week.starts_at).to eq(Date.today.midnight)
+        expect(week.starts_at.to_date).to eq(starts_at)
+        expect(week.week_type).to eq(playoff_week_type)
         expect(week.complete).to be_true
       end
     end
