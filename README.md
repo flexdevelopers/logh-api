@@ -51,9 +51,9 @@ And then you can do this, for example:
 ##### Picks
 ---
 * GET         /teams/:team_id/picks                         [ team picks ]
-* POST        /teams/:team_id/picks                         [ create pick ] { week_id*, loser_id* }
+* POST        /teams/:team_id/picks                         [ create pick ] { week_id*, squad_id* }
 * GET         /teams/:team_id/picks/:id                     [ show pick ]
-* PATCH/PUT   /teams/:team_id/picks/:id                     [ update pick ] { week_id*, loser_id* }
+* PATCH/PUT   /teams/:team_id/picks/:id                     [ update pick ] { week_id*, squad_id* }
 * DELETE      /teams/:team_id/picks/:id                     [ destroy pick ]
 
 ##### Games

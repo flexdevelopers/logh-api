@@ -58,7 +58,7 @@ class API::PicksController < API::BaseController
     end
 
     def _pick_params
-      params.require(:pick).permit(:week_id, :week_type_id, :loser_id)
+      params.require(:pick).permit(:week_id, :week_type_id, :squad_id)
     end
 
 end

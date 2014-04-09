@@ -64,35 +64,35 @@ describe API::PicksController do
         let(:week) { FactoryGirl.create(:week, number: 1) }
         let(:squad1) { FactoryGirl.create(:squad) }
         let(:squad2) { FactoryGirl.create(:squad) }
-        let(:pick2_params) { FactoryGirl.attributes_for(:pick, week: week, team: coached_team, loser: squad2) }
-        before { FactoryGirl.create(:pick, week: week, team: coached_team, loser: squad1) }
+        let(:pick2_params) { FactoryGirl.attributes_for(:pick, week: week, team: coached_team, squad: squad2) }
+        before { FactoryGirl.create(:pick, week: week, team: coached_team, squad: squad1) }
         it 'the 2nd pick is not created' do
           pick2_params[:week_type_id] = pick2_params[:week_type].id
           expect { post :create, team_id: coached_team.id, pick: pick2_params }.not_to change(week.picks, :count).by(1)
           expect(response.status).to eq(422) # Unprocessable Entity
         end
       end
-      context 'when the team tries make two picks with the same loser in 2 weeks with different week types' do
+      context 'when the team tries make two picks with the same squad in 2 weeks with different week types' do
         let(:regular_week_type) { FactoryGirl.create(:week_type) }
         let(:playoff_week_type) { FactoryGirl.create(:playoff_week_type) }
         let(:week1) { FactoryGirl.create(:week, number: 1, week_type: regular_week_type) }
         let(:week18) { FactoryGirl.create(:week, number: 18, week_type: playoff_week_type) }
         let(:squad) { FactoryGirl.create(:squad) }
-        before { FactoryGirl.create(:pick, team: coached_team, week: week1, week_type: week1.week_type, loser: squad) }
+        before { FactoryGirl.create(:pick, team: coached_team, week: week1, week_type: week1.week_type, squad: squad) }
         it 'creates a pick for team' do
-          pick2 = FactoryGirl.build(:pick, team: coached_team, week: week18, week_type: week18.week_type, loser: squad)
+          pick2 = FactoryGirl.build(:pick, team: coached_team, week: week18, week_type: week18.week_type, squad: squad)
           expect { post :create, team_id: coached_team.id, pick: pick2.attributes }.to change(coached_team.picks, :count).by(1)
           expect(response).to be_success
         end
       end
-      context 'when the team tries make two picks with the same loser in 2 weeks with the same week type' do
+      context 'when the team tries make two picks with the same squad in 2 weeks with the same week type' do
         let(:regular_week_type) { FactoryGirl.create(:week_type) }
         let(:week1) { FactoryGirl.create(:week, number: 1, week_type: regular_week_type) }
         let(:week2) { FactoryGirl.create(:week, number: 2, week_type: regular_week_type) }
         let(:squad) { FactoryGirl.create(:squad) }
-        before { FactoryGirl.create(:pick, team: coached_team, week: week1, week_type: week1.week_type, loser: squad) }
+        before { FactoryGirl.create(:pick, team: coached_team, week: week1, week_type: week1.week_type, squad: squad) }
         it 'the 2nd pick is not created' do
-          pick2 = FactoryGirl.build(:pick, team: coached_team, week: week2, week_type: week2.week_type, loser: squad)
+          pick2 = FactoryGirl.build(:pick, team: coached_team, week: week2, week_type: week2.week_type, squad: squad)
           expect { post :create, team_id: coached_team.id, pick: pick2.attributes }.not_to change(coached_team.picks, :count).by(1)
           expect(response.status).to eq(422) # Unprocessable Entity
         end

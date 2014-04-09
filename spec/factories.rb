@@ -31,7 +31,7 @@ FactoryGirl.define do
     pick.association  :team
     pick.association  :week
     week_type         { FactoryGirl.create(:week_type) }
-    loser             { FactoryGirl.create(:squad) }
+    squad             { FactoryGirl.create(:squad) }
   end
 
   factory :season do

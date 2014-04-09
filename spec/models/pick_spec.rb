@@ -11,8 +11,8 @@ describe Pick do
   it { should respond_to(:week_type) }
   its(:week_type) { should be_blank }
 
-  it { should respond_to(:loser) }
-  its(:loser) { should be_nil }
+  it { should respond_to(:squad) }
+  its(:squad) { should be_nil }
 
   it { should respond_to(:correct) }
   its(:correct) { should be_nil }
@@ -32,8 +32,8 @@ describe Pick do
     it { should_not be_valid }
   end
 
-  context 'when loser is not present' do
-    subject(:pick) { FactoryGirl.build(:pick, loser: nil) }
+  context 'when squad is not present' do
+    subject(:pick) { FactoryGirl.build(:pick, squad: nil) }
     it { should_not be_valid }
   end
 

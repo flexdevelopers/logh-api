@@ -61,9 +61,9 @@ describe Week do
     context 'when complete is set to false' do
       it 'should not update pick.correct' do
         week = FactoryGirl.create(:week)
-        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
-        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
-        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
+        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
+        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
         week.picks << pick1 << pick2 << pick3
         week.complete = false
         expect(pick1.correct).to be_nil
@@ -75,9 +75,9 @@ describe Week do
     context 'when complete is set to true' do
       it 'should update pick.correct' do
         week = FactoryGirl.create(:week)
-        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
-        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
-        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), loser: FactoryGirl.create(:squad) )
+        pick1 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
+        pick2 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
+        pick3 = FactoryGirl.create(:pick, week: week, team: FactoryGirl.create(:team), squad: FactoryGirl.create(:squad) )
         week.picks << pick1 << pick2 << pick3
         week.complete = true
         expect(pick1.correct).not_to be_nil

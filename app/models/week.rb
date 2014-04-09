@@ -23,7 +23,7 @@ class Week < ActiveRecord::Base
       return if self.complete == false # only update if the week is complete
 
       picks.each do |pick|
-        if losers.find_by(squad: pick.loser)
+        if losers.find_by(squad: pick.squad)
           pick.correct = true
         else
           pick.correct = false
