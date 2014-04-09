@@ -41,12 +41,20 @@ describe API::UsersController do
   # PATCH/PUT /api/users/:id
   describe '#update' do
     context 'when attempting to update the signed in user' do
-      before { current_user.email = 'newemail@foo.com' }
-      it 'updates the user' do
+      before do
+        current_user.email = 'themaninblack@cash.com'
+        current_user.first_name = 'Johnny'
+        current_user.last_name = 'Cash'
+        current_user.admin = true
+      end
+      it 'updates the user except for the admin field' do
         patch :update, id: current_user.id, user: current_user.attributes
         expect(response).to be_success
         current_user.reload
-        current_user.email.should == 'newemail@foo.com'
+        current_user.email.should == 'themaninblack@cash.com'
+        current_user.first_name.should == 'Johnny'
+        current_user.last_name.should == 'Cash'
+        current_user.admin.should be_false
       end
     end
     context 'when attempting to update a user other than the signed in user' do
