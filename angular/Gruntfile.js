@@ -1,7 +1,7 @@
 // Generated on 2014-04-10 using generator-angular 0.8.0
 'use strict';
 
-var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+//var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
-    // Project settings
+  // Project settings
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
@@ -431,9 +431,26 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
+  grunt.registerTask('default', ['heroku:production']);
+  grunt.registerTask('heroku:production',[
+    'forceOn',
+    'build',
+    'forceOff'
   ]);
+
+  grunt.registerTask('forceOn', 'turns the --force option ON',
+    function() {
+      if ( !grunt.option( 'force' ) ) {
+        grunt.config.set('forceStatus', true);
+        grunt.option( 'force', true );
+      }
+    });
+
+  grunt.registerTask('forceOff', 'turns the --force option Off',
+    function() {
+      if ( grunt.config.get('forceStatus') ) {
+        grunt.option( 'force', false );
+      }
+    });
+
 };

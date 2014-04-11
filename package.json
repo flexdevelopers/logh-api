@@ -1,7 +1,17 @@
 {
-  "name": "logh",
-  "version": "0.0.1",
+  "name": "my-grunt-hub",
+  "version": "0.1.0",
+  "description": "A grunt hub",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/user/repo.git"
+  },
   "devDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "grunt-hub": ">= 0.6.2"
+  },
+  "engines": {
+    "node": "~0.10.0"
   }
 }
+

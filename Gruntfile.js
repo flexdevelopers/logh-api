@@ -17,5 +17,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-hub');
 
-  grunt.registerTask('default', ['hub']);
+  grunt.registerTask('default', ['heroku']);
+  grunt.registerTask('heroku',['hub']);
 };
