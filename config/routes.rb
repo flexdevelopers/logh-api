@@ -1,6 +1,6 @@
 LoghApi::Application.routes.draw do
 
-  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+  namespace :api do
 
     match '/docs', to: 'docs#index', via: 'get'
 
