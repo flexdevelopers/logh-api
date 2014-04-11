@@ -7,10 +7,6 @@
     "url": "git://github.com/user/repo.git"
   },
   "devDependencies": {
-    "grunt": "~0.4.1"
-  },
-  "dependencies": {
-    "express": "^4.0.0",
-    "gzippo": "^0.2.0"
+  	"grunt": "~0.4.1"
   }
 }
