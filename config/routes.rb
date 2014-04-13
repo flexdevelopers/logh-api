@@ -1,6 +1,6 @@
 LoghApi::Application.routes.draw do
 
-  get '/', to: redirect('/index.html')
+  get '/', to: redirect('/')
 
   namespace :api do
 
