@@ -154,7 +154,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the app -
+    // Automatically inject Bower components into the app
     bowerInstall: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -237,7 +237,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks produce minified files in the dist folder -
+    // The following *-min tasks produce minified files in the dist folder
     cssmin: {
       options: {
         root: '<%= yeoman.app %>'
@@ -325,9 +325,9 @@ module.exports = function (grunt) {
           ]
         }, {
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
-          src: ['*']
+          src: ['generated/*']
         }]
       },
       styles: {
@@ -433,11 +433,12 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', ['heroku:production']);
-  grunt.registerTask('heroku:production',[
-    'forceOn',
-    'build',
-    'forceOff'
-  ]);
+//  grunt.registerTask('heroku:production',[
+//    'forceOn',
+//    'build',
+//    'forceOff'
+//  ]);
+  grunt.registerTask('heroku:production',[]);
 
   grunt.registerTask('forceOn', 'turns the --force option ON',
     function() {
