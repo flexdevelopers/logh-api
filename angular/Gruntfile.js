@@ -71,15 +71,15 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
-      proxies: [
-        {
-          context: '/api/',
-          host: 'localhost',
-          port: 3000,
-          https: false,
-          changeOrigin: false
-        }
-      ],
+//      proxies: [
+//        {
+//          context: '/api/',
+//          host: 'localhost',
+//          port: 3000,
+//          https: false,
+//          changeOrigin: false
+//        }
+//      ],
       livereload: {
         options: {
           open: true,
@@ -154,7 +154,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // Automatically inject Bower components into the app
+    // Automatically inject Bower components into the app -
     bowerInstall: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -237,7 +237,7 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks produce minified files in the dist folder
+    // The following *-min tasks produce minified files in the dist folder -
     cssmin: {
       options: {
         root: '<%= yeoman.app %>'
