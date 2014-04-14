@@ -5,6 +5,6 @@ angular.module('angularApp')
     $scope.awesomeThings = [
       'footon',
       'tom',
-      'cars'
+      'goodman'
     ];
   });

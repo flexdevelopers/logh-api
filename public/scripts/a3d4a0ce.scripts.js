@@ -1,1 +1,0 @@
-"use strict";angular.module("angularApp",["ui.bootstrap","ngCookies","ngResource","ngSanitize","ngRoute"]).config(["$routeProvider",function(a){a.when("/",{templateUrl:"views/main.html",controller:"MainCtrl"}).otherwise({redirectTo:"/"})}]),angular.module("angularApp").controller("MainCtrl",["$scope",function(a){a.awesomeThings=["footon","tom","cars"]}]);
