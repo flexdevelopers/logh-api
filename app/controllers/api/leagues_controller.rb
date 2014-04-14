@@ -1,4 +1,5 @@
 class API::LeaguesController < API::BaseController
+  skip_before_filter :authenticate, only: [:index]
   before_action :_set_season
   before_action :_set_league, only: [:show, :update, :destroy]
   before_action :_verify_league_membership, only: [:show]
