@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git://github.com/user/repo.git"
   },
-  "devDependencies": {
+  "dependencies": {
     "grunt": "~0.4.1",
     "grunt-hub": ">= 0.6.2"
   },

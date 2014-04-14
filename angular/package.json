@@ -39,6 +39,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "predeploy": "npm install"
+    "test": "grunt test"
   }
 }

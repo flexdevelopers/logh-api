@@ -246,10 +246,13 @@ module.exports = function (grunt) {
 
     imagemin: {
       dist: {
+        options: {
+          cache: false
+        },
         files: [{
           expand: true,
-          cwd: './app/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          cwd: 'app/images',
+          src: ['**/*.{png,jpg,gif}'],
           dest: '../public/images'
         }]
       }
@@ -344,9 +347,7 @@ module.exports = function (grunt) {
         'compass'
       ],
       dist: [
-        'compass:dist',
-        'imagemin',
-        'svgmin'
+        'compass:dist'
       ]
     },
 
