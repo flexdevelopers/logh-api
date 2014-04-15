@@ -7,13 +7,15 @@ loghApp.filter('reverse', function() {
   };
 });
 
-loghApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
-  var app = this;
-  $http( { method: 'GET', url: '/api/seasons/2/leagues' }).
-    success(function(data) {
-      app.leagues = data;
-    }).
-    error(function() {
-      console.log('no luck');
-    });
+loghApp.controller('MainCtrl', ['$scope', function($scope) {
+
+  $scope.choices = [
+    { code: 'edit-profile', desc: 'Edit Profile' },
+    { code: 'sign-out', desc: 'Sign Out' }
+  ];
+
+  $scope.footon = function(choice) {
+    alert(choice.desc) ;
+  };
+
 }]);
