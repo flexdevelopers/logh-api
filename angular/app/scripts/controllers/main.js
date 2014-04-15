@@ -7,16 +7,13 @@ loghApp.filter('reverse', function() {
   };
 });
 
-function MainCtrl($http, $scope) {
+loghApp.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
   var app = this;
-  $http( { method: 'GET', url: '/api/seasons/9/leagues' }).
+  $http( { method: 'GET', url: '/api/seasons/2/leagues' }).
     success(function(data) {
       app.leagues = data;
     }).
     error(function() {
       console.log('no luck');
     });
-
-
-}
-
+}]);
