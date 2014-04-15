@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('angularApp', [
+  .module('loghApp', [
     'ui.bootstrap',
     'ngCookies',
     'ngResource',

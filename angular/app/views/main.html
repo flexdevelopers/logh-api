@@ -17,10 +17,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Joe Loser <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">make picks</a></li>
-            <li class="divider"></li>
-            <li><a href="#">join a league</a></li>
-            <li><a href="#">create a league</a></li>
+            <li><a href="#">Edit Profile</a></li>
+            <li><a href="#">Sign Out</a></li>
           </ul>
         </li>
       </ul>
@@ -34,23 +32,29 @@
     <img src="images/loser.jpg" alt="Hello Loser"><br>
   </p>
   <div>
-    <a class="btn btn-lg btn-success" ng-href="#">Join a League</a>
-    <a class="btn btn-lg btn-success" ng-href="#">Create a League</a>
+    <button type="button" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-user"></span> Join a League
+    </button>
+    <button type="button" class="btn btn-info btn-lg">
+      <span class="glyphicon glyphicon-plus"></span> Create a League
+    </button>
   </div>
 </div>
 
-<ul>
-  <li class="dropdown">
-    <a class="dropdown-toggle">
-      Click me to see some awesome things!
-    </a>
-    <ul class="dropdown-menu">
-      <li ng-repeat="league in app.leagues">
-        <a>{{league.name}}</a>
-      </li>
-    </ul>
-  </li>
+<!-- Nav tabs -->
+<ul id="dashboardTabs" class="nav nav-tabs">
+  <li class="active"><a href="#play" data-toggle="tab">Play</a></li>
+  <li><a href="#manage" data-toggle="tab">Manage</a></li>
 </ul>
+
+<!-- Tab panes -->
+<div id="dashboardTabsContent" class="tab-content">
+  <div class="tab-pane active" id="home">slkj dflksj flkjsd kflsj klsjdl fkjslkf sdlkf</div>
+  <div class="tab-pane" id="profile">...</div>
+  <div class="tab-pane" id="messages">...</div>
+  <div class="tab-pane" id="settings">...</div>
+</div>
+
 <div class="footer">
   <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
 </div>

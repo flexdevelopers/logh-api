@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('angularApp'));
+  beforeEach(module('loghApp'));
   beforeEach(module('ui.bootstrap'));
 
   var MainCtrl,
@@ -17,7 +17,10 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  describe('reverse', function() {
+    it('should reverse the league name', inject(function(reverseFilter) {
+      expect(reverseFilter('abcd')).toEqual('dcba');
+    }));
   });
+
 });
