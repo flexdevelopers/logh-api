@@ -4,13 +4,10 @@ class API::SessionsController < API::BaseController
   # POST /api/sessions
   def create
     @user = User.find_by(email: _session_params[:email])
+    return not_authorized() unless _password_valid?
     access_token = current_access_token
-    access_token.user = @user if _password_valid?
-    if signed_in?
-      render json: { token: access_token.token }
-    else
-      not_authorized()
-    end
+    access_token.user = @user
+    render json: { token: access_token.token }
   end
 
   # DELETE /api/sessions/:id
