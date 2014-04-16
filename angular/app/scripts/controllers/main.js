@@ -26,6 +26,7 @@ loghApp.controller('MainCtrl', ['$scope', '$http', '$window', function($scope, $
       })
       .error(function (data, status, headers, config) {
         delete $window.sessionStorage.token;
+        $scope.user = {};
         $scope.isAuthenticated = false;
         $scope.message = 'Error: Invalid user or password';
       });
