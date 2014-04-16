@@ -18,4 +18,6 @@ loghApp.controller('MainCtrl', ['$scope', function($scope) {
     alert(choice.desc) ;
   };
 
+  $scope.isCollapsed = true;
+
 }]);
