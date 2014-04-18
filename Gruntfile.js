@@ -10,13 +10,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
     hub: {
       all: {
-        src: ['angular/Gruntfile.js'],
-      },
-    },
+        src: ['client/Gruntfile.js']
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-hub');
 
   grunt.registerTask('default', ['heroku']);
-  grunt.registerTask('heroku',['hub']);
+//  grunt.registerTask('heroku',['hub']);
+  grunt.registerTask('heroku',[]);
 };

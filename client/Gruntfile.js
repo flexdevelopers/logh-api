@@ -11,7 +11,11 @@ module.exports = function (grunt) {
     require('load-grunt-config')(grunt);
 
     //default task
-    grunt.registerTask('default', ['build-dev','build-shared-libs']);
+    grunt.registerTask('default', ['heroku']);
+
+    //heroku
+    grunt.registerTask('heroku', []);
+//    grunt.registerTask('heroku', ['build-dev','build-shared-libs']);
 
     // build tasks
     grunt.registerTask('build-release', ['clean','copy:prod','build']);

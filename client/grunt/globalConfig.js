@@ -1,5 +1,6 @@
 
 module.exports = function() {
+
     var globalConfig = {
         app: 'app',
         resourcesdir: '../public/resources',

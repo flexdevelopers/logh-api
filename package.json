@@ -1,7 +1,7 @@
 {
   "name": "my-grunt-hub",
   "version": "0.1.0",
-  "description": "A grunt hub",
+  "description": "A grunt hub requires to run ./client/Gruntfile.js on Heroku",
   "repository": {
     "type": "git",
     "url": "git://github.com/user/repo.git"
