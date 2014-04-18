@@ -1,7 +1,7 @@
-//$icon-font-path: "/bower_components/bootstrap-sass/vendor/assets/fonts/";
+$icon-font-path: "bootstrap-sass-official/vendor/assets/fonts/";
 
 @import "variables";
-@import "bootstrap-sass/vendor/assets/stylesheets/bootstrap/bootstrap";
+@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/bootstrap";
 
 @import "../common/modules/header/header";
 
@@ -66,6 +66,8 @@ body {
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
+  width: 220px;
+  margin: 5px;
 }
 
 /* Supporting marketing content */
