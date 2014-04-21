@@ -24,7 +24,7 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
           <div class="dropdown-menu panel panel-default">
             <div class="panel-body">
-              <form role="form" ng-submit="submit(loginParams); $event.stopPropagation();">
+              <form role="form" ng-submit="login(loginParams); $event.stopPropagation();">
                 <div class="form-group">
                   <input type="email" class="form-control" placeholder="Enter email" ng-model="loginParams.email" ng-click="$event.stopPropagation();">
                 </div>

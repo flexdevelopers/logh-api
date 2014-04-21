@@ -18,7 +18,7 @@ var HeaderController = function($scope, $log, userModel) {
         password: ''
     };
 
-    $scope.submit = function(loginParams) {
+    $scope.login = function(loginParams) {
         $log.log(loginParams);
         $scope.dispatch("LoginEvent", loginParams);
     };
