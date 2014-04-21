@@ -32,7 +32,6 @@ var UserService = function($http, $log, $window, apiConfig, userModel) {
             .success(function(data) {
                 $log.log("UserService: POST /api/sessions success");
                 $window.sessionStorage.token = data.token;
-                userModel.setUser(data);
                 return data;
             })
             .error(function(data) {

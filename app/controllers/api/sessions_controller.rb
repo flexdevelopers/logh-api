@@ -7,11 +7,7 @@ class API::SessionsController < API::BaseController
     return not_authorized() unless _password_valid?
     access_token = current_access_token
     access_token.user = @user
-    render json: {
-        id: @user.id,
-        email: @user.email,
-        token: access_token.token
-    }
+    render json: { token: access_token.token }
   end
 
   # DELETE /api/sessions/:id
