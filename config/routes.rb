@@ -8,7 +8,9 @@ LoghApi::Application.routes.draw do
 
     resources :sessions, only: [:create, :destroy]
 
-    resources :users, only: [:show, :create, :update]
+    resources :users, only: [:create, :update] do
+      get 'current', on: :collection
+    end
 
     resources :seasons, only: [] do
       resources :leagues, only: [:index, :show, :create, :update, :destroy]

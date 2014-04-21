@@ -8,19 +8,13 @@ describe API::UsersController do
     sign_in(current_user)
   end
 
-  # GET /api/users/:id
-  describe '#show' do
-    context 'when requesting the signed in user' do
+  # GET /api/users/current
+  describe '#current' do
+    context 'when requesting the current' do
       it 'returns a user' do
-        get :show, id: current_user.id
+        get :current
         expect(response).to be_success
         expect(json[:email]).to eq(current_user.email)
-      end
-    end
-    context 'when requesting a user other than the signed in user' do
-      it 'returns unauthorized' do
-        get :show, id: another_user.id
-        expect(response.status).to eq(403)
       end
     end
   end

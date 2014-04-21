@@ -1,9 +1,8 @@
 class API::UsersController < API::BaseController
   skip_before_filter :authenticate, only: [:create]
-  before_action :_verify_user, only: [:show, :update]
 
-  # GET /api/users/1
-  def show
+  # GET /api/users/current
+  def current
     render json: current_user
   end
 
@@ -27,10 +26,6 @@ class API::UsersController < API::BaseController
   end
 
   private
-
-    def _verify_user
-      forbidden() unless params[:id].to_i == current_user.id
-    end
 
     def _user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)

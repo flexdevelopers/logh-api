@@ -1,4 +1,5 @@
 class API::Admin::UsersController < API::UsersController
+  before_action :_verify_admin
   before_action :_set_user, only: [:show, :update, :destroy]
 
   # GET /api/admin/users/
@@ -36,8 +37,8 @@ class API::Admin::UsersController < API::UsersController
       @user = User.find(params[:id])
     end
 
-    def _verify_user
-      super unless current_user.admin?
+    def _verify_admin
+      forbidden() unless current_user.admin?
     end
 
 end

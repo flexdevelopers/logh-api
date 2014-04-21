@@ -7,17 +7,17 @@
 var UserService = function($http, $log, $window, apiConfig, userModel) {
 
 
-    this.getUser = function(userId) {
-        $log.log('UserService: getUser');
-        var promise = $http.get(apiConfig.baseURL + "users/" + userId)
+    this.getCurrentUser = function() {
+        $log.log('UserService: getCurrentUser');
+        var promise = $http.get(apiConfig.baseURL + "users/current")
             .success(function(data) {
-                $log.log("UserService: get user success");
-                $log.log("UserService: user data:" + data);
+                $log.log("UserService: get current user success");
+                $log.log("UserService: current user data:" + data);
                 userModel.setUser(data);
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: get user failed");
+                $log.log("UserService: get current user failed");
                 return data;
             });
 

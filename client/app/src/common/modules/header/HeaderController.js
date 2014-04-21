@@ -23,8 +23,8 @@ var HeaderController = function($scope, $log, userModel) {
         $scope.dispatch("LoginEvent", loginParams);
     };
 
-    $scope.getUser = function() {
-        $scope.dispatch("GetUserEvent", { userId: userModel.user.id });
+    $scope.getCurrentUser = function() {
+        $scope.dispatch("GetCurrentUserEvent");
     };
 
     /**
