@@ -28,6 +28,8 @@ var loghApp = angular.module('loghApp', [
     require('./common/api').name,
     require('./common/command').name,
 
+    require('./common/service/application').name,
+
     //modals
 
     //filters
@@ -44,10 +46,9 @@ var loghApp = angular.module('loghApp', [
         })
     })
 
-    .run(function($rootScope, $urlRouter, $log) {
-        $log.log("Application run...");
-        //inject a service here if you want to run some startup processes e.g.
-        //applicationService.startup();
+    .run(function($rootScope, $urlRouter, $log, applicationService) {
+        $log.log("Application starting up...");
+        applicationService.startup();
     })
 ;
 

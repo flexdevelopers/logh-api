@@ -6,12 +6,6 @@
  */
 var UserModel = function($log) {
 
-    var auth = {};
-    auth.authenticated = false;
-    auth.failure = false;
-
-    this.auth = auth;
-
     var user = {};
     user.loaded = false;
     user.id = '';
@@ -22,15 +16,6 @@ var UserModel = function($log) {
 
     this.user = user;
 
-    this.setAuthenticated = function(value) {
-        auth.authenticated = value;
-        auth.failure = false;
-    };
-
-    this.setAuthenticationFailure = function() {
-        auth.failure = true;
-    };
-
     this.setUser = function(userData) {
         user.loaded = true;
         user = angular.extend(user, userData);
@@ -38,12 +23,6 @@ var UserModel = function($log) {
     };
 
     this.reset = function() {
-        auth = {};
-        auth.authenticated = false;
-        auth.failure = false;
-
-        this.auth = auth;
-
         user = {};
         user.loaded = false;
         user.id = '';

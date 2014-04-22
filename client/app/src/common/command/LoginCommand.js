@@ -10,11 +10,9 @@ commangular.create('LoginCommand',
         },
         onError: function(error) {
             $log.log("LoginCommand: error in login: " + error.data);
-            userModel.setAuthenticationFailure();
         },
         onResult: function(result) {
             $log.log("LoginCommand: login successful ");
-            userModel.setAuthenticated(true);
         }
 
     }
