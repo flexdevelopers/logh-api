@@ -1,6 +1,6 @@
 
 commangular.create('LoginCommand',
-    function($log, $commangular, userService, userModel) {
+    function($log, userService) {
 
     return {
 

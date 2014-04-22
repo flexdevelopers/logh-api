@@ -4,7 +4,7 @@
 
  * @param $log
  */
-var UserModel = function($log) {
+var UserModel = function($window, $log) {
 
     var user = {};
     user.loaded = false;
@@ -23,6 +23,8 @@ var UserModel = function($log) {
     };
 
     this.reset = function() {
+        $window.sessionStorage.removeItem('token');
+
         user = {};
         user.loaded = false;
         user.id = '';
@@ -44,5 +46,5 @@ var UserModel = function($log) {
 
 };
 
-UserModel.$inject = ['$log'];
+UserModel.$inject = ['$window', '$log'];
 module.exports = UserModel;

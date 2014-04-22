@@ -31,18 +31,18 @@ describe API::SessionsController do
 
   # DELETE /api/sessions/:id
   describe '#destroy' do
-    context 'when a current access token is sent' do
+    context 'when a current access token is sent as a result of signing in' do
       before do
         sign_in(user)
       end
       it 'deletes the access token' do
-        delete :destroy, id: access_token.token
+        delete :destroy
         expect(response.status).to eq(204)
       end
     end
     context 'when no current access token is sent' do
       it 'returns unauthorized' do
-        delete :destroy, id: '1234'
+        delete :destroy
         expect(response.status).to eq(401)
       end
     end

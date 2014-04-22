@@ -6,7 +6,9 @@ LoghApi::Application.routes.draw do
 
     match '/docs', to: 'docs#index', via: 'get'
 
-    resources :sessions, only: [:create, :destroy]
+    resources :sessions, only: [:create] do
+      delete 'destroy', on: :collection
+    end
 
     resources :users, only: [:create, :update] do
       get 'current', on: :collection

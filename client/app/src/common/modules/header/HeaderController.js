@@ -1,15 +1,4 @@
-/**
- * Controller for the main application screen that controls the header and menu.
- * @param $scope
- * @param userModel
- * @constructor
- */
 var HeaderController = function($scope, $log, userModel) {
-
-    $scope.alerts = [{
-        type: 'danger',
-        msg: 'Login Failure'
-    }];
 
     $scope.userData = userModel;
 
@@ -23,8 +12,16 @@ var HeaderController = function($scope, $log, userModel) {
         $scope.dispatch("LoginEvent", loginParams);
     };
 
+    $scope.logout = function() {
+        $scope.loginParams = {
+            email: '',
+            password: ''
+        };
+        $scope.dispatch("LogoutEvent");
+    };
+
     $scope.getCurrentUser = function() {
-        $scope.dispatch("GetCurrentUserEvent");
+        // todo: switch views only. you already have the user
     };
 
     /**

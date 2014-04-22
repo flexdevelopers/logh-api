@@ -10,7 +10,7 @@ class API::SessionsController < API::BaseController
     render json: { token: access_token.token }
   end
 
-  # DELETE /api/sessions/:id
+  # DELETE /api/sessions/destroy
   def destroy
     current_access_token.delete!
     head :no_content
