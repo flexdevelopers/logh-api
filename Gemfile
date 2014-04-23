@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.1'
 #ruby-gemset=logh
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -8,7 +8,7 @@ gem 'rails', '4.0.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder - 
 gem 'jbuilder', '~> 1.2'
 
 # Use jquery
