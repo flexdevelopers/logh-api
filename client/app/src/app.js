@@ -3,7 +3,8 @@ require('app-templates');
 
 
 var App = function($urlRouterProvider) {
-    $urlRouterProvider.otherwise('/app/main');
+    // unmatched urls should be directed back to the start
+    $urlRouterProvider.otherwise('/main');
 };
 
 App.$inject = ['$urlRouterProvider'];
