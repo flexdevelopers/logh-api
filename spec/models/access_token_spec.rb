@@ -15,7 +15,7 @@ describe AccessToken do
   shared_examples_for :fresh_token do
     its(:token)       { should be_present }
     its(:last_seen)   { should be_within(2.seconds).of(Time.now) }
-    its(:ttl)         { should be_within(2).of(1200) }
+    its(:ttl)         { should be_within(2).of(AccessToken::TTL) }
     its(:expired?)    { should be_false }
     its(:valid?)      { should be_true }
   end
