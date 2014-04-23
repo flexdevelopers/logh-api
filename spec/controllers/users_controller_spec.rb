@@ -53,9 +53,8 @@ describe API::UsersController do
     end
     context 'when attempting to update a user other than the signed in user' do
       before { another_user.email = 'newemail@foo.com' }
-      it 'returns unauthorized and does not update the user' do
-        patch :update, id: another_user.id, user: another_user.attributes
-        expect(response.status).to eq(403)
+      it 'does not update the other user' do
+        patch :update, user: another_user.attributes
         another_user.reload
         another_user.email.should == 'foo@baz.com'
       end

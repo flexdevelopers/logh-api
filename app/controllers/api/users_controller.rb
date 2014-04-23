@@ -10,13 +10,13 @@ class API::UsersController < API::BaseController
   def create
     user = User.new(_user_params)
     if user.save
-      render json: user, status: :created, location: api_user_path(user)
+      render json: user, status: :created, location: current_api_users_path
     else
       render json: user.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /api/users/1
+  # PATCH api/users/current
   def update
     if current_user.update(_user_params)
       head :no_content
