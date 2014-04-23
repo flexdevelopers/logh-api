@@ -13,7 +13,6 @@
 /tmp
 
 # Ignore other unneeded files.
-database.yml
 doc/
 *.swp
 *~
@@ -22,8 +21,8 @@ doc/
 .idea
 .secret
 
-# http://redis.io/topics/persistence - RDB is a very compact single-file point-in-time representation of your Redis data
-.rdb
-
 # Ignore application configuration
 /config/application.yml
+
+# Ignore database configuration
+/config/database.yml
