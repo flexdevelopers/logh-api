@@ -26,3 +26,8 @@ doc/
 
 # Ignore database configuration
 /config/database.yml
+
+# Ignore dev notes
+/dev-notes.txt
+
+
