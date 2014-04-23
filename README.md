@@ -18,13 +18,13 @@ And then you can do this, for example:
 ##### Sessions (sign in/out)
 ---
 * POST        /api/sessions                                   [ create session ] { email*, password* }
-* DELETE      /api/sessions/:id                               [ destroy session ]
+* DELETE      /api/sessions/destroy                           [ destroy session ]
 
 ##### Users
 ---
 * POST        /api/users                                       [ create user ] { email*, first_name*, last_name*, password*, password_confirmation* }
-* GET         /api/users/:id                                   [ show current user ]
-* PATCH/PUT   /api/users/:id                                   [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
+* GET         /api/users/current                               [ show current user ]
+* PATCH       /api/users/current                               [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
 
 ##### Leagues
 ---
