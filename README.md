@@ -78,7 +78,6 @@ And then you can do this, for example:
 * PATCH/PUT   /api/admin/seasons/:id                            [ update season ] { name* }
 * DELETE      /api/admin/seasons/:id                            [ destroy season ]
 
-
 ##### Weeks
 ---
 * GET         /api/admin/seasons/:season_id/weeks               [ seasons weeks ]
@@ -101,3 +100,12 @@ And then you can do this, for example:
 #### Notes:
 
 We all got it coming, kid.
+
+##### Heroku
+
+'heroku config' (to see heroku config settings)
+
+##### Redis
+
+redis-cli -h my-host -p 1234 -a mypassword
+KEYS * (to see the keys)
