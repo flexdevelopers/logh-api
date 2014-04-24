@@ -15,7 +15,7 @@ class API::InvitationsController < API::BaseController
     if @invitation.save
       render json: @invitation, status: :created, location: api_league_invitations_path(@league, @invitation)
     else
-      render json: @invitation.errors, status: :unprocessable_entity
+      error(WARNING, @invitation.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

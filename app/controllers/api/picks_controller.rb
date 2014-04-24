@@ -20,7 +20,7 @@ class API::PicksController < API::BaseController
     if @pick.save
       render json: @pick, status: :created, location: api_team_pick_path(@team, @pick)
     else
-      render json: @pick.errors, status: :unprocessable_entity
+      error(WARNING, @pick.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -29,7 +29,7 @@ class API::PicksController < API::BaseController
     if @pick.update(_pick_params)
       head :no_content
     else
-      render json: @pick.errors, status: :unprocessable_entity
+      error(WARNING, @pick.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

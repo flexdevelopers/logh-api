@@ -7,7 +7,7 @@ class API::Admin::GamesController < API::GamesController
     if @game.save
       render json: @game, status: :created, location: api_week_game_path(@week, @game)
     else
-      render json: @game.errors, status: :unprocessable_entity
+      error(WARNING, @game.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -16,7 +16,7 @@ class API::Admin::GamesController < API::GamesController
     if @game.update(_game_params)
       head :no_content
     else
-      render json: @game.errors, status: :unprocessable_entity
+      error(WARNING, @game.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

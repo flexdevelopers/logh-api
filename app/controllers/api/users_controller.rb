@@ -14,7 +14,7 @@ class API::UsersController < API::BaseController
       access_token.user = user
       render json: { token: access_token.token }
     else
-      render json: user.errors, status: :unprocessable_entity
+      error(WARNING, user.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -23,7 +23,7 @@ class API::UsersController < API::BaseController
     if current_user.update(_user_params)
       head :no_content
     else
-      render json: current_user.errors, status: :unprocessable_entity
+      error(WARNING, current_user.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

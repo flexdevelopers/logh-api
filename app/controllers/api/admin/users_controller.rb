@@ -17,7 +17,7 @@ class API::Admin::UsersController < API::UsersController
     if @user.update(_user_params)
       head :no_content
     else
-      render json: @user.errors, status: :unprocessable_entity
+      error(WARNING, @user.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

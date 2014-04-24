@@ -1,4 +1,9 @@
 class API::BaseController < ApplicationController
+  SUCCESS = 'success'
+  INFO = 'info'
+  WARNING = 'warning'
+  DANGER = 'danger'
+
   before_action :authenticate
 
   private
@@ -24,26 +29,26 @@ class API::BaseController < ApplicationController
     end
 
     # 401 - authentication failures
-    def not_authorized(type = "warning", message = "The server was unable to validate your log in credentials. Please sign in again.")
-      _error(type, message, :unauthorized)
+    def not_authorized(type = DANGER, message = "Authorization failure. Please sign in again.")
+      error(type, message, :unauthorized)
     end
 
     #403 - authorization failures
-    def forbidden(type = "danger", message = "Forbidden")
-      _error(type, message, :forbidden)
+    def forbidden(type = DANGER, message = "Forbidden")
+      error(type, message, :forbidden)
     end
 
     # 404 - my head if not attached
-    def not_found(type = "warning", message = "Not Found")
-      _error(type, message, :not_found)
+    def not_found(type = WARNING, message = "Not Found")
+      error(type, message, :not_found)
+    end
+
+    def error(type, message, status)
+      render json: { type: type, content: message }, status: status
     end
 
     def _authorization_header
       request.headers['HTTP_AUTHORIZATION']
-    end
-
-    def _error(type, message, status)
-      render json: { error: { type: type, content: message } }, status: status
     end
 
 end

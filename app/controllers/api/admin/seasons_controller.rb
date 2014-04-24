@@ -20,7 +20,7 @@ class API::Admin::SeasonsController < API::BaseController
     if @season.save
       render json: @season, status: :created, location: api_admin_season_path(@season)
     else
-      render json: @season.errors, status: :unprocessable_entity
+      error(WARNING, @season.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -29,7 +29,7 @@ class API::Admin::SeasonsController < API::BaseController
     if @season.update(_season_params)
       head :no_content
     else
-      render json: @season.errors, status: :unprocessable_entity
+      error(WARNING, @season.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

@@ -24,7 +24,7 @@ class API::TeamsController < API::BaseController
       _mark_invitation_accepted() if _has_invitation_for?(@league)
       render json: @team, status: :created, location: api_league_team_path(@league, @team)
     else
-      render json: @team.errors, status: :unprocessable_entity
+      error(WARNING, @team.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -33,7 +33,7 @@ class API::TeamsController < API::BaseController
     if @team.update_attributes(_team_params)
       head :no_content
     else
-      render json: @team.errors, status: :unprocessable_entity
+      error(WARNING, @team.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 

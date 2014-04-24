@@ -65,9 +65,7 @@ loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageMod
             return config;
         },
         responseError: function (rejection) {
-            if (rejection.status === 401) {
-                messageModel.setMessage(rejection.data.error);
-            }
+            messageModel.setMessage(rejection.data);
             return $q.reject(rejection);
         }
     };

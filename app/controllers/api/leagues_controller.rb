@@ -22,7 +22,7 @@ class API::LeaguesController < API::BaseController
     if @league.save
       render json: @league, status: :created, location: api_season_league_path(@season, @league)
     else
-      render json: @league.errors, status: :unprocessable_entity
+      error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
@@ -32,7 +32,7 @@ class API::LeaguesController < API::BaseController
     if @league.update(_league_params)
       head :no_content
     else
-      render json: @league.errors, status: :unprocessable_entity
+      error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
     end
   end
 
