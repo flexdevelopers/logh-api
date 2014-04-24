@@ -51,10 +51,16 @@
             <div class="panel-body">
               <form role="form" ng-submit="login(loginParams); $event.stopPropagation();">
                 <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Enter email" ng-model="loginParams.email" ng-click="$event.stopPropagation();">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="email" class="form-control" placeholder="Enter email" ng-model="loginParams.email" ng-click="$event.stopPropagation();">
+                    </div>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password" ng-model="loginParams.password" ng-click="$event.stopPropagation();">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" placeholder="Password" ng-model="loginParams.password" ng-click="$event.stopPropagation();">
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
