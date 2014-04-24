@@ -23,6 +23,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/main').name,
 
     require('./common/modules/header').name,
+    require('./common/modules/message').name,
 
     require('./common/aspects').name,
     require('./common/models').name,
