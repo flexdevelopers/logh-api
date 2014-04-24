@@ -10,7 +10,9 @@ class API::UsersController < API::BaseController
   def create
     user = User.new(_user_params)
     if user.save
-      render json: user, status: :created, location: current_api_users_path
+      access_token = current_access_token
+      access_token.user = user
+      render json: { token: access_token.token }
     else
       render json: user.errors, status: :unprocessable_entity
     end

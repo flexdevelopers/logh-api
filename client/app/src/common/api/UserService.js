@@ -52,6 +52,23 @@ var UserService = function($http, $log, $window, apiConfig, userModel) {
         return promise;
     };
 
+    this.createUser = function(userParams) {
+        $log.log('UserService: createUser');
+        var promise = $http.post(apiConfig.baseURL + "users",
+            { user: userParams })
+            .success(function(data) {
+                $log.log("UserService: create user success");
+                $window.sessionStorage.token = data.token;
+                return data;
+            })
+            .error(function(data) {
+                $log.log("UserService: create user failed");
+                return data;
+            });
+
+        return promise;
+    };
+
 };
 
 UserService.$inject = ['$http', '$log', '$window', 'apiConfig', 'userModel'];

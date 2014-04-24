@@ -7,6 +7,14 @@ var HeaderController = function($scope, $log, userModel) {
         password: ''
     };
 
+    $scope.userParams = {
+        email: '',
+        password: '',
+        password_confirmation: '',
+        first_name: '',
+        last_name: ''
+    };
+
     $scope.login = function(loginParams) {
         $log.log(loginParams);
         $scope.dispatch("LoginEvent", loginParams);
@@ -18,6 +26,11 @@ var HeaderController = function($scope, $log, userModel) {
             password: ''
         };
         $scope.dispatch("LogoutEvent");
+    };
+
+    $scope.createUser = function(userParams) {
+        $log.log(userParams);
+        $scope.dispatch('CreateUserEvent', { userParams: userParams} );
     };
 
     $scope.getCurrentUser = function() {

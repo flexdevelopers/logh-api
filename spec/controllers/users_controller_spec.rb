@@ -21,10 +21,11 @@ describe API::UsersController do
 
   # POST /api/users
   describe '#create' do
-    it 'creates a user' do
+    it 'creates a user and returns an access token' do
       user_params = FactoryGirl.attributes_for(:user)
       expect { post :create, user: user_params }.to change(User, :count).by(1)
       expect(response).to be_success
+      expect(json[:token]).not_to be_blank
     end
     it 'sends a welcome email' do
       user = FactoryGirl.create(:user)

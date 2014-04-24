@@ -29,7 +29,7 @@ describe API::SessionsController do
     end
   end
 
-  # DELETE /api/sessions/:id
+  # DELETE /api/sessions/destroy
   describe '#destroy' do
     context 'when a current access token is sent as a result of signing in' do
       before do

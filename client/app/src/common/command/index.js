@@ -3,6 +3,7 @@
 require('./LoginCommand');
 require('./LogoutCommand');
 require('./GetCurrentUserCommand');
+require('./CreateUserCommand');
 
 module.exports = angular.module('loghApp.commandConfig', [])
     .config(function($commangularProvider) {
@@ -15,6 +16,9 @@ module.exports = angular.module('loghApp.commandConfig', [])
 
         $commangularProvider.mapTo('GetCurrentUserEvent').asSequence()
             .add('GetCurrentUserCommand');
+
+        $commangularProvider.mapTo('CreateUserEvent').asSequence()
+            .add('CreateUserCommand').add('GetCurrentUserCommand');
 
     }
 );

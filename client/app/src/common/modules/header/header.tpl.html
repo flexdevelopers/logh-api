@@ -21,7 +21,32 @@
       </ul>
       <ul ng-show="!userData.user.loaded" class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Join</strong></a>
+          <div class="dropdown-menu panel panel-default">
+            <div class="panel-body">
+              <form role="form" ng-submit="createUser(userParams); $event.stopPropagation();">
+                  <div class="form-group">
+                  <input type="text" class="form-control" placeholder="First name" ng-model="userParams.first_name" ng-click="$event.stopPropagation();">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Last name" ng-model="userParams.last_name" ng-click="$event.stopPropagation();">
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Enter email" ng-model="userParams.email" ng-click="$event.stopPropagation();">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Password" ng-model="userParams.password" ng-click="$event.stopPropagation();">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Confirm Password" ng-model="userParams.password_confirmation" ng-click="$event.stopPropagation();">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
           <div class="dropdown-menu panel panel-default">
             <div class="panel-body">
               <form role="form" ng-submit="login(loginParams); $event.stopPropagation();">
