@@ -24,26 +24,26 @@ class API::BaseController < ApplicationController
     end
 
     # 401 - authentication failures
-    def not_authorized(message = "Not Authorized")
-      _error(message, :unauthorized)
+    def not_authorized(type = "warning", message = "The server was unable to validate your log in credentials. Please sign in again.")
+      _error(type, message, :unauthorized)
     end
 
     #403 - authorization failures
-    def forbidden(message = "Forbidden")
-      _error(message, :forbidden)
+    def forbidden(type = "danger", message = "Forbidden")
+      _error(type, message, :forbidden)
     end
 
     # 404 - my head if not attached
-    def not_found(message = "Not Found")
-      _error(message, :not_found)
+    def not_found(type = "warning", message = "Not Found")
+      _error(type, message, :not_found)
     end
 
     def _authorization_header
       request.headers['HTTP_AUTHORIZATION']
     end
 
-    def _error(message, status)
-      render json: { error: message }, status: status
+    def _error(type, message, status)
+      render json: { error: { type: type, content: message } }, status: status
     end
 
 end

@@ -54,9 +54,10 @@ var loghApp = angular.module('loghApp', [
     })
 ;
 
-loghApp.factory('authInterceptor', function ($rootScope, $q, $window) {
+loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageModel) {
     return {
         request: function (config) {
+            messageModel.reset();
             config.headers = config.headers || {};
             if ($window.sessionStorage.token) {
                 config.headers.Authorization = $window.sessionStorage.token;
@@ -65,7 +66,7 @@ loghApp.factory('authInterceptor', function ($rootScope, $q, $window) {
         },
         responseError: function (rejection) {
             if (rejection.status === 401) {
-                // handle the case where the user is not authenticated
+                messageModel.setMessage(rejection.data.error);
             }
             return $q.reject(rejection);
         }
