@@ -21,6 +21,7 @@ var loghApp = angular.module('loghApp', [
     'ui.router.stateHelper',
 
     require('./modules/main').name,
+    require('./modules/user').name,
 
     require('./common/modules/header').name,
     require('./common/modules/message').name,
@@ -43,7 +44,7 @@ var loghApp = angular.module('loghApp', [
         $stateProvider
         .state('app', {
             abstract: true,
-            url: '/',
+            url: '',
             templateUrl: 'common/templates/master.tpl.html'
         })
     })
