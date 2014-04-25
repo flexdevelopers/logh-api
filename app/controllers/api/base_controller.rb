@@ -43,12 +43,12 @@ class API::BaseController < ApplicationController
       error(type, message, :not_found)
     end
 
-    def success(message, status)
-      render json: { type: SUCCESS, content: message }, status: status
+    def payload(data, message = '')
+      render json: { payload: data, message: { type: SUCCESS, content: message } }, status: :ok
     end
 
     def error(type, message, status)
-      render json: { type: type, content: message }, status: status
+      render json: { message: { type: type, content: message } }, status: status
     end
 
     def _authorization_header

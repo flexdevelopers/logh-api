@@ -7,7 +7,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             { email: email, password: password })
             .success(function(data) {
                 $log.log("UserService: POST /api/sessions success");
-                $window.sessionStorage.token = data.token;
+                $window.sessionStorage.token = data.payload.token;
                 return data;
             })
             .error(function(data) {
@@ -23,7 +23,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
         var promise = $http.delete(
             apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
-                messageModel.setMessage(data);
+                messageModel.setMessage(data.message);
                 $log.log("UserService: DELETE /api/sessions/destroy success");
                 return data;
             })
@@ -59,7 +59,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: create user success");
-                $window.sessionStorage.token = data.token;
+                $window.sessionStorage.token = data.payload.token;
                 return data;
             })
             .error(function(data) {
@@ -77,7 +77,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             .success(function(data) {
                 $log.log("UserService: update user success");
                 userModel.setUser(userParams);
-                messageModel.setMessage(data);
+                messageModel.setMessage(data.message);
                 return data;
             })
             .error(function(data) {

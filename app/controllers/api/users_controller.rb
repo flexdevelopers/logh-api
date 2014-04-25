@@ -12,7 +12,7 @@ class API::UsersController < API::BaseController
     if user.save
       access_token = current_access_token
       access_token.user = user
-      render json: { token: access_token.token }
+      payload({ token: access_token.token })
     else
       error(WARNING, user.errors.full_messages.join(', '), :unprocessable_entity)
     end
@@ -21,7 +21,7 @@ class API::UsersController < API::BaseController
   # PUT api/users/current
   def update
     if current_user.update(_user_params)
-      head :no_content
+      payload({}, 'User has been updated')
     else
       error(WARNING, current_user.errors.full_messages.join(', '), :unprocessable_entity)
     end
