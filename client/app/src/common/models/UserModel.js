@@ -4,7 +4,7 @@
 
  * @param $log
  */
-var UserModel = function($window, $log) {
+var UserModel = function($rootScope, $window, $log) {
 
     var user = {};
     user.loaded = false;
@@ -19,6 +19,7 @@ var UserModel = function($window, $log) {
     this.setUser = function(userData) {
         user.loaded = true;
         user = angular.extend(user, userData);
+        $rootScope.$broadcast('userModel::userUpdated', user);
         $log.log("UserModel: email: " + user.email);
     };
 
@@ -46,5 +47,5 @@ var UserModel = function($window, $log) {
 
 };
 
-UserModel.$inject = ['$window', '$log'];
+UserModel.$inject = ['$rootScope', '$window', '$log'];
 module.exports = UserModel;
