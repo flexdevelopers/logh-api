@@ -1,4 +1,4 @@
-var UserService = function($http, $log, $window, apiConfig, userModel) {
+var UserService = function($http, $log, $window, apiConfig, messageModel, userModel) {
 
     this.login = function(email, password) {
         $log.log('UserService: login');
@@ -76,6 +76,7 @@ var UserService = function($http, $log, $window, apiConfig, userModel) {
             .success(function(data) {
                 $log.log("UserService: update user success");
                 userModel.setUser(userParams);
+                messageModel.setMessage(data);
                 return data;
             })
             .error(function(data) {
@@ -88,5 +89,5 @@ var UserService = function($http, $log, $window, apiConfig, userModel) {
 
 };
 
-UserService.$inject = ['$http', '$log', '$window', 'apiConfig', 'userModel'];
+UserService.$inject = ['$http', '$log', '$window', 'apiConfig', 'messageModel', 'userModel'];
 module.exports = UserService;
