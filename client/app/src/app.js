@@ -55,7 +55,7 @@ var loghApp = angular.module('loghApp', [
     })
 ;
 
-loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageModel) {
+loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageModel, userModel) {
     return {
         request: function (config) {
             messageModel.reset();
@@ -67,6 +67,9 @@ loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageMod
         },
         responseError: function (rejection) {
             messageModel.setMessage(rejection.data);
+            if (rejection.status === 401) {
+                userModel.reset();
+            }
             return $q.reject(rejection);
         }
     };
