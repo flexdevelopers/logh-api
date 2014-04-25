@@ -23,6 +23,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
         var promise = $http.delete(
             apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
+                messageModel.setMessage(data);
                 $log.log("UserService: DELETE /api/sessions/destroy success");
                 return data;
             })

@@ -1,5 +1,5 @@
 class API::SessionsController < API::BaseController
-  skip_before_filter :authenticate, only: [:create]
+  skip_before_filter :authenticate
 
   # POST /api/sessions
   def create
@@ -13,7 +13,7 @@ class API::SessionsController < API::BaseController
   # DELETE /api/sessions/destroy
   def destroy
     current_access_token.delete!
-    head :no_content
+    success('Your session has been terminated', :ok)
   end
 
   private
