@@ -65,11 +65,6 @@ loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageMod
             }
             return config;
         },
-        response: function (response) {
-            //Will only be called for HTTP up to 300
-            messageModel.setMessage(response.data);
-            return response;
-        },
         responseError: function (rejection) {
             messageModel.setMessage(rejection.data);
             return $q.reject(rejection);
