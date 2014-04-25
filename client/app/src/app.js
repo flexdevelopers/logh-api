@@ -44,7 +44,7 @@ var loghApp = angular.module('loghApp', [
         $stateProvider
         .state('app', {
             abstract: true,
-            url: '',
+            url: '/',
             templateUrl: 'common/templates/master.tpl.html'
         })
     })
