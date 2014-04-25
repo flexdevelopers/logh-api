@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, userModel) {
+var HeaderController = function($scope, $log, $state, userModel) {
 
     $scope.userData = userModel;
 
@@ -33,8 +33,8 @@ var HeaderController = function($scope, $log, userModel) {
         $scope.dispatch('CreateUserEvent', { userParams: userParams} );
     };
 
-    $scope.getCurrentUser = function() {
-        // todo: switch views only. you already have the user
+    $scope.viewUser = function() {
+        $state.go('app.user');
     };
 
     /**
@@ -46,5 +46,5 @@ var HeaderController = function($scope, $log, userModel) {
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', 'userModel'];
+HeaderController.$inject = ['$scope', '$log', '$state', 'userModel'];
 module.exports = HeaderController;
