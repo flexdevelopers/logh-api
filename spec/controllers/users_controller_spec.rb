@@ -33,7 +33,7 @@ describe API::UsersController do
     end
   end
 
-  # PATCH/PUT /api/users/:id
+  # PUT /api/users/current
   describe '#update' do
     context 'when attempting to update the signed in user' do
       before do
@@ -43,7 +43,7 @@ describe API::UsersController do
         current_user.admin = true
       end
       it 'updates the user except for the admin field' do
-        patch :update, id: current_user.id, user: current_user.attributes
+        put :update, user: current_user.attributes
         expect(response).to be_success
         current_user.reload
         current_user.email.should == 'themaninblack@cash.com'
@@ -55,7 +55,7 @@ describe API::UsersController do
     context 'when attempting to update a user other than the signed in user' do
       before { another_user.email = 'newemail@foo.com' }
       it 'does not update the other user' do
-        patch :update, user: another_user.attributes
+        put :update, user: another_user.attributes
         another_user.reload
         another_user.email.should == 'foo@baz.com'
       end

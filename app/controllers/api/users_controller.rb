@@ -18,7 +18,7 @@ class API::UsersController < API::BaseController
     end
   end
 
-  # PATCH api/users/current
+  # PUT api/users/current
   def update
     if current_user.update(_user_params)
       head :no_content

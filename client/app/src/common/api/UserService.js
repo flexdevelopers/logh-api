@@ -69,6 +69,23 @@ var UserService = function($http, $log, $window, apiConfig, userModel) {
         return promise;
     };
 
+    this.updateUser = function(userParams) {
+        $log.log('UserService: updateUser');
+        var promise = $http.put(apiConfig.baseURL + "users/current",
+            { user: userParams })
+            .success(function(data) {
+                $log.log("UserService: update user success");
+                userModel.setUser(userParams);
+                return data;
+            })
+            .error(function(data) {
+                $log.log("UserService: update user failed");
+                return data;
+            });
+
+        return promise;
+    };
+
 };
 
 UserService.$inject = ['$http', '$log', '$window', 'apiConfig', 'userModel'];

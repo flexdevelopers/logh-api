@@ -1,7 +1,11 @@
 
-var UserController = function($scope, $window, $location, $commangular, userModel) {
+var UserController = function($scope, userModel) {
 
-    $scope.user = userModel.user;
+    $scope.userData = angular.copy(userModel);
+
+    $scope.update = function(user) {
+        $scope.dispatch('UpdateUserEvent', { userParams: user });
+    };
 
     /**
      * Invoked on startup, like a constructor.
@@ -10,7 +14,8 @@ var UserController = function($scope, $window, $location, $commangular, userMode
         console.log("user controller");
     };
     init();
+
 };
 
-UserController.$inject = ['$scope', '$window', '$location', '$commangular', 'userModel'];
+UserController.$inject = ['$scope', 'userModel'];
 module.exports = UserController;

@@ -12,7 +12,7 @@ LoghApi::Application.routes.draw do
 
     resources :users, only: [:create] do
       get 'current', on: :collection, to: 'users#current'
-      patch 'current', on: :collection, to: 'users#update'
+      put 'current', on: :collection, to: 'users#update'
     end
 
     resources :seasons, only: [] do
