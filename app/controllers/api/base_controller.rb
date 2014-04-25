@@ -43,6 +43,10 @@ class API::BaseController < ApplicationController
       error(type, message, :not_found)
     end
 
+    def success(message, status)
+      render json: { type: SUCCESS, content: message }, status: status
+    end
+
     def error(type, message, status)
       render json: { type: type, content: message }, status: status
     end
