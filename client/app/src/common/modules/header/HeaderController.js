@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $state, userModel) {
+var HeaderController = function($scope, $log, userModel) {
 
     $scope.userData = userModel;
 
@@ -33,10 +33,6 @@ var HeaderController = function($scope, $log, $state, userModel) {
         $scope.dispatch('CreateUserEvent', { userParams: userParams} );
     };
 
-    $scope.viewUser = function() {
-        $state.go('app.user');
-    };
-
     /**
      * Invoked on startup, like a constructor.
      */
@@ -46,5 +42,5 @@ var HeaderController = function($scope, $log, $state, userModel) {
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$state', 'userModel'];
+HeaderController.$inject = ['$scope', '$log', 'userModel'];
 module.exports = HeaderController;
