@@ -9,34 +9,34 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="First name" ng-model="userData.user.first_name">
+                        <input type="text" class="form-control" placeholder="First name" ng-model="newUserData.first_name">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Last name" ng-model="userData.user.last_name">
+                        <input type="text" class="form-control" placeholder="Last name" ng-model="newUserData.last_name">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <input type="email" class="form-control" placeholder="Enter email" ng-model="userData.user.email">
+                <input type="email" class="form-control" placeholder="Enter email" ng-model="newUserData.email">
             </div>
 
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" ng-model="userData.user.password">
+                        <input type="password" class="form-control" placeholder="Password" ng-model="newUserData.password">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm Password" ng-model="userData.user.password_confirmation">
+                        <input type="password" class="form-control" placeholder="Confirm Password" ng-model="newUserData.password_confirmation">
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-block" ng-click="register(userData.user)">Register</button>
+            <button type="submit" class="btn btn-info btn-block" ng-click="register(newUserData)">Register</button>
 
         </form>
     </div>
