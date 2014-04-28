@@ -1,6 +1,6 @@
 
 commangular.create('GetCurrentUserCommand',
-   function($log, userService) {
+   function($log, userService, userModel) {
 
     return {
 
@@ -9,12 +9,12 @@ commangular.create('GetCurrentUserCommand',
             var userPromise = userService.getCurrentUser();
             return userPromise;
         },
-        onError : function(error) {
+        onError: function(error) {
             $log.log("GetCurrentUserCommand: error in GetCurrentUser: " + error.data);
-//            $state.go('app.registration.login');
         },
-        onResult : function(result) {
+        onResult: function(result) {
             $log.log("GetCurrentUserCommand: current user data result is " + result);
+            userModel.setAuthenticated(true);
         }
 
     }
