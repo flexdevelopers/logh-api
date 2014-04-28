@@ -7,7 +7,7 @@ class API::SessionsController < API::BaseController
     return not_authorized() unless _password_valid?
     access_token = current_access_token
     access_token.user = @user
-    payload({ token: access_token.token })
+    payload({ email: access_token.user.email, admin: access_token.user.admin, token: access_token.token })
   end
 
   # DELETE /api/sessions/destroy

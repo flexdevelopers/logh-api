@@ -7,6 +7,8 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             { email: email, password: password })
             .success(function(data) {
                 $log.log("UserService: POST /api/sessions success");
+                userModel.setUserEmail(data.payload.email);
+                userModel.setUserAdmin(data.payload.admin);
                 $window.sessionStorage.token = data.payload.token;
                 return data;
             })

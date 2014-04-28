@@ -10,7 +10,7 @@ module.exports = angular.module('loghApp.commandConfig', [])
     .config(function($commangularProvider) {
 
         $commangularProvider.mapTo('LoginEvent').asSequence()
-            .add('LoginCommand').add('GetCurrentUserCommand');
+            .add('LoginCommand');
 
         $commangularProvider.mapTo('LogoutEvent').asSequence()
             .add('LogoutCommand');

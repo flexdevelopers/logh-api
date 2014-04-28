@@ -25,6 +25,14 @@ var UserModel = function($rootScope, $window, $log) {
         auth.authenticated = value;
     };
 
+    this.setUserEmail = function(value) {
+        user.email = value;
+    };
+
+    this.setUserAdmin = function(value) {
+        user.admin = value;
+    };
+
     this.setUser = function(userData) {
         user.loaded = true;
         user = angular.extend(user, userData);
