@@ -14,7 +14,6 @@ commangular.create('GetCurrentUserCommand',
         },
         onResult: function(result) {
             $log.log("GetCurrentUserCommand: current user data result is " + result);
-            userModel.setAuthenticated(true);
         }
 
     }

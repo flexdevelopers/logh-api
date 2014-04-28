@@ -7,8 +7,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             { email: email, password: password })
             .success(function(data) {
                 $log.log("UserService: POST /api/sessions success");
-                userModel.setUserEmail(data.payload.email);
-                userModel.setUserAdmin(data.payload.admin);
+                userModel.setUser(data.payload.user);
                 $window.sessionStorage.token = data.payload.token;
                 return data;
             })
@@ -61,9 +60,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: create user success");
-                userModel.setAuthenticated(true);
-                userModel.setUserEmail(data.payload.email);
-                userModel.setUserAdmin(data.payload.admin);
+                userModel.setUser(data.payload.user);
                 $window.sessionStorage.token = data.payload.token;
                 messageModel.setMessage(data.message);
                 return data;

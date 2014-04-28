@@ -6,11 +6,6 @@
  */
 var UserModel = function($rootScope, $window, $log) {
 
-    var auth = {};
-    auth.authenticated = false;
-
-    this.auth = auth;
-
     var user = {};
     user.loaded = false;
     user.id = '';
@@ -21,18 +16,6 @@ var UserModel = function($rootScope, $window, $log) {
 
     this.user = user;
 
-    this.setAuthenticated = function(value) {
-        auth.authenticated = value;
-    };
-
-    this.setUserEmail = function(value) {
-        user.email = value;
-    };
-
-    this.setUserAdmin = function(value) {
-        user.admin = value;
-    };
-
     this.setUser = function(userData) {
         user.loaded = true;
         user = angular.extend(user, userData);
@@ -42,10 +25,6 @@ var UserModel = function($rootScope, $window, $log) {
 
     this.reset = function() {
         $window.sessionStorage.removeItem('token');
-
-        auth.authenticated = false;
-
-        this.auth = auth;
 
         user = {};
         user.loaded = false;

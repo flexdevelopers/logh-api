@@ -12,7 +12,7 @@ class API::UsersController < API::BaseController
     if user.save
       access_token = current_access_token
       access_token.user = user
-      payload({ email: access_token.user.email, admin: access_token.user.admin, token: access_token.token }, "User created for #{access_token.user.email}")
+      payload({ user: access_token.user, token: access_token.token }, "User created for #{access_token.user.email}")
     else
       error(WARNING, user.errors.full_messages.join(', '), :unprocessable_entity)
     end

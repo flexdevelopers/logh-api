@@ -14,7 +14,6 @@ commangular.create('LoginCommand',
         },
         onResult: function(result) {
             $log.log("LoginCommand: login successful ");
-            userModel.setAuthenticated(true);
         }
 
     }
