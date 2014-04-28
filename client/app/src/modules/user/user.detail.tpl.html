@@ -1,0 +1,43 @@
+<div class="user-details panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">User Details</h3>
+    </div>
+
+    <div class="panel-body">
+        <form role="form">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="First name" ng-model="userData.user.first_name">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Last name" ng-model="userData.user.last_name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Enter email" ng-model="userData.user.email">
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" ng-model="userData.user.password">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Confirm Password" ng-model="userData.user.password_confirmation">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block" ng-click="update(userData.user)">Update</button>
+
+        </form>
+    </div>
+</div>

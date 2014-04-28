@@ -7,6 +7,10 @@ var UserController = function($scope, userModel) {
         $scope.dispatch('UpdateUserEvent', { userParams: user });
     };
 
+    $scope.register = function(user) {
+        $scope.dispatch('CreateUserEvent', { userParams: user } );
+    };
+
     $scope.$on('userModel::userUpdated', function(event) {
         $scope.userData = angular.copy(userModel);
     });
