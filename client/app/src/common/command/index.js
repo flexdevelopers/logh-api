@@ -19,7 +19,7 @@ module.exports = angular.module('loghApp.commandConfig', [])
             .add('GetCurrentUserCommand');
 
         $commangularProvider.mapTo('CreateUserEvent').asSequence()
-            .add('CreateUserCommand').add('GetCurrentUserCommand');
+            .add('CreateUserCommand');
 
         $commangularProvider.mapTo('UpdateUserEvent').asSequence()
             .add('UpdateUserCommand');
