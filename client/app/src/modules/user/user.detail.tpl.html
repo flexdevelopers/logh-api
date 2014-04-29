@@ -1,42 +1,67 @@
-<div class="user-details panel panel-default">
+<div class="panel panel-default">
 
     <div class="panel-heading">
         <h3 class="panel-title">User Details</h3>
     </div>
 
     <div class="panel-body">
-        <form role="form">
+        <form name="editUserForm" role="form" novalidate>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="First name" ng-model="userData.user.first_name">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(editUserForm.firstName), 'has-feedback': hasError(editUserForm.firstName)}">
+                        <label class="control-label" for="firstName">First Name
+                            <small ng-show="hasPropertyError(editUserForm.firstName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(editUserForm.firstName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="userData.user.first_name" ng-maxlength="20" required>
+                        <span ng-show="hasError(editUserForm.firstName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Last name" ng-model="userData.user.last_name">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(editUserForm.lastName), 'has-feedback': hasError(editUserForm.lastName)}">
+                        <label class="control-label" for="lastName">Last Name
+                            <small ng-show="hasPropertyError(editUserForm.lastName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(editUserForm.lastName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="lastName" name="lastName" type="text" class="form-control" ng-model="userData.user.last_name" ng-maxlength="20" required>
+                        <span ng-show="hasError(editUserForm.lastName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <input type="email" class="form-control" placeholder="Enter email" ng-model="userData.user.email">
+            <div class="form-group" ng-class="{'has-error': hasError(editUserForm.email), 'has-feedback': hasError(editUserForm.email)}">
+                <label class="control-label" for="email">Email
+                    <small ng-show="hasPropertyError(editUserForm.email, 'required')">[ Required ]</small>
+                    <small ng-show="hasPropertyError(editUserForm.email, 'email')">[ Invalid Email ]</small>
+                </label>
+                <input id="email" name="email" type="email" class="form-control" ng-model="userData.user.email" required>
+                <span ng-show="hasError(editUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
             </div>
 
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="New Password" ng-model="userData.user.password">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(editUserForm.password), 'has-feedback': hasError(editUserForm.password)}">
+                        <label class="control-label" for="password">New Password
+                            <small ng-show="hasPropertyError(editUserForm.password, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(editUserForm.password, 'minlength')">[ Too Short ]</small>
+                        </label>
+                        <input id="password" name="password" type="password" class="form-control" ng-model="userData.user.password" ng-minlength="6" required>
+                        <span ng-show="hasError(editUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirm New Password" ng-model="userData.user.password_confirmation">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(editUserForm.confirmPassword), 'has-feedback': hasError(editUserForm.confirmPassword)}">
+                        <label class="control-label" for="confirmPassword">Confirm New Password
+                            <small ng-show="hasPropertyError(editUserForm.confirmPassword, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(editUserForm.confirmPassword, 'minlength')">[ Too Short ]</small>
+                        </label>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="userData.user.password_confirmation" ng-minlength="6" required>
+                        <span ng-show="hasError(editUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-block" ng-click="update(userData.user)">Update</button>
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="editUserForm.$invalid" ng-click="update(userData.user)">Update</button>
 
         </form>
     </div>
