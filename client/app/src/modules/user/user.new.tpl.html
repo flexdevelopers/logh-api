@@ -52,10 +52,9 @@
                 <div class="col-sm-6 col-md-6">
                     <div class="form-group" ng-class="{'has-error': hasError(newUserForm.confirmPassword), 'has-feedback': hasError(newUserForm.confirmPassword)}">
                         <label class="control-label" for="confirmPassword">Confirm Password
-                            <small ng-show="hasPropertyError(newUserForm.confirmPassword, 'required')">[ Required ]</small>
-                            <small ng-show="hasPropertyError(newUserForm.confirmPassword, 'minlength')">[ Too Short ]</small>
+                            <small ng-show="hasPropertyError(newUserForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
                         </label>
-                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newUserData.password_confirmation" ng-minlength="6" focus required>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newUserData.password_confirmation" match="newUserData.password" focus>
                         <span ng-show="hasError(newUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
