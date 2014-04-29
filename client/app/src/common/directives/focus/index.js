@@ -1,4 +1,4 @@
 //application directives
-module.exports = angular.module('logh.directives.focus',[])
+module.exports = angular.module('loghApp.directives.focus',[])
     .directive('focus', require('./FocusDirective'))
 ;
