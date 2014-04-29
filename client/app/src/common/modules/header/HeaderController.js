@@ -20,6 +20,11 @@ var HeaderController = function($scope, $log, userModel) {
         $scope.dispatch("LogoutEvent");
     };
 
+    $scope.forgotPassword = function() {
+        // todo: implement this
+        alert('tough shit');
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
