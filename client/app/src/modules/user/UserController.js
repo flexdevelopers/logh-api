@@ -11,17 +11,11 @@ var UserController = function($scope, userModel) {
         password_confirmation: ''
     };
 
-    $scope.update = function(user, form) {
-        if (form.$invalid) {
-            return;
-        }
+    $scope.update = function(user) {
         $scope.dispatch('UpdateUserEvent', { userParams: user });
     };
 
-    $scope.register = function(newUser, form) {
-        if (form.$invalid) {
-            return;
-        }
+    $scope.register = function(newUser) {
         $scope.dispatch('CreateUserEvent', { userParams: newUser } );
     };
 

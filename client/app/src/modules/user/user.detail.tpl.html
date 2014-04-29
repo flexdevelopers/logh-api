@@ -54,13 +54,13 @@
                         <label class="control-label" for="confirmPassword">Confirm New Password
                             <small ng-show="hasPropertyError(editUserForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
                         </label>
-                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="userData.user.password_confirmation" match="userData.user.password" focus>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="userData.user.password_confirmation" match="userData.user.password">
                         <span ng-show="hasError(editUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-block" ng-click="update(userData.user, editUserForm)">Update</button>
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="editUserForm.$invalid" ng-click="update(userData.user)">Update</button>
 
         </form>
     </div>
