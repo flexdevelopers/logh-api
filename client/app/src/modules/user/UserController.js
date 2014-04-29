@@ -20,11 +20,11 @@ var UserController = function($scope, userModel) {
     };
 
     $scope.hasError = function(input) {
-        return input.$dirty && input.$invalid;
+        return !input.$focused && input.$dirty && input.$invalid;
     };
 
     $scope.hasPropertyError = function(input, property) {
-        return input.$dirty && input.$error[property];
+        return !input.$focused && input.$dirty && input.$error[property];
     };
 
     $scope.$on('userModel::userUpdated', function(event) {
