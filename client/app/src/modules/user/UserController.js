@@ -19,6 +19,14 @@ var UserController = function($scope, userModel) {
         $scope.dispatch('CreateUserEvent', { userParams: newUser } );
     };
 
+    $scope.hasError = function(input) {
+        return input.$dirty && input.$invalid;
+    };
+
+    $scope.hasPropertyError = function(input, property) {
+        return input.$dirty && input.$error[property];
+    };
+
     $scope.$on('userModel::userUpdated', function(event) {
         $scope.userData = angular.copy(userModel);
     });
