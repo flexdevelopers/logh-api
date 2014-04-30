@@ -1,10 +1,12 @@
 
-//application commands
-require('./LoginCommand');
-require('./LogoutCommand');
-require('./GetCurrentUserCommand');
-require('./CreateUserCommand');
-require('./UpdateUserCommand');
+//session commands
+require('./session/LoginCommand');
+require('./session/LogoutCommand');
+
+//user commands
+require('./user/GetCurrentUserCommand');
+require('./user/CreateUserCommand');
+require('./user/UpdateUserCommand');
 
 module.exports = angular.module('loghApp.commandConfig', [])
     .config(function($commangularProvider) {
