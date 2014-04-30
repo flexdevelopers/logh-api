@@ -3,6 +3,9 @@
 require('./session/LoginCommand');
 require('./session/LogoutCommand');
 
+//season commands
+require('./season/GetCurrentSeasonCommand');
+
 //user commands
 require('./user/GetCurrentUserCommand');
 require('./user/CreateUserCommand');
@@ -16,6 +19,9 @@ module.exports = angular.module('loghApp.commandConfig', [])
 
         $commangularProvider.mapTo('LogoutEvent').asSequence()
             .add('LogoutCommand');
+
+        $commangularProvider.mapTo('GetCurrentSeasonEvent').asSequence()
+            .add('GetCurrentSeasonCommand');
 
         $commangularProvider.mapTo('GetCurrentUserEvent').asSequence()
             .add('GetCurrentUserCommand');

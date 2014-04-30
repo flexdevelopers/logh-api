@@ -1,23 +1,20 @@
-/**
- * Controller for the main application screen that controls the header and menu.
- * @param $scope
- * @param $window
- * @param $location
- * @constructor
- */
-var MainController = function($scope, $window, $location, $commangular, userModel) {
 
-    $scope.user = userModel.user;
+var MainController = function($scope, $log, seasonModel) {
+
+    $scope.seasonId = seasonModel.season.id;
+
+    $scope.$on('seasonModel::seasonUpdated', function(event) {
+        $scope.seasonId = seasonModel.season.id;
+    });
 
     /**
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-       //dostuff
-        console.log("main controller");
+        $log.log("main controller");
     };
     init();
 };
 
-MainController.$inject = ['$scope', '$window', '$location', '$commangular', 'userModel'];
+MainController.$inject = ['$scope', '$log', 'seasonModel'];
 module.exports = MainController;

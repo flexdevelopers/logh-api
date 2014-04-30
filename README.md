@@ -26,6 +26,10 @@ And then you can do this, for example:
 * GET         /api/users/current                               [ show current user ]
 * PATCH       /api/users/current                               [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
 
+##### Seasons
+---
+* GET         /api/seasons/current                             [ show current season ]
+
 ##### Leagues
 ---
 * GET         /api/seasons/:season_id/leagues                   [ season leagues ]

@@ -16,6 +16,7 @@ LoghApi::Application.routes.draw do
     end
 
     resources :seasons, only: [] do
+      get 'current', on: :collection, to: 'seasons#current'
       resources :leagues, only: [:index, :show, :create, :update, :destroy]
     end
 
