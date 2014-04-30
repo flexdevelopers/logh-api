@@ -20,9 +20,12 @@ var loghApp = angular.module('loghApp', [
     'app.templates',
     'ui.router.stateHelper',
 
+    // main modules
     require('./modules/main').name,
     require('./modules/user').name,
+    require('./modules/league').name,
 
+    // helper modules
     require('./common/modules/header').name,
     require('./common/modules/message').name,
 
