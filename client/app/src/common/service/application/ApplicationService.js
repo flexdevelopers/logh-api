@@ -1,5 +1,5 @@
 var ApplicationService =
-    function($window, $log, $commangular) {
+    function($log) {
 
         /**
          *  Application Startup Process
@@ -11,10 +11,6 @@ var ApplicationService =
 
         var startupProcess = function() {
             $log.log("executing startup process...")
-            if ($window.sessionStorage.token) {
-                $commangular.dispatch("GetCurrentUserEvent");
-                return;
-            }
         };
 
         /**
@@ -28,5 +24,5 @@ var ApplicationService =
 
     };
 
-ApplicationService.$inject = ['$window', '$log', '$commangular'];
+ApplicationService.$inject = ['$log'];
 module.exports = ApplicationService;
