@@ -3,7 +3,9 @@ var MatchDirective = function() {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
             scope.$watch('[' + attrs.ngModel + ', ' + attrs.match + ']', function(value) {
-                ctrl.$setValidity('match', value[0] === value[1]);
+                var a = value[0] || '';
+                var b = value[1] || '';
+                ctrl.$setValidity('match', a === b);
             }, true);
         }
     }
