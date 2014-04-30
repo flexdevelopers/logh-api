@@ -1,11 +1,7 @@
 
-var MainController = function($scope, $log, seasonModel) {
+var MainController = function($scope, $log, season) {
 
-    $scope.seasonId = seasonModel.season.id;
-
-    $scope.$on('seasonModel::seasonUpdated', function(event) {
-        $scope.seasonId = seasonModel.season.id;
-    });
+    $scope.seasonId = season.data.id;
 
     /**
      * Invoked on startup, like a constructor.
@@ -16,5 +12,5 @@ var MainController = function($scope, $log, seasonModel) {
     init();
 };
 
-MainController.$inject = ['$scope', '$log', 'seasonModel'];
+MainController.$inject = ['$scope', '$log', 'season'];
 module.exports = MainController;

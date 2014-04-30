@@ -1,11 +1,10 @@
-var SeasonService = function($http, $log, apiConfig, seasonModel) {
+var SeasonService = function($http, $log, apiConfig) {
 
     this.getCurrentSeason = function() {
         $log.log('SeasonService: get current season');
         var promise = $http.get(apiConfig.baseURL + "seasons/current")
             .success(function(data) {
                 $log.log("UserService: get current season success");
-                seasonModel.setSeason(data);
                 return data;
             })
             .error(function(data) {
@@ -18,5 +17,5 @@ var SeasonService = function($http, $log, apiConfig, seasonModel) {
 
 };
 
-SeasonService.$inject = ['$http', '$log', 'apiConfig', 'seasonModel'];
+SeasonService.$inject = ['$http', '$log', 'apiConfig'];
 module.exports = SeasonService;

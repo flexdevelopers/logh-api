@@ -11,7 +11,6 @@ var ApplicationService =
 
         var startupProcess = function() {
             $log.log("executing startup process...");
-            $commangular.dispatch("GetCurrentSeasonEvent");
             if ($window.sessionStorage.token) {
                 $commangular.dispatch("GetCurrentUserEvent");
                 return;

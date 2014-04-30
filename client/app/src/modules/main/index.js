@@ -1,7 +1,7 @@
 
 module.exports = angular.module('loghApp.main', [])
     .controller('MainController', require('./MainController'))
-    .config(function($stateProvider,$urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.main', {
                 url: 'main',
@@ -19,20 +19,15 @@ module.exports = angular.module('loghApp.main', [])
                         controller: 'MainController'
                     },
                     footer: {                        
-						templateUrl: 'common/templates/footer.tpl.html'
+                        templateUrl: 'common/templates/footer.tpl.html'
+                    }
+                },
+                resolve: {
+                    season: function(seasonService) {
+                        return seasonService.getCurrentSeason();
                     }
                 }
 
-            })
-//            .state('app.main.someChildState', {
-//                url: '',
-//                views: {
-//                    content: {
-//                        templateUrl: 'modules/somefeature.somefeature.tpl.html',
-//                        controller: 'SomeFeatureController'
-//                    }
-//                }
-//            })
-        ;
+            });
         $urlRouterProvider.otherwise('/');
     });
