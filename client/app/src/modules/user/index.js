@@ -1,7 +1,7 @@
 
 module.exports = angular.module('loghApp.user', [])
     .controller('UserController', require('./UserController'))
-    .config(function($stateProvider, $urlRouterProvider, $injector) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('user', {
                 abstract: true,
@@ -45,15 +45,6 @@ module.exports = angular.module('loghApp.user', [])
                     },
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
-                    }
-                },
-                resolve: {
-                    loadUser: function($injector) {
-                        var userModel = $injector.get('userModel');
-                        if (!userModel.user.loaded) {
-                            var $commangular = $injector.get('$commangular');
-                            $commangular.dispatch("GetCurrentUserEvent");
-                        }
                     }
                 }
             });
