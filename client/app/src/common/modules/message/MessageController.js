@@ -3,7 +3,7 @@ var MessageController = function($scope, $log, messageModel) {
     $scope.messageData = messageModel;
 
     $scope.dismissMessage = function(message) {
-        message.reset();
+        message.resetMessage();
     }
 
     /**

@@ -15,7 +15,7 @@ var MessageModel = function($log) {
         $log.log("MessageModel: content: " + message.content);
     };
 
-    this.reset = function() {
+    this.resetMessage = function() {
         message = {};
         message.loaded = false;
         message.type = '';
