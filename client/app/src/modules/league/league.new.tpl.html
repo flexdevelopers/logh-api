@@ -1,1 +1,80 @@
-<div>create a league</div>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Create League</h3>
+    </div>
+
+    <div class="panel-body">
+        <form name="newLeagueForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.leagueName), 'has-feedback': hasError(newLeagueForm.leagueName)}">
+                        <label class="control-label" for="leagueName">League Name
+                            <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="newLeagueData.name" ng-maxlength="30" focus required>
+                        <span ng-show="hasError(newLeagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="maxTeams">Maximum Teams per User</label>
+                        <input id="maxTeams" name="maxTeams" type="number" class="form-control" ng-model="newLeagueData.max_teams_per_user" focus required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="startWeek">Start Week</label>
+                        <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.name for week in weeks"></select>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(true)" ng-checked="true" value="true"> Public League
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(false)" value="false"> Private League
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div collapse="isPasswordHidden">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.password), 'has-feedback': hasError(newLeagueForm.password)}">
+                            <label class="control-label" for="password">Password
+                                <small ng-show="hasPropertyError(newLeagueForm.password, 'required')">[ Required ]</small>
+                                <small ng-show="hasPropertyError(newLeagueForm.password, 'minlength')">[ Too Short ]</small>
+                            </label>
+                            <input id="password" name="password" type="password" class="form-control" ng-model="newLeagueData.password" ng-minlength="6" focus required>
+                            <span ng-show="hasError(newLeagueForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.confirmPassword), 'has-feedback': hasError(newLeagueForm.confirmPassword)}">
+                            <label class="control-label" for="confirmPassword">Confirm Password
+                                <small ng-show="hasPropertyError(newLeagueForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
+                            </label>
+                            <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newLeagueData.password_confirmation" match="newLeagueData.password">
+                            <span ng-show="hasError(newLeagueForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block" ng-click="createLeague(newLeagueData)">Create League</button>
+
+        </form>
+    </div>
+</div>
