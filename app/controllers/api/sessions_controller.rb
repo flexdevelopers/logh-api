@@ -4,7 +4,7 @@ class API::SessionsController < API::BaseController
   # POST /api/sessions
   def create
     @user = User.find_by(email: _session_params[:email])
-    return not_authorized() unless _password_valid?
+    return not_authorized('Invalid Credentials') unless _password_valid?
     access_token = current_access_token
     access_token.user = @user
     payload({ user: access_token.user, token: access_token.token })
