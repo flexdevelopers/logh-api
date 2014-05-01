@@ -1,5 +1,5 @@
 
-var LeagueController = function($scope, $log, $stateParams) {
+var LeagueController = function($scope, $log, $stateParams, weeks) {
 
     $scope.isPasswordHidden = true;
 
@@ -13,12 +13,7 @@ var LeagueController = function($scope, $log, $stateParams) {
         password_confirmation: ''
     };
 
-    $scope.weeks = [
-        {name:'week 1', id:'23'},
-        {name:'week 2', id:'45'},
-        {name:'week 3', id:'56'},
-        {name:'week 4', id:'78'}
-    ];
+    $scope.weeks = weeks.data;
 
     $scope.hidePasswordFields = function(value) {
         $scope.isPasswordHidden = value;
@@ -49,5 +44,5 @@ var LeagueController = function($scope, $log, $stateParams) {
 
 };
 
-LeagueController.$inject = ['$scope', '$log', '$stateParams'];
+LeagueController.$inject = ['$scope', '$log', '$stateParams', 'weeks'];
 module.exports = LeagueController;

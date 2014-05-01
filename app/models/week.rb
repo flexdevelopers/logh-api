@@ -12,6 +12,8 @@ class Week < ActiveRecord::Base
   validates :week_type, presence: true
   validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
 
+  scope :available, -> { where('starts_at > ?', Time.zone.now.to_date) }
+
   def complete=(value)
     super
     mark_picks_correct_or_not if self.complete == true

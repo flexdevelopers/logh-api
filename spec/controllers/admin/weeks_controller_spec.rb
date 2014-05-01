@@ -7,32 +7,6 @@ describe API::Admin::WeeksController do
     sign_in(current_user_admin)
   end
 
-  # GET /api/admin/seasons/:season_id/weeks
-  describe '#index' do
-    context 'when an admin requests the weeks for a season' do
-      it 'returns the weeks for the season' do
-        season = FactoryGirl.create(:season)
-        FactoryGirl.create(:week, number: 1, season: season)
-        FactoryGirl.create(:week, number: 2, season: season)
-        get :index, season_id: season.id
-        response.should be_success
-        expect(json.length).to eq(2)
-      end
-    end
-  end
-
-  # GET /api/admin/seasons/:season_id/weeks/:id
-  describe '#show' do
-    context 'when an admin request a week for a season' do
-      it 'returns the week' do
-        week = FactoryGirl.create(:week, number: 7)
-        get :show, season_id: week.season.id, id: week.id
-        response.should be_success
-        expect(json[:number]).to eq(7)
-      end
-    end
-  end
-
   # POST /api/admin/seasons/:season_id/weeks
   describe '#create' do
     context 'when an admin attempts to create a week where all required fields are provided' do

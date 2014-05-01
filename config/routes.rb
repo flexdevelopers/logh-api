@@ -18,6 +18,9 @@ LoghApi::Application.routes.draw do
     resources :seasons, only: [] do
       get 'current', on: :collection, to: 'seasons#current'
       resources :leagues, only: [:index, :show, :create, :update, :destroy]
+      resources :weeks, only: [:index, :show] do
+        get 'available', on: :collection, to: 'weeks#available'
+      end
     end
 
     resources :leagues, only: [] do
@@ -38,7 +41,7 @@ LoghApi::Application.routes.draw do
       resources :users, only: [:index, :show, :update, :destroy]
 
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
-        resources :weeks, only: [:index, :show, :create, :update, :destroy]
+        resources :weeks, only: [:create, :update, :destroy]
       end
 
       resources :weeks, only:[] do

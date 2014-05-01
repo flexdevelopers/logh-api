@@ -30,6 +30,12 @@ And then you can do this, for example:
 ---
 * GET         /api/seasons/current                             [ show current season ]
 
+##### Weeks
+---
+* GET         /api/seasons/:season_id/weeks                    [ season weeks ]
+* GET         /api/seasons/:season_id/weeks/available          [ available season weeks ]
+* GET         /api/seasons/:season_id/weeks/:id                [ show week ]
+
 ##### Leagues
 ---
 * GET         /api/seasons/:season_id/leagues                   [ season leagues ]
@@ -84,9 +90,7 @@ And then you can do this, for example:
 
 ##### Weeks
 ---
-* GET         /api/admin/seasons/:season_id/weeks               [ seasons weeks ]
 * POST        /api/admin/seasons/:season_id/weeks               [ create week ] { number*, starts_at*, week_type_id*, complete }
-* GET         /api/admin/seasons/:season_id/weeks/:id           [ show week ]
 * PATCH/PUT   /api/admin/seasons/:season_id/weeks/:id           [ update week ] { number*, starts_at*, week_type_id*, complete }
 * DELETE      /api/admin/seasons/:season_id/weeks/:id           [ destroy week ]
 

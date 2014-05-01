@@ -46,6 +46,14 @@ module.exports = angular.module('loghApp.league', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
+                },
+                resolve: {
+                    season: function(seasonService) {
+                        return seasonService.getCurrentSeason();
+                    },
+                    weeks: function(weekService, season) {
+                        return weekService.getAvailableWeeks(season.data.id);
+                    }
                 }
             })
             .state('league.detail', {
