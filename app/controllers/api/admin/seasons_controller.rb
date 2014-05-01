@@ -1,4 +1,4 @@
-class API::Admin::SeasonsController < API::BaseController
+class API::Admin::SeasonsController < API::SeasonsController
   skip_before_filter :authenticate, only: :index
   before_action :_set_season, only: [:show, :update, :destroy]
   before_action :_verify_admin, except: :index
@@ -41,16 +41,16 @@ class API::Admin::SeasonsController < API::BaseController
 
   private
 
+    def _season_params
+      params.require(:season).permit(:name)
+    end
+
     def _set_season
       @season = Season.find(params[:id])
     end
 
     def _verify_admin
       forbidden() unless current_user.admin?
-    end
-
-    def _season_params
-      params.require(:season).permit(:name)
     end
 
 end
