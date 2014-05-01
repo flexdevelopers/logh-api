@@ -3,13 +3,9 @@ module.exports = angular.module('loghApp.user', [])
     .controller('UserController', require('./UserController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('user', {
+            .state('app.user', {
                 abstract: true,
-                url: '/user',
-                templateUrl: 'modules/user/user.tpl.html'
-            })
-            .state('user.new', {
-                url: '/new',
+                url: 'user',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
@@ -20,31 +16,28 @@ module.exports = angular.module('loghApp.user', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/user/user.new.tpl.html',
-                        controller: 'UserController'
+                        templateUrl: 'modules/user/user.tpl.html'
                     },
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
                 }
             })
-            .state('user.detail', {
+            .state('app.user.new', {
+                url: '/new',
+                views: {
+                    userContent: {
+                        templateUrl: 'modules/user/user.new.tpl.html',
+                        controller: 'UserController'
+                    }
+                }
+            })
+            .state('app.user.detail', {
                 url: '/detail',
                 views: {
-                    header: {
-                        templateUrl: 'common/modules/header/header.tpl.html',
-                        controller: 'HeaderController'
-                    },
-                    message: {
-                        templateUrl: 'common/modules/message/message.tpl.html',
-                        controller: 'MessageController'
-                    },
-                    content: {
+                    userContent: {
                         templateUrl: 'modules/user/user.detail.tpl.html',
                         controller: 'UserController'
-                    },
-                    footer: {
-                        templateUrl: 'common/templates/footer.tpl.html'
                     }
                 }
             });

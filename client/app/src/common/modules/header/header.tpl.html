@@ -14,13 +14,13 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userData.user.email}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="user.detail">User Profile</a></li>
+            <li><a ui-sref="app.user.detail">User Profile</a></li>
             <li><a ui-sref="app.main" ng-click="logout()">Sign Out</a></li>
           </ul>
         </li>
       </ul>
       <ul ng-show="!userData.user.loaded" class="nav navbar-nav navbar-right">
-        <li><a ui-sref="user.new">Register</a></li>
+        <li><a ui-sref="app.user.new">Register</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
           <div class="dropdown-menu panel panel-default">
