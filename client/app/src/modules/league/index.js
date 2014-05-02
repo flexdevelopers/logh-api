@@ -21,6 +21,11 @@ module.exports = angular.module('loghApp.league', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
+                },
+                resolve: {
+                    weeks: ['weekService', '$stateParams', function(weekService, $stateParams) {
+                        return weekService.getAvailableWeeks($stateParams.seasonId);
+                    }]
                 }
             })
             .state('app.league.list', {
@@ -29,11 +34,6 @@ module.exports = angular.module('loghApp.league', [])
                     leagueContent: {
                         templateUrl: 'modules/league/league.list.tpl.html',
                         controller: 'LeagueController'
-                    }
-                },
-                resolve: {
-                    weeks: function() {
-                        return [];
                     }
                 }
             })
@@ -44,11 +44,6 @@ module.exports = angular.module('loghApp.league', [])
                         templateUrl: 'modules/league/league.new.tpl.html',
                         controller: 'LeagueController'
                     }
-                },
-                resolve: {
-                    weeks: ['weekService', '$stateParams', function(weekService, $stateParams) {
-                        return weekService.getAvailableWeeks($stateParams.seasonId);
-                    }]
                 }
             })
             .state('app.league.detail', {
@@ -57,11 +52,6 @@ module.exports = angular.module('loghApp.league', [])
                     leagueContent: {
                         templateUrl: 'modules/league/league.detail.tpl.html',
                         controller: 'LeagueController'
-                    }
-                },
-                resolve: {
-                    weeks: function() {
-                        return [];
                     }
                 }
             })
