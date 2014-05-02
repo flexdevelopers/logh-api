@@ -18,9 +18,14 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="maxTeams">Maximum Teams per User</label>
-                        <input id="maxTeams" name="maxTeams" type="number" class="form-control" ng-model="newLeagueData.max_teams_per_user" focus required>
+                    <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.maxTeams), 'has-feedback': hasError(newLeagueForm.maxTeams)}">
+                        <label class="control-label" for="maxTeams">Max Teams per User
+                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'required')">[ Number Required ]</small>
+                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ One or More ]</small>
+                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 10 or Less ]</small>
+                        </label>
+                        <input id="maxTeams" name="maxTeams" type="number" min="1" max="10" class="form-control" ng-model="newLeagueData.max_teams_per_user" focus required>
+                        <span ng-show="hasError(newLeagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
             </div>
@@ -40,10 +45,10 @@
                 <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                         <label class="radio-inline">
-                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(true)" ng-checked="true" value="true"> Public League
+                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(true)" ng-checked="true" ng-value="true"> Public League
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(false)" value="false"> Private League
+                            <input type="radio" ng-model="newLeagueData.public" ng-click="hidePasswordFields(false)" ng-value="false"> Private League
                         </label>
                     </div>
                 </div>
@@ -55,9 +60,9 @@
                         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.password), 'has-feedback': hasError(newLeagueForm.password)}">
                             <label class="control-label" for="password">Password
                                 <small ng-show="hasPropertyError(newLeagueForm.password, 'required')">[ Required ]</small>
-                                <small ng-show="hasPropertyError(newLeagueForm.password, 'minlength')">[ Too Short ]</small>
+                                <small ng-show="hasPropertyError(newLeagueForm.password, 'pattern')">[ Too Short ]</small>
                             </label>
-                            <input id="password" name="password" type="password" class="form-control" ng-model="newLeagueData.password" ng-minlength="6" focus required>
+                            <input id="password" name="password" type="password" class="form-control" ng-model="newLeagueData.password" ng-required="!newLeagueData.public" rpattern="/.{6}/" focus>
                             <span ng-show="hasError(newLeagueForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                         </div>
                     </div>
@@ -73,7 +78,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-block" ng-click="createLeague(newLeagueData)">Create League</button>
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="newLeagueForm.$invalid" ng-click="createLeague(newLeagueData)">Create League</button>
 
         </form>
     </div>
