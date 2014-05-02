@@ -42,6 +42,7 @@ var loghApp = angular.module('loghApp', [
     //directives
     require('./common/directives/focus').name,
     require('./common/directives/match').name,
+    require('./common/directives/requiredPattern').name,
 
     //modals
 
