@@ -52,7 +52,12 @@ var loghApp = angular.module('loghApp', [
         .state('app', {
             abstract: true,
             url: '/',
-            templateUrl: 'common/templates/master.tpl.html'
+            templateUrl: 'common/templates/master.tpl.html',
+            resolve: {
+                user: function(userService) {
+                    return userService.getCurrentUser();
+                }
+            }
         })
         .state('home', {
             abstract: true,
