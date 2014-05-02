@@ -1,5 +1,5 @@
 
-var MainController = function($scope, $log, season) {
+var HomeController = function($scope, $log, season) {
 
     $scope.season = season.data;
 
@@ -12,5 +12,5 @@ var MainController = function($scope, $log, season) {
     init();
 };
 
-MainController.$inject = ['$scope', '$log', 'season'];
-module.exports = MainController;
+HomeController.$inject = ['$scope', '$log', 'season'];
+module.exports = HomeController;

@@ -1,10 +1,10 @@
 
-module.exports = angular.module('loghApp.main', [])
-    .controller('MainController', require('./MainController'))
+module.exports = angular.module('loghApp.public.home', [])
+    .controller('HomeController', require('./HomeController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('home.main', {
-                url: 'main',
+            .state('public.home', {
+                url: 'home',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
@@ -15,10 +15,10 @@ module.exports = angular.module('loghApp.main', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/main/main.tpl.html',
-                        controller: 'MainController'
+                        templateUrl: 'modules/public/home/home.tpl.html',
+                        controller: 'HomeController'
                     },
-                    footer: {                        
+                    footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
                 },

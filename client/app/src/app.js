@@ -4,7 +4,7 @@ require('app-templates');
 
 var App = function($urlRouterProvider) {
     // unmatched urls should be directed back to the start
-    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/home');
 };
 
 App.$inject = ['$urlRouterProvider'];
@@ -20,8 +20,10 @@ var loghApp = angular.module('loghApp', [
     'app.templates',
     'ui.router.stateHelper',
 
-    // main modules
-    require('./modules/main').name,
+    // public modules
+    require('./modules/public/home').name,
+
+    // app modules
     require('./modules/user').name,
     require('./modules/league').name,
 
@@ -49,6 +51,11 @@ var loghApp = angular.module('loghApp', [
 
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
+        .state('public', {
+            abstract: true,
+            url: '/',
+            templateUrl: 'common/templates/master.tpl.html'
+        })
         .state('app', {
             abstract: true,
             url: '/',
@@ -58,11 +65,6 @@ var loghApp = angular.module('loghApp', [
                     return userService.getCurrentUser();
                 }
             }
-        })
-        .state('home', {
-            abstract: true,
-            url: '/',
-            templateUrl: 'common/templates/master.tpl.html'
         })
     })
 
