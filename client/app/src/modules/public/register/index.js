@@ -1,11 +1,10 @@
 
-module.exports = angular.module('loghApp.user', [])
-    .controller('UserController', require('./UserController'))
+module.exports = angular.module('loghApp.public.register', [])
+    .controller('RegisterController', require('./RegisterController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.user', {
-                abstract: true,
-                url: 'user',
+            .state('public.register', {
+                url: 'register',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
@@ -16,19 +15,11 @@ module.exports = angular.module('loghApp.user', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/user/user.tpl.html'
+                        templateUrl: 'modules/public/register/register.tpl.html',
+                        controller: 'RegisterController'
                     },
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
-                    }
-                }
-            })
-            .state('app.user.detail', {
-                url: '',
-                views: {
-                    userContent: {
-                        templateUrl: 'modules/user/user.detail.tpl.html',
-                        controller: 'UserController'
                     }
                 }
             });

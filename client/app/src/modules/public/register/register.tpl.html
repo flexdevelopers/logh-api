@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Register</h3>
+    </div>
+
+    <div class="panel-body">
+        <form name="newUserForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newUserForm.firstName), 'has-feedback': hasError(newUserForm.firstName)}">
+                        <label class="control-label" for="firstName">First Name
+                            <small ng-show="hasPropertyError(newUserForm.firstName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(newUserForm.firstName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="newUserData.first_name" ng-maxlength="20" focus required>
+                        <span ng-show="hasError(newUserForm.firstName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newUserForm.lastName), 'has-feedback': hasError(newUserForm.lastName)}">
+                        <label class="control-label" for="lastName">Last Name
+                            <small ng-show="hasPropertyError(newUserForm.lastName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(newUserForm.lastName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="lastName" name="lastName" type="text" class="form-control" ng-model="newUserData.last_name" ng-maxlength="20" focus required>
+                        <span ng-show="hasError(newUserForm.lastName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': hasError(newUserForm.email), 'has-feedback': hasError(newUserForm.email)}">
+                <label class="control-label" for="email">Email
+                    <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
+                    <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
+                </label>
+                <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" focus required>
+                <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newUserForm.password), 'has-feedback': hasError(newUserForm.password)}">
+                        <label class="control-label" for="password">Password
+                            <small ng-show="hasPropertyError(newUserForm.password, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(newUserForm.password, 'minlength')">[ Too Short ]</small>
+                        </label>
+                        <input id="password" name="password" type="password" class="form-control" ng-model="newUserData.password" ng-minlength="6" focus required>
+                        <span ng-show="hasError(newUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newUserForm.confirmPassword), 'has-feedback': hasError(newUserForm.confirmPassword)}">
+                        <label class="control-label" for="confirmPassword">Confirm Password
+                            <small ng-show="hasPropertyError(newUserForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
+                        </label>
+                        <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newUserData.password_confirmation" match="newUserData.password">
+                        <span ng-show="hasError(newUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="newUserForm.$invalid" ng-click="register(newUserData)">Register</button>
+
+        </form>
+    </div>
+</div>

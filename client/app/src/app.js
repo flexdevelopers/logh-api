@@ -22,6 +22,7 @@ var loghApp = angular.module('loghApp', [
 
     // public modules
     require('./modules/public/home').name,
+    require('./modules/public/register').name,
 
     // app modules
     require('./modules/user').name,

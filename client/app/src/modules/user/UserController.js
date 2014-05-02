@@ -3,20 +3,8 @@ var UserController = function($scope, userModel) {
 
     $scope.userData = angular.copy(userModel);
 
-    $scope.newUserData = {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-    };
-
     $scope.update = function(user) {
         $scope.dispatch('UpdateUserEvent', { userParams: user });
-    };
-
-    $scope.register = function(newUser) {
-        $scope.dispatch('CreateUserEvent', { userParams: newUser } );
     };
 
     $scope.hasError = function(input) {
