@@ -47,17 +47,17 @@ var loghApp = angular.module('loghApp', [
 
     ], App)
 
-    .config(function($stateProvider,$urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
         .state('app', {
             abstract: true,
             url: '/',
-            templateUrl: 'common/templates/master.tpl.html',
-            resolve: {
-                user: function(userService) {
-                    return userService.getCurrentUser();
-                }
-            }
+            templateUrl: 'common/templates/master.tpl.html'
+        })
+        .state('home', {
+            abstract: true,
+            url: '/',
+            templateUrl: 'common/templates/master.tpl.html'
         })
     })
 

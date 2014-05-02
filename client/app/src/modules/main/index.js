@@ -3,7 +3,7 @@ module.exports = angular.module('loghApp.main', [])
     .controller('MainController', require('./MainController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.main', {
+            .state('home.main', {
                 url: 'main',
                 views: {
                     header: {
