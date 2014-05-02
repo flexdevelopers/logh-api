@@ -11,9 +11,6 @@ var ApplicationService =
 
         var startupProcess = function() {
             $log.log("executing startup process...");
-            if ($window.sessionStorage.token || $location.path() != '/main') {
-                $commangular.dispatch("GetCurrentUserEvent");
-            }
         };
 
         /**
