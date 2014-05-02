@@ -23,20 +23,20 @@ module.exports = angular.module('loghApp.user', [])
                     }
                 }
             })
+            .state('app.user.detail', {
+                url: '',
+                views: {
+                    userContent: {
+                        templateUrl: 'modules/user/user.detail.tpl.html',
+                        controller: 'UserController'
+                    }
+                }
+            })
             .state('app.user.new', {
                 url: '/new',
                 views: {
                     userContent: {
                         templateUrl: 'modules/user/user.new.tpl.html',
-                        controller: 'UserController'
-                    }
-                }
-            })
-            .state('app.user.detail', {
-                url: '/detail',
-                views: {
-                    userContent: {
-                        templateUrl: 'modules/user/user.detail.tpl.html',
                         controller: 'UserController'
                     }
                 }
