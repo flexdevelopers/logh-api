@@ -1,7 +1,7 @@
 
 var MainController = function($scope, $log, season) {
 
-    $scope.seasonId = season.data.id;
+    $scope.season = season.data;
 
     /**
      * Invoked on startup, like a constructor.

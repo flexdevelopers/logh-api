@@ -5,7 +5,7 @@ module.exports = angular.module('loghApp.league', [])
         $stateProvider
             .state('app.league', {
                 abstract: true,
-                url: 'seasons/:seasonId/leagues',
+                url: 'seasons/{seasonId}/leagues',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
@@ -46,16 +46,13 @@ module.exports = angular.module('loghApp.league', [])
                     }
                 },
                 resolve: {
-                    season: function(seasonService) {
-                        return seasonService.getCurrentSeason();
-                    },
-                    weeks: function(weekService, season) {
-                        return weekService.getAvailableWeeks(season.data.id);
-                    }
+                    weeks: ['weekService', '$stateParams', function(weekService, $stateParams) {
+                        return weekService.getAvailableWeeks($stateParams.seasonId);
+                    }]
                 }
             })
             .state('app.league.detail', {
-                url: '/:leagueId',
+                url: '/{leagueId}',
                 views: {
                     leagueContent: {
                         templateUrl: 'modules/league/league.detail.tpl.html',
