@@ -1,16 +1,14 @@
 
 var LeagueController = function($scope, $log, weeks) {
 
-    $scope.isPasswordHidden = true;
-
     $scope.weeks = weeks.data;
 
-    $scope.hidePasswordFields = function(value) {
-        $scope.isPasswordHidden = value;
-        if (value) {
-            $scope.newLeagueData.password = '';
-            $scope.newLeagueData.password_confirmation = '';
-        }
+    $scope.hasError = function(input) {
+        return !input.$focused && input.$dirty && input.$invalid;
+    };
+
+    $scope.hasPropertyError = function(input, property) {
+        return !input.$focused && input.$dirty && input.$error[property];
     };
 
     /**
