@@ -12,7 +12,7 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues/1
   def show
-    render json: @league
+    payload({ league: @league })
   end
 
   # POST /api/seasons/:season_id/leagues

@@ -1,5 +1,20 @@
 var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
 
+    this.getLeague = function(seasonId, leagueId) {
+        $log.log('LeagueService: getLeague');
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
+            .success(function(data) {
+                $log.log("LeagueService: getLeague success");
+                return data;
+            })
+            .error(function(data) {
+                $log.log("LeagueService: getLeague failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.createLeague = function(leagueParams) {
         $log.log('LeagueService: createLeague');
         var promise = $http.post(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues",
