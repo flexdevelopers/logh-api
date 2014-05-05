@@ -1,11 +1,32 @@
 
 module.exports = angular.module('loghApp.league', [])
+    .controller('LeaguesController', require('./LeaguesController'))
     .controller('LeagueController', require('./LeagueController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
+            .state('app.leagues', {
+                url: 'season/{seasonId}/leagues',
+                views: {
+                    header: {
+                        templateUrl: 'common/modules/header/header.tpl.html',
+                        controller: 'HeaderController'
+                    },
+                    message: {
+                        templateUrl: 'common/modules/message/message.tpl.html',
+                        controller: 'MessageController'
+                    },
+                    content: {
+                        templateUrl: 'modules/league/leagues.tpl.html',
+                        controller: 'LeaguesController'
+                    },
+                    footer: {
+                        templateUrl: 'common/templates/footer.tpl.html'
+                    }
+                }
+            })
             .state('app.league', {
                 abstract: true,
-                url: 'seasons/{seasonId}/leagues',
+                url: 'season/{seasonId}/league',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
@@ -26,15 +47,6 @@ module.exports = angular.module('loghApp.league', [])
                     weeks: ['weekService', '$stateParams', function(weekService, $stateParams) {
                         return weekService.getAvailableWeeks($stateParams.seasonId);
                     }]
-                }
-            })
-            .state('app.league.list', {
-                url: '',
-                views: {
-                    leagueContent: {
-                        templateUrl: 'modules/league/league.list.tpl.html',
-                        controller: 'LeagueController'
-                    }
                 }
             })
             .state('app.league.new', {
