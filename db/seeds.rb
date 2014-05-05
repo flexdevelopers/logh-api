@@ -52,7 +52,7 @@ end
 
 # create a user and a league for that user and a few teams for that user in that league
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
-foo_league = League.create!(name: "Foo League", max_teams_per_user: 10, commishes: [user1], season: season, password: 'foobar', password_confirmation: 'foobar', start_week_id: Week.first.id)
+foo_league = League.create!(name: "Foo League", max_teams_per_user: 10, commishes: [user1], season: season, password: 'foobar', start_week_id: Week.first.id)
 3.times do |i|
   team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
   # and 3 picks for that team

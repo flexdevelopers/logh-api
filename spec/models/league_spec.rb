@@ -8,9 +8,6 @@ describe League do
   it { should respond_to(:password) }
   its(:password) { should be_blank }
 
-  it { should respond_to(:password_confirmation) }
-  its(:password_confirmation) { should be_blank }
-
   it { should respond_to(:password_digest) }
   its(:password_digest) { should be_blank }
 
@@ -75,18 +72,23 @@ describe League do
     it { should_not be_valid }
   end
 
-  context 'when league has no password' do
-    subject(:league) { FactoryGirl.build(:league, password: nil, password_confirmation: nil) }
+  context 'when league is public and has no password' do
+    subject(:league) { FactoryGirl.build(:league, public: true, password: nil) }
+    it { should be_valid }
+  end
+
+  context 'when league is public and has a password less than 6 characters' do
+    subject(:league) { FactoryGirl.build(:league, public: true, password: 'a' * 5) }
+    it { should be_valid }
+  end
+
+  context 'when league is private and has no password' do
+    subject(:league) { FactoryGirl.build(:league, public: false, password: nil) }
     it { should_not be_valid }
   end
 
-  context 'when league has a password less than 6 characters' do
-    subject(:league) { FactoryGirl.build(:league, password: 'a' * 5, password_confirmation: 'a' * 5) }
-    it { should_not be_valid }
-  end
-
-  context 'when league password does not match password confirmation' do
-    subject(:league) { FactoryGirl.build(:league, password: 'foobar', password_confirmation: 'barfoo') }
+  context 'when league is private and has a password less than 6 characters' do
+    subject(:league) { FactoryGirl.build(:league, public: false, password: 'a' * 5) }
     it { should_not be_valid }
   end
 

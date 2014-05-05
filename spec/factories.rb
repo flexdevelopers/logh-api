@@ -17,7 +17,6 @@ FactoryGirl.define do
   factory :league do |league|
     name                    'Bad News Bears'
     password                'foobar'
-    password_confirmation   'foobar'
     league.association      :season
     start_week_id           { FactoryGirl.create(:week).id }
   end

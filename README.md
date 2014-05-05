@@ -39,9 +39,9 @@ And then you can do this, for example:
 ##### Leagues
 ---
 * GET         /api/seasons/:season_id/leagues                   [ season leagues ]
-* POST        /api/seasons/:season_id/leagues                   [ create league ] { name*, start_week_id*, password*, password_confirmation*, public, max_teams_per_user }
+* POST        /api/seasons/:season_id/leagues                   [ create league ] { name*, start_week_id*, password*, public, max_teams_per_user }
 * GET         /api/seasons/:season_id/leagues/:id               [ show league ]
-* PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, password_confirmation, public, max_teams_per_user }
+* PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, public, max_teams_per_user }
 * DELETE      /api/seasons/:season_id/leagues/:id               [ destroy league ]
 
 ##### Invitations
