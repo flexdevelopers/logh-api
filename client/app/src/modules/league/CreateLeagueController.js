@@ -15,6 +15,16 @@ var CreateLeagueController = function($scope, $log, $stateParams) {
         $scope.dispatch('CreateLeagueEvent', { leagueParams: league });
     };
 
+    $scope.isPasswordHidden = true;
+
+    $scope.hidePasswordFields = function(value) {
+        $scope.isPasswordHidden = value;
+        if (value) {
+            $scope.newLeagueData.password = '';
+            $scope.newLeagueData.password_confirmation = '';
+        }
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
