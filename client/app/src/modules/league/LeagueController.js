@@ -23,7 +23,8 @@ var LeagueController = function($scope, $log, $stateParams, weeks) {
         }
     };
 
-    $scope.createLeague = function(newLeague) {
+    $scope.createLeague = function(league) {
+        $scope.dispatch('CreateLeagueEvent', { leagueParams: league });
     };
 
     $scope.hasError = function(input) {

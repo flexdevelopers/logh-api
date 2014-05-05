@@ -20,7 +20,7 @@ class API::LeaguesController < API::BaseController
     @league = @season.leagues.new(_league_params)
     @league.commishes << current_user
     if @league.save
-      render json: @league, status: :created, location: api_season_league_path(@season, @league)
+      payload({ league_id: @league.id }, "#{@league[:name]} league created")
     else
       error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
     end
@@ -43,6 +43,10 @@ class API::LeaguesController < API::BaseController
   end
 
   private
+
+    def _league_params
+      params.require(:league).permit(:name, :start_week_id, :password, :password_confirmation, :public, :max_teams_per_user)
+    end
 
     def _set_season
       @season = Season.find(params[:season_id])
@@ -72,10 +76,6 @@ class API::LeaguesController < API::BaseController
     def _has_team_in(league)
       current_user_leagues = current_user.teams.map(&:league)
       current_user_leagues.include?(league)
-    end
-
-    def _league_params
-      params.require(:league).permit(:name, :start_week_id, :password, :password_confirmation, :public, :max_teams_per_user)
     end
 
 end
