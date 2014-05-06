@@ -4,7 +4,6 @@ module.exports = angular.module('loghApp.user', [])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.user', {
-                abstract: true,
                 url: 'user',
                 views: {
                     header: {
@@ -16,19 +15,11 @@ module.exports = angular.module('loghApp.user', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/user/user.tpl.html'
+                        templateUrl: 'modules/user/user.tpl.html',
+                        controller: 'UserController'
                     },
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
-                    }
-                }
-            })
-            .state('app.user.detail', {
-                url: '',
-                views: {
-                    userContent: {
-                        templateUrl: 'modules/user/user.detail.tpl.html',
-                        controller: 'UserController'
                     }
                 }
             });
