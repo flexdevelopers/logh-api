@@ -56,7 +56,7 @@ class API::LeaguesController < API::BaseController
     end
 
     def _verify_league_management
-      forbidden() unless _is_commish_of(@league)
+      forbidden('Only the commish can update a league') unless _is_commish_of(@league)
     end
 
     def _verify_start_week
