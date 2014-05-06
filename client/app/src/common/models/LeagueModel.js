@@ -16,7 +16,7 @@ var LeagueModel = function($rootScope, $window, $log) {
         league.loaded = true;
         league = angular.extend(league, leagueData);
         $rootScope.$broadcast('leagueModel::leagueUpdated', league);
-        $log.log("LeagueModel: name: " + league.name);
+        $log.log("LeagueModel: setLeague: " + league.name);
     };
 
     this.resetLeague = function() {
@@ -36,7 +36,7 @@ var LeagueModel = function($rootScope, $window, $log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating league model");
+        console.log("creating league model...");
     };
     init();
 

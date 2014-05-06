@@ -5,15 +5,15 @@ commangular.create('CreateUserCommand',
         return {
 
             execute: function(userParams) {
-                $log.log('CreateUserCommand: Creating a new user...');
+                $log.log('CreateUserCommand: creating a new user...');
                 var userPromise = userService.createUser(userParams);
                 return userPromise;
             },
             onError: function(error) {
-                $log.log("CreateUserCommand: error in CreateUser: " + error.data);
+                $log.log("CreateUserCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.log("CreateUserCommand: create user was successful");
+                $log.log("CreateUserCommand: success");
                 $state.go('app.user.detail');
             }
 

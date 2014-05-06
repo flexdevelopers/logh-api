@@ -5,14 +5,14 @@ commangular.create('LogoutCommand',
         return {
 
             execute: function() {
-                $log.log('LogoutCommand: Logout user');
+                $log.log('LogoutCommand: logging out user...');
                 return userService.logout();
             },
             onError: function(error) {
-                $log.log("LogoutCommand: error in logout: " + error.data);
+                $log.log("LogoutCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.log("LogoutCommand: logout successful");
+                $log.log("LogoutCommand: success");
                 userModel.resetUser();
             }
 

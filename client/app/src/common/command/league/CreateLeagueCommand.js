@@ -5,15 +5,15 @@ commangular.create('CreateLeagueCommand',
         return {
 
             execute: function(leagueParams) {
-                $log.log('CreateLeagueCommand: Creating a new league...');
+                $log.log('CreateLeagueCommand: creating a new league...');
                 var promise = leagueService.createLeague(leagueParams);
                 return promise;
             },
             onError: function(error) {
-                $log.log("CreateLeagueCommand: error in CreateLeague: " + error.data);
+                $log.log("CreateLeagueCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.log("CreateLeagueCommand: create league was successful");
+                $log.log("CreateLeagueCommand: success");
             }
 
         }

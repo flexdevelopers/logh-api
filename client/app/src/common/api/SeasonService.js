@@ -1,14 +1,13 @@
 var SeasonService = function($http, $log, apiConfig) {
 
     this.getCurrentSeason = function() {
-        $log.log('SeasonService: get current season');
         var promise = $http.get(apiConfig.baseURL + "seasons/current")
             .success(function(data) {
-                $log.log("SeasonService: get current season success");
+                $log.log("SeasonService: getCurrentSeason success");
                 return data;
             })
             .error(function(data) {
-                $log.log("SeasonService: get current season failed");
+                $log.log("SeasonService: getCurrentSeason failed");
                 return data;
             });
 

@@ -5,12 +5,11 @@ var ApplicationService =
          *  Application Startup Process
          */
         this.startup = function() {
-            $log.log("starting the app...");
             startupProcess();
         };
 
         var startupProcess = function() {
-            $log.log("executing startup process...");
+            // anything you want to happen on app startup
         };
 
         /**
@@ -18,7 +17,6 @@ var ApplicationService =
          */
         var init = function () {
             $log.log("ApplicationService init application service");
-
         };
         init();
 

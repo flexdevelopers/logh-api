@@ -1,9 +1,4 @@
 
-/**
- * User Model to hold the user details
-
- * @param $log
- */
 var UserModel = function($rootScope, $window, $log) {
 
     var user = {};
@@ -20,7 +15,7 @@ var UserModel = function($rootScope, $window, $log) {
         user.loaded = true;
         user = angular.extend(user, userData);
         $rootScope.$broadcast('userModel::userUpdated', user);
-        $log.log("UserModel: email: " + user.email);
+        $log.log("UserModel: setUser: " + user.email);
     };
 
     this.resetUser = function() {
@@ -41,7 +36,7 @@ var UserModel = function($rootScope, $window, $log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating user model");
+        console.log("creating user model...");
     };
     init();
 

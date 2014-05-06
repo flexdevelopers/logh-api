@@ -5,15 +5,15 @@ commangular.create('GetCurrentUserCommand',
     return {
 
         execute: function() {
-            $log.log('GetCurrentUserCommand: Getting current user details...');
+            $log.log('GetCurrentUserCommand: getting current user details...');
             var userPromise = userService.getCurrentUser();
             return userPromise;
         },
         onError: function(error) {
-            $log.log("GetCurrentUserCommand: error in GetCurrentUser: " + error.data);
+            $log.log("GetCurrentUserCommand: failure: " + error.data);
         },
         onResult: function(result) {
-            $log.log("GetCurrentUserCommand: current user data result is " + result);
+            $log.log("GetCurrentUserCommand: success");
         }
 
     }

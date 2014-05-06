@@ -11,7 +11,6 @@ var MessageModel = function($log) {
     this.setMessage = function(messageData) {
         message.loaded = true;
         message = angular.extend(message, messageData);
-        $log.log("MessageModel: type: " + message.type);
         $log.log("MessageModel: content: " + message.content);
     };
 
@@ -28,7 +27,7 @@ var MessageModel = function($log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating message model");
+        console.log("creating message model...");
     };
     init();
 

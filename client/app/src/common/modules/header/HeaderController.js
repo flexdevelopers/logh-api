@@ -8,7 +8,7 @@ var HeaderController = function($scope, $log, userModel) {
     };
 
     $scope.login = function(loginParams) {
-        $log.log(loginParams);
+        $log.log("login params: " + loginParams);
         $scope.dispatch("LoginEvent", loginParams);
     };
 
