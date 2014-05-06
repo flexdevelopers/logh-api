@@ -4,6 +4,7 @@ module.exports = angular.module('loghApp.league', [])
     .controller('LeagueController', require('./LeagueController'))
     .controller('CreateLeagueController', require('./CreateLeagueController'))
     .controller('EditLeagueController', require('./EditLeagueController'))
+    .controller('JoinLeagueController', require('./JoinLeagueController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.leagues', {
@@ -82,6 +83,15 @@ module.exports = angular.module('loghApp.league', [])
                     leagueDetailContent: {
                         templateUrl: 'modules/league/league.edit.tpl.html',
                         controller: 'EditLeagueController'
+                    }
+                }
+            })
+            .state('app.league.detail.join', {
+                url: '/join',
+                views: {
+                    leagueDetailContent: {
+                        templateUrl: 'modules/league/league.join.tpl.html',
+                        controller: 'JoinLeagueController'
                     }
                 }
             })
