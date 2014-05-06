@@ -27,7 +27,7 @@ class API::LeaguesController < API::BaseController
 
   # PATCH/PUT /api/seasons/:season_id/leagues/1
   def update
-    return forbidden() if @league.started?
+    return forbidden('Cannot update a league that has started') if @league.started?
     if @league.update(_league_params)
       payload({}, "#{@league[:name]} league updated")
     else

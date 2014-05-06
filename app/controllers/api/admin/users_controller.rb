@@ -24,7 +24,7 @@ class API::Admin::UsersController < API::UsersController
   # DELETE /api/admin/users/:id
   def destroy
     if params[:id].to_i == current_user.id
-      forbidden() # deleting the current user is not allowed
+      forbidden('You cannot delete the current user') # deleting the current user is not allowed
       return
     end
     @user.destroy
@@ -38,7 +38,7 @@ class API::Admin::UsersController < API::UsersController
     end
 
     def _verify_admin
-      forbidden() unless current_user.admin?
+      forbidden('You must be an admin') unless current_user.admin?
     end
 
 end

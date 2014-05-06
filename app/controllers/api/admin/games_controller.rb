@@ -33,7 +33,7 @@ class API::Admin::GamesController < API::GamesController
     end
 
     def _verify_admin
-      forbidden() unless current_user.admin?
+      forbidden('You must be an admin') unless current_user.admin?
     end
 
 end

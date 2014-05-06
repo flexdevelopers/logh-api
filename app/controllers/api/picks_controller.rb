@@ -50,7 +50,7 @@ class API::PicksController < API::BaseController
     end
 
     def _verify_team_ownership
-      forbidden() unless _is_coach_of(@team)
+      forbidden('You must be a coach to manage picks') unless _is_coach_of(@team)
     end
 
     def _is_coach_of(team)

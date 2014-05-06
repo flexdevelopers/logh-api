@@ -40,11 +40,11 @@ class API::InvitationsController < API::BaseController
     end
 
     def _verify_league_status
-      forbidden() if @league.started?
+      forbidden('Invitations cannot be sent after the league has started') if @league.started?
     end
 
     def _is_commish_of?(league)
-      forbidden() unless current_user.managed_leagues.include?(league)
+      forbidden('Only the commish can send invitations') unless current_user.managed_leagues.include?(league)
     end
 
     def _invitation_params

@@ -17,7 +17,7 @@ class API::TeamsController < API::BaseController
 
   # POST /api/leagues/:league_id/teams
   def create
-    return forbidden() unless !@league.started? && _can_add_team_to?(@league)
+    return forbidden('The league has started or you have exceeded the number of teams allowed per user') unless !@league.started? && _can_add_team_to?(@league)
     @team = @league.teams.new(_team_params)
     @team.coaches << current_user
     if @team.save
@@ -54,15 +54,15 @@ class API::TeamsController < API::BaseController
     end
 
     def _verify_league_acceptance
-      forbidden() unless @league.public || (_has_invitation_for?(@league) && _has_valid_password_for?(@league))
+      forbidden('Private leagues require an invitation and a valid password') unless @league.public || (_has_invitation_for?(@league) && _has_valid_password_for?(@league))
     end
 
     def _verify_league_membership
-      forbidden() unless _is_commish_of?(@league) || _has_team_in?(@league)
+      forbidden('You must be the commish or a member of the league') unless _is_commish_of?(@league) || _has_team_in?(@league)
     end
 
     def _verify_team_ownership
-      forbidden() unless _is_coach_of?(@team)
+      forbidden('You must be a coach of the team') unless _is_coach_of?(@team)
     end
 
     def _is_commish_of?(league)
