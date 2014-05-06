@@ -38,6 +38,14 @@ describe API::LeaguesController do
 
   # POST /api/seasons/:season_id/leagues
   describe '#create' do
+    context 'when creating 2 leagues in the same season with the same name' do
+      let(:league) { FactoryGirl.create(:league, name: 'foobar league')}
+      let(:bad_league_params) { FactoryGirl.attributes_for(:league, name: 'foobar league') }
+      it 'the 2nd league is not created' do
+        expect { post :create, season_id: league.season_id, league: bad_league_params }.not_to change(league.season.leagues, :count).by(1)
+        expect(response.status).to eq(422) # Unprocessable Entity
+      end
+    end
     context 'when the start week start date is in the future' do
       let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: future_week.id) }
@@ -131,7 +139,7 @@ describe API::LeaguesController do
             put :update, season_id: season.id, id: league.id, league: league.attributes
             expect(response.status).to eq(403)
             league.reload
-            expect(league[:name]).to eq('Bad News Bears')
+            expect(league[:name]).not_to eq('Good News Bears')
           end
         end
       end
