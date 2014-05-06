@@ -31,7 +31,7 @@ describe API::LeaguesController do
       it 'returns the league' do
         get :show, season_id: season.id, id: league.id
         expect(response).to be_success
-        expect(json[:name]).to eq(league.name)
+        expect(json[:payload][:league][:name]).to eq(league.name)
       end
     end
     context 'when the signed in user has a team in the league' do
@@ -40,7 +40,7 @@ describe API::LeaguesController do
       it 'returns the league' do
         get :show, season_id: season.id, id: league.id
         expect(response).to be_success
-        expect(json[:name]).to eq(league.name)
+        expect(json[:payload][:league][:name]).to eq(league.name)
       end
     end
     context 'when the signed in user has no team in the league and is not a commish of the league' do
@@ -89,7 +89,7 @@ describe API::LeaguesController do
     end
   end
 
-  # PATCH/PUT /api/seasons/:season_id/leagues/:id
+  # PUT /api/seasons/:season_id/leagues/:id
   describe '#update' do
     context 'when the signed in user is a commish of the league' do
       let(:league) { FactoryGirl.create(:league, season: season, commishes: [ current_user ]) }
@@ -101,7 +101,7 @@ describe API::LeaguesController do
         league.max_teams_per_user = 15
       }
       it 'updates the league' do
-        patch :update, season_id: season.id, id: league.id, league: league.attributes
+        put :update, season_id: season.id, id: league.id, league: league.attributes
         league.reload
         expect(league.name).to eq('Good News Bears')
         expect(league.start_week).to eq(future_week)
@@ -115,7 +115,7 @@ describe API::LeaguesController do
           let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
           before { league.start_week = new_start_week }
           it 'updates the start week' do
-            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            put :update, season_id: season.id, id: league.id, league: league.attributes
             expect(response).to be_success
             league.reload
             expect(league[:start_week_id]).to eq(new_start_week.id)
@@ -127,7 +127,7 @@ describe API::LeaguesController do
           let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
           before { league.start_week = new_start_week }
           it 'updates the start week' do
-            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            put :update, season_id: season.id, id: league.id, league: league.attributes
             expect(response.status).to eq(403)
             league.reload
             expect(league[:start_week_id]).to eq(current_start_week.id)
@@ -144,7 +144,7 @@ describe API::LeaguesController do
             league.start_week = new_start_week
           }
           it 'it does not update the league name' do
-            patch :update, season_id: season.id, id: league.id, league: league.attributes
+            put :update, season_id: season.id, id: league.id, league: league.attributes
             expect(response.status).to eq(403)
             league.reload
             expect(league[:name]).to eq('Bad News Bears')
@@ -156,7 +156,7 @@ describe API::LeaguesController do
       let(:league) { FactoryGirl.create(:league, season: season) }
       before { league.name = 'Good News Bears' }
       it 'returns unauthorized and does not update the league' do
-        patch :update, season_id: season.id, id: league.id, league: league.attributes
+        put :update, season_id: season.id, id: league.id, league: league.attributes
         expect(response.status).to eq(403)
         league.reload
         expect(league[:name]).not_to eq('Good News Bears')
