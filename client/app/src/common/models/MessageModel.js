@@ -1,5 +1,8 @@
 
-var MessageModel = function($log) {
+var MessageModel = function($rootScope, $log) {
+
+    var model = this;
+    var queue = [];
 
     var message = {};
     message.loaded = false;
@@ -8,9 +11,15 @@ var MessageModel = function($log) {
 
     this.message = message;
 
-    this.setMessage = function(messageData) {
+    this.setMessage = function(messageData, delay) {
+        model.resetMessage();
         message.loaded = true;
         message = angular.extend(message, messageData);
+        if (delay) {
+            queue[0] = message; // queue it up for after a state change
+        } else {
+            queue = []; // clear the queue as message will be showed immediately
+        }
         $log.log("MessageModel: content: " + message.content);
     };
 
@@ -23,6 +32,14 @@ var MessageModel = function($log) {
         this.message = message;
     };
 
+    $rootScope.$on("$stateChangeStart", function() {
+        model.resetMessage();
+    });
+
+    $rootScope.$on("$stateChangeSuccess", function() {
+        model.message = queue.shift() || {};
+    });
+
     /**
      * Invoked on startup, like a constructor.
      */
@@ -33,5 +50,5 @@ var MessageModel = function($log) {
 
 };
 
-MessageModel.$inject = ['$log'];
+MessageModel.$inject = ['$rootScope', '$log'];
 module.exports = MessageModel;

@@ -1,4 +1,4 @@
-var LeagueService = function($http, $log, apiConfig, leagueModel, messageModel) {
+var LeagueService = function($http, $log, $location, apiConfig, leagueModel, messageModel) {
 
     this.getLeague = function(seasonId, leagueId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
@@ -20,7 +20,8 @@ var LeagueService = function($http, $log, apiConfig, leagueModel, messageModel) 
             { league: leagueParams })
             .success(function(data) {
                 $log.log("LeagueService: createLeague success");
-                messageModel.setMessage(data.message);
+                $location.path('/season/' + leagueParams.season_id + '/league/' + data.payload.league_id + '/edit' );
+                messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
@@ -37,7 +38,7 @@ var LeagueService = function($http, $log, apiConfig, leagueModel, messageModel) 
             .success(function(data) {
                 $log.log("LeagueService: updateLeague success");
                 leagueModel.setLeague(leagueParams);
-                messageModel.setMessage(data.message);
+                messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
@@ -50,5 +51,5 @@ var LeagueService = function($http, $log, apiConfig, leagueModel, messageModel) 
 
 };
 
-LeagueService.$inject = ['$http', '$log', 'apiConfig', 'leagueModel', 'messageModel'];
+LeagueService.$inject = ['$http', '$log', '$location', 'apiConfig', 'leagueModel', 'messageModel'];
 module.exports = LeagueService;

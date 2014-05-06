@@ -8,6 +8,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
                 $log.log("UserService: login success");
                 userModel.setUser(data.payload.user);
                 $window.sessionStorage.token = data.payload.token;
+                messageModel.resetMessage();
                 return data;
             })
             .error(function(data) {
@@ -22,7 +23,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
         var promise = $http.delete(
             apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
-                messageModel.setMessage(data.message);
+                messageModel.setMessage(data.message, false);
                 $log.log("UserService: logout success");
                 return data;
             })
@@ -57,7 +58,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
                 $log.log("UserService: createUser success");
                 userModel.setUser(data.payload.user);
                 $window.sessionStorage.token = data.payload.token;
-                messageModel.setMessage(data.message);
+                messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
@@ -74,7 +75,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             .success(function(data) {
                 $log.log("UserService: updateUser success");
                 userModel.setUser(userParams);
-                messageModel.setMessage(data.message);
+                messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
