@@ -1,1339 +1,4 @@
-require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
-/**
- * Define the required js libraries needed for this application. The compiler will merge them all into a single download
- */
-require('jquery');
-require('angular');
-require('angular-cookies');
-require('angular-resource');
-require('angular-sanitize');
-require('angular-route');
-require('angular-ui-router');
-require('ui-bootstrap');
-require('ui-bootstrap-tpls');
-require('commangular');
-require('statehelper');
-require('jquery-ui');
-},{"jquery":"WRX+g2","angular":"fo7oCi","angular-cookies":"14Chnj","angular-resource":"hcChoi","angular-sanitize":"4XF6h/","angular-route":"Wwm8Sa","angular-ui-router":"Houb7Z","ui-bootstrap":"TuHbh3","ui-bootstrap-tpls":"IHhWdR","commangular":"DKmofu","statehelper":"hPp6Ab","jquery-ui":"Zjqsv8"}],"es5-shim":[function(require,module,exports){
-module.exports=require('58KmHl');
-},{}],"58KmHl":[function(require,module,exports){
-(function(){// Copyright 2009-2012 by contributors, MIT License
-// vim: ts=4 sts=4 sw=4 expandtab
-
-// Module systems magic dance
-(function (definition) {
-    // RequireJS
-    if (typeof define == "function") {
-        define(definition);
-    // YUI3
-    } else if (typeof YUI == "function") {
-        YUI.add("es5", definition);
-    // CommonJS and <script>
-    } else {
-        definition();
-    }
-})(function () {
-
-/**
- * Brings an environment as close to ECMAScript 5 compliance
- * as is possible with the facilities of erstwhile engines.
- *
- * Annotated ES5: http://es5.github.com/ (specific links below)
- * ES5 Spec: http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
- * Required reading: http://javascriptweblog.wordpress.com/2011/12/05/extending-javascript-natives/
- */
-
-//
-// Function
-// ========
-//
-
-// ES-5 15.3.4.5
-// http://es5.github.com/#x15.3.4.5
-
-function Empty() {}
-
-if (!Function.prototype.bind) {
-    Function.prototype.bind = function bind(that) { // .length is 1
-        // 1. Let Target be the this value.
-        var target = this;
-        // 2. If IsCallable(Target) is false, throw a TypeError exception.
-        if (typeof target != "function") {
-            throw new TypeError("Function.prototype.bind called on incompatible " + target);
-        }
-        // 3. Let A be a new (possibly empty) internal list of all of the
-        //   argument values provided after thisArg (arg1, arg2 etc), in order.
-        // XXX slicedArgs will stand in for "A" if used
-        var args = _Array_slice_.call(arguments, 1); // for normal call
-        // 4. Let F be a new native ECMAScript object.
-        // 11. Set the [[Prototype]] internal property of F to the standard
-        //   built-in Function prototype object as specified in 15.3.3.1.
-        // 12. Set the [[Call]] internal property of F as described in
-        //   15.3.4.5.1.
-        // 13. Set the [[Construct]] internal property of F as described in
-        //   15.3.4.5.2.
-        // 14. Set the [[HasInstance]] internal property of F as described in
-        //   15.3.4.5.3.
-        var bound = function () {
-
-            if (this instanceof bound) {
-                // 15.3.4.5.2 [[Construct]]
-                // When the [[Construct]] internal method of a function object,
-                // F that was created using the bind function is called with a
-                // list of arguments ExtraArgs, the following steps are taken:
-                // 1. Let target be the value of F's [[TargetFunction]]
-                //   internal property.
-                // 2. If target has no [[Construct]] internal method, a
-                //   TypeError exception is thrown.
-                // 3. Let boundArgs be the value of F's [[BoundArgs]] internal
-                //   property.
-                // 4. Let args be a new list containing the same values as the
-                //   list boundArgs in the same order followed by the same
-                //   values as the list ExtraArgs in the same order.
-                // 5. Return the result of calling the [[Construct]] internal
-                //   method of target providing args as the arguments.
-
-                var result = target.apply(
-                    this,
-                    args.concat(_Array_slice_.call(arguments))
-                );
-                if (Object(result) === result) {
-                    return result;
-                }
-                return this;
-
-            } else {
-                // 15.3.4.5.1 [[Call]]
-                // When the [[Call]] internal method of a function object, F,
-                // which was created using the bind function is called with a
-                // this value and a list of arguments ExtraArgs, the following
-                // steps are taken:
-                // 1. Let boundArgs be the value of F's [[BoundArgs]] internal
-                //   property.
-                // 2. Let boundThis be the value of F's [[BoundThis]] internal
-                //   property.
-                // 3. Let target be the value of F's [[TargetFunction]] internal
-                //   property.
-                // 4. Let args be a new list containing the same values as the
-                //   list boundArgs in the same order followed by the same
-                //   values as the list ExtraArgs in the same order.
-                // 5. Return the result of calling the [[Call]] internal method
-                //   of target providing boundThis as the this value and
-                //   providing args as the arguments.
-
-                // equiv: target.call(this, ...boundArgs, ...args)
-                return target.apply(
-                    that,
-                    args.concat(_Array_slice_.call(arguments))
-                );
-
-            }
-
-        };
-        if(target.prototype) {
-            Empty.prototype = target.prototype;
-            bound.prototype = new Empty();
-            // Clean up dangling references.
-            Empty.prototype = null;
-        }
-        // XXX bound.length is never writable, so don't even try
-        //
-        // 15. If the [[Class]] internal property of Target is "Function", then
-        //     a. Let L be the length property of Target minus the length of A.
-        //     b. Set the length own property of F to either 0 or L, whichever is
-        //       larger.
-        // 16. Else set the length own property of F to 0.
-        // 17. Set the attributes of the length own property of F to the values
-        //   specified in 15.3.5.1.
-
-        // TODO
-        // 18. Set the [[Extensible]] internal property of F to true.
-
-        // TODO
-        // 19. Let thrower be the [[ThrowTypeError]] function Object (13.2.3).
-        // 20. Call the [[DefineOwnProperty]] internal method of F with
-        //   arguments "caller", PropertyDescriptor {[[Get]]: thrower, [[Set]]:
-        //   thrower, [[Enumerable]]: false, [[Configurable]]: false}, and
-        //   false.
-        // 21. Call the [[DefineOwnProperty]] internal method of F with
-        //   arguments "arguments", PropertyDescriptor {[[Get]]: thrower,
-        //   [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false},
-        //   and false.
-
-        // TODO
-        // NOTE Function objects created using Function.prototype.bind do not
-        // have a prototype property or the [[Code]], [[FormalParameters]], and
-        // [[Scope]] internal properties.
-        // XXX can't delete prototype in pure-js.
-
-        // 22. Return F.
-        return bound;
-    };
-}
-
-// Shortcut to an often accessed properties, in order to avoid multiple
-// dereference that costs universally.
-// _Please note: Shortcuts are defined after `Function.prototype.bind` as we
-// us it in defining shortcuts.
-var call = Function.prototype.call;
-var prototypeOfArray = Array.prototype;
-var prototypeOfObject = Object.prototype;
-var _Array_slice_ = prototypeOfArray.slice;
-// Having a toString local variable name breaks in Opera so use _toString.
-var _toString = call.bind(prototypeOfObject.toString);
-var owns = call.bind(prototypeOfObject.hasOwnProperty);
-
-// If JS engine supports accessors creating shortcuts.
-var defineGetter;
-var defineSetter;
-var lookupGetter;
-var lookupSetter;
-var supportsAccessors;
-if ((supportsAccessors = owns(prototypeOfObject, "__defineGetter__"))) {
-    defineGetter = call.bind(prototypeOfObject.__defineGetter__);
-    defineSetter = call.bind(prototypeOfObject.__defineSetter__);
-    lookupGetter = call.bind(prototypeOfObject.__lookupGetter__);
-    lookupSetter = call.bind(prototypeOfObject.__lookupSetter__);
-}
-
-//
-// Array
-// =====
-//
-
-// ES5 15.4.4.12
-// http://es5.github.com/#x15.4.4.12
-// Default value for second param
-// [bugfix, ielt9, old browsers]
-// IE < 9 bug: [1,2].splice(0).join("") == "" but should be "12"
-if ([1,2].splice(0).length != 2) {
-    var array_splice = Array.prototype.splice;
-
-    if(function() { // test IE < 9 to splice bug - see issue #138
-        function makeArray(l) {
-            var a = [];
-            while (l--) {
-                a.unshift(l)
-            }
-            return a
-        }
-
-        var array = []
-            , lengthBefore
-        ;
-
-        array.splice.bind(array, 0, 0).apply(null, makeArray(20));
-        array.splice.bind(array, 0, 0).apply(null, makeArray(26));
-
-        lengthBefore = array.length; //20
-        array.splice(5, 0, "XXX"); // add one element
-
-        if(lengthBefore + 1 == array.length) {
-            return true;// has right splice implementation without bugs
-        }
-        // else {
-        //    IE8 bug
-        // }
-    }()) {//IE 6/7
-        Array.prototype.splice = function(start, deleteCount) {
-            if (!arguments.length) {
-                return [];
-            } else {
-                return array_splice.apply(this, [
-                    start === void 0 ? 0 : start,
-                    deleteCount === void 0 ? (this.length - start) : deleteCount
-                ].concat(_Array_slice_.call(arguments, 2)))
-            }
-        };
-    }
-    else {//IE8
-        Array.prototype.splice = function(start, deleteCount) {
-            var result
-                , args = _Array_slice_.call(arguments, 2)
-                , addElementsCount = args.length
-            ;
-
-            if(!arguments.length) {
-                return [];
-            }
-
-            if(start === void 0) { // default
-                start = 0;
-            }
-            if(deleteCount === void 0) { // default
-                deleteCount = this.length - start;
-            }
-
-            if(addElementsCount > 0) {
-                if(deleteCount <= 0) {
-                    if(start == this.length) { // tiny optimisation #1
-                        this.push.apply(this, args);
-                        return [];
-                    }
-
-                    if(start == 0) { // tiny optimisation #2
-                        this.unshift.apply(this, args);
-                        return [];
-                    }
-                }
-
-                // Array.prototype.splice implementation
-                result = _Array_slice_.call(this, start, start + deleteCount);// delete part
-                args.push.apply(args, _Array_slice_.call(this, start + deleteCount, this.length));// right part
-                args.unshift.apply(args, _Array_slice_.call(this, 0, start));// left part
-
-                // delete all items from this array and replace it to 'left part' + _Array_slice_.call(arguments, 2) + 'right part'
-                args.unshift(0, this.length);
-
-                array_splice.apply(this, args);
-
-                return result;
-            }
-
-            return array_splice.call(this, start, deleteCount);
-        }
-
-    }
-}
-
-// ES5 15.4.4.12
-// http://es5.github.com/#x15.4.4.13
-// Return len+argCount.
-// [bugfix, ielt8]
-// IE < 8 bug: [].unshift(0) == undefined but should be "1"
-if ([].unshift(0) != 1) {
-    var array_unshift = Array.prototype.unshift;
-    Array.prototype.unshift = function() {
-        array_unshift.apply(this, arguments);
-        return this.length;
-    };
-}
-
-// ES5 15.4.3.2
-// http://es5.github.com/#x15.4.3.2
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray
-if (!Array.isArray) {
-    Array.isArray = function isArray(obj) {
-        return _toString(obj) == "[object Array]";
-    };
-}
-
-// The IsCallable() check in the Array functions
-// has been replaced with a strict check on the
-// internal class of the object to trap cases where
-// the provided function was actually a regular
-// expression literal, which in V8 and
-// JavaScriptCore is a typeof "function".  Only in
-// V8 are regular expression literals permitted as
-// reduce parameters, so it is desirable in the
-// general case for the shim to match the more
-// strict and common behavior of rejecting regular
-// expressions.
-
-// ES5 15.4.4.18
-// http://es5.github.com/#x15.4.4.18
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/forEach
-
-// Check failure of by-index access of string characters (IE < 9)
-// and failure of `0 in boxedString` (Rhino)
-var boxedString = Object("a"),
-    splitString = boxedString[0] != "a" || !(0 in boxedString);
-
-if (!Array.prototype.forEach) {
-    Array.prototype.forEach = function forEach(fun /*, thisp*/) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            thisp = arguments[1],
-            i = -1,
-            length = self.length >>> 0;
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(); // TODO message
-        }
-
-        while (++i < length) {
-            if (i in self) {
-                // Invoke the callback function with call, passing arguments:
-                // context, property value, property key, thisArg object
-                // context
-                fun.call(thisp, self[i], i, object);
-            }
-        }
-    };
-}
-
-// ES5 15.4.4.19
-// http://es5.github.com/#x15.4.4.19
-// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/map
-if (!Array.prototype.map) {
-    Array.prototype.map = function map(fun /*, thisp*/) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            length = self.length >>> 0,
-            result = Array(length),
-            thisp = arguments[1];
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        for (var i = 0; i < length; i++) {
-            if (i in self)
-                result[i] = fun.call(thisp, self[i], i, object);
-        }
-        return result;
-    };
-}
-
-// ES5 15.4.4.20
-// http://es5.github.com/#x15.4.4.20
-// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/filter
-if (!Array.prototype.filter) {
-    Array.prototype.filter = function filter(fun /*, thisp */) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                    object,
-            length = self.length >>> 0,
-            result = [],
-            value,
-            thisp = arguments[1];
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        for (var i = 0; i < length; i++) {
-            if (i in self) {
-                value = self[i];
-                if (fun.call(thisp, value, i, object)) {
-                    result.push(value);
-                }
-            }
-        }
-        return result;
-    };
-}
-
-// ES5 15.4.4.16
-// http://es5.github.com/#x15.4.4.16
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every
-if (!Array.prototype.every) {
-    Array.prototype.every = function every(fun /*, thisp */) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            length = self.length >>> 0,
-            thisp = arguments[1];
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        for (var i = 0; i < length; i++) {
-            if (i in self && !fun.call(thisp, self[i], i, object)) {
-                return false;
-            }
-        }
-        return true;
-    };
-}
-
-// ES5 15.4.4.17
-// http://es5.github.com/#x15.4.4.17
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some
-if (!Array.prototype.some) {
-    Array.prototype.some = function some(fun /*, thisp */) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            length = self.length >>> 0,
-            thisp = arguments[1];
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        for (var i = 0; i < length; i++) {
-            if (i in self && fun.call(thisp, self[i], i, object)) {
-                return true;
-            }
-        }
-        return false;
-    };
-}
-
-// ES5 15.4.4.21
-// http://es5.github.com/#x15.4.4.21
-// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduce
-if (!Array.prototype.reduce) {
-    Array.prototype.reduce = function reduce(fun /*, initial*/) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            length = self.length >>> 0;
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        // no value to return if no initial value and an empty array
-        if (!length && arguments.length == 1) {
-            throw new TypeError("reduce of empty array with no initial value");
-        }
-
-        var i = 0;
-        var result;
-        if (arguments.length >= 2) {
-            result = arguments[1];
-        } else {
-            do {
-                if (i in self) {
-                    result = self[i++];
-                    break;
-                }
-
-                // if array contains no values, no initial value to return
-                if (++i >= length) {
-                    throw new TypeError("reduce of empty array with no initial value");
-                }
-            } while (true);
-        }
-
-        for (; i < length; i++) {
-            if (i in self) {
-                result = fun.call(void 0, result, self[i], i, object);
-            }
-        }
-
-        return result;
-    };
-}
-
-// ES5 15.4.4.22
-// http://es5.github.com/#x15.4.4.22
-// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduceRight
-if (!Array.prototype.reduceRight) {
-    Array.prototype.reduceRight = function reduceRight(fun /*, initial*/) {
-        var object = toObject(this),
-            self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                object,
-            length = self.length >>> 0;
-
-        // If no callback function or if callback is not a callable function
-        if (_toString(fun) != "[object Function]") {
-            throw new TypeError(fun + " is not a function");
-        }
-
-        // no value to return if no initial value, empty array
-        if (!length && arguments.length == 1) {
-            throw new TypeError("reduceRight of empty array with no initial value");
-        }
-
-        var result, i = length - 1;
-        if (arguments.length >= 2) {
-            result = arguments[1];
-        } else {
-            do {
-                if (i in self) {
-                    result = self[i--];
-                    break;
-                }
-
-                // if array contains no values, no initial value to return
-                if (--i < 0) {
-                    throw new TypeError("reduceRight of empty array with no initial value");
-                }
-            } while (true);
-        }
-
-        if (i < 0) {
-            return result;
-        }
-
-        do {
-            if (i in this) {
-                result = fun.call(void 0, result, self[i], i, object);
-            }
-        } while (i--);
-
-        return result;
-    };
-}
-
-// ES5 15.4.4.14
-// http://es5.github.com/#x15.4.4.14
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
-if (!Array.prototype.indexOf || ([0, 1].indexOf(1, 2) != -1)) {
-    Array.prototype.indexOf = function indexOf(sought /*, fromIndex */ ) {
-        var self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                toObject(this),
-            length = self.length >>> 0;
-
-        if (!length) {
-            return -1;
-        }
-
-        var i = 0;
-        if (arguments.length > 1) {
-            i = toInteger(arguments[1]);
-        }
-
-        // handle negative indices
-        i = i >= 0 ? i : Math.max(0, length + i);
-        for (; i < length; i++) {
-            if (i in self && self[i] === sought) {
-                return i;
-            }
-        }
-        return -1;
-    };
-}
-
-// ES5 15.4.4.15
-// http://es5.github.com/#x15.4.4.15
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf
-if (!Array.prototype.lastIndexOf || ([0, 1].lastIndexOf(0, -3) != -1)) {
-    Array.prototype.lastIndexOf = function lastIndexOf(sought /*, fromIndex */) {
-        var self = splitString && _toString(this) == "[object String]" ?
-                this.split("") :
-                toObject(this),
-            length = self.length >>> 0;
-
-        if (!length) {
-            return -1;
-        }
-        var i = length - 1;
-        if (arguments.length > 1) {
-            i = Math.min(i, toInteger(arguments[1]));
-        }
-        // handle negative indices
-        i = i >= 0 ? i : length - Math.abs(i);
-        for (; i >= 0; i--) {
-            if (i in self && sought === self[i]) {
-                return i;
-            }
-        }
-        return -1;
-    };
-}
-
-//
-// Object
-// ======
-//
-
-// ES5 15.2.3.14
-// http://es5.github.com/#x15.2.3.14
-if (!Object.keys) {
-    // http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
-    var hasDontEnumBug = true,
-        dontEnums = [
-            "toString",
-            "toLocaleString",
-            "valueOf",
-            "hasOwnProperty",
-            "isPrototypeOf",
-            "propertyIsEnumerable",
-            "constructor"
-        ],
-        dontEnumsLength = dontEnums.length;
-
-    for (var key in {"toString": null}) {
-        hasDontEnumBug = false;
-    }
-
-    Object.keys = function keys(object) {
-
-        if (
-            (typeof object != "object" && typeof object != "function") ||
-            object === null
-        ) {
-            throw new TypeError("Object.keys called on a non-object");
-        }
-
-        var keys = [];
-        for (var name in object) {
-            if (owns(object, name)) {
-                keys.push(name);
-            }
-        }
-
-        if (hasDontEnumBug) {
-            for (var i = 0, ii = dontEnumsLength; i < ii; i++) {
-                var dontEnum = dontEnums[i];
-                if (owns(object, dontEnum)) {
-                    keys.push(dontEnum);
-                }
-            }
-        }
-        return keys;
-    };
-
-}
-
-//
-// Date
-// ====
-//
-
-// ES5 15.9.5.43
-// http://es5.github.com/#x15.9.5.43
-// This function returns a String value represent the instance in time
-// represented by this Date object. The format of the String is the Date Time
-// string format defined in 15.9.1.15. All fields are present in the String.
-// The time zone is always UTC, denoted by the suffix Z. If the time value of
-// this object is not a finite Number a RangeError exception is thrown.
-var negativeDate = -62198755200000,
-    negativeYearString = "-000001";
-if (
-    !Date.prototype.toISOString ||
-    (new Date(negativeDate).toISOString().indexOf(negativeYearString) === -1)
-) {
-    Date.prototype.toISOString = function toISOString() {
-        var result, length, value, year, month;
-        if (!isFinite(this)) {
-            throw new RangeError("Date.prototype.toISOString called on non-finite value.");
-        }
-
-        year = this.getUTCFullYear();
-
-        month = this.getUTCMonth();
-        // see https://github.com/kriskowal/es5-shim/issues/111
-        year += Math.floor(month / 12);
-        month = (month % 12 + 12) % 12;
-
-        // the date time string format is specified in 15.9.1.15.
-        result = [month + 1, this.getUTCDate(),
-            this.getUTCHours(), this.getUTCMinutes(), this.getUTCSeconds()];
-        year = (
-            (year < 0 ? "-" : (year > 9999 ? "+" : "")) +
-            ("00000" + Math.abs(year))
-            .slice(0 <= year && year <= 9999 ? -4 : -6)
-        );
-
-        length = result.length;
-        while (length--) {
-            value = result[length];
-            // pad months, days, hours, minutes, and seconds to have two
-            // digits.
-            if (value < 10) {
-                result[length] = "0" + value;
-            }
-        }
-        // pad milliseconds to have three digits.
-        return (
-            year + "-" + result.slice(0, 2).join("-") +
-            "T" + result.slice(2).join(":") + "." +
-            ("000" + this.getUTCMilliseconds()).slice(-3) + "Z"
-        );
-    };
-}
-
-
-// ES5 15.9.5.44
-// http://es5.github.com/#x15.9.5.44
-// This function provides a String representation of a Date object for use by
-// JSON.stringify (15.12.3).
-var dateToJSONIsSupported = false;
-try {
-    dateToJSONIsSupported = (
-        Date.prototype.toJSON &&
-        new Date(NaN).toJSON() === null &&
-        new Date(negativeDate).toJSON().indexOf(negativeYearString) !== -1 &&
-        Date.prototype.toJSON.call({ // generic
-            toISOString: function () {
-                return true;
-            }
-        })
-    );
-} catch (e) {
-}
-if (!dateToJSONIsSupported) {
-    Date.prototype.toJSON = function toJSON(key) {
-        // When the toJSON method is called with argument key, the following
-        // steps are taken:
-
-        // 1.  Let O be the result of calling ToObject, giving it the this
-        // value as its argument.
-        // 2. Let tv be toPrimitive(O, hint Number).
-        var o = Object(this),
-            tv = toPrimitive(o),
-            toISO;
-        // 3. If tv is a Number and is not finite, return null.
-        if (typeof tv === "number" && !isFinite(tv)) {
-            return null;
-        }
-        // 4. Let toISO be the result of calling the [[Get]] internal method of
-        // O with argument "toISOString".
-        toISO = o.toISOString;
-        // 5. If IsCallable(toISO) is false, throw a TypeError exception.
-        if (typeof toISO != "function") {
-            throw new TypeError("toISOString property is not callable");
-        }
-        // 6. Return the result of calling the [[Call]] internal method of
-        //  toISO with O as the this value and an empty argument list.
-        return toISO.call(o);
-
-        // NOTE 1 The argument is ignored.
-
-        // NOTE 2 The toJSON function is intentionally generic; it does not
-        // require that its this value be a Date object. Therefore, it can be
-        // transferred to other kinds of objects for use as a method. However,
-        // it does require that any such object have a toISOString method. An
-        // object is free to use the argument key to filter its
-        // stringification.
-    };
-}
-
-// ES5 15.9.4.2
-// http://es5.github.com/#x15.9.4.2
-// based on work shared by Daniel Friesen (dantman)
-// http://gist.github.com/303249
-if (!Date.parse || "Date.parse is buggy") {
-    // XXX global assignment won't work in embeddings that use
-    // an alternate object for the context.
-    Date = (function(NativeDate) {
-
-        // Date.length === 7
-        function Date(Y, M, D, h, m, s, ms) {
-            var length = arguments.length;
-            if (this instanceof NativeDate) {
-                var date = length == 1 && String(Y) === Y ? // isString(Y)
-                    // We explicitly pass it through parse:
-                    new NativeDate(Date.parse(Y)) :
-                    // We have to manually make calls depending on argument
-                    // length here
-                    length >= 7 ? new NativeDate(Y, M, D, h, m, s, ms) :
-                    length >= 6 ? new NativeDate(Y, M, D, h, m, s) :
-                    length >= 5 ? new NativeDate(Y, M, D, h, m) :
-                    length >= 4 ? new NativeDate(Y, M, D, h) :
-                    length >= 3 ? new NativeDate(Y, M, D) :
-                    length >= 2 ? new NativeDate(Y, M) :
-                    length >= 1 ? new NativeDate(Y) :
-                                  new NativeDate();
-                // Prevent mixups with unfixed Date object
-                date.constructor = Date;
-                return date;
-            }
-            return NativeDate.apply(this, arguments);
-        };
-
-        // 15.9.1.15 Date Time String Format.
-        var isoDateExpression = new RegExp("^" +
-            "(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign +
-                                      // 6-digit extended year
-            "(?:-(\\d{2})" + // optional month capture
-            "(?:-(\\d{2})" + // optional day capture
-            "(?:" + // capture hours:minutes:seconds.milliseconds
-                "T(\\d{2})" + // hours capture
-                ":(\\d{2})" + // minutes capture
-                "(?:" + // optional :seconds.milliseconds
-                    ":(\\d{2})" + // seconds capture
-                    "(?:(\\.\\d{1,}))?" + // milliseconds capture
-                ")?" +
-            "(" + // capture UTC offset component
-                "Z|" + // UTC capture
-                "(?:" + // offset specifier +/-hours:minutes
-                    "([-+])" + // sign capture
-                    "(\\d{2})" + // hours offset capture
-                    ":(\\d{2})" + // minutes offset capture
-                ")" +
-            ")?)?)?)?" +
-        "$");
-
-        var months = [
-            0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
-        ];
-
-        function dayFromMonth(year, month) {
-            var t = month > 1 ? 1 : 0;
-            return (
-                months[month] +
-                Math.floor((year - 1969 + t) / 4) -
-                Math.floor((year - 1901 + t) / 100) +
-                Math.floor((year - 1601 + t) / 400) +
-                365 * (year - 1970)
-            );
-        }
-
-        // Copy any custom methods a 3rd party library may have added
-        for (var key in NativeDate) {
-            Date[key] = NativeDate[key];
-        }
-
-        // Copy "native" methods explicitly; they may be non-enumerable
-        Date.now = NativeDate.now;
-        Date.UTC = NativeDate.UTC;
-        Date.prototype = NativeDate.prototype;
-        Date.prototype.constructor = Date;
-
-        // Upgrade Date.parse to handle simplified ISO 8601 strings
-        Date.parse = function parse(string) {
-            var match = isoDateExpression.exec(string);
-            if (match) {
-                // parse months, days, hours, minutes, seconds, and milliseconds
-                // provide default values if necessary
-                // parse the UTC offset component
-                var year = Number(match[1]),
-                    month = Number(match[2] || 1) - 1,
-                    day = Number(match[3] || 1) - 1,
-                    hour = Number(match[4] || 0),
-                    minute = Number(match[5] || 0),
-                    second = Number(match[6] || 0),
-                    millisecond = Math.floor(Number(match[7] || 0) * 1000),
-                    // When time zone is missed, local offset should be used
-                    // (ES 5.1 bug)
-                    // see https://bugs.ecmascript.org/show_bug.cgi?id=112
-                    offset = !match[4] || match[8] ?
-                        0 : Number(new NativeDate(1970, 0)),
-                    signOffset = match[9] === "-" ? 1 : -1,
-                    hourOffset = Number(match[10] || 0),
-                    minuteOffset = Number(match[11] || 0),
-                    result;
-                if (
-                    hour < (
-                        minute > 0 || second > 0 || millisecond > 0 ?
-                        24 : 25
-                    ) &&
-                    minute < 60 && second < 60 && millisecond < 1000 &&
-                    month > -1 && month < 12 && hourOffset < 24 &&
-                    minuteOffset < 60 && // detect invalid offsets
-                    day > -1 &&
-                    day < (
-                        dayFromMonth(year, month + 1) -
-                        dayFromMonth(year, month)
-                    )
-                ) {
-                    result = (
-                        (dayFromMonth(year, month) + day) * 24 +
-                        hour +
-                        hourOffset * signOffset
-                    ) * 60;
-                    result = (
-                        (result + minute + minuteOffset * signOffset) * 60 +
-                        second
-                    ) * 1000 + millisecond + offset;
-                    if (-8.64e15 <= result && result <= 8.64e15) {
-                        return result;
-                    }
-                }
-                return NaN;
-            }
-            return NativeDate.parse.apply(this, arguments);
-        };
-
-        return Date;
-    })(Date);
-}
-
-// ES5 15.9.4.4
-// http://es5.github.com/#x15.9.4.4
-if (!Date.now) {
-    Date.now = function now() {
-        return new Date().getTime();
-    };
-}
-
-
-//
-// Number
-// ======
-//
-
-// ES5.1 15.7.4.5
-// http://es5.github.com/#x15.7.4.5
-if (!Number.prototype.toFixed || (0.00008).toFixed(3) !== '0.000' || (0.9).toFixed(0) === '0' || (1.255).toFixed(2) !== '1.25' || (1000000000000000128).toFixed(0) !== "1000000000000000128") {
-    // Hide these variables and functions
-    (function () {
-        var base, size, data, i;
-
-        base = 1e7;
-        size = 6;
-        data = [0, 0, 0, 0, 0, 0];
-
-        function multiply(n, c) {
-            var i = -1;
-            while (++i < size) {
-                c += n * data[i];
-                data[i] = c % base;
-                c = Math.floor(c / base);
-            }
-        }
-
-        function divide(n) {
-            var i = size, c = 0;
-            while (--i >= 0) {
-                c += data[i];
-                data[i] = Math.floor(c / n);
-                c = (c % n) * base;
-            }
-        }
-
-        function toString() {
-            var i = size;
-            var s = '';
-            while (--i >= 0) {
-                if (s !== '' || i === 0 || data[i] !== 0) {
-                    var t = String(data[i]);
-                    if (s === '') {
-                        s = t;
-                    } else {
-                        s += '0000000'.slice(0, 7 - t.length) + t;
-                    }
-                }
-            }
-            return s;
-        }
-
-        function pow(x, n, acc) {
-            return (n === 0 ? acc : (n % 2 === 1 ? pow(x, n - 1, acc * x) : pow(x * x, n / 2, acc)));
-        }
-
-        function log(x) {
-            var n = 0;
-            while (x >= 4096) {
-                n += 12;
-                x /= 4096;
-            }
-            while (x >= 2) {
-                n += 1;
-                x /= 2;
-            }
-            return n;
-        }
-
-        Number.prototype.toFixed = function (fractionDigits) {
-            var f, x, s, m, e, z, j, k;
-
-            // Test for NaN and round fractionDigits down
-            f = Number(fractionDigits);
-            f = f !== f ? 0 : Math.floor(f);
-
-            if (f < 0 || f > 20) {
-                throw new RangeError("Number.toFixed called with invalid number of decimals");
-            }
-
-            x = Number(this);
-
-            // Test for NaN
-            if (x !== x) {
-                return "NaN";
-            }
-
-            // If it is too big or small, return the string value of the number
-            if (x <= -1e21 || x >= 1e21) {
-                return String(x);
-            }
-
-            s = "";
-
-            if (x < 0) {
-                s = "-";
-                x = -x;
-            }
-
-            m = "0";
-
-            if (x > 1e-21) {
-                // 1e-21 < x < 1e21
-                // -70 < log2(x) < 70
-                e = log(x * pow(2, 69, 1)) - 69;
-                z = (e < 0 ? x * pow(2, -e, 1) : x / pow(2, e, 1));
-                z *= 0x10000000000000; // Math.pow(2, 52);
-                e = 52 - e;
-
-                // -18 < e < 122
-                // x = z / 2 ^ e
-                if (e > 0) {
-                    multiply(0, z);
-                    j = f;
-
-                    while (j >= 7) {
-                        multiply(1e7, 0);
-                        j -= 7;
-                    }
-
-                    multiply(pow(10, j, 1), 0);
-                    j = e - 1;
-
-                    while (j >= 23) {
-                        divide(1 << 23);
-                        j -= 23;
-                    }
-
-                    divide(1 << j);
-                    multiply(1, 1);
-                    divide(2);
-                    m = toString();
-                } else {
-                    multiply(0, z);
-                    multiply(1 << (-e), 0);
-                    m = toString() + '0.00000000000000000000'.slice(2, 2 + f);
-                }
-            }
-
-            if (f > 0) {
-                k = m.length;
-
-                if (k <= f) {
-                    m = s + '0.0000000000000000000'.slice(0, f - k + 2) + m;
-                } else {
-                    m = s + m.slice(0, k - f) + '.' + m.slice(k - f);
-                }
-            } else {
-                m = s + m;
-            }
-
-            return m;
-        }
-    }());
-}
-
-
-//
-// String
-// ======
-//
-
-
-// ES5 15.5.4.14
-// http://es5.github.com/#x15.5.4.14
-
-// [bugfix, IE lt 9, firefox 4, Konqueror, Opera, obscure browsers]
-// Many browsers do not split properly with regular expressions or they
-// do not perform the split correctly under obscure conditions.
-// See http://blog.stevenlevithan.com/archives/cross-browser-split
-// I've tested in many browsers and this seems to cover the deviant ones:
-//    'ab'.split(/(?:ab)*/) should be ["", ""], not [""]
-//    '.'.split(/(.?)(.?)/) should be ["", ".", "", ""], not ["", ""]
-//    'tesst'.split(/(s)*/) should be ["t", undefined, "e", "s", "t"], not
-//       [undefined, "t", undefined, "e", ...]
-//    ''.split(/.?/) should be [], not [""]
-//    '.'.split(/()()/) should be ["."], not ["", "", "."]
-
-var string_split = String.prototype.split;
-if (
-    'ab'.split(/(?:ab)*/).length !== 2 ||
-    '.'.split(/(.?)(.?)/).length !== 4 ||
-    'tesst'.split(/(s)*/)[1] === "t" ||
-    ''.split(/.?/).length === 0 ||
-    '.'.split(/()()/).length > 1
-) {
-    (function () {
-        var compliantExecNpcg = /()??/.exec("")[1] === void 0; // NPCG: nonparticipating capturing group
-
-        String.prototype.split = function (separator, limit) {
-            var string = this;
-            if (separator === void 0 && limit === 0)
-                return [];
-
-            // If `separator` is not a regex, use native split
-            if (Object.prototype.toString.call(separator) !== "[object RegExp]") {
-                return string_split.apply(this, arguments);
-            }
-
-            var output = [],
-                flags = (separator.ignoreCase ? "i" : "") +
-                        (separator.multiline  ? "m" : "") +
-                        (separator.extended   ? "x" : "") + // Proposed for ES6
-                        (separator.sticky     ? "y" : ""), // Firefox 3+
-                lastLastIndex = 0,
-                // Make `global` and avoid `lastIndex` issues by working with a copy
-                separator = new RegExp(separator.source, flags + "g"),
-                separator2, match, lastIndex, lastLength;
-            string += ""; // Type-convert
-            if (!compliantExecNpcg) {
-                // Doesn't need flags gy, but they don't hurt
-                separator2 = new RegExp("^" + separator.source + "$(?!\\s)", flags);
-            }
-            /* Values for `limit`, per the spec:
-             * If undefined: 4294967295 // Math.pow(2, 32) - 1
-             * If 0, Infinity, or NaN: 0
-             * If positive number: limit = Math.floor(limit); if (limit > 4294967295) limit -= 4294967296;
-             * If negative number: 4294967296 - Math.floor(Math.abs(limit))
-             * If other: Type-convert, then use the above rules
-             */
-            limit = limit === void 0 ?
-                -1 >>> 0 : // Math.pow(2, 32) - 1
-                limit >>> 0; // ToUint32(limit)
-            while (match = separator.exec(string)) {
-                // `separator.lastIndex` is not reliable cross-browser
-                lastIndex = match.index + match[0].length;
-                if (lastIndex > lastLastIndex) {
-                    output.push(string.slice(lastLastIndex, match.index));
-                    // Fix browsers whose `exec` methods don't consistently return `undefined` for
-                    // nonparticipating capturing groups
-                    if (!compliantExecNpcg && match.length > 1) {
-                        match[0].replace(separator2, function () {
-                            for (var i = 1; i < arguments.length - 2; i++) {
-                                if (arguments[i] === void 0) {
-                                    match[i] = void 0;
-                                }
-                            }
-                        });
-                    }
-                    if (match.length > 1 && match.index < string.length) {
-                        Array.prototype.push.apply(output, match.slice(1));
-                    }
-                    lastLength = match[0].length;
-                    lastLastIndex = lastIndex;
-                    if (output.length >= limit) {
-                        break;
-                    }
-                }
-                if (separator.lastIndex === match.index) {
-                    separator.lastIndex++; // Avoid an infinite loop
-                }
-            }
-            if (lastLastIndex === string.length) {
-                if (lastLength || !separator.test("")) {
-                    output.push("");
-                }
-            } else {
-                output.push(string.slice(lastLastIndex));
-            }
-            return output.length > limit ? output.slice(0, limit) : output;
-        };
-    }());
-
-// [bugfix, chrome]
-// If separator is undefined, then the result array contains just one String,
-// which is the this value (converted to a String). If limit is not undefined,
-// then the output array is truncated so that it contains no more than limit
-// elements.
-// "0".split(undefined, 0) -> []
-} else if ("0".split(void 0, 0).length) {
-    String.prototype.split = function(separator, limit) {
-        if (separator === void 0 && limit === 0) return [];
-        return string_split.apply(this, arguments);
-    }
-}
-
-
-// ECMA-262, 3rd B.2.3
-// Note an ECMAScript standart, although ECMAScript 3rd Edition has a
-// non-normative section suggesting uniform semantics and it should be
-// normalized across all browsers
-// [bugfix, IE lt 9] IE < 9 substr() with negative value not working in IE
-if("".substr && "0b".substr(-1) !== "b") {
-    var string_substr = String.prototype.substr;
-    /**
-     *  Get the substring of a string
-     *  @param  {integer}  start   where to start the substring
-     *  @param  {integer}  length  how many characters to return
-     *  @return {string}
-     */
-    String.prototype.substr = function(start, length) {
-        return string_substr.call(
-            this,
-            start < 0 ? ((start = this.length + start) < 0 ? 0 : start) : start,
-            length
-        );
-    }
-}
-
-// ES5 15.5.4.20
-// http://es5.github.com/#x15.5.4.20
-var ws = "\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
-    "\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028" +
-    "\u2029\uFEFF";
-if (!String.prototype.trim || ws.trim()) {
-    // http://blog.stevenlevithan.com/archives/faster-trim-javascript
-    // http://perfectionkills.com/whitespace-deviations/
-    ws = "[" + ws + "]";
-    var trimBeginRegexp = new RegExp("^" + ws + ws + "*"),
-        trimEndRegexp = new RegExp(ws + ws + "*$");
-    String.prototype.trim = function trim() {
-        if (this === void 0 || this === null) {
-            throw new TypeError("can't convert "+this+" to object");
-        }
-        return String(this)
-            .replace(trimBeginRegexp, "")
-            .replace(trimEndRegexp, "");
-    };
-}
-
-//
-// Util
-// ======
-//
-
-// ES5 9.4
-// http://es5.github.com/#x9.4
-// http://jsperf.com/to-integer
-
-function toInteger(n) {
-    n = +n;
-    if (n !== n) { // isNaN
-        n = 0;
-    } else if (n !== 0 && n !== (1/0) && n !== -(1/0)) {
-        n = (n > 0 || -1) * Math.floor(Math.abs(n));
-    }
-    return n;
-}
-
-function isPrimitive(input) {
-    var type = typeof input;
-    return (
-        input === null ||
-        type === "undefined" ||
-        type === "boolean" ||
-        type === "number" ||
-        type === "string"
-    );
-}
-
-function toPrimitive(input) {
-    var val, valueOf, toString;
-    if (isPrimitive(input)) {
-        return input;
-    }
-    valueOf = input.valueOf;
-    if (typeof valueOf === "function") {
-        val = valueOf.call(input);
-        if (isPrimitive(val)) {
-            return val;
-        }
-    }
-    toString = input.toString;
-    if (typeof toString === "function") {
-        val = toString.call(input);
-        if (isPrimitive(val)) {
-            return val;
-        }
-    }
-    throw new TypeError();
-}
-
-// ES5 9.9
-// http://es5.github.com/#x9.9
-var toObject = function (o) {
-    if (o == null) { // this matches both null and undefined
-        throw new TypeError("can't convert "+o+" to object");
-    }
-    return Object(o);
-};
-
-});
-
-})()
-},{}],"jquery":[function(require,module,exports){
+require=(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0].call(u.exports,function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({"jquery":[function(require,module,exports){
 module.exports=require('WRX+g2');
 },{}],"WRX+g2":[function(require,module,exports){
 (function(){/*!
@@ -10188,7 +8853,1342 @@ e=e+a.slice(g,b)}}if(a.charCodeAt(b)==34){b++;return e}i();default:g=b;if(d==45)
 b+4;return true}if(a.slice(b,b+5)=="false"){b=b+5;return false}if(a.slice(b,b+4)=="null"){b=b+4;return n}i()}}return"$"},C=function(a){var c,b;a=="$"&&i();if(typeof a=="string"){if((t?a.charAt(0):a[0])=="@")return a.slice(1);if(a=="["){for(c=[];;b||(b=true)){a=r();if(a=="]")break;if(b)if(a==","){a=r();a=="]"&&i()}else i();a==","&&i();c.push(C(a))}return c}if(a=="{"){for(c={};;b||(b=true)){a=r();if(a=="}")break;if(b)if(a==","){a=r();a=="}"&&i()}else i();(a==","||typeof a!="string"||(t?a.charAt(0):
 a[0])!="@"||r()!=":")&&i();c[a.slice(1)]=C(r())}return c}i()}return a},F=function(a,b,e){e=E(a,b,e);e===s?delete a[b]:a[b]=e},E=function(a,b,e){var g=a[b],f;if(typeof g=="object"&&g)if(p.call(g)=="[object Array]")for(f=g.length;f--;)F(g,f,e);else x(g,function(a){F(g,a,e)});return e.call(a,b,g)};o.parse=function(a,c){var e,g;b=0;A=""+a;e=C(r());r()!="$"&&i();b=A=n;return c&&p.call(c)=="[object Function]"?E((g={},g[""]=e,g),"",c):e}}}H&&define(function(){return o})})(this);
 }());
-},{}],"angular-resource":[function(require,module,exports){
+},{}],"es5-shim":[function(require,module,exports){
+module.exports=require('58KmHl');
+},{}],"58KmHl":[function(require,module,exports){
+(function(){// Copyright 2009-2012 by contributors, MIT License
+// vim: ts=4 sts=4 sw=4 expandtab
+
+// Module systems magic dance
+(function (definition) {
+    // RequireJS
+    if (typeof define == "function") {
+        define(definition);
+    // YUI3
+    } else if (typeof YUI == "function") {
+        YUI.add("es5", definition);
+    // CommonJS and <script>
+    } else {
+        definition();
+    }
+})(function () {
+
+/**
+ * Brings an environment as close to ECMAScript 5 compliance
+ * as is possible with the facilities of erstwhile engines.
+ *
+ * Annotated ES5: http://es5.github.com/ (specific links below)
+ * ES5 Spec: http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
+ * Required reading: http://javascriptweblog.wordpress.com/2011/12/05/extending-javascript-natives/
+ */
+
+//
+// Function
+// ========
+//
+
+// ES-5 15.3.4.5
+// http://es5.github.com/#x15.3.4.5
+
+function Empty() {}
+
+if (!Function.prototype.bind) {
+    Function.prototype.bind = function bind(that) { // .length is 1
+        // 1. Let Target be the this value.
+        var target = this;
+        // 2. If IsCallable(Target) is false, throw a TypeError exception.
+        if (typeof target != "function") {
+            throw new TypeError("Function.prototype.bind called on incompatible " + target);
+        }
+        // 3. Let A be a new (possibly empty) internal list of all of the
+        //   argument values provided after thisArg (arg1, arg2 etc), in order.
+        // XXX slicedArgs will stand in for "A" if used
+        var args = _Array_slice_.call(arguments, 1); // for normal call
+        // 4. Let F be a new native ECMAScript object.
+        // 11. Set the [[Prototype]] internal property of F to the standard
+        //   built-in Function prototype object as specified in 15.3.3.1.
+        // 12. Set the [[Call]] internal property of F as described in
+        //   15.3.4.5.1.
+        // 13. Set the [[Construct]] internal property of F as described in
+        //   15.3.4.5.2.
+        // 14. Set the [[HasInstance]] internal property of F as described in
+        //   15.3.4.5.3.
+        var bound = function () {
+
+            if (this instanceof bound) {
+                // 15.3.4.5.2 [[Construct]]
+                // When the [[Construct]] internal method of a function object,
+                // F that was created using the bind function is called with a
+                // list of arguments ExtraArgs, the following steps are taken:
+                // 1. Let target be the value of F's [[TargetFunction]]
+                //   internal property.
+                // 2. If target has no [[Construct]] internal method, a
+                //   TypeError exception is thrown.
+                // 3. Let boundArgs be the value of F's [[BoundArgs]] internal
+                //   property.
+                // 4. Let args be a new list containing the same values as the
+                //   list boundArgs in the same order followed by the same
+                //   values as the list ExtraArgs in the same order.
+                // 5. Return the result of calling the [[Construct]] internal
+                //   method of target providing args as the arguments.
+
+                var result = target.apply(
+                    this,
+                    args.concat(_Array_slice_.call(arguments))
+                );
+                if (Object(result) === result) {
+                    return result;
+                }
+                return this;
+
+            } else {
+                // 15.3.4.5.1 [[Call]]
+                // When the [[Call]] internal method of a function object, F,
+                // which was created using the bind function is called with a
+                // this value and a list of arguments ExtraArgs, the following
+                // steps are taken:
+                // 1. Let boundArgs be the value of F's [[BoundArgs]] internal
+                //   property.
+                // 2. Let boundThis be the value of F's [[BoundThis]] internal
+                //   property.
+                // 3. Let target be the value of F's [[TargetFunction]] internal
+                //   property.
+                // 4. Let args be a new list containing the same values as the
+                //   list boundArgs in the same order followed by the same
+                //   values as the list ExtraArgs in the same order.
+                // 5. Return the result of calling the [[Call]] internal method
+                //   of target providing boundThis as the this value and
+                //   providing args as the arguments.
+
+                // equiv: target.call(this, ...boundArgs, ...args)
+                return target.apply(
+                    that,
+                    args.concat(_Array_slice_.call(arguments))
+                );
+
+            }
+
+        };
+        if(target.prototype) {
+            Empty.prototype = target.prototype;
+            bound.prototype = new Empty();
+            // Clean up dangling references.
+            Empty.prototype = null;
+        }
+        // XXX bound.length is never writable, so don't even try
+        //
+        // 15. If the [[Class]] internal property of Target is "Function", then
+        //     a. Let L be the length property of Target minus the length of A.
+        //     b. Set the length own property of F to either 0 or L, whichever is
+        //       larger.
+        // 16. Else set the length own property of F to 0.
+        // 17. Set the attributes of the length own property of F to the values
+        //   specified in 15.3.5.1.
+
+        // TODO
+        // 18. Set the [[Extensible]] internal property of F to true.
+
+        // TODO
+        // 19. Let thrower be the [[ThrowTypeError]] function Object (13.2.3).
+        // 20. Call the [[DefineOwnProperty]] internal method of F with
+        //   arguments "caller", PropertyDescriptor {[[Get]]: thrower, [[Set]]:
+        //   thrower, [[Enumerable]]: false, [[Configurable]]: false}, and
+        //   false.
+        // 21. Call the [[DefineOwnProperty]] internal method of F with
+        //   arguments "arguments", PropertyDescriptor {[[Get]]: thrower,
+        //   [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false},
+        //   and false.
+
+        // TODO
+        // NOTE Function objects created using Function.prototype.bind do not
+        // have a prototype property or the [[Code]], [[FormalParameters]], and
+        // [[Scope]] internal properties.
+        // XXX can't delete prototype in pure-js.
+
+        // 22. Return F.
+        return bound;
+    };
+}
+
+// Shortcut to an often accessed properties, in order to avoid multiple
+// dereference that costs universally.
+// _Please note: Shortcuts are defined after `Function.prototype.bind` as we
+// us it in defining shortcuts.
+var call = Function.prototype.call;
+var prototypeOfArray = Array.prototype;
+var prototypeOfObject = Object.prototype;
+var _Array_slice_ = prototypeOfArray.slice;
+// Having a toString local variable name breaks in Opera so use _toString.
+var _toString = call.bind(prototypeOfObject.toString);
+var owns = call.bind(prototypeOfObject.hasOwnProperty);
+
+// If JS engine supports accessors creating shortcuts.
+var defineGetter;
+var defineSetter;
+var lookupGetter;
+var lookupSetter;
+var supportsAccessors;
+if ((supportsAccessors = owns(prototypeOfObject, "__defineGetter__"))) {
+    defineGetter = call.bind(prototypeOfObject.__defineGetter__);
+    defineSetter = call.bind(prototypeOfObject.__defineSetter__);
+    lookupGetter = call.bind(prototypeOfObject.__lookupGetter__);
+    lookupSetter = call.bind(prototypeOfObject.__lookupSetter__);
+}
+
+//
+// Array
+// =====
+//
+
+// ES5 15.4.4.12
+// http://es5.github.com/#x15.4.4.12
+// Default value for second param
+// [bugfix, ielt9, old browsers]
+// IE < 9 bug: [1,2].splice(0).join("") == "" but should be "12"
+if ([1,2].splice(0).length != 2) {
+    var array_splice = Array.prototype.splice;
+
+    if(function() { // test IE < 9 to splice bug - see issue #138
+        function makeArray(l) {
+            var a = [];
+            while (l--) {
+                a.unshift(l)
+            }
+            return a
+        }
+
+        var array = []
+            , lengthBefore
+        ;
+
+        array.splice.bind(array, 0, 0).apply(null, makeArray(20));
+        array.splice.bind(array, 0, 0).apply(null, makeArray(26));
+
+        lengthBefore = array.length; //20
+        array.splice(5, 0, "XXX"); // add one element
+
+        if(lengthBefore + 1 == array.length) {
+            return true;// has right splice implementation without bugs
+        }
+        // else {
+        //    IE8 bug
+        // }
+    }()) {//IE 6/7
+        Array.prototype.splice = function(start, deleteCount) {
+            if (!arguments.length) {
+                return [];
+            } else {
+                return array_splice.apply(this, [
+                    start === void 0 ? 0 : start,
+                    deleteCount === void 0 ? (this.length - start) : deleteCount
+                ].concat(_Array_slice_.call(arguments, 2)))
+            }
+        };
+    }
+    else {//IE8
+        Array.prototype.splice = function(start, deleteCount) {
+            var result
+                , args = _Array_slice_.call(arguments, 2)
+                , addElementsCount = args.length
+            ;
+
+            if(!arguments.length) {
+                return [];
+            }
+
+            if(start === void 0) { // default
+                start = 0;
+            }
+            if(deleteCount === void 0) { // default
+                deleteCount = this.length - start;
+            }
+
+            if(addElementsCount > 0) {
+                if(deleteCount <= 0) {
+                    if(start == this.length) { // tiny optimisation #1
+                        this.push.apply(this, args);
+                        return [];
+                    }
+
+                    if(start == 0) { // tiny optimisation #2
+                        this.unshift.apply(this, args);
+                        return [];
+                    }
+                }
+
+                // Array.prototype.splice implementation
+                result = _Array_slice_.call(this, start, start + deleteCount);// delete part
+                args.push.apply(args, _Array_slice_.call(this, start + deleteCount, this.length));// right part
+                args.unshift.apply(args, _Array_slice_.call(this, 0, start));// left part
+
+                // delete all items from this array and replace it to 'left part' + _Array_slice_.call(arguments, 2) + 'right part'
+                args.unshift(0, this.length);
+
+                array_splice.apply(this, args);
+
+                return result;
+            }
+
+            return array_splice.call(this, start, deleteCount);
+        }
+
+    }
+}
+
+// ES5 15.4.4.12
+// http://es5.github.com/#x15.4.4.13
+// Return len+argCount.
+// [bugfix, ielt8]
+// IE < 8 bug: [].unshift(0) == undefined but should be "1"
+if ([].unshift(0) != 1) {
+    var array_unshift = Array.prototype.unshift;
+    Array.prototype.unshift = function() {
+        array_unshift.apply(this, arguments);
+        return this.length;
+    };
+}
+
+// ES5 15.4.3.2
+// http://es5.github.com/#x15.4.3.2
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/isArray
+if (!Array.isArray) {
+    Array.isArray = function isArray(obj) {
+        return _toString(obj) == "[object Array]";
+    };
+}
+
+// The IsCallable() check in the Array functions
+// has been replaced with a strict check on the
+// internal class of the object to trap cases where
+// the provided function was actually a regular
+// expression literal, which in V8 and
+// JavaScriptCore is a typeof "function".  Only in
+// V8 are regular expression literals permitted as
+// reduce parameters, so it is desirable in the
+// general case for the shim to match the more
+// strict and common behavior of rejecting regular
+// expressions.
+
+// ES5 15.4.4.18
+// http://es5.github.com/#x15.4.4.18
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/array/forEach
+
+// Check failure of by-index access of string characters (IE < 9)
+// and failure of `0 in boxedString` (Rhino)
+var boxedString = Object("a"),
+    splitString = boxedString[0] != "a" || !(0 in boxedString);
+
+if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function forEach(fun /*, thisp*/) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            thisp = arguments[1],
+            i = -1,
+            length = self.length >>> 0;
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(); // TODO message
+        }
+
+        while (++i < length) {
+            if (i in self) {
+                // Invoke the callback function with call, passing arguments:
+                // context, property value, property key, thisArg object
+                // context
+                fun.call(thisp, self[i], i, object);
+            }
+        }
+    };
+}
+
+// ES5 15.4.4.19
+// http://es5.github.com/#x15.4.4.19
+// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/map
+if (!Array.prototype.map) {
+    Array.prototype.map = function map(fun /*, thisp*/) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            length = self.length >>> 0,
+            result = Array(length),
+            thisp = arguments[1];
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        for (var i = 0; i < length; i++) {
+            if (i in self)
+                result[i] = fun.call(thisp, self[i], i, object);
+        }
+        return result;
+    };
+}
+
+// ES5 15.4.4.20
+// http://es5.github.com/#x15.4.4.20
+// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/filter
+if (!Array.prototype.filter) {
+    Array.prototype.filter = function filter(fun /*, thisp */) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                    object,
+            length = self.length >>> 0,
+            result = [],
+            value,
+            thisp = arguments[1];
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        for (var i = 0; i < length; i++) {
+            if (i in self) {
+                value = self[i];
+                if (fun.call(thisp, value, i, object)) {
+                    result.push(value);
+                }
+            }
+        }
+        return result;
+    };
+}
+
+// ES5 15.4.4.16
+// http://es5.github.com/#x15.4.4.16
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every
+if (!Array.prototype.every) {
+    Array.prototype.every = function every(fun /*, thisp */) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            length = self.length >>> 0,
+            thisp = arguments[1];
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        for (var i = 0; i < length; i++) {
+            if (i in self && !fun.call(thisp, self[i], i, object)) {
+                return false;
+            }
+        }
+        return true;
+    };
+}
+
+// ES5 15.4.4.17
+// http://es5.github.com/#x15.4.4.17
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some
+if (!Array.prototype.some) {
+    Array.prototype.some = function some(fun /*, thisp */) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            length = self.length >>> 0,
+            thisp = arguments[1];
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        for (var i = 0; i < length; i++) {
+            if (i in self && fun.call(thisp, self[i], i, object)) {
+                return true;
+            }
+        }
+        return false;
+    };
+}
+
+// ES5 15.4.4.21
+// http://es5.github.com/#x15.4.4.21
+// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduce
+if (!Array.prototype.reduce) {
+    Array.prototype.reduce = function reduce(fun /*, initial*/) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            length = self.length >>> 0;
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        // no value to return if no initial value and an empty array
+        if (!length && arguments.length == 1) {
+            throw new TypeError("reduce of empty array with no initial value");
+        }
+
+        var i = 0;
+        var result;
+        if (arguments.length >= 2) {
+            result = arguments[1];
+        } else {
+            do {
+                if (i in self) {
+                    result = self[i++];
+                    break;
+                }
+
+                // if array contains no values, no initial value to return
+                if (++i >= length) {
+                    throw new TypeError("reduce of empty array with no initial value");
+                }
+            } while (true);
+        }
+
+        for (; i < length; i++) {
+            if (i in self) {
+                result = fun.call(void 0, result, self[i], i, object);
+            }
+        }
+
+        return result;
+    };
+}
+
+// ES5 15.4.4.22
+// http://es5.github.com/#x15.4.4.22
+// https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/reduceRight
+if (!Array.prototype.reduceRight) {
+    Array.prototype.reduceRight = function reduceRight(fun /*, initial*/) {
+        var object = toObject(this),
+            self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                object,
+            length = self.length >>> 0;
+
+        // If no callback function or if callback is not a callable function
+        if (_toString(fun) != "[object Function]") {
+            throw new TypeError(fun + " is not a function");
+        }
+
+        // no value to return if no initial value, empty array
+        if (!length && arguments.length == 1) {
+            throw new TypeError("reduceRight of empty array with no initial value");
+        }
+
+        var result, i = length - 1;
+        if (arguments.length >= 2) {
+            result = arguments[1];
+        } else {
+            do {
+                if (i in self) {
+                    result = self[i--];
+                    break;
+                }
+
+                // if array contains no values, no initial value to return
+                if (--i < 0) {
+                    throw new TypeError("reduceRight of empty array with no initial value");
+                }
+            } while (true);
+        }
+
+        if (i < 0) {
+            return result;
+        }
+
+        do {
+            if (i in this) {
+                result = fun.call(void 0, result, self[i], i, object);
+            }
+        } while (i--);
+
+        return result;
+    };
+}
+
+// ES5 15.4.4.14
+// http://es5.github.com/#x15.4.4.14
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
+if (!Array.prototype.indexOf || ([0, 1].indexOf(1, 2) != -1)) {
+    Array.prototype.indexOf = function indexOf(sought /*, fromIndex */ ) {
+        var self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                toObject(this),
+            length = self.length >>> 0;
+
+        if (!length) {
+            return -1;
+        }
+
+        var i = 0;
+        if (arguments.length > 1) {
+            i = toInteger(arguments[1]);
+        }
+
+        // handle negative indices
+        i = i >= 0 ? i : Math.max(0, length + i);
+        for (; i < length; i++) {
+            if (i in self && self[i] === sought) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
+
+// ES5 15.4.4.15
+// http://es5.github.com/#x15.4.4.15
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf
+if (!Array.prototype.lastIndexOf || ([0, 1].lastIndexOf(0, -3) != -1)) {
+    Array.prototype.lastIndexOf = function lastIndexOf(sought /*, fromIndex */) {
+        var self = splitString && _toString(this) == "[object String]" ?
+                this.split("") :
+                toObject(this),
+            length = self.length >>> 0;
+
+        if (!length) {
+            return -1;
+        }
+        var i = length - 1;
+        if (arguments.length > 1) {
+            i = Math.min(i, toInteger(arguments[1]));
+        }
+        // handle negative indices
+        i = i >= 0 ? i : length - Math.abs(i);
+        for (; i >= 0; i--) {
+            if (i in self && sought === self[i]) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
+
+//
+// Object
+// ======
+//
+
+// ES5 15.2.3.14
+// http://es5.github.com/#x15.2.3.14
+if (!Object.keys) {
+    // http://whattheheadsaid.com/2010/10/a-safer-object-keys-compatibility-implementation
+    var hasDontEnumBug = true,
+        dontEnums = [
+            "toString",
+            "toLocaleString",
+            "valueOf",
+            "hasOwnProperty",
+            "isPrototypeOf",
+            "propertyIsEnumerable",
+            "constructor"
+        ],
+        dontEnumsLength = dontEnums.length;
+
+    for (var key in {"toString": null}) {
+        hasDontEnumBug = false;
+    }
+
+    Object.keys = function keys(object) {
+
+        if (
+            (typeof object != "object" && typeof object != "function") ||
+            object === null
+        ) {
+            throw new TypeError("Object.keys called on a non-object");
+        }
+
+        var keys = [];
+        for (var name in object) {
+            if (owns(object, name)) {
+                keys.push(name);
+            }
+        }
+
+        if (hasDontEnumBug) {
+            for (var i = 0, ii = dontEnumsLength; i < ii; i++) {
+                var dontEnum = dontEnums[i];
+                if (owns(object, dontEnum)) {
+                    keys.push(dontEnum);
+                }
+            }
+        }
+        return keys;
+    };
+
+}
+
+//
+// Date
+// ====
+//
+
+// ES5 15.9.5.43
+// http://es5.github.com/#x15.9.5.43
+// This function returns a String value represent the instance in time
+// represented by this Date object. The format of the String is the Date Time
+// string format defined in 15.9.1.15. All fields are present in the String.
+// The time zone is always UTC, denoted by the suffix Z. If the time value of
+// this object is not a finite Number a RangeError exception is thrown.
+var negativeDate = -62198755200000,
+    negativeYearString = "-000001";
+if (
+    !Date.prototype.toISOString ||
+    (new Date(negativeDate).toISOString().indexOf(negativeYearString) === -1)
+) {
+    Date.prototype.toISOString = function toISOString() {
+        var result, length, value, year, month;
+        if (!isFinite(this)) {
+            throw new RangeError("Date.prototype.toISOString called on non-finite value.");
+        }
+
+        year = this.getUTCFullYear();
+
+        month = this.getUTCMonth();
+        // see https://github.com/kriskowal/es5-shim/issues/111
+        year += Math.floor(month / 12);
+        month = (month % 12 + 12) % 12;
+
+        // the date time string format is specified in 15.9.1.15.
+        result = [month + 1, this.getUTCDate(),
+            this.getUTCHours(), this.getUTCMinutes(), this.getUTCSeconds()];
+        year = (
+            (year < 0 ? "-" : (year > 9999 ? "+" : "")) +
+            ("00000" + Math.abs(year))
+            .slice(0 <= year && year <= 9999 ? -4 : -6)
+        );
+
+        length = result.length;
+        while (length--) {
+            value = result[length];
+            // pad months, days, hours, minutes, and seconds to have two
+            // digits.
+            if (value < 10) {
+                result[length] = "0" + value;
+            }
+        }
+        // pad milliseconds to have three digits.
+        return (
+            year + "-" + result.slice(0, 2).join("-") +
+            "T" + result.slice(2).join(":") + "." +
+            ("000" + this.getUTCMilliseconds()).slice(-3) + "Z"
+        );
+    };
+}
+
+
+// ES5 15.9.5.44
+// http://es5.github.com/#x15.9.5.44
+// This function provides a String representation of a Date object for use by
+// JSON.stringify (15.12.3).
+var dateToJSONIsSupported = false;
+try {
+    dateToJSONIsSupported = (
+        Date.prototype.toJSON &&
+        new Date(NaN).toJSON() === null &&
+        new Date(negativeDate).toJSON().indexOf(negativeYearString) !== -1 &&
+        Date.prototype.toJSON.call({ // generic
+            toISOString: function () {
+                return true;
+            }
+        })
+    );
+} catch (e) {
+}
+if (!dateToJSONIsSupported) {
+    Date.prototype.toJSON = function toJSON(key) {
+        // When the toJSON method is called with argument key, the following
+        // steps are taken:
+
+        // 1.  Let O be the result of calling ToObject, giving it the this
+        // value as its argument.
+        // 2. Let tv be toPrimitive(O, hint Number).
+        var o = Object(this),
+            tv = toPrimitive(o),
+            toISO;
+        // 3. If tv is a Number and is not finite, return null.
+        if (typeof tv === "number" && !isFinite(tv)) {
+            return null;
+        }
+        // 4. Let toISO be the result of calling the [[Get]] internal method of
+        // O with argument "toISOString".
+        toISO = o.toISOString;
+        // 5. If IsCallable(toISO) is false, throw a TypeError exception.
+        if (typeof toISO != "function") {
+            throw new TypeError("toISOString property is not callable");
+        }
+        // 6. Return the result of calling the [[Call]] internal method of
+        //  toISO with O as the this value and an empty argument list.
+        return toISO.call(o);
+
+        // NOTE 1 The argument is ignored.
+
+        // NOTE 2 The toJSON function is intentionally generic; it does not
+        // require that its this value be a Date object. Therefore, it can be
+        // transferred to other kinds of objects for use as a method. However,
+        // it does require that any such object have a toISOString method. An
+        // object is free to use the argument key to filter its
+        // stringification.
+    };
+}
+
+// ES5 15.9.4.2
+// http://es5.github.com/#x15.9.4.2
+// based on work shared by Daniel Friesen (dantman)
+// http://gist.github.com/303249
+if (!Date.parse || "Date.parse is buggy") {
+    // XXX global assignment won't work in embeddings that use
+    // an alternate object for the context.
+    Date = (function(NativeDate) {
+
+        // Date.length === 7
+        function Date(Y, M, D, h, m, s, ms) {
+            var length = arguments.length;
+            if (this instanceof NativeDate) {
+                var date = length == 1 && String(Y) === Y ? // isString(Y)
+                    // We explicitly pass it through parse:
+                    new NativeDate(Date.parse(Y)) :
+                    // We have to manually make calls depending on argument
+                    // length here
+                    length >= 7 ? new NativeDate(Y, M, D, h, m, s, ms) :
+                    length >= 6 ? new NativeDate(Y, M, D, h, m, s) :
+                    length >= 5 ? new NativeDate(Y, M, D, h, m) :
+                    length >= 4 ? new NativeDate(Y, M, D, h) :
+                    length >= 3 ? new NativeDate(Y, M, D) :
+                    length >= 2 ? new NativeDate(Y, M) :
+                    length >= 1 ? new NativeDate(Y) :
+                                  new NativeDate();
+                // Prevent mixups with unfixed Date object
+                date.constructor = Date;
+                return date;
+            }
+            return NativeDate.apply(this, arguments);
+        };
+
+        // 15.9.1.15 Date Time String Format.
+        var isoDateExpression = new RegExp("^" +
+            "(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign +
+                                      // 6-digit extended year
+            "(?:-(\\d{2})" + // optional month capture
+            "(?:-(\\d{2})" + // optional day capture
+            "(?:" + // capture hours:minutes:seconds.milliseconds
+                "T(\\d{2})" + // hours capture
+                ":(\\d{2})" + // minutes capture
+                "(?:" + // optional :seconds.milliseconds
+                    ":(\\d{2})" + // seconds capture
+                    "(?:(\\.\\d{1,}))?" + // milliseconds capture
+                ")?" +
+            "(" + // capture UTC offset component
+                "Z|" + // UTC capture
+                "(?:" + // offset specifier +/-hours:minutes
+                    "([-+])" + // sign capture
+                    "(\\d{2})" + // hours offset capture
+                    ":(\\d{2})" + // minutes offset capture
+                ")" +
+            ")?)?)?)?" +
+        "$");
+
+        var months = [
+            0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365
+        ];
+
+        function dayFromMonth(year, month) {
+            var t = month > 1 ? 1 : 0;
+            return (
+                months[month] +
+                Math.floor((year - 1969 + t) / 4) -
+                Math.floor((year - 1901 + t) / 100) +
+                Math.floor((year - 1601 + t) / 400) +
+                365 * (year - 1970)
+            );
+        }
+
+        // Copy any custom methods a 3rd party library may have added
+        for (var key in NativeDate) {
+            Date[key] = NativeDate[key];
+        }
+
+        // Copy "native" methods explicitly; they may be non-enumerable
+        Date.now = NativeDate.now;
+        Date.UTC = NativeDate.UTC;
+        Date.prototype = NativeDate.prototype;
+        Date.prototype.constructor = Date;
+
+        // Upgrade Date.parse to handle simplified ISO 8601 strings
+        Date.parse = function parse(string) {
+            var match = isoDateExpression.exec(string);
+            if (match) {
+                // parse months, days, hours, minutes, seconds, and milliseconds
+                // provide default values if necessary
+                // parse the UTC offset component
+                var year = Number(match[1]),
+                    month = Number(match[2] || 1) - 1,
+                    day = Number(match[3] || 1) - 1,
+                    hour = Number(match[4] || 0),
+                    minute = Number(match[5] || 0),
+                    second = Number(match[6] || 0),
+                    millisecond = Math.floor(Number(match[7] || 0) * 1000),
+                    // When time zone is missed, local offset should be used
+                    // (ES 5.1 bug)
+                    // see https://bugs.ecmascript.org/show_bug.cgi?id=112
+                    offset = !match[4] || match[8] ?
+                        0 : Number(new NativeDate(1970, 0)),
+                    signOffset = match[9] === "-" ? 1 : -1,
+                    hourOffset = Number(match[10] || 0),
+                    minuteOffset = Number(match[11] || 0),
+                    result;
+                if (
+                    hour < (
+                        minute > 0 || second > 0 || millisecond > 0 ?
+                        24 : 25
+                    ) &&
+                    minute < 60 && second < 60 && millisecond < 1000 &&
+                    month > -1 && month < 12 && hourOffset < 24 &&
+                    minuteOffset < 60 && // detect invalid offsets
+                    day > -1 &&
+                    day < (
+                        dayFromMonth(year, month + 1) -
+                        dayFromMonth(year, month)
+                    )
+                ) {
+                    result = (
+                        (dayFromMonth(year, month) + day) * 24 +
+                        hour +
+                        hourOffset * signOffset
+                    ) * 60;
+                    result = (
+                        (result + minute + minuteOffset * signOffset) * 60 +
+                        second
+                    ) * 1000 + millisecond + offset;
+                    if (-8.64e15 <= result && result <= 8.64e15) {
+                        return result;
+                    }
+                }
+                return NaN;
+            }
+            return NativeDate.parse.apply(this, arguments);
+        };
+
+        return Date;
+    })(Date);
+}
+
+// ES5 15.9.4.4
+// http://es5.github.com/#x15.9.4.4
+if (!Date.now) {
+    Date.now = function now() {
+        return new Date().getTime();
+    };
+}
+
+
+//
+// Number
+// ======
+//
+
+// ES5.1 15.7.4.5
+// http://es5.github.com/#x15.7.4.5
+if (!Number.prototype.toFixed || (0.00008).toFixed(3) !== '0.000' || (0.9).toFixed(0) === '0' || (1.255).toFixed(2) !== '1.25' || (1000000000000000128).toFixed(0) !== "1000000000000000128") {
+    // Hide these variables and functions
+    (function () {
+        var base, size, data, i;
+
+        base = 1e7;
+        size = 6;
+        data = [0, 0, 0, 0, 0, 0];
+
+        function multiply(n, c) {
+            var i = -1;
+            while (++i < size) {
+                c += n * data[i];
+                data[i] = c % base;
+                c = Math.floor(c / base);
+            }
+        }
+
+        function divide(n) {
+            var i = size, c = 0;
+            while (--i >= 0) {
+                c += data[i];
+                data[i] = Math.floor(c / n);
+                c = (c % n) * base;
+            }
+        }
+
+        function toString() {
+            var i = size;
+            var s = '';
+            while (--i >= 0) {
+                if (s !== '' || i === 0 || data[i] !== 0) {
+                    var t = String(data[i]);
+                    if (s === '') {
+                        s = t;
+                    } else {
+                        s += '0000000'.slice(0, 7 - t.length) + t;
+                    }
+                }
+            }
+            return s;
+        }
+
+        function pow(x, n, acc) {
+            return (n === 0 ? acc : (n % 2 === 1 ? pow(x, n - 1, acc * x) : pow(x * x, n / 2, acc)));
+        }
+
+        function log(x) {
+            var n = 0;
+            while (x >= 4096) {
+                n += 12;
+                x /= 4096;
+            }
+            while (x >= 2) {
+                n += 1;
+                x /= 2;
+            }
+            return n;
+        }
+
+        Number.prototype.toFixed = function (fractionDigits) {
+            var f, x, s, m, e, z, j, k;
+
+            // Test for NaN and round fractionDigits down
+            f = Number(fractionDigits);
+            f = f !== f ? 0 : Math.floor(f);
+
+            if (f < 0 || f > 20) {
+                throw new RangeError("Number.toFixed called with invalid number of decimals");
+            }
+
+            x = Number(this);
+
+            // Test for NaN
+            if (x !== x) {
+                return "NaN";
+            }
+
+            // If it is too big or small, return the string value of the number
+            if (x <= -1e21 || x >= 1e21) {
+                return String(x);
+            }
+
+            s = "";
+
+            if (x < 0) {
+                s = "-";
+                x = -x;
+            }
+
+            m = "0";
+
+            if (x > 1e-21) {
+                // 1e-21 < x < 1e21
+                // -70 < log2(x) < 70
+                e = log(x * pow(2, 69, 1)) - 69;
+                z = (e < 0 ? x * pow(2, -e, 1) : x / pow(2, e, 1));
+                z *= 0x10000000000000; // Math.pow(2, 52);
+                e = 52 - e;
+
+                // -18 < e < 122
+                // x = z / 2 ^ e
+                if (e > 0) {
+                    multiply(0, z);
+                    j = f;
+
+                    while (j >= 7) {
+                        multiply(1e7, 0);
+                        j -= 7;
+                    }
+
+                    multiply(pow(10, j, 1), 0);
+                    j = e - 1;
+
+                    while (j >= 23) {
+                        divide(1 << 23);
+                        j -= 23;
+                    }
+
+                    divide(1 << j);
+                    multiply(1, 1);
+                    divide(2);
+                    m = toString();
+                } else {
+                    multiply(0, z);
+                    multiply(1 << (-e), 0);
+                    m = toString() + '0.00000000000000000000'.slice(2, 2 + f);
+                }
+            }
+
+            if (f > 0) {
+                k = m.length;
+
+                if (k <= f) {
+                    m = s + '0.0000000000000000000'.slice(0, f - k + 2) + m;
+                } else {
+                    m = s + m.slice(0, k - f) + '.' + m.slice(k - f);
+                }
+            } else {
+                m = s + m;
+            }
+
+            return m;
+        }
+    }());
+}
+
+
+//
+// String
+// ======
+//
+
+
+// ES5 15.5.4.14
+// http://es5.github.com/#x15.5.4.14
+
+// [bugfix, IE lt 9, firefox 4, Konqueror, Opera, obscure browsers]
+// Many browsers do not split properly with regular expressions or they
+// do not perform the split correctly under obscure conditions.
+// See http://blog.stevenlevithan.com/archives/cross-browser-split
+// I've tested in many browsers and this seems to cover the deviant ones:
+//    'ab'.split(/(?:ab)*/) should be ["", ""], not [""]
+//    '.'.split(/(.?)(.?)/) should be ["", ".", "", ""], not ["", ""]
+//    'tesst'.split(/(s)*/) should be ["t", undefined, "e", "s", "t"], not
+//       [undefined, "t", undefined, "e", ...]
+//    ''.split(/.?/) should be [], not [""]
+//    '.'.split(/()()/) should be ["."], not ["", "", "."]
+
+var string_split = String.prototype.split;
+if (
+    'ab'.split(/(?:ab)*/).length !== 2 ||
+    '.'.split(/(.?)(.?)/).length !== 4 ||
+    'tesst'.split(/(s)*/)[1] === "t" ||
+    ''.split(/.?/).length === 0 ||
+    '.'.split(/()()/).length > 1
+) {
+    (function () {
+        var compliantExecNpcg = /()??/.exec("")[1] === void 0; // NPCG: nonparticipating capturing group
+
+        String.prototype.split = function (separator, limit) {
+            var string = this;
+            if (separator === void 0 && limit === 0)
+                return [];
+
+            // If `separator` is not a regex, use native split
+            if (Object.prototype.toString.call(separator) !== "[object RegExp]") {
+                return string_split.apply(this, arguments);
+            }
+
+            var output = [],
+                flags = (separator.ignoreCase ? "i" : "") +
+                        (separator.multiline  ? "m" : "") +
+                        (separator.extended   ? "x" : "") + // Proposed for ES6
+                        (separator.sticky     ? "y" : ""), // Firefox 3+
+                lastLastIndex = 0,
+                // Make `global` and avoid `lastIndex` issues by working with a copy
+                separator = new RegExp(separator.source, flags + "g"),
+                separator2, match, lastIndex, lastLength;
+            string += ""; // Type-convert
+            if (!compliantExecNpcg) {
+                // Doesn't need flags gy, but they don't hurt
+                separator2 = new RegExp("^" + separator.source + "$(?!\\s)", flags);
+            }
+            /* Values for `limit`, per the spec:
+             * If undefined: 4294967295 // Math.pow(2, 32) - 1
+             * If 0, Infinity, or NaN: 0
+             * If positive number: limit = Math.floor(limit); if (limit > 4294967295) limit -= 4294967296;
+             * If negative number: 4294967296 - Math.floor(Math.abs(limit))
+             * If other: Type-convert, then use the above rules
+             */
+            limit = limit === void 0 ?
+                -1 >>> 0 : // Math.pow(2, 32) - 1
+                limit >>> 0; // ToUint32(limit)
+            while (match = separator.exec(string)) {
+                // `separator.lastIndex` is not reliable cross-browser
+                lastIndex = match.index + match[0].length;
+                if (lastIndex > lastLastIndex) {
+                    output.push(string.slice(lastLastIndex, match.index));
+                    // Fix browsers whose `exec` methods don't consistently return `undefined` for
+                    // nonparticipating capturing groups
+                    if (!compliantExecNpcg && match.length > 1) {
+                        match[0].replace(separator2, function () {
+                            for (var i = 1; i < arguments.length - 2; i++) {
+                                if (arguments[i] === void 0) {
+                                    match[i] = void 0;
+                                }
+                            }
+                        });
+                    }
+                    if (match.length > 1 && match.index < string.length) {
+                        Array.prototype.push.apply(output, match.slice(1));
+                    }
+                    lastLength = match[0].length;
+                    lastLastIndex = lastIndex;
+                    if (output.length >= limit) {
+                        break;
+                    }
+                }
+                if (separator.lastIndex === match.index) {
+                    separator.lastIndex++; // Avoid an infinite loop
+                }
+            }
+            if (lastLastIndex === string.length) {
+                if (lastLength || !separator.test("")) {
+                    output.push("");
+                }
+            } else {
+                output.push(string.slice(lastLastIndex));
+            }
+            return output.length > limit ? output.slice(0, limit) : output;
+        };
+    }());
+
+// [bugfix, chrome]
+// If separator is undefined, then the result array contains just one String,
+// which is the this value (converted to a String). If limit is not undefined,
+// then the output array is truncated so that it contains no more than limit
+// elements.
+// "0".split(undefined, 0) -> []
+} else if ("0".split(void 0, 0).length) {
+    String.prototype.split = function(separator, limit) {
+        if (separator === void 0 && limit === 0) return [];
+        return string_split.apply(this, arguments);
+    }
+}
+
+
+// ECMA-262, 3rd B.2.3
+// Note an ECMAScript standart, although ECMAScript 3rd Edition has a
+// non-normative section suggesting uniform semantics and it should be
+// normalized across all browsers
+// [bugfix, IE lt 9] IE < 9 substr() with negative value not working in IE
+if("".substr && "0b".substr(-1) !== "b") {
+    var string_substr = String.prototype.substr;
+    /**
+     *  Get the substring of a string
+     *  @param  {integer}  start   where to start the substring
+     *  @param  {integer}  length  how many characters to return
+     *  @return {string}
+     */
+    String.prototype.substr = function(start, length) {
+        return string_substr.call(
+            this,
+            start < 0 ? ((start = this.length + start) < 0 ? 0 : start) : start,
+            length
+        );
+    }
+}
+
+// ES5 15.5.4.20
+// http://es5.github.com/#x15.5.4.20
+var ws = "\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
+    "\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028" +
+    "\u2029\uFEFF";
+if (!String.prototype.trim || ws.trim()) {
+    // http://blog.stevenlevithan.com/archives/faster-trim-javascript
+    // http://perfectionkills.com/whitespace-deviations/
+    ws = "[" + ws + "]";
+    var trimBeginRegexp = new RegExp("^" + ws + ws + "*"),
+        trimEndRegexp = new RegExp(ws + ws + "*$");
+    String.prototype.trim = function trim() {
+        if (this === void 0 || this === null) {
+            throw new TypeError("can't convert "+this+" to object");
+        }
+        return String(this)
+            .replace(trimBeginRegexp, "")
+            .replace(trimEndRegexp, "");
+    };
+}
+
+//
+// Util
+// ======
+//
+
+// ES5 9.4
+// http://es5.github.com/#x9.4
+// http://jsperf.com/to-integer
+
+function toInteger(n) {
+    n = +n;
+    if (n !== n) { // isNaN
+        n = 0;
+    } else if (n !== 0 && n !== (1/0) && n !== -(1/0)) {
+        n = (n > 0 || -1) * Math.floor(Math.abs(n));
+    }
+    return n;
+}
+
+function isPrimitive(input) {
+    var type = typeof input;
+    return (
+        input === null ||
+        type === "undefined" ||
+        type === "boolean" ||
+        type === "number" ||
+        type === "string"
+    );
+}
+
+function toPrimitive(input) {
+    var val, valueOf, toString;
+    if (isPrimitive(input)) {
+        return input;
+    }
+    valueOf = input.valueOf;
+    if (typeof valueOf === "function") {
+        val = valueOf.call(input);
+        if (isPrimitive(val)) {
+            return val;
+        }
+    }
+    toString = input.toString;
+    if (typeof toString === "function") {
+        val = toString.call(input);
+        if (isPrimitive(val)) {
+            return val;
+        }
+    }
+    throw new TypeError();
+}
+
+// ES5 9.9
+// http://es5.github.com/#x9.9
+var toObject = function (o) {
+    if (o == null) { // this matches both null and undefined
+        throw new TypeError("can't convert "+o+" to object");
+    }
+    return Object(o);
+};
+
+});
+
+})()
+},{}],1:[function(require,module,exports){
+/**
+ * Define the required js libraries needed for this application. The compiler will merge them all into a single download
+ */
+require('jquery');
+require('angular');
+require('angular-cookies');
+require('angular-resource');
+require('angular-sanitize');
+require('angular-route');
+require('angular-ui-router');
+require('ui-bootstrap');
+require('ui-bootstrap-tpls');
+require('commangular');
+require('statehelper');
+require('jquery-ui');
+},{"jquery":"WRX+g2","angular":"fo7oCi","angular-cookies":"14Chnj","angular-resource":"hcChoi","angular-sanitize":"4XF6h/","angular-route":"Wwm8Sa","angular-ui-router":"Houb7Z","ui-bootstrap":"TuHbh3","ui-bootstrap-tpls":"IHhWdR","commangular":"DKmofu","statehelper":"hPp6Ab","jquery-ui":"Zjqsv8"}],"angular-resource":[function(require,module,exports){
 module.exports=require('hcChoi');
 },{}],"hcChoi":[function(require,module,exports){
 /**
@@ -15221,756 +15221,6 @@ angular.module('ui.router.compat')
   .directive('ngView', $ViewDirective);
 })(window, window.angular);
 })()
-},{}],"commangular":[function(require,module,exports){
-module.exports=require('DKmofu');
-},{}],"DKmofu":[function(require,module,exports){
-/**
- * Command pattern implementation for AngularJS
- * @version v0.8.0 - 2013-12-30
- * @link https://github.com/yukatan/commangular
- * @author Jesús Barquín Cheda <yukatan@gmail.com>
- * @license MIT License, http://www.opensource.org/licenses/MIT
- */
-(function(window, angular, undefined) {
-
-	var commangular = window.commangular || (window.commangular = {});
-	var injector;
-	var q;
-	var parse;
-	var commands;
-	var commandNameString = "";
-	var eventNameString = "";
-	var aspects = [];
-	var eventAspects = [];
-	var descriptors = {};
-	var eventInterceptors= {};
-	var interceptorExtractor = /\/(.*)\//;
-	var aspectExtractor = /@([^(]*)\((.*)\)/;
-
-	function escapeRegExp(str) {
-  		return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-	}
-
-	commangular.create = function(commandName, commandFunction, commandConfig) {
-				
-		commands = commangular.commands || (commangular.commands = {});
-		commands[commandName] = {
-			function: commandFunction,
-			config: commandConfig,
-			interceptors:{},
-			commandName:commandName
-		};
-		commandNameString = commandNameString.concat("%" + commandName + "%{" + commandName + "}\n");
-	}
-	commangular.command = commangular.create;
-
-	commangular.aspect = function(aspectDescriptor,aspectFunction,order) {
-		
-		aspects = commangular.aspects || (commangular.aspects = []);
-		var result = aspectExtractor.exec(aspectDescriptor);
-		var poincut = result[1];
-		var matcherString = interceptorExtractor.exec(result[2])[1];
-		var matcher = new RegExp("^%" + matcherString + "%\{(.*)\}$","mg");
-		aspectOrder = order || (order = 0);
-		if(!/(\bBefore\b|\bAfter\b|\bAfterThrowing\b|\bAround\b)/.test(poincut))
-			throw new Error('aspect descriptor ' + aspectDescriptor + ' contains errors');
-		aspects.push({poincut:poincut,
-			matcher:matcher,
-			aspectFunction:aspectFunction,
-			order:aspectOrder,
-			descriptor:aspectDescriptor});
-	}
-
-	commangular.eventAspect = function(aspectDescriptor,aspectFunction,order) {
-		
-		eventAspects = commangular.eventAspects || (commangular.eventAspects = []);
-		var result = aspectExtractor.exec(aspectDescriptor);
-		var poincut = result[1];
-		var matcherString = interceptorExtractor.exec(result[2])[1];
-		var matcher = new RegExp("^%" + matcherString + "%\{(.*)\}$","mg");
-		aspectOrder = order || (order = 0);
-		if(!/(\bBefore\b|\bAfter\b|\bAfterThrowing\b)/.test(poincut))
-			throw new Error('aspect descriptor ' + aspectDescriptor + ' contains errors');
-		eventAspects.push({poincut:poincut,
-			matcher:matcher,
-			aspectFunction:aspectFunction,
-			order:aspectOrder,
-			descriptor:aspectDescriptor});
-	}
-
-	commangular.resolver = function (commandName,resolverFunction) {
-
-		var aspectResolverFunction = ['lastResult','processor',function(lastResult,processor) {
-			return {
-				execute : function() {
-					var result = injector.invoke(resolverFunction,this,{result:lastResult});
-					processor.setData('lastResult',result);
-					if(commands[commandName] && 
-						commands[commandName].config &&
-						commands[commandName].config.resultKey)
-							processor.setData(commands[commandName].config.resultKey,result);
-					return result;	
-				}
-			}
-		}];	
-		var aspectDescriptor = "@After(/" + escapeRegExp(commandName) + "/)";
-		commangular.aspect(aspectDescriptor,aspectResolverFunction,-100);
-	}
-
-	commangular.reset = function() {
-
-		aspects = [];
-		eventAspects = [];
-		commands = {};
-		commangular.aspects = [];
-		commangular.eventAspects = [];
-		commangular.commands = {};
-		eventInterceptors = {};
-		commandNameString = "";
-		eventNameString = "";
-
-	}
-
-	//----------------------------------------------------------------------------------------------------------------------
-
-	function CommandDescriptor(commandType) {
-
-		this.commandType = commandType;
-		this.descriptors = [];
-		this.command = null;
-		this.commandConfig;
-		this.interceptors;
-	}
-
-	CommandDescriptor.prototype.asSequence = function() {
-
-		this.commandType = 'S';
-		return this;
-	};
-
-	CommandDescriptor.prototype.asParallel = function() {
-
-		this.commandType = 'P';
-		return this;			
-	};
-
-	CommandDescriptor.prototype.asFlow = function() {
-
-		this.commandType = 'F';
-		return this;			
-	};
-
-	CommandDescriptor.prototype.add =  function(command) {
-
-		if (angular.isString(command)) {
-
-			command = commangular.commands[command];
-		}
-
-		if (command instanceof CommandDescriptor) {
-
-			this.descriptors.push(command);
-			return this;
-		}
-		var commandDescriptor = new CommandDescriptor('E');
-		commandDescriptor.command = command.function;
-		commandDescriptor.commandConfig = command.config;
-		commandDescriptor.interceptors = command.interceptors;
-		this.descriptors.push(commandDescriptor);
-		return this;
-	};
-	CommandDescriptor.prototype.link = function(expresion, services) {
-
-		var descriptor = new LinkDescriptor(expresion,services,this);
-		this.descriptors.push(descriptor); 
-		return descriptor;
-	};
-	
-	//----------------------------------------------------------------------------------------------------------------------
-	function LinkDescriptor(expresion,services,parent) {
-
-		this.commandDescriptor;
-		this.expresion = expresion;
-		this.services = services;
-		this.parent = parent;
-	}
-
-	LinkDescriptor.prototype.to = function(command){
-
-		if (angular.isString(command)) {
-
-			command = commangular.commands[command];
-		}
-
-		if (command instanceof CommandDescriptor) {
-
-			this.commandDescriptor = command;
-			return this.parent;
-		}
-		var commandDescriptor = new CommandDescriptor('E');
-		commandDescriptor.command = command.function;
-		commandDescriptor.commandConfig = command.config;
-		commandDescriptor.interceptors = command.interceptors;
-		this.commandDescriptor = commandDescriptor;
-		return this.parent;
-	}; 
-		
-	//----------------------------------------------------------------------------------------------------------------------
-	function CommandBase(context) {
-
-		this.context = context;
-		this.deferred = null;
-
-	}
-	//----------------------------------------------------------------------------------------------------------------------
-
-	function Command(command, context, config,interceptors) {
-
-		CommandBase.apply(this, [context]);
-		this.command = command;
-		this.commandConfig = config;
-		this.interceptors = interceptors;
-		
-		this.execute = function() {
-
-			var self = this;
-			var context = this.context;
-			var result;					
-			var deferExecution = q.defer();
-			deferExecution.resolve();
-			return deferExecution.promise
-				.then(function () {
-					return context.intercept('Before',interceptors);
-				})
-				.then(function() {
-					var deferred = q.defer();
-					try{
-						if(interceptors['Around']) 
-							result = context.intercept('Around',interceptors,self.command);
-						else {
-							command = context.instantiate(self.command,true);
-							result = context.invoke(command.execute, command);
-						}
-						context.processResults(result,config).then(function(){
-							deferred.resolve();
-						},function(error){
-							deferred.reject(error);
-						});	
-					}catch(error){
-						deferred.reject(error);
-					}
-					return deferred.promise;
-				})
-				.then(function(){
-					return context.intercept('After',interceptors);
-				})
-				.then(function(){
-					if(context.currentCommand.hasOwnProperty('onResult'))
-						context.currentCommand.onResult(result);
-				},function(error) {
-					var deferred = q.defer();
-					if(context.canceled){
-						deferred.reject(error);
-						return deferred.promise;
-					}
-					if(context.currentCommand && context.currentCommand.hasOwnProperty('onError'))
-						context.currentCommand.onError(error);
-					context.getContextData().lastError = error;
-					context.intercept('AfterThrowing',interceptors).then(function(){
-						deferred.reject(error)
-					},function(){deferred.reject(error)});
-					return deferred.promise;
-				});
-			}
-	}
-	Command.prototype = new CommandBase();
-	Command.prototype.constructor = Command;
-
-	//----------------------------------------------------------------------------------------------------------------------
-	function CommandGroup(context, descriptors) {
-
-		CommandBase.apply(this, [context]);
-		this.descriptors = descriptors;
-
-		this.start = function() {
-
-			this.deferred = q.defer();
-			this.execute();
-			return this.deferred.promise;
-		}
-	}
-	CommandGroup.prototype = new CommandBase();
-	CommandGroup.prototype.constructor = CommandGroup;
-	//----------------------------------------------------------------------------------------------------------------------
-
-	function CommandSequence(context, descriptors) {
-
-		CommandGroup.apply(this, [context, descriptors]);
-		var currentIndex = 0;
-
-		this.execute = function() {
-			var self = this;
-			var commandDescriptor = this.descriptors[currentIndex];
-			var command = this.context.instantiateDescriptor(commandDescriptor);
-
-			if (command instanceof Command) {
-				command.execute().then(
-					function() {
-						self.nextCommand();
-					},
-					function(error) {
-						self.deferred.reject(error);
-					});
-		}
-			else
-				command.start().then(
-					function() {
-						self.nextCommand();
-					},
-					function(error) {
-						self.deferred.reject(error);
-					});
-		};
-		this.nextCommand = function() {
-
-			if (++currentIndex == this.descriptors.length) {
-
-				this.deferred.resolve();
-				return;
-			}
-			this.execute();
-		};
-	}
-	CommandSequence.prototype = new CommandGroup();
-	CommandSequence.prototype.constructor = CommandSequence;
-	//----------------------------------------------------------------------------------------------------------------------
-	function CommandParallel(context, descriptors) {
-
-		CommandGroup.apply(this, [context, descriptors]);
-		var totalComplete = 0;
-
-		this.execute = function() {
-
-			var self = this;
-			for (var x = 0; x < this.descriptors.length; x++) {
-
-				var commandDescriptor = this.descriptors[x];
-				var command = this.context.instantiateDescriptor(commandDescriptor);
-
-				if (command instanceof Command)
-					command.execute().then(
-						function() {
-							self.checkComplete();
-						},
-						function(error) {
-							self.deferred.reject(error);
-						});
-				else
-					command.start().then(
-						function() {
-							self.checkComplete();
-						},
-						function(error) {
-							self.deferred.reject(error);
-						});
-			}
-		};
-		this.checkComplete = function() {
-
-			if (++totalComplete == this.descriptors.length)
-				this.deferred.resolve();
-		};
-	}
-
-	CommandParallel.prototype = new CommandGroup();
-	CommandParallel.prototype.constructor = CommandParallel;
-	//----------------------------------------------------------------------------------------------------------------------
-	function CommandFlow(context, descriptors) {
-
-		CommandGroup.apply(this, [context, descriptors]);
-		var currentIndex = 0;
-		this.execute = function() {
-
-			var self = this;
-			var descriptor = this.descriptors[currentIndex];
-			var locals = {};
-			if(descriptor.services) {
-				
-				angular.forEach(descriptor.services.split(','), function(service, key){
-					locals[service] = injector.get(service);
-				});
-			}
-			var result = parse(descriptor.expresion)(this.context.contextData,locals);
-			if(typeof result != 'boolean')
-				throw new Error('Result from expresion :' + descriptor.expresion + ' is not boolean');
-			if(result){
-
-				var command = this.context.instantiateDescriptor(descriptor.commandDescriptor);
-				if (command instanceof Command)
-					command.execute().then(function() {
-						self.next();
-					});
-				else
-					command.start().then(function() {
-						self.next();
-				});
-			} else {
-				this.next();
-			}
-			
-		};
-
-		this.next = function() {
-
-			if (++currentIndex == this.descriptors.length) {
-
-				this.deferred.resolve();
-				return;
-			}
-			this.execute();
-		};
-	}
-
-	CommandParallel.prototype = new CommandGroup();
-	CommandParallel.prototype.constructor = CommandFlow;
-	//----------------------------------------------------------------------------------------------------------------------
-	function CommandContext(data) {
-
-		this.contextData = data || {};
-		this.instantiator = new CommandInstantiator();
-		this.contextData.commandModel = {};
-		this.currentDeferred;
-		this.currentCommand;
-		this.canceled = false;
-	}
-
-	CommandContext.prototype.instantiateDescriptor = function(descriptor) {
-
-		var command = this.instantiator.instantiate(descriptor, this);
-		return command;
-	};
-
-	CommandContext.prototype.instantiate = function(funct,isCommand) {
-
-		instance = injector.instantiate(funct,this.contextData);
-		if(isCommand) this.currentCommand = instance;
-		return instance;
-	}
-
-	CommandContext.prototype.processResults = function(result,config) {
-
-		var self = this;
-		var deferred = q.defer();
-		if (!result) {
-
-			deferred.resolve();
-			return deferred.promise;
-		}
-
-		var promise = q.when(result).then(function(data) {
-
-			self.contextData.lastResult = data;
-			if (config && config.resultKey) {
-				self.contextData[config.resultKey] = data;
-			}
-			deferred.resolve();
-		},function(error){deferred.reject(error)});
-		return deferred.promise;
-	};
-
-	CommandContext.prototype.invoke = function(theFunction, self) {
-
-		return injector.invoke(theFunction,self,this.contextData);
-	};
-	
-	CommandContext.prototype.getContextData = function(resultKey) {
-
-		return this.contextData;
-	};
-	
-	CommandContext.prototype.intercept = function(poincut,interceptors,command) {
-
-		var self = this;
-		var deferred = q.defer();
-		if(!interceptors[poincut]){
-			deferred.resolve();
-			return deferred.promise;
-		}
-		interceptors[poincut].sort(function(a,b){
-			return b.order - a.order;
-		})
-		switch(poincut) {
-			case 'Around' : {
-				var processor = new AroundProcessor(command,null,self,deferred);
-				angular.forEach(interceptors[poincut],function(value){
-					processor = new AroundProcessor(value.func,processor,self,deferred);
-				});
-				q.when(processor.invoke()).then(function(result){
-					deferred.resolve(result);
-				},function(error){
-					deferred.reject(error);});
-				break;
-			}
-			default : {
-				var processor = this.contextData.processor = new InterceptorProcessor(self,deferred);
-				interceptors[poincut].reverse();
-				var x = 0;
-				(function invocationChain(){
-					
-					try{
-						if(x == interceptors[poincut].length || self.canceled){
-							deferred.resolve();
-							return;
-						}
-						var interceptor = self.instantiate(interceptors[poincut][x++].func,false);
-						q.when(self.invoke(interceptor.execute,interceptor)).then(function(){
-							invocationChain();
-						});
-					}catch(error){deferred.reject(error)};
-					
-				})();
-				break;
-			}
-		}
-		return deferred.promise;
-	};
-	//----------------------------------------------------------------------------------------------------------------------
-
-	function CommandInstantiator() {};
-
-	CommandInstantiator.prototype.instantiate = function(descriptor,context) {
-
-		switch (descriptor.commandType) {
-
-			case 'S':
-				return new CommandSequence(context, descriptor.descriptors);
-			case 'P':
-				return new CommandParallel(context, descriptor.descriptors);
-			case 'E':
-				return new Command(descriptor.command, context, descriptor.commandConfig,descriptor.interceptors);
-			case 'F':
-				return new CommandFlow(context, descriptor.descriptors);
-		}
-	};
-	//----------------------------------------------------------------------------------------------------------------------
-	function InterceptorProcessor(context,deferred) {
-
-		this.deferred = deferred;
-		this.context = context;
-		
-	}
-	InterceptorProcessor.prototype.cancel = function(reason) {
-		
-		this.context.canceled = true;		
-		this.deferred.reject(reason);
-	}
-	InterceptorProcessor.prototype.setData = function(key,value) {
-		
-		this.context.contextData[key] = value;		
-	}
-	InterceptorProcessor.prototype.getData = function(key) {
-		
-		return this.context.contextData[key];		
-	}
-	//----------------------------------------------------------------------------------------------------------------------
-	function AroundProcessor(executed,next,context,deferred) {
-		
-		InterceptorProcessor.apply(this,[context,deferred]);
-		this.executed = executed;
-		this.next = next;
-	}
-	AroundProcessor.prototype = new InterceptorProcessor();
-	AroundProcessor.prototype.constructor = AroundProcessor;
-
-	AroundProcessor.prototype.invoke = function() {
-			
-		var self = this;
-		var deferred = q.defer();
-		self.context.contextData.processor = self.next;
-		var instance = self.context.instantiate(self.executed,this.next == null);
-				
-		q.when(self.context.invoke(instance.execute,instance)).then(function(data){
-			deferred.resolve(data);
-		},function(error){
-			deferred.reject(error)
-		});
-		return deferred.promise;
-	}
-		
-	//----------------------------------------------------------------------------------------------------------------------
-	angular.module('commangular', [])
-		.provider('$commangular', function() {
-						
-			return {
-				$get: ['commandExecutor',
-					function(commandExecutor) {
-						
-						return {
-							dispatch: function(eventName, data) {
-
-								return commandExecutor.execute(eventName, data);
-							}
-						}
-					}
-				],
-		
-				mapTo: function(eventName) {
-
-					var interceptorChain = eventInterceptors[eventName] || (eventInterceptors[eventName] = {});
-					if(!interceptorChain.interceptors)
-						interceptorChain.interceptors = {};
-					eventNameString = eventNameString.concat("%" + eventName + "%{" + eventName + "}\n");
-					var descriptor = new CommandDescriptor();
-					descriptors[eventName] = descriptor;
-					return descriptor
-				},
-
-				asSequence : function() {
-
-					return new CommandDescriptor('S');
-				},
-				asParallel : function() {
-
-					return new CommandDescriptor('P');
-				},
-				asFlow : function() {
-
-					return new CommandDescriptor('F');
-				},
-				
-				findCommand: function(eventName) {
-
-					return descriptors[eventName];
-				},
-				modelBinding : function(eventName,serviceName,resultKey) {
-
-					
-				}
-			};
-		});
-	//-----------------------------------------------------------------------------------------------------------------
-	angular.module('commangular')
-		.service('commandExecutor',function() {
-
-				return {
-					
-					execute: function(eventName, data) {
-						var deferred = q.defer();
-						var context = new CommandContext(data);
-						var command = context.instantiateDescriptor(descriptors[eventName]);
-						var interceptors = eventInterceptors[eventName].interceptors;
-						deferred.resolve();
-						return deferred.promise.then(function() {
-														
-							return context.intercept('Before',interceptors);
-						}).then(function() {
-
-							return command.start();
-						}).then(function(){
-
-							return context.intercept('After',interceptors);	
-						}).then(function() {
-							
-							return context.contextData;
-						},function(error){
-							var defer = q.defer();
-							context.intercept('AfterThrowing',interceptors).then(function(){
-								defer.reject(error);
-							},function(){defer.reject(error)});
-							return defer.promise;
-						});
-						
-					},
-				};
-			}
-		);
-	//------------------------------------------------------------------------------------------------------------------
-	angular.module('commangular')
-		.run(['$rootScope','$commangular','$injector','$q','$parse',function($rootScope,$commangular,$injector,$q,$parse) {
-			
-			injector = $injector;
-			q = $q;
-			parse = $parse; 
-			angular.forEach(aspects,function(aspect){
-							
-				while((result = aspect.matcher.exec(commandNameString)) != null) {
-					
-					if(!commands[result[1]].interceptors[aspect.poincut])
-						commands[result[1]].interceptors[aspect.poincut] = [];
-					commands[result[1]].interceptors[aspect.poincut]
-							.push({func:aspect.aspectFunction,order:aspect.order});
-				}
-			});
-			commandNameString = "";
-			angular.forEach(eventAspects,function(aspect){
-							
-				while((result = aspect.matcher.exec(eventNameString)) != null) {
-										
-					if(eventInterceptors[result[1]] &&
-						!eventInterceptors[result[1]].interceptors[aspect.poincut])
-						eventInterceptors[result[1]].interceptors[aspect.poincut] = [];
-					eventInterceptors[result[1]].interceptors[aspect.poincut]
-							.push({func:aspect.aspectFunction,order:aspect.order});
-				}
-			});
-			eventNameString = "";
-
-			$rootScope.dispatch = function(eventName,data) {
-
-				return $commangular.dispatch(eventName,data);
-			}
-
-		}]); 
-	//------------------------------------------------------------------------------------------------------------------ 
-})(window, angular);
-},{}],"statehelper":[function(require,module,exports){
-module.exports=require('hPp6Ab');
-},{}],"hPp6Ab":[function(require,module,exports){
-/**
- * A helper module for AngularUI Router, which allows you to define your states as an object tree.
- * @author Mark Lagendijk <mark@lagendijk.info>
- * @license MIT
- */
-angular.module('ui.router.stateHelper', ['ui.router'])
-    .provider('stateHelper', function($stateProvider){
-        var self = this;
-
-        /**
-         * Recursively sets the states using $stateProvider.state.
-         * Child states are defined via a `children` property.
-         *
-         * 1. Recursively calls itself for all descendant states, by traversing the `children` properties.
-         * 2. Converts all the state names to dot notation, of the form `grandfather.father.state`.
-         * 3. Sets `parent` property of the descendant states.
-         *
-         * @param {Object} state - A regular ui.router state object.
-         * @param {Array} [state.children] - An optional array of child states.
-         */
-        this.setNestedState = function(state){
-            fixStateName(state);
-            $stateProvider.state(state);
-
-            if(state.children && state.children.length){
-                state.children.forEach(function(childState){
-                    childState.parent = state;
-                    self.setNestedState(childState);
-                });
-            }
-        };
-
-        self.$get = angular.noop;
-
-        /**
-         * Converts the name of a state to dot notation, of the form `grandfather.father.state`.
-         * @param state
-         */
-        function fixStateName(state){
-            if(state.parent){
-                state.name = state.parent.name + '.' + state.name;
-            }
-        }
-    })
-;
 },{}],"ui-bootstrap":[function(require,module,exports){
 module.exports=require('TuHbh3');
 },{}],"TuHbh3":[function(require,module,exports){
@@ -19402,6 +18652,756 @@ angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position', 'ui.bootstrap
     };
   });
 })()
+},{}],"commangular":[function(require,module,exports){
+module.exports=require('DKmofu');
+},{}],"DKmofu":[function(require,module,exports){
+/**
+ * Command pattern implementation for AngularJS
+ * @version v0.8.0 - 2013-12-30
+ * @link https://github.com/yukatan/commangular
+ * @author Jesús Barquín Cheda <yukatan@gmail.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+(function(window, angular, undefined) {
+
+	var commangular = window.commangular || (window.commangular = {});
+	var injector;
+	var q;
+	var parse;
+	var commands;
+	var commandNameString = "";
+	var eventNameString = "";
+	var aspects = [];
+	var eventAspects = [];
+	var descriptors = {};
+	var eventInterceptors= {};
+	var interceptorExtractor = /\/(.*)\//;
+	var aspectExtractor = /@([^(]*)\((.*)\)/;
+
+	function escapeRegExp(str) {
+  		return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+	}
+
+	commangular.create = function(commandName, commandFunction, commandConfig) {
+				
+		commands = commangular.commands || (commangular.commands = {});
+		commands[commandName] = {
+			function: commandFunction,
+			config: commandConfig,
+			interceptors:{},
+			commandName:commandName
+		};
+		commandNameString = commandNameString.concat("%" + commandName + "%{" + commandName + "}\n");
+	}
+	commangular.command = commangular.create;
+
+	commangular.aspect = function(aspectDescriptor,aspectFunction,order) {
+		
+		aspects = commangular.aspects || (commangular.aspects = []);
+		var result = aspectExtractor.exec(aspectDescriptor);
+		var poincut = result[1];
+		var matcherString = interceptorExtractor.exec(result[2])[1];
+		var matcher = new RegExp("^%" + matcherString + "%\{(.*)\}$","mg");
+		aspectOrder = order || (order = 0);
+		if(!/(\bBefore\b|\bAfter\b|\bAfterThrowing\b|\bAround\b)/.test(poincut))
+			throw new Error('aspect descriptor ' + aspectDescriptor + ' contains errors');
+		aspects.push({poincut:poincut,
+			matcher:matcher,
+			aspectFunction:aspectFunction,
+			order:aspectOrder,
+			descriptor:aspectDescriptor});
+	}
+
+	commangular.eventAspect = function(aspectDescriptor,aspectFunction,order) {
+		
+		eventAspects = commangular.eventAspects || (commangular.eventAspects = []);
+		var result = aspectExtractor.exec(aspectDescriptor);
+		var poincut = result[1];
+		var matcherString = interceptorExtractor.exec(result[2])[1];
+		var matcher = new RegExp("^%" + matcherString + "%\{(.*)\}$","mg");
+		aspectOrder = order || (order = 0);
+		if(!/(\bBefore\b|\bAfter\b|\bAfterThrowing\b)/.test(poincut))
+			throw new Error('aspect descriptor ' + aspectDescriptor + ' contains errors');
+		eventAspects.push({poincut:poincut,
+			matcher:matcher,
+			aspectFunction:aspectFunction,
+			order:aspectOrder,
+			descriptor:aspectDescriptor});
+	}
+
+	commangular.resolver = function (commandName,resolverFunction) {
+
+		var aspectResolverFunction = ['lastResult','processor',function(lastResult,processor) {
+			return {
+				execute : function() {
+					var result = injector.invoke(resolverFunction,this,{result:lastResult});
+					processor.setData('lastResult',result);
+					if(commands[commandName] && 
+						commands[commandName].config &&
+						commands[commandName].config.resultKey)
+							processor.setData(commands[commandName].config.resultKey,result);
+					return result;	
+				}
+			}
+		}];	
+		var aspectDescriptor = "@After(/" + escapeRegExp(commandName) + "/)";
+		commangular.aspect(aspectDescriptor,aspectResolverFunction,-100);
+	}
+
+	commangular.reset = function() {
+
+		aspects = [];
+		eventAspects = [];
+		commands = {};
+		commangular.aspects = [];
+		commangular.eventAspects = [];
+		commangular.commands = {};
+		eventInterceptors = {};
+		commandNameString = "";
+		eventNameString = "";
+
+	}
+
+	//----------------------------------------------------------------------------------------------------------------------
+
+	function CommandDescriptor(commandType) {
+
+		this.commandType = commandType;
+		this.descriptors = [];
+		this.command = null;
+		this.commandConfig;
+		this.interceptors;
+	}
+
+	CommandDescriptor.prototype.asSequence = function() {
+
+		this.commandType = 'S';
+		return this;
+	};
+
+	CommandDescriptor.prototype.asParallel = function() {
+
+		this.commandType = 'P';
+		return this;			
+	};
+
+	CommandDescriptor.prototype.asFlow = function() {
+
+		this.commandType = 'F';
+		return this;			
+	};
+
+	CommandDescriptor.prototype.add =  function(command) {
+
+		if (angular.isString(command)) {
+
+			command = commangular.commands[command];
+		}
+
+		if (command instanceof CommandDescriptor) {
+
+			this.descriptors.push(command);
+			return this;
+		}
+		var commandDescriptor = new CommandDescriptor('E');
+		commandDescriptor.command = command.function;
+		commandDescriptor.commandConfig = command.config;
+		commandDescriptor.interceptors = command.interceptors;
+		this.descriptors.push(commandDescriptor);
+		return this;
+	};
+	CommandDescriptor.prototype.link = function(expresion, services) {
+
+		var descriptor = new LinkDescriptor(expresion,services,this);
+		this.descriptors.push(descriptor); 
+		return descriptor;
+	};
+	
+	//----------------------------------------------------------------------------------------------------------------------
+	function LinkDescriptor(expresion,services,parent) {
+
+		this.commandDescriptor;
+		this.expresion = expresion;
+		this.services = services;
+		this.parent = parent;
+	}
+
+	LinkDescriptor.prototype.to = function(command){
+
+		if (angular.isString(command)) {
+
+			command = commangular.commands[command];
+		}
+
+		if (command instanceof CommandDescriptor) {
+
+			this.commandDescriptor = command;
+			return this.parent;
+		}
+		var commandDescriptor = new CommandDescriptor('E');
+		commandDescriptor.command = command.function;
+		commandDescriptor.commandConfig = command.config;
+		commandDescriptor.interceptors = command.interceptors;
+		this.commandDescriptor = commandDescriptor;
+		return this.parent;
+	}; 
+		
+	//----------------------------------------------------------------------------------------------------------------------
+	function CommandBase(context) {
+
+		this.context = context;
+		this.deferred = null;
+
+	}
+	//----------------------------------------------------------------------------------------------------------------------
+
+	function Command(command, context, config,interceptors) {
+
+		CommandBase.apply(this, [context]);
+		this.command = command;
+		this.commandConfig = config;
+		this.interceptors = interceptors;
+		
+		this.execute = function() {
+
+			var self = this;
+			var context = this.context;
+			var result;					
+			var deferExecution = q.defer();
+			deferExecution.resolve();
+			return deferExecution.promise
+				.then(function () {
+					return context.intercept('Before',interceptors);
+				})
+				.then(function() {
+					var deferred = q.defer();
+					try{
+						if(interceptors['Around']) 
+							result = context.intercept('Around',interceptors,self.command);
+						else {
+							command = context.instantiate(self.command,true);
+							result = context.invoke(command.execute, command);
+						}
+						context.processResults(result,config).then(function(){
+							deferred.resolve();
+						},function(error){
+							deferred.reject(error);
+						});	
+					}catch(error){
+						deferred.reject(error);
+					}
+					return deferred.promise;
+				})
+				.then(function(){
+					return context.intercept('After',interceptors);
+				})
+				.then(function(){
+					if(context.currentCommand.hasOwnProperty('onResult'))
+						context.currentCommand.onResult(result);
+				},function(error) {
+					var deferred = q.defer();
+					if(context.canceled){
+						deferred.reject(error);
+						return deferred.promise;
+					}
+					if(context.currentCommand && context.currentCommand.hasOwnProperty('onError'))
+						context.currentCommand.onError(error);
+					context.getContextData().lastError = error;
+					context.intercept('AfterThrowing',interceptors).then(function(){
+						deferred.reject(error)
+					},function(){deferred.reject(error)});
+					return deferred.promise;
+				});
+			}
+	}
+	Command.prototype = new CommandBase();
+	Command.prototype.constructor = Command;
+
+	//----------------------------------------------------------------------------------------------------------------------
+	function CommandGroup(context, descriptors) {
+
+		CommandBase.apply(this, [context]);
+		this.descriptors = descriptors;
+
+		this.start = function() {
+
+			this.deferred = q.defer();
+			this.execute();
+			return this.deferred.promise;
+		}
+	}
+	CommandGroup.prototype = new CommandBase();
+	CommandGroup.prototype.constructor = CommandGroup;
+	//----------------------------------------------------------------------------------------------------------------------
+
+	function CommandSequence(context, descriptors) {
+
+		CommandGroup.apply(this, [context, descriptors]);
+		var currentIndex = 0;
+
+		this.execute = function() {
+			var self = this;
+			var commandDescriptor = this.descriptors[currentIndex];
+			var command = this.context.instantiateDescriptor(commandDescriptor);
+
+			if (command instanceof Command) {
+				command.execute().then(
+					function() {
+						self.nextCommand();
+					},
+					function(error) {
+						self.deferred.reject(error);
+					});
+		}
+			else
+				command.start().then(
+					function() {
+						self.nextCommand();
+					},
+					function(error) {
+						self.deferred.reject(error);
+					});
+		};
+		this.nextCommand = function() {
+
+			if (++currentIndex == this.descriptors.length) {
+
+				this.deferred.resolve();
+				return;
+			}
+			this.execute();
+		};
+	}
+	CommandSequence.prototype = new CommandGroup();
+	CommandSequence.prototype.constructor = CommandSequence;
+	//----------------------------------------------------------------------------------------------------------------------
+	function CommandParallel(context, descriptors) {
+
+		CommandGroup.apply(this, [context, descriptors]);
+		var totalComplete = 0;
+
+		this.execute = function() {
+
+			var self = this;
+			for (var x = 0; x < this.descriptors.length; x++) {
+
+				var commandDescriptor = this.descriptors[x];
+				var command = this.context.instantiateDescriptor(commandDescriptor);
+
+				if (command instanceof Command)
+					command.execute().then(
+						function() {
+							self.checkComplete();
+						},
+						function(error) {
+							self.deferred.reject(error);
+						});
+				else
+					command.start().then(
+						function() {
+							self.checkComplete();
+						},
+						function(error) {
+							self.deferred.reject(error);
+						});
+			}
+		};
+		this.checkComplete = function() {
+
+			if (++totalComplete == this.descriptors.length)
+				this.deferred.resolve();
+		};
+	}
+
+	CommandParallel.prototype = new CommandGroup();
+	CommandParallel.prototype.constructor = CommandParallel;
+	//----------------------------------------------------------------------------------------------------------------------
+	function CommandFlow(context, descriptors) {
+
+		CommandGroup.apply(this, [context, descriptors]);
+		var currentIndex = 0;
+		this.execute = function() {
+
+			var self = this;
+			var descriptor = this.descriptors[currentIndex];
+			var locals = {};
+			if(descriptor.services) {
+				
+				angular.forEach(descriptor.services.split(','), function(service, key){
+					locals[service] = injector.get(service);
+				});
+			}
+			var result = parse(descriptor.expresion)(this.context.contextData,locals);
+			if(typeof result != 'boolean')
+				throw new Error('Result from expresion :' + descriptor.expresion + ' is not boolean');
+			if(result){
+
+				var command = this.context.instantiateDescriptor(descriptor.commandDescriptor);
+				if (command instanceof Command)
+					command.execute().then(function() {
+						self.next();
+					});
+				else
+					command.start().then(function() {
+						self.next();
+				});
+			} else {
+				this.next();
+			}
+			
+		};
+
+		this.next = function() {
+
+			if (++currentIndex == this.descriptors.length) {
+
+				this.deferred.resolve();
+				return;
+			}
+			this.execute();
+		};
+	}
+
+	CommandParallel.prototype = new CommandGroup();
+	CommandParallel.prototype.constructor = CommandFlow;
+	//----------------------------------------------------------------------------------------------------------------------
+	function CommandContext(data) {
+
+		this.contextData = data || {};
+		this.instantiator = new CommandInstantiator();
+		this.contextData.commandModel = {};
+		this.currentDeferred;
+		this.currentCommand;
+		this.canceled = false;
+	}
+
+	CommandContext.prototype.instantiateDescriptor = function(descriptor) {
+
+		var command = this.instantiator.instantiate(descriptor, this);
+		return command;
+	};
+
+	CommandContext.prototype.instantiate = function(funct,isCommand) {
+
+		instance = injector.instantiate(funct,this.contextData);
+		if(isCommand) this.currentCommand = instance;
+		return instance;
+	}
+
+	CommandContext.prototype.processResults = function(result,config) {
+
+		var self = this;
+		var deferred = q.defer();
+		if (!result) {
+
+			deferred.resolve();
+			return deferred.promise;
+		}
+
+		var promise = q.when(result).then(function(data) {
+
+			self.contextData.lastResult = data;
+			if (config && config.resultKey) {
+				self.contextData[config.resultKey] = data;
+			}
+			deferred.resolve();
+		},function(error){deferred.reject(error)});
+		return deferred.promise;
+	};
+
+	CommandContext.prototype.invoke = function(theFunction, self) {
+
+		return injector.invoke(theFunction,self,this.contextData);
+	};
+	
+	CommandContext.prototype.getContextData = function(resultKey) {
+
+		return this.contextData;
+	};
+	
+	CommandContext.prototype.intercept = function(poincut,interceptors,command) {
+
+		var self = this;
+		var deferred = q.defer();
+		if(!interceptors[poincut]){
+			deferred.resolve();
+			return deferred.promise;
+		}
+		interceptors[poincut].sort(function(a,b){
+			return b.order - a.order;
+		})
+		switch(poincut) {
+			case 'Around' : {
+				var processor = new AroundProcessor(command,null,self,deferred);
+				angular.forEach(interceptors[poincut],function(value){
+					processor = new AroundProcessor(value.func,processor,self,deferred);
+				});
+				q.when(processor.invoke()).then(function(result){
+					deferred.resolve(result);
+				},function(error){
+					deferred.reject(error);});
+				break;
+			}
+			default : {
+				var processor = this.contextData.processor = new InterceptorProcessor(self,deferred);
+				interceptors[poincut].reverse();
+				var x = 0;
+				(function invocationChain(){
+					
+					try{
+						if(x == interceptors[poincut].length || self.canceled){
+							deferred.resolve();
+							return;
+						}
+						var interceptor = self.instantiate(interceptors[poincut][x++].func,false);
+						q.when(self.invoke(interceptor.execute,interceptor)).then(function(){
+							invocationChain();
+						});
+					}catch(error){deferred.reject(error)};
+					
+				})();
+				break;
+			}
+		}
+		return deferred.promise;
+	};
+	//----------------------------------------------------------------------------------------------------------------------
+
+	function CommandInstantiator() {};
+
+	CommandInstantiator.prototype.instantiate = function(descriptor,context) {
+
+		switch (descriptor.commandType) {
+
+			case 'S':
+				return new CommandSequence(context, descriptor.descriptors);
+			case 'P':
+				return new CommandParallel(context, descriptor.descriptors);
+			case 'E':
+				return new Command(descriptor.command, context, descriptor.commandConfig,descriptor.interceptors);
+			case 'F':
+				return new CommandFlow(context, descriptor.descriptors);
+		}
+	};
+	//----------------------------------------------------------------------------------------------------------------------
+	function InterceptorProcessor(context,deferred) {
+
+		this.deferred = deferred;
+		this.context = context;
+		
+	}
+	InterceptorProcessor.prototype.cancel = function(reason) {
+		
+		this.context.canceled = true;		
+		this.deferred.reject(reason);
+	}
+	InterceptorProcessor.prototype.setData = function(key,value) {
+		
+		this.context.contextData[key] = value;		
+	}
+	InterceptorProcessor.prototype.getData = function(key) {
+		
+		return this.context.contextData[key];		
+	}
+	//----------------------------------------------------------------------------------------------------------------------
+	function AroundProcessor(executed,next,context,deferred) {
+		
+		InterceptorProcessor.apply(this,[context,deferred]);
+		this.executed = executed;
+		this.next = next;
+	}
+	AroundProcessor.prototype = new InterceptorProcessor();
+	AroundProcessor.prototype.constructor = AroundProcessor;
+
+	AroundProcessor.prototype.invoke = function() {
+			
+		var self = this;
+		var deferred = q.defer();
+		self.context.contextData.processor = self.next;
+		var instance = self.context.instantiate(self.executed,this.next == null);
+				
+		q.when(self.context.invoke(instance.execute,instance)).then(function(data){
+			deferred.resolve(data);
+		},function(error){
+			deferred.reject(error)
+		});
+		return deferred.promise;
+	}
+		
+	//----------------------------------------------------------------------------------------------------------------------
+	angular.module('commangular', [])
+		.provider('$commangular', function() {
+						
+			return {
+				$get: ['commandExecutor',
+					function(commandExecutor) {
+						
+						return {
+							dispatch: function(eventName, data) {
+
+								return commandExecutor.execute(eventName, data);
+							}
+						}
+					}
+				],
+		
+				mapTo: function(eventName) {
+
+					var interceptorChain = eventInterceptors[eventName] || (eventInterceptors[eventName] = {});
+					if(!interceptorChain.interceptors)
+						interceptorChain.interceptors = {};
+					eventNameString = eventNameString.concat("%" + eventName + "%{" + eventName + "}\n");
+					var descriptor = new CommandDescriptor();
+					descriptors[eventName] = descriptor;
+					return descriptor
+				},
+
+				asSequence : function() {
+
+					return new CommandDescriptor('S');
+				},
+				asParallel : function() {
+
+					return new CommandDescriptor('P');
+				},
+				asFlow : function() {
+
+					return new CommandDescriptor('F');
+				},
+				
+				findCommand: function(eventName) {
+
+					return descriptors[eventName];
+				},
+				modelBinding : function(eventName,serviceName,resultKey) {
+
+					
+				}
+			};
+		});
+	//-----------------------------------------------------------------------------------------------------------------
+	angular.module('commangular')
+		.service('commandExecutor',function() {
+
+				return {
+					
+					execute: function(eventName, data) {
+						var deferred = q.defer();
+						var context = new CommandContext(data);
+						var command = context.instantiateDescriptor(descriptors[eventName]);
+						var interceptors = eventInterceptors[eventName].interceptors;
+						deferred.resolve();
+						return deferred.promise.then(function() {
+														
+							return context.intercept('Before',interceptors);
+						}).then(function() {
+
+							return command.start();
+						}).then(function(){
+
+							return context.intercept('After',interceptors);	
+						}).then(function() {
+							
+							return context.contextData;
+						},function(error){
+							var defer = q.defer();
+							context.intercept('AfterThrowing',interceptors).then(function(){
+								defer.reject(error);
+							},function(){defer.reject(error)});
+							return defer.promise;
+						});
+						
+					},
+				};
+			}
+		);
+	//------------------------------------------------------------------------------------------------------------------
+	angular.module('commangular')
+		.run(['$rootScope','$commangular','$injector','$q','$parse',function($rootScope,$commangular,$injector,$q,$parse) {
+			
+			injector = $injector;
+			q = $q;
+			parse = $parse; 
+			angular.forEach(aspects,function(aspect){
+							
+				while((result = aspect.matcher.exec(commandNameString)) != null) {
+					
+					if(!commands[result[1]].interceptors[aspect.poincut])
+						commands[result[1]].interceptors[aspect.poincut] = [];
+					commands[result[1]].interceptors[aspect.poincut]
+							.push({func:aspect.aspectFunction,order:aspect.order});
+				}
+			});
+			commandNameString = "";
+			angular.forEach(eventAspects,function(aspect){
+							
+				while((result = aspect.matcher.exec(eventNameString)) != null) {
+										
+					if(eventInterceptors[result[1]] &&
+						!eventInterceptors[result[1]].interceptors[aspect.poincut])
+						eventInterceptors[result[1]].interceptors[aspect.poincut] = [];
+					eventInterceptors[result[1]].interceptors[aspect.poincut]
+							.push({func:aspect.aspectFunction,order:aspect.order});
+				}
+			});
+			eventNameString = "";
+
+			$rootScope.dispatch = function(eventName,data) {
+
+				return $commangular.dispatch(eventName,data);
+			}
+
+		}]); 
+	//------------------------------------------------------------------------------------------------------------------ 
+})(window, angular);
+},{}],"statehelper":[function(require,module,exports){
+module.exports=require('hPp6Ab');
+},{}],"hPp6Ab":[function(require,module,exports){
+/**
+ * A helper module for AngularUI Router, which allows you to define your states as an object tree.
+ * @author Mark Lagendijk <mark@lagendijk.info>
+ * @license MIT
+ */
+angular.module('ui.router.stateHelper', ['ui.router'])
+    .provider('stateHelper', function($stateProvider){
+        var self = this;
+
+        /**
+         * Recursively sets the states using $stateProvider.state.
+         * Child states are defined via a `children` property.
+         *
+         * 1. Recursively calls itself for all descendant states, by traversing the `children` properties.
+         * 2. Converts all the state names to dot notation, of the form `grandfather.father.state`.
+         * 3. Sets `parent` property of the descendant states.
+         *
+         * @param {Object} state - A regular ui.router state object.
+         * @param {Array} [state.children] - An optional array of child states.
+         */
+        this.setNestedState = function(state){
+            fixStateName(state);
+            $stateProvider.state(state);
+
+            if(state.children && state.children.length){
+                state.children.forEach(function(childState){
+                    childState.parent = state;
+                    self.setNestedState(childState);
+                });
+            }
+        };
+
+        self.$get = angular.noop;
+
+        /**
+         * Converts the name of a state to dot notation, of the form `grandfather.father.state`.
+         * @param state
+         */
+        function fixStateName(state){
+            if(state.parent){
+                state.name = state.parent.name + '.' + state.name;
+            }
+        }
+    })
+;
 },{}],"ui-bootstrap-tpls":[function(require,module,exports){
 module.exports=require('IHhWdR');
 },{}],"IHhWdR":[function(require,module,exports){
