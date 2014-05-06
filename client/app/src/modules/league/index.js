@@ -61,20 +61,29 @@ module.exports = angular.module('loghApp.league', [])
                     }
                 }
             })
-            .state('app.league.edit', {
-                url: '/{leagueId}/edit',
+            .state('app.league.detail', {
+                abstract: true,
+                url: '/{leagueId}',
                 views: {
                     leagueContent: {
-                        templateUrl: 'modules/league/league.edit.tpl.html',
-                        controller: 'EditLeagueController'
+                        templateUrl: 'modules/league/league.detail.tpl.html'
                     }
                 },
                 resolve: {
-                    league: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                    loadLeague: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
                         return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
                     }]
                 }
 
+            })
+            .state('app.league.detail.edit', {
+                url: '/edit',
+                views: {
+                    leagueDetailContent: {
+                        templateUrl: 'modules/league/league.edit.tpl.html',
+                        controller: 'EditLeagueController'
+                    }
+                }
             })
         ;
         $urlRouterProvider.otherwise('/');
