@@ -30,24 +30,24 @@ class API::BaseController < ApplicationController
 
     # 401 - authentication failures
     def not_authorized(message = "Authorization failure. Please sign in or register.", type = DANGER)
-      error(type, message, :unauthorized)
+      error(message, type, :unauthorized)
     end
 
     #403 - authorization failures
-    def forbidden(type = DANGER, message = "Forbidden")
-      error(type, message, :forbidden)
+    def forbidden(message = "Forbidden", type = DANGER)
+      error(message, type, :forbidden)
     end
 
     # 404 - my head if not attached
-    def not_found(type = WARNING, message = "Not Found")
-      error(type, message, :not_found)
+    def not_found(message = "Not Found", type = WARNING)
+      error(message, type, :not_found)
     end
 
     def payload(data, message = '')
       render json: { payload: data, message: { type: SUCCESS, content: message } }, status: :ok
     end
 
-    def error(type, message, status)
+    def error(message, type, status)
       render json: { message: { type: type, content: message } }, status: status
     end
 

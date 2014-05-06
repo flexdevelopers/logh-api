@@ -14,7 +14,7 @@ class API::UsersController < API::BaseController
       access_token.user = user
       payload({ user: access_token.user, token: access_token.token }, "User created for #{access_token.user.email}")
     else
-      error(WARNING, user.errors.full_messages.join(', '), :unprocessable_entity)
+      error(user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
@@ -23,7 +23,7 @@ class API::UsersController < API::BaseController
     if current_user.update(_user_params)
       payload({}, 'User has been updated')
     else
-      error(WARNING, current_user.errors.full_messages.join(', '), :unprocessable_entity)
+      error(current_user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 

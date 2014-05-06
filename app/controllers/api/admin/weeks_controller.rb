@@ -8,7 +8,7 @@ class API::Admin::WeeksController < API::WeeksController
     if @week.save
       render json: @week, status: :created, location: api_admin_season_week_path(@season, @week)
     else
-      error(WARNING, @week.errors.full_messages.join(', '), :unprocessable_entity)
+      error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
@@ -17,7 +17,7 @@ class API::Admin::WeeksController < API::WeeksController
     if @week.update(_week_params)
       head :no_content
     else
-      error(WARNING, @week.errors.full_messages.join(', '), :unprocessable_entity)
+      error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 

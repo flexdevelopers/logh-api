@@ -22,7 +22,7 @@ class API::LeaguesController < API::BaseController
     if @league.save
       payload({ league_id: @league.id }, "#{@league[:name]} league created")
     else
-      error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
+      error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
@@ -32,7 +32,7 @@ class API::LeaguesController < API::BaseController
     if @league.update(_league_params)
       payload({}, "#{@league[:name]} league updated")
     else
-      error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
+      error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
