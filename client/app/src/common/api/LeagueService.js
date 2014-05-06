@@ -34,6 +34,23 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
         return promise;
     };
 
+    this.updateLeague = function(leagueParams) {
+        $log.log('LeagueService: updateLeague');
+        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id,
+            { league: leagueParams })
+            .success(function(data) {
+                $log.log("LeagueService: updateLeague success");
+                messageModel.setMessage(data.message);
+                return data;
+            })
+            .error(function(data) {
+                $log.log("LeagueService: updateLeague failed");
+                return data;
+            });
+
+        return promise;
+    };
+
 };
 
 LeagueService.$inject = ['$http', '$log', '$location', 'apiConfig', 'messageModel'];

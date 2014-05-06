@@ -30,7 +30,7 @@ class API::LeaguesController < API::BaseController
   def update
     return forbidden() if @league.started?
     if @league.update(_league_params)
-      head :no_content
+      payload({}, "#{@league[:name]} league updated")
     else
       error(WARNING, @league.errors.full_messages.join(', '), :unprocessable_entity)
     end
