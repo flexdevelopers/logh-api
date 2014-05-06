@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.password), 'has-feedback': hasError(newLeagueForm.password)}">
-                            <label class="control-label" for="password">Password
+                            <label class="control-label" for="password">League Password
                                 <small ng-show="hasPropertyError(newLeagueForm.password, 'required')">[ Required ]</small>
                                 <small ng-show="hasPropertyError(newLeagueForm.password, 'pattern')">[ Too Short ]</small>
                             </label>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.confirmPassword), 'has-feedback': hasError(newLeagueForm.confirmPassword)}">
-                            <label class="control-label" for="confirmPassword">Confirm Password
+                            <label class="control-label" for="confirmPassword">Confirm League Password
                                 <small ng-show="hasPropertyError(newLeagueForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
                             </label>
                             <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newLeagueData.password_confirmation" match="newLeagueData.password">
