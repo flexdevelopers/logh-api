@@ -26,28 +26,12 @@ describe API::LeaguesController do
 
   # GET /api/seasons/:season_id/leagues/:id
   describe '#show' do
-    context 'when the signed in user is a commish of the league' do
-      let(:league) { FactoryGirl.create(:league, season: season, commishes: [ current_user ]) }
+    context 'when the signed in requests a league' do
+      let(:league) { FactoryGirl.create(:league, season: season, commishes: []) }
       it 'returns the league' do
         get :show, season_id: season.id, id: league.id
         expect(response).to be_success
         expect(json[:payload][:league][:name]).to eq(league.name)
-      end
-    end
-    context 'when the signed in user has a team in the league' do
-      let(:league) { FactoryGirl.create(:league, season: season) }
-      before { FactoryGirl.create(:team, league: league, coaches: [ current_user ]) }
-      it 'returns the league' do
-        get :show, season_id: season.id, id: league.id
-        expect(response).to be_success
-        expect(json[:payload][:league][:name]).to eq(league.name)
-      end
-    end
-    context 'when the signed in user has no team in the league and is not a commish of the league' do
-      let(:league) { FactoryGirl.create(:league, season: season) }
-      it 'returns unauthorized' do
-        get :show, season_id: season.id, id: league.id
-        expect(response.status).to eq(403)
       end
     end
   end

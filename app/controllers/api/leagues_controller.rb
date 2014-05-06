@@ -1,7 +1,6 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
   before_action :_set_league, only: [:show, :update, :destroy]
-  before_action :_verify_league_membership, only: [:show]
   before_action :_verify_league_management, only: [:update, :destroy]
   before_action :_verify_start_week, only: [:create, :update]
 
@@ -54,10 +53,6 @@ class API::LeaguesController < API::BaseController
 
     def _set_league
       @league = @season.leagues.find(params[:id])
-    end
-
-    def _verify_league_membership
-      forbidden() unless _is_commish_of(@league) || _has_team_in(@league)
     end
 
     def _verify_league_management
