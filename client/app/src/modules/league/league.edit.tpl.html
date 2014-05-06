@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-info btn-block" ng-disabled="leagueForm.$invalid" ng-click="updateLeague(leagueData.league)">Update League</button>
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="leagueForm.$pristine || leagueForm.$invalid" ng-click="updateLeague(leagueData.league)">Update League</button>
 
         </form>
     </div>
