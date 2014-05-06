@@ -10,7 +10,7 @@ commangular.create('LoginCommand',
         },
         onError: function(error) {
             $log.log("LoginCommand: error in login: " + error.data);
-            userModel.reset();
+            userModel.resetUser();
         },
         onResult: function(result) {
             $log.log("LoginCommand: login successful ");

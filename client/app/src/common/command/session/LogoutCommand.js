@@ -13,7 +13,7 @@ commangular.create('LogoutCommand',
             },
             onResult: function(result) {
                 $log.log("LogoutCommand: logout successful");
-                userModel.reset();
+                userModel.resetUser();
             }
 
         }

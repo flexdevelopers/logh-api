@@ -23,7 +23,7 @@ var UserModel = function($rootScope, $window, $log) {
         $log.log("UserModel: email: " + user.email);
     };
 
-    this.reset = function() {
+    this.resetUser = function() {
         $window.sessionStorage.removeItem('token');
 
         user = {};
