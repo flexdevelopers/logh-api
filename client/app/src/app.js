@@ -63,7 +63,7 @@ var loghApp = angular.module('loghApp', [
             url: '/',
             templateUrl: 'common/templates/master.tpl.html',
             resolve: {
-                user: function(userService) {
+                loadUser: function(userService) {
                     return userService.getCurrentUser();
                 }
             }
