@@ -20,7 +20,7 @@ describe API::LeaguesController do
     it 'returns a list of leagues for the season' do
       get :index, season_id: season.id
       expect(response).to be_success
-      expect(json.length).to eq(5)
+      expect(json[:payload][:leagues].length).to eq(5)
     end
   end
 

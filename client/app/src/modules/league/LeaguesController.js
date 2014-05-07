@@ -1,7 +1,7 @@
 
-var LeaguesController = function($scope, $log) {
+var LeaguesController = function($scope, $log, leagues) {
 
-    $scope.foo = 'bar';
+    $scope.leagues = leagues.data.payload.leagues;
 
     /**
      * Invoked on startup, like a constructor.
@@ -13,6 +13,6 @@ var LeaguesController = function($scope, $log) {
 
 };
 
-LeaguesController.$inject = ['$scope', '$log'];
+LeaguesController.$inject = ['$scope', '$log', 'leagues'];
 module.exports = LeaguesController;
 

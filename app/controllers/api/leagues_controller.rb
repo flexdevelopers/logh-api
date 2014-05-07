@@ -6,7 +6,7 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues
   def index
-    render json: @season.leagues
+    payload({ leagues: @season.leagues })
   end
 
   # GET /api/seasons/:season_id/leagues/1

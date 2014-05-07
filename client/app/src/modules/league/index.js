@@ -25,7 +25,13 @@ module.exports = angular.module('loghApp.league', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
+                },
+                resolve: {
+                    leagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getSeasonLeagues($stateParams.seasonId);
+                    }]
                 }
+
             })
             .state('app.league', {
                 abstract: true,

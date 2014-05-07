@@ -1,1 +1,29 @@
-<div>here is your list of leagues {{foo}}</div>
+<div class="row">
+    <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#public" data-toggle="tab">Public (234)</a></li>
+            <li class=""><a href="#private" data-toggle="tab">Private (123)</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="public" class="tab-pane fade active in">
+                <div class="list-group">
+                    <a ng-repeat="league in leagues" href="#" class="list-group-item">
+                        <span class="name" style="min-width: 120px; display: inline-block;">{{league.name}}</span>
+                        <span class="">40 teams</span>
+                        <span class="text-muted" style="font-size: 11px;">- Starts Week 1 (9/7/2014)</span>
+                        <span class="badge">Join</span>
+                    </a>
+                </div>
+            </div>
+            <div id="private" class="tab-pane fade">
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <span class="text-center">This tab is empty.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
