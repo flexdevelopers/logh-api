@@ -37,8 +37,8 @@ describe League do
     it { should_not be_valid }
   end
 
-  context 'when league has a name greater than 30 characters' do
-    subject(:league) { FactoryGirl.build(:league, name: 'a' * 31) }
+  context 'when league has a name greater than 25 characters' do
+    subject(:league) { FactoryGirl.build(:league, name: 'a' * 26) }
     it { should_not be_valid }
   end
 
