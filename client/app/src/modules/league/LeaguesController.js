@@ -1,22 +1,11 @@
 
-var LeaguesController = function($scope, $log, leagues) {
+var LeaguesController = function($scope, $log, $state, $stateParams) {
 
-    $scope.leagues = leagues.data.payload.leagues;
+    $scope.seasonId = $stateParams.seasonId;
 
-    $scope.totalItems = 64;
-    $scope.currentPage = 4;
-
-    $scope.setPage = function (pageNo) {
-        $scope.currentPage = pageNo;
+    $scope.isPublic = function() {
+        return $state.current.name == 'app.leagues.public';
     };
-
-    $scope.pageChanged = function() {
-        console.log('Page changed to: ' + $scope.currentPage);
-    };
-
-    $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
-    $scope.bigCurrentPage = 1;
 
     /**
      * Invoked on startup, like a constructor.
@@ -28,6 +17,6 @@ var LeaguesController = function($scope, $log, leagues) {
 
 };
 
-LeaguesController.$inject = ['$scope', '$log', 'leagues'];
+LeaguesController.$inject = ['$scope', '$log', '$state', '$stateParams'];
 module.exports = LeaguesController;
 

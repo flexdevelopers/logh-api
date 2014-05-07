@@ -1,0 +1,18 @@
+<div class="list-group">
+    <a ng-repeat="league in publicLeagues" ui-sref="app.league.detail.join({seasonId:league.season_id, leagueId: league.id})" class="list-group-item">
+        <div class="row">
+            <div class="league-name col-sm-4 col-md-4">{{league.name}}</div>
+            <div class="col-sm-8 col-md-8">
+                <span class="">40 teams</span>
+                <span class="start-week">- Starts Week 1 (9/7/2014)</span>
+                <span class="badge">Join</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--pagination-->
+
+<div class="league-pagination">
+    <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+</div>

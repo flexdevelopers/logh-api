@@ -1,6 +1,8 @@
 
 module.exports = angular.module('loghApp.league', [])
     .controller('LeaguesController', require('./LeaguesController'))
+    .controller('PublicLeaguesController', require('./PublicLeaguesController'))
+    .controller('PrivateLeaguesController', require('./PrivateLeaguesController'))
     .controller('LeagueController', require('./LeagueController'))
     .controller('CreateLeagueController', require('./CreateLeagueController'))
     .controller('EditLeagueController', require('./EditLeagueController'))
@@ -8,6 +10,7 @@ module.exports = angular.module('loghApp.league', [])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.leagues', {
+                abstract: true,
                 url: 'season/{seasonId}/leagues',
                 views: {
                     header: {
@@ -25,13 +28,35 @@ module.exports = angular.module('loghApp.league', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
+                }
+            })
+            .state('app.leagues.public', {
+                url: '/public',
+                views: {
+                    leaguesContent: {
+                        templateUrl: 'modules/league/leagues.public.tpl.html',
+                        controller: 'PublicLeaguesController'
+                    }
                 },
                 resolve: {
-                    leagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                    publicLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
                         return leagueService.getSeasonLeagues($stateParams.seasonId);
                     }]
                 }
-
+            })
+            .state('app.leagues.private', {
+                url: '/private',
+                views: {
+                    leaguesContent: {
+                        templateUrl: 'modules/league/leagues.private.tpl.html',
+                        controller: 'PrivateLeaguesController'
+                    }
+                },
+                resolve: {
+                    privateLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getSeasonLeagues($stateParams.seasonId);
+                    }]
+                }
             })
             .state('app.league', {
                 abstract: true,
