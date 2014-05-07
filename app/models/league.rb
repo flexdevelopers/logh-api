@@ -17,6 +17,8 @@ class League < ActiveRecord::Base
 
   has_secure_password validations: false
 
+  default_scope { order('name') }
+
   def started?
     start_week.starts_at.to_date <= Time.zone.now.to_date
   end
