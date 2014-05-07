@@ -1,29 +1,51 @@
-<div class="row">
-    <div>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#public" data-toggle="tab">Public (234)</a></li>
-            <li class=""><a href="#private" data-toggle="tab">Private (123)</a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div id="public" class="tab-pane fade active in">
-                <div class="list-group">
-                    <a ng-repeat="league in leagues" href="#" class="list-group-item">
-                        <span class="name" style="min-width: 120px; display: inline-block;">{{league.name}}</span>
+<tabset>
+    <tab>
+        <tab-heading class="league-tab-heading">
+            <i class="glyphicon glyphicon-ok-sign"></i> Public <span class="league-count">(852)</span>
+        </tab-heading>
+        <div class="list-group">
+            <a ng-repeat="league in leagues" ui-sref="app.league.detail.join({seasonId:league.season_id, leagueId: league.id})" class="list-group-item">
+                <div class="row">
+                    <div class="league-name col-sm-4 col-md-4">{{league.name}}</div>
+                    <div class="col-sm-8 col-md-8">
                         <span class="">40 teams</span>
-                        <span class="text-muted" style="font-size: 11px;">- Starts Week 1 (9/7/2014)</span>
+                        <span class="start-week">- Starts Week 1 (9/7/2014)</span>
                         <span class="badge">Join</span>
-                    </a>
-                </div>
-            </div>
-            <div id="private" class="tab-pane fade">
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <span class="text-center">This tab is empty.</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
+    </tab>
+    <tab>
+        <tab-heading class="league-tab-heading">
+            <i class="glyphicon glyphicon-lock"></i> Private <span class="league-count">(354)</span>
+        </tab-heading>
+        <div class="list-group">
+            <a ng-repeat="league in leagues" class="list-group-item">
+                <div class="row">
+                    <div class="league-name col-sm-4 col-md-4">{{league.name}}</div>
+                    <div class="col-sm-8 col-md-8">
+                        <span class="">40 teams</span>
+                        <span class="start-week">- Starts Week 1 (9/7/2014)</span>
+                        <span class="badge">Request Invite</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </tab>
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Search by name...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
     </div>
+</tabset>
+
+<!--pagination-->
+
+<div class="league-pagination">
+    <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
+
