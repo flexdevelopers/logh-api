@@ -4,6 +4,16 @@ class API::LeaguesController < API::BaseController
   before_action :_verify_league_management, only: [:update, :destroy]
   before_action :_verify_start_week, only: [:create, :update]
 
+  # GET /api/seasons/:season_id/leagues/public
+  def public
+    payload({ leagues: @season.leagues.public })
+  end
+
+  # GET /api/seasons/:season_id/leagues/private
+  def private
+    payload({ leagues: @season.leagues.private })
+  end
+
   # GET /api/seasons/:season_id/leagues
   def index
     payload({ leagues: @season.leagues })
@@ -61,7 +71,7 @@ class API::LeaguesController < API::BaseController
 
     def _verify_start_week
       start_week = Week.find(_league_params[:start_week_id])
-      forbidden() unless start_week.starts_at.to_date > Time.zone.now.to_date
+      forbidden('Start week is invalid') unless start_week.starts_at.to_date > Time.zone.now.to_date
     end
 
     def _is_commish_of(league)

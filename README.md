@@ -39,6 +39,8 @@ And then you can do this, for example:
 ##### Leagues
 ---
 * GET         /api/seasons/:season_id/leagues                   [ season leagues ]
+* GET         /api/seasons/:season_id/leagues/public            [ season public leagues ]
+* GET         /api/seasons/:season_id/leagues/private           [ season private leagues ]
 * POST        /api/seasons/:season_id/leagues                   [ create league ] { name*, start_week_id*, password*, public, max_teams_per_user }
 * GET         /api/seasons/:season_id/leagues/:id               [ show league ]
 * PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, public, max_teams_per_user }

@@ -8,6 +8,46 @@ describe API::LeaguesController do
     sign_in(current_user)
   end
 
+  # GET /api/seasons/:season_id/leagues/public
+  describe '#public' do
+    context 'when requesting public leagues for a season' do
+      before do
+        FactoryGirl.create(:league, public: true, season: season)
+        FactoryGirl.create(:league, public: true, season: season)
+        FactoryGirl.create(:league, public: true, season: season)
+        FactoryGirl.create(:league, public: false, season: season)
+      end
+      it 'returns only public leagues' do
+        get :public, season_id: season.id
+        expect(response).to be_success
+        expect(json[:payload][:leagues].length).to eq(3)
+        json[:payload][:leagues].each do |league|
+          expect(league[:public]).to be_true
+        end
+      end
+    end
+  end
+
+  # GET /api/seasons/:season_id/leagues/private
+  describe '#private' do
+    context 'when requesting private leagues for a season' do
+      before do
+        FactoryGirl.create(:league, public: true, season: season)
+        FactoryGirl.create(:league, public: true, season: season)
+        FactoryGirl.create(:league, public: false, season: season)
+        FactoryGirl.create(:league, public: false, season: season)
+      end
+      it 'returns only private leagues' do
+        get :private, season_id: season.id
+        expect(response).to be_success
+        expect(json[:payload][:leagues].length).to eq(2)
+        json[:payload][:leagues].each do |league|
+          expect(league[:public]).to be_false
+        end
+      end
+    end
+  end
+
   # GET /api/seasons/:season_id/leagues
   describe '#index' do
     before do

@@ -40,7 +40,7 @@ module.exports = angular.module('loghApp.league', [])
                 },
                 resolve: {
                     publicLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
-                        return leagueService.getSeasonLeagues($stateParams.seasonId);
+                        return leagueService.getPublicLeagues($stateParams.seasonId);
                     }]
                 }
             })
@@ -54,7 +54,7 @@ module.exports = angular.module('loghApp.league', [])
                 },
                 resolve: {
                     privateLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
-                        return leagueService.getSeasonLeagues($stateParams.seasonId);
+                        return leagueService.getPrivateLeagues($stateParams.seasonId);
                     }]
                 }
             })

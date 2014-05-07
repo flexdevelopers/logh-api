@@ -19,6 +19,9 @@ class League < ActiveRecord::Base
 
   default_scope { order('lower(name)') }
 
+  scope :public, -> { where(public: true) }
+  scope :private, -> { where(public: false) }
+
   def started?
     start_week.starts_at.to_date <= Time.zone.now.to_date
   end

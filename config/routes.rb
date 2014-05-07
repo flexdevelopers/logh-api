@@ -17,7 +17,10 @@ LoghApi::Application.routes.draw do
 
     resources :seasons, only: [] do
       get 'current', on: :collection, to: 'seasons#current'
-      resources :leagues, only: [:index, :show, :create, :update, :destroy]
+      resources :leagues, only: [:index, :show, :create, :update, :destroy] do
+        get 'public', on: :collection, to: 'leagues#public'
+        get 'private', on: :collection, to: 'leagues#private'
+      end
       resources :weeks, only: [:index, :show] do
         get 'available', on: :collection, to: 'weeks#available'
       end

@@ -15,14 +15,28 @@ var LeagueService = function($http, $log, $location, apiConfig, leagueModel, mes
         return promise;
     };
 
-    this.getSeasonLeagues = function(seasonId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues")
+    this.getPublicLeagues = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/public")
             .success(function(data) {
-                $log.log("LeagueService: getSeasonLeagues success");
+                $log.log("LeagueService: getPublicLeagues success");
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: getSeasonLeagues failed");
+                $log.log("LeagueService: getPublicLeagues failed");
+                return data;
+            });
+
+        return promise;
+    };
+
+    this.getPrivateLeagues = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/private")
+            .success(function(data) {
+                $log.log("LeagueService: getPrivateLeagues success");
+                return data;
+            })
+            .error(function(data) {
+                $log.log("LeagueService: getPrivateLeagues failed");
                 return data;
             });
 
