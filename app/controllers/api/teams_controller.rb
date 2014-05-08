@@ -7,12 +7,13 @@ class API::TeamsController < API::BaseController
 
   # GET /api/leagues/:league_id/teams
   def index
-    render json: @league.teams
+    @teams = @league.teams
+    respond_with @teams
   end
 
   # GET /api/leagues/:league_id/teams/1
   def show
-    render json: @team
+    respond_with @teams
   end
 
   # POST /api/leagues/:league_id/teams
@@ -22,6 +23,7 @@ class API::TeamsController < API::BaseController
     @team.coaches << current_user
     if @team.save
       _mark_invitation_accepted() if _has_invitation_for?(@league)
+      # todo: this is not necessary
       render json: @team, status: :created, location: api_league_team_path(@league, @team)
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

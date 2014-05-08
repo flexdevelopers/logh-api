@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::SessionsController do
+  render_views # for rabl
+
   let(:user) { FactoryGirl.create(:user) }
 
   # POST /api/sessions

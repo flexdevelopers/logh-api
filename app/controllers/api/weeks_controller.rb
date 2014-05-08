@@ -2,22 +2,21 @@ class API::WeeksController < API::BaseController
   before_action :_set_season
   before_action :_set_week, only: [:show]
 
-
   # GET /api/seasons/:season_id/weeks
   def index
     @weeks = @season.weeks.all
-    render json: @weeks, status: :ok
+    respond_with @weeks
   end
 
   # GET /api/seasons/:season_id/weeks/available
   def available
     @weeks = @season.weeks.available
-    render json: @weeks, status: :ok
+    respond_with @weeks
   end
 
   # GET /api/seasons/:season_id/weeks/:id
   def show
-    render json: @week, status: :ok
+    respond_with @week
   end
 
   private

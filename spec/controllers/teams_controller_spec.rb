@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::TeamsController do
+  render_views # for rabl
+
   let(:current_user) { FactoryGirl.create(:user) }
 
   before do
@@ -16,7 +18,7 @@ describe API::TeamsController do
         FactoryGirl.create(:team, league: league)
       end
       it 'returns a list of teams for the specified league' do
-        get :index, league_id: league.id
+        get :index, format: 'json', league_id: league.id
         expect(response).to be_success
         expect(json.length).to eq(2)
       end
@@ -29,7 +31,7 @@ describe API::TeamsController do
         FactoryGirl.create(:team, league: league)
       end
       it 'returns a list of teams for the specified league' do
-        get :index, league_id: league.id
+        get :index, format: 'json', league_id: league.id
         expect(response).to be_success
         expect(json.length).to eq(3)
       end
@@ -52,7 +54,7 @@ describe API::TeamsController do
     context 'when the current user is a coach of the team' do
       let(:team) { FactoryGirl.create(:team, coaches: [ current_user ]) }
       it 'returns the team' do
-        get :show, league_id: team.league.id, id: team.id
+        get :show, format: 'json', league_id: team.league.id, id: team.id
         expect(response).to be_success
         expect(json[:name]).to eq('Fire Breathing Rubber Duckies')
       end

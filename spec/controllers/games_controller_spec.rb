@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe API::GamesController do
+  render_views # for rabl
 
   before do
     sign_in(FactoryGirl.create(:user))
@@ -14,7 +15,7 @@ describe API::GamesController do
       FactoryGirl.create(:game, week: week)
     end
     it 'returns games for a week' do
-      get :index, week_id: week.id
+      get :index, format: 'json', week_id: week.id
       response.should be_success
       expect(json.length).to eq(2)
     end
@@ -26,7 +27,7 @@ describe API::GamesController do
     let(:visiting_squad) { FactoryGirl.create(:squad, name: 'New England Patriots', abbrev: 'NEP') }
     let(:game) { FactoryGirl.create(:game, home_squad: home_squad, visiting_squad: visiting_squad) }
     it 'returns a game' do
-      get :show, week_id: game.week.id, id: game.id
+      get :show, format: 'json', week_id: game.week.id, id: game.id
       response.should be_success
       expect(json[:home_squad_id]).to eq(home_squad.id)
       expect(json[:visiting_squad_id]).to eq(visiting_squad.id)

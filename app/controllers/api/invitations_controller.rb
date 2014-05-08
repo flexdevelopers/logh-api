@@ -6,13 +6,15 @@ class API::InvitationsController < API::BaseController
 
   # GET /leagues/:league_id/invitations
   def index
-    render json: @league.invitations
+    @invitations = @league.invitations
+    respond_with @invitations
   end
 
   # POST /leagues/:league_id/invitations
   def create
     @invitation = @league.invitations.new(_invitation_params)
     if @invitation.save
+      # todo: this is not necessary
       render json: @invitation, status: :created, location: api_league_invitations_path(@league, @invitation)
     else
       error(@invitation.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

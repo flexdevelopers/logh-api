@@ -6,18 +6,19 @@ class API::PicksController < API::BaseController
   # GET /api/teams/:team_id/picks
   def index
     @picks = @team.picks
-    render json: @picks
+    respond_with @picks
   end
 
   # GET /api/teams/:team_id/picks/1
   def show
-    render json: @pick
+    respond_with @pick
   end
 
   # POST /api/teams/:team_id/picks
   def create
     @pick = @team.picks.new(_pick_params)
     if @pick.save
+      # todo: not necessary
       render json: @pick, status: :created, location: api_team_pick_path(@team, @pick)
     else
       error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

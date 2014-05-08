@@ -7,24 +7,24 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues/public.json
   def public
     @leagues = @season.leagues.public
-    respond_with @leagues, status: :ok
+    respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues/private.json
   def private
     @leagues = @season.leagues.private
-    respond_with @leagues, status: :ok
+    respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues.json
   def index
     @leagues = @season.leagues
-    respond_with @leagues, status: :ok
+    respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues/1.json
   def show
-    respond_with @league, status: :ok
+    respond_with @league
   end
 
   # POST /api/seasons/:season_id/leagues.json

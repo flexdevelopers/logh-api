@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::InvitationsController do
+  render_views # for rabl
+
   let(:current_user) { FactoryGirl.create(:user) }
   let(:another_user) { FactoryGirl.create(:user) }
 
@@ -17,7 +19,7 @@ describe API::InvitationsController do
         FactoryGirl.create(:invitation, league: league, email: 'bar@foo.com')
       end
       it 'returns a list of invitations for the league' do
-        get :index, league_id: league.id
+        get :index, format: 'json', league_id: league.id
         expect(response).to be_success
         expect(json.length).to eq(2)
       end

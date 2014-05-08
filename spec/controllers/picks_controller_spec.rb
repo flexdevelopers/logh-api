@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::PicksController do
+  render_views # for rabl
+
   let(:current_user) { FactoryGirl.create(:user) }
   let(:coached_team) { FactoryGirl.create(:team, coaches: [current_user]) }
   let(:non_coached_team) { FactoryGirl.create(:team) }
@@ -19,7 +21,7 @@ describe API::PicksController do
     }
     context 'when the current user is a coach of the team' do
       it 'returns a list of picks for the team' do
-        get :index, team_id: coached_team.id
+        get :index, format: 'json', team_id: coached_team.id
         expect(response).to be_success
         expect(json.length).to eq(3)
       end
@@ -37,7 +39,7 @@ describe API::PicksController do
     context 'when the current user is a coach of the team' do
       let(:pick) { FactoryGirl.create(:pick, team: coached_team) }
       it 'returns the pick for the team' do
-        get :show, team_id: pick.team.id, id: pick.id
+        get :show, format: 'json', team_id: pick.team.id, id: pick.id
         expect(response).to be_success
         expect(json[:team_id]).to eq(pick.team.id)
       end

@@ -1,2 +1,2 @@
 object @week
-attributes :id, :starts_at
+attributes :id, :week_type_id, :number, :season_id, :starts_at, :complete

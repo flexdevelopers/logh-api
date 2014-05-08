@@ -5,12 +5,12 @@ class API::GamesController < API::BaseController
   # GET /api/weeks/:week_id/games
   def index
     @games = @week.games
-    render json: @games
+    respond_with @games
   end
 
   # GET /api/weeks/:week_id/games/:id
   def show
-    render json: @game
+    respond_with @game
   end
 
   private

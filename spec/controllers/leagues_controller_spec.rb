@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe API::LeaguesController do
-  render_views
+  render_views # for rabl
 
   let(:current_user) { FactoryGirl.create(:user) }
   let(:season) { FactoryGirl.create(:season) }

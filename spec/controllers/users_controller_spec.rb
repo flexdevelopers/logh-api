@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe API::UsersController do
-  render_views
+  render_views # for rabl
 
   let(:current_user) { FactoryGirl.create(:user, email: 'foo@bar.com') }
   let(:another_user) { FactoryGirl.create(:user, email: 'foo@baz.com') }
