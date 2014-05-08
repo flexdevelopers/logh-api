@@ -3,7 +3,8 @@ class API::UsersController < API::BaseController
 
   # GET /api/users/current
   def current
-    respond_with current_user, status: :ok
+    @user = current_user
+    respond_with @user, status: :ok
   end
 
   # POST /api/users
