@@ -6,18 +6,18 @@ class API::WeeksController < API::BaseController
   # GET /api/seasons/:season_id/weeks
   def index
     @weeks = @season.weeks.all
-    render json: @weeks
+    render json: @weeks, status: :ok
   end
 
   # GET /api/seasons/:season_id/weeks/available
   def available
     @weeks = @season.weeks.available
-    render json: @weeks
+    render json: @weeks, status: :ok
   end
 
   # GET /api/seasons/:season_id/weeks/:id
   def show
-    render json: @week
+    render json: @week, status: :ok
   end
 
   private

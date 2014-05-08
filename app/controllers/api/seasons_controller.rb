@@ -4,7 +4,7 @@ class API::SeasonsController < API::BaseController
   # GET /api/seasons/current
   def current
     # todo: better job of showing the current season
-    render json: Season.last
+    render json: Season.last, status: :ok
   end
 
 end

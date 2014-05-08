@@ -1,10 +1,10 @@
 var LeagueService = function($http, $log, $location, apiConfig, leagueModel, messageModel) {
 
     this.getLeague = function(seasonId, leagueId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId + ".json")
             .success(function(data) {
                 $log.log("LeagueService: getLeague success");
-                leagueModel.setLeague(data.payload.league);
+                leagueModel.setLeague(data.league);
                 return data;
             })
             .error(function(data) {
@@ -16,7 +16,7 @@ var LeagueService = function($http, $log, $location, apiConfig, leagueModel, mes
     };
 
     this.getPublicLeagues = function(seasonId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/public")
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/public.json")
             .success(function(data) {
                 $log.log("LeagueService: getPublicLeagues success");
                 return data;
@@ -30,7 +30,7 @@ var LeagueService = function($http, $log, $location, apiConfig, leagueModel, mes
     };
 
     this.getPrivateLeagues = function(seasonId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/private")
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/private.json")
             .success(function(data) {
                 $log.log("LeagueService: getPrivateLeagues success");
                 return data;
@@ -44,11 +44,11 @@ var LeagueService = function($http, $log, $location, apiConfig, leagueModel, mes
     };
 
     this.createLeague = function(leagueParams) {
-        var promise = $http.post(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues",
+        var promise = $http.post(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues.json",
             { league: leagueParams })
             .success(function(data) {
                 $log.log("LeagueService: createLeague success");
-                $location.path('/season/' + leagueParams.season_id + '/league/' + data.payload.league_id + '/edit' );
+                $location.path('/season/' + leagueParams.season_id + '/league/' + data.league_id + '/edit' );
                 messageModel.setMessage(data.message, true);
                 return data;
             })
@@ -61,7 +61,7 @@ var LeagueService = function($http, $log, $location, apiConfig, leagueModel, mes
     };
 
     this.updateLeague = function(leagueParams) {
-        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id,
+        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + ".json",
             { league: leagueParams })
             .success(function(data) {
                 $log.log("LeagueService: updateLeague success");

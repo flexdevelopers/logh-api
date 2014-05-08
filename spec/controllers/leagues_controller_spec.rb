@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::LeaguesController do
+  render_views
+
   let(:current_user) { FactoryGirl.create(:user) }
   let(:season) { FactoryGirl.create(:season) }
 
@@ -18,10 +20,10 @@ describe API::LeaguesController do
         FactoryGirl.create(:league, public: false, season: season)
       end
       it 'returns only public leagues' do
-        get :public, season_id: season.id
+        get :public, format: 'json', season_id: season.id
         expect(response).to be_success
-        expect(json[:payload][:leagues].length).to eq(3)
-        json[:payload][:leagues].each do |league|
+        expect(json.length).to eq(3)
+        json.each do |league|
           expect(league[:public]).to be_true
         end
       end
@@ -38,10 +40,10 @@ describe API::LeaguesController do
         FactoryGirl.create(:league, public: false, season: season)
       end
       it 'returns only private leagues' do
-        get :private, season_id: season.id
+        get :private, format: 'json', season_id: season.id
         expect(response).to be_success
-        expect(json[:payload][:leagues].length).to eq(2)
-        json[:payload][:leagues].each do |league|
+        expect(json.length).to eq(2)
+        json.each do |league|
           expect(league[:public]).to be_false
         end
       end
@@ -58,9 +60,9 @@ describe API::LeaguesController do
       FactoryGirl.create(:league, season: season)
     end
     it 'returns a list of leagues for the season' do
-      get :index, season_id: season.id
+      get :index, format: 'json', season_id: season.id
       expect(response).to be_success
-      expect(json[:payload][:leagues].length).to eq(5)
+      expect(json.length).to eq(5)
     end
   end
 
@@ -69,9 +71,9 @@ describe API::LeaguesController do
     context 'when the signed in requests a league' do
       let(:league) { FactoryGirl.create(:league, season: season, commishes: []) }
       it 'returns the league' do
-        get :show, season_id: season.id, id: league.id
+        get :show, format: 'json', season_id: season.id, id: league.id
         expect(response).to be_success
-        expect(json[:payload][:league][:name]).to eq(league.name)
+        expect(json[:name]).to eq(league.name)
       end
     end
   end

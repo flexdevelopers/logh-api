@@ -24,8 +24,8 @@ describe API::SessionsController do
         session_params = FactoryGirl.attributes_for(:session, email: user.email, password: user.password)
         post :create, session: session_params
         expect(response).to be_success
-        expect(json[:payload][:user]).not_to be_blank
-        expect(json[:payload][:token]).not_to be_blank
+        expect(json[:user]).not_to be_blank
+        expect(json[:token]).not_to be_blank
       end
     end
   end

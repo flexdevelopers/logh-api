@@ -2,12 +2,12 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
 
     this.login = function(email, password) {
         var promise = $http.post(
-            apiConfig.baseURL + "sessions",
+            apiConfig.baseURL + "sessions.json",
             { email: email, password: password })
             .success(function(data) {
                 $log.log("UserService: login success");
-                userModel.setUser(data.payload.user);
-                $window.sessionStorage.token = data.payload.token;
+                userModel.setUser(data.user);
+                $window.sessionStorage.token = data.token;
                 messageModel.resetMessage();
                 return data;
             })
@@ -21,7 +21,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
 
     this.logout = function() {
         var promise = $http.delete(
-            apiConfig.baseURL + 'sessions/destroy')
+            apiConfig.baseURL + 'sessions/destroy.json')
             .success(function(data) {
                 messageModel.setMessage(data.message, false);
                 $log.log("UserService: logout success");
@@ -37,7 +37,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.getCurrentUser = function() {
-        var promise = $http.get(apiConfig.baseURL + "users/current")
+        var promise = $http.get(apiConfig.baseURL + "users/current.json")
             .success(function(data) {
                 $log.log("UserService: getCurrentUser success");
                 userModel.setUser(data);
@@ -52,12 +52,12 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.createUser = function(userParams) {
-        var promise = $http.post(apiConfig.baseURL + "users",
+        var promise = $http.post(apiConfig.baseURL + "users.json",
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: createUser success");
-                userModel.setUser(data.payload.user);
-                $window.sessionStorage.token = data.payload.token;
+                userModel.setUser(data.user);
+                $window.sessionStorage.token = data.token;
                 messageModel.setMessage(data.message, true);
                 return data;
             })
@@ -70,7 +70,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.updateUser = function(userParams) {
-        var promise = $http.put(apiConfig.baseURL + "users/current",
+        var promise = $http.put(apiConfig.baseURL + "users/current.json",
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: updateUser success");

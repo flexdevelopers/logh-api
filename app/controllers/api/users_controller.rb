@@ -3,7 +3,7 @@ class API::UsersController < API::BaseController
 
   # GET /api/users/current
   def current
-    render json: current_user
+    respond_with current_user, status: :ok
   end
 
   # POST /api/users
@@ -12,7 +12,7 @@ class API::UsersController < API::BaseController
     if user.save
       access_token = current_access_token
       access_token.user = user
-      payload({ user: access_token.user, token: access_token.token }, "User created for #{access_token.user.email}")
+      render json: { user: access_token.user, token: access_token.token, message: { type: SUCCESS, content: "User created for #{access_token.user.email}" } }, status: :ok
     else
       error(user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -21,7 +21,7 @@ class API::UsersController < API::BaseController
   # PUT api/users/current
   def update
     if current_user.update(_user_params)
-      payload({}, 'User has been updated')
+      render json: { message: { type: SUCCESS, content: 'User has been updated' } }, status: :ok
     else
       error(current_user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

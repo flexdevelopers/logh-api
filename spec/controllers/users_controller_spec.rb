@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe API::UsersController do
+  render_views
+
   let(:current_user) { FactoryGirl.create(:user, email: 'foo@bar.com') }
   let(:another_user) { FactoryGirl.create(:user, email: 'foo@baz.com') }
 
@@ -12,7 +14,7 @@ describe API::UsersController do
   describe '#current' do
     context 'when requesting the current' do
       it 'returns a user' do
-        get :current
+        get :current, format: 'json'
         expect(response).to be_success
         expect(json[:email]).to eq(current_user.email)
       end
@@ -25,8 +27,8 @@ describe API::UsersController do
       user_params = FactoryGirl.attributes_for(:user)
       expect { post :create, user: user_params }.to change(User, :count).by(1)
       expect(response).to be_success
-      expect(json[:payload][:user]).not_to be_blank
-      expect(json[:payload][:token]).not_to be_blank
+      expect(json[:user]).not_to be_blank
+      expect(json[:token]).not_to be_blank
     end
     it 'sends a welcome email' do
       user = FactoryGirl.create(:user)

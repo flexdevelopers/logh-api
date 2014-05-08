@@ -1,7 +1,7 @@
 var WeekService = function($http, $log, apiConfig) {
 
     this.getAvailableWeeks = function(seasonId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/available")
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/available.json")
             .success(function(data) {
                 $log.log("WeekService: getAvailableWeeks success");
                 return data;

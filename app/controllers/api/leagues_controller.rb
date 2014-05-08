@@ -4,48 +4,51 @@ class API::LeaguesController < API::BaseController
   before_action :_verify_league_management, only: [:update, :destroy]
   before_action :_verify_start_week, only: [:create, :update]
 
-  # GET /api/seasons/:season_id/leagues/public
+  # GET /api/seasons/:season_id/leagues/public.json
   def public
-    payload({ leagues: @season.leagues.public })
+    @leagues = @season.leagues.public
+    respond_with @leagues, status: :ok
   end
 
-  # GET /api/seasons/:season_id/leagues/private
+  # GET /api/seasons/:season_id/leagues/private.json
   def private
-    payload({ leagues: @season.leagues.private })
+    @leagues = @season.leagues.private
+    respond_with @leagues, status: :ok
   end
 
-  # GET /api/seasons/:season_id/leagues
+  # GET /api/seasons/:season_id/leagues.json
   def index
-    payload({ leagues: @season.leagues })
+    @leagues = @season.leagues
+    respond_with @leagues, status: :ok
   end
 
-  # GET /api/seasons/:season_id/leagues/1
+  # GET /api/seasons/:season_id/leagues/1.json
   def show
-    payload({ league: @league })
+    respond_with @league, status: :ok
   end
 
-  # POST /api/seasons/:season_id/leagues
+  # POST /api/seasons/:season_id/leagues.json
   def create
     @league = @season.leagues.new(_league_params)
     @league.commishes << current_user
     if @league.save
-      payload({ league_id: @league.id }, "#{@league[:name]} league created")
+      render json: { league_id: @league.id, message: { type: SUCCESS, content: "#{@league[:name]} league created" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
-  # PATCH/PUT /api/seasons/:season_id/leagues/1
+  # PATCH/PUT /api/seasons/:season_id/leagues/1.json
   def update
     return forbidden('Cannot update a league that has started') if @league.started?
     if @league.update(_league_params)
-      payload({}, "#{@league[:name]} league updated")
+      render json: { message: { type: SUCCESS, content: "#{@league[:name]} league updated" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 
-  # DELETE /api/seasons/:season_id/leagues/1
+  # DELETE /api/seasons/:season_id/leagues/1.json
   def destroy
     @league.destroy
     head :no_content

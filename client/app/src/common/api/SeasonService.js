@@ -1,7 +1,7 @@
 var SeasonService = function($http, $log, apiConfig) {
 
     this.getCurrentSeason = function() {
-        var promise = $http.get(apiConfig.baseURL + "seasons/current")
+        var promise = $http.get(apiConfig.baseURL + "seasons/current.json")
             .success(function(data) {
                 $log.log("SeasonService: getCurrentSeason success");
                 return data;

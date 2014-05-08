@@ -1,7 +1,7 @@
 
 var PrivateLeaguesController = function($scope, $log, privateLeagues) {
 
-    $scope.privateLeagues = privateLeagues.data.payload.leagues;
+    $scope.privateLeagues = privateLeagues.data;
 
     $scope.totalItems = 64;
     $scope.currentPage = 4;

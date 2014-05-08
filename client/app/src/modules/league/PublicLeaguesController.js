@@ -1,7 +1,7 @@
 
 var PublicLeaguesController = function($scope, $log, publicLeagues) {
 
-    $scope.publicLeagues = publicLeagues.data.payload.leagues;
+    $scope.publicLeagues = publicLeagues.data;
 
     $scope.totalItems = 64;
     $scope.currentPage = 4;

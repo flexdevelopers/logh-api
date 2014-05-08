@@ -7,13 +7,13 @@ class API::SessionsController < API::BaseController
     return not_authorized('Invalid Credentials') unless _password_valid?
     access_token = current_access_token
     access_token.user = @user
-    payload({ user: access_token.user, token: access_token.token })
+    render json:  { user: access_token.user, token: access_token.token }
   end
 
   # DELETE /api/sessions/destroy
   def destroy
     current_access_token.delete!
-    payload({}, 'Thank you. Come again.')
+    render json:  { message: { type: SUCCESS, content: 'Thank you. Come again.' } }, status: :ok
   end
 
   private
