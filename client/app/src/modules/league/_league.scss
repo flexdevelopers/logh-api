@@ -25,10 +25,7 @@
   margin: -20px auto 0 auto;
 }
 
-@media all and (max-width: 600px) {
-  .league-count {
-    display: none;
-  }
+@media all and (max-width: 500px) {
   .custom-search-form {
     width: 145px;
     .input-group-btn {
