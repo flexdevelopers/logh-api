@@ -21,6 +21,7 @@ class League < ActiveRecord::Base
 
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }
+  scope :not_started, -> { joins(:start_week).where('starts_at > ?', Time.zone.now.to_date) }
 
   def started?
     start_week.starts_at.to_date <= Time.zone.now.to_date
