@@ -50,6 +50,9 @@ gem 'micro_token'
 # Figaro provides a clean and simple way to configure your app and keep the private stuff… private
 gem 'figaro'
 
+# RABL (Ruby API Builder Language)
+gem 'rabl'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

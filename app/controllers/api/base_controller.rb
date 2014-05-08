@@ -4,6 +4,8 @@ class API::BaseController < ApplicationController
   WARNING = 'warning'
   DANGER = 'danger'
 
+  respond_to :json
+
   before_action :authenticate
 
   private
