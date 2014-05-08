@@ -4,7 +4,8 @@ class API::SeasonsController < API::BaseController
   # GET /api/seasons/current
   def current
     # todo: better job of showing the current season
-    respond_with Season.last
+    @season = Season.last
+    respond_with @season
   end
 
 end
