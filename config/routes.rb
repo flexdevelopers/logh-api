@@ -2,7 +2,7 @@ LoghApi::Application.routes.draw do
 
   get '/', to: redirect('/')
 
-  namespace :api do
+  namespace :api, defaults: {format: 'json'} do
 
     match '/docs', to: 'docs#index', via: 'get'
 

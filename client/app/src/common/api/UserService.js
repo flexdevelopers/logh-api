@@ -2,7 +2,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
 
     this.login = function(email, password) {
         var promise = $http.post(
-            apiConfig.baseURL + "sessions.json",
+            apiConfig.baseURL + "sessions",
             { email: email, password: password })
             .success(function(data) {
                 $log.log("UserService: login success");
@@ -21,7 +21,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
 
     this.logout = function() {
         var promise = $http.delete(
-            apiConfig.baseURL + 'sessions/destroy.json')
+            apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
                 messageModel.setMessage(data.message, false);
                 $log.log("UserService: logout success");
@@ -37,7 +37,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.getCurrentUser = function() {
-        var promise = $http.get(apiConfig.baseURL + "users/current.json")
+        var promise = $http.get(apiConfig.baseURL + "users/current")
             .success(function(data) {
                 $log.log("UserService: getCurrentUser success");
                 userModel.setUser(data);
@@ -52,7 +52,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.createUser = function(userParams) {
-        var promise = $http.post(apiConfig.baseURL + "users.json",
+        var promise = $http.post(apiConfig.baseURL + "users",
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: createUser success");
@@ -70,7 +70,7 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     };
 
     this.updateUser = function(userParams) {
-        var promise = $http.put(apiConfig.baseURL + "users/current.json",
+        var promise = $http.put(apiConfig.baseURL + "users/current",
             { user: userParams })
             .success(function(data) {
                 $log.log("UserService: updateUser success");
