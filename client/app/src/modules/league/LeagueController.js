@@ -1,7 +1,5 @@
 
-var LeagueController = function($scope, $log, leagueModel, weeks) {
-
-    $scope.leagueData = angular.copy(leagueModel);
+var LeagueController = function($scope, $log, weeks) {
 
     $scope.weeks = weeks.data;
 
@@ -13,10 +11,6 @@ var LeagueController = function($scope, $log, leagueModel, weeks) {
         return !input.$focused && input.$dirty && input.$error[property];
     };
 
-    $scope.$on('leagueModel::leagueUpdated', function(event) {
-        $scope.leagueData = angular.copy(leagueModel);
-    });
-
     /**
      * Invoked on startup, like a constructor.
      */
@@ -27,5 +21,5 @@ var LeagueController = function($scope, $log, leagueModel, weeks) {
 
 };
 
-LeagueController.$inject = ['$scope', '$log', 'leagueModel', 'weeks'];
+LeagueController.$inject = ['$scope', '$log', 'weeks'];
 module.exports = LeagueController;

@@ -1,5 +1,7 @@
 
-var JoinLeagueController = function($scope, $log) {
+var JoinLeagueController = function($scope, $log, league) {
+
+    $scope.leagueData = league.data;
 
     $scope.joinLeague = function(team) {
         $scope.dispatch('CreateTeamEvent', {});
@@ -15,5 +17,5 @@ var JoinLeagueController = function($scope, $log) {
 
 };
 
-JoinLeagueController.$inject = ['$scope', '$log'];
+JoinLeagueController.$inject = ['$scope', '$log', 'league'];
 module.exports = JoinLeagueController;

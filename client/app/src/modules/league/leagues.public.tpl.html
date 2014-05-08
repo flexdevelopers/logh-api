@@ -1,5 +1,5 @@
 <div class="list-group">
-    <a ng-repeat="league in publicLeagues" ui-sref="app.league.detail.join({seasonId:league.season_id, leagueId: league.id})" class="list-group-item">
+    <a ng-repeat="league in publicLeagues" ui-sref="app.league.join({seasonId:league.season_id, leagueId: league.id})" class="list-group-item">
         <div class="row">
             <div class="league-name col-sm-4 col-md-4">{{league.name}}</div>
             <div class="col-sm-8 col-md-8">

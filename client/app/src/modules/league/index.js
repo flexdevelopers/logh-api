@@ -93,37 +93,32 @@ module.exports = angular.module('loghApp.league', [])
                     }
                 }
             })
-            .state('app.league.detail', {
-                abstract: true,
-                url: '/{leagueId}',
+            .state('app.league.edit', {
+                url: '/{leagueId}/edit',
                 views: {
                     leagueContent: {
-                        templateUrl: 'modules/league/league.detail.tpl.html'
-                    }
-                },
-                resolve: {
-                    loadLeague: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
-                        return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
-                    }]
-                }
-
-            })
-            .state('app.league.detail.edit', {
-                url: '/edit',
-                views: {
-                    leagueDetailContent: {
                         templateUrl: 'modules/league/league.edit.tpl.html',
                         controller: 'EditLeagueController'
                     }
+                },
+                resolve: {
+                    league: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
+                    }]
                 }
             })
-            .state('app.league.detail.join', {
-                url: '/join',
+            .state('app.league.join', {
+                url: '/{leagueId}/join',
                 views: {
-                    leagueDetailContent: {
+                    leagueContent: {
                         templateUrl: 'modules/league/league.join.tpl.html',
                         controller: 'JoinLeagueController'
                     }
+                },
+                resolve: {
+                    league: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
+                    }]
                 }
             })
         ;

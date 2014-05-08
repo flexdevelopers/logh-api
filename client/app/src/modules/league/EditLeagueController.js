@@ -1,24 +1,26 @@
 
-var EditLeagueController = function($scope, $log) {
+var EditLeagueController = function($scope, $log, league) {
 
-    $scope.isPasswordHidden = $scope.leagueData.league.public;
+    $scope.leagueData = league.data;
 
-    $scope.wasPublic = $scope.leagueData.league.public;
+    $scope.isPasswordHidden = $scope.leagueData.public;
 
-    $scope.updateLeague = function(league) {
-        $scope.dispatch('UpdateLeagueEvent', { leagueParams: league });
+    $scope.wasPublic = $scope.leagueData.public;
+
+    $scope.updateLeague = function(leagueData) {
+        $scope.dispatch('UpdateLeagueEvent', { leagueParams: leagueData });
     };
 
     $scope.hidePasswordFields = function(value) {
         $scope.isPasswordHidden = value;
         if (value) {
-            $scope.leagueData.league.password = '';
-            $scope.leagueData.league.password_confirmation = '';
+            $scope.leagueData.password = '';
+            $scope.leagueData.password_confirmation = '';
         }
     };
 
     $scope.changedToPrivate = function() {
-        return $scope.wasPublic && $scope.leagueData.league.public == false;
+        return $scope.wasPublic && $scope.leagueData.public == false;
     };
 
     /**
@@ -31,5 +33,5 @@ var EditLeagueController = function($scope, $log) {
 
 };
 
-EditLeagueController.$inject = ['$scope', '$log'];
+EditLeagueController.$inject = ['$scope', '$log', 'league'];
 module.exports = EditLeagueController;

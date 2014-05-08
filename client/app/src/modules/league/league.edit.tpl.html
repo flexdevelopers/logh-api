@@ -1,12 +1,12 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h3 class="panel-title">{{leagueData.league.name}} League </h3>
+        <h3 class="panel-title">{{leagueData.name}} League </h3>
     </div>
 
     <div class="panel-body">
         <form name="leagueForm" role="form" novalidate>
-            <fieldset ng-disabled="{{leagueData.league.started}}">
+            <fieldset ng-disabled="{{leagueData.started}}">
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group" ng-class="{'has-error': hasError(leagueForm.leagueName), 'has-feedback': hasError(leagueForm.leagueName)}">
@@ -14,7 +14,7 @@
                                 <small ng-show="hasPropertyError(leagueForm.leagueName, 'required')">[ Required ]</small>
                                 <small ng-show="hasPropertyError(leagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
                             </label>
-                            <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="leagueData.league.name" ng-maxlength="25" focus required>
+                            <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="leagueData.name" ng-maxlength="25" focus required>
                             <span ng-show="hasError(leagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                                 <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
                                 <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
                             </label>
-                            <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="leagueData.league.max_teams_per_user" focus required>
+                            <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="leagueData.max_teams_per_user" focus required>
                             <span ng-show="hasError(leagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
                             <label class="control-label" for="startWeek">Start Week</label>
-                            <select id="startWeek" name="startWeek" class="form-control" ng-show="!leagueData.league.started" ng-model="leagueData.league.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
-                            <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.league.started" ng-model="leagueData.league.week_display">
+                            <select id="startWeek" name="startWeek" class="form-control" ng-show="!leagueData.started" ng-model="leagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
+                            <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.started" ng-model="leagueData.week_display">
                         </div>
                     </div>
                 </div>
@@ -47,10 +47,10 @@
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
                             <label class="radio-inline">
-                                <input type="radio" ng-model="leagueData.league.public" ng-click="hidePasswordFields(true)" ng-value="true"> Public League
+                                <input type="radio" ng-model="leagueData.public" ng-click="hidePasswordFields(true)" ng-value="true"> Public League
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" ng-model="leagueData.league.public" ng-click="hidePasswordFields(false)" ng-value="false"> Private League
+                                <input type="radio" ng-model="leagueData.public" ng-click="hidePasswordFields(false)" ng-value="false"> Private League
                             </label>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                     <small ng-show="hasPropertyError(leagueForm.password, 'required')">[ Required ]</small>
                                     <small ng-show="hasPropertyError(leagueForm.password, 'pattern')">[ Too Short ]</small>
                                 </label>
-                                <input id="password" name="password" type="password" class="form-control" ng-model="leagueData.league.password" ng-required="changedToPrivate()" rpattern="/.{6}/" focus>
+                                <input id="password" name="password" type="password" class="form-control" ng-model="leagueData.password" ng-required="changedToPrivate()" rpattern="/.{6}/" focus>
                                 <span ng-show="hasError(leagueForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                             </div>
                         </div>
@@ -73,14 +73,14 @@
                                 <label class="control-label" for="confirmPassword">Confirm New League Password
                                     <small ng-show="hasPropertyError(leagueForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
                                 </label>
-                                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="leagueData.league.password_confirmation" match="leagueData.league.password">
+                                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="leagueData.password_confirmation" match="leagueData.password">
                                 <span ng-show="hasError(leagueForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-info btn-block" ng-disabled="leagueForm.$pristine || leagueForm.$invalid" ng-click="updateLeague(leagueData.league)">Update League</button>
+                <button type="submit" class="btn btn-info btn-block" ng-disabled="leagueForm.$pristine || leagueForm.$invalid" ng-click="updateLeague(leagueData)">Update League</button>
             </fieldset>
         </form>
     </div>
