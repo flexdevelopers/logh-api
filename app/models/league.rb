@@ -26,4 +26,8 @@ class League < ActiveRecord::Base
     start_week.starts_at.to_date <= Time.zone.now.to_date
   end
 
+  def week_display
+    "Week #{start_week.number} (#{start_week.starts_at.strftime("%m/%d/%Y")})"
+  end
+
 end
