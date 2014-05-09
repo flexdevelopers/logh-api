@@ -1,5 +1,5 @@
 <div class="list-group">
-    <a ng-repeat="league in privateLeagues" class="list-group-item">
+    <a ng-repeat="league in privateLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" class="list-group-item">
         <div class="row">
             <div class="league-name col-sm-4 col-md-4">{{league.name}}</div>
             <div class="col-sm-8 col-md-8">
@@ -11,8 +11,7 @@
     </a>
 </div>
 
-<!--pagination-->
-
+<!--dynamic pagination-->
 <div class="league-pagination">
-    <pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <pagination boundary-links="true" max-size="5" total-items="(privateLeagues | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>

@@ -1,6 +1,10 @@
 
 var LeaguesController = function($scope, $log, $state, $stateParams) {
 
+    // pagination
+    $scope.currentLeaguePage = 1;
+    $scope.leaguesPerPage = 10;
+
     $scope.seasonId = $stateParams.seasonId;
 
     $scope.isPublic = function() {
