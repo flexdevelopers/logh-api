@@ -13,7 +13,7 @@
                             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
                         </label>
-                        <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="newLeagueData.name" ng-maxlength="25" focus required>
+                        <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="newLeagueData.name" ng-maxlength="25" logh-focus required>
                         <span ng-show="hasError(newLeagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
                             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
                         </label>
-                        <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="newLeagueData.max_teams_per_user" focus required>
+                        <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="newLeagueData.max_teams_per_user" logh-focus required>
                         <span ng-show="hasError(newLeagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                 <small ng-show="hasPropertyError(newLeagueForm.password, 'required')">[ Required ]</small>
                                 <small ng-show="hasPropertyError(newLeagueForm.password, 'pattern')">[ Too Short ]</small>
                             </label>
-                            <input id="password" name="password" type="password" class="form-control" ng-model="newLeagueData.password" ng-required="!newLeagueData.public" rpattern="/.{6}/" focus>
+                            <input id="password" name="password" type="password" class="form-control" ng-model="newLeagueData.password" ng-required="!newLeagueData.public" rpattern="/.{6}/" logh-focus>
                             <span ng-show="hasError(newLeagueForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                         </div>
                     </div>

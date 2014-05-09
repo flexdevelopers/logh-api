@@ -13,7 +13,7 @@
                             <small ng-show="hasPropertyError(newUserForm.firstName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(newUserForm.firstName, 'maxlength')">[ Too Long ]</small>
                         </label>
-                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="newUserData.first_name" ng-maxlength="20" focus required>
+                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="newUserData.first_name" ng-maxlength="20" logh-focus required>
                         <span ng-show="hasError(newUserForm.firstName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <small ng-show="hasPropertyError(newUserForm.lastName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(newUserForm.lastName, 'maxlength')">[ Too Long ]</small>
                         </label>
-                        <input id="lastName" name="lastName" type="text" class="form-control" ng-model="newUserData.last_name" ng-maxlength="20" focus required>
+                        <input id="lastName" name="lastName" type="text" class="form-control" ng-model="newUserData.last_name" ng-maxlength="20" logh-focus required>
                         <span ng-show="hasError(newUserForm.lastName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
                     <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
                 </label>
-                <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" focus required>
+                <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" logh-focus required>
                 <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
             </div>
 
@@ -45,7 +45,7 @@
                             <small ng-show="hasPropertyError(newUserForm.password, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(newUserForm.password, 'minlength')">[ Too Short ]</small>
                         </label>
-                        <input id="password" name="password" type="password" class="form-control" ng-model="newUserData.password" ng-minlength="6" focus required>
+                        <input id="password" name="password" type="password" class="form-control" ng-model="newUserData.password" ng-minlength="6" logh-focus required>
                         <span ng-show="hasError(newUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
