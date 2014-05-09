@@ -4,7 +4,7 @@
 }
 
 .list-group-item {
-  .start-week {
+  .start-week, .team-count {
     font-size: 11px;
     color: #999;
   }
@@ -15,19 +15,18 @@
 
 .custom-search-form {
   width: 250px;
-  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .league-pagination {
-  width: 300px;
   margin: -20px auto 0 0;
 }
 
 @media all and (max-width: 500px) {
   .custom-search-form {
-    width: 145px;
-    .input-group-btn {
-      display: none;
-    }
+    width: 100%;
+    position: relative;
   }
 }
