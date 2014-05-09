@@ -2,6 +2,7 @@ module.exports = angular.module('loghApp.league', [])
     .controller('LeagueController', require('./LeagueController'))
     .controller('CreateLeagueController', require('./CreateLeagueController'))
     .controller('EditLeagueController', require('./EditLeagueController'))
+    .controller('InviteLeagueController', require('./InviteLeagueController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.league', {
@@ -51,6 +52,15 @@ module.exports = angular.module('loghApp.league', [])
                     league: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
                         return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
                     }]
+                }
+            })
+            .state('app.league.invite', {
+                url: '/{leagueId}/invite',
+                views: {
+                    leagueContent: {
+                        templateUrl: 'modules/league/league.invite.tpl.html',
+                        controller: 'InviteLeagueController'
+                    }
                 }
             })
         ;
