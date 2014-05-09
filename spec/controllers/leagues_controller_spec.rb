@@ -89,21 +89,21 @@ describe API::LeaguesController do
       end
     end
     context 'when the start week start date is in the future' do
-      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
+      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: future_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(1) }
       it { should change(current_user.managed_leagues, :count).by(1) }
     end
     context 'when the start week start date is in the past' do
-      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.day) }
+      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.day) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: old_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(0) }
       it { should change(current_user.managed_leagues, :count).by(0) }
     end
     context 'when the start week start date is today' do
-      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date) }
+      let(:old_week) { FactoryGirl.create(:week, starts_at: Time.zone.now) }
       let(:league_params) { FactoryGirl.attributes_for(:league, start_week_id: old_week.id) }
       subject { -> { post :create, season_id: season.id, league: league_params } }
       it { should change(season.leagues, :count).by(0) }
@@ -127,7 +127,7 @@ describe API::LeaguesController do
   describe '#update' do
     context 'when the signed in user is a commish of the league' do
       let(:league) { FactoryGirl.create(:league, season: season, commishes: [ current_user ]) }
-      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
+      let(:future_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
       before {
         league.name = 'Good News Bears'
         league.start_week = future_week
@@ -144,8 +144,8 @@ describe API::LeaguesController do
       end
       context 'and the start week has yet to arrive' do
         context 'and the start week is changed to a future start week' do
-          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
-          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.week) }
+          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.week) }
           let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
           before { league.start_week = new_start_week }
           it 'updates the start week' do
@@ -156,8 +156,8 @@ describe API::LeaguesController do
           end
         end
         context 'and the start week is changed to a past start week' do
-          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.day) }
-          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
           let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
           before { league.start_week = new_start_week }
           it 'updates the start week' do
@@ -170,8 +170,8 @@ describe API::LeaguesController do
       end
       context 'and the start week has passed' do
         context 'and league name is changed' do
-          let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
-          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date + 1.week) }
+          let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.week) }
           let(:league) { FactoryGirl.create(:league, season: season, start_week: start_week, commishes: [ current_user ]) }
           before {
             league.name = 'Good News Bears'

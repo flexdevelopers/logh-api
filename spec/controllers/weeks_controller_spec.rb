@@ -28,9 +28,9 @@ describe API::WeeksController do
     context 'when a signed in user requests the available weeks for a season' do
       it 'returns the weeks for the season that are in the future' do
         season = FactoryGirl.create(:season)
-        FactoryGirl.create(:week, number: 1, season: season, starts_at: Time.zone.now.to_date - 1.day)
-        FactoryGirl.create(:week, number: 2, season: season, starts_at: Time.zone.now.to_date + 1.week)
-        FactoryGirl.create(:week, number: 3, season: season, starts_at: Time.zone.now.to_date + 2.weeks)
+        FactoryGirl.create(:week, number: 1, season: season, starts_at: Time.zone.now - 1.day)
+        FactoryGirl.create(:week, number: 2, season: season, starts_at: Time.zone.now + 1.week)
+        FactoryGirl.create(:week, number: 3, season: season, starts_at: Time.zone.now + 2.weeks)
         get :available, format: 'json', season_id: season.id
         response.should be_success
         expect(json.length).to eq(2)

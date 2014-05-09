@@ -128,7 +128,7 @@ describe API::TeamsController do
       end
     end
     context 'when the league has already started' do
-      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
       let(:league) { FactoryGirl.create(:league, start_week: start_week) }
       let(:team) { FactoryGirl.build(:team, league: league) }
       subject { -> { post :create, league_id: team.league.id, league_password: 'whatever', team: team.attributes } }

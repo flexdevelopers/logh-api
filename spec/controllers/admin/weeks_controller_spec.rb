@@ -10,12 +10,13 @@ describe API::Admin::WeeksController do
   # POST /api/admin/seasons/:season_id/weeks
   describe '#create' do
     context 'when an admin attempts to create a week where all required fields are provided' do
-      it 'creates the week for the season' do
+      it 'creates the week for the season where starts_at is converted to a date with no time' do
         season = FactoryGirl.create(:season)
-        week_params = FactoryGirl.attributes_for(:week)
+        week_params = FactoryGirl.attributes_for(:week, starts_at: Time.zone.now + 1.day)
         week_params[:week_type_id] = week_params[:week_type].id
         expect { post :create, season_id: season.id, week: week_params }.to change(season.weeks, :count).by(1)
-        response.should be_success
+        expect(response).to be_success
+        expect(Week.last[:starts_at]).to eq(Time.zone.now.to_date + 1.day)
       end
     end
     context 'when an admin attempts to add the same week number to 2 different seasons' do
@@ -43,7 +44,7 @@ describe API::Admin::WeeksController do
   describe '#update' do
     context 'when an admin attempts to update a week' do
       let(:week) { FactoryGirl.create(:week) }
-      let(:starts_at) { Time.zone.now.to_date }
+      let(:starts_at) { Time.zone.now }
       let(:playoff_week_type) { FactoryGirl.create(:playoff_week_type) }
       before do
         week.number = 7
@@ -56,7 +57,7 @@ describe API::Admin::WeeksController do
         response.should be_success
         week.reload
         expect(week.number).to eq(7)
-        expect(week.starts_at.to_date).to eq(starts_at)
+        expect(week.starts_at).to eq(starts_at.to_date)
         expect(week.week_type).to eq(playoff_week_type)
         expect(week.complete).to be_true
       end

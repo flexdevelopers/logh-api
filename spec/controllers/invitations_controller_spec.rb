@@ -51,7 +51,7 @@ describe API::InvitationsController do
         expect(ActionMailer::Base.deliveries.last.to).to include(invitation.email)
       end
       context 'and the league has already started' do
-        let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now.to_date - 1.week) }
+        let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
         let(:league) { FactoryGirl.create(:league, start_week: start_week, commishes: [ current_user ]) }
         let(:invitation) { FactoryGirl.build(:invitation) }
         it 'does not creates a league invitation' do
