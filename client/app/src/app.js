@@ -28,6 +28,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/user').name,
     require('./modules/league').name,
     require('./modules/league/leagues').name,
+    require('./modules/team').name,
 
     // helper modules
     require('./common/modules/header').name,
