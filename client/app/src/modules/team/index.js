@@ -5,7 +5,7 @@ module.exports = angular.module('loghApp.team', [])
         $stateProvider
             .state('app.team', {
                 abstract: true,
-                url: 'league/{leagueId}/team',
+                url: 'season/{seasonId}/league/{leagueId}/team',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',
