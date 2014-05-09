@@ -5,6 +5,7 @@ module.exports = angular.module('loghApp.api', [])
       .constant('apiConfig', require('./ApiConfig'))
       .service('userService', require('./UserService'))
       .service('leagueService', require('./LeagueService'))
+      .service('teamService', require('./TeamService'))
       .service('seasonService', require('./SeasonService'))
       .service('weekService', require('./WeekService'))
 ;

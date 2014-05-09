@@ -23,8 +23,7 @@ class API::TeamsController < API::BaseController
     @team.coaches << current_user
     if @team.save
       _mark_invitation_accepted() if _has_invitation_for?(@league)
-      # todo: this is not necessary
-      render json: @team, status: :created, location: api_league_team_path(@league, @team)
+      render json: { team_id: @team.id, message: { type: SUCCESS, content: "#{@team[:name]} team created in #{@league[:name]} league" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

@@ -1,1 +1,26 @@
-<div>create a new team in a league for {{bar}}  {{foo}}</div>
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Create Team in {{league.name}} League</h3>
+    </div>
+
+    <div class="panel-body">
+        <form name="newTeamForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(newTeamForm.teamName), 'has-feedback': hasError(newTeamForm.teamName)}">
+                        <label class="control-label" for="teamName">Team Name
+                            <small ng-show="hasPropertyError(newTeamForm.teamName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(newTeamForm.teamName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="teamName" name="teamName" type="text" class="form-control" ng-model="newTeamData.name" ng-maxlength="30" logh-focus required>
+                        <span ng-show="hasError(newTeamForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="newTeamForm.$invalid" ng-click="create(newTeamData)">Join</button>
+
+        </form>
+    </div>
+</div>

@@ -31,6 +31,11 @@ module.exports = angular.module('loghApp.team', [])
                         templateUrl: 'modules/team/team.new.tpl.html',
                         controller: 'CreateTeamController'
                     }
+                },
+                resolve: {
+                    league: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
+                    }]
                 }
             })
         ;
