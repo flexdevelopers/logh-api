@@ -85,6 +85,11 @@ body {
   margin-top: 28px;
 }
 
+/* content views */
+.content-view {
+  position: relative;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
