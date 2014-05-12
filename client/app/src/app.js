@@ -53,7 +53,12 @@ var loghApp = angular.module('loghApp', [
 
     ], App)
 
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $anchorScrollProvider) {
+        // disables auto-scroll
+        $uiViewScrollProvider.useAnchorScroll();
+        $anchorScrollProvider.disableAutoScrolling();
+
+        // defines root states
         $stateProvider
         .state('public', {
             abstract: true,
