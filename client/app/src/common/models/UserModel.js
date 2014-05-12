@@ -8,6 +8,7 @@ var UserModel = function($rootScope, $window, $log) {
     user.first_name = '';
     user.last_name = '';
     user.admin = false;
+    user.managed_league_count = 0;
 
     this.user = user;
 
@@ -28,6 +29,7 @@ var UserModel = function($rootScope, $window, $log) {
         user.first_name = '';
         user.last_name = '';
         user.admin = false;
+        user.managed_league_count = 0;
 
         this.user = user;
     };
