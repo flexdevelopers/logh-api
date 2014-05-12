@@ -1,6 +1,8 @@
-var HeaderController = function($scope, $log, userModel) {
+var HeaderController = function($scope, $log, userModel, seasonModel) {
 
     $scope.userData = userModel;
+
+    $scope.season = seasonModel.season;
 
     $scope.loginParams = {
         email: '',
@@ -34,5 +36,5 @@ var HeaderController = function($scope, $log, userModel) {
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', 'userModel'];
+HeaderController.$inject = ['$scope', '$log', 'userModel', 'seasonModel'];
 module.exports = HeaderController;

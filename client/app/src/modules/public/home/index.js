@@ -21,13 +21,7 @@ module.exports = angular.module('loghApp.public.home', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
-                },
-                resolve: {
-                    season: function(seasonService) {
-                        return seasonService.getCurrentSeason();
-                    }
                 }
-
             });
         $urlRouterProvider.otherwise('/');
     });

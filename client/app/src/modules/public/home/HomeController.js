@@ -1,7 +1,7 @@
 
-var HomeController = function($scope, $log, season) {
+var HomeController = function($scope, $log, seasonModel) {
 
-    $scope.season = season.data;
+    $scope.season = seasonModel.season;
 
     /**
      * Invoked on startup, like a constructor.
@@ -12,5 +12,5 @@ var HomeController = function($scope, $log, season) {
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', 'season'];
+HomeController.$inject = ['$scope', '$log', 'seasonModel'];
 module.exports = HomeController;
