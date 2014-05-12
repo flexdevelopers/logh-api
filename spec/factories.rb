@@ -23,7 +23,7 @@ FactoryGirl.define do
 
   factory :team do |team|
     team.association  :league
-    name              'Fire Breathing Rubber Duckies'
+    sequence(:name) { |n| "Rubber Duckies#{n}" }
     alive             true
     paid              false
   end

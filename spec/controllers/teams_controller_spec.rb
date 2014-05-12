@@ -56,7 +56,7 @@ describe API::TeamsController do
       it 'returns the team' do
         get :show, format: 'json', league_id: team.league.id, id: team.id
         expect(response).to be_success
-        expect(json[:name]).to eq('Fire Breathing Rubber Duckies')
+        expect(json[:name]).to eq(team[:name])
       end
     end
     context 'when the current user is not a coach of the team' do
@@ -71,6 +71,15 @@ describe API::TeamsController do
 
   # POST /api/leagues/:league_id/teams
   describe '#create' do
+    context 'when creating 2 teams in the same league with the same name' do
+      let(:team) { FactoryGirl.create(:team, name: 'foobar team')}
+      let(:bad_team_params) { FactoryGirl.attributes_for(:team, name: 'foobar team') }
+      it 'the 2nd team is not created' do
+        expect { post :create, league_id: team.league_id, team: bad_team_params }.not_to change(team.league.teams, :count).by(1)
+        expect(response.status).to eq(422) # Unprocessable Entity
+      end
+    end
+
     context 'when a league is private' do
       let(:league) { FactoryGirl.create(:league, public: false) }
       context 'and a valid league password is provided and league invitation exists' do
