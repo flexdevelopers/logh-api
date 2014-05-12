@@ -8,13 +8,7 @@ class API::SessionsController < API::BaseController
     access_token = current_access_token
     access_token.user = @user
     render json: {
-        user: {
-            id: access_token.user.id,
-            email: access_token.user.email,
-            first_name: access_token.user.first_name,
-            last_name: access_token.user.last_name,
-            admin: access_token.user.admin
-        },
+        user: Rabl.render(access_token.user, 'api/users/current', { format: :hash, view_path: Rails.root.join('app/views') }),
         token: access_token.token
     }
   end
