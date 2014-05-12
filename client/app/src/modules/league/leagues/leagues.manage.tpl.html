@@ -1,0 +1,37 @@
+<div class="page-header">
+    <h3>Manage Leagues</h3>
+</div>
+
+<!--if you have managed leagues (i.e. if you're a commish)-->
+<div class="manage-leagues-container" ng-show="managedLeagues.length > 0">
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </span>
+    </div>
+
+    <div class="list-group">
+        <a ng-repeat="league in managedLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" class="list-group-item">
+            <div class="row">
+                <div class="league-name col-sm-4 col-md-4">{{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
+                <div class="col-sm-8 col-md-8">
+                    <span class="start-week">Starts {{league.week_display}}</span>
+                    <span class="badge">View</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!--dynamic pagination-->
+    <div class="league-pagination">
+        <pagination boundary-links="true" max-size="4" total-items="(managedLeagues | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </div>
+</div>
+
+<!--if you have no managed leagues-->
+<div ng-show="managedLeagues.length == 0">
+    You have no managed leagues. <a ui-sref="app.league.new({seasonId:season.id})">Create a League</a> if you want to be a commish.
+</div>

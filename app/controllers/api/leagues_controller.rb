@@ -4,32 +4,39 @@ class API::LeaguesController < API::BaseController
   before_action :_verify_league_management, only: [:update, :destroy]
   before_action :_verify_start_week, only: [:create, :update]
 
-  # GET /api/seasons/:season_id/leagues/public.json
+  # GET /api/seasons/:season_id/leagues/managed
+  def managed
+    @leagues = current_user.managed_leagues
+    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    respond_with @leagues
+  end
+
+  # GET /api/seasons/:season_id/leagues/public
   def public
     @leagues = @season.leagues.public.not_started
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
     respond_with @leagues
   end
 
-  # GET /api/seasons/:season_id/leagues/private.json
+  # GET /api/seasons/:season_id/leagues/private
   def private
     @leagues = @season.leagues.private.not_started
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
     respond_with @leagues
   end
 
-  # GET /api/seasons/:season_id/leagues.json
+  # GET /api/seasons/:season_id/leagues
   def index
     @leagues = @season.leagues
     respond_with @leagues
   end
 
-  # GET /api/seasons/:season_id/leagues/1.json
+  # GET /api/seasons/:season_id/leagues/1
   def show
     respond_with @league
   end
 
-  # POST /api/seasons/:season_id/leagues.json
+  # POST /api/seasons/:season_id/leagues
   def create
     @league = @season.leagues.new(_league_params)
     @league.commishes << current_user
@@ -40,7 +47,7 @@ class API::LeaguesController < API::BaseController
     end
   end
 
-  # PATCH/PUT /api/seasons/:season_id/leagues/1.json
+  # PATCH/PUT /api/seasons/:season_id/leagues/1
   def update
     return forbidden('Cannot update a league that has started') if @league.started?
     if @league.update(_league_params)
@@ -50,7 +57,7 @@ class API::LeaguesController < API::BaseController
     end
   end
 
-  # DELETE /api/seasons/:season_id/leagues/1.json
+  # DELETE /api/seasons/:season_id/leagues/1
   def destroy
     @league.destroy
     head :no_content

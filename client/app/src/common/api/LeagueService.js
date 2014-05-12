@@ -14,6 +14,20 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getManagedLeagues = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/managed")
+            .success(function(data) {
+                $log.log("LeagueService: getManagedLeagues success");
+                return data;
+            })
+            .error(function(data) {
+                $log.log("LeagueService: getManagedLeagues failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.getPublicLeagues = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/public")
             .success(function(data) {

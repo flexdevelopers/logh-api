@@ -1,5 +1,6 @@
 module.exports = angular.module('loghApp.leagues', [])
     .controller('LeaguesController', require('./LeaguesController'))
+    .controller('ManageLeaguesController', require('./ManageLeaguesController'))
     .controller('PublicLeaguesController', require('./PublicLeaguesController'))
     .controller('PrivateLeaguesController', require('./PrivateLeaguesController'))
     .config(function($stateProvider, $urlRouterProvider) {
@@ -23,6 +24,20 @@ module.exports = angular.module('loghApp.leagues', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
+                }
+            })
+            .state('app.leagues.manage', {
+                url: '/manage',
+                views: {
+                    leaguesContent: {
+                        templateUrl: 'modules/league/leagues/leagues.manage.tpl.html',
+                        controller: 'ManageLeaguesController'
+                    }
+                },
+                resolve: {
+                    managedLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+                        return leagueService.getManagedLeagues($stateParams.seasonId);
+                    }]
                 }
             })
             .state('app.leagues.join', {
