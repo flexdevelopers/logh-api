@@ -13,7 +13,7 @@ class API::TeamsController < API::BaseController
 
   # GET /api/leagues/:league_id/teams/1
   def show
-    respond_with @teams
+    respond_with @team
   end
 
   # POST /api/leagues/:league_id/teams
@@ -32,7 +32,7 @@ class API::TeamsController < API::BaseController
   # PATCH/PUT /api/leagues/:league_id/teams/1
   def update
     if @team.update_attributes(_team_params)
-      head :no_content
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

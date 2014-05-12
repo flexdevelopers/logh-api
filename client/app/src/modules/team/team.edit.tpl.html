@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Edit {{teamData.name}}</h3>
+    </div>
+
+    <div class="panel-body">
+        <form name="editTeamForm" role="form" novalidate>
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <div class="form-group" ng-class="{'has-error': hasError(editTeamForm.teamName), 'has-feedback': hasError(editTeamForm.teamName)}">
+                        <label class="control-label" for="teamName">Team Name
+                            <small ng-show="hasPropertyError(editTeamForm.teamName, 'required')">[ Required ]</small>
+                            <small ng-show="hasPropertyError(editTeamForm.teamName, 'maxlength')">[ Too Long ]</small>
+                        </label>
+                        <input id="teamName" name="teamName" type="text" class="form-control" ng-model="teamData.name" ng-maxlength="30" logh-focus required>
+                        <span ng-show="hasError(editTeamForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-block" ng-disabled="editTeamForm.$invalid" ng-click="updateTeam(teamData)">Update</button>
+
+        </form>
+    </div>
+</div>

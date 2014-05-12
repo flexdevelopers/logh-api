@@ -1,6 +1,12 @@
 var TeamController = function($scope, $log) {
 
-    $scope.foo = 'bar';
+    $scope.hasError = function(input) {
+        return !input.$focused && input.$dirty && input.$invalid;
+    };
+
+    $scope.hasPropertyError = function(input, property) {
+        return !input.$focused && input.$dirty && input.$error[property];
+    };
 
     /**
      * Invoked on startup, like a constructor.

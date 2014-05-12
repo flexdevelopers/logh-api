@@ -1,6 +1,7 @@
 module.exports = angular.module('loghApp.team', [])
     .controller('TeamController', require('./TeamController'))
     .controller('CreateTeamController', require('./CreateTeamController'))
+    .controller('EditTeamController', require('./EditTeamController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('app.team', {
@@ -38,6 +39,21 @@ module.exports = angular.module('loghApp.team', [])
                     }]
                 }
             })
+            .state('app.team.edit', {
+                url: '/{teamId}/edit',
+                views: {
+                    teamContent: {
+                        templateUrl: 'modules/team/team.edit.tpl.html',
+                        controller: 'EditTeamController'
+                    }
+                },
+                resolve: {
+                    team: ['teamService', '$stateParams', function(teamService, $stateParams) {
+                        return teamService.getTeam($stateParams.leagueId, $stateParams.teamId);
+                    }]
+                }
+            })
+
         ;
         $urlRouterProvider.otherwise('/');
     });
