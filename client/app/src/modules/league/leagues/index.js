@@ -25,11 +25,20 @@ module.exports = angular.module('loghApp.leagues', [])
                     }
                 }
             })
-            .state('app.leagues.public', {
-                url: '/public',
+            .state('app.leagues.join', {
+                url: '/',
+                abstract: true,
                 views: {
                     leaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.public.tpl.html',
+                        templateUrl: 'modules/league/leagues/leagues.join.tpl.html'
+                    }
+                }
+            })
+            .state('app.leagues.join.public', {
+                url: 'public',
+                views: {
+                    joinLeaguesContent: {
+                        templateUrl: 'modules/league/leagues/leagues.join.public.tpl.html',
                         controller: 'PublicLeaguesController'
                     }
                 },
@@ -39,11 +48,11 @@ module.exports = angular.module('loghApp.leagues', [])
                     }]
                 }
             })
-            .state('app.leagues.private', {
-                url: '/private',
+            .state('app.leagues.join.private', {
+                url: 'private',
                 views: {
-                    leaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.private.tpl.html',
+                    joinLeaguesContent: {
+                        templateUrl: 'modules/league/leagues/leagues.join.private.tpl.html',
                         controller: 'PrivateLeaguesController'
                     }
                 },

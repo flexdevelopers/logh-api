@@ -8,7 +8,7 @@ var LeaguesController = function($scope, $log, $state, $stateParams) {
     $scope.seasonId = $stateParams.seasonId;
 
     $scope.isPublic = function() {
-        return $state.current.name == 'app.leagues.public';
+        return $state.current.name == 'app.leagues.join.public';
     };
 
     /**

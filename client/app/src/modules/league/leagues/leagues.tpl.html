@@ -1,27 +1,2 @@
-<div class="page-header">
-    <h3>Join League</h3>
-</div>
-<div class="leagues-container">
-    <ul class="nav nav-tabs">
-        <li ng-class="{'active': isPublic()}">
-            <a ui-sref="app.leagues.public({seasonId:seasonId})"><i class="glyphicon glyphicon-ok-sign"></i> Public</a>
-        </li>
-        <li ng-class="{'active': !isPublic()}">
-            <a ui-sref="app.leagues.private({seasonId:seasonId})"><i class="glyphicon glyphicon-lock"></i> Private</a>
-        </li>
-    </ul>
-    <div class="input-group custom-search-form">
-        <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-    </div>
-</div>
-
-
-
-<!-- placeholder for public and private leagues -->
-<div class="leagues-content" ui-view="leaguesContent"></div>
-
+<!-- placeholder for child view content -->
+<div ui-view="leaguesContent"></div>
