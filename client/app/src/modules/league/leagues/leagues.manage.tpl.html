@@ -3,7 +3,7 @@
 </div>
 
 <!--if you have managed leagues (i.e. if you're a commish)-->
-<div class="manage-leagues-container" ng-show="managedLeagues.length > 0">
+<div class="manage-leagues-container" ng-show="managedLeagues.length > 0 ">
     <div class="input-group custom-search-form">
         <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
     <span class="input-group-btn">
@@ -33,5 +33,5 @@
 
 <!--if you have no managed leagues-->
 <div ng-show="managedLeagues.length == 0">
-    You have no managed leagues. <a ui-sref="app.league.new({seasonId:season.id})">Create a League</a> if you want to be a commish.
+    You have no managed leagues. <a ui-sref="app.league.new({seasonId:seasonId})">Create a League</a> if you want to be a commish.
 </div>
