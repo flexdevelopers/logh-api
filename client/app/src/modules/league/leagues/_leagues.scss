@@ -6,9 +6,12 @@
     right: 0;
     top: 0;
   }
+  .manage-custom-search-form {
+    margin: 5px 0 5px 0;
+  }
 }
 
-.public-leagues, .private-leagues {
+.public-leagues, .private-leagues, .managed-leagues {
   .list-group-item {
     .team-count, .start-week {
       font-size: 11px;
@@ -20,15 +23,16 @@
   }
 }
 
-.public-league-pagination, .private-league-pagination {
+.public-league-pagination, .private-league-pagination, .manage-league-pagination {
   margin: -20px auto 0 0;
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 550px) {
   .leagues-container {
     .custom-search-form {
       width: 100%;
       position: relative;
+      margin: 5px 0 5px 0;
     }
   }
 }
