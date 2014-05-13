@@ -1,5 +1,7 @@
 var HeaderController = function($scope, $log, userModel, seasonModel) {
 
+    $scope.isCollapsed = true;
+
     $scope.userData = userModel;
 
     $scope.season = seasonModel.season;
