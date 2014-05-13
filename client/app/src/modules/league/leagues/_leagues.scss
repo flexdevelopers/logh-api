@@ -1,36 +1,34 @@
 .leagues-container {
   position: relative;
-}
-
-.league-tab-heading {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.list-group-item {
-  .start-week, .team-count {
-    font-size: 11px;
-    color: #999;
-  }
-  .badge {
-    float: right;
+  .custom-search-form {
+    width: 250px;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }
 
-.custom-search-form {
-  width: 250px;
-  position: absolute;
-  right: 0;
-  top: 0;
+.public-leagues, .private-leagues {
+  .list-group-item {
+    .team-count, .start-week {
+      font-size: 11px;
+      color: #999;
+    }
+    .badge {
+      float: right;
+    }
+  }
 }
 
-.league-pagination {
+.public-league-pagination, .private-league-pagination {
   margin: -20px auto 0 0;
 }
 
 @media all and (max-width: 500px) {
-  .custom-search-form {
-    width: 100%;
-    position: relative;
+  .leagues-container {
+    .custom-search-form {
+      width: 100%;
+      position: relative;
+    }
   }
 }
