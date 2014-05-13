@@ -1,2 +1,5 @@
 object @team
-attributes :id, :name, :league_id, :alive, :paid
+attributes :id, :name, :paid
+child :league do
+  attributes :id, :name, :season_id
+end

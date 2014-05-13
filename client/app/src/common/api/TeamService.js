@@ -14,6 +14,35 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getAliveTeams = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/teams/alive")
+            .success(function(data) {
+                $log.log("TeamService: getAliveTeams success");
+                return data;
+            })
+            .error(function(data) {
+                $log.log("TeamService: getAliveTeams failed");
+                return data;
+            });
+
+        return promise;
+    };
+
+    this.getDeadTeams = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/teams/dead")
+            .success(function(data) {
+                $log.log("TeamService: getDeadTeams success");
+                return data;
+            })
+            .error(function(data) {
+                $log.log("TeamService: getDeadTeams failed");
+                return data;
+            });
+
+        return promise;
+    };
+
+
     this.createTeam = function(teamParams) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams",
             { team: teamParams })

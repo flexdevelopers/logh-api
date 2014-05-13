@@ -1,0 +1,16 @@
+<div class="dead-teams list-group">
+    <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" href="#" class="list-group-item">
+        <div class="row">
+            <div class="team-name col-sm-4 col-md-4">{{team.name}} <span class="team-league">{{team.league.name}}</span></div>
+            <div class="col-sm-8 col-md-8">
+                <span class="current-pick">Current Pick: Seattle</span>
+                <span class="badge">Make Picks</span>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--dynamic pagination-->
+<div class="dead-team-pagination">
+    <pagination boundary-links="true" max-size="4" total-items="(deadTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+</div>

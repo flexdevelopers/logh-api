@@ -9,6 +9,48 @@ describe API::TeamsController do
     sign_in(current_user)
   end
 
+  # GET /api/seasons/:season_id/teams/alive
+  describe '#alive' do
+    context 'when requesting alive teams for a season' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
+      end
+      it 'returns only alive teams for the current user' do
+        get :alive, format: 'json', season_id: league.season.id
+        expect(response).to be_success
+        expect(json.length).to eq(3)
+        json.each do |team|
+          expect(team[:alive]).to be_true
+        end
+      end
+    end
+  end
+
+  # GET /api/seasons/:season_id/teams/dead
+  describe '#dead' do
+    context 'when requesting dead teams for a season' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+      end
+      it 'returns only dead teams for the current user' do
+        get :dead, format: 'json', season_id: league.season.id
+        expect(response).to be_success
+        expect(json.length).to eq(2)
+        json.each do |team|
+          expect(team[:alive]).to be_false
+        end
+      end
+    end
+  end
+
   # GET /api/leagues/:league_id/teams
   describe '#index' do
     context 'when the current user is a commish of the league' do

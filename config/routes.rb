@@ -22,6 +22,10 @@ LoghApi::Application.routes.draw do
         get 'public', on: :collection, to: 'leagues#public'
         get 'private', on: :collection, to: 'leagues#private'
       end
+      resources :teams, only: [] do
+        get 'alive', on: :collection, to: 'teams#alive'
+        get 'dead', on: :collection, to: 'teams#dead'
+      end
       resources :weeks, only: [:index, :show] do
         get 'available', on: :collection, to: 'weeks#available'
       end

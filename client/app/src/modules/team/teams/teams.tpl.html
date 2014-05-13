@@ -1,0 +1,25 @@
+<div class="page-header">
+    <h3>Manage Teams</h3>
+</div>
+<div class="teams-container">
+    <ul class="nav nav-tabs">
+        <li ng-class="{'active': isAliveState()}">
+            <a ui-sref="app.teams.alive({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-up"></i> Alive</a>
+        </li>
+        <li ng-class="{'active': !isAliveState()}">
+            <a ui-sref="app.teams.dead({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-down"></i> Dead</a>
+        </li>
+    </ul>
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+</div>
+
+<!-- placeholder for alive and dead teams -->
+<div class="teams-content" ui-view="teamsContent"></div>
+

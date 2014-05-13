@@ -8,4 +8,8 @@ class Team < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :league_id }
   validates :league, presence: true
   validates :alive, inclusion: { in: [true, false] }
+
+  scope :alive, -> { where(alive: true) }
+  scope :dead, -> { where(alive: false) }
+
 end

@@ -1,9 +1,19 @@
 class API::TeamsController < API::BaseController
-  before_action :_set_league
+  before_action :_set_league, except: [:alive, :dead]
   before_action :_set_team, only: [:show, :update, :destroy]
   before_action :_verify_team_ownership, only: [:show, :update, :destroy]
   before_action :_verify_league_membership, only: [:index]
   before_action :_verify_league_acceptance, only: [:create]
+
+  # GET /api/seasons/:season_id/teams/alive
+  def alive
+    @teams = current_user.teams.joins(:league).where('season_id', params[:season_id]).alive
+  end
+
+  # GET /api/seasons/:season_id/teams/dead
+  def dead
+    @teams = current_user.teams.joins(:league).where('season_id', params[:season_id]).dead
+  end
 
   # GET /api/leagues/:league_id/teams
   def index
