@@ -1,5 +1,7 @@
 
-var LeaguesController = function($scope, $log, $state, $stateParams) {
+var LeaguesController = function($scope, $log, $state, $stateParams, seasonModel) {
+
+    $scope.season = seasonModel.season;
 
     // pagination
     $scope.currentLeaguePage = 1;
@@ -21,6 +23,6 @@ var LeaguesController = function($scope, $log, $state, $stateParams) {
 
 };
 
-LeaguesController.$inject = ['$scope', '$log', '$state', '$stateParams'];
+LeaguesController.$inject = ['$scope', '$log', '$state', '$stateParams', 'seasonModel'];
 module.exports = LeaguesController;
 
