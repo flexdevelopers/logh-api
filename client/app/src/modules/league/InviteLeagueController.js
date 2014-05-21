@@ -6,7 +6,7 @@ var InviteLeagueController = function($scope, $log, $stateParams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("invite league controller");
+        $log.debug("invite league controller");
     };
     init();
 

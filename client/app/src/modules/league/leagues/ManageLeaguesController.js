@@ -6,7 +6,7 @@ var ManagedLeaguesController = function($scope, $log, managedLeagues) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("managed leagues controller");
+        $log.debug("managed leagues controller");
     };
     init();
 

@@ -7,7 +7,7 @@ var PublicLeaguesController = function($scope, $log, publicLeagues) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("public leagues controller");
+        $log.debug("public leagues controller");
     };
     init();
 

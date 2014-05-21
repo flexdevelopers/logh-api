@@ -3,11 +3,11 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
     this.getTeam = function(leagueId, teamId) {
         var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/teams/" + teamId)
             .success(function(data) {
-                $log.log("TeamService: getTeam success");
+                $log.debug("TeamService: getTeam success");
                 return data;
             })
             .error(function(data) {
-                $log.log("TeamService: getTeam failed");
+                $log.debug("TeamService: getTeam failed");
                 return data;
             });
 
@@ -17,11 +17,11 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
     this.getAliveTeams = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/teams/alive")
             .success(function(data) {
-                $log.log("TeamService: getAliveTeams success");
+                $log.debug("TeamService: getAliveTeams success");
                 return data;
             })
             .error(function(data) {
-                $log.log("TeamService: getAliveTeams failed");
+                $log.debug("TeamService: getAliveTeams failed");
                 return data;
             });
 
@@ -31,11 +31,11 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
     this.getDeadTeams = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/teams/dead")
             .success(function(data) {
-                $log.log("TeamService: getDeadTeams success");
+                $log.debug("TeamService: getDeadTeams success");
                 return data;
             })
             .error(function(data) {
-                $log.log("TeamService: getDeadTeams failed");
+                $log.debug("TeamService: getDeadTeams failed");
                 return data;
             });
 
@@ -47,14 +47,14 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams",
             { team: teamParams })
             .success(function(data) {
-                $log.log("TeamService: createTeam success");
+                $log.debug("TeamService: createTeam success");
                 var editTeamPath = '/season/' + teamParams.season_id + '/league/' + teamParams.league_id + '/team/' + data.team_id + '/edit';
                 $location.path(editTeamPath);
                 messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
-                $log.log("TeamService: createTeam failed");
+                $log.debug("TeamService: createTeam failed");
                 return data;
             });
 
@@ -65,12 +65,12 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
         var promise = $http.put(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams/" + teamParams.id,
             { team: teamParams })
             .success(function(data) {
-                $log.log("TeamService: updateTeam success");
+                $log.debug("TeamService: updateTeam success");
                 messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
-                $log.log("TeamService: updateTeam failed");
+                $log.debug("TeamService: updateTeam failed");
                 return data;
             });
 

@@ -1,5 +1,5 @@
 
-var UserController = function($scope, userModel) {
+var UserController = function($scope, $log, userModel) {
 
     $scope.userData = angular.copy(userModel);
 
@@ -23,11 +23,11 @@ var UserController = function($scope, userModel) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("user controller");
+        $log.debug("user controller");
     };
     init();
 
 };
 
-UserController.$inject = ['$scope', 'userModel'];
+UserController.$inject = ['$scope', '$log', 'userModel'];
 module.exports = UserController;

@@ -7,7 +7,7 @@ var HomeController = function($scope, $log, seasonModel) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("main controller");
+        $log.debug("main controller");
     };
     init();
 };

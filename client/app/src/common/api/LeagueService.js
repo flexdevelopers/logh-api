@@ -3,11 +3,11 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
     this.getLeague = function(seasonId, leagueId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
             .success(function(data) {
-                $log.log("LeagueService: getLeague success");
+                $log.debug("LeagueService: getLeague success");
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: getLeague failed");
+                $log.debug("LeagueService: getLeague failed");
                 return data;
             });
 
@@ -17,11 +17,11 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
     this.getManagedLeagues = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/managed")
             .success(function(data) {
-                $log.log("LeagueService: getManagedLeagues success");
+                $log.debug("LeagueService: getManagedLeagues success");
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: getManagedLeagues failed");
+                $log.debug("LeagueService: getManagedLeagues failed");
                 return data;
             });
 
@@ -31,11 +31,11 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
     this.getPublicLeagues = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/public")
             .success(function(data) {
-                $log.log("LeagueService: getPublicLeagues success");
+                $log.debug("LeagueService: getPublicLeagues success");
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: getPublicLeagues failed");
+                $log.debug("LeagueService: getPublicLeagues failed");
                 return data;
             });
 
@@ -45,11 +45,11 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
     this.getPrivateLeagues = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/private")
             .success(function(data) {
-                $log.log("LeagueService: getPrivateLeagues success");
+                $log.debug("LeagueService: getPrivateLeagues success");
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: getPrivateLeagues failed");
+                $log.debug("LeagueService: getPrivateLeagues failed");
                 return data;
             });
 
@@ -60,13 +60,13 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
         var promise = $http.post(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues",
             { league: leagueParams })
             .success(function(data) {
-                $log.log("LeagueService: createLeague success");
+                $log.debug("LeagueService: createLeague success");
                 $location.path('/season/' + leagueParams.season_id + '/league/' + data.league_id + '/edit' );
                 messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: createLeague failed");
+                $log.debug("LeagueService: createLeague failed");
                 return data;
             });
 
@@ -77,12 +77,12 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
         var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id,
             { league: leagueParams })
             .success(function(data) {
-                $log.log("LeagueService: updateLeague success");
+                $log.debug("LeagueService: updateLeague success");
                 messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
-                $log.log("LeagueService: updateLeague failed");
+                $log.debug("LeagueService: updateLeague failed");
                 return data;
             });
 

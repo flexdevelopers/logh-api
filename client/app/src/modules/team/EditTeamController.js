@@ -10,7 +10,7 @@ var EditTeamController = function($scope, $log, team) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("edit team controller");
+        $log.debug("edit team controller");
     };
     init();
 

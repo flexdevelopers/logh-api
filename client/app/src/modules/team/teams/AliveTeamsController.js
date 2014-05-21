@@ -6,7 +6,7 @@ var AliveTeamsController = function($scope, $log, aliveTeams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("alive teams controller");
+        $log.debug("alive teams controller");
     };
     init();
 

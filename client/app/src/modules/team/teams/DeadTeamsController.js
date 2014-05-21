@@ -6,7 +6,7 @@ var DeadTeamsController = function($scope, $log, deadTeams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("dead teams controller");
+        $log.debug("dead teams controller");
     };
     init();
 

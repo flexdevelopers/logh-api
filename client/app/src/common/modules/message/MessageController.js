@@ -10,7 +10,7 @@ var MessageController = function($scope, $log, messageModel) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("message controller");
+        $log.debug("message controller");
     };
     init();
 };

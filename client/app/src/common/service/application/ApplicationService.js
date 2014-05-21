@@ -16,7 +16,7 @@ var ApplicationService =
          * Invoked on startup, like a constructor.
          */
         var init = function () {
-            $log.log("ApplicationService init application service");
+            $log.debug("ApplicationService init application service");
         };
         init();
 

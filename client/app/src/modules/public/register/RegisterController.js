@@ -1,5 +1,5 @@
 
-var RegisterController = function($scope) {
+var RegisterController = function($scope, $log) {
 
     $scope.newUserData = {
         first_name: '',
@@ -25,11 +25,11 @@ var RegisterController = function($scope) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("register controller");
+        $log.debug("register controller");
     };
     init();
 
 };
 
-RegisterController.$inject = ['$scope'];
+RegisterController.$inject = ['$scope', '$log'];
 module.exports = RegisterController;

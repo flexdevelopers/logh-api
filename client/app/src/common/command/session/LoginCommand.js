@@ -5,15 +5,15 @@ commangular.create('LoginCommand',
     return {
 
         execute: function(email, password) {
-            $log.log('LoginCommand: authenticating user...');
+            $log.debug('LoginCommand: authenticating user...');
             return userService.login(email, password);
         },
         onError: function(error) {
-            $log.log("LoginCommand: failure: " + error.data);
+            $log.debug("LoginCommand: failure: " + error.data);
             userModel.resetUser();
         },
         onResult: function(result) {
-            $log.log("LoginCommand: success ");
+            $log.debug("LoginCommand: success ");
         }
 
     }

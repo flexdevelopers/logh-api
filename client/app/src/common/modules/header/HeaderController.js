@@ -12,7 +12,7 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
     };
 
     $scope.login = function(loginParams) {
-        $log.log("login params: " + loginParams);
+        $log.debug("login params: " + loginParams);
         $scope.dispatch("LoginEvent", loginParams);
     };
 
@@ -33,7 +33,7 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("header controller");
+        $log.debug("header controller");
     };
     init();
 };

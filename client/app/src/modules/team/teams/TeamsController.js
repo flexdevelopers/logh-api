@@ -14,7 +14,7 @@ var TeamsController = function($scope, $log, $state, $stateParams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("teams controller");
+        $log.debug("teams controller");
     };
     init();
 

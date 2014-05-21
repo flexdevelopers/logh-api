@@ -4,15 +4,15 @@ commangular.create('CreateTeamCommand',
         return {
 
             execute: function(teamParams) {
-                $log.log('CreateTeamCommand: creating a new team...');
+                $log.debug('CreateTeamCommand: creating a new team...');
                 var promise = teamService.createTeam(teamParams);
                 return promise;
             },
             onError: function(error) {
-                $log.log("CreateTeamCommand: failure: " + error.data);
+                $log.debug("CreateTeamCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.log("CreateTeamCommand: success");
+                $log.debug("CreateTeamCommand: success");
             }
 
         }

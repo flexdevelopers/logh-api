@@ -12,7 +12,7 @@ var TeamController = function($scope, $log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("team controller");
+        $log.debug("team controller");
     };
     init();
 

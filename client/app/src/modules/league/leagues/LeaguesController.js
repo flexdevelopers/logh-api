@@ -17,7 +17,7 @@ var LeaguesController = function($scope, $log, $state, $stateParams, seasonModel
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("leagues controller");
+        $log.debug("leagues controller");
     };
     init();
 

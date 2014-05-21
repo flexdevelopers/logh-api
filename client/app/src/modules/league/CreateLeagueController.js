@@ -29,7 +29,7 @@ var CreateLeagueController = function($scope, $log, $stateParams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("create league controller");
+        $log.debug("create league controller");
     };
     init();
 

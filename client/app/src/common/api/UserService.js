@@ -5,14 +5,14 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             apiConfig.baseURL + "sessions",
             { email: email, password: password })
             .success(function(data) {
-                $log.log("UserService: login success");
+                $log.debug("UserService: login success");
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 messageModel.resetMessage();
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: login failure");
+                $log.debug("UserService: login failure");
                 return data;
             });
 
@@ -24,11 +24,11 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
                 messageModel.setMessage(data.message, false);
-                $log.log("UserService: logout success");
+                $log.debug("UserService: logout success");
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: logout failure");
+                $log.debug("UserService: logout failure");
                 return data;
             });
 
@@ -39,12 +39,12 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
     this.getCurrentUser = function() {
         var promise = $http.get(apiConfig.baseURL + "users/current")
             .success(function(data) {
-                $log.log("UserService: getCurrentUser success");
+                $log.debug("UserService: getCurrentUser success");
                 userModel.setUser(data);
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: getCurrentUser failed");
+                $log.debug("UserService: getCurrentUser failed");
                 return data;
             });
 
@@ -55,14 +55,14 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
         var promise = $http.post(apiConfig.baseURL + "users",
             { user: userParams })
             .success(function(data) {
-                $log.log("UserService: createUser success");
+                $log.debug("UserService: createUser success");
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: createUser failed");
+                $log.debug("UserService: createUser failed");
                 return data;
             });
 
@@ -73,13 +73,13 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
         var promise = $http.put(apiConfig.baseURL + "users/current",
             { user: userParams })
             .success(function(data) {
-                $log.log("UserService: updateUser success");
+                $log.debug("UserService: updateUser success");
                 userModel.setUser(userParams);
                 messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
-                $log.log("UserService: updateUser failed");
+                $log.debug("UserService: updateUser failed");
                 return data;
             });
 

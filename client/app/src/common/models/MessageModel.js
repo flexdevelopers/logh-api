@@ -20,7 +20,7 @@ var MessageModel = function($rootScope, $log) {
         } else {
             queue = []; // clear the queue as message will be showed immediately
         }
-        $log.log("MessageModel: content: " + message.content);
+        $log.debug("MessageModel: content: " + message.content);
     };
 
     this.resetMessage = function() {
@@ -44,7 +44,7 @@ var MessageModel = function($rootScope, $log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating message model...");
+        $log.debug("creating message model...");
     };
     init();
 

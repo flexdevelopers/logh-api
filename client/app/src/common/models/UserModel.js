@@ -15,7 +15,7 @@ var UserModel = function($rootScope, $window, $log) {
         user.loaded = true;
         user = angular.extend(user, userData);
         $rootScope.$broadcast('userModel::userUpdated', user);
-        $log.log("UserModel: setUser: " + user.email);
+        $log.debug("UserModel: setUser: " + user.email);
     };
 
     this.resetUser = function() {
@@ -36,7 +36,7 @@ var UserModel = function($rootScope, $window, $log) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating user model...");
+        $log.debug("creating user model...");
     };
     init();
 

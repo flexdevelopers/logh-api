@@ -24,7 +24,7 @@ var CreateTeamController = function($scope, $log, $stateParams, league) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("create team controller");
+        $log.debug("create team controller");
     };
     init();
 

@@ -5,15 +5,15 @@ commangular.create('UpdateUserCommand',
         return {
 
             execute: function(userParams) {
-                $log.log('UpdateUserCommand: updating a user...');
+                $log.debug('UpdateUserCommand: updating a user...');
                 var userPromise = userService.updateUser(userParams);
                 return userPromise;
             },
             onError: function(error) {
-                $log.log("UpdateUserCommand: failure: " + error.data);
+                $log.debug("UpdateUserCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.log("UpdateUserCommand: success");
+                $log.debug("UpdateUserCommand: success");
             }
 
         }

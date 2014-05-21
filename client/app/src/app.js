@@ -54,10 +54,13 @@ var loghApp = angular.module('loghApp', [
 
     ], App)
 
-    .config(function($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $anchorScrollProvider) {
+    .config(function($stateProvider, $logProvider, $uiViewScrollProvider, $anchorScrollProvider) {
         // disables auto-scroll
         $uiViewScrollProvider.useAnchorScroll();
         $anchorScrollProvider.disableAutoScrolling();
+
+        // turns on/off debug console log statements
+        $logProvider.debugEnabled(true);
 
         // defines root states
         $stateProvider
@@ -87,7 +90,7 @@ var loghApp = angular.module('loghApp', [
     })
 
     .run(function($rootScope, $urlRouter, $log, applicationService) {
-        $log.log("Application starting up...");
+        $log.debug("Application starting up...");
         applicationService.startup();
     })
 ;

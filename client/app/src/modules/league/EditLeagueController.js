@@ -27,7 +27,7 @@ var EditLeagueController = function($scope, $log, league) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.log("edit league controller");
+        $log.debug("edit league controller");
     };
     init();
 

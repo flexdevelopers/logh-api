@@ -8,14 +8,14 @@ var SeasonModel = function($rootScope, $log) {
 
     this.setSeason = function(seasonData) {
         season = angular.extend(season, seasonData);
-        $log.log("SeasonModel: setSeasonn: " + season.name);
+        $log.debug("SeasonModel: setSeasonn: " + season.name);
     };
 
     /**
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        console.log("creating season model...");
+        $log.debug("creating season model...");
     };
     init();
 
