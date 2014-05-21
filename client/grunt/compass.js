@@ -12,16 +12,7 @@ module.exports = {
     },
     dist: {
         options: {
-//            generatedImagesDir: '<%= globalConfig.resourcesdir %>/images/generated',
             cssDir: '<%= globalConfig.resourcesdir %>',
-            outputStyle: 'compressed',
-            environment: 'production'
-        }
-    },
-    prod: {
-        options: {
-//            generatedImagesDir: '<%= globalConfig.proddir %>/images/generated',
-            cssDir: '<%= globalConfig.proddir %>',
             outputStyle: 'compressed',
             environment: 'production'
         }
@@ -29,7 +20,6 @@ module.exports = {
     dev: {
         options: {
             debugInfo: true,
-//            generatedImagesDir: '<%= globalConfig.resourcesdir %>/images/generated',
             cssDir: '<%= globalConfig.resourcesdir %>',
             outputStyle: 'compressed',
             environment: 'production'

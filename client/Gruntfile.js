@@ -13,21 +13,8 @@ module.exports = function (grunt) {
     //default task
     grunt.registerTask('default', ['heroku']);
 
-    //heroku
+    //heroku - do nothing for now
     grunt.registerTask('heroku', []);
-//    grunt.registerTask('heroku', ['build-dev','build-shared-libs']);
-
-    // build tasks
-    grunt.registerTask('build-release', ['clean','copy:prod','build']);
-    grunt.registerTask('export-release', ['build-release', 'copy:export']);
-    grunt.registerTask('export-release-ci', ['build-release', 'copy:export_ci']);
-
-
-    //prod tasks
-    grunt.registerTask('build', ['build-css','build-js','build-shared-libs']);
-    grunt.registerTask('build-css', ['compass:prod']);
-    grunt.registerTask('build-js', ['html2js','browserify2:app-prod']);
-    grunt.registerTask('build-shared-libs', ['browserify2:shared-libs-prod']);
 
     //dev tasks
     grunt.registerTask('build-dev-all', ['clean','copy:dist','build-css-dev','build-js-dev','build-shared-libs-dev']);
@@ -38,5 +25,4 @@ module.exports = function (grunt) {
 
     // server task
     grunt.registerTask('server', ['build-dev', 'watch']);
-
 };
