@@ -9,6 +9,8 @@ class Team < ActiveRecord::Base
   validates :league, presence: true
   validates :alive, inclusion: { in: [true, false] }
 
+  default_scope { includes(:league) }
+
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
 
