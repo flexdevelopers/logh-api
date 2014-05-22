@@ -54,7 +54,10 @@ var loghApp = angular.module('loghApp', [
 
     ], App)
 
-    .config(function($stateProvider, $logProvider, $uiViewScrollProvider, $anchorScrollProvider) {
+    .config(function($stateProvider, $locationProvider, $logProvider, $uiViewScrollProvider, $anchorScrollProvider) {
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
+
         // disables auto-scroll
         $uiViewScrollProvider.useAnchorScroll();
         $anchorScrollProvider.disableAutoScrolling();
