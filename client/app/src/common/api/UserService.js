@@ -1,4 +1,4 @@
-var UserService = function($http, $log, $window, apiConfig, messageModel, userModel) {
+var UserService = function($http, $log, $state, $window, $timeout, apiConfig, messageModel, userModel) {
 
     this.login = function(email, password) {
         var promise = $http.post(
@@ -45,7 +45,10 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
             })
             .error(function(data) {
                 $log.debug("UserService: getCurrentUser failed");
-                return data;
+                $timeout(function () {
+                  messageModel.setMessage({ type: 'danger', content: "Authorization failure. Please sign in or register." }, true);
+                  $state.go('public.signin');
+                }, 200);
             });
 
         return promise;
@@ -88,5 +91,5 @@ var UserService = function($http, $log, $window, apiConfig, messageModel, userMo
 
 };
 
-UserService.$inject = ['$http', '$log', '$window', 'apiConfig', 'messageModel', 'userModel'];
+UserService.$inject = ['$http', '$log', '$state', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel'];
 module.exports = UserService;
