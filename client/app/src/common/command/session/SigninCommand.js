@@ -1,5 +1,5 @@
 commangular.create('SigninCommand',
-    function($log, userService, userModel) {
+    function($log, $state, userService, userModel) {
 
     return {
 
@@ -13,6 +13,9 @@ commangular.create('SigninCommand',
         },
         onResult: function(result) {
             $log.debug("SigninCommand: success ");
+            if ($state.current.name == 'public.signin') {
+                $state.go('public.home');
+            }
         }
 
     }
