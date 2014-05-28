@@ -4,7 +4,7 @@ module.exports = angular.module('loghApp.public.home', [])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('public.home', {
-                url: 'home',
+                url: '',
                 views: {
                     header: {
                         templateUrl: 'common/modules/header/header.tpl.html',

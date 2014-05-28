@@ -4,7 +4,7 @@ require('app-templates');
 
 var App = function($urlRouterProvider) {
     // unmatched urls should be directed back to the start
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
 };
 
 App.$inject = ['$urlRouterProvider'];
