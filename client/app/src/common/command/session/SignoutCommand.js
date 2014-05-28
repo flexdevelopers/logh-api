@@ -1,23 +1,20 @@
-
-commangular.create('LogoutCommand',
+commangular.create('SignoutCommand',
     function($log, $state, userService, userModel) {
 
         return {
 
             execute: function() {
-                $log.debug('LogoutCommand: logging out user...');
-                return userService.logout();
+                $log.debug('SignoutCommand: signing out user...');
+                return userService.signout();
             },
             onError: function(error) {
-                $log.debug("LogoutCommand: failure: " + error.data);
+                $log.debug("SignoutCommand: failure: " + error.data);
             },
             onResult: function(result) {
-                $log.debug("LogoutCommand: success");
+                $log.debug("SignoutCommand: success");
                 userModel.resetUser();
                 $state.go('public.home');
             }
 
         }
     });
-
-

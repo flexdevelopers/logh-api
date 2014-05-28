@@ -1,6 +1,6 @@
 // session commands
 require('./session/SigninCommand');
-require('./session/LogoutCommand');
+require('./session/SignoutCommand');
 
 // user commands
 require('./user/GetCurrentUserCommand');
@@ -21,8 +21,8 @@ module.exports = angular.module('loghApp.commandConfig', [])
         // session events
         $commangularProvider.mapTo('SigninEvent').asSequence()
             .add('SigninCommand');
-        $commangularProvider.mapTo('LogoutEvent').asSequence()
-            .add('LogoutCommand');
+        $commangularProvider.mapTo('SignoutEvent').asSequence()
+            .add('SignoutCommand');
 
         // user events
         $commangularProvider.mapTo('GetCurrentUserEvent').asSequence()

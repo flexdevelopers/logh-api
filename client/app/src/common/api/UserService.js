@@ -19,16 +19,16 @@ var UserService = function($http, $log, $state, $window, $timeout, apiConfig, me
         return promise;
     };
 
-    this.logout = function() {
+    this.signout = function() {
         var promise = $http.delete(
             apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
                 messageModel.setMessage(data.message, false);
-                $log.debug("UserService: logout success");
+                $log.debug("UserService: signout success");
                 return data;
             })
             .error(function(data) {
-                $log.debug("UserService: logout failure");
+                $log.debug("UserService: signout failure");
                 return data;
             });
 

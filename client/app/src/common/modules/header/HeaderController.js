@@ -16,12 +16,12 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
         $scope.dispatch("SigninEvent", credentials);
     };
 
-    $scope.logout = function() {
+    $scope.signout = function() {
         $scope.credentials = {
             email: '',
             password: ''
         };
-        $scope.dispatch("LogoutEvent");
+        $scope.dispatch("SignoutEvent");
     };
 
     $scope.forgotPassword = function() {
