@@ -6,18 +6,18 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
 
     $scope.season = seasonModel.season;
 
-    $scope.loginParams = {
+    $scope.credentials = {
         email: '',
         password: ''
     };
 
-    $scope.login = function(loginParams) {
-        $log.debug("login params: " + loginParams);
-        $scope.dispatch("LoginEvent", loginParams);
+    $scope.signin = function(credentials) {
+        $log.debug("signin credentials: " + credentials);
+        $scope.dispatch("SigninEvent", credentials);
     };
 
     $scope.logout = function() {
-        $scope.loginParams = {
+        $scope.credentials = {
             email: '',
             password: ''
         };

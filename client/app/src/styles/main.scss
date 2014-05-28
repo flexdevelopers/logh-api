@@ -7,7 +7,9 @@ $icon-font-path: "../assets/fonts/";
 @import "../common/modules/message/message";
 
 @import "../modules/public/home/home";
+@import "../modules/public/signin/signin";
 @import "../modules/public/register/register";
+
 @import "../modules/user/user";
 @import "../modules/league/league";
 @import "../modules/league/leagues/leagues";

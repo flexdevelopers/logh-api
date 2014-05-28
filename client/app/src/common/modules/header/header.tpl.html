@@ -39,17 +39,17 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
           <div class="dropdown-menu panel panel-default">
             <div class="panel-body">
-              <form role="form" ng-submit="login(loginParams); $event.stopPropagation();">
+              <form role="form" ng-submit="signin(credentials); $event.stopPropagation();">
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="Enter email" ng-model="loginParams.email" ng-click="$event.stopPropagation();">
+                        <input type="email" class="form-control" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" placeholder="Password" ng-model="loginParams.password" ng-click="$event.stopPropagation();">
+                        <input type="password" class="form-control" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();">
                     </div>
                 </div>
                 <button type="submit" class="submit-btn btn btn-primary pull-left">Submit</button>

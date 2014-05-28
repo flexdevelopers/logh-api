@@ -1,18 +1,18 @@
 var UserService = function($http, $log, $state, $window, $timeout, apiConfig, messageModel, userModel) {
 
-    this.login = function(email, password) {
+    this.signin = function(email, password) {
         var promise = $http.post(
             apiConfig.baseURL + "sessions",
             { email: email, password: password })
             .success(function(data) {
-                $log.debug("UserService: login success");
+                $log.debug("UserService: signin success");
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 messageModel.resetMessage();
                 return data;
             })
             .error(function(data) {
-                $log.debug("UserService: login failure");
+                $log.debug("UserService: signin failure");
                 return data;
             });
 
