@@ -86,8 +86,10 @@ var loghApp = angular.module('loghApp', [
                 loadSeason: function(seasonService) {
                     return seasonService.getCurrentSeason();
                 },
-                loadUser: function(userService) {
-                    return userService.getCurrentUser();
+                loadUser: function(userService, userModel) {
+                    if (!userModel.user.loaded) {
+                      userService.getCurrentUser();
+                    }
                 }
             }
         })
