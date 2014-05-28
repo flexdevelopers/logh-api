@@ -4,10 +4,10 @@
 <div class="leagues-container">
     <ul class="nav nav-tabs">
         <li ng-class="{'active': isPublic()}">
-            <a ui-sref="app.leagues.join.public({seasonId:seasonId})"><i class="glyphicon glyphicon-ok-sign"></i> Public</a>
+            <a ui-sref="private.leagues.join.public({seasonId:seasonId})"><i class="glyphicon glyphicon-ok-sign"></i> Public</a>
         </li>
         <li ng-class="{'active': !isPublic()}">
-            <a ui-sref="app.leagues.join.private({seasonId:seasonId})"><i class="glyphicon glyphicon-lock"></i> Private</a>
+            <a ui-sref="private.leagues.join.private({seasonId:seasonId})"><i class="glyphicon glyphicon-lock"></i> Private</a>
         </li>
     </ul>
     <div class="input-group custom-search-form">

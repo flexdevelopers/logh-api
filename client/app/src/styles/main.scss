@@ -3,18 +3,21 @@ $icon-font-path: "../assets/fonts/";
 @import "variables";
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/bootstrap";
 
+// common
 @import "../common/modules/header/header";
 @import "../common/modules/message/message";
 
+// public
 @import "../modules/public/home/home";
 @import "../modules/public/signin/signin";
 @import "../modules/public/register/register";
 
-@import "../modules/user/user";
-@import "../modules/league/league";
-@import "../modules/league/leagues/leagues";
-@import "../modules/team/team";
-@import "../modules/team/teams/teams";
+// private
+@import "../modules/private/user/user";
+@import "../modules/private/league/league";
+@import "../modules/private/league/leagues/leagues";
+@import "../modules/private/team/team";
+@import "../modules/private/team/teams/teams";
 
 .browsehappy {
   margin: 0.2em 0;

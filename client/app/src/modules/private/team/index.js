@@ -4,7 +4,7 @@ module.exports = angular.module('loghApp.team', [])
     .controller('EditTeamController', require('./EditTeamController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.team', {
+            .state('private.team', {
                 abstract: true,
                 url: 'season/{seasonId}/league/{leagueId}/team',
                 views: {
@@ -17,7 +17,7 @@ module.exports = angular.module('loghApp.team', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/team/team.tpl.html',
+                        templateUrl: 'modules/private/team/team.tpl.html',
                         controller: 'TeamController'
                     },
                     footer: {
@@ -25,11 +25,11 @@ module.exports = angular.module('loghApp.team', [])
                     }
                 }
             })
-            .state('app.team.new', {
+            .state('private.team.new', {
                 url: '/new',
                 views: {
                     teamContent: {
-                        templateUrl: 'modules/team/team.new.tpl.html',
+                        templateUrl: 'modules/private/team/team.new.tpl.html',
                         controller: 'CreateTeamController'
                     }
                 },
@@ -39,11 +39,11 @@ module.exports = angular.module('loghApp.team', [])
                     }]
                 }
             })
-            .state('app.team.edit', {
+            .state('private.team.edit', {
                 url: '/{teamId}/edit',
                 views: {
                     teamContent: {
-                        templateUrl: 'modules/team/team.edit.tpl.html',
+                        templateUrl: 'modules/private/team/team.edit.tpl.html',
                         controller: 'EditTeamController'
                     }
                 },

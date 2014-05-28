@@ -14,7 +14,7 @@ commangular.create('CreateUserCommand',
             },
             onResult: function(result) {
                 $log.debug("CreateUserCommand: success");
-                $state.go('app.user');
+                $state.go('private.user');
             }
 
         }

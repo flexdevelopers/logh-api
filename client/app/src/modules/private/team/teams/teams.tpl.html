@@ -4,10 +4,10 @@
 <div class="teams-container">
     <ul class="nav nav-tabs">
         <li ng-class="{'active': isAliveState()}">
-            <a ui-sref="app.teams.alive({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-up"></i> Alive</a>
+            <a ui-sref="private.teams.alive({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-up"></i> Alive</a>
         </li>
         <li ng-class="{'active': !isAliveState()}">
-            <a ui-sref="app.teams.dead({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-down"></i> Dead</a>
+            <a ui-sref="private.teams.dead({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-down"></i> Dead</a>
         </li>
     </ul>
     <div class="input-group custom-search-form">

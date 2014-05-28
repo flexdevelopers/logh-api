@@ -1,9 +1,8 @@
-
 module.exports = angular.module('loghApp.user', [])
     .controller('UserController', require('./UserController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.user', {
+            .state('private.user', {
                 url: 'user',
                 views: {
                     header: {
@@ -15,7 +14,7 @@ module.exports = angular.module('loghApp.user', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/user/user.tpl.html',
+                        templateUrl: 'modules/private/user/user.tpl.html',
                         controller: 'UserController'
                     },
                     footer: {

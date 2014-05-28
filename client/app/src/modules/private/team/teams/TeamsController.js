@@ -7,7 +7,7 @@ var TeamsController = function($scope, $log, $state, $stateParams) {
     $scope.seasonId = $stateParams.seasonId;
 
     $scope.isAliveState = function() {
-        return $state.current.name == 'app.teams.alive';
+        return $state.current.name == 'private.teams.alive';
     };
 
     /**

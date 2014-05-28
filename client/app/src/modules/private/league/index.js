@@ -5,7 +5,7 @@ module.exports = angular.module('loghApp.league', [])
     .controller('InviteLeagueController', require('./InviteLeagueController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.league', {
+            .state('private.league', {
                 abstract: true,
                 url: 'season/{seasonId}/league',
                 views: {
@@ -18,7 +18,7 @@ module.exports = angular.module('loghApp.league', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/league/league.tpl.html',
+                        templateUrl: 'modules/private/league/league.tpl.html',
                         controller: 'LeagueController'
                     },
                     footer: {
@@ -31,20 +31,20 @@ module.exports = angular.module('loghApp.league', [])
                     }]
                 }
             })
-            .state('app.league.new', {
+            .state('private.league.new', {
                 url: '/new',
                 views: {
                     leagueContent: {
-                        templateUrl: 'modules/league/league.new.tpl.html',
+                        templateUrl: 'modules/private/league/league.new.tpl.html',
                         controller: 'CreateLeagueController'
                     }
                 }
             })
-            .state('app.league.edit', {
+            .state('private.league.edit', {
                 url: '/{leagueId}/edit',
                 views: {
                     leagueContent: {
-                        templateUrl: 'modules/league/league.edit.tpl.html',
+                        templateUrl: 'modules/private/league/league.edit.tpl.html',
                         controller: 'EditLeagueController'
                     }
                 },
@@ -54,11 +54,11 @@ module.exports = angular.module('loghApp.league', [])
                     }]
                 }
             })
-            .state('app.league.invite', {
+            .state('private.league.invite', {
                 url: '/{leagueId}/invite',
                 views: {
                     leagueContent: {
-                        templateUrl: 'modules/league/league.invite.tpl.html',
+                        templateUrl: 'modules/private/league/league.invite.tpl.html',
                         controller: 'InviteLeagueController'
                     }
                 }

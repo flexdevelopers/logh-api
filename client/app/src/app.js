@@ -25,12 +25,12 @@ var loghApp = angular.module('loghApp', [
     require('./modules/public/signin').name,
     require('./modules/public/register').name,
 
-    // app modules
-    require('./modules/user').name,
-    require('./modules/league').name,
-    require('./modules/league/leagues').name,
-    require('./modules/team').name,
-    require('./modules/team/teams').name,
+    // private modules
+    require('./modules/private/user').name,
+    require('./modules/private/league').name,
+    require('./modules/private/league/leagues').name,
+    require('./modules/private/team').name,
+    require('./modules/private/team/teams').name,
 
     // helper modules
     require('./common/modules/header').name,
@@ -78,7 +78,7 @@ var loghApp = angular.module('loghApp', [
                 }
             }
         })
-        .state('app', {
+        .state('private', {
             abstract: true,
             url: '/',
             templateUrl: 'common/templates/master.tpl.html',

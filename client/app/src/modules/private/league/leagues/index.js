@@ -5,7 +5,7 @@ module.exports = angular.module('loghApp.leagues', [])
     .controller('PrivateLeaguesController', require('./PrivateLeaguesController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.leagues', {
+            .state('private.leagues', {
                 abstract: true,
                 url: 'season/{seasonId}/leagues',
                 views: {
@@ -18,7 +18,7 @@ module.exports = angular.module('loghApp.leagues', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/league/leagues/leagues.tpl.html',
+                        templateUrl: 'modules/private/league/leagues/leagues.tpl.html',
                         controller: 'LeaguesController'
                     },
                     footer: {
@@ -26,11 +26,11 @@ module.exports = angular.module('loghApp.leagues', [])
                     }
                 }
             })
-            .state('app.leagues.manage', {
+            .state('private.leagues.manage', {
                 url: '/manage',
                 views: {
                     leaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.manage.tpl.html',
+                        templateUrl: 'modules/private/league/leagues/leagues.manage.tpl.html',
                         controller: 'ManageLeaguesController'
                     }
                 },
@@ -40,20 +40,20 @@ module.exports = angular.module('loghApp.leagues', [])
                     }]
                 }
             })
-            .state('app.leagues.join', {
+            .state('private.leagues.join', {
                 url: '/',
                 abstract: true,
                 views: {
                     leaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.join.tpl.html'
+                        templateUrl: 'modules/private/league/leagues/leagues.join.tpl.html'
                     }
                 }
             })
-            .state('app.leagues.join.public', {
+            .state('private.leagues.join.public', {
                 url: 'public',
                 views: {
                     joinLeaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.join.public.tpl.html',
+                        templateUrl: 'modules/private/league/leagues/leagues.join.public.tpl.html',
                         controller: 'PublicLeaguesController'
                     }
                 },
@@ -63,11 +63,11 @@ module.exports = angular.module('loghApp.leagues', [])
                     }]
                 }
             })
-            .state('app.leagues.join.private', {
+            .state('private.leagues.join.private', {
                 url: 'private',
                 views: {
                     joinLeaguesContent: {
-                        templateUrl: 'modules/league/leagues/leagues.join.private.tpl.html',
+                        templateUrl: 'modules/private/league/leagues/leagues.join.private.tpl.html',
                         controller: 'PrivateLeaguesController'
                     }
                 },

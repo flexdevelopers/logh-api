@@ -4,7 +4,7 @@ module.exports = angular.module('loghApp.teams', [])
     .controller('DeadTeamsController', require('./DeadTeamsController'))
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('app.teams', {
+            .state('private.teams', {
                 abstract: true,
                 url: 'season/{seasonId}/teams',
                 views: {
@@ -17,7 +17,7 @@ module.exports = angular.module('loghApp.teams', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/team/teams/teams.tpl.html',
+                        templateUrl: 'modules/private/team/teams/teams.tpl.html',
                         controller: 'TeamsController'
                     },
                     footer: {
@@ -25,11 +25,11 @@ module.exports = angular.module('loghApp.teams', [])
                     }
                 }
             })
-            .state('app.teams.alive', {
+            .state('private.teams.alive', {
                 url: '/alive',
                 views: {
                     teamsContent: {
-                        templateUrl: 'modules/team/teams/teams.alive.tpl.html',
+                        templateUrl: 'modules/private/team/teams/teams.alive.tpl.html',
                         controller: 'AliveTeamsController'
                     }
                 },
@@ -39,11 +39,11 @@ module.exports = angular.module('loghApp.teams', [])
                     }]
                 }
             })
-            .state('app.teams.dead', {
+            .state('private.teams.dead', {
                 url: '/dead',
                 views: {
                     teamsContent: {
-                        templateUrl: 'modules/team/teams/teams.dead.tpl.html',
+                        templateUrl: 'modules/private/team/teams/teams.dead.tpl.html',
                         controller: 'DeadTeamsController'
                     }
                 },

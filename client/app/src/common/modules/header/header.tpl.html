@@ -14,21 +14,21 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="app.leagues.join.public({seasonId:season.id})">Create Team</a></li>
-            <li><a ui-sref="app.teams.alive({seasonId:season.id})">Manage Teams</a></li>
+            <li><a ui-sref="private.leagues.join.public({seasonId:season.id})">Create Team</a></li>
+            <li><a ui-sref="private.teams.alive({seasonId:season.id})">Manage Teams</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leagues <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="app.league.new({seasonId:season.id})">Create League</a></li>
-            <li><a ui-sref="app.leagues.manage({seasonId:season.id})">Manage Leagues</a></li>
+            <li><a ui-sref="private.league.new({seasonId:season.id})">Create League</a></li>
+            <li><a ui-sref="private.leagues.manage({seasonId:season.id})">Manage Leagues</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userData.user.email}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="app.user">User Profile</a></li>
+            <li><a ui-sref="private.user">User Profile</a></li>
             <li><a ng-click="signout()">Sign Out</a></li>
           </ul>
         </li>
