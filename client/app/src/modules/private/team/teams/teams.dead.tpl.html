@@ -10,7 +10,6 @@
     </a>
 </div>
 
-<!--dynamic pagination-->
-<div class="dead-team-pagination">
-    <pagination boundary-links="true" max-size="4" total-items="(deadTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+<div class="alert alert-dismissable alert-info" ng-show="deadTeams.length == 0">
+  No dead teams :)
 </div>

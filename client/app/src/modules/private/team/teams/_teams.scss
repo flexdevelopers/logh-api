@@ -1,7 +1,7 @@
 .teams-container {
   position: relative;
-  .custom-search-form {
-    width: 250px;
+  .join-league {
+    width: 110px;
     position: absolute;
     right: 0;
     top: 0;
@@ -16,19 +16,6 @@
     }
     .badge {
       float: right;
-    }
-  }
-}
-
-.alive-team-pagination, .dead-team-pagination {
-  margin: -20px auto 0 0;
-}
-
-@media all and (max-width: 500px) {
-  .teams-container {
-    .custom-search-form {
-      width: 100%;
-      position: relative;
     }
   }
 }
