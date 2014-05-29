@@ -75,7 +75,12 @@ var loghApp = angular.module('loghApp', [
             templateUrl: 'common/templates/master.tpl.html',
             resolve: {
                 loadSeason: function(seasonService) {
-                    return seasonService.getCurrentSeason();
+                    seasonService.getCurrentSeason();
+                },
+                loadUser: function($window, userService, userModel) {
+                    if (!userModel.user.loaded && $window.sessionStorage.token) {
+                      userService.getCurrentUser();
+                    }
                 }
             }
         })
@@ -85,7 +90,7 @@ var loghApp = angular.module('loghApp', [
             templateUrl: 'common/templates/master.tpl.html',
             resolve: {
                 loadSeason: function(seasonService) {
-                    return seasonService.getCurrentSeason();
+                    seasonService.getCurrentSeason();
                 },
                 loadUser: function(userService, userModel) {
                     if (!userModel.user.loaded) {
