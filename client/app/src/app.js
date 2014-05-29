@@ -19,6 +19,7 @@ var loghApp = angular.module('loghApp', [
     'ui.bootstrap',
     'app.templates',
     'ui.router.stateHelper',
+    'angular-loading-bar',
 
     // public modules
     require('./modules/public/home').name,

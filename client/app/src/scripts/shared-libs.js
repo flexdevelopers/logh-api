@@ -9,6 +9,7 @@ require('angular-resource');
 require('angular-route');
 require('angular-sanitize');
 require('angular-ui-router');
+require('loading-bar');
 require('statehelper');
 require('bootstrap');
 require('commangular');

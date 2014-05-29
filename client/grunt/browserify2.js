@@ -11,6 +11,7 @@ module.exports = {
                         'angular-bootstrap/ui-bootstrap.js',
                         'angular-bootstrap/ui-bootstrap-tpls.js',
                         'angular-cookies/angular-cookies.js',
+                        'angular-loading-bar/build/loading-bar.min.js',
                         'angular-resource/angular-resource.js',
                         'angular-route/angular-route.js',
                         'angular-sanitize/angular-sanitize.js',
