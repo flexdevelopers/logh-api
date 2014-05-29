@@ -25,7 +25,7 @@ class API::UsersController < API::BaseController
 
   # PUT api/users/current
   def update
-    if current_user.update(_user_params)
+    if current_user.update(_user_params.except(:email))
       render json: { message: { type: SUCCESS, content: 'User has been updated' } }, status: :ok
     else
       error(current_user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

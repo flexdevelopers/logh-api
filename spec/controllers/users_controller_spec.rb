@@ -38,21 +38,22 @@ describe API::UsersController do
 
   # PUT /api/users/current
   describe '#update' do
+    let(:user_params) { FactoryGirl.attributes_for(:user) }
+    before do
+      user_params[:email] = 'themaninblack@cash.com'
+      user_params[:first_name] = 'Johnny'
+      user_params[:last_name] = 'Cash'
+      user_params[:admin] = true
+    end
     context 'when attempting to update the signed in user' do
-      before do
-        current_user.email = 'themaninblack@cash.com'
-        current_user.first_name = 'Johnny'
-        current_user.last_name = 'Cash'
-        current_user.admin = true
-      end
-      it 'updates the user except for the admin field' do
-        put :update, user: current_user.attributes
+      it 'updates the user except for the admin field and the email field' do
+        put :update, user: user_params
         expect(response).to be_success
         current_user.reload
-        current_user.email.should == 'themaninblack@cash.com'
+        current_user.email.should_not == 'themaninblack@cash.com'
+        current_user.admin.should be_false
         current_user.first_name.should == 'Johnny'
         current_user.last_name.should == 'Cash'
-        current_user.admin.should be_false
       end
     end
     context 'when attempting to update a user other than the signed in user' do

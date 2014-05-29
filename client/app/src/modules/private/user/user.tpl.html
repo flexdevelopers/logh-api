@@ -29,13 +29,9 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': hasError(editUserForm.email), 'has-feedback': hasError(editUserForm.email)}">
-                <label class="control-label" for="email">Email
-                    <small ng-show="hasPropertyError(editUserForm.email, 'required')">[ Required ]</small>
-                    <small ng-show="hasPropertyError(editUserForm.email, 'email')">[ Invalid Email ]</small>
-                </label>
-                <input id="email" name="email" type="email" class="form-control" ng-model="userData.user.email" logh-focus required>
-                <span ng-show="hasError(editUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <div class="form-group">
+                <label class="control-label" for="email">Email</label>
+                <input id="email" name="email" type="email" class="form-control" ng-disabled="true" ng-model="userData.user.email">
             </div>
 
             <div class="row">
