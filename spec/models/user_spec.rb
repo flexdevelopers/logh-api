@@ -90,6 +90,11 @@ describe User do
     it { should_not be_valid }
   end
 
+  context 'when password is more than 15 characters' do
+    subject(:user) { FactoryGirl.build(:user, password: 'f' * 16, password_confirmation: 'f' * 16) }
+    it { should_not be_valid }
+  end
+
   context 'when password does not match password confirmation' do
     subject(:user) { FactoryGirl.build(:user, password: 'foobar', password_confirmation: 'barfoo') }
     it { should_not be_valid }
