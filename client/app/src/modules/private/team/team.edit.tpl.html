@@ -13,7 +13,7 @@
                             <small ng-show="hasPropertyError(editTeamForm.teamName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(editTeamForm.teamName, 'maxlength')">[ Too Long ]</small>
                         </label>
-                        <input id="teamName" name="teamName" type="text" class="form-control" ng-model="teamData.name" ng-maxlength="30" logh-focus required>
+                        <input id="teamName" name="teamName" type="text" class="form-control" ng-model="teamData.name" ng-maxlength="30" required>
                         <span ng-show="hasError(editTeamForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
