@@ -16,7 +16,6 @@ FactoryGirl.define do
 
   factory :league do |league|
     sequence(:name) { |n| "Bad News Bears#{n}" }
-    password                'foobar'
     league.association      :season
     start_week_id           { FactoryGirl.create(:week).id }
   end

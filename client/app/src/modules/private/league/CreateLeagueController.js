@@ -6,23 +6,11 @@ var CreateLeagueController = function($scope, $log, $stateParams) {
         season_id: $stateParams.seasonId,
         start_week_id: $scope.weeks[0].id,
         public: true,
-        max_teams_per_user: '',
-        password: '',
-        password_confirmation: ''
+        max_teams_per_user: ''
     };
 
     $scope.createLeague = function(league) {
         $scope.dispatch('CreateLeagueEvent', { leagueParams: league });
-    };
-
-    $scope.isPasswordHidden = true;
-
-    $scope.hidePasswordFields = function(value) {
-        $scope.isPasswordHidden = value;
-        if (value) {
-            $scope.newLeagueData.password = '';
-            $scope.newLeagueData.password_confirmation = '';
-        }
     };
 
     /**

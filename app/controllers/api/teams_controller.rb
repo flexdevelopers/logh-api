@@ -65,7 +65,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _verify_league_acceptance
-      forbidden('Private leagues require an invitation and a valid password') unless @league.public || (_has_invitation_for?(@league) && _has_valid_password_for?(@league))
+      forbidden('Private leagues require an invitation') unless @league.public || _has_invitation_for?(@league)
     end
 
     def _verify_league_membership
@@ -91,10 +91,6 @@ class API::TeamsController < API::BaseController
 
     def _has_invitation_for?(league)
       @invitation = league.invitations.find_by(email: current_user.email)
-    end
-
-    def _has_valid_password_for?(league)
-      league.authenticate(params[:league_password])
     end
 
     def _can_add_team_to?(league)

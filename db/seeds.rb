@@ -55,9 +55,9 @@ user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.c
 # create 50 public and private leagues with random but unique names
 50.times do |i|
   League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
-  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season, password: 'foobar', start_week_id: Week.first.id)
+  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
 end
-foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season, password: 'foobar', start_week_id: Week.first.id)
+foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
 3.times do |i|
   team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
   # and 3 picks for that team

@@ -9,13 +9,10 @@ class League < ActiveRecord::Base
   has_many :invitations, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 25 }, uniqueness: { scope: :season_id }
-  validates :password, presence: true, length: { minimum: 6 }, on: :create, unless: :public
   validates :season, presence: true
   validates :public, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
-
-  has_secure_password validations: false
 
   default_scope { order('lower(name)') }
 

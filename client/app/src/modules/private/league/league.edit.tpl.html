@@ -47,35 +47,11 @@
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
                             <label class="radio-inline">
-                                <input type="radio" ng-model="leagueData.public" ng-click="hidePasswordFields(true)" ng-value="true"> Public League
+                                <input type="radio" ng-model="leagueData.public" ng-value="true"> Public League
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" ng-model="leagueData.public" ng-click="hidePasswordFields(false)" ng-value="false"> Private League
+                                <input type="radio" ng-model="leagueData.public" ng-value="false"> Private League
                             </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div collapse="isPasswordHidden">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6">
-                            <div class="form-group" ng-class="{'has-error': hasError(leagueForm.password), 'has-feedback': hasError(leagueForm.password)}">
-                                <label class="control-label" for="password">New League Password
-                                    <small ng-show="hasPropertyError(leagueForm.password, 'required')">[ Required ]</small>
-                                    <small ng-show="hasPropertyError(leagueForm.password, 'pattern')">[ Too Short ]</small>
-                                </label>
-                                <input id="password" name="password" type="password" class="form-control" ng-model="leagueData.password" ng-required="changedToPrivate()" rpattern="/.{6}/" logh-focus>
-                                <span ng-show="hasError(leagueForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6">
-                            <div class="form-group" ng-class="{'has-error': hasError(leagueForm.confirmPassword), 'has-feedback': hasError(leagueForm.confirmPassword)}">
-                                <label class="control-label" for="confirmPassword">Confirm New League Password
-                                    <small ng-show="hasPropertyError(leagueForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
-                                </label>
-                                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="leagueData.password_confirmation" match="leagueData.password">
-                                <span ng-show="hasError(leagueForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            </div>
                         </div>
                     </div>
                 </div>

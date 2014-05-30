@@ -5,12 +5,6 @@ describe League do
   it { should respond_to(:name) }
   its(:name) { should be_blank }
 
-  it { should respond_to(:password) }
-  its(:password) { should be_blank }
-
-  it { should respond_to(:password_digest) }
-  its(:password_digest) { should be_blank }
-
   it { should respond_to(:public) }
   its(:public) { should be_true }
 
@@ -70,42 +64,6 @@ describe League do
   context 'when league has max teams per user of less than zero' do
     subject(:league) { FactoryGirl.build(:league, max_teams_per_user: -1) }
     it { should_not be_valid }
-  end
-
-  context 'when league is public and has no password' do
-    subject(:league) { FactoryGirl.build(:league, public: true, password: nil) }
-    it { should be_valid }
-  end
-
-  context 'when league is public and has a password less than 6 characters' do
-    subject(:league) { FactoryGirl.build(:league, public: true, password: 'a' * 5) }
-    it { should be_valid }
-  end
-
-  context 'when league is private and has no password' do
-    subject(:league) { FactoryGirl.build(:league, public: false, password: nil) }
-    it { should_not be_valid }
-  end
-
-  context 'when league is private and has a password less than 6 characters' do
-    subject(:league) { FactoryGirl.build(:league, public: false, password: 'a' * 5) }
-    it { should_not be_valid }
-  end
-
-  describe 'return value of authenticate method' do
-    subject(:league) { FactoryGirl.create(:league) }
-    let(:found_league) { League.find(league.id) }
-
-    context 'with a valid passord' do
-      it { should eq found_league.authenticate(league.password) }
-    end
-
-    context 'with an invalid password' do
-      let(:league_for_invalid_password) { found_league.authenticate('invalid') }
-
-      it { should_not == league_for_invalid_password }
-      specify { expect(league_for_invalid_password).to be_false }
-    end
   end
 
 end

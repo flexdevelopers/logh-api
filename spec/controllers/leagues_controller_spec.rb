@@ -115,12 +115,6 @@ describe API::LeaguesController do
       it { should change(season.leagues, :count).by(1) }
       it { should change(current_user.managed_leagues, :count).by(1) }
     end
-    context 'when the league is private and no password is given' do
-      let(:league_params) { FactoryGirl.attributes_for(:league, public: false, password: '') }
-      subject { -> { post :create, season_id: season.id, league: league_params } }
-      it { should change(season.leagues, :count).by(0) }
-      it { should change(current_user.managed_leagues, :count).by(0) }
-    end
   end
 
   # PUT /api/seasons/:season_id/leagues/:id
