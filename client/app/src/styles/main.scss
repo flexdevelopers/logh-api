@@ -18,6 +18,8 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/league/leagues/leagues";
 @import "../modules/private/team/team";
 @import "../modules/private/team/teams/teams";
+@import "../modules/private/team/teams/alive/teams.alive";
+@import "../modules/private/team/teams/dead/teams.dead";
 
 .browsehappy {
   margin: 0.2em 0;
