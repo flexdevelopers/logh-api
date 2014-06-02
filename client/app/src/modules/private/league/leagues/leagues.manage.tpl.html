@@ -1,6 +1,8 @@
 <div class="page-header">
     <h3>Manage Leagues</h3>
 </div>
+<button type="button" class="create-league-btn btn btn-primary btn-sm" ui-sref="private.league.new({seasonId:season.id})"><i class="glyphicon glyphicon-plus"></i> Create League</button>
+
 
 <!--if you have managed leagues (i.e. if you're a commish)-->
 <div ng-show="managedLeagues.length > 0" class="leagues-container">
@@ -33,13 +35,6 @@
 </div>
 
 <!--if you have no managed leagues-->
-<div ng-show="managedLeagues.length == 0" class="managed-leagues list-group">
-  <a class="list-group-item" ui-sref="private.league.new({seasonId:season.id})">
-    <div class="row">
-      <div class="league-name col-sm-6 col-md-6">You current manage zero leagues.</div>
-      <div class="col-sm-6 col-md-6">
-        <span class="badge">Create League</span>
-      </div>
-    </div>
-  </a>
+<div class="alert alert-info" ng-show="managedLeagues.length == 0">
+  No managed leagues :(
 </div>
