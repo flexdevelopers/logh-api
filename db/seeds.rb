@@ -68,7 +68,7 @@ foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, comm
 end
 
 # create another user and a few teams for that user
-user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobfoo', password_confirmation: 'bobfoo')
+user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bob@bar.com', password: 'bobbar', password_confirmation: 'bobbar')
 3.times do |i|
   team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
   # and 3 picks for that team
