@@ -27,7 +27,7 @@ module.exports = angular.module('loghApp.leagues', [])
                 }
             })
             .state('private.leagues.manage', {
-                url: '/manage',
+                url: '',
                 views: {
                     leaguesContent: {
                         templateUrl: 'modules/private/league/leagues/leagues.manage.tpl.html',
