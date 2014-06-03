@@ -1,13 +1,13 @@
-module.exports = angular.module('loghApp.league.edit', [])
-  .controller('EditLeagueController', require('./EditLeagueController'))
+module.exports = angular.module('loghApp.league.view', [])
+  .controller('ViewLeagueController', require('./ViewLeagueController'))
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('private.league.edit', {
-        url: '/{leagueId}/edit',
+      .state('private.league.view', {
+        url: '/{leagueId}',
         views: {
           leagueContent: {
-            templateUrl: 'modules/private/league/edit/league.edit.tpl.html',
-            controller: 'EditLeagueController'
+            templateUrl: 'modules/private/league/view/league.view.tpl.html',
+            controller: 'ViewLeagueController'
           }
         },
         resolve: {
