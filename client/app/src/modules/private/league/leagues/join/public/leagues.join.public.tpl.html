@@ -4,7 +4,7 @@
             <div class="league-name col-sm-4 col-md-4">{{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
             <div class="col-sm-8 col-md-8">
                 <span class="start-week">Starts {{league.week_display}}</span>
-                <span class="badge">Join</span>
+                <span class="badge">Select</span>
             </div>
         </div>
     </a>
@@ -15,6 +15,6 @@
     <pagination boundary-links="true" max-size="4" total-items="(publicLeagues | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
 
-<div class="alert alert-dismissable alert-info" ng-show="(publicLeagues | filter:search:strict).length == 0">
+<div class="alert alert-info" ng-show="(publicLeagues | filter:search:strict).length == 0">
   No matching leagues
 </div>

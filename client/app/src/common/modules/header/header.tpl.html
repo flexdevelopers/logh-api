@@ -12,17 +12,17 @@
     <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
       <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coach <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="private.leagues.join.public({seasonId:season.id})">Create Team</a></li>
-            <li><a ui-sref="private.teams.alive({seasonId:season.id})">Manage Teams</a></li>
+            <li><a ui-sref="private.leagues.join.public({seasonId:season.id})">Create a new team</a></li>
+            <li><a ui-sref="private.teams.alive({seasonId:season.id})">Manage my teams</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Leagues <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commish <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ui-sref="private.league.new({seasonId:season.id})">Create League</a></li>
-            <li><a ui-sref="private.leagues.manage({seasonId:season.id})">Manage Leagues</a></li>
+            <li><a ui-sref="private.league.new({seasonId:season.id})">Create a new league</a></li>
+            <li><a ui-sref="private.leagues.manage({seasonId:season.id})">Manage my leagues</a></li>
           </ul>
         </li>
         <li class="dropdown">
