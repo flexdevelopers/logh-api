@@ -1,5 +1,4 @@
-
-var CreateLeagueController = function($scope, $log, $stateParams) {
+var NewLeagueController = function($scope, $log, $stateParams) {
 
     $scope.newLeagueData = {
         name: '',
@@ -17,11 +16,11 @@ var CreateLeagueController = function($scope, $log, $stateParams) {
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.debug("create league controller");
+        $log.debug("new league controller");
     };
     init();
 
 };
 
-CreateLeagueController.$inject = ['$scope', '$log', '$stateParams'];
-module.exports = CreateLeagueController;
+NewLeagueController.$inject = ['$scope', '$log', '$stateParams'];
+module.exports = NewLeagueController;

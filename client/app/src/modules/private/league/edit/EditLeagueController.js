@@ -1,4 +1,3 @@
-
 var EditLeagueController = function($scope, $log, league) {
 
     $scope.leagueData = league.data;
