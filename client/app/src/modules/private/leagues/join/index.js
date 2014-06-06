@@ -6,7 +6,7 @@ module.exports = angular.module('loghApp.leagues.join', [])
         abstract: true,
         views: {
           leaguesContent: {
-            templateUrl: 'modules/private/league/leagues/join/leagues.join.tpl.html'
+            templateUrl: 'modules/private/leagues/join/leagues.join.tpl.html'
           }
         }
       })

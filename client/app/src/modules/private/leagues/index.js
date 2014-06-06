@@ -15,7 +15,7 @@ module.exports = angular.module('loghApp.leagues', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/private/league/leagues/leagues.tpl.html',
+                        templateUrl: 'modules/private/leagues/leagues.tpl.html',
                         controller: 'LeaguesController'
                     },
                     footer: {

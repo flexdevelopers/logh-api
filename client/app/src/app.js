@@ -27,20 +27,25 @@ var loghApp = angular.module('loghApp', [
     require('./modules/public/register').name,
 
     // private modules
+    // user
     require('./modules/private/user').name,
+    // league
     require('./modules/private/league').name,
     require('./modules/private/league/new').name,
     require('./modules/private/league/view').name,
     require('./modules/private/league/edit').name,
     require('./modules/private/league/invite').name,
-    require('./modules/private/league/leagues').name,
-    require('./modules/private/league/leagues/join').name,
-    require('./modules/private/league/leagues/join/public').name,
-    require('./modules/private/league/leagues/join/private').name,
-    require('./modules/private/league/leagues/manage').name,
+    // leagues
+    require('./modules/private/leagues').name,
+    require('./modules/private/leagues/join').name,
+    require('./modules/private/leagues/join/public').name,
+    require('./modules/private/leagues/join/private').name,
+    require('./modules/private/leagues/manage').name,
+    // team
     require('./modules/private/team').name,
     require('./modules/private/team/new').name,
     require('./modules/private/team/edit').name,
+    // teams
     require('./modules/private/team/teams').name,
     require('./modules/private/team/teams/alive').name,
     require('./modules/private/team/teams/dead').name,

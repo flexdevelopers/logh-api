@@ -6,14 +6,14 @@ module.exports = angular.module('loghApp.leagues.join.public', [])
         url: 'public',
         views: {
           joinLeaguesContent: {
-            templateUrl: 'modules/private/league/leagues/join/public/leagues.join.public.tpl.html',
+            templateUrl: 'modules/private/leagues/join/public/leagues.join.public.tpl.html',
             controller: 'PublicLeaguesController'
           }
         },
         resolve: {
-          publicLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+          publicLeagues: function(leagueService, $stateParams) {
             return leagueService.getPublicLeagues($stateParams.seasonId);
-          }]
+          }
         }
       })
     ;

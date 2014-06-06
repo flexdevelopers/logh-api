@@ -6,14 +6,14 @@ module.exports = angular.module('loghApp.leagues.manage', [])
         url: '',
         views: {
           leaguesContent: {
-            templateUrl: 'modules/private/league/leagues/manage/leagues.manage.tpl.html',
+            templateUrl: 'modules/private/leagues/manage/leagues.manage.tpl.html',
             controller: 'ManageLeaguesController'
           }
         },
         resolve: {
-          managedLeagues: ['leagueService', '$stateParams', function(leagueService, $stateParams) {
+          managedLeagues: function(leagueService, $stateParams) {
             return leagueService.getManagedLeagues($stateParams.seasonId);
-          }]
+          }
         }
       })
     ;
