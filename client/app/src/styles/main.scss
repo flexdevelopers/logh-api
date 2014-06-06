@@ -32,9 +32,9 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/team/new/team.new";
 @import "../modules/private/team/edit/team.edit";
 // teams
-@import "../modules/private/team/teams/teams";
-@import "../modules/private/team/teams/alive/teams.alive";
-@import "../modules/private/team/teams/dead/teams.dead";
+@import "../modules/private/teams/teams";
+@import "../modules/private/teams/alive/teams.alive";
+@import "../modules/private/teams/dead/teams.dead";
 
 .browsehappy {
   margin: 0.2em 0;

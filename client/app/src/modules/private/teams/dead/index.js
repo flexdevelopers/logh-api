@@ -6,14 +6,14 @@ module.exports = angular.module('loghApp.teams.dead', [])
         url: '/dead',
         views: {
           teamsContent: {
-            templateUrl: 'modules/private/team/teams/dead/teams.dead.tpl.html',
+            templateUrl: 'modules/private/teams/dead/teams.dead.tpl.html',
             controller: 'DeadTeamsController'
           }
         },
         resolve: {
-          deadTeams: ['teamService', '$stateParams', function(teamService, $stateParams) {
+          deadTeams: function(teamService, $stateParams) {
             return teamService.getDeadTeams($stateParams.seasonId);
-          }]
+          }
         }
       })
     ;

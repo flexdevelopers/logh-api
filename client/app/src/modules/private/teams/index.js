@@ -15,7 +15,7 @@ module.exports = angular.module('loghApp.teams', [])
                         controller: 'MessageController'
                     },
                     content: {
-                        templateUrl: 'modules/private/team/teams/teams.tpl.html',
+                        templateUrl: 'modules/private/teams/teams.tpl.html',
                         controller: 'TeamsController'
                     },
                     footer: {
