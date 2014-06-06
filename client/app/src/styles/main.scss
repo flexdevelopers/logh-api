@@ -25,6 +25,8 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/league/leagues/join/private/leagues.join.private";
 @import "../modules/private/league/leagues/manage/leagues.manage";
 @import "../modules/private/team/team";
+@import "../modules/private/team/new/team.new";
+@import "../modules/private/team/edit/team.edit";
 @import "../modules/private/team/teams/teams";
 @import "../modules/private/team/teams/alive/teams.alive";
 @import "../modules/private/team/teams/dead/teams.dead";

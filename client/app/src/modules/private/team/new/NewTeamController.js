@@ -1,4 +1,4 @@
-var CreateTeamController = function($scope, $log, $stateParams, league) {
+var NewTeamController = function($scope, $log, $stateParams, league) {
 
     $scope.league = league.data;
 
@@ -30,5 +30,5 @@ var CreateTeamController = function($scope, $log, $stateParams, league) {
 
 };
 
-CreateTeamController.$inject = ['$scope', '$log', '$stateParams', 'league'];
-module.exports = CreateTeamController;
+NewTeamController.$inject = ['$scope', '$log', '$stateParams', 'league'];
+module.exports = NewTeamController;
