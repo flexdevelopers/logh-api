@@ -62,7 +62,8 @@ var UserService = function($http, $log, $state, $window, $timeout, apiConfig, me
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 messageModel.setMessage(data.message, true);
-                return data;
+                $state.go('public.home');
+            return data;
             })
             .error(function(data) {
                 $log.debug("UserService: createUser failed");

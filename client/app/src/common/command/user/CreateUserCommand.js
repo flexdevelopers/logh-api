@@ -1,6 +1,6 @@
 
 commangular.create('CreateUserCommand',
-    function($log, $state, userService) {
+    function($log, userService) {
 
         return {
 
@@ -14,7 +14,6 @@ commangular.create('CreateUserCommand',
             },
             onResult: function(result) {
                 $log.debug("CreateUserCommand: success");
-                $state.go('private.user');
             }
 
         }

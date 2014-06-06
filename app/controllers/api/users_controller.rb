@@ -16,7 +16,7 @@ class API::UsersController < API::BaseController
       render json: {
           user: Rabl.render(access_token.user, 'api/users/current', { format: :hash, view_path: Rails.root.join('app/views') }),
           token: access_token.token,
-          message: { type: SUCCESS, content: "User created for #{access_token.user.email}" }
+          message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Enjoy!" }
       }
     else
       error(user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
