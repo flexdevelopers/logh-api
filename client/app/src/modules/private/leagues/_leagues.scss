@@ -30,7 +30,8 @@
 }
 
 .public-league-pagination, .private-league-pagination, .manage-league-pagination {
-  margin: -20px auto 0 0;
+  width: 253px;
+  margin: -20px 0 0 auto;
 }
 
 @media all and (max-width: 550px) {
