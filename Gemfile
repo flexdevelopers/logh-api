@@ -14,13 +14,11 @@ gem 'jbuilder', '~> 1.2'
 # Use Sass for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
-#Uglifier
+# Uglifier
 gem 'uglifier'
 
-group :development do
-  # Use sqlite3 as the development database
-  gem 'sqlite3'
-end
+# Postgres
+gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -31,7 +29,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 

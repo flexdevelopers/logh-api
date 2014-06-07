@@ -13,13 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20140530033524) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "api_keys", force: true do |t|
     t.string   "token",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "api_keys", ["token"], name: "index_api_keys_on_token", unique: true
+  add_index "api_keys", ["token"], name: "index_api_keys_on_token", unique: true, using: :btree
 
   create_table "games", force: true do |t|
     t.datetime "starts_at",                        null: false
@@ -32,9 +35,9 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.integer  "visiting_squad_score", default: 0, null: false
   end
 
-  add_index "games", ["week_id", "home_squad_id"], name: "index_games_on_week_id_and_home_squad_id", unique: true
-  add_index "games", ["week_id", "visiting_squad_id"], name: "index_games_on_week_id_and_visiting_squad_id", unique: true
-  add_index "games", ["week_id"], name: "index_games_on_week_id"
+  add_index "games", ["week_id", "home_squad_id"], name: "index_games_on_week_id_and_home_squad_id", unique: true, using: :btree
+  add_index "games", ["week_id", "visiting_squad_id"], name: "index_games_on_week_id_and_visiting_squad_id", unique: true, using: :btree
+  add_index "games", ["week_id"], name: "index_games_on_week_id", using: :btree
 
   create_table "invitations", force: true do |t|
     t.integer  "league_id",   null: false
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.datetime "accepted_at"
   end
 
-  add_index "invitations", ["league_id", "email"], name: "index_invitations_on_league_id_and_email", unique: true
-  add_index "invitations", ["league_id"], name: "index_invitations_on_league_id"
+  add_index "invitations", ["league_id", "email"], name: "index_invitations_on_league_id_and_email", unique: true, using: :btree
+  add_index "invitations", ["league_id"], name: "index_invitations_on_league_id", using: :btree
 
   create_table "league_commishes", force: true do |t|
     t.integer  "user_id"
@@ -54,9 +57,9 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.datetime "updated_at"
   end
 
-  add_index "league_commishes", ["league_id"], name: "index_league_commishes_on_league_id"
-  add_index "league_commishes", ["user_id", "league_id"], name: "index_league_commishes_on_user_id_and_league_id", unique: true
-  add_index "league_commishes", ["user_id"], name: "index_league_commishes_on_user_id"
+  add_index "league_commishes", ["league_id"], name: "index_league_commishes_on_league_id", using: :btree
+  add_index "league_commishes", ["user_id", "league_id"], name: "index_league_commishes_on_user_id_and_league_id", unique: true, using: :btree
+  add_index "league_commishes", ["user_id"], name: "index_league_commishes_on_user_id", using: :btree
 
   create_table "leagues", force: true do |t|
     t.string   "name",                              null: false
@@ -68,8 +71,8 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.boolean  "public",             default: true, null: false
   end
 
-  add_index "leagues", ["name", "season_id"], name: "index_leagues_on_name_and_season_id", unique: true
-  add_index "leagues", ["season_id"], name: "index_leagues_on_season_id"
+  add_index "leagues", ["name", "season_id"], name: "index_leagues_on_name_and_season_id", unique: true, using: :btree
+  add_index "leagues", ["season_id"], name: "index_leagues_on_season_id", using: :btree
 
   create_table "losers", force: true do |t|
     t.integer  "week_id",    null: false
@@ -78,8 +81,8 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.datetime "updated_at"
   end
 
-  add_index "losers", ["week_id", "squad_id"], name: "index_losers_on_week_id_and_squad_id", unique: true
-  add_index "losers", ["week_id"], name: "index_losers_on_week_id"
+  add_index "losers", ["week_id", "squad_id"], name: "index_losers_on_week_id_and_squad_id", unique: true, using: :btree
+  add_index "losers", ["week_id"], name: "index_losers_on_week_id", using: :btree
 
   create_table "picks", force: true do |t|
     t.datetime "created_at"
@@ -91,10 +94,10 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.integer  "week_type_id", null: false
   end
 
-  add_index "picks", ["team_id", "squad_id", "week_type_id"], name: "index_picks_on_team_id_and_squad_id_and_week_type_id", unique: true
-  add_index "picks", ["team_id"], name: "index_picks_on_team_id"
-  add_index "picks", ["week_id", "team_id"], name: "index_picks_on_week_id_and_team_id", unique: true
-  add_index "picks", ["week_id"], name: "index_picks_on_week_id"
+  add_index "picks", ["team_id", "squad_id", "week_type_id"], name: "index_picks_on_team_id_and_squad_id_and_week_type_id", unique: true, using: :btree
+  add_index "picks", ["team_id"], name: "index_picks_on_team_id", using: :btree
+  add_index "picks", ["week_id", "team_id"], name: "index_picks_on_week_id_and_team_id", unique: true, using: :btree
+  add_index "picks", ["week_id"], name: "index_picks_on_week_id", using: :btree
 
   create_table "seasons", force: true do |t|
     t.string   "name",       null: false
@@ -116,9 +119,9 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.datetime "updated_at"
   end
 
-  add_index "team_coaches", ["team_id"], name: "index_team_coaches_on_team_id"
-  add_index "team_coaches", ["user_id", "team_id"], name: "index_team_coaches_on_user_id_and_team_id", unique: true
-  add_index "team_coaches", ["user_id"], name: "index_team_coaches_on_user_id"
+  add_index "team_coaches", ["team_id"], name: "index_team_coaches_on_team_id", using: :btree
+  add_index "team_coaches", ["user_id", "team_id"], name: "index_team_coaches_on_user_id_and_team_id", unique: true, using: :btree
+  add_index "team_coaches", ["user_id"], name: "index_team_coaches_on_user_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name",                       null: false
@@ -129,8 +132,8 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.boolean  "paid",       default: false
   end
 
-  add_index "teams", ["league_id"], name: "index_teams_on_league_id"
-  add_index "teams", ["name", "league_id"], name: "index_teams_on_name_and_league_id", unique: true
+  add_index "teams", ["league_id"], name: "index_teams_on_league_id", using: :btree
+  add_index "teams", ["name", "league_id"], name: "index_teams_on_name_and_league_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                           null: false
@@ -142,7 +145,7 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.boolean  "admin",           default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "week_types", force: true do |t|
     t.string   "code"
@@ -161,7 +164,7 @@ ActiveRecord::Schema.define(version: 20140530033524) do
     t.integer  "week_type_id",                 null: false
   end
 
-  add_index "weeks", ["number", "season_id"], name: "index_weeks_on_number_and_season_id", unique: true
-  add_index "weeks", ["season_id"], name: "index_weeks_on_season_id"
+  add_index "weeks", ["number", "season_id"], name: "index_weeks_on_number_and_season_id", unique: true, using: :btree
+  add_index "weeks", ["season_id"], name: "index_weeks_on_season_id", using: :btree
 
 end
