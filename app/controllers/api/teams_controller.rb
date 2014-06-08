@@ -7,12 +7,12 @@ class API::TeamsController < API::BaseController
 
   # GET /api/seasons/:season_id/teams/alive
   def alive
-    @teams = current_user.teams.joins(:league).where('season_id', params[:season_id]).alive
+    @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).alive
   end
 
   # GET /api/seasons/:season_id/teams/dead
   def dead
-    @teams = current_user.teams.joins(:league).where('season_id', params[:season_id]).dead
+    @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).dead
   end
 
   # GET /api/leagues/:league_id/teams
