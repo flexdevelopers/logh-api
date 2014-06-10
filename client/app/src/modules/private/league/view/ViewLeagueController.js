@@ -6,7 +6,9 @@ var ViewLeagueController = function($scope, $log, league, aliveTeams, deadTeams)
   $scope.deadTeams = deadTeams.data;
 
   $scope.resetSearch = function() {
-    $scope.search.name = "";
+    $scope.search = {
+      name: ""
+    };
   }
 
   /**
