@@ -1,8 +1,54 @@
-<div class="container">
-  <div>this is the league - {{leagueData.name}}</div>
-  <div>give a summary of the league</div>
-  <div>list the teams and show their status</div>
-  <div>add an invitation button if league hasn't started yet and you are the commish</div>
-  <div>add an edit button if league hasn't started yet and you are the commish</div>
-  <div>add a join button? and maybe get rid of the join state?</div>
+<div class="page-header">
+  <h3>{{leagueData.name}} <small>Starts 9/14/14</small></h3>
+</div>
+<div class="league-container">
+  <button type="button" class="create-team-btn btn btn-success btn-sm" ui-sref="private.team.new({seasonId:leagueData.season_id, leagueId:leagueData.id})"><i class="glyphicon glyphicon-plus"></i> Team</button>
+  <div class="input-group custom-search-form">
+    <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+  </div>
+  <tabset>
+    <tab select="resetSearch()">
+      <tab-heading>
+        <i class="glyphicon glyphicon-thumbs-up"></i> Alive
+      </tab-heading>
+      <div class="alive-teams list-group">
+        <a ng-repeat="team in aliveTeams | filter:search:strict | limitTo:10" class="list-group-item">
+          <div class="row">
+            <div class="league-name col-sm-4 col-md-4">{{team.name}} <span class="team-count">Tom D.</span></div>
+            <div class="col-sm-8 col-md-8">
+              <span class="start-week">Current Pick: [ Hidden ]</span>
+              <span class="badge">View Picks</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="alert alert-info" ng-show="(aliveTeams | filter:search:strict).length == 0">
+        No matching teams
+      </div>
+    </tab>
+    <tab select="resetSearch()">
+      <tab-heading>
+        <i class="glyphicon glyphicon-thumbs-down"></i> Dead
+      </tab-heading>
+      <div class="dead-teams list-group">
+        <a ng-repeat="team in deadTeams | filter:search:strict | limitTo:10" class="list-group-item">
+          <div class="row">
+            <div class="league-name col-sm-4 col-md-4">{{team.name}} <span class="team-count">Sam R.</span></div>
+            <div class="col-sm-8 col-md-8">
+              <span class="start-week">Last Pick: Seattle</span>
+              <span class="badge">View Picks</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="alert alert-info" ng-show="(deadTeams | filter:search:strict).length == 0">
+        No matching teams
+      </div>
+    </tab>
+  </tabset>
 </div>

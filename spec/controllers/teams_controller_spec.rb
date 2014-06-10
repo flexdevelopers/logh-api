@@ -30,6 +30,27 @@ describe API::TeamsController do
     end
   end
 
+  # GET /api/seasons/:season_id/teams/alive?league_id=23
+  describe '#alive' do
+    context 'when requesting alive teams for a league' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, league: league, alive: true)
+        FactoryGirl.create(:team, league: league, alive: true)
+        FactoryGirl.create(:team, league: league, alive: false)
+        FactoryGirl.create(:team, league: league, alive: false)
+      end
+      it 'returns only alive teams for the league' do
+        get :alive, format: 'json', season_id: league.season.id, league_id: league.id
+        expect(response).to be_success
+        expect(json.length).to eq(2)
+        json.each do |team|
+          expect(team[:alive]).to be_true
+        end
+      end
+    end
+  end
+
   # GET /api/seasons/:season_id/teams/dead
   describe '#dead' do
     context 'when requesting dead teams for a season' do
@@ -44,6 +65,27 @@ describe API::TeamsController do
         get :dead, format: 'json', season_id: league.season.id
         expect(response).to be_success
         expect(json.length).to eq(2)
+        json.each do |team|
+          expect(team[:alive]).to be_false
+        end
+      end
+    end
+  end
+
+  # GET /api/seasons/:season_id/teams/dead?league_id=45
+  describe '#dead' do
+    context 'when requesting dead teams for a league' do
+      let(:league) { FactoryGirl.create(:league) }
+      before do
+        FactoryGirl.create(:team, league: league, alive: true)
+        FactoryGirl.create(:team, league: league, alive: true)
+        FactoryGirl.create(:team, league: league, alive: true)
+        FactoryGirl.create(:team, league: league, alive: false)
+      end
+      it 'returns only dead teams for the league' do
+        get :dead, format: 'json', season_id: league.season.id, league_id: league.id
+        expect(response).to be_success
+        expect(json.length).to eq(1)
         json.each do |team|
           expect(team[:alive]).to be_false
         end

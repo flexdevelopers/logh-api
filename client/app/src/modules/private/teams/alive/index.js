@@ -12,7 +12,7 @@ module.exports = angular.module('loghApp.teams.alive', [])
         },
         resolve: {
           aliveTeams: function(teamService, $stateParams) {
-            return teamService.getAliveTeams($stateParams.seasonId);
+            return teamService.getAliveTeams({ seasonId: $stateParams.seasonId });
           }
         }
       })

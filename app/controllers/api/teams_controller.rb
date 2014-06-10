@@ -6,13 +6,23 @@ class API::TeamsController < API::BaseController
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/alive
+  # GET /api/seasons/:season_id/teams/alive?league_id=:league_id
   def alive
-    @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).alive
+    if params[:league_id]
+      @teams = Team.where('league_id' == params[:league_id]).alive
+    else
+      @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).alive
+    end
   end
 
   # GET /api/seasons/:season_id/teams/dead
+  # GET /api/seasons/:season_id/teams/dead?league_id=:league_id
   def dead
-    @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).dead
+    if params[:league_id]
+      @teams = Team.where('league_id' == params[:league_id]).dead
+    else
+      @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).dead
+    end
   end
 
   # GET /api/leagues/:league_id/teams

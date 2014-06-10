@@ -1,0 +1,45 @@
+.league-container {
+  position: relative;
+  .custom-search-form {
+    width: 250px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .manage-custom-search-form {
+    margin: 5px 0 5px 0;
+  }
+  .create-team-btn {
+    position: absolute;
+    right: 0;
+    top: -60px;
+  }
+
+}
+
+.alive-teams, .dead-teams {
+  .list-group-item {
+    .team-count, .start-week {
+      font-size: 11px;
+      color: #999;
+    }
+    .badge {
+      float: right;
+    }
+  }
+}
+
+.alive-teams-pagination, .dead-teams-pagination {
+  width: 253px;
+  margin: -20px 0 0 auto;
+}
+
+@media all and (max-width: 550px) {
+  .league-container {
+    .custom-search-form {
+      width: 100%;
+      position: relative;
+      margin: 5px 0 5px 0;
+    }
+  }
+}
