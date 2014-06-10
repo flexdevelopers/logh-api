@@ -1,10 +1,11 @@
 .teams-container {
   position: relative;
-  .create-team-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
+}
+
+.create-team-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .alive-teams, .dead-teams {
