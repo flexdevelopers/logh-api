@@ -29,11 +29,16 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
     };
 
     this.signout = function() {
-        var promise = $http.delete(
-            apiConfig.baseURL + 'sessions/destroy')
+        var promise = $http.delete(apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
-                messageModel.setMessage(data.message, false);
                 $log.debug("UserService: signout success");
+                userModel.resetUser();
+                if ($state.current.name == 'public.home') {
+                    messageModel.setMessage(data.message, false);
+                } else {
+                    messageModel.setMessage(data.message, true);
+                    $state.go('public.home');
+                }
                 return data;
             })
             .error(function(data) {

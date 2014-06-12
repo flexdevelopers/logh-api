@@ -1,5 +1,5 @@
 commangular.create('SignoutCommand',
-    function($log, $state, userService, userModel) {
+    function($log, userService) {
 
         return {
 
@@ -12,8 +12,6 @@ commangular.create('SignoutCommand',
             },
             onResult: function(result) {
                 $log.debug("SignoutCommand: success");
-                userModel.resetUser();
-                $state.go('public.home');
             }
 
         }
