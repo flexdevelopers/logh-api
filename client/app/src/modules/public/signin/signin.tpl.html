@@ -1,19 +1,19 @@
 <div class="signin-box panel panel-default">
   <div class="panel-body">
-    <form role="form" ng-submit="signin(credentials)">
+    <form name="signinForm" role="form" ng-submit="signin(credentials)" novalidate>
       <div class="form-group">
         <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-          <input class="form-control" placeholder="Email" ng-model="credentials.email">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+          <input type="email" class="form-control" placeholder="Email" ng-model="credentials.email" autofocus required>
         </div>
       </div>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-          <input type="password" class="form-control" placeholder="Password" ng-model="credentials.password">
+          <input type="password" class="form-control" placeholder="Password" ng-model="credentials.password" required>
         </div>
       </div>
-      <button type="submit" class="submit-btn btn btn-primary">Sign in</button>
+      <button type="submit" class="submit-btn btn btn-primary" ng-disabled="signinForm.$invalid">Sign in</button>
     </form>
   </div>
 </div>
