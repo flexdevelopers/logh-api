@@ -12,12 +12,13 @@ var MessageModel = function($rootScope, $log) {
     this.message = message;
 
     this.setMessage = function(messageData, delay) {
-        model.resetMessage();
+        var message = {};
         message.loaded = true;
         message = angular.extend(message, messageData);
         if (delay) {
-            queue[0] = message; // queue it up for after a state change
+            queue[0] = message; // queue it up for after a location change
         } else {
+            model.message = message; // show the message asap
             queue = []; // clear the queue as message will be showed immediately
         }
         $log.debug("MessageModel: content: " + message.content);
@@ -32,11 +33,11 @@ var MessageModel = function($rootScope, $log) {
         this.message = message;
     };
 
-    $rootScope.$on("$stateChangeStart", function() {
+    $rootScope.$on("$locationChangeStart", function() {
         model.resetMessage();
     });
 
-    $rootScope.$on("$stateChangeSuccess", function() {
+    $rootScope.$on("$locationChangeSuccess", function() {
         model.message = queue.shift() || {};
     });
 

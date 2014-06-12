@@ -111,7 +111,7 @@ var loghApp = angular.module('loghApp', [
                 },
                 loadUser: function(userService, userModel) {
                     if (!userModel.user.loaded) {
-                      userService.getCurrentUser();
+                        userService.getCurrentUser();
                     }
                 }
             }
@@ -124,7 +124,7 @@ var loghApp = angular.module('loghApp', [
     })
 ;
 
-loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageModel, userModel) {
+loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, messageModel) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -134,9 +134,17 @@ loghApp.factory('authInterceptor', function ($rootScope, $q, $window, messageMod
             return config;
         },
         responseError: function (rejection) {
-            messageModel.setMessage(rejection.data.message, false);
             if (rejection.status === 401) {
-                userModel.resetUser();
+                var message = { type: 'danger', content: 'Authentication Failure' };
+                var path = $location.path();
+                if (path == '/signin') {
+                    messageModel.setMessage(message, false);
+                } else {
+                    $timeout(function () {
+                        messageModel.setMessage(message, true);
+                        $location.path('/signin').search({ redirect: encodeURIComponent(path) });
+                    }, 200);
+                }
             }
             return $q.reject(rejection);
         }

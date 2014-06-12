@@ -1,4 +1,4 @@
-var UserService = function($http, $log, $state, $window, $timeout, apiConfig, messageModel, userModel) {
+var UserService = function($http, $log, $state, $location, $window, $timeout, apiConfig, messageModel, userModel) {
 
     this.signin = function(email, password) {
         var promise = $http.post(
@@ -8,8 +8,17 @@ var UserService = function($http, $log, $state, $window, $timeout, apiConfig, me
                 $log.debug("UserService: signin success");
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
-                messageModel.resetMessage();
-                return data;
+                var redirect = decodeURIComponent($location.search().redirect);
+                if (redirect !== 'undefined') {
+                    $location.search('redirect', null); // remove the redirect query param
+                    $location.path(redirect);
+                } else if ($state.current.name == 'public.signin') {
+                    $state.go('public.home');
+                } else {
+                    // no location changes, better clear any message
+                    messageModel.resetMessage();
+                }
+            return data;
             })
             .error(function(data) {
                 $log.debug("UserService: signin failure");
@@ -45,10 +54,6 @@ var UserService = function($http, $log, $state, $window, $timeout, apiConfig, me
             })
             .error(function(data) {
                 $log.debug("UserService: getCurrentUser failed");
-                $timeout(function () {
-                  messageModel.setMessage({ type: 'danger', content: "Authorization failure. Please sign in or register." }, true);
-                  $state.go('public.signin');
-                }, 200);
             });
 
         return promise;
@@ -92,5 +97,5 @@ var UserService = function($http, $log, $state, $window, $timeout, apiConfig, me
 
 };
 
-UserService.$inject = ['$http', '$log', '$state', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel'];
+UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel'];
 module.exports = UserService;
