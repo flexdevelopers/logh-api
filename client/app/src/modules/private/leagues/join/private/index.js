@@ -11,7 +11,7 @@ module.exports = angular.module('loghApp.leagues.join.private', [])
           }
         },
         resolve: {
-          privateLeagues: function(leagueService, $stateParams) {
+          privateLeagues: function(user, leagueService, $stateParams) {
             return leagueService.getPrivateLeagues($stateParams.seasonId);
           }
         }

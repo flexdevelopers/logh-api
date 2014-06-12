@@ -11,7 +11,7 @@ module.exports = angular.module('loghApp.team.edit', [])
           }
         },
         resolve: {
-          team: function(teamService, $stateParams) {
+          team: function(user, teamService, $stateParams) {
             return teamService.getTeam($stateParams.leagueId, $stateParams.teamId);
           }
         }

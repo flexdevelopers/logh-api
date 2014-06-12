@@ -11,7 +11,7 @@ module.exports = angular.module('loghApp.team.new', [])
           }
         },
         resolve: {
-          league: function(leagueService, $stateParams) {
+          league: function(user, leagueService, $stateParams) {
             return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
           }
         }

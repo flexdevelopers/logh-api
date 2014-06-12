@@ -11,7 +11,7 @@ module.exports = angular.module('loghApp.leagues.manage', [])
           }
         },
         resolve: {
-          managedLeagues: function(leagueService, $stateParams) {
+          managedLeagues: function(user, leagueService, $stateParams) {
             return leagueService.getManagedLeagues($stateParams.seasonId);
           }
         }

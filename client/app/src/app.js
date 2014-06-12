@@ -86,36 +86,40 @@ var loghApp = angular.module('loghApp', [
 
         // defines root states
         $stateProvider
-        .state('public', {
-            abstract: true,
-            url: '/',
-            templateUrl: 'common/templates/master.tpl.html',
-            resolve: {
-                loadSeason: function(seasonService) {
-                    seasonService.getCurrentSeason();
-                },
-                loadUser: function($window, userService, userModel) {
-                    if (!userModel.user.loaded && $window.sessionStorage.token) {
-                      userService.getCurrentUser();
+            .state('public', {
+                abstract: true,
+                url: '/',
+                templateUrl: 'common/templates/master.tpl.html',
+                resolve: {
+                    currentSeason: function(seasonService) {
+                        return seasonService.getCurrentSeason();
+                    },
+                    user: function(currentSeason, userService, userModel, $window) {
+                        if (userModel.user.loaded) {
+                            return userModel.user;
+                        } else if ($window.sessionStorage.token) {
+                            return userService.getCurrentUser();
+                        }
                     }
                 }
-            }
-        })
-        .state('private', {
-            abstract: true,
-            url: '/',
-            templateUrl: 'common/templates/master.tpl.html',
-            resolve: {
-                loadSeason: function(seasonService) {
-                    seasonService.getCurrentSeason();
-                },
-                loadUser: function(userService, userModel) {
-                    if (!userModel.user.loaded) {
-                        userService.getCurrentUser();
+            })
+            .state('private', {
+                abstract: true,
+                url: '/',
+                templateUrl: 'common/templates/master.tpl.html',
+                resolve: {
+                    currentSeason: function(seasonService) {
+                        return seasonService.getCurrentSeason();
+                    },
+                    user: function(currentSeason, userService, userModel) {
+                        if (userModel.user.loaded) {
+                            return userModel.user;
+                        } else {
+                            return userService.getCurrentUser();
+                        }
                     }
                 }
-            }
-        })
+            })
     })
 
     .run(function($rootScope, $urlRouter, $log, applicationService) {

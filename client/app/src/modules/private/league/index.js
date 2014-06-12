@@ -23,7 +23,7 @@ module.exports = angular.module('loghApp.league', [])
                     }
                 },
                 resolve: {
-                    weeks: function(weekService, $stateParams) {
+                    weeks: function(user, weekService, $stateParams) {
                         return weekService.getAvailableWeeks($stateParams.seasonId);
                     }
                 }
