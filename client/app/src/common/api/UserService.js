@@ -1,4 +1,4 @@
-var UserService = function($http, $log, $state, $location, $window, $timeout, apiConfig, messageModel, userModel) {
+var UserService = function($http, $log, $state, $location, $window, $timeout, apiConfig, messageModel, userModel, seasonModel) {
 
     this.signin = function(email, password) {
         var promise = $http.post(
@@ -6,7 +6,6 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             { email: email, password: password })
             .success(function(data) {
                 $log.debug("UserService: signin success");
-                userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
@@ -102,5 +101,5 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
 
 };
 
-UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel'];
+UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel', 'seasonModel'];
 module.exports = UserService;

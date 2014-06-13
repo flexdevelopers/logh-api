@@ -7,10 +7,7 @@ class API::SessionsController < API::BaseController
     return not_authorized('Invalid Credentials') unless _password_valid?
     access_token = current_access_token
     access_token.user = @user
-    render json: {
-        user: Rabl.render(access_token.user, 'api/users/current', { format: :hash, view_path: Rails.root.join('app/views') }),
-        token: access_token.token
-    }
+    render json: { token: access_token.token }
   end
 
   # DELETE /api/sessions/destroy
