@@ -14,7 +14,6 @@ class API::UsersController < API::BaseController
       access_token = current_access_token
       access_token.user = user
       render json: {
-          user: Rabl.render(access_token.user, 'api/users/current', { format: :hash, view_path: Rails.root.join('app/views') }),
           token: access_token.token,
           message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Enjoy!" }
       }

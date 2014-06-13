@@ -65,15 +65,14 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             { user: userParams })
             .success(function(data) {
                 $log.debug("UserService: createUser success");
-                userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
-                messageModel.setMessage(data.message, true);
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
                 } else  {
-                    $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
+                  messageModel.setMessage(data.message, true);
+                  $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
                 }
                 return data;
             })
