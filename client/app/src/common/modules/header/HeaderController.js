@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, userModel, seasonModel) {
 
     $scope.isCollapsed = true;
 
@@ -29,6 +29,10 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
         alert('tough shit');
     };
 
+    $scope.register = function() {
+        $location.path('/register');
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
@@ -38,5 +42,5 @@ var HeaderController = function($scope, $log, userModel, seasonModel) {
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', 'userModel', 'seasonModel'];
 module.exports = HeaderController;

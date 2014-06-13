@@ -1,4 +1,4 @@
-var SigninController = function($scope, $log) {
+var SigninController = function($scope, $log, $location) {
 
     $scope.credentials = {
         email: '',
@@ -15,6 +15,10 @@ var SigninController = function($scope, $log) {
         alert('tough shit');
     };
 
+    $scope.register = function() {
+        $location.path('/register');
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
@@ -25,5 +29,5 @@ var SigninController = function($scope, $log) {
 
 };
 
-SigninController.$inject = ['$scope', '$log'];
+SigninController.$inject = ['$scope', '$log', '$location'];
 module.exports = SigninController;
