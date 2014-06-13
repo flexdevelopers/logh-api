@@ -68,8 +68,14 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 userModel.setUser(data.user);
                 $window.sessionStorage.token = data.token;
                 messageModel.setMessage(data.message, true);
-                $state.go('public.home');
-            return data;
+                var redirect = decodeURIComponent($location.search().redirect);
+                if (redirect !== 'undefined') {
+                    $location.search('redirect', null); // remove the redirect query param
+                    $location.path(redirect);
+                } else  {
+                    $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
+                }
+                return data;
             })
             .error(function(data) {
                 $log.debug("UserService: createUser failed");
