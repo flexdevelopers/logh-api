@@ -13,7 +13,13 @@
           <input type="password" class="form-control" placeholder="Password" ng-model="credentials.password" required>
         </div>
       </div>
-      <button type="submit" class="submit-btn btn btn-primary" ng-disabled="signinForm.$invalid">Sign in</button>
+      <div>
+        <button type="submit" class="submit-btn btn btn-primary pull-left" ng-disabled="signinForm.$invalid">Sign in</button>
+        <a class="forgot-password btn btn-link pull-right" role="button" ng-click="forgotPassword()">Forgot Password?</a>
+      </div>
+      <div style="clear: both;"></div>
+      <hr>
+      <div class="register"><a ui-sref="public.register">Don't have an account? <strong>Register</strong></a></div>
     </form>
   </div>
 </div>

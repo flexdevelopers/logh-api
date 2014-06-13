@@ -38,7 +38,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
           <div class="dropdown-menu panel panel-default">
-            <div class="panel-body">
+            <div class="inline-signin-form panel-body">
               <form name="inlineSigninForm" role="form" ng-submit="signin(credentials); $event.stopPropagation();" novalidate>
                 <div class="form-group">
                     <div class="input-group">
@@ -52,8 +52,13 @@
                         <input type="password" class="form-control" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" required>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn btn btn-primary pull-left" ng-disabled="inlineSigninForm.$invalid">Submit</button>
-                <a class="forgot-password btn btn-link pull-right" href="#" role="button" ng-click="forgotPassword()">Forgot Password?</a>
+                <div>
+                  <button type="submit" class="submit-btn btn btn-primary pull-left" ng-disabled="inlineSigninForm.$invalid">Sign in</button>
+                  <a class="forgot-password btn btn-link pull-right" role="button" ng-click="forgotPassword()">Forgot Password?</a>
+                </div>
+                <div style="clear: both;"></div>
+                <hr>
+                <div class="register"><a ui-sref="public.register">Don't have an account? <strong>Register</strong></a></div>
               </form>
             </div>
           </div>

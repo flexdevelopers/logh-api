@@ -251,3 +251,18 @@ body {
 [ng-click] {
   cursor: pointer;
 }
+
+.register {
+  text-align: center;
+  margin-top: -10px;
+  a {
+    color: #b5b5b5;
+    font-size: 12px;
+    text-decoration: underline;
+    &:hover, &:focus {
+      color: #2a6496;
+      text-decoration: underline;
+    }
+  }
+}
+

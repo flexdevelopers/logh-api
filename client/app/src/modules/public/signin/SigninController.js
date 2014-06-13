@@ -10,6 +10,11 @@ var SigninController = function($scope, $log) {
         $scope.dispatch("SigninEvent", credentials);
     };
 
+    $scope.forgotPassword = function() {
+        // todo: implement this
+        alert('tough shit');
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
