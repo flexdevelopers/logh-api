@@ -11,13 +11,10 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
-                } else if ($state.current.name == 'public.signin') {
-                    $state.go('public.home');
-                } else {
-                    // no location changes, better clear any message
-                    messageModel.resetMessage();
+                } else  {
+                    $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
                 }
-            return data;
+                return data;
             })
             .error(function(data) {
                 $log.debug("UserService: signin failure");
