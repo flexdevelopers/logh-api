@@ -1,16 +1,35 @@
-var InviteLeagueController = function($scope, $log, $stateParams) {
+var InviteLeagueController = function($modalInstance, $scope, $log) {
 
-    $scope.foo = 'request an invite to league #' + $stateParams.leagueId;
+  $scope.invitation = {
+    email: ""
+  };
 
-    /**
-     * Invoked on startup, like a constructor.
-     */
-    var init = function () {
-        $log.debug("invite league controller");
-    };
-    init();
+  $scope.invite = function () {
+    return;
+    $modalInstance.dismiss('ok');
+    $modalInstance.close($scope.selected.item);
+  };
 
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
+  $scope.hasError = function(input) {
+    return !input.$focused && input.$dirty && input.$invalid;
+  };
+
+  $scope.hasPropertyError = function(input, property) {
+    return !input.$focused && input.$dirty && input.$error[property];
+  };
+
+  /**
+   * Invoked on startup, like a constructor.
+   */
+  var init = function () {
+    $log.debug("league invite controller");
+  };
+  init();
 };
 
-InviteLeagueController.$inject = ['$scope', '$log', '$stateParams'];
+InviteLeagueController.$inject = ['$modalInstance', '$scope', '$log'];
 module.exports = InviteLeagueController;

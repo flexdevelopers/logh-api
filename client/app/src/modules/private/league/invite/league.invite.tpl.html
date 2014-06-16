@@ -1,1 +1,20 @@
-<div>{{foo}}</div>
+<div class="modal-header">
+  <h3 class="modal-title">Invite Coach</h3>
+</div>
+<div class="modal-body">
+  <form name="inviteForm" class="invite-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(inviteForm.email), 'has-feedback': hasError(inviteForm.email)}">
+      <label for="email" class="col-sm-2 control-label">Email:</label>
+      <div class="col-sm-10">
+        <input id="email" name="email" type="email" class="form-control" placeholder="Enter email" ng-model="invitation.email" required>
+        <small class="input-error" ng-show="hasPropertyError(inviteForm.email, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(inviteForm.email, 'email')">Invalid email</small>
+        <span ng-show="hasError(inviteForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="inviteForm.$pristine || inviteForm.$invalid" ng-click="invite()">Invite</button>
+</div>
