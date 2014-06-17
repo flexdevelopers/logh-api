@@ -136,17 +136,21 @@ describe API::TeamsController do
   # GET /api/leagues/:league_id/teams/:id
   describe '#show' do
     context 'when the current user is a coach of the team' do
-      let(:team) { FactoryGirl.create(:team, coaches: [ current_user ]) }
-      it 'returns the team' do
+      let(:another_user) { FactoryGirl.create(:user, email: 'another@user.com') }
+      let(:team) { FactoryGirl.create(:team, coaches: [ current_user, another_user ]) }
+      it 'returns the team and the emails of the coaches' do
         get :show, format: 'json', league_id: team.league.id, id: team.id
         expect(response).to be_success
         expect(json[:name]).to eq(team[:name])
+        expect(json[:coach_emails].length).to eq(2)
+        expect(json[:coach_emails]).to include(current_user[:email])
+        expect(json[:coach_emails]).to include(another_user[:email])
       end
     end
     context 'when the current user is not a coach of the team' do
       let(:another_user) { FactoryGirl.create(:user) }
       let(:team) { FactoryGirl.create(:team, coaches: [ another_user ]) }
-      it 'returns unathorized' do
+      it 'returns forbidden' do
         get :show, league_id: team.league.id, id: team.id
         expect(response.status).to eq(403)
       end

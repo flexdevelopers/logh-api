@@ -14,4 +14,9 @@ class Team < ActiveRecord::Base
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
 
+  def coach_emails
+    coach_ids = TeamCoach.where(team_id: self.id).map(&:user_id)
+    User.where(id: coach_ids).map(&:email)
+  end
+
 end
