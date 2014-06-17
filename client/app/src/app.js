@@ -93,13 +93,6 @@ var loghApp = angular.module('loghApp', [
                 resolve: {
                     currentSeason: function(seasonService) {
                         return seasonService.getCurrentSeason();
-                    },
-                    user: function(currentSeason, userService, userModel, $window) {
-                        if (userModel.user.loaded) {
-                            return userModel.user;
-                        } else if ($window.sessionStorage.token) {
-                            return userService.getCurrentUser();
-                        }
                     }
                 }
             })
@@ -141,14 +134,10 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, m
             if (rejection.status === 401) {
                 var message = { type: 'danger', content: 'Authentication Failure' };
                 var path = $location.path();
-                if (_.indexOf(['/', '/signin', '/register'], path) > -1) {
-                    messageModel.setMessage(message, false);
-                } else {
-                    $timeout(function () {
-                        messageModel.setMessage(message, true);
-                        $location.path('/signin').search({ redirect: encodeURIComponent(path) });
-                    }, 200);
-                }
+                $timeout(function () {
+                    messageModel.setMessage(message, true);
+                    $location.path('/signin').search({ redirect: encodeURIComponent(path) });
+                }, 200);
             }
             return $q.reject(rejection);
         }
