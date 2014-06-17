@@ -9,9 +9,9 @@ class API::TeamsController < API::BaseController
   # GET /api/seasons/:season_id/teams/alive?league_id=:league_id
   def alive
     if params[:league_id]
-      @teams = Team.where('league_id' == params[:league_id]).alive
+      @teams = Team.where('league_id = ?', params[:league_id]).alive
     else
-      @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).alive
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive
     end
   end
 
@@ -19,9 +19,9 @@ class API::TeamsController < API::BaseController
   # GET /api/seasons/:season_id/teams/dead?league_id=:league_id
   def dead
     if params[:league_id]
-      @teams = Team.where('league_id' == params[:league_id]).dead
+      @teams = Team.where('league_id = ?', params[:league_id]).dead
     else
-      @teams = current_user.teams.joins(:league).where('season_id' == params[:season_id]).dead
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead
     end
   end
 
