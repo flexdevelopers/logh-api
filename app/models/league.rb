@@ -28,4 +28,9 @@ class League < ActiveRecord::Base
     "Week #{start_week.number} (#{start_week.starts_at.strftime("%m/%d/%Y")})"
   end
 
+  def commish_emails
+    commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
+    User.where(id: commish_ids).map(&:email)
+  end
+
 end

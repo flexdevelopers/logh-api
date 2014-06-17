@@ -15,6 +15,7 @@ var UserModel = function($rootScope, $window, $log) {
         user.loaded = true;
         user = angular.extend(user, userData);
         $rootScope.$broadcast('userModel::userUpdated', user);
+        $log.debug("UserModel: setUser: " + user.id);
         $log.debug("UserModel: setUser: " + user.email);
     };
 

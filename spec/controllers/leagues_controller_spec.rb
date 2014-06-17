@@ -69,11 +69,16 @@ describe API::LeaguesController do
   # GET /api/seasons/:season_id/leagues/:id
   describe '#show' do
     context 'when the signed in requests a league' do
-      let(:league) { FactoryGirl.create(:league, season: season, commishes: []) }
-      it 'returns the league' do
+      let(:first_user) { FactoryGirl.create(:user, email: 'don@draper.com') }
+      let(:second_user) { FactoryGirl.create(:user, email: 'betty@draper.com') }
+      let(:league) { FactoryGirl.create(:league, season: season, commishes: [ first_user, second_user ]) }
+      it 'returns the league along with the emails of the commishes' do
         get :show, format: 'json', season_id: season.id, id: league.id
         expect(response).to be_success
         expect(json[:name]).to eq(league.name)
+        expect(json[:commish_emails].length).to eq(2)
+        expect(json[:commish_emails]).to include('don@draper.com')
+        expect(json[:commish_emails]).to include('betty@draper.com')
       end
     end
   end
