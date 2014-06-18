@@ -12,10 +12,9 @@ class API::InvitationsController < API::BaseController
 
   # POST /leagues/:league_id/invitations
   def create
-    @invitation = @league.invitations.new(_invitation_params)
+    @invitation = @league.invitations.where(email: _invitation_params[:email]).first_or_initialize
     if @invitation.save
-      # todo: this is not necessary
-      render json: @invitation, status: :created, location: api_league_invitations_path(@league, @invitation)
+      render json: { message: { type: SUCCESS, content: "Invitation sent to #{@invitation.email}" } }, status: :ok
     else
       error(@invitation.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

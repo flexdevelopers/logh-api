@@ -19,15 +19,20 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return league.commish_emails.indexOf(userModel.user.email) > -1;
   };
 
-  $scope.invite = function() {
+  $scope.invite = function(leagueId) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
-      controller: 'InviteLeagueController'
+      controller: 'InviteLeagueController',
+      resolve: {
+        leagueId: function() {
+          return leagueId;
+        }
+      }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    modalInstance.result.then(function (invitation) {
+      $scope.dispatch('InviteLeagueEvent', { inviteParams: invitation });
     }, function () {
       $log.debug('Invite coach modal dismissed...');
     });

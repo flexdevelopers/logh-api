@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   before_save { email.downcase! }
-  after_create :league_invitation_notification
+  after_save :league_invitation_notification
 
   belongs_to :league
 

@@ -1,13 +1,12 @@
-var InviteLeagueController = function($modalInstance, $scope, $log) {
+var InviteLeagueController = function(leagueId, $modalInstance, $scope, $log) {
 
   $scope.invitation = {
+    league_id: leagueId,
     email: ""
   };
 
-  $scope.invite = function () {
-    return;
-    $modalInstance.dismiss('ok');
-    $modalInstance.close($scope.selected.item);
+  $scope.invite = function (invitation) {
+    $modalInstance.close(invitation);
   };
 
   $scope.cancel = function () {
@@ -31,5 +30,5 @@ var InviteLeagueController = function($modalInstance, $scope, $log) {
   init();
 };
 
-InviteLeagueController.$inject = ['$modalInstance', '$scope', '$log'];
+InviteLeagueController.$inject = ['leagueId', '$modalInstance', '$scope', '$log'];
 module.exports = InviteLeagueController;

@@ -63,12 +63,12 @@ var LeagueService = function($http, $log, $state, apiConfig, messageModel) {
                 $log.debug("LeagueService: createLeague success");
                 messageModel.setMessage(data.message, true);
                 $state.go('private.league.view', { seasonId: leagueParams.season_id, leagueId: data.league_id });
-            return data;
+                return data;
             })
             .error(function(data) {
                 $log.debug("LeagueService: createLeague failed");
                 messageModel.setMessage(data.message, false);
-            return data;
+                return data;
             });
 
         return promise;
@@ -81,12 +81,29 @@ var LeagueService = function($http, $log, $state, apiConfig, messageModel) {
                 $log.debug("LeagueService: updateLeague success");
                 messageModel.setMessage(data.message, true);
                 $state.go('private.league.view', { seasonId: leagueParams.season_id, leagueId: leagueParams.id });
-            return data;
+                return data;
             })
             .error(function(data) {
                 $log.debug("LeagueService: updateLeague failed");
                 messageModel.setMessage(data.message, false);
-            return data;
+                return data;
+            });
+
+        return promise;
+    };
+
+    this.inviteLeague = function(inviteParams) {
+        var promise = $http.post(apiConfig.baseURL + "leagues/" + inviteParams.league_id + "/invitations",
+            { invitation: inviteParams })
+            .success(function(data) {
+                $log.debug("LeagueService: inviteLeague success");
+                messageModel.setMessage(data.message, false);
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("LeagueService: inviteLeague failed");
+                messageModel.setMessage(data.message, false);
+                return data;
             });
 
         return promise;

@@ -10,6 +10,7 @@ require('./user/UpdateUserCommand');
 // league commands
 require('./league/CreateLeagueCommand');
 require('./league/UpdateLeagueCommand');
+require('./league/InviteLeagueCommand');
 
 // team commands
 require('./team/CreateTeamCommand');
@@ -37,6 +38,8 @@ module.exports = angular.module('loghApp.commandConfig', [])
             .add('CreateLeagueCommand');
         $commangularProvider.mapTo('UpdateLeagueEvent').asSequence()
             .add('UpdateLeagueCommand');
+        $commangularProvider.mapTo('InviteLeagueEvent').asSequence()
+            .add('InviteLeagueCommand');
 
         // team events
         $commangularProvider.mapTo('CreateTeamEvent').asSequence()

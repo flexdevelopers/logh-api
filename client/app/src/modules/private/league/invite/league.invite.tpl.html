@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Invite Coach</h3>
+  <h3 class="modal-title">Invite</h3>
 </div>
 <div class="modal-body">
   <form name="inviteForm" class="invite-form form-horizontal" role="form" novalidate>
@@ -16,5 +16,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="inviteForm.$pristine || inviteForm.$invalid" ng-click="invite()">Invite</button>
+  <button class="btn btn-primary" ng-disabled="inviteForm.$pristine || inviteForm.$invalid" ng-click="invite(invitation)">Invite</button>
 </div>
