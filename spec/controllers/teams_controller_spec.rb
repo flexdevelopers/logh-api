@@ -14,10 +14,10 @@ describe API::TeamsController do
     context 'when requesting alive teams for a season' do
       let(:league) { FactoryGirl.create(:league) }
       before do
-        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: false, coaches: [ current_user ])
       end
       it 'returns only alive teams for the current user' do
         get :alive, format: 'json', season_id: league.season.id
@@ -56,10 +56,10 @@ describe API::TeamsController do
     context 'when requesting dead teams for a season' do
       let(:league) { FactoryGirl.create(:league) }
       before do
-        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: false, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
-        FactoryGirl.create(:team, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: false, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: false, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
       end
       it 'returns only dead teams for the current user' do
         get :dead, format: 'json', season_id: league.season.id
