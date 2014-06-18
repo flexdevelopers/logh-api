@@ -1,4 +1,4 @@
-var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
+var LeagueService = function($http, $log, $state, apiConfig, messageModel) {
 
     this.getLeague = function(seasonId, leagueId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
@@ -61,13 +61,14 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
             { league: leagueParams })
             .success(function(data) {
                 $log.debug("LeagueService: createLeague success");
-                $location.path('/season/' + leagueParams.season_id + '/league/' + data.league_id + '/edit' );
                 messageModel.setMessage(data.message, true);
-                return data;
+                $state.go('private.league.view', { seasonId: leagueParams.season_id, leagueId: data.league_id });
+            return data;
             })
             .error(function(data) {
                 $log.debug("LeagueService: createLeague failed");
-                return data;
+                messageModel.setMessage(data.message, false);
+            return data;
             });
 
         return promise;
@@ -78,12 +79,14 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
             { league: leagueParams })
             .success(function(data) {
                 $log.debug("LeagueService: updateLeague success");
-                messageModel.setMessage(data.message, false);
-                return data;
+                messageModel.setMessage(data.message, true);
+                $state.go('private.league.view', { seasonId: leagueParams.season_id, leagueId: leagueParams.id });
+            return data;
             })
             .error(function(data) {
                 $log.debug("LeagueService: updateLeague failed");
-                return data;
+                messageModel.setMessage(data.message, false);
+            return data;
             });
 
         return promise;
@@ -91,5 +94,5 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
 
 };
 
-LeagueService.$inject = ['$http', '$log', '$location', 'apiConfig', 'messageModel'];
+LeagueService.$inject = ['$http', '$log', '$state', 'apiConfig', 'messageModel'];
 module.exports = LeagueService;
