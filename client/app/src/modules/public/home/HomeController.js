@@ -7,7 +7,7 @@ var HomeController = function($scope, $log, $location, seasonModel) {
         $location.path('season/' + season.id + '/league/new');
     };
 
-    $scope.createTeam = function(season) {
+    $scope.joinLeague = function(season) {
         $location.path('season/' + season.id + '/leagues/public');
     };
 

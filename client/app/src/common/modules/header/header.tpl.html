@@ -11,23 +11,14 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
       <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coach <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a ui-sref="private.leagues.join.public({seasonId:season.id})">Create a new team</a></li>
-            <li><a ui-sref="private.teams.alive({seasonId:season.id})">Manage my teams</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commish <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a ui-sref="private.league.new({seasonId:season.id})">Create a new league</a></li>
-            <li><a ui-sref="private.leagues.manage({seasonId:season.id})">Manage my leagues</a></li>
-          </ul>
-        </li>
+        <li><a ui-sref="private.leagues.join.public({seasonId:season.id})">Join a league</a></li>
+        <li><a ui-sref="private.league.new({seasonId:season.id})">Create a league</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userData.user.email}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
+            <li><a ui-sref="private.teams.alive({seasonId:season.id})">My teams</a></li>
+            <li><a ui-sref="private.leagues.manage({seasonId:season.id})">My leagues</a></li>
+            <li class="divider"></li>
             <li><a ui-sref="private.user">User Profile</a></li>
             <li><a ng-click="signout()">Sign Out</a></li>
           </ul>
