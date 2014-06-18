@@ -50,6 +50,19 @@ describe API::InvitationsController do
         invitation = FactoryGirl.create(:invitation)
         expect(ActionMailer::Base.deliveries.last.to).to include(invitation.email)
       end
+      context 'and an invitation already exists' do
+        let(:invitation1) { FactoryGirl.build(:invitation, email: 'tyrion@lannister.com') }
+        let(:invitation2) { FactoryGirl.build(:invitation, email: 'tyrion@lannister.com') }
+        before do
+          post :create, league_id: league.id, invitation: invitation1.attributes
+          ActionMailer::Base.deliveries.clear
+        end
+        it 'does not creates a new league invitation' do
+          expect { post :create, league_id: league.id, invitation: invitation2.attributes }.to change(league.invitations, :count).by(0)
+          expect(ActionMailer::Base.deliveries.last.to).to include(invitation2.email)
+          expect(response).to be_success
+        end
+      end
       context 'and the league has already started' do
         let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
         let(:league) { FactoryGirl.create(:league, start_week: start_week, commishes: [ current_user ]) }
