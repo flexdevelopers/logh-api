@@ -40,19 +40,17 @@ describe API::InvitationsController do
   # POST /leagues/:league_id/invitations/new
   describe '#new' do
     context 'when a user requests a league invitation' do
-      let(:league) { FactoryGirl.create(:league, commishes: [ current_user ]) }
+      let(:league) { FactoryGirl.create(:league, commishes: [ current_user, another_user ]) }
       let(:invitation) { FactoryGirl.build(:invitation, league: league, email: 'walter@white.com') }
       before { ActionMailer::Base.deliveries.clear }
-      it 'sends an email to the commish' do
+      it 'sends an email to each commish' do
         expect { post :new, league_id: invitation.league_id, invitation: invitation.attributes }.to change(league.invitations, :count).by(0)
         expect(response).to be_success
         expect(ActionMailer::Base.deliveries.last.to).to include(current_user[:email])
+        expect(ActionMailer::Base.deliveries.last.to).to include(another_user[:email])
       end
-
-
     end
   end
-
 
   # POST /leagues/:league_id/invitations
   describe '#create' do
