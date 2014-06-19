@@ -1,4 +1,4 @@
-var InviteLeagueController = function(leagueId, $modalInstance, $scope, $log) {
+var LeagueInviteController = function(leagueId, $modalInstance, $scope, $log) {
 
   $scope.invitation = {
     league_id: leagueId,
@@ -30,5 +30,5 @@ var InviteLeagueController = function(leagueId, $modalInstance, $scope, $log) {
   init();
 };
 
-InviteLeagueController.$inject = ['leagueId', '$modalInstance', '$scope', '$log'];
-module.exports = InviteLeagueController;
+LeagueInviteController.$inject = ['leagueId', '$modalInstance', '$scope', '$log'];
+module.exports = LeagueInviteController;

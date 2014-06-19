@@ -23,7 +23,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
-      controller: 'InviteLeagueController',
+      controller: 'LeagueInviteController',
       resolve: {
         leagueId: function() {
           return leagueId;
@@ -32,7 +32,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     });
 
     modalInstance.result.then(function (invitation) {
-      $scope.dispatch('InviteLeagueEvent', { inviteParams: invitation });
+      $scope.dispatch('CreateLeagueInviteEvent', { inviteParams: invitation });
     }, function () {
       $log.debug('Invite coach modal dismissed...');
     });

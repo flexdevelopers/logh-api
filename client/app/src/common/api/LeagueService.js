@@ -92,16 +92,16 @@ var LeagueService = function($http, $log, $state, apiConfig, messageModel) {
         return promise;
     };
 
-    this.inviteLeague = function(inviteParams) {
+    this.createInvite = function(inviteParams) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + inviteParams.league_id + "/invitations",
             { invitation: inviteParams })
             .success(function(data) {
-                $log.debug("LeagueService: inviteLeague success");
+                $log.debug("LeagueService: createInvite success");
                 messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
-                $log.debug("LeagueService: inviteLeague failed");
+                $log.debug("LeagueService: createInvite failed");
                 messageModel.setMessage(data.message, false);
                 return data;
             });
