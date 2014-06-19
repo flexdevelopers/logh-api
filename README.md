@@ -50,6 +50,7 @@ And then you can do this, for example:
 ---
 * GET         /api/leagues/:league_id/invitations               [ league invitations ]
 * POST        /api/leagues/:league_id/invitations               [ create invitation ] { email* }
+* POST        /api/leagues/:league_id/invitations/new           [ request invitation ] { email* }
 * DELETE      /api/leagues/:league_id/invitations/:id           [ destroy invitation ]
 
 ##### Teams
