@@ -1,8 +1,14 @@
 class API::InvitationsController < API::BaseController
   before_action :_set_league
   before_action :_set_invitation, only: :destroy
-  before_action :_verify_league_management
-  before_action :_verify_league_status
+  before_action :_verify_league_management, except: :new
+  before_action :_verify_league_status, except: :new
+
+  # POST /leagues/:league_id/invitations/new
+  def new
+    InvitationMailer.request_invitation(@league, _invitation_params[:email]).deliver
+    render json: { message: { type: SUCCESS, content: "An invitation request for #{_invitation_params[:email]} has been sent to the commish" } }, status: :ok
+  end
 
   # GET /leagues/:league_id/invitations
   def index
