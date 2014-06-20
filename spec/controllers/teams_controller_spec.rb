@@ -170,18 +170,18 @@ describe API::TeamsController do
 
     context 'when a league is private' do
       let(:league) { FactoryGirl.create(:league, public: false) }
-      context 'and a valid league password is provided and league invitation exists' do
+      context 'and a league invitation exists' do
         let(:team) { FactoryGirl.build(:team, league: league) }
         before { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
-        subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
+        subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
         it { should change(team.league.teams, :count).by(1) }
         it { should change(current_user.teams, :count).by(1) }
       end
-      context 'and a valid league password is provided and league invitation exists' do
+      context 'and a league invitation exists' do
         let(:team) { FactoryGirl.build(:team, league: league) }
         before { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
         it 'marks the invitation as accepted' do
-          post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes
+          post :create, league_id: team.league.id, team: team.attributes
           invitation = league.invitations.find_by(email: current_user.email)
           expect(invitation.accepted_at).to be_within(2.seconds).of(Time.now)
         end
@@ -190,34 +190,21 @@ describe API::TeamsController do
         let(:team) { FactoryGirl.build(:team, league: league) }
         before { FactoryGirl.create(:invitation, league: team.league, email: current_user.email, accepted_at: 2.days.ago) }
         it 'it does not update the accepted_at field' do
-          post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes
+          post :create, league_id: team.league.id, team: team.attributes
           invitation = league.invitations.find_by(email: current_user.email)
           expect(invitation.accepted_at).to be_within(2.seconds).of(2.days.ago)
         end
       end
-      context 'and an invalid league password is provided but a league invitation exists' do
+      context 'and no invitation exists' do
         let(:team) { FactoryGirl.build(:team, league: league) }
-        let(:invitation) { FactoryGirl.create(:invitation, league: team.league, email: current_user.email) }
-        subject { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
-        it { should change(team.league.teams, :count).by(0) }
-        it { should change(current_user.teams, :count).by(0) }
-      end
-      context 'and no invitation exists for the user but a valid password is provided' do
-        let(:team) { FactoryGirl.build(:team, league: league) }
-        subject { -> { post :create, league_id: team.league.id, league_password: 'foobar', team: team.attributes } }
+        subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
         it { should change(team.league.teams, :count).by(0) }
         it { should change(current_user.teams, :count).by(0) }
       end
     end
     context 'when a league is public' do
       let(:league) { FactoryGirl.create(:league, public: true) }
-      context 'and an invalid league password is provided and no invitation exists' do
-        let(:team) { FactoryGirl.build(:team, league: league) }
-        subject { -> { post :create, league_id: team.league.id, league_password: 'badpassword', team: team.attributes } }
-        it { should change(team.league.teams, :count).by(1) }
-        it { should change(current_user.teams, :count).by(1) }
-      end
-      context 'and no league password is provided' do
+      context 'and no invitation exists' do
         let(:team) { FactoryGirl.build(:team, league: league) }
         subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
         it { should change(team.league.teams, :count).by(1) }
@@ -228,7 +215,7 @@ describe API::TeamsController do
       let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
       let(:league) { FactoryGirl.create(:league, start_week: start_week) }
       let(:team) { FactoryGirl.build(:team, league: league) }
-      subject { -> { post :create, league_id: team.league.id, league_password: 'whatever', team: team.attributes } }
+      subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
       it { should change(team.league.teams, :count).by(0) }
       it { should change(current_user.teams, :count).by(0) }
     end
@@ -242,7 +229,7 @@ describe API::TeamsController do
         FactoryGirl.create(:team, league: another_league, coaches: [current_user])
       end
       it 'returns unauthorized and does not create a team' do
-        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(0)
+        expect { post :create, league_id: league.id, team: team.attributes }.to change(league.teams, :count).by(0)
         expect(response.status).to eq(403)
       end
     end
@@ -256,7 +243,7 @@ describe API::TeamsController do
         FactoryGirl.create(:team, league: another_league, coaches: [current_user])
       end
       it 'creates a team' do
-        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(1)
+        expect { post :create, league_id: league.id, team: team.attributes }.to change(league.teams, :count).by(1)
         expect(response).to be_success
       end
     end
@@ -268,7 +255,7 @@ describe API::TeamsController do
         FactoryGirl.create(:team, league: league, coaches: [current_user])
       end
       it 'creates a team' do
-        expect { post :create, league_id: league.id, league_password: 'foobar', team: team.attributes }.to change(league.teams, :count).by(1)
+        expect { post :create, league_id: league.id, team: team.attributes }.to change(league.teams, :count).by(1)
         expect(response).to be_success
       end
     end
