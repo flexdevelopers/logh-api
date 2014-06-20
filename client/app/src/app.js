@@ -122,7 +122,7 @@ var loghApp = angular.module('loghApp', [
     })
 ;
 
-loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, messageModel) {
+loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, userModel, messageModel) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
@@ -137,6 +137,7 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, m
                 var path = $location.path();
                 $timeout(function () {
                     messageModel.setMessage(message, true);
+                    userModel.resetUser();
                     $location.path('/signin').search({ redirect: encodeURIComponent(path) });
                 }, 200);
             }
