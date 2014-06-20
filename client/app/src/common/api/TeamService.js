@@ -64,6 +64,7 @@ var TeamService = function($http, $log, $state, apiConfig, messageModel) {
             })
             .error(function(data) {
                 $log.debug("TeamService: createTeam failed");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
 
