@@ -167,7 +167,6 @@ describe API::TeamsController do
         expect(response.status).to eq(422) # Unprocessable Entity
       end
     end
-
     context 'when a league is private' do
       let(:league) { FactoryGirl.create(:league, public: false) }
       context 'and a league invitation exists' do
@@ -200,6 +199,13 @@ describe API::TeamsController do
         subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
         it { should change(team.league.teams, :count).by(0) }
         it { should change(current_user.teams, :count).by(0) }
+      end
+      context 'and no invitation exists and the commish tries to join the league' do
+        let(:league) { FactoryGirl.create(:league, public: false, commishes: [ current_user ]) }
+        let(:team) { FactoryGirl.build(:team, league: league) }
+        subject { -> { post :create, league_id: team.league.id, team: team.attributes } }
+        it { should change(team.league.teams, :count).by(1) }
+        it { should change(current_user.teams, :count).by(1) }
       end
     end
     context 'when a league is public' do
