@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, userModel) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel) {
 
   $scope.leagueData = league.data;
 
@@ -17,6 +17,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.showInvite = function(league) {
     return league.commish_emails.indexOf(userModel.user.email) > -1;
+  };
+
+  $scope.joinLeague = function(league) {
+    $location.path('/season/' + league.season_id + '/league/' + league.id + '/team/new');
   };
 
   $scope.invite = function(leagueId) {
@@ -54,5 +58,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', 'userModel'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel'];
 module.exports = ViewLeagueController;

@@ -12,7 +12,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
                 } else  {
-                    $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
+                  $location.path('/season/' + seasonModel.season.id + '/teams/alive');
                 }
                 return data;
             })
@@ -33,7 +33,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                     messageModel.setMessage(data.message, false);
                 } else {
                     messageModel.setMessage(data.message, true);
-                    $state.go('public.home');
+                    $location.path('/');
                 }
                 return data;
             })
@@ -72,7 +72,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                     $location.path(redirect);
                 } else  {
                   messageModel.setMessage(data.message, true);
-                  $state.go('private.teams.alive', { seasonId: seasonModel.season.id });
+                  $location.path('/season/' + seasonModel.season.id + '/teams/alive');
                 }
                 return data;
             })

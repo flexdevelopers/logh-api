@@ -1,4 +1,4 @@
-var TeamService = function($http, $log, $state, apiConfig, messageModel) {
+var TeamService = function($http, $log, $location, apiConfig, messageModel) {
 
     this.getTeam = function(leagueId, teamId) {
         var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/teams/" + teamId)
@@ -59,7 +59,7 @@ var TeamService = function($http, $log, $state, apiConfig, messageModel) {
             .success(function(data) {
                 $log.debug("TeamService: createTeam success");
                 messageModel.setMessage(data.message, true);
-                $state.go('private.league.view', { seasonId: teamParams.season_id, leagueId: teamParams.league_id});
+                $location.path('/season/' + teamParams.season_id + '/league/' + teamParams.league_id);
                 return data;
             })
             .error(function(data) {
@@ -90,5 +90,5 @@ var TeamService = function($http, $log, $state, apiConfig, messageModel) {
 
 };
 
-TeamService.$inject = ['$http', '$log', '$state', 'apiConfig', 'messageModel'];
+TeamService.$inject = ['$http', '$log', '$location', 'apiConfig', 'messageModel'];
 module.exports = TeamService;

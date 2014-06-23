@@ -4,11 +4,11 @@ var HomeController = function($scope, $log, $location, seasonModel) {
     $scope.season = seasonModel.season;
 
     $scope.createLeague = function(season) {
-        $location.path('season/' + season.id + '/league/new');
+        $location.path('/season/' + season.id + '/league/new');
     };
 
     $scope.joinLeague = function(season) {
-        $location.path('season/' + season.id + '/leagues/public');
+        $location.path('/season/' + season.id + '/leagues/public');
     };
 
     /**

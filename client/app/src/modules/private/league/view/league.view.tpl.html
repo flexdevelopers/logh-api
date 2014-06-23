@@ -1,6 +1,6 @@
 <div class="page-header">
   <h3>{{leagueData.name}} <small>{{startWeek(leagueData)}}</small></h3>
-  <button type="button" class="create-team-btn btn btn-success btn-sm" ui-sref="private.team.new({seasonId:leagueData.season_id, leagueId:leagueData.id})">Join</button>
+  <button type="button" class="create-team-btn btn btn-success btn-sm" ng-click="joinLeague(leagueData)">Join</button>
   <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="showInvite(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
 </div>
 <div class="league-container">

@@ -1,5 +1,5 @@
 <div class="public-leagues list-group">
-    <a ng-repeat="league in publicLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ui-sref="private.team.new({seasonId:league.season_id,leagueId:league.id})" class="list-group-item">
+    <a ng-repeat="league in publicLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="joinLeague(league)" class="list-group-item">
         <div class="row">
             <div class="league-name col-sm-4 col-md-4">{{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
             <div class="col-sm-8 col-md-8">

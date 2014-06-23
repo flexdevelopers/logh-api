@@ -1,9 +1,21 @@
-var TeamsController = function($scope, $log, $state, $stateParams) {
+var TeamsController = function($scope, $log, $state, $location, $stateParams) {
 
     $scope.seasonId = $stateParams.seasonId;
 
     $scope.isAliveState = function() {
         return $state.current.name == 'private.teams.alive';
+    };
+
+    $scope.createTeam = function(seasonId) {
+        $location.path('/season/' + seasonId + '/leagues/public');
+    };
+
+    $scope.aliveTeams = function(seasonId) {
+      $location.path('/season/' + seasonId + '/teams/alive');
+    };
+
+    $scope.deadTeams = function(seasonId) {
+      $location.path('/season/' + seasonId + '/teams/dead');
     };
 
     /**
@@ -16,5 +28,5 @@ var TeamsController = function($scope, $log, $state, $stateParams) {
 
 };
 
-TeamsController.$inject = ['$scope', '$log', '$state', '$stateParams'];
+TeamsController.$inject = ['$scope', '$log', '$state', '$location', '$stateParams'];
 module.exports = TeamsController;

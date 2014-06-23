@@ -1,4 +1,5 @@
 module.exports = angular.module('loghApp.leagues.join', [])
+  .controller('JoinLeaguesController', require('./JoinLeaguesController'))
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.leagues.join', {
@@ -6,7 +7,8 @@ module.exports = angular.module('loghApp.leagues.join', [])
         abstract: true,
         views: {
           leaguesContent: {
-            templateUrl: 'modules/private/leagues/join/leagues.join.tpl.html'
+            templateUrl: 'modules/private/leagues/join/leagues.join.tpl.html',
+            controller: 'JoinLeaguesController'
           }
         }
       })

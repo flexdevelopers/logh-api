@@ -11,6 +11,34 @@ var HeaderController = function($scope, $log, $location, userModel, seasonModel)
         password: ''
     };
 
+    $scope.home = function() {
+        $location.path('/');
+    };
+
+    $scope.joinLeague = function(season) {
+        $location.path('/season/' + season.id + '/leagues/public');
+    };
+
+    $scope.createLeague = function(season) {
+      $location.path('/season/' + season.id + '/league/new');
+    };
+
+    $scope.manageTeams = function(season) {
+        $location.path('/season/' + season.id + '/teams/alive');
+    };
+
+    $scope.manageLeagues = function(season) {
+        $location.path('/season/' + season.id + '/leagues');
+    };
+
+    $scope.userProfile = function() {
+        $location.path('/user');
+    };
+
+    $scope.register = function() {
+        $location.path('/register');
+    };
+
     $scope.signin = function(credentials) {
         $log.debug("signin credentials: " + credentials);
         $scope.dispatch("SigninEvent", credentials);
@@ -27,10 +55,6 @@ var HeaderController = function($scope, $log, $location, userModel, seasonModel)
     $scope.forgotPassword = function() {
         // todo: implement this
         alert('tough shit');
-    };
-
-    $scope.register = function() {
-        $location.path('/register');
     };
 
     /**

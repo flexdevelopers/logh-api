@@ -1,7 +1,7 @@
 <div class="page-header">
     <h3>My Leagues</h3>
 </div>
-<button type="button" class="create-league-btn btn btn-success btn-sm" ui-sref="private.league.new({seasonId:season.id})"><i class="glyphicon glyphicon-plus"></i> League</button>
+<button type="button" class="create-league-btn btn btn-success btn-sm" ng-click="createLeague(season)"><i class="glyphicon glyphicon-plus"></i> League</button>
 
 
 <!--if you have managed leagues (i.e. if you're a commish)-->
@@ -17,7 +17,7 @@
     </div>
 
     <div class="managed-leagues list-group">
-        <a ng-repeat="league in managedLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ui-sref="private.league.view({seasonId:league.season_id,leagueId:league.id})" class="list-group-item">
+        <a ng-repeat="league in managedLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
             <div class="row">
                 <div class="league-name col-sm-4 col-md-4">{{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
                 <div class="col-sm-8 col-md-8">

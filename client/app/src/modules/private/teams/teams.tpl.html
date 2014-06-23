@@ -1,14 +1,14 @@
 <div class="page-header">
     <h3>My Teams</h3>
-    <button type="button" class="create-team-btn btn btn-success btn-sm" ui-sref="private.leagues.join.public({seasonId:seasonId})"><i class="glyphicon glyphicon-plus"></i> Team</button>
+    <button type="button" class="create-team-btn btn btn-success btn-sm" ng-click="createTeam(seasonId)"><i class="glyphicon glyphicon-plus"></i> Team</button>
 </div>
 <div class="teams-container">
     <ul class="nav nav-tabs">
         <li ng-class="{'active': isAliveState()}">
-            <a ui-sref="private.teams.alive({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-up"></i> Alive</a>
+            <a ng-click="aliveTeams(seasonId)"><i class="glyphicon glyphicon-thumbs-up"></i> Alive</a>
         </li>
         <li ng-class="{'active': !isAliveState()}">
-            <a ui-sref="private.teams.dead({seasonId:seasonId})"><i class="glyphicon glyphicon-thumbs-down"></i> Dead</a>
+            <a ng-click="deadTeams(seasonId)"><i class="glyphicon glyphicon-thumbs-down"></i> Dead</a>
         </li>
     </ul>
 </div>
