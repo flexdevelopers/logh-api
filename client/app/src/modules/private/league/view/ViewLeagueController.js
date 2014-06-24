@@ -15,16 +15,32 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return message + leagueData.week_display;
   };
 
-  $scope.showInvite = function(league) {
+  $scope.isCommish = function(league) {
     return league.commish_emails.indexOf(userModel.user.email) > -1;
-  };
-
-  $scope.showJoin = function(league) {
-    return !league.started;
   };
 
   $scope.joinLeague = function(league) {
     $location.path('/season/' + league.season_id + '/league/' + league.id + '/team/new');
+  };
+
+  $scope.requestInvite = function(league) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/league/invite/request/league.invite.request.tpl.html',
+      controller: 'LeagueInviteRequestController',
+      resolve: {
+        leagueId: function() {
+          return league.id;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (invitation) {
+      $scope.dispatch('LeagueInviteRequestEvent', { inviteParams: invitation });
+    }, function () {
+      $log.debug('Request invite modal dismissed...');
+    });
+
   };
 
   $scope.invite = function(leagueId) {

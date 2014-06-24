@@ -1,26 +1,9 @@
-
-var PrivateLeaguesController = function(privateLeagues, $scope, $log, $modal) {
+var PrivateLeaguesController = function(privateLeagues, $scope, $log, $location) {
 
     $scope.privateLeagues = privateLeagues.data;
 
-    $scope.requestInvite = function(league) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'modules/private/league/invite/request/league.invite.request.tpl.html',
-        controller: 'LeagueInviteRequestController',
-        resolve: {
-          leagueId: function() {
-            return league.id;
-          }
-        }
-      });
-
-      modalInstance.result.then(function (invitation) {
-        $scope.dispatch('LeagueInviteRequestEvent', { inviteParams: invitation });
-      }, function () {
-        $log.debug('Request invite modal dismissed...');
-      });
-
+    $scope.showLeague = function(league) {
+      $location.path('/season/' + league.season_id + '/league/' + league.id);
     };
 
     /**
@@ -33,6 +16,6 @@ var PrivateLeaguesController = function(privateLeagues, $scope, $log, $modal) {
 
 };
 
-PrivateLeaguesController.$inject = ['privateLeagues', '$scope', '$log', '$modal'];
+PrivateLeaguesController.$inject = ['privateLeagues', '$scope', '$log', '$location'];
 module.exports = PrivateLeaguesController;
 

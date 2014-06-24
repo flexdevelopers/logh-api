@@ -1,7 +1,8 @@
 <div class="page-header">
-  <h3>{{leagueData.name}} <small>{{startWeek(leagueData)}}</small></h3>
-  <button type="button" class="create-team-btn btn btn-success btn-sm" ng-show="showJoin(leagueData)" ng-click="joinLeague(leagueData)">Join</button>
-  <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="showInvite(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+  <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <small>{{startWeek(leagueData)}}</small></h3>
+  <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+  <button type="button" class="get-invite-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="requestInvite(leagueData)">Get Invite</button>
+  <button type="button" class="create-team-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
 </div>
 <div class="league-container">
   <div class="input-group custom-search-form">
