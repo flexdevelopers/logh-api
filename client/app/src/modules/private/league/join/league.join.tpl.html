@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h3 class="modal-title">Join {{leagueData.name}}</h3>
+</div>
+<div class="modal-body">
+  <form name="joinForm" class="join-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(joinForm.teamName), 'has-feedback': hasError(joinForm.teamName)}">
+      <label for="teamName" class="col-sm-3 control-label">Team Name:</label>
+      <div class="col-sm-9">
+        <input id="teamName" name="teamName" type="text" class="form-control" placeholder="Enter a team name" ng-model="newTeamData.name" required>
+        <small class="input-error" ng-show="hasPropertyError(joinForm.teamName, 'required')">Required</small>
+        <span ng-show="hasError(joinForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="joinForm.$pristine || joinForm.$invalid" ng-click="joinLeague(newTeamData)">Join</button>
+</div>

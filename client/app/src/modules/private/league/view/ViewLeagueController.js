@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, userModel) {
 
   $scope.leagueData = league.data;
 
@@ -20,7 +20,23 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.joinLeague = function(league) {
-    $location.path('/season/' + league.season_id + '/league/' + league.id + '/team/new');
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/league/join/league.join.tpl.html',
+      controller: 'LeagueJoinController',
+      resolve: {
+        league: function() {
+          return league;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (team) {
+      $scope.dispatch('CreateTeamEvent', { teamParams: team } );
+    }, function () {
+      $log.debug('Join league modal dismissed...');
+    });
+
   };
 
   $scope.requestInvite = function(league) {
@@ -78,5 +94,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', 'userModel'];
 module.exports = ViewLeagueController;

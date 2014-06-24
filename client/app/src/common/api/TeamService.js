@@ -58,8 +58,7 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
             { team: teamParams })
             .success(function(data) {
                 $log.debug("TeamService: createTeam success");
-                messageModel.setMessage(data.message, true);
-                $location.path('/season/' + teamParams.season_id + '/league/' + teamParams.league_id);
+                messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
