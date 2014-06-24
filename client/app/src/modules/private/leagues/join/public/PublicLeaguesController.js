@@ -4,7 +4,7 @@ var PublicLeaguesController = function($scope, $log, $location, publicLeagues) {
     $scope.publicLeagues = publicLeagues.data;
 
     $scope.joinLeague = function(league) {
-      $location.path('/season/' + league.season_id + '/league/' + league.id + '/team/new');
+      $location.path('/season/' + league.season_id + '/league/' + league.id);
     };
 
     /**
