@@ -19,6 +19,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return league.commish_emails.indexOf(userModel.user.email) > -1;
   };
 
+  $scope.showJoin = function(league) {
+    return !league.started;
+  };
+
   $scope.joinLeague = function(league) {
     $location.path('/season/' + league.season_id + '/league/' + league.id + '/team/new');
   };
