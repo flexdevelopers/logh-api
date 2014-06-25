@@ -3,10 +3,10 @@
 </div>
 <div class="leagues-container">
     <ul class="nav nav-tabs">
-        <li ng-class="{'active': isPublic()}">
+        <li ng-class="{'active': isPublic()}" ng-click="resetSearch()">
             <a ng-click="publicLeagues(seasonId)"><i class="glyphicon glyphicon-ok-sign"></i> Public</a>
         </li>
-        <li ng-class="{'active': !isPublic()}">
+        <li ng-class="{'active': !isPublic()}" ng-click="resetSearch()">
             <a ng-click="privateLeagues(seasonId)"><i class="glyphicon glyphicon-lock"></i> Private</a>
         </li>
     </ul>

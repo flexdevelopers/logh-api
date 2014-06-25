@@ -8,6 +8,12 @@ var JoinLeaguesController = function($scope, $log, $location) {
     $location.path('/season/' + seasonId + '/leagues/private');
   };
 
+  $scope.resetSearch = function() {
+    $scope.search = {
+      name: ""
+    };
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
