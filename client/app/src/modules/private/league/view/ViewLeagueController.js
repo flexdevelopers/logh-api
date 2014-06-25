@@ -5,6 +5,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.aliveTeams = aliveTeams.data;
   $scope.deadTeams = deadTeams.data;
 
+  // pagination
+  $scope.currentTeamPage = 1;
+  $scope.teamsPerPage = 10;
+
   $scope.startWeek = function(leagueData) {
     var message;
     if (leagueData.started) {
@@ -82,6 +86,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     $scope.search = {
       name: ""
     };
+    $scope.currentTeamPage = 1;
   };
 
   /**
