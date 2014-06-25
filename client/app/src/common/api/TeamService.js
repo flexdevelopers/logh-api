@@ -1,4 +1,4 @@
-var TeamService = function($http, $log, $location, apiConfig, messageModel) {
+var TeamService = function($http, $log, $location, $state, apiConfig, messageModel) {
 
     this.getTeam = function(leagueId, teamId) {
         var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/teams/" + teamId)
@@ -58,6 +58,9 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
             { team: teamParams })
             .success(function(data) {
                 $log.debug("TeamService: createTeam success");
+                // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+                // but may be resolved with future releases of angular-ui-router
+                $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
                 messageModel.setMessage(data.message, false);
                 return data;
             })
@@ -89,5 +92,5 @@ var TeamService = function($http, $log, $location, apiConfig, messageModel) {
 
 };
 
-TeamService.$inject = ['$http', '$log', '$location', 'apiConfig', 'messageModel'];
+TeamService.$inject = ['$http', '$log', '$location', '$state', 'apiConfig', 'messageModel'];
 module.exports = TeamService;

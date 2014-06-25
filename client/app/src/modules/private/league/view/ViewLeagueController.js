@@ -82,7 +82,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     $scope.search = {
       name: ""
     };
-  }
+  };
 
   /**
    * Invoked on startup, like a constructor.
