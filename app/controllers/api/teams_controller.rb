@@ -39,7 +39,7 @@ class API::TeamsController < API::BaseController
   # POST /api/leagues/:league_id/teams
   def create
     return forbidden('The league has already started') if @league.started?
-    return forbidden('You have exceeded the number of teams allowed per user') if !_can_add_team_to?(@league)
+    return forbidden("You have exceeded the number of teams allowed per user (#{@league.max_teams_per_user})") if !_can_add_team_to?(@league)
     @team = @league.teams.new(_team_params)
     @team.coaches << current_user
     if @team.save
