@@ -68,7 +68,7 @@ describe API::LeaguesController do
 
   # GET /api/seasons/:season_id/leagues/:id
   describe '#show' do
-    context 'when the signed in requests a league' do
+    context 'when the signed in user requests a league' do
       let(:first_user) { FactoryGirl.create(:user, email: 'don@draper.com') }
       let(:second_user) { FactoryGirl.create(:user, email: 'betty@draper.com') }
       let(:league) { FactoryGirl.create(:league, season: season, commishes: [ first_user, second_user ]) }
@@ -79,6 +79,44 @@ describe API::LeaguesController do
         expect(json[:commish_emails].length).to eq(2)
         expect(json[:commish_emails]).to include('don@draper.com')
         expect(json[:commish_emails]).to include('betty@draper.com')
+      end
+    end
+    context 'when the signed in user requests a league that is public and has started' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+      let(:league) { FactoryGirl.create(:league, public: true, start_week: start_week) }
+      it 'returns the league' do
+        get :show, format: 'json', season_id: league.season_id, id: league.id
+        expect(response).to be_success
+        expect(json[:name]).to eq(league.name)
+      end
+    end
+    context 'when the signed in user requests a league that is private and has not started' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.week) }
+      let(:league) { FactoryGirl.create(:league, public: false, start_week: start_week) }
+      it 'returns the league' do
+        get :show, format: 'json', season_id: league.season_id, id: league.id
+        expect(response).to be_success
+        expect(json[:name]).to eq(league.name)
+      end
+    end
+    context 'when the signed in user requests a league that is private and has started and they belong to it' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+      let(:league) { FactoryGirl.create(:league, public: false, start_week: start_week) }
+      before do
+        FactoryGirl.create(:team, league: league, alive: true, coaches: [ current_user ])
+      end
+      it 'returns the league' do
+        get :show, format: 'json', season_id: league.season_id, id: league.id
+        expect(response).to be_success
+        expect(json[:name]).to eq(league.name)
+      end
+    end
+    context 'when the signed in user requests a league that is private and has started and they do not belong to it' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+      let(:league) { FactoryGirl.create(:league, public: false, start_week: start_week) }
+      it 'returns forbidden' do
+        get :show, format: 'json', season_id: league.season_id, id: league.id
+        expect(response.status).to eq(403) # Forbidden
       end
     end
   end
