@@ -1,10 +1,12 @@
 <div class="page-header">
   <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <small>{{startWeek(leagueData)}}</small></h3>
-  <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
-  <button type="button" class="get-invite-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="requestInvite(leagueData)">Get Invite</button>
-  <button type="button" class="create-team-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
+  <div class="btn-group league-btn-group">
+    <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
+    <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+    <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
+  </div>
 </div>
-<div class="league-container">
+<div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
     <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
         <span class="input-group-btn">
