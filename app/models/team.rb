@@ -10,6 +10,7 @@ class Team < ActiveRecord::Base
   validates :alive, inclusion: { in: [true, false] }
 
   default_scope { includes(:league) }
+  default_scope { order(:name) }
 
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
