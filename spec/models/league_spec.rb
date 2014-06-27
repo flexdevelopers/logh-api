@@ -14,6 +14,9 @@ describe League do
   it { should respond_to(:start_week) }
   its(:start_week) { should be_nil }
 
+  it { should respond_to(:message) }
+  its(:message) { should be_blank }
+
   it { should respond_to(:season) }
   its(:season) { should be_nil }
 
@@ -44,6 +47,16 @@ describe League do
   context 'when league has no start week' do
     subject(:league) { FactoryGirl.build(:league, start_week: nil) }
     it { should_not be_valid }
+  end
+
+  context 'when league has a message greater than 200 characters' do
+    subject(:league) { FactoryGirl.build(:league, message: 'a' * 201) }
+    it { should_not be_valid }
+  end
+
+  context 'when league has no message' do
+    subject(:league) { FactoryGirl.build(:league, message: nil) }
+    it { should be_valid }
   end
 
   context 'when league has defined no max teams per user' do

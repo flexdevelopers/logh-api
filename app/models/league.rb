@@ -13,6 +13,7 @@ class League < ActiveRecord::Base
   validates :public, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
+  validates :message, allow_nil: true, length: { maximum: 200 }
 
   default_scope { order('lower(name)') }
 
