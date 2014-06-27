@@ -6,6 +6,7 @@
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
   </div>
 </div>
+<div class="well well-sm">{{message(leagueData)}}</div>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
     <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">

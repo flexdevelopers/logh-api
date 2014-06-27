@@ -9,6 +9,14 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 10;
 
+  $scope.message = function(league) {
+    var message = 'This league allows a max of ' + league.max_teams_per_user + ' teams per user';
+    if (league.message && league.message.length > 0) {
+      message = league.message;
+    }
+    return message;
+  };
+
   $scope.startWeek = function(leagueData) {
     var message;
     if (leagueData.started) {
