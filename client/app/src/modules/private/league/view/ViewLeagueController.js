@@ -10,7 +10,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.teamsPerPage = 10;
 
   $scope.message = function(league) {
-    var message = 'This league allows a max of ' + league.max_teams_per_user + ' teams per user';
+    var message = 'The league message board is empty';
     if (league.message && league.message.length > 0) {
       message = league.message;
     }
