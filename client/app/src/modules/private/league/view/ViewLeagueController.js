@@ -9,8 +9,6 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 10;
 
-  $scope.rulesCollapsed = false;
-
   $scope.startWeek = function(leagueData) {
     var message;
     if (leagueData.started) {
