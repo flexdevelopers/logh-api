@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <small>{{startWeek(leagueData)}}</small></h3>
+  <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCommish(leagueData)" ng-click="editLeague(leagueData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small>{{startWeek(leagueData)}}</small></h3>
   <div class="btn-group league-btn-group">
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>

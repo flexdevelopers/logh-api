@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, userModel) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel) {
 
   $scope.leagueData = league.data;
 
@@ -8,6 +8,8 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   // pagination
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 10;
+
+  $scope.rulesCollapsed = false;
 
   $scope.startWeek = function(leagueData) {
     var message;
@@ -21,6 +23,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.isCommish = function(league) {
     return league.commish_emails.indexOf(userModel.user.email) > -1;
+  };
+
+  $scope.editLeague = function(league) {
+    $location.path($location.path() + '/edit');
   };
 
   $scope.joinLeague = function(league) {
@@ -99,5 +105,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', 'userModel'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel'];
 module.exports = ViewLeagueController;
