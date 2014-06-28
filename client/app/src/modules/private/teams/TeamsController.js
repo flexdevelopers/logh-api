@@ -2,6 +2,10 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
 
     $scope.seasonId = $stateParams.seasonId;
 
+    // pagination
+    $scope.currentTeamPage = 1;
+    $scope.teamsPerPage = 10;
+
     $scope.isAliveState = function() {
         return $state.current.name == 'private.teams.alive';
     };
