@@ -16,7 +16,7 @@ class League < ActiveRecord::Base
   validates :message, allow_nil: true, length: { maximum: 200 }
 
   default_scope { includes(:start_week) }
-  default_scope { order('lower(name)') }
+  default_scope { order("lower(#{table_name}.name)") }
 
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }

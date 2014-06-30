@@ -7,21 +7,21 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues/managed
   def managed
     @leagues = current_user.managed_leagues
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, 'LOWER(league.name)'] }
     respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues/public
   def public
     @leagues = @season.leagues.public.not_started
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, 'LOWER(league.name)'] }
     respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues/private
   def private
     @leagues = @season.leagues.private.not_started
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, 'LOWER(league.name)'] }
     respond_with @leagues
   end
 
