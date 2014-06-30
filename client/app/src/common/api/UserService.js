@@ -66,12 +66,12 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             .success(function(data) {
                 $log.debug("UserService: createUser success");
                 $window.sessionStorage.token = data.token;
+                messageModel.setMessage(data.message, true);
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
                 } else  {
-                  messageModel.setMessage(data.message, true);
                   $location.path('/season/' + seasonModel.season.id + '/teams/alive');
                 }
                 return data;
