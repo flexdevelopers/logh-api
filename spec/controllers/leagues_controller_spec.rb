@@ -192,12 +192,28 @@ describe API::LeaguesController do
             expect(league[:start_week_id]).to eq(new_start_week.id)
           end
         end
+        context 'and the start week is changed to a future start week but there are teams in the league' do
+          let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
+          let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.week) }
+          let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
+          before do
+            FactoryGirl.create(:team, league: league)
+            FactoryGirl.create(:team, league: league)
+          end
+          before { league.start_week = new_start_week }
+          it 'does not update the start week' do
+            put :update, season_id: season.id, id: league.id, league: league.attributes
+            expect(response).to be_success
+            league.reload
+            expect(league[:start_week_id]).to eq(current_start_week.id)
+          end
+        end
         context 'and the start week is changed to a past start week' do
           let(:current_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now + 1.day) }
           let(:new_start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
           let(:league) { FactoryGirl.create(:league, season: season, start_week: current_start_week, commishes: [ current_user ]) }
           before { league.start_week = new_start_week }
-          it 'updates the start week' do
+          it 'does not update the start week' do
             put :update, season_id: season.id, id: league.id, league: league.attributes
             expect(response.status).to eq(403)
             league.reload

@@ -2,8 +2,12 @@ var EditLeagueController = function($scope, $log, league) {
 
     $scope.leagueData = league.data;
 
-    $scope.updateLeague = function(leagueData) {
-        $scope.dispatch('UpdateLeagueEvent', { leagueParams: leagueData });
+    $scope.updateLeague = function(league) {
+        $scope.dispatch('UpdateLeagueEvent', { leagueParams: league });
+    };
+
+    $scope.canUpdateStartWeek = function(league) {
+      return !league.started && league.team_count == 0;
     };
 
     /**
