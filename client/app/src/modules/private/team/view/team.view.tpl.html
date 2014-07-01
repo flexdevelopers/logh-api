@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3><i class="glyphicon glyphicon-thumbs-up"></i> {{teamData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCoach(teamData)" ng-click="editTeam(teamData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small>{{getLeague(teamData)}}</small></h3>
+  <h3><i class="glyphicon glyphicon-thumbs-up"></i> {{teamData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCoach(teamData)" ng-click="editTeam(teamData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small><a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small></h3>
   <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-click="makePick(teamData)">+ Pick</button>
 </div>
 <div class="well well-sm">Need some kind of message here</div>

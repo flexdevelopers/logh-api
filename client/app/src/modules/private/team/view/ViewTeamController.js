@@ -18,8 +18,8 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     alert('popup a modal');
   };
 
-  $scope.getLeague = function(team) {
-    return "Foo 852 League";
+  $scope.showLeague = function(team) {
+    $location.path('/season/' + team.league.season_id + '/league/' + team.league.id);
   };
 
   $scope.makePick = function(team) {
