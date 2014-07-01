@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location) {
+var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, userModel) {
 
   $scope.teamData = team.data;
 
@@ -10,8 +10,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
   };
 
   $scope.isCoach = function(team) {
-    return true;
-//    return league.commish_emails.indexOf(userModel.user.email) > -1;
+    return team.coach_emails.indexOf(userModel.user.email) > -1;
   };
 
   $scope.editTeam = function(team) {
@@ -36,5 +35,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location'];
+ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'userModel'];
 module.exports = ViewTeamController;
