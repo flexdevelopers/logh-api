@@ -20,6 +20,9 @@
           </div>
         </a>
       </div>
+      <div class="alert alert-info" ng-show="regularPicks.length == 0">
+        No regular season picks
+      </div>
     </tab>
     <tab>
       <tab-heading>Playoff</tab-heading>
@@ -33,6 +36,9 @@
             </div>
           </div>
         </a>
+      </div>
+      <div class="alert alert-info" ng-show="playoffPicks.length == 0">
+        No playoff picks
       </div>
     </tab>
   </tabset>

@@ -1,7 +1,19 @@
 class API::PicksController < API::BaseController
-  before_action :_set_team, only: [:index, :show, :create, :update, :destroy]
+  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update, :destroy]
   before_action :_set_pick, only: [:show, :update, :destroy]
   before_action :_verify_team_ownership
+
+  # GET /api/teams/:team_id/picks/regular
+  def regular
+    regular_week_type_id = WeekType.find_by(code: 'reg').id
+    @picks = @team.picks.joins(:week).where(week_type_id: regular_week_type_id)
+  end
+
+  # GET /api/teams/:team_id/picks/playoff
+  def playoff
+    playoff_week_type_id = WeekType.find_by(code: 'play').id
+    @picks = @team.picks.joins(:week).where(week_type_id: playoff_week_type_id)
+  end
 
   # GET /api/teams/:team_id/picks
   def index

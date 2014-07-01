@@ -14,25 +14,12 @@ module.exports = angular.module('loghApp.team.view', [])
           team: function(teamService, $stateParams) {
             return teamService.getTeam($stateParams.leagueId, $stateParams.teamId);
           },
-          regularPicks: function(team, teamService) {
-            return [
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'}
-            ];
-//            return teamService.getRegularPicks({ seasonId: league.data.season_id, leagueId: league.data.id });
+          regularPicks: function(team, pickService) {
+            return pickService.getRegularPicks({ teamId: team.data.id });
           },
-          playoffPicks: function(team, teamService) {
-            return [
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'},
-              {foo:'bar',bar:'foo'}
-            ];
-//            return teamService.getDeadTeams({ seasonId: league.data.season_id, leagueId: league.data.id });
+          playoffPicks: function(team, pickService) {
+            return pickService.getPlayoffPicks({ teamId: team.data.id });
           }
-
         }
       });
     $urlRouterProvider.otherwise('/');

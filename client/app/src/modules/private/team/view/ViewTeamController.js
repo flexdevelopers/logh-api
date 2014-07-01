@@ -2,8 +2,8 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
   $scope.teamData = team.data;
 
-  $scope.regularPicks = regularPicks;
-  $scope.playoffPicks = playoffPicks;
+  $scope.regularPicks = regularPicks.data;
+  $scope.playoffPicks = playoffPicks.data;
 
   $scope.message = function(team) {
     return "here is a message for the coach";
