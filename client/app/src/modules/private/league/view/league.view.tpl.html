@@ -24,7 +24,7 @@
         <i class="glyphicon glyphicon-thumbs-up"></i> Alive
       </tab-heading>
       <div class="alive-teams list-group">
-        <a ng-repeat="team in aliveTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" class="list-group-item">
+        <a ng-repeat="team in aliveTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-4 col-md-4">{{team.name}} <span class="team-count">Tom D.</span></div>
             <div class="col-sm-8 col-md-8">
@@ -46,7 +46,7 @@
         <i class="glyphicon glyphicon-thumbs-down"></i> Dead
       </tab-heading>
       <div class="dead-teams list-group">
-        <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" class="list-group-item">
+        <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-4 col-md-4">{{team.name}} <span class="team-count">Sam R.</span></div>
             <div class="col-sm-8 col-md-8">

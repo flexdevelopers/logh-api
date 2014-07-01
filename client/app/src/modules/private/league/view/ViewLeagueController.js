@@ -35,6 +35,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     $location.path($location.path() + '/edit');
   };
 
+  $scope.showTeam = function(team) {
+    $location.path($location.path() + '/team/' + team.id);
+  };
+
   $scope.joinLeague = function(league) {
 
     var modalInstance = $modal.open({

@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h3><i class="glyphicon glyphicon-thumbs-up"></i> {{teamData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCoach(teamData)" ng-click="editTeam(teamData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small>{{getLeague(teamData)}}</small></h3>
+  <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-click="makePick(teamData)">+ Pick</button>
+</div>
+<div class="well well-sm">Need some kind of message here</div>
+<h4>Picks</h4>
+<hr>
+<div class="team-container" style="clear:both;">
+  <tabset>
+    <tab>
+      <tab-heading>Regular</tab-heading>
+      <div class="regular-picks list-group">
+        <a ng-repeat="pick in regularPicks" class="list-group-item">
+          <div class="row">
+            <div class="week-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-ok"></i> Week 1 <span class="week-date">9/14/14</span></div>
+            <div class="col-sm-8 col-md-8">
+              <span class="week-loser">Loser: [ Hidden ]</span>
+              <span class="badge">Change</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </tab>
+    <tab>
+      <tab-heading>Playoff</tab-heading>
+      <div class="playoff-picks list-group">
+        <a ng-repeat="pick in playoffPicks" class="list-group-item">
+          <div class="row">
+            <div class="week-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-remove"></i> Week 17 <span class="week-date">9/14/14</span></div>
+            <div class="col-sm-8 col-md-8">
+              <span class="week-loser">Loser: [ Hidden ]</span>
+              <span class="badge">Change</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </tab>
+  </tabset>
+</div>

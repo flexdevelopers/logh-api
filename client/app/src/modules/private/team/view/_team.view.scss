@@ -1,0 +1,21 @@
+.team-container {
+  position: relative;
+}
+
+.make-pick-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.regular-picks, .playoff-picks {
+  .list-group-item {
+    .week-date, .week-loser {
+      font-size: 11px;
+      color: #999;
+    }
+    .badge {
+      float: right;
+    }
+  }
+}

@@ -22,6 +22,10 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
       $location.path('/season/' + seasonId + '/teams/dead');
     };
 
+    $scope.showTeam = function(seasonId, team) {
+      $location.path('/season/' + seasonId + '/league/' + team.league.id + '/team/' + team.id);
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */

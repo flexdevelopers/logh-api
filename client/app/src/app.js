@@ -45,6 +45,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/leagues/manage').name,
     // team
     require('./modules/private/team').name,
+    require('./modules/private/team/view').name,
     require('./modules/private/team/edit').name,
     // teams
     require('./modules/private/teams').name,
