@@ -1,7 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_league, except: [:alive, :dead]
   before_action :_set_team, only: [:show, :update, :destroy]
-  before_action :_verify_team_ownership, only: [:show, :update, :destroy]
+  before_action :_verify_team_ownership, only: [:update, :destroy]
   before_action :_verify_league_membership, only: [:index]
   before_action :_verify_league_acceptance, only: [:create]
 

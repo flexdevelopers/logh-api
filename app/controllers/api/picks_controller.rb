@@ -1,7 +1,6 @@
 class API::PicksController < API::BaseController
   before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update, :destroy]
   before_action :_set_pick, only: [:show, :update, :destroy]
-  before_action :_verify_team_ownership
 
   # GET /api/teams/:team_id/picks/regular
   def regular
@@ -60,10 +59,6 @@ class API::PicksController < API::BaseController
 
     def _set_pick
       @pick = @team.picks.find(params[:id])
-    end
-
-    def _verify_team_ownership
-      forbidden('You must be a coach to manage picks') unless _is_coach_of(@team)
     end
 
     def _is_coach_of(team)
