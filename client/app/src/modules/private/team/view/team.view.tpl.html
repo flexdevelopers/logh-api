@@ -13,10 +13,10 @@
       <div class="regular-picks list-group">
         <a ng-repeat="pick in regularPicks" class="list-group-item">
           <div class="row">
-            <div class="week-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-ok"></i> Week 1 <span class="week-date">9/14/14</span></div>
-            <div class="col-sm-8 col-md-8">
-              <span class="week-loser">Loser: [ Hidden ]</span>
-              <span class="badge">Change</span>
+            <div class="week-name col-sm-6 col-md-6"><i class="glyphicon glyphicon-ok"></i> {{pick.week_display}} <span class="game">{{pick.game_display}}</span></div>
+            <div class="col-sm-6 col-md-6">
+              <span class="week-loser">Loser: [ {{pick.loser}} ]</span>
+              <span class="badge" ng-show="!pick.started">Change</span>
             </div>
           </div>
         </a>
@@ -30,10 +30,10 @@
       <div class="playoff-picks list-group">
         <a ng-repeat="pick in playoffPicks" class="list-group-item">
           <div class="row">
-            <div class="week-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-remove"></i> Week 17 <span class="week-date">9/14/14</span></div>
+            <div class="week-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-remove"></i> {{pick.week_display}} <span class="game">{{pick.game_display}}</span></div>
             <div class="col-sm-8 col-md-8">
-              <span class="week-loser">Loser: [ Hidden ]</span>
-              <span class="badge">Change</span>
+              <span class="week-loser">Loser: [ {{pick.loser}} ]</span>
+              <span class="badge" ng-show="!pick.started">Change</span>
             </div>
           </div>
         </a>

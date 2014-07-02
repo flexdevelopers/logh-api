@@ -135,14 +135,14 @@ describe API::PicksController do
   describe '#destroy' do
     context 'when the current user is a coach of the team' do
       let(:pick) { FactoryGirl.create(:pick, team: coached_team) }
-      it 'deletes a pick' do
-        expect { delete :destroy, team_id: pick.team.id, id: pick.id }.to change(pick.team.picks, :count).by(-1)
-        expect(response.status).to eq(204)
+      it 'returns forbidden and does not delete a pick' do
+        expect { delete :destroy, team_id: pick.team.id, id: pick.id }.to change(pick.team.picks, :count).by(0)
+        expect(response.status).to eq(403)
       end
     end
     context 'when the current user is not a coach of the team' do
       let(:pick) { FactoryGirl.create(:pick, team: non_coached_team) }
-      it 'returns unauthorized and does not delete a pick' do
+      it 'returns forbidden and does not delete a pick' do
         expect { delete :destroy, team_id: pick.team.id, id: pick.id }.to change(pick.team.picks, :count).by(0)
         expect(response.status).to eq(403)
       end

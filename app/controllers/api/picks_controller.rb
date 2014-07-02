@@ -27,6 +27,7 @@ class API::PicksController < API::BaseController
 
   # POST /api/teams/:team_id/picks
   def create
+    return forbidden('Only the coach can make picks') if !_is_coach_of(@team)
     @pick = @team.picks.new(_pick_params)
     if @pick.save
       # todo: not necessary
@@ -38,6 +39,7 @@ class API::PicksController < API::BaseController
 
   # PATCH/PUT /api/teams/:team_id/picks/1
   def update
+    return forbidden('Only the coach can update picks') if !_is_coach_of(@team)
     if @pick.update(_pick_params)
       head :no_content
     else
@@ -47,8 +49,7 @@ class API::PicksController < API::BaseController
 
   # DELETE /api/teams/:team_id/picks/1
   def destroy
-    @pick.destroy
-    head :no_content
+    return forbidden('You cannot delete a pick')
   end
 
   private
@@ -66,7 +67,7 @@ class API::PicksController < API::BaseController
     end
 
     def _pick_params
-      params.require(:pick).permit(:week_id, :week_type_id, :squad_id)
+      params.require(:pick).permit(:week_id, :game_id, :week_type_id, :squad_id)
     end
 
 end

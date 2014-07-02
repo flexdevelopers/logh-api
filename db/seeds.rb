@@ -63,7 +63,8 @@ foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, comm
   # and 3 picks for that team
   3.times do |i|
     week = Week.find_by(number: i + 1, season: season)
-    Pick.create!(team: team, week: week, week_type: week.week_type, squad: home_squads[i])
+    game = week.games[i]
+    Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: home_squads[i])
   end
 end
 
@@ -74,7 +75,8 @@ user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com
   # and 3 picks for that team
   3.times do |i|
     week = Week.find_by(number: i + 1, season: season)
-    Pick.create!(team: team, week: week, week_type: week.week_type, squad: visiting_squads[i])
+    game = week.games[i]
+    Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: visiting_squads[i])
   end
 end
 

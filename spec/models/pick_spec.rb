@@ -8,6 +8,9 @@ describe Pick do
   it { should respond_to(:week) }
   its(:week) { should be_nil }
 
+  it { should respond_to(:game) }
+  its(:game) { should be_nil }
+
   it { should respond_to(:week_type) }
   its(:week_type) { should be_blank }
 
@@ -24,6 +27,11 @@ describe Pick do
 
   context 'when week is not present' do
     subject(:pick) { FactoryGirl.build(:pick, week: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when game is not present' do
+    subject(:pick) { FactoryGirl.build(:pick, game: nil) }
     it { should_not be_valid }
   end
 

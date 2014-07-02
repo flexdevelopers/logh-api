@@ -13,6 +13,10 @@ class Game < ActiveRecord::Base
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  def display
+    "#{visiting_squad.name} @ #{home_squad.name}"
+  end
+
   private
 
     def ensure_no_squad_duplication
