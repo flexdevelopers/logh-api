@@ -1,4 +1,4 @@
-var JoinLeaguesController = function($scope, $log, $location) {
+var JoinLeaguesController = function($scope, $log, $location, userModel) {
 
   $scope.publicLeagues = function(seasonId) {
     $location.path('/season/' + seasonId + '/leagues/public');
@@ -14,6 +14,10 @@ var JoinLeaguesController = function($scope, $log, $location) {
     };
   };
 
+  $scope.isCommish = function(league) {
+    return league.commish_emails.indexOf(userModel.user.email) > -1;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -24,5 +28,5 @@ var JoinLeaguesController = function($scope, $log, $location) {
 
 };
 
-JoinLeaguesController.$inject = ['$scope', '$log', '$location'];
+JoinLeaguesController.$inject = ['$scope', '$log', '$location', 'userModel'];
 module.exports = JoinLeaguesController;
