@@ -1,6 +1,6 @@
 var EditTeamController = function(team, $scope, $log, $modalInstance) {
 
-    $scope.teamData = team;
+    $scope.teamData = angular.copy(team);
 
     $scope.editTeam = function (team) {
       $modalInstance.close(team);

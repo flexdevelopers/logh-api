@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, userModel) {
+var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, userModel, teamService) {
 
   $scope.teamData = team.data;
 
@@ -34,7 +34,10 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     });
 
     modalInstance.result.then(function (team) {
-      $scope.dispatch('UpdateTeamEvent', { teamParams: team } );
+      teamService.updateTeam(team)
+        .then(function() {
+          $scope.teamData = team;
+        });
     }, function () {
       $log.debug('Edit team modal dismissed...');
     });
@@ -55,5 +58,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'userModel'];
+ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'userModel', 'teamService'];
 module.exports = ViewTeamController;

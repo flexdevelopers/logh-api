@@ -73,9 +73,9 @@ var TeamService = function($http, $log, $location, $state, apiConfig, messageMod
         return promise;
     };
 
-    this.updateTeam = function(teamParams) {
-        var promise = $http.put(apiConfig.baseURL + "leagues/" + teamParams.league.id + "/teams/" + teamParams.id,
-            { team: teamParams })
+    this.updateTeam = function(team) {
+        var promise = $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id,
+            { team: team })
             .success(function(data) {
                 $log.debug("TeamService: updateTeam success");
                 messageModel.setMessage(data.message, false);
@@ -83,6 +83,7 @@ var TeamService = function($http, $log, $location, $state, apiConfig, messageMod
             })
             .error(function(data) {
                 $log.debug("TeamService: updateTeam failed");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
 
