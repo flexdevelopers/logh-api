@@ -277,11 +277,24 @@ describe API::TeamsController do
         team.paid = true
       end
       it 'updates the team except for the alive attribute' do
-        patch :update, league_id: team.league.id, id: team.id, team: team.attributes
+        put :update, league_id: team.league.id, id: team.id, team: team.attributes
         team.reload
         expect(team.name).to eq('Average Joes')
         expect(team.alive).to be_true # this field is not updated
         expect(team.paid).to be_true
+      end
+      context 'and the league has already started' do
+        let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+        let(:league) { FactoryGirl.create(:league, start_week: start_week) }
+        let(:team) { FactoryGirl.create(:team, name: 'Original Name', league: league, coaches: [current_user]) }
+        before do
+          team.name = 'A Different Name'
+        end
+        it 'does not update the team' do
+          put :update, league_id: team.league.id, id: team.id, team: team.attributes
+          team.reload
+          expect(team.name).to eq('Original Name')
+        end
       end
     end
     context 'when the current user is not a coach of the team' do
@@ -289,12 +302,26 @@ describe API::TeamsController do
       let(:team) { FactoryGirl.create(:team, coaches: [another_user]) }
       before { team.name = 'Average Joes' }
       it 'returns unauthorized' do
-        patch :update, league_id: team.league.id, id: team.id, team: team.attributes
+        put :update, league_id: team.league.id, id: team.id, team: team.attributes
         expect(response.status).to eq(403)
         team.reload
         expect(team.name).not_to eq('Average Joes')
       end
     end
+    context 'when the current user is a commish of the league and the league has already started' do
+      let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
+      let(:league) { FactoryGirl.create(:league, start_week: start_week, commishes: [current_user]) }
+      let(:team) { FactoryGirl.create(:team, name: 'Original Name', league: league, coaches: [current_user]) }
+      before do
+        team.name = 'A Different Name'
+      end
+      it 'does update the team' do
+        put :update, league_id: team.league.id, id: team.id, team: team.attributes
+        team.reload
+        expect(team.name).to eq('A Different Name')
+      end
+    end
+
   end
 
   # DELETE /api/leagues/:league_id/teams/:id
@@ -303,24 +330,9 @@ describe API::TeamsController do
       let(:team) { FactoryGirl.create(:team, coaches: [current_user]) }
       subject { -> { delete :destroy, league_id: team.league.id, id: team.id } }
       before { team }
-      it { should change(team.league.teams, :count).by(-1) }
-      it { should change(current_user.teams, :count).by(-1) }
-      it 'deletes all the picks for the deleted team' do
-        week1 = FactoryGirl.create(:week, number: 1)
-        week2 = FactoryGirl.create(:week, number: 2)
-        pick1 = FactoryGirl.create(:pick, week: week1, team: team)
-        pick2 = FactoryGirl.create(:pick, week: week2, team: team)
-        expect(team.picks).to include(pick1)
-        expect(team.picks).to include(pick2)
-        expect { delete :destroy, league_id: team.league.id, id: team.id }.to change(Pick, :count).by(-2)
-      end
-    end
-    context 'when the current user is not a coach of the team' do
-      let(:another_user) { FactoryGirl.create(:user) }
-      let(:team) { FactoryGirl.create(:team, coaches: [another_user]) }
-      subject { -> { delete :destroy, league_id: team.league.id, id: team.id } }
       it { should change(team.league.teams, :count).by(0) }
       it { should change(current_user.teams, :count).by(0) }
+
     end
   end
 

@@ -1,8 +1,6 @@
 class API::TeamsController < API::BaseController
   before_action :_set_league, except: [:alive, :dead]
-  before_action :_set_team, only: [:show, :update, :destroy]
-  before_action :_verify_team_ownership, only: [:update, :destroy]
-  before_action :_verify_league_membership, only: [:index]
+  before_action :_set_team, only: [:show, :update]
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/alive
@@ -52,6 +50,8 @@ class API::TeamsController < API::BaseController
 
   # PATCH/PUT /api/leagues/:league_id/teams/1
   def update
+    return forbidden('You must be a coach of the team or the commish of the league') unless _is_coach_of?(@team) || _is_commish_of?(@league)
+    return forbidden("Can't edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
     else
@@ -61,8 +61,7 @@ class API::TeamsController < API::BaseController
 
   # DELETE /api/leagues/:league_id/teams/1
   def destroy
-    @team.destroy
-    head :no_content
+    return forbidden('You cannot delete a team')
   end
 
   private
@@ -77,14 +76,6 @@ class API::TeamsController < API::BaseController
 
     def _verify_league_acceptance
       forbidden('Private leagues require an invitation') unless @league.public || _is_commish_of?(@league) || _has_invitation_for?(@league)
-    end
-
-    def _verify_league_membership
-      forbidden('You must be the commish or a member of the league') unless _is_commish_of?(@league) || _has_team_in?(@league)
-    end
-
-    def _verify_team_ownership
-      forbidden('You must be a coach of the team') unless _is_coach_of?(@team)
     end
 
     def _is_commish_of?(league)
