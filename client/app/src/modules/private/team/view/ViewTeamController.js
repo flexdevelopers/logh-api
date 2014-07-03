@@ -21,6 +21,26 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     $location.path('/season/' + team.league.season_id + '/league/' + team.league.id);
   };
 
+  $scope.editTeam = function(team) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/team/edit/team.edit.tpl.html',
+      controller: 'EditTeamController',
+      resolve: {
+        team: function() {
+          return team;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (team) {
+      $scope.dispatch('UpdateTeamEvent', { teamParams: team } );
+    }, function () {
+      $log.debug('Edit team modal dismissed...');
+    });
+
+  };
+
   $scope.makePick = function(team) {
     alert('popup a modal');
   };

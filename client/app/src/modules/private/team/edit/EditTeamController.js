@@ -1,9 +1,21 @@
-var EditTeamController = function($scope, $log, team) {
+var EditTeamController = function(team, $scope, $log, $modalInstance) {
 
-    $scope.teamData = team.data;
+    $scope.teamData = team;
 
-    $scope.updateTeam = function(teamData) {
-        $scope.dispatch('UpdateTeamEvent', { teamParams: teamData });
+    $scope.editTeam = function (team) {
+      $modalInstance.close(team);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+    $scope.hasError = function(input) {
+      return !input.$focused && input.$dirty && input.$invalid;
+    };
+
+    $scope.hasPropertyError = function(input, property) {
+      return !input.$focused && input.$dirty && input.$error[property];
     };
 
     /**
@@ -16,5 +28,5 @@ var EditTeamController = function($scope, $log, team) {
 
 };
 
-EditTeamController.$inject = ['$scope', '$log', 'team'];
+EditTeamController.$inject = ['team', '$scope', '$log', '$modalInstance'];
 module.exports = EditTeamController;
