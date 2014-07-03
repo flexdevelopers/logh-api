@@ -134,7 +134,7 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
         },
         responseError: function (rejection) {
             if (rejection.status === 401) {
-                var message = { type: 'danger', content: 'Authentication Failure' };
+                var message = { type: 'danger', content: 'Please sign in or register' };
                 var path = $location.path();
                 $timeout(function () {
                     messageModel.setMessage(message, true);

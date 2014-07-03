@@ -38,7 +38,7 @@
         <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
       </div>
       <div class="alert alert-info" ng-show="(aliveTeams | filter:search:strict).length == 0">
-        No matching teams
+        No teams found
       </div>
     </tab>
     <tab select="resetSearch()">
@@ -60,7 +60,7 @@
         <pagination boundary-links="true" max-size="4" total-items="(deadTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
       </div>
       <div class="alert alert-info" ng-show="(deadTeams | filter:search:strict).length == 0">
-        No matching teams
+        No teams found
       </div>
     </tab>
   </tabset>
