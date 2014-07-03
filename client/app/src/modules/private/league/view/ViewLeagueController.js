@@ -31,6 +31,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return league.commish_emails.indexOf(userModel.user.email) > -1;
   };
 
+  $scope.isCoach = function(team) {
+    return team.coach_emails.indexOf(userModel.user.email) > -1;
+  };
+
   $scope.editLeague = function(league) {
     $location.path($location.path() + '/edit');
   };
