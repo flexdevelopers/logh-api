@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def display_name
+    "#{self.first_name} #{self.last_name[0,1]}."
+  end
+
   private
 
   def welcome_notification
