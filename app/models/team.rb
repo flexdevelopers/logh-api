@@ -20,4 +20,9 @@ class Team < ActiveRecord::Base
     User.where(id: coach_ids).map(&:email)
   end
 
+  def coach_names
+    coach_ids = TeamCoach.where(team_id: self.id).map(&:user_id)
+    User.where(id: coach_ids).map(&:display_name)
+  end
+
 end
