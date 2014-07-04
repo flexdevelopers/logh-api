@@ -1,6 +1,7 @@
 <div class="page-header">
-  <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCommish(leagueData)" ng-click="editLeague(leagueData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small>{{startWeek(leagueData)}}</small></h3>
-  <div class="btn-group league-btn-group">
+  <h3><i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i> {{leagueData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="isCommish(leagueData)" ng-click="editLeague(leagueData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></h3>
+  <h4><small>{{startWeek(leagueData)}}</small></h4>
+  <div class="league-btn-group">
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
@@ -11,7 +12,7 @@
 <hr>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
-    <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
+    <input type="text" class="form-control" placeholder="Filter by team name..." ng-model="search.name">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">
               <span class="glyphicon glyphicon-search"></span>

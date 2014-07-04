@@ -1,6 +1,10 @@
 <div class="page-header">
-  <h3><i class="glyphicon glyphicon-thumbs-up" ng-show="teamData.alive"></i><i class="glyphicon glyphicon-thumbs-down" ng-show="!teamData.alive"></i> {{teamData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.league['started?'] && isCoach(teamData)" ng-click="editTeam(teamData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button> <small><a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small></h3>
-  <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick(teamData)">+ Pick</button>
+  <h3><i class="glyphicon glyphicon-thumbs-up" ng-show="teamData.alive"></i><i class="glyphicon glyphicon-thumbs-down" ng-show="!teamData.alive"></i> {{teamData.name}} <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.league['started?'] && isCoach(teamData)" ng-click="editTeam(teamData)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+  </h3>
+  <h4><small><a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small></h4>
+  <div class="team-buttons">
+    <button type="button" class="btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
+  </div>
 </div>
 <div ng-show="teamData.alive && isCoach(teamData)" class="well well-sm">Need some kind of message here.</div>
 <div ng-show="!teamData.alive" class="well well-sm">This team is dead. So sorry.</div>
