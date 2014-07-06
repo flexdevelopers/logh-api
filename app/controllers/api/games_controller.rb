@@ -1,10 +1,17 @@
 class API::GamesController < API::BaseController
-  before_action :_set_week
+  before_action :_set_week, except: [:current]
   before_action :_set_game, only: [:show, :update, :destroy]
 
   # GET /api/weeks/:week_id/games
   def index
     @games = @week.games
+    respond_with @games
+  end
+
+  # GET /api/games/current
+  def current
+    @week = Week.last
+    @games = @week.games.all
     respond_with @games
   end
 

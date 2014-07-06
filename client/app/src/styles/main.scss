@@ -37,6 +37,8 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/teams/teams";
 @import "../modules/private/teams/alive/teams.alive";
 @import "../modules/private/teams/dead/teams.dead";
+// pick
+@import "../modules/private/pick/make/pick.make";
 
 .browsehappy {
   margin: 0.2em 0;

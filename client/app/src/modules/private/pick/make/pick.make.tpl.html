@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h3 class="modal-title">Week #2 Pick</h3>
+</div>
+<div class="modal-body">
+  <div class="week-games list-group">
+    <a ng-repeat="game in games" ng-click="makePick(game)" class="list-group-item" ng-class="{'invalid': !isValid(game),}">
+      <div class="row">
+        <div class="league-name col-sm-4 col-md-4">Squad <span class="game-display">{{game.display}}</span></div>
+        <div class="col-sm-8 col-md-8">
+          <span class="start-time">Date / time</span>
+          <span class="badge" ng-show="isValid(game)">Select</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

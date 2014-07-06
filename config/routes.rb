@@ -49,6 +49,10 @@ LoghApi::Application.routes.draw do
       resources :games, only: [:index, :show]
     end
 
+    resources :games, only:[] do
+      get 'current', on: :collection, to: 'games#current'
+    end
+
     namespace :admin do
 
       resources :users, only: [:index, :show, :update, :destroy]

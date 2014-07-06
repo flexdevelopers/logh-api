@@ -75,6 +75,7 @@ And then you can do this, for example:
 
 ##### Games
 ---
+* GET         /api/games/current                                [ current games ]
 * GET         /api/weeks/:week_id/games                         [ week games ]
 * GET         /api/weeks/:week_id/games/:id                     [ show game ]
 

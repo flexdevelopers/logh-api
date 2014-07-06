@@ -51,6 +51,8 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/teams').name,
     require('./modules/private/teams/alive').name,
     require('./modules/private/teams/dead').name,
+    // pick
+    require('./modules/private/pick/make').name,
 
     // helper modules
     require('./common/modules/header').name,

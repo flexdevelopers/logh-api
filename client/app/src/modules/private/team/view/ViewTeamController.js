@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, userModel, teamService) {
+var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, gameService) {
 
   $scope.teamData = team.data;
 
@@ -45,7 +45,23 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
   };
 
   $scope.makePick = function(team) {
-    alert('popup a modal');
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
+      controller: 'PickMakeController',
+      size: 'lg',
+      resolve: {
+        currentGames: function() {
+          return gameService.getCurrentGames();
+        }
+      }
+    });
+
+    modalInstance.result.then(function (squadId) {
+    }, function () {
+      $log.debug('Make pick modal dismissed...');
+    });
+
   };
 
   /**
@@ -58,5 +74,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'userModel', 'teamService'];
+ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'gameService'];
 module.exports = ViewTeamController;

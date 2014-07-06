@@ -1,4 +1,4 @@
-var PickService = function($http, $log, $location, $state, apiConfig, messageModel) {
+var PickService = function($http, $log, apiConfig) {
 
   this.getRegularPicks = function(params) {
     var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks/regular";
@@ -34,5 +34,5 @@ var PickService = function($http, $log, $location, $state, apiConfig, messageMod
 
 };
 
-PickService.$inject = ['$http', '$log', '$location', '$state', 'apiConfig', 'messageModel'];
+PickService.$inject = ['$http', '$log', 'apiConfig'];
 module.exports = PickService;

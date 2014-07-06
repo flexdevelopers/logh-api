@@ -9,4 +9,5 @@ module.exports = angular.module('loghApp.api', [])
       .service('pickService', require('./PickService'))
       .service('seasonService', require('./SeasonService'))
       .service('weekService', require('./WeekService'))
+      .service('gameService', require('./GameService'))
 ;
