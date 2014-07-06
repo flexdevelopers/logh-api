@@ -17,6 +17,10 @@ class Game < ActiveRecord::Base
     "#{visiting_squad.name} @ #{home_squad.name}"
   end
 
+  def started?
+    self.starts_at <= Time.zone.now.to_date
+  end
+
   private
 
     def ensure_no_squad_duplication
