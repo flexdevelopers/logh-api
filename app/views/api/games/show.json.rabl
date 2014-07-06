@@ -4,6 +4,5 @@ node(:started) { |game| game.started? }
 node(:display) { |game| game.display }
 node(:start_display) { |game| game.start_display }
 node(:week_type_id) { |game| game.week_type_id }
-node(:squad_id) { |game| game.squad_id }
-node(:squad_name) { |game| game.squad_name }
+node(:squads) { |game| game.squads }
 

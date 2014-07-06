@@ -22,18 +22,18 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
     return game.started;
   };
 
-  $scope.hasSquadBeenUsed = function(game) {
+  $scope.hasSquadBeenUsed = function(game, squad) {
     var squadHasBeenUsed = false;
     _.each(picks, function(pick) {
-      if (pick.squad_id == game.squad_id && pick.week_type_id == game.week_type_id) {
+      if (pick.squad_id == squad.id && pick.week_type_id == game.week_type_id) {
         squadHasBeenUsed = true;
       }
     });
     return squadHasBeenUsed;
   };
 
-  $scope.isValid = function(game) {
-    return !$scope.hasGameStarted(game) && !$scope.hasSquadBeenUsed(game);
+  $scope.isValid = function(game, squad) {
+    return !$scope.hasGameStarted(game) && !$scope.hasSquadBeenUsed(game, squad);
   };
 
   $scope.hasError = function(input) {
