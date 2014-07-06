@@ -44,7 +44,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
   };
 
-  $scope.makePick = function(team) {
+  $scope.makePick = function() {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
