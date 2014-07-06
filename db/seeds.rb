@@ -42,7 +42,7 @@ season = Season.create!(name: '2014-15 NFL Season')
 
 # create 5 weeks for the season
 5.times do |i|
-  week = Week.create!(number: i + 1, week_type: WeekType.find_by(code: 'reg'), starts_at: (i + 1).weeks.from_now + 1.day, season: season)
+  week = Week.create!(number: i + 1, week_type: WeekType.find_by(code: 'reg'), starts_at: (i - 4).weeks.from_now, season: season)
   # create 3 games for each week
   3.times do |i|
     game = Game.create!(starts_at: week.starts_at + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
@@ -52,8 +52,8 @@ end
 
 # create a user and a league for that user and a few teams for that user in that league
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
-# create 50 public and private leagues with random but unique names
-50.times do |i|
+# create 20 public and private leagues with random but unique names
+20.times do |i|
   League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
   League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
 end
@@ -74,7 +74,7 @@ user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com
   team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
   # and 3 picks for that team
   3.times do |i|
-    week = Week.find_by(number: i + 1, season: season)
+    week = Week.find_by(number: i + 3, season: season)
     game = week.games[i]
     Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: visiting_squads[i])
   end
