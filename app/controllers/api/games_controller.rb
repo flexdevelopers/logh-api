@@ -11,7 +11,7 @@ class API::GamesController < API::BaseController
   # GET /api/games/current
   def current
     @week = Week.last
-    @games = @week.games.all
+    @games = @week.games.joins('LEFT OUTER JOIN squads ON squads.id = games.home_squad_id OR squads.id = games.visiting_squad_id').select("games.*, squads.id as squad_id, squads.name as squad_name")
     respond_with @games
   end
 

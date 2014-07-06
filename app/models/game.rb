@@ -21,6 +21,14 @@ class Game < ActiveRecord::Base
     self.starts_at <= Time.zone.now.to_date
   end
 
+  def week_type_id
+    week.week_type_id
+  end
+
+  def start_display
+    "Starts #{starts_at.strftime("%m/%d/%Y")}"
+  end
+
   private
 
     def ensure_no_squad_duplication

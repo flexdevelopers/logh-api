@@ -1,10 +1,16 @@
-var PickMakeController = function(currentGames, $modalInstance, $scope, $log) {
+var PickMakeController = function(regularPicks, playoffPicks, currentGames, $modalInstance, $scope, $log) {
+
+  var regularPicks = regularPicks;
+  var playoffPicks = playoffPicks;
+  var picks = _.union(regularPicks, playoffPicks);
 
   $scope.games = currentGames.data;
 
   $scope.makePick = function(game) {
     if ($scope.isValid(game)) {
       $modalInstance.close();
+    } else {
+      alert('invalid selection');
     }
   };
 
@@ -12,8 +18,22 @@ var PickMakeController = function(currentGames, $modalInstance, $scope, $log) {
     $modalInstance.dismiss('cancel');
   };
 
+  $scope.hasGameStarted = function(game) {
+    return game.started;
+  };
+
+  $scope.hasSquadBeenUsed = function(game) {
+    var squadHasBeenUsed = false;
+    _.each(picks, function(pick) {
+      if (pick.squad_id == game.squad_id && pick.week_type_id == game.week_type_id) {
+        squadHasBeenUsed = true;
+      }
+    });
+    return squadHasBeenUsed;
+  };
+
   $scope.isValid = function(game) {
-    return !game.started;
+    return !$scope.hasGameStarted(game) && !$scope.hasSquadBeenUsed(game);
   };
 
   $scope.hasError = function(input) {
@@ -33,5 +53,5 @@ var PickMakeController = function(currentGames, $modalInstance, $scope, $log) {
   init();
 };
 
-PickMakeController.$inject = ['currentGames', '$modalInstance', '$scope', '$log'];
+PickMakeController.$inject = ['regularPicks', 'playoffPicks', 'currentGames', '$modalInstance', '$scope', '$log'];
 module.exports = PickMakeController;

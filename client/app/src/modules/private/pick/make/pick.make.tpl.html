@@ -3,11 +3,11 @@
 </div>
 <div class="modal-body">
   <div class="week-games list-group">
-    <a ng-repeat="game in games" ng-click="makePick(game)" class="list-group-item" ng-class="{'invalid': !isValid(game),}">
+    <a ng-repeat="game in games" ng-click="makePick(game)" class="list-group-item" ng-class="{'invalid': !isValid(game)}">
       <div class="row">
-        <div class="league-name col-sm-4 col-md-4">Squad <span class="game-display">{{game.display}}</span></div>
-        <div class="col-sm-8 col-md-8">
-          <span class="start-time">Date / time</span>
+        <div class="league-name col-sm-6 col-md-6">{{game.squad_name}} <span class="game-display">{{game.display}}</span></div>
+        <div class="col-sm-6 col-md-6">
+          <span class="start-time">{{game.start_display}}</span>
           <span class="badge" ng-show="isValid(game)">Select</span>
         </div>
       </div>

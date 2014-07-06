@@ -51,6 +51,12 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
       controller: 'PickMakeController',
       size: 'lg',
       resolve: {
+        regularPicks: function() {
+          return $scope.regularPicks;
+        },
+        playoffPicks: function() {
+          return $scope.playoffPicks;
+        },
         currentGames: function() {
           return gameService.getCurrentGames();
         }
