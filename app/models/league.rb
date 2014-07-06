@@ -27,7 +27,7 @@ class League < ActiveRecord::Base
   end
 
   def started?
-    start_week.starts_at <= Time.zone.now.to_date
+    start_week.started?
   end
 
   def week_display

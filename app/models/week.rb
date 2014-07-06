@@ -14,6 +14,10 @@ class Week < ActiveRecord::Base
 
   scope :available, -> { where('starts_at > ?', Time.zone.now.to_date) }
 
+  def started?
+    self.starts_at <= Time.zone.now.to_date
+  end
+
   def complete=(value)
     super
     mark_picks_correct_or_not if self.complete == true
