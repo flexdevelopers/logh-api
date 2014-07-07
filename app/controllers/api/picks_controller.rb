@@ -1,4 +1,5 @@
 class API::PicksController < API::BaseController
+  before_action :_set_user, only: [:regular, :playoff, :index, :show]
   before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update, :destroy]
   before_action :_set_pick, only: [:show, :update, :destroy]
 
@@ -53,6 +54,10 @@ class API::PicksController < API::BaseController
   end
 
   private
+
+    def _set_user
+      @user = current_user
+    end
 
     def _set_team
       @team = Team.find(params[:team_id])

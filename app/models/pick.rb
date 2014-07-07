@@ -23,6 +23,10 @@ class Pick < ActiveRecord::Base
     "Week #{week.number}"
   end
 
+  def coach_emails
+    team.coach_emails
+  end
+
   def correct=(value)
     super
     kill_team if self.correct == false
