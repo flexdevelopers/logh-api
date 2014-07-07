@@ -62,7 +62,7 @@ foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, comm
   team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
   # and 3 picks for that team
   3.times do |i|
-    week = Week.find_by(number: i + 1, season: season)
+    week = Week.find_by(number: i + 3, season: season)
     game = week.games[i]
     Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: home_squads[i])
   end
