@@ -8,9 +8,6 @@ describe Game do
   it { should respond_to(:starts_at) }
   its(:starts_at) { should be_nil }
 
-  it { should respond_to(:started?) }
-  its(:started?) { should be_nil }
-
   it { should respond_to(:home_squad) }
   its(:home_squad) { should be_nil }
 
