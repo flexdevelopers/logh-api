@@ -10,7 +10,7 @@ class API::WeeksController < API::BaseController
 
   # GET /api/seasons/:season_id/weeks/available
   def available
-    @weeks = @season.weeks.available
+    @weeks = @season.weeks.not_started
     respond_with @weeks
   end
 
