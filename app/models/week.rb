@@ -15,6 +15,7 @@ class Week < ActiveRecord::Base
   default_scope { order('starts_at ASC') }
 
   scope :available, -> { where('starts_at > ?', Time.zone.now.to_date) }
+  scope :started, -> { where('starts_at <= ?', Time.zone.now.to_date) }
 
   def started?
     self.starts_at <= Time.zone.now.to_date

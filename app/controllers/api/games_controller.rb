@@ -10,7 +10,7 @@ class API::GamesController < API::BaseController
 
   # GET /api/games/current
   def current
-    @week = Week.last
+    @week = Week.started.last || Week.last # todo: not sure if this is the best way to get the current week
     @games = @week.games
     respond_with @games
   end
