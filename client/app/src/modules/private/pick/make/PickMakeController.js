@@ -6,8 +6,8 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
 
   $scope.games = currentGames.data;
 
-  $scope.makePick = function(game) {
-    if ($scope.isValid(game)) {
+  $scope.makePick = function(game, squad) {
+    if (!game.started && !$scope.hasSquadBeenUsed(game, squad)) {
       $modalInstance.close();
     } else {
       alert('invalid selection');
@@ -18,10 +18,6 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
     $modalInstance.dismiss('cancel');
   };
 
-  $scope.hasGameStarted = function(game) {
-    return game.started;
-  };
-
   $scope.hasSquadBeenUsed = function(game, squad) {
     var squadHasBeenUsed = false;
     _.each(picks, function(pick) {
@@ -30,10 +26,6 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
       }
     });
     return squadHasBeenUsed;
-  };
-
-  $scope.isValid = function(game, squad) {
-    return !$scope.hasGameStarted(game) && !$scope.hasSquadBeenUsed(game, squad);
   };
 
   $scope.hasError = function(input) {

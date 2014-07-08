@@ -3,12 +3,12 @@
 </div>
 <div class="modal-body">
   <div ng-repeat-start="game in games" class="week-games list-group">
-    <a ng-repeat="squad in game.squads" ng-click="makePick(game)" class="list-group-item" ng-class="{'invalid': !isValid(game, squad)}">
+    <h4 ng-class="{'invalid-game': game.started}">{{game.display}} <small>{{game.start_display}}</small></h4>
+    <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-show="!game.started">
       <div class="row">
-        <div class="league-name col-sm-6 col-md-6">{{squad.name}} <span class="game-display">{{game.display}}</span></div>
+        <div class="squad-name col-sm-6 col-md-6" ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}}</div>
         <div class="col-sm-6 col-md-6">
-          <span class="start-time">{{game.start_display}}</span>
-          <span class="badge" ng-show="isValid(game, squad)">Pick</span>
+          <span class="badge" ng-show="!game.started && !hasSquadBeenUsed(game, squad)">Pick</span>
         </div>
       </div>
     </a>

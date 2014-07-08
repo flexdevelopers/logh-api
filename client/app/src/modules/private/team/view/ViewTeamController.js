@@ -49,7 +49,6 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
       controller: 'PickMakeController',
-      size: 'lg',
       resolve: {
         regularPicks: function() {
           return $scope.regularPicks;

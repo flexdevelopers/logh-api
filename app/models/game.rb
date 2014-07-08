@@ -31,8 +31,8 @@ class Game < ActiveRecord::Base
 
   def squads
     [
-        Rabl.render(Squad.find_by(id: self.home_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') }),
-        Rabl.render(Squad.find_by(id: self.visiting_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') })
+        Rabl.render(Squad.find_by(id: self.visiting_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') }),
+        Rabl.render(Squad.find_by(id: self.home_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') })
     ]
   end
 

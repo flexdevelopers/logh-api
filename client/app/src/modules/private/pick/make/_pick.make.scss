@@ -1,16 +1,16 @@
 .week-games {
+  .invalid-game, .invalid-squad {
+    color: #a94442;
+    text-decoration: line-through;
+  }
   .list-group-item {
     .game-display, .start-time {
       font-size: 11px;
       color: #999;
+      text-decoration: none;
     }
     .badge {
       float: right;
     }
-  }
-  .invalid {
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    color: #a94442;
   }
 }
