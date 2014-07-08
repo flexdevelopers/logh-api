@@ -1,4 +1,5 @@
 class API::TeamsController < API::BaseController
+  before_action :_set_user, only: [:alive, :dead, :index, :show]
   before_action :_set_league, except: [:alive, :dead]
   before_action :_set_team, only: [:show, :update]
   before_action :_verify_league_acceptance, only: [:create]
@@ -65,6 +66,10 @@ class API::TeamsController < API::BaseController
   end
 
   private
+
+    def _set_user
+      @user = current_user
+    end
 
     def _set_league
       @league = League.find(params[:league_id])

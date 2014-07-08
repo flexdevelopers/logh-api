@@ -25,4 +25,12 @@ class Team < ActiveRecord::Base
     User.where(id: coach_ids).map(&:display_name)
   end
 
+  def current_pick_name
+    if picks.length > 0
+      Squad.find_by(id: picks.last.squad_id).name
+    else
+      "None"
+    end
+  end
+
 end
