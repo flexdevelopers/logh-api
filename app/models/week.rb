@@ -17,6 +17,10 @@ class Week < ActiveRecord::Base
   scope :not_started, -> { where('starts_at > ?', Time.zone.now.to_date) }
   scope :started, -> { where('starts_at <= ?', Time.zone.now.to_date) }
 
+  def display
+    "Week #{self.number} (#{self.starts_at.strftime("%m/%d/%Y")})"
+  end
+
   def started?
     self.starts_at <= Time.zone.now.to_date
   end

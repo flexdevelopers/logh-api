@@ -17,16 +17,16 @@ class Game < ActiveRecord::Base
     "#{visiting_squad.name} @ #{home_squad.name}"
   end
 
+  def start_display
+    "Starts #{starts_at.strftime("%m/%d/%Y")}"
+  end
+
   def started?
     self.starts_at <= Time.zone.now.to_date
   end
 
   def week_type_id
     week.week_type_id
-  end
-
-  def start_display
-    "Starts #{starts_at.strftime("%m/%d/%Y")}"
   end
 
   def squads

@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h3 class="modal-title">Week #2 Pick</h3>
+  <h3 class="modal-title">Pick a loser for week {{games[0].week.number}}</h3>
 </div>
 <div class="modal-body">
   <div ng-repeat-start="game in games" class="week-games list-group">
@@ -8,7 +8,7 @@
         <div class="league-name col-sm-6 col-md-6">{{squad.name}} <span class="game-display">{{game.display}}</span></div>
         <div class="col-sm-6 col-md-6">
           <span class="start-time">{{game.start_display}}</span>
-          <span class="badge" ng-show="isValid(game, squad)">Pick Loser</span>
+          <span class="badge" ng-show="isValid(game, squad)">Pick</span>
         </div>
       </div>
     </a>

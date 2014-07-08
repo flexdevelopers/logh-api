@@ -31,7 +31,7 @@ class League < ActiveRecord::Base
   end
 
   def week_display
-    "Week #{start_week.number} (#{start_week.starts_at.strftime("%m/%d/%Y")})"
+    week.display
   end
 
   def commish_emails
