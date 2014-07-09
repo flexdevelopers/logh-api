@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
   end
 
   def start_display
-    "Starts #{starts_at.strftime("%m/%d/%Y")}"
+    "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
   end
 
   def started?
