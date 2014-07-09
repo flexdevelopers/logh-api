@@ -31,7 +31,7 @@ class League < ActiveRecord::Base
   end
 
   def week_display
-    week.display
+    start_week.display
   end
 
   def commish_emails
