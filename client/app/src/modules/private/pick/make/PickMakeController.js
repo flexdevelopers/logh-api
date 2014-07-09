@@ -9,8 +9,6 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
   $scope.makePick = function(game, squad) {
     if (!game.started && !$scope.hasSquadBeenUsed(game, squad)) {
       $modalInstance.close();
-    } else {
-      alert('invalid selection');
     }
   };
 

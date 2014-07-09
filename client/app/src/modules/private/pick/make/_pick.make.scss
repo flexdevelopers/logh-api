@@ -6,6 +6,11 @@
     text-decoration: line-through;
   }
   .list-group-item {
+    &.disabled {
+      cursor: not-allowed;
+      background-color: #f2dede;
+      border-color: #ebccd1;
+    }
     .game-display, .start-time {
       font-size: 11px;
       color: #999;
@@ -16,3 +21,4 @@
     }
   }
 }
+
