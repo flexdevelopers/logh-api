@@ -17,7 +17,7 @@
       <div class="regular-picks list-group">
         <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick()">
           <div class="row">
-            <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> {{pick.loser}} <span class="game">{{pick.game_display}}</span></div>
+            <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span></div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
               <span class="badge" ng-show="!pick.locked">Change</span>
@@ -34,7 +34,7 @@
       <div class="playoff-picks list-group">
         <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick()">
           <div class="row">
-            <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> {{pick.loser}} <span class="game">{{pick.game_display}}</span></div>
+            <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span></div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
               <span class="badge" ng-show="!pick.locked">Change</span>
