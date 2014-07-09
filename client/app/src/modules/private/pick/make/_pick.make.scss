@@ -1,6 +1,8 @@
 .week-games {
   .invalid-game, .invalid-squad {
     color: #a94442;
+  }
+  .invalid-squad {
     text-decoration: line-through;
   }
   .list-group-item {

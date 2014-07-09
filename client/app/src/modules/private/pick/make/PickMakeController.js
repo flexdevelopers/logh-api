@@ -18,6 +18,11 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
     $modalInstance.dismiss('cancel');
   };
 
+  $scope.starts = function(game) {
+    var startsLabel = (game.started) ? 'Started ' : 'Starts ';
+    return startsLabel + game.start_display;
+  };
+
   $scope.hasSquadBeenUsed = function(game, squad) {
     var squadHasBeenUsed = false;
     _.each(picks, function(pick) {

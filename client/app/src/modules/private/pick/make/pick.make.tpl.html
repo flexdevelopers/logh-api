@@ -3,8 +3,8 @@
 </div>
 <div class="modal-body">
   <div ng-repeat-start="game in games" class="week-games list-group">
-    <h4 ng-class="{'invalid-game': game.started}">{{game.display}} <small>{{game.start_display}}</small></h4>
-    <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-show="!game.started">
+    <h4 ng-class="{'invalid-game': game.started}">{{game.display}} <small>{{starts(game)}}</small></h4>
+    <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item">
       <div class="row">
         <div class="squad-name col-sm-6 col-md-6" ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}}</div>
         <div class="col-sm-6 col-md-6">
@@ -13,7 +13,7 @@
       </div>
     </a>
   </div>
-  <hr ng-repeat-end>
+  <div ng-repeat-end></div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
