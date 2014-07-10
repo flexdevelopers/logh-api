@@ -2,8 +2,7 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
 
   var regularPicks = regularPicks;
   var playoffPicks = playoffPicks;
-  var picks = regularPicks;
-//  var picks = _.union(regularPicks, playoffPicks);
+  var picks = _.union(regularPicks, playoffPicks);
 
   $scope.games = currentGames.data;
 
