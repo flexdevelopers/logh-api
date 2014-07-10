@@ -24,7 +24,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     } else {
       message = "Starts ";
     }
-    return message + leagueData.week_display;
+    return message + leagueData.start_week;
   };
 
   $scope.isCommish = function(league) {
