@@ -1,7 +1,7 @@
 object @pick
 attributes :id, :team_id, :squad_id, :week_type_id, :correct
 node(:locked) { |pick| pick.locked? }
-node(:week_display) { |pick| pick.week_display }
+node(:week_display) { |pick| pick.week.display }
 node(:game_display) do |pick|
   if pick.locked? || pick.coach_emails.include?(@user.email)
     pick.game.display

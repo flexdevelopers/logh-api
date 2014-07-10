@@ -17,10 +17,6 @@ class Pick < ActiveRecord::Base
     game.starts_at <= Time.zone.now.to_date
   end
 
-  def week_display
-    "Week #{week.number}"
-  end
-
   def coach_emails
     team.coach_emails
   end
