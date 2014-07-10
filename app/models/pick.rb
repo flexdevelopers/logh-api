@@ -14,7 +14,7 @@ class Pick < ActiveRecord::Base
   default_scope { includes(:game).order('games.starts_at ASC') }
 
   def locked?
-    game.starts_at <= Time.zone.now.to_date
+    game.started?
   end
 
   def coach_emails
