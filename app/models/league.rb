@@ -30,10 +30,6 @@ class League < ActiveRecord::Base
     start_week.started?
   end
 
-  def week_display
-    start_week.display
-  end
-
   def commish_emails
     commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
     User.where(id: commish_ids).map(&:email)
