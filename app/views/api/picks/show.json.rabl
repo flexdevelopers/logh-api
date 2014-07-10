@@ -4,7 +4,7 @@ node(:locked) { |pick| pick.locked? }
 node(:week_display) { |pick| pick.week_display }
 node(:game_display) do |pick|
   if pick.locked? || pick.coach_emails.include?(@user.email)
-    pick.game_display
+    pick.game.display
   else
     ""
   end
