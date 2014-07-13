@@ -52,7 +52,7 @@ class API::TeamsController < API::BaseController
   # PATCH/PUT /api/leagues/:league_id/teams/1
   def update
     return forbidden('You must be a coach of the team or the commish of the league') unless _is_coach_of?(@team) || _is_commish_of?(@league)
-    return forbidden("Can't edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
+    return forbidden("Only the commish can edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
     else
