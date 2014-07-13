@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.team-name-link[disabled] {
+  color: 000 !important; // todo this does not work make it black
+  font-weight: bold;
+}
+
 .team-buttons {
   position: absolute;
   right: 0;
