@@ -11,6 +11,14 @@
   }
 }
 
+.league-name-link {
+  padding-left: 0;
+  &.disabled {
+    color: 000 !important; // todo this does not work make it black
+    font-weight: bold;
+  }
+}
+
 .league-btn-group {
   position: absolute;
   right: 0;
