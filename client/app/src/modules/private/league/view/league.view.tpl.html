@@ -13,7 +13,17 @@
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
   </div>
 </div>
-<div class="well well-sm">{{message(leagueData)}}</div>
+<div class="well well-sm" ng-show="!isCommish(leagueData)">{{message(leagueData)}}</div>
+<form name="messageForm" role="form" ng-show="isCommish(leagueData)" novalidate>
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="form-group">
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for you league here..." rows="2" maxlength="200" ng-model="leagueData.message"></textarea>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-info" ng-click="updateLeagueMessage(leagueData)">Update Message</button>
+</form>
 <h4>Teams</h4>
 <hr>
 <div class="league-container" style="clear:both;">

@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, leagueService) {
 
   $scope.leagueData = league.data;
 
@@ -15,6 +15,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       message = league.message;
     }
     return message;
+  };
+
+  $scope.updateLeagueMessage = function(league) {
+    leagueService.updateLeagueMessage(league);
   };
 
   $scope.startWeek = function(leagueData) {
@@ -123,5 +127,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'leagueService'];
 module.exports = ViewLeagueController;

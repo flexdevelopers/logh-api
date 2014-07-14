@@ -1,7 +1,7 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
-  before_action :_set_league, only: [:show, :update, :destroy]
-  before_action :_verify_league_management, only: [:update, :destroy]
+  before_action :_set_league, only: [:show, :update, :message, :destroy]
+  before_action :_verify_league_management, only: [:update, :message, :destroy]
   before_action :_verify_start_week, only: [:create, :update]
 
   # GET /api/seasons/:season_id/leagues/managed
@@ -53,6 +53,15 @@ class API::LeaguesController < API::BaseController
     return forbidden('Cannot update a league that has started') if @league.started?
     if @league.update(_league_params)
       render json: { message: { type: SUCCESS, content: "#{@league[:name]} league updated" } }, status: :ok
+    else
+      error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PUT /api/seasons/:season_id/leagues/1/message
+  def message
+    if @league.update_attributes(message: _league_params[:message])
+      render json: { message: { type: SUCCESS, content: "#{@league[:name]} league message has been updated" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

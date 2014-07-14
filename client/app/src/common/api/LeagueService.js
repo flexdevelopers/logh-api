@@ -92,6 +92,23 @@ var LeagueService = function($http, $log, $location, apiConfig, messageModel) {
         return promise;
     };
 
+    this.updateLeagueMessage = function(leagueParams) {
+        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/message",
+            { league: leagueParams })
+            .success(function(data) {
+                $log.debug("LeagueService: updateLeagueMessage success");
+                messageModel.setMessage(data.message, false);
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("LeagueService: updateLeagueMessage failed");
+                messageModel.setMessage(data.message, false);
+                return data;
+            });
+
+        return promise;
+    };
+
     this.createInvite = function(inviteParams) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + inviteParams.league_id + "/invitations",
             { invitation: inviteParams })
