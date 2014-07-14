@@ -2,7 +2,7 @@
   <h3>
     <button type="button" class="league-name-link btn btn-link btn-lg" ng-disabled="!isCommish(leagueData)" ng-click="editLeague(leagueData)">
       <i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i>
-      <i class="glyphicon glyphicon-user" ng-show="leagueData.public"></i>     <!--todo: pick a better icon for public-->
+      <i class="glyphicon glyphicon-star" ng-show="leagueData.public"></i>     <!--todo: pick a better icon for public-->
       {{leagueData.name}}
     </button>
   </h3>
