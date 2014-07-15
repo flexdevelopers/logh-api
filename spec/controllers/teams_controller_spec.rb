@@ -279,7 +279,7 @@ describe API::TeamsController do
       it 'updates the team except for the alive attribute' do
         put :update, league_id: team.league.id, id: team.id, team: team.attributes
         team.reload
-        expect(team.name).to eq('Average Joes')
+        expect(team.name).to eq('average joes')
         expect(team.alive).to be_true # this field is not updated
         expect(team.paid).to be_true
       end
@@ -293,7 +293,7 @@ describe API::TeamsController do
         it 'does not update the team' do
           put :update, league_id: team.league.id, id: team.id, team: team.attributes
           team.reload
-          expect(team.name).to eq('Original Name')
+          expect(team.name).to eq('original name')
         end
       end
     end
@@ -318,7 +318,7 @@ describe API::TeamsController do
       it 'does update the team' do
         put :update, league_id: team.league.id, id: team.id, team: team.attributes
         team.reload
-        expect(team.name).to eq('A Different Name')
+        expect(team.name).to eq('a different name')
       end
     end
 

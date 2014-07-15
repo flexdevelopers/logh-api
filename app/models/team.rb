@@ -1,4 +1,7 @@
 class Team < ActiveRecord::Base
+
+  before_save { name.downcase! }
+
   belongs_to :league
   has_many :picks, dependent: :destroy
 

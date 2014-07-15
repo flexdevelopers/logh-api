@@ -51,8 +51,8 @@ describe API::UsersController do
         current_user.reload
         current_user.email.should_not == 'themaninblack@cash.com'
         current_user.admin.should be_false
-        current_user.first_name.should == 'Johnny'
-        current_user.last_name.should == 'Cash'
+        current_user.first_name.should == 'johnny'
+        current_user.last_name.should == 'cash'
       end
     end
     context 'when attempting to update a user other than the signed in user' do

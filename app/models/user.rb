@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
+  before_save { first_name.downcase! }
+  before_save { last_name.downcase! }
   before_save { email.downcase! }
   after_create :welcome_notification
 

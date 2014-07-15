@@ -174,7 +174,7 @@ describe API::LeaguesController do
       it 'updates the league' do
         put :update, season_id: season.id, id: league.id, league: league.attributes
         league.reload
-        expect(league.name).to eq('Good News Bears')
+        expect(league.name).to eq('good news bears')
         expect(league.start_week).to eq(future_week)
         expect(league.public).to be_false
         expect(league.max_teams_per_user).to eq(15)

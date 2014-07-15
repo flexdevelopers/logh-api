@@ -1,4 +1,7 @@
 class League < ActiveRecord::Base
+
+  before_save { name.downcase! }
+
   belongs_to :season
   belongs_to :start_week, class_name: 'Week', foreign_key: 'start_week_id'
 
