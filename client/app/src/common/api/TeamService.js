@@ -1,4 +1,4 @@
-var TeamService = function($http, $log, $location, $state, apiConfig, messageModel) {
+var TeamService = function($http, $log, $location, $state, $q, apiConfig, messageModel) {
 
     this.getTeam = function(leagueId, teamId) {
         var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/teams/" + teamId)
@@ -90,8 +90,41 @@ var TeamService = function($http, $log, $location, $state, apiConfig, messageMod
         return promise;
     };
 
+    this.activateTeam = function(team) {
+        var deferred = $q.defer();
+        $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/activate")
+            .success(function(data) {
+                $log.debug("TeamService: activateTeam success");
+                messageModel.setMessage(data.message, false);
+                deferred.resolve(true);
+            })
+            .error(function(data) {
+                $log.debug("TeamService: activateTeam failed");
+                messageModel.setMessage(data.message, false);
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
+    this.deactivateTeam = function(team) {
+        var deferred = $q.defer();
+        $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/deactivate")
+            .success(function(data) {
+                $log.debug("TeamService: deactivateTeam success");
+                messageModel.setMessage(data.message, false);
+                deferred.resolve(false);
+            })
+            .error(function(data) {
+                $log.debug("TeamService: deactivateTeam failed");
+                messageModel.setMessage(data.message, false);
+                deferred.reject();
+            });
+
+      return deferred.promise;
+    };
 
 };
 
-TeamService.$inject = ['$http', '$log', '$location', '$state', 'apiConfig', 'messageModel'];
+TeamService.$inject = ['$http', '$log', '$location', '$state', '$q', 'apiConfig', 'messageModel'];
 module.exports = TeamService;

@@ -1,7 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:alive, :dead, :index, :show]
   before_action :_set_league, except: [:alive, :dead]
-  before_action :_set_team, only: [:show, :update]
+  before_action :_set_team, only: [:show, :update, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/alive
@@ -55,6 +55,26 @@ class API::TeamsController < API::BaseController
     return forbidden("Only the commish can edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
+    else
+      error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PUT /api/leagues/:league_id/teams/1/activate
+  def activate
+    return forbidden("Only the commish can activate an inactive team") if !_is_commish_of?(@league)
+    if @team.update_attributes(active: true)
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been activated" } }, status: :ok
+    else
+      error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PUT /api/leagues/:league_id/teams/1/deactivate
+  def deactivate
+    return forbidden("Only the commish can deactivate a team") if !_is_commish_of?(@league)
+    if @team.update_attributes(active: false)
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been deactivated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

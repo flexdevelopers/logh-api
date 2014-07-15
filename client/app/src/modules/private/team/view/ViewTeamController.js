@@ -9,12 +9,30 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     return "here is a message for the coach";
   };
 
+  $scope.activate = function(team) {
+    teamService.activateTeam(team)
+      .then(function(active) {
+        team.active = active;
+      });
+  };
+
+  $scope.deactivate = function(team) {
+    teamService.deactivateTeam(team)
+      .then(function(active) {
+        team.active = active;
+      });
+  };
+
+  $scope.isCommish = function(team) {
+    return team.commish_emails.indexOf(userModel.user.email) > -1;
+  };
+
   $scope.isCoach = function(team) {
     return team.coach_emails.indexOf(userModel.user.email) > -1;
   };
 
   $scope.editTeam = function(team) {
-    alert('popup a modal');
+    alert('popup a modal'); // todo: what is this doing here?
   };
 
   $scope.showLeague = function(team) {

@@ -62,6 +62,8 @@ And then you can do this, for example:
 * POST        /api/leagues/:league_id/teams                     [ create team ] { name* }
 * GET         /api/leagues/:league_id/teams/:id                 [ show team ]
 * PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ] { name* }
+* PATCH/PUT   /api/leagues/:league_id/teams/:id/activate        [ activate team ]
+* PATCH/PUT   /api/leagues/:league_id/teams/:id/deactivate      [ deactivate team ]
 * DELETE      /api/leagues/:league_id/teams/:id                 [ destroy team ]
 
 ##### Picks
