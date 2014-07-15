@@ -24,7 +24,7 @@ FactoryGirl.define do
     team.association  :league
     sequence(:name) { |n| "Rubber Duckies#{n}" }
     alive             true
-    paid              false
+    active            true
   end
 
   factory :pick do |pick|

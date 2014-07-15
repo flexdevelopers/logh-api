@@ -1,5 +1,5 @@
 object @team
-attributes :id, :name, :paid, :alive
+attributes :id, :name, :active, :alive
 node(:coach_emails) { |team| team.coach_emails }
 node(:coach_names) { |team| team.coach_names }
 node(:last_pick_squad_name) do |team|

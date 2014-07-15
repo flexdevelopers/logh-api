@@ -10,6 +10,7 @@ class Team < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :league_id }
   validates :league, presence: true
+  validates :active, inclusion: { in: [true, false] }
   validates :alive, inclusion: { in: [true, false] }
 
   default_scope { includes(:league) }

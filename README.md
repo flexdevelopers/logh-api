@@ -59,9 +59,9 @@ And then you can do this, for example:
 * GET         /api/seasons/:season_id/teams/alive[?league_id=x] [ user alive teams ]
 * GET         /api/seasons/:season_id/teams/dead[?league_id=x]  [ user dead teams ]
 * GET         /api/leagues/:league_id/teams                     [ league teams ]
-* POST        /api/leagues/:league_id/teams                     [ create team ] { name*, paid }
+* POST        /api/leagues/:league_id/teams                     [ create team ] { name* }
 * GET         /api/leagues/:league_id/teams/:id                 [ show team ]
-* PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ] { name*, paid }
+* PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ] { name* }
 * DELETE      /api/leagues/:league_id/teams/:id                 [ destroy team ]
 
 ##### Picks

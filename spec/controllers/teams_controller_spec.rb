@@ -274,14 +274,14 @@ describe API::TeamsController do
       before do
         team.name = 'Average Joes'
         team.alive = false
-        team.paid = true
+        team.active = false
       end
-      it 'updates the team except for the alive attribute' do
+      it 'updates the team except for the alive and active attribute' do
         put :update, league_id: team.league.id, id: team.id, team: team.attributes
         team.reload
         expect(team.name).to eq('average joes')
         expect(team.alive).to be_true # this field is not updated
-        expect(team.paid).to be_true
+        expect(team.active).to be_true # this field is changed via the activate / deactivate route
       end
       context 'and the league has already started' do
         let(:start_week) { FactoryGirl.create(:week, starts_at: Time.zone.now - 1.week) }
