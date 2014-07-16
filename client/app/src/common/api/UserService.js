@@ -39,6 +39,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             })
             .error(function(data) {
                 $log.debug("UserService: signout failure");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
 
@@ -78,6 +79,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             })
             .error(function(data) {
                 $log.debug("UserService: createUser failed");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
 
@@ -95,6 +97,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             })
             .error(function(data) {
                 $log.debug("UserService: updateUser failed");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
 
