@@ -1,7 +1,9 @@
 class API::PicksController < API::BaseController
   before_action :_set_user, only: [:regular, :playoff, :index, :show]
-  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update, :destroy]
-  before_action :_set_pick, only: [:show, :update, :destroy]
+  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update]
+  before_action :_set_pick, only: [:show, :update]
+  before_action :_verify_team_is_active, only: [:create, :update]
+  before_action :_verify_team_management, only: [:create, :update]
 
   # GET /api/teams/:team_id/picks/regular
   def regular
@@ -28,7 +30,6 @@ class API::PicksController < API::BaseController
 
   # POST /api/teams/:team_id/picks
   def create
-    return forbidden('Only the coach can make picks') if !_is_coach_of(@team)
     @pick = @team.picks.new(_pick_params)
     if @pick.save
       # todo: not necessary
@@ -40,7 +41,6 @@ class API::PicksController < API::BaseController
 
   # PATCH/PUT /api/teams/:team_id/picks/1
   def update
-    return forbidden('Only the coach can update picks') if !_is_coach_of(@team)
     if @pick.update(_pick_params)
       head :no_content
     else
@@ -65,6 +65,14 @@ class API::PicksController < API::BaseController
 
     def _set_pick
       @pick = @team.picks.find(params[:id])
+    end
+
+    def _verify_team_is_active
+      forbidden('Cannot make picks for an inactive team') if !@team.active
+    end
+
+    def _verify_team_management
+      forbidden('Only a coach can manage picks') unless _is_coach_of(@team)
     end
 
     def _is_coach_of(team)
