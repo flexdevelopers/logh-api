@@ -1,7 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:alive, :dead, :index, :show]
   before_action :_set_league, except: [:alive, :dead]
-  before_action :_set_team, only: [:show, :update, :activate, :deactivate]
+  before_action :_set_team, only: [:show, :update, :message, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/alive
@@ -56,6 +56,16 @@ class API::TeamsController < API::BaseController
     return forbidden("Only the commish can edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
+    else
+      error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PATCH/PUT /api/leagues/:league_id/teams/1/message
+  def message
+    return forbidden("Only the commish can send a message to a team") if !_is_commish_of?(@league)
+    if @team.update_attributes(message: _team_params[:message])
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team message has been updated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -134,7 +144,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :message)
     end
 
 end

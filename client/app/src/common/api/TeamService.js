@@ -90,6 +90,23 @@ var TeamService = function($http, $log, $location, $state, $q, apiConfig, messag
         return promise;
     };
 
+    this.updateTeamMessage = function(teamParams) {
+      var promise = $http.put(apiConfig.baseURL + "leagues/" + teamParams.league.id + "/teams/" + teamParams.id + "/message",
+        { team: teamParams })
+        .success(function(data) {
+          $log.debug("TeamService: updateTeamMessage success");
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("TeamService: updateTeamMessage failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
     this.activateTeam = function(team) {
         var deferred = $q.defer();
         $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/activate")

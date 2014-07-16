@@ -6,13 +6,22 @@
     <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.active && isCommish(teamData)" ng-click="activate(teamData)"><span class="glyphicon glyphicon-pencil"></span> Activate</button>
     <button type="button" class="btn btn-default btn-sm" ng-show="teamData.active && isCommish(teamData)" ng-click="deactivate(teamData)"><span class="glyphicon glyphicon-pencil"></span> Deactivate</button>
   </h3>
-  <h4><small><a ng-click="showLeague(teamData)">{{teamData.league.name}} league</a></small></h4>
+  <h4><small><span class="glyphicon glyphicon-chevron-left"></span> <a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small></h4>
   <div class="team-buttons">
     <button type="button" class="btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick()">Make Pick</button>
   </div>
 </div>
-<div ng-show="teamData.alive && isCoach(teamData)" class="well well-sm">Need some kind of message here.</div>
-<div ng-show="!teamData.alive" class="well well-sm">This team is dead. So sorry.</div>
+<div class="well well-sm" ng-show="!isCommish(teamData)">{{message(teamData)}}</div>
+<form name="messageForm" role="form" ng-show="isCommish(teamData)" novalidate>
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="form-group">
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for this team here..." rows="2" maxlength="200" ng-model="teamData.message"></textarea>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-info" ng-click="updateTeamMessage(teamData)">Update Message</button>
+</form>
 <h4>Picks</h4>
 <hr>
 <div class="team-container" style="clear:both;">

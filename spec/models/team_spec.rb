@@ -11,6 +11,9 @@ describe Team do
   it { should respond_to(:active) }
   its(:active) { should be_true }
 
+  it { should respond_to(:message) }
+  its(:message) { should be_blank }
+
   it { should respond_to(:coaches) }
   its(:coaches) { should be_empty }
 
@@ -42,6 +45,11 @@ describe Team do
 
   context 'when alive is not present' do
     subject(:team) { FactoryGirl.build(:team, alive: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when team has a message greater than 200 characters' do
+    subject(:team) { FactoryGirl.build(:team, message: 'a' * 201) }
     it { should_not be_valid }
   end
 

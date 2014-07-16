@@ -9,6 +9,18 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     return "here is a message for the coach";
   };
 
+  $scope.message = function(team) {
+    var message = 'The team message board is empty';
+    if (team.message && team.message.length > 0) {
+      message = team.message;
+    }
+    return message;
+  };
+
+  $scope.updateTeamMessage = function(team) {
+    teamService.updateTeamMessage(team);
+  };
+
   $scope.activate = function(team) {
     teamService.activateTeam(team)
       .then(function(active) {
