@@ -1,6 +1,10 @@
-var EditLeagueController = function($scope, $log, league) {
+var EditLeagueController = function($scope, $log, $location, league) {
 
     $scope.leagueData = league.data;
+
+    $scope.showLeague = function(league) {
+      $location.path('/season/' + league.season_id + '/league/' + league.id);
+    };
 
     $scope.updateLeague = function(league) {
         $scope.dispatch('UpdateLeagueEvent', { leagueParams: league });
@@ -20,5 +24,5 @@ var EditLeagueController = function($scope, $log, league) {
 
 };
 
-EditLeagueController.$inject = ['$scope', '$log', 'league'];
+EditLeagueController.$inject = ['$scope', '$log', '$location', 'league'];
 module.exports = EditLeagueController;
