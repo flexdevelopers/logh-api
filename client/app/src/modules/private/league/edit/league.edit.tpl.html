@@ -6,7 +6,7 @@
 
     <div class="panel-body">
         <form name="leagueForm" role="form" novalidate>
-            <fieldset ng-disabled="{{leagueData.started}}">
+            <fieldset ng-disabled="leagueData.started">
                 <div class="row">
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group" ng-class="{'has-error': hasError(leagueForm.leagueName), 'has-feedback': hasError(leagueForm.leagueName)}">
@@ -38,7 +38,7 @@
                                 <small ng-show="!canUpdateStartWeek(leagueData)">[ Teams have already joined ]</small>
                             </label>
                             <select id="startWeek" name="startWeek" class="form-control" ng-show="canUpdateStartWeek(leagueData)" ng-model="leagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
-                            <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="!canUpdateStartWeek(leagueData)" ng-model="leagueData.week_display" ng-disabled="true">
+                            <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="!canUpdateStartWeek(leagueData)" ng-model="leagueData.start_week" ng-disabled="true">
                         </div>
                     </div>
                 </div>
