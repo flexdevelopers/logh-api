@@ -13,7 +13,7 @@
                             <small ng-show="hasPropertyError(editUserForm.firstName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(editUserForm.firstName, 'maxlength')">[ Too Long ]</small>
                         </label>
-                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="userData.user.first_name" ng-maxlength="20" required>
+                        <input id="firstName" name="firstName" type="text" class="form-control" ng-model="userData.user.first_name" ng-maxlength="15" required>
                         <span ng-show="hasError(editUserForm.firstName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
