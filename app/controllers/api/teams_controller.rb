@@ -75,6 +75,7 @@ class API::TeamsController < API::BaseController
   def activate
     return forbidden("Only the commish can activate an inactive team") if !_is_commish_of?(@league)
     if @team.update_attributes(active: true)
+      TeamMailer.activate_notify(@team).deliver
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been activated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
@@ -85,6 +86,7 @@ class API::TeamsController < API::BaseController
   def deactivate
     return forbidden("Only the commish can deactivate a team") if !_is_commish_of?(@league)
     if @team.update_attributes(active: false)
+      TeamMailer.deactivate_notify(@team).deliver
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been deactivated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
