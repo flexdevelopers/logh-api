@@ -6,8 +6,13 @@ var ManagedLeaguesController = function($scope, $log, $location, managedLeagues)
         $location.path('/season/' + season.id + '/league/new');
     };
 
-  $scope.viewLeague = function(league) {
-    $location.path('/season/' + league.season_id + '/league/' + league.id);
+    $scope.viewLeague = function(league) {
+        $location.path('/season/' + league.season_id + '/league/' + league.id);
+    };
+
+    $scope.starts = function(league) {
+      var startsLabel = (league.started) ? 'Started ' : 'Starts ';
+      return startsLabel + league.start_week;
     };
 
     /**
