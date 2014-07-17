@@ -6,7 +6,7 @@ class API::InvitationsController < API::BaseController
   # POST /leagues/:league_id/invitations/new
   def new
     InvitationMailer.request_invitation(@league, _invitation_params[:email]).deliver
-    render json: { message: { type: SUCCESS, content: "An invitation request for #{_invitation_params[:email]} has been sent to the commish" } }, status: :ok
+    render json: { message: { type: SUCCESS, content: "An invite request for #{_invitation_params[:email]} has been sent to the commish" } }, status: :ok
   end
 
   # GET /leagues/:league_id/invitations
@@ -19,7 +19,7 @@ class API::InvitationsController < API::BaseController
   def create
     @invitation = @league.invitations.where(email: _invitation_params[:email]).first_or_initialize
     if @invitation.save
-      render json: { message: { type: SUCCESS, content: "Invitation sent to #{@invitation.email}" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "An invite has been sent to #{@invitation.email}" } }, status: :ok
     else
       error(@invitation.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -27,7 +27,7 @@ class API::InvitationsController < API::BaseController
 
   # DELETE /leagues/:league_id/invitations/:id
   def destroy
-    return forbidden('You cannot delete an invitation at the moment')
+    return forbidden('You cannot delete an invitation')
   end
 
   private
@@ -41,11 +41,11 @@ class API::InvitationsController < API::BaseController
     end
 
     def _verify_league_status
-      forbidden('Invitations cannot be sent after the league has started') if @league.started?
+      forbidden('Invites cannot be sent after the league has started') if @league.started?
     end
 
     def _is_commish_of?(league)
-      forbidden('Only the commish can send invitations') unless current_user.managed_leagues.include?(league)
+      forbidden('Only the commish can send a league invite') unless current_user.managed_leagues.include?(league)
     end
 
     def _invitation_params

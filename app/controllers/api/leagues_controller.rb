@@ -61,7 +61,7 @@ class API::LeaguesController < API::BaseController
   # PUT /api/seasons/:season_id/leagues/1/message
   def message
     if @league.update_attributes(message: _league_params[:message])
-      render json: { message: { type: SUCCESS, content: "#{@league[:name]} league message has been updated" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "League message has been updated for #{@league[:name]}" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

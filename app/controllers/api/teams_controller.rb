@@ -38,7 +38,7 @@ class API::TeamsController < API::BaseController
   # POST /api/leagues/:league_id/teams
   def create
     return forbidden('The league has already started') if @league.started?
-    return forbidden("You have exceeded the number of teams allowed per user (#{@league.max_teams_per_user})") if !_can_add_team_to?(@league)
+    return forbidden("The league only allows #{@league.max_teams_per_user} teams per user") if !_can_add_team_to?(@league)
     @team = @league.teams.new(_team_params)
     @team.coaches << current_user
     if @team.save
@@ -53,7 +53,7 @@ class API::TeamsController < API::BaseController
   def update
     return forbidden('You cannot edit an inactive team') if !@team.active
     return forbidden('You must be a coach of the team or the commish of the league') unless _is_coach_of?(@team) || _is_commish_of?(@league)
-    return forbidden("Only the commish can edit a team after the league has started") if @league.started? && !_is_commish_of?(@league)
+    return forbidden('Only the commish can edit a team after the league has started') if @league.started? && !_is_commish_of?(@league)
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
     else
@@ -63,10 +63,10 @@ class API::TeamsController < API::BaseController
 
   # PATCH/PUT /api/leagues/:league_id/teams/1/message
   def message
-    return forbidden("Only the commish can send a message to a team") if !_is_commish_of?(@league)
+    return forbidden('Only the commish can send a message to a team') if !_is_commish_of?(@league)
     if @team.update_attributes(message: _team_params[:message])
       TeamMailer.message_notify(@team).deliver
-      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team message has been updated" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "Team message has been updated for #{@team[:name]}" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -74,7 +74,7 @@ class API::TeamsController < API::BaseController
 
   # PUT /api/leagues/:league_id/teams/1/activate
   def activate
-    return forbidden("Only the commish can activate an inactive team") if !_is_commish_of?(@league)
+    return forbidden('Only the commish can activate an inactive team') if !_is_commish_of?(@league)
     if @team.update_attributes(active: true)
       TeamMailer.activate_notify(@team).deliver
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been activated" } }, status: :ok
@@ -85,7 +85,7 @@ class API::TeamsController < API::BaseController
 
   # PUT /api/leagues/:league_id/teams/1/deactivate
   def deactivate
-    return forbidden("Only the commish can deactivate a team") if !_is_commish_of?(@league)
+    return forbidden('Only the commish can deactivate a team') if !_is_commish_of?(@league)
     if @team.update_attributes(active: false)
       TeamMailer.deactivate_notify(@team).deliver
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been deactivated" } }, status: :ok
