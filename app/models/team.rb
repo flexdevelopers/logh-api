@@ -15,7 +15,7 @@ class Team < ActiveRecord::Base
   validates :message, allow_nil: true, length: { maximum: 200 }
 
   default_scope { includes(:league) }
-  default_scope { order("lower(#{table_name}.name)") }
+  default_scope { order("#{table_name}.name") }
 
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
