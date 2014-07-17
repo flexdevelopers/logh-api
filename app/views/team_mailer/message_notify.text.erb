@@ -1,0 +1,11 @@
+The commish of the <%= @league.name %> league has left a message for your team - <%= @team.name %>.
+
+** Message Start **
+
+<%= @team.message %>
+
+** Message End **
+
+If you need to contact the commish you can do so on the league page:
+
+<%= "http://www.loseorgohome.com/#/season/#{@league.season_id}/league/#{@league.id}" %>

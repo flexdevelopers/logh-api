@@ -13,4 +13,10 @@ class TeamMailer < ActionMailer::Base
     mail to: @team.coach_emails, subject: "The commish has deactivated the #{@team.name} team"
   end
 
+  def message_notify(team)
+    @team = team
+    @league = @team.league
+    mail to: @team.coach_emails, subject: "The commish has sent you a message"
+  end
+
 end
