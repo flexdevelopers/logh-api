@@ -22,8 +22,7 @@ class API::Admin::GamesController < API::GamesController
 
   # DELETE /api/admin/weeks/:week_id/games/:id
   def destroy
-    @game.destroy
-    head :no_content
+    return forbidden('You cannot delete a game')
   end
 
   private

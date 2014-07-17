@@ -1,6 +1,5 @@
 class API::InvitationsController < API::BaseController
   before_action :_set_league
-  before_action :_set_invitation, only: :destroy
   before_action :_verify_league_management, except: :new
   before_action :_verify_league_status, except: :new
 
@@ -28,18 +27,13 @@ class API::InvitationsController < API::BaseController
 
   # DELETE /leagues/:league_id/invitations/:id
   def destroy
-    @invitation.destroy
-    head :no_content
+    return forbidden('You cannot delete an invitation at the moment')
   end
 
   private
 
     def _set_league
       @league = League.find(params[:league_id])
-    end
-
-    def _set_invitation
-      @invitation = @league.invitations.find(params[:id])
     end
 
     def _verify_league_management

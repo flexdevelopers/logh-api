@@ -1,5 +1,5 @@
 class API::Admin::WeeksController < API::WeeksController
-  before_action :_set_week, only: [:update, :destroy]
+  before_action :_set_week, only: [:update]
   before_action :_verify_admin
 
   # POST /api/admin/seasons/:season_id/weeks
@@ -23,8 +23,7 @@ class API::Admin::WeeksController < API::WeeksController
 
   # DELETE /api/admin/seasons/:season_id/weeks/:id
   def destroy
-    @week.destroy
-    head :no_content
+    return forbidden('You cannot delete a week')
   end
 
   private

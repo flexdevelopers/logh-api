@@ -1,7 +1,7 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
-  before_action :_set_league, only: [:show, :update, :message, :destroy]
-  before_action :_verify_league_management, only: [:update, :message, :destroy]
+  before_action :_set_league, only: [:show, :update, :message]
+  before_action :_verify_league_management, only: [:update, :message]
   before_action :_verify_start_week, only: [:create, :update]
 
   # GET /api/seasons/:season_id/leagues/managed
@@ -69,8 +69,7 @@ class API::LeaguesController < API::BaseController
 
   # DELETE /api/seasons/:season_id/leagues/1
   def destroy
-    @league.destroy
-    head :no_content
+    return forbidden('You cannot delete a league')
   end
 
   private

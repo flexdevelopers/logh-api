@@ -1,6 +1,6 @@
 class API::Admin::UsersController < API::UsersController
   before_action :_verify_admin
-  before_action :_set_user, only: [:show, :update, :destroy]
+  before_action :_set_user, only: [:show, :update]
 
   # GET /api/admin/users/
   def index
@@ -23,12 +23,7 @@ class API::Admin::UsersController < API::UsersController
 
   # DELETE /api/admin/users/:id
   def destroy
-    if params[:id].to_i == current_user.id
-      forbidden('You cannot delete the current user') # deleting the current user is not allowed
-      return
-    end
-    @user.destroy
-    head :no_content
+    return forbidden('You cannot delete a user')
   end
 
   private

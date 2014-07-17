@@ -35,8 +35,7 @@ class API::Admin::SeasonsController < API::SeasonsController
 
   # DELETE /api/admin/seasons/:id
   def destroy
-    @season.destroy
-    head :no_content
+    return forbidden('You cannot delete a season')
   end
 
   private
