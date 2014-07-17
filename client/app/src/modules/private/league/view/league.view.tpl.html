@@ -6,7 +6,7 @@
       {{leagueData.name}}
     </button>
   </h3>
-  <h4><small>{{startWeek(leagueData)}}</small></h4>
+  <h4><small>{{starts(leagueData)}}</small></h4>
   <div class="league-btn-group">
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>

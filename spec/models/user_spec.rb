@@ -33,8 +33,8 @@ describe User do
     it { should_not be_valid }
   end
 
-  context 'when first name is longer than 20 characters' do
-    subject(:user) { FactoryGirl.build(:user, first_name: 'a' * 21) }
+  context 'when first name is longer than 15 characters' do
+    subject(:user) { FactoryGirl.build(:user, first_name: 'a' * 16) }
     it { should_not be_valid }
   end
 

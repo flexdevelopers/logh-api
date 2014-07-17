@@ -21,14 +21,9 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     leagueService.updateLeagueMessage(league);
   };
 
-  $scope.startWeek = function(leagueData) {
-    var message;
-    if (leagueData.started) {
-      message = "Started ";
-    } else {
-      message = "Starts ";
-    }
-    return message + leagueData.start_week;
+  $scope.starts = function(league) {
+    var startsLabel = (league.started) ? 'Started ' : 'Starts ';
+    return startsLabel + league.start_week;
   };
 
   $scope.isCommish = function(league) {
