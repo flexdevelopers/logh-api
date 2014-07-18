@@ -60,7 +60,6 @@ class API::LeaguesController < API::BaseController
 
   # PUT /api/seasons/:season_id/leagues/1/message
   def message
-    return forbidden('Only league members can contact the commish after the league has started') if @league.started? && !_has_team_in(@league)
     if @league.update_attributes(message: _league_params[:message])
       render json: { message: { type: SUCCESS, content: "League message has been updated for #{@league[:name]}" } }, status: :ok
     else
@@ -70,6 +69,7 @@ class API::LeaguesController < API::BaseController
 
   # PUT /api/seasons/:season_id/leagues/1/contact
   def contact
+    return forbidden('Only league members can contact the commish after the league has started') if @league.started? && !_has_team_in(@league)
     LeagueMailer.contact_commish(@league, current_user, params[:contact]).deliver
     render json: { message: { type: SUCCESS, content: 'Your message has been sent to the commish' } }, status: :ok
   end
