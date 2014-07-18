@@ -21,6 +21,7 @@ LoghApi::Application.routes.draw do
         get 'managed', on: :collection, to: 'leagues#managed'
         get 'public', on: :collection, to: 'leagues#public'
         get 'private', on: :collection, to: 'leagues#private'
+        put 'contact', on: :member, to: 'leagues#contact'
         put 'message', on: :member, to: 'leagues#message'
       end
       resources :teams, only: [] do

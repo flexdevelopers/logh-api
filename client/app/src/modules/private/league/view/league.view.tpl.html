@@ -7,6 +7,17 @@
     </button>
   </h3>
   <h4><small>{{starts(leagueData)}}</small></h4>
+  <h4>contact commish</h4>
+  <form name="contactCommishForm" role="form" novalidate>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <textarea id="commishMessage" name="commishMessage" class="form-control" placeholder="Send a direct message to the commish. By doing so the commish we be made aware of your emails address. " rows="2" maxlength="200" ng-model="commishMessage" required></textarea>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-info" ng-disabled="contactCommishForm.$invalid" ng-click="sendCommishMessage(leagueData, commishMessage)">Send</button>
+  </form>
   <div class="league-btn-group">
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
     <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>

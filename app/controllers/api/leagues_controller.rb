@@ -1,6 +1,6 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
-  before_action :_set_league, only: [:show, :update, :message]
+  before_action :_set_league, only: [:show, :update, :message, :contact]
   before_action :_verify_league_management, only: [:update, :message]
   before_action :_verify_start_week, only: [:create, :update]
 
@@ -65,6 +65,12 @@ class API::LeaguesController < API::BaseController
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
+  end
+
+  # PUT /api/seasons/:season_id/leagues/1/contact
+  def contact
+    LeagueMailer.contact_commish(@league, current_user, params[:contact]).deliver
+    render json: { message: { type: SUCCESS, content: 'Your message has been sent to the commish' } }, status: :ok
   end
 
   # DELETE /api/seasons/:season_id/leagues/1

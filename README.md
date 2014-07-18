@@ -45,6 +45,7 @@ And then you can do this, for example:
 * GET         /api/seasons/:season_id/leagues/:id               [ show league ]
 * PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, public, max_teams_per_user, message }
 * PUT         /api/seasons/:season_id/leagues/:id/message       [ update league message ] { message* }
+* PUT         /api/seasons/:season_id/leagues/:id/contact       [ sends commish a message ] { contact* }
 * DELETE      /api/seasons/:season_id/leagues/:id               [ destroy league ]
 
 ##### Invitations

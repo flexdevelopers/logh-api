@@ -9,6 +9,8 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 10;
 
+  $scope.commishMessage = '';
+
   $scope.message = function(league) {
     var message = 'The league message board is empty';
     if (league.message && league.message.length > 0) {
@@ -19,6 +21,13 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.updateLeagueMessage = function(league) {
     leagueService.updateLeagueMessage(league);
+  };
+
+  $scope.sendCommishMessage = function(league, commishMessage) {
+    leagueService.sendCommishMessage(league, commishMessage)
+      .then(function() {
+        alert('close message box'); // todo: close the message commish message box
+      });
   };
 
   $scope.starts = function(league) {
