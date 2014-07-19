@@ -17,6 +17,8 @@ class Team < ActiveRecord::Base
   default_scope { includes(:league) }
   default_scope { order("#{table_name}.name") }
 
+  scope :active, -> { where(active: true) }
+
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
 
