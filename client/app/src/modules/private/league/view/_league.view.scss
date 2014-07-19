@@ -15,8 +15,20 @@
   }
 }
 
+.header-row {
+  margin-right: 0;
+}
+
+.league-name {
+  margin-top: 0;
+  small {
+    font-size: 60%
+  }
+}
+
 .league-name-link {
   padding-left: 0;
+  font-size: 24px;
   &.disabled {
     color: 000 !important; // todo this does not work make it black
     font-weight: bold;
@@ -24,9 +36,12 @@
 }
 
 .league-btn-group {
-  position: absolute;
-  right: 0;
-  top: 0;
+  padding-top: 15px;
+  float: right;
+}
+
+.league-message {
+  margin-top: 10px;
 }
 
 .alive-teams, .dead-teams {
