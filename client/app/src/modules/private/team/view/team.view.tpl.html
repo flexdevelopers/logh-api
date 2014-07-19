@@ -1,17 +1,21 @@
-<div class="page-header">
-  <h3>
-    <i class="glyphicon glyphicon-thumbs-up" ng-show="teamData.alive"></i>
-    <i class="glyphicon glyphicon-thumbs-down" ng-show="!teamData.alive"></i>
-    <button type="button" class="team-name-link btn btn-link btn-lg" ng-disabled="!isCoach(teamData) && !isCommish(teamData)" ng-click="editTeam(teamData)">{{teamData.name}}</button>
-    <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.active && isCommish(teamData)" ng-click="activate(teamData)"><span class="glyphicon glyphicon-pencil"></span> Activate</button>
-    <button type="button" class="btn btn-default btn-sm" ng-show="teamData.active && isCommish(teamData)" ng-click="deactivate(teamData)"><span class="glyphicon glyphicon-pencil"></span> Deactivate</button>
-  </h3>
-  <h4><small><span class="glyphicon glyphicon-chevron-left"></span> <a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small></h4>
-  <div class="team-buttons">
-    <button type="button" class="btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick()">Make Pick</button>
+<div class="header-row row">
+  <div class="col-sm-9 col-md-9">
+    <h3 class="team-name">
+      <i class="glyphicon glyphicon-thumbs-up" ng-show="teamData.alive"></i>
+      <i class="glyphicon glyphicon-thumbs-down" ng-show="!teamData.alive"></i>
+      <button type="button" class="team-name-link btn btn-link btn-lg" ng-disabled="!isCoach(teamData) && !isCommish(teamData)" ng-click="editTeam(teamData)">{{teamData.name}}</button>
+      <small><a ng-click="showLeague(teamData)">{{teamData.league.name}}</a></small>
+    </h3>
+  </div>
+  <div class="col-sm-3 col-md-3">
+    <div class="team-btn-group">
+      <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.active && isCommish(teamData)" ng-click="activate(teamData)">Act</button>
+      <button type="button" class="btn btn-default btn-sm" ng-show="teamData.active && isCommish(teamData)" ng-click="deactivate(teamData)">Deact</button>
+      <button type="button" class="btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick()">Make Pick</button>
+    </div>
   </div>
 </div>
-<div class="well well-sm" ng-show="!isCommish(teamData)">{{message(teamData)}}</div>
+<div class="team-message well well-sm" ng-show="!isCommish(teamData)">{{message(teamData)}}</div>
 <form name="messageForm" role="form" ng-show="isCommish(teamData)" novalidate>
   <div class="row">
     <div class="col-sm-12 col-md-12">
