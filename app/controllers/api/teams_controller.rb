@@ -1,6 +1,6 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:alive, :dead, :index, :show]
-  before_action :_set_league, except: [:alive, :dead]
+  before_action :_set_league
   before_action :_set_team, only: [:show, :update, :message, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
 
@@ -8,7 +8,11 @@ class API::TeamsController < API::BaseController
   # GET /api/seasons/:season_id/teams/alive?league_id=:league_id
   def alive
     if params[:league_id]
-      @teams = Team.where('league_id = ?', params[:league_id]).alive
+      if _is_commish_of?(@league)
+        @teams = Team.where('league_id = ?', params[:league_id]).alive
+      else
+        @teams = Team.where('league_id = ?', params[:league_id]).active.alive
+      end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive
     end
@@ -18,7 +22,11 @@ class API::TeamsController < API::BaseController
   # GET /api/seasons/:season_id/teams/dead?league_id=:league_id
   def dead
     if params[:league_id]
-      @teams = Team.where('league_id = ?', params[:league_id]).dead
+      if _is_commish_of?(@league)
+        @teams = Team.where('league_id = ?', params[:league_id]).dead
+      else
+        @teams = Team.where('league_id = ?', params[:league_id]).active.dead
+      end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead
     end
@@ -106,11 +114,11 @@ class API::TeamsController < API::BaseController
     end
 
     def _set_league
-      @league = League.find(params[:league_id])
+      @league = League.find(params[:league_id]) if params[:league_id]
     end
 
     def _set_team
-      @team = @league.teams.find(params[:id])
+      @team = @league.teams.find(params[:id]) if params[:id]
     end
 
     def _verify_league_acceptance
