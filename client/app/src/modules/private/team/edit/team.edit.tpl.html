@@ -6,8 +6,9 @@
     <div class="form-group" ng-class="{'has-error': hasError(editTeamForm.teamName), 'has-feedback': hasError(editTeamForm.teamName)}">
       <label for="teamName" class="col-sm-3 control-label">Team Name:</label>
       <div class="col-sm-9">
-        <input id="teamName" name="teamName" type="text" class="form-control" placeholder="Enter a team name" ng-model="teamData.name" required>
+        <input id="teamName" name="teamName" type="text" class="form-control" placeholder="Enter a team name" ng-model="teamData.name" ng-maxlength="25" required>
         <small class="input-error" ng-show="hasPropertyError(editTeamForm.teamName, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(editTeamForm.teamName, 'maxlength')">Too Long</small>
         <span ng-show="hasError(editTeamForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
     </div>
