@@ -18,6 +18,15 @@
   }
 
   @media all and (max-width: 550px) {
+    .league-btn-group {
+      float: none !important;
+      padding: 0;
+    }
+    .get-invite-btn, .invite-btn, .join-btn {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
     .league-container {
       .custom-search-form {
         width: 100%;

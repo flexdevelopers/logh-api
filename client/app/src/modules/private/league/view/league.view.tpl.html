@@ -11,9 +11,9 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <div class="league-btn-group">
-      <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
-      <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
-      <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join ({{leagueData.max_teams_per_user}} times max)</button>
+      <button type="button" class="get-invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
+      <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+      <button type="button" class="join-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join ({{leagueData.max_teams_per_user}} times max)</button>
     </div>
   </div>
 </div>

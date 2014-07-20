@@ -1,5 +1,21 @@
-.create-league-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
+.manage-leagues-header-row {
+  margin-bottom: 15px;
 }
+
+.manage-leagues-btn-group {
+  padding-top: 20px;
+  float: right;
+}
+
+@media all and (max-width: 550px) {
+  .manage-leagues-btn-group {
+    float: none !important;
+    padding: 0;
+  }
+  .create-league-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+

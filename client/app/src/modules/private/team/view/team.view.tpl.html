@@ -10,9 +10,9 @@
   </div>
   <div class="col-sm-3 col-md-3">
     <div class="team-btn-group">
-      <button type="button" class="btn btn-default btn-sm" ng-show="!teamData.active && isCommish(teamData)" ng-click="activate(teamData)">Act</button>
-      <button type="button" class="btn btn-default btn-sm" ng-show="teamData.active && isCommish(teamData)" ng-click="deactivate(teamData)">Deact</button>
-      <button type="button" class="btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick()">Make Pick</button>
+      <button type="button" class="activate-btn btn btn-default btn-sm" ng-show="!teamData.active && isCommish(teamData)" ng-click="activate(teamData)">Act</button>
+      <button type="button" class="deactivate-btn btn btn-default btn-sm" ng-show="teamData.active && isCommish(teamData)" ng-click="deactivate(teamData)">Deact</button>
+      <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-show="teamData.alive && isCoach(teamData)" ng-click="makePick()">Make Pick</button>
     </div>
   </div>
 </div>

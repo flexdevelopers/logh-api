@@ -41,6 +41,19 @@
       }
     }
   }
-  
+
+  @media all and (max-width: 550px) {
+    .team-btn-group {
+      float: none !important;
+      padding: 0;
+    }
+    .activate-btn, .deactivate-btn, .make-pick-btn {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+
+
 }
 

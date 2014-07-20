@@ -1,25 +1,45 @@
-.teams-container {
-  position: relative;
+.teams-header-row {
+  margin-bottom: 15px;
 }
 
-.create-team-btn {
-  position: absolute;
-  right: 0;
-  top: 0;
+.teams-btn-group {
+  padding-top: 20px;
+  float: right;
 }
 
-.alive-teams, .dead-teams {
-  .list-group-item {
-    .team-league, .current-pick {
-      font-size: 11px;
-      color: #999;
-    }
-    .inactive-team {
-      font-size: 11px;
-      color: #a94442;
-    }
-    .badge {
-      float: right;
-    }
+@media all and (max-width: 550px) {
+  .teams-btn-group {
+    float: none !important;
+    padding: 0;
+  }
+  .create-team-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }
+
+.teams-content {
+
+  .teams-container {
+    position: relative;
+  }
+
+  .alive-teams, .dead-teams {
+    .list-group-item {
+      .team-league, .current-pick {
+        font-size: 11px;
+        color: #999;
+      }
+      .inactive-team {
+        font-size: 11px;
+        color: #a94442;
+      }
+      .badge {
+        float: right;
+      }
+    }
+  }
+
+}
+
