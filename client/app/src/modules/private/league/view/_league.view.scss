@@ -17,6 +17,16 @@
     }
   }
 
+  @media all and (max-width: 550px) {
+    .league-container {
+      .custom-search-form {
+        width: 100%;
+        position: relative;
+        margin: 5px 0 5px 0;
+      }
+    }
+  }
+
   .league-name {
     margin-top: 0;
     small {
@@ -60,14 +70,4 @@
     margin: -20px auto 0 0;
   }
 
-}
-
-@media all and (max-width: 550px) {
-  .league-container {
-    .custom-search-form {
-      width: 100%;
-      position: relative;
-      margin: 5px 0 5px 0;
-    }
-  }
 }
