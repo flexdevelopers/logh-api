@@ -1,5 +1,5 @@
 <div class="header-row row">
-  <div class="col-sm-9 col-md-9">
+  <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
       <button type="button" class="league-name-link btn btn-link btn-lg" ng-disabled="!isCommish(leagueData)" ng-click="editLeague(leagueData)">
         <i class="glyphicon glyphicon-lock" ng-show="!leagueData.public"></i>
@@ -9,11 +9,11 @@
       <small>{{starts(leagueData)}}</small>
     </h3>
   </div>
-  <div class="col-sm-3 col-md-3">
+  <div class="col-sm-4 col-md-4">
     <div class="league-btn-group">
       <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
       <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
-      <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
+      <button type="button" class="btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join ({{leagueData.max_teams_per_user}} times max)</button>
     </div>
   </div>
 </div>
