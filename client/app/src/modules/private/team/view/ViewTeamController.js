@@ -6,7 +6,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
   $scope.playoffPicks = playoffPicks.data;
 
   $scope.message = function(team) {
-    var message = "This team's message board is empty";
+    var message = "Zip. Zilch. Nada";
     if (team.message && team.message.length > 0) {
       message = team.message;
     }
