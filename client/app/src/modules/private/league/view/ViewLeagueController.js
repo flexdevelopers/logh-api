@@ -10,7 +10,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.teamsPerPage = 10;
 
   $scope.message = function(league) {
-    var message = 'The league message board is empty';
+    var message = 'The league message board is currently empty';
     if (league.message && league.message.length > 0) {
       message = league.message;
     }

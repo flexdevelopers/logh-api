@@ -16,10 +16,10 @@
     </div>
   </div>
 </div>
-<div ng-show="isCommish(teamData)">
-  <a ng-click="updateMessage(teamData)">Update team message</a>
+<div>
+  <h5>Message from the commish: <small><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></small></h5>
+  <div class="team-message well well-sm">{{message(teamData)}}</div>
 </div>
-<div class="team-message well well-sm">{{message(teamData)}}</div>
 <h4>Picks</h4>
 <hr>
 <div class="team-container" style="clear:both;">

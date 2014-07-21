@@ -6,8 +6,7 @@
     <div class="form-group" ng-class="{'has-error': hasError(messageForm.message), 'has-feedback': hasError(messageForm.message)}">
       <label for="message" class="col-sm-3 control-label">Message:</label>
       <div class="col-sm-9">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see." rows="3" maxlength="200" ng-model="leagueData.message" required></textarea>
-        <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'required')">Required</small>
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see or leave it blank." rows="3" maxlength="200" ng-model="leagueData.message"></textarea>
         <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'maxlength')">Too Long</small>
         <span ng-show="hasError(messageForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>

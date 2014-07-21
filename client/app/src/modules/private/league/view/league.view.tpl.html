@@ -20,15 +20,15 @@
 <div>
   <a ng-click="contactCommish(leagueData)">Contact commish</a>
 </div>
-<div ng-show="isCommish(leagueData)">
-  <a ng-click="updateMessage(leagueData)">Update league message</a>
+<div>
+  <h5>League Message: <small><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></small></h5>
+  <div class="league-message well well-sm">{{message(leagueData)}}</div>
 </div>
-<div class="league-message well well-sm">{{message(leagueData)}}</div>
 <h4>Teams ({{leagueData.team_count}})</h4>
 <hr>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
-    <input type="text" class="form-control" placeholder="Filter by team name..." ng-model="search.name">
+    <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">
               <span class="glyphicon glyphicon-search"></span>
@@ -38,7 +38,7 @@
   <tabset>
     <tab select="resetSearch()">
       <tab-heading>
-        <i class="glyphicon glyphicon-thumbs-up"></i> Alive
+        <i class="glyphicon glyphicon-thumbs-up"></i> Alive Teams
       </tab-heading>
       <div class="alive-teams list-group">
         <a ng-repeat="team in aliveTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
@@ -61,7 +61,7 @@
     </tab>
     <tab select="resetSearch()">
       <tab-heading>
-        <i class="glyphicon glyphicon-thumbs-down"></i> Dead
+        <i class="glyphicon glyphicon-thumbs-down"></i> Dead Teams
       </tab-heading>
       <div class="dead-teams list-group">
         <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
