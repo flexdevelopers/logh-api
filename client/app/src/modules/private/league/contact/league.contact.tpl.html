@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h3 class="modal-title">Contact commish</h3>
+</div>
+<div class="modal-body">
+  <form name="contactForm" class="contact-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(contactForm.message), 'has-feedback': hasError(contactForm.message)}">
+      <label for="message" class="col-sm-3 control-label">Message:</label>
+      <div class="col-sm-9">
+        <textarea id="message" name="message" class="form-control" placeholder="Send a direct message to the commish. By doing so the commish we be made aware of your emails address. " rows="3" maxlength="200" ng-model="commishMessage" required></textarea>
+        <small class="input-error" ng-show="hasPropertyError(contactForm.message, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(contactForm.message, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(contactForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="contactForm.$pristine || contactForm.$invalid" ng-click="contactCommish(leagueData, commishMessage)">Send</button>
+</div>

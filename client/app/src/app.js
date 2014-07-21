@@ -34,6 +34,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/league/new').name,
     require('./modules/private/league/view').name,
     require('./modules/private/league/edit').name,
+    require('./modules/private/league/contact').name,
     require('./modules/private/league/join').name,
     require('./modules/private/league/invite').name,
     require('./modules/private/league/invite/request').name,
