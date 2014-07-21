@@ -17,10 +17,6 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return message;
   };
 
-  $scope.updateLeagueMessage = function(league) {
-    leagueService.updateLeagueMessage(league);
-  };
-
   $scope.starts = function(league) {
     var startsLabel = (league.started) ? 'Started ' : 'Starts ';
     return startsLabel + league.start_week;
@@ -62,6 +58,30 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       leagueService.sendCommishMessage(params.league, params.message)
     }, function () {
       $log.debug('Contact league modal dismissed...');
+    });
+
+  };
+
+  $scope.updateMessage = function(league) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/league/message/league.message.tpl.html',
+      controller: 'LeagueMessageController',
+      resolve: {
+        league: function() {
+          return league;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(league) {
+      leagueService.updateLeagueMessage(league)
+        .then(function(message) {
+          $scope.leagueData.message = message;
+        });
+
+    }, function () {
+      $log.debug('League message modal dismissed...');
     });
 
   };

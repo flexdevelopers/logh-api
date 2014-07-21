@@ -17,18 +17,13 @@
     </div>
   </div>
 </div>
-<a ng-click="contactCommish(leagueData)">Contact commish</a>
-<div class="league-message well well-sm" ng-show="!isCommish(leagueData)">{{message(leagueData)}}</div>
-<form name="leagueMessageForm" role="form" ng-show="isCommish(leagueData)" novalidate>
-  <div class="row">
-    <div class="col-sm-12 col-md-12">
-      <div class="form-group">
-        <textarea id="leagueMessage" name="leagueMessage" class="form-control" placeholder="Enter a message for you league here..." rows="2" maxlength="200" ng-model="leagueData.message" required></textarea>
-      </div>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-info" ng-disabled="leagueMessageForm.$invalid" ng-click="updateLeagueMessage(leagueData)">Update Message</button>
-</form>
+<div>
+  <a ng-click="contactCommish(leagueData)">Contact commish</a>
+</div>
+<div ng-show="isCommish(leagueData)">
+  <a ng-click="updateMessage(leagueData)">Update league message</a>
+</div>
+<div class="league-message well well-sm">{{message(leagueData)}}</div>
 <h4>Teams ({{leagueData.team_count}})</h4>
 <hr>
 <div class="league-container" style="clear:both;">

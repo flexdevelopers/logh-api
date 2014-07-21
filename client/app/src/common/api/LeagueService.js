@@ -93,20 +93,21 @@ var LeagueService = function($http, $log, $location, $q, apiConfig, messageModel
     };
 
     this.updateLeagueMessage = function(leagueParams) {
-        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/message",
+      var deferred = $q.defer();
+      $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/message",
             { league: leagueParams })
             .success(function(data) {
                 $log.debug("LeagueService: updateLeagueMessage success");
                 messageModel.setMessage(data.message, false);
-                return data;
+                deferred.resolve(leagueParams.message);
             })
             .error(function(data) {
                 $log.debug("LeagueService: updateLeagueMessage failed");
                 messageModel.setMessage(data.message, false);
-                return data;
+                deferred.reject();
             });
 
-        return promise;
+        return deferred.promise;
     };
 
     this.sendCommishMessage = function(leagueParams, message) {
