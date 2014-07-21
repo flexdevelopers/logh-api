@@ -1,12 +1,12 @@
 <div class="modal-header">
-  <h3 class="modal-title">Update league message</h3>
+  <h3 class="modal-title">Update team message</h3>
 </div>
 <div class="modal-body">
-  <form name="messageForm" class="league-message-form form-horizontal" role="form" novalidate>
+  <form name="messageForm" class="team-message-form form-horizontal" role="form" novalidate>
     <div class="form-group" ng-class="{'has-error': hasError(messageForm.message), 'has-feedback': hasError(messageForm.message)}">
       <label for="message" class="col-sm-3 control-label">Message:</label>
       <div class="col-sm-9">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see." rows="3" maxlength="200" ng-model="leagueData.message" required></textarea>
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for this team to see." rows="3" maxlength="200" ng-model="teamData.message" required></textarea>
         <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'required')">Required</small>
         <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'maxlength')">Too Long</small>
         <span ng-show="hasError(messageForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
@@ -16,5 +16,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(leagueData)">Update</button>
+  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(teamData)">Update</button>
 </div>

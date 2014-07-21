@@ -6,10 +6,6 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
   $scope.playoffPicks = playoffPicks.data;
 
   $scope.message = function(team) {
-    return "here is a message for the coach";
-  };
-
-  $scope.message = function(team) {
     var message = 'The team message board is empty';
     if (team.message && team.message.length > 0) {
       message = team.message;
@@ -17,8 +13,28 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     return message;
   };
 
-  $scope.updateTeamMessage = function(team) {
-    teamService.updateTeamMessage(team);
+  $scope.updateMessage = function(team) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/team/message/team.message.tpl.html',
+      controller: 'TeamMessageController',
+      resolve: {
+        team: function() {
+          return team;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(team) {
+      teamService.updateTeamMessage(team)
+        .then(function(message) {
+          $scope.teamData.message = message;
+        });
+
+    }, function () {
+      $log.debug('Team message modal dismissed...');
+    });
+
   };
 
   $scope.activate = function(team) {

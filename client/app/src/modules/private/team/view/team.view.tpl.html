@@ -16,17 +16,10 @@
     </div>
   </div>
 </div>
-<div class="team-message well well-sm" ng-show="!isCommish(teamData)">{{message(teamData)}}</div>
-<form name="messageForm" role="form" ng-show="isCommish(teamData)" novalidate>
-  <div class="row">
-    <div class="col-sm-12 col-md-12">
-      <div class="form-group">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for this team here..." rows="2" maxlength="200" ng-model="teamData.message"></textarea>
-      </div>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-info" ng-click="updateTeamMessage(teamData)">Update Message</button>
-</form>
+<div ng-show="isCommish(teamData)">
+  <a ng-click="updateMessage(teamData)">Update team message</a>
+</div>
+<div class="team-message well well-sm">{{message(teamData)}}</div>
 <h4>Picks</h4>
 <hr>
 <div class="team-container" style="clear:both;">
