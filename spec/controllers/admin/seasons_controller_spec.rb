@@ -58,9 +58,10 @@ describe API::Admin::SeasonsController do
   # DELETE /api/admin/seasons/:id
   describe '#destroy' do
     context 'when an admin attempts to delete a season' do
-      it 'deletes a season' do
+      it 'does not delete a season' do
         season = FactoryGirl.create(:season)
-        expect { delete :destroy, id: season.id }.to change(Season, :count).by(-1)
+        expect { delete :destroy, id: season.id }.to change(Season, :count).by(0)
+        expect(response.status).to eq(403)
       end
     end
   end

@@ -256,13 +256,9 @@ describe API::LeaguesController do
     context 'when the signed in user is a commish of the league' do
       let(:league) { FactoryGirl.create(:league, season: season, commishes: [ current_user ]) }
       before { league }
-      it 'destroys a league for the signed-in user' do
-        expect { delete :destroy, season_id: season.id, id: league.id }.to change(current_user.managed_leagues, :count).by(-1)
-      end
-      it 'destroys all the teams for the destroyed league' do
-        team1 = FactoryGirl.create(:team, league: league)
-        team2 = FactoryGirl.create(:team, league: league)
-        expect { delete :destroy, season_id: season.id, id: league.id }.to change(Team, :count).by(-2)
+      it 'does not destroy a league for the signed-in user' do
+        expect { delete :destroy, season_id: season.id, id: league.id }.to change(current_user.managed_leagues, :count).by(0)
+        expect(response.status).to eq(403)
       end
     end
     context 'when the signed in user is not a commish of the league' do
