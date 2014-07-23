@@ -37,6 +37,7 @@ FactoryGirl.define do
 
   factory :season do
     name              '2014-15 NFL Season'
+    ends_at           Time.zone.parse('2015-02-02 06:00')
   end
 
   factory :week do |week|

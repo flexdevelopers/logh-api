@@ -41,7 +41,7 @@ class API::Admin::SeasonsController < API::SeasonsController
   private
 
     def _season_params
-      params.require(:season).permit(:name)
+      params.require(:season).permit(:name, :ends_at)
     end
 
     def _set_season
