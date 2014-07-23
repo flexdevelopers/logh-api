@@ -36,4 +36,8 @@ class Team < ActiveRecord::Base
     User.where(id: coach_ids).map(&:display_name)
   end
 
+  def kill
+    self.update(alive: false)
+  end
+
 end
