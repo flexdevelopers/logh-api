@@ -18,14 +18,25 @@
   }
 
   @media all and (max-width: 550px) {
-    .league-btn-group {
+    .coach-actions {
       float: none !important;
       padding: 0;
-    }
-    .get-invite-btn, .invite-btn, .join-btn {
-      width: 100%;
       margin-top: 5px;
       margin-bottom: 5px;
+      width: 100%;
+      .join-btn {
+        width: 90%;
+      }
+    }
+    .commish-actions {
+      float: none !important;
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+      .commish-only-btn {
+        width: 90%;
+      }
     }
     .league-container {
       .custom-search-form {
@@ -53,7 +64,12 @@
     }
   }
 
-  .league-btn-group {
+  .commish-actions {
+    padding: 15px 5px 0 0;
+    float: right;
+  }
+
+  .coach-actions {
     padding-top: 15px;
     float: right;
   }

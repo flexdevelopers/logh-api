@@ -10,15 +10,29 @@
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
-    <div class="league-btn-group">
-      <button type="button" class="get-invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Get Invite</button>
-      <button type="button" class="invite-btn btn btn-success btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
-      <button type="button" class="join-btn btn btn-success btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join ({{leagueData.max_teams_per_user}} times max)</button>
+    <div class="coach-actions btn-group" dropdown>
+      <button type="button" class="join-btn btn btn-primary btn-sm" ng-click="joinLeague(leagueData)">Join</button>
+      <button type="button" class="btn btn-primary btn-sm dropdown-toggle">
+        <span class="caret"></span>
+        <span class="sr-only">Coach Actions</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join League ({{leagueData.max_teams_per_user}} times max)</a></li>
+        <li><a ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</a></li>
+        <li><a ng-click="contactCommish(leagueData)">Contact commish</a></li>
+      </ul>
+    </div>
+    <div ng-show="isCommish(leagueData)" class="commish-actions btn-group" dropdown>
+      <button type="button" class="commish-only-btn btn btn-default btn-sm">Commish Only</button>
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle">
+        <span class="caret"></span>
+        <span class="sr-only">Commish Actions</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite Coach</a></li>
+      </ul>
     </div>
   </div>
-</div>
-<div>
-  <a ng-click="contactCommish(leagueData)">Contact commish</a>
 </div>
 <div class="league-message well well-sm"><strong>From the commish:</strong> <em>{{message(leagueData)}}</em> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></div>
 <h4>Teams ({{leagueData.team_count}})</h4>
