@@ -17,8 +17,13 @@
     }
   }
 
-  .team-btn-group {
+  .coach-actions {
     padding-top: 15px;
+    float: right;
+  }
+
+  .commish-actions {
+    padding: 15px 5px 0 0;
     float: right;
   }
 
@@ -43,14 +48,25 @@
   }
 
   @media all and (max-width: 550px) {
-    .team-btn-group {
+    .coach-actions {
       float: none !important;
       padding: 0;
-    }
-    .activate-btn, .deactivate-btn, .make-pick-btn {
       width: 100%;
       margin-top: 5px;
       margin-bottom: 5px;
+      .make-pick-btn {
+        width: 90%;
+      }
+    }
+    .commish-actions {
+      float: none !important;
+      padding: 0;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      .commish-btn {
+        width: 90%;
+      }
     }
   }
 

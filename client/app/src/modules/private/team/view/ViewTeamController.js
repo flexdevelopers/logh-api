@@ -13,6 +13,10 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     return message;
   };
 
+  $scope.contactCommish = function() {
+    alert('contact commish needs to be enabled');
+  }
+
   $scope.updateMessage = function(team) {
 
     var modalInstance = $modal.open({
