@@ -3,8 +3,7 @@ class API::SeasonsController < API::BaseController
 
   # GET /api/seasons/current
   def current
-    # todo: better job of showing the current season
-    @season = Season.last
+    @season = Season.where('ends_at > ?', Time.zone.now).order('ends_at ASC')[0]
     respond_with @season
   end
 
