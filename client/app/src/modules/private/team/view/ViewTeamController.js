@@ -83,7 +83,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
       }
     });
 
-    modalInstance.result.then(function (team) {
+    modalInstance.result.then(function(team) {
       teamService.updateTeam(team)
         .then(function() {
           $scope.teamData = team;
@@ -94,7 +94,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
   };
 
-  $scope.makePick = function() {
+  $scope.makePick = function(team) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
@@ -107,7 +107,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
           return $scope.playoffPicks;
         },
         currentGames: function() {
-          return gameService.getCurrentGames();
+          return gameService.getCurrentGames(team.league.id);
         }
       }
     });

@@ -1,4 +1,4 @@
-<div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish. Visit the <a ng-click="showLeague(teamData)">league page</a> to contact the commish.</div>
+<div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish. Contact the commish if you have questions.</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <h3 class="team-name">
@@ -10,13 +10,13 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <div class="coach-actions btn-group" dropdown>
-      <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-click="makePick()">Make Pick</button>
+      <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-click="makePick(teamData)">Make Pick</button>
       <button type="button" class="btn btn-primary btn-sm dropdown-toggle">
         <span class="caret"></span>
         <span class="sr-only">Coach Actions</span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li><a ng-click="makePick()">Make Pick</a></li>
+        <li><a ng-click="makePick(teamData)">Make Pick</a></li>
         <li><a ng-click="contactCommish(teamData)">Contact commish</a></li>
       </ul>
     </div>
