@@ -43,7 +43,7 @@
     <tab>
       <tab-heading>Regular</tab-heading>
       <div class="regular-picks list-group">
-        <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick()">
+        <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span></div>
             <div class="col-sm-4 col-md-4">
@@ -60,7 +60,7 @@
     <tab>
       <tab-heading>Playoff</tab-heading>
       <div class="playoff-picks list-group">
-        <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick()">
+        <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8"><i class="glyphicon glyphicon-ok" ng-show="pick.correct"></i><i class="glyphicon glyphicon-remove" ng-show="!pick.correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span></div>
             <div class="col-sm-4 col-md-4">

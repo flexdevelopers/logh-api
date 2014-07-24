@@ -7,9 +7,14 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
   $scope.games = currentGames.data;
 
   $scope.makePick = function(game, squad) {
-    if (!game.started && !$scope.hasSquadBeenUsed(game, squad)) {
-      $modalInstance.close();
-    }
+    var pick = {
+      week_id: game.week_id,
+      week_type_id: game.week_type_id,
+      game_id: game.id,
+      team_id: '',
+      squad_id: squad.id
+    };
+    $modalInstance.close(pick);
   };
 
   $scope.cancel = function () {

@@ -30,10 +30,9 @@ class API::PicksController < API::BaseController
 
   # POST /api/teams/:team_id/picks
   def create
-    @pick = @team.picks.new(_pick_params)
-    if @pick.save
-      # todo: not necessary
-      render json: @pick, status: :created, location: api_team_pick_path(@team, @pick)
+    @pick = @team.picks.where(week: Week.find(_pick_params[:week_id])).first_or_initialize
+    if @pick.update_attributes(_pick_params)
+      render json: { message: { type: SUCCESS, content: "Pick updated" } }, status: :ok
     else
       error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

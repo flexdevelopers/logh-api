@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService) {
+var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService, pickService) {
 
   $scope.teamData = team.data;
 
@@ -128,7 +128,9 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
       }
     });
 
-    modalInstance.result.then(function (squadId) {
+    modalInstance.result.then(function(pick) {
+      pick.team_id = $scope.teamData.id;
+      pickService.createPick(pick);
     }, function () {
       $log.debug('Make pick modal dismissed...');
     });
@@ -145,5 +147,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService'];
+ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;
