@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, gameService) {
+var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService) {
 
   $scope.teamData = team.data;
 
@@ -13,9 +13,25 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     return message;
   };
 
-  $scope.contactCommish = function() {
-    alert('contact commish needs to be enabled');
-  }
+  $scope.contactCommish = function(team) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/league/contact/league.contact.tpl.html',
+      controller: 'LeagueContactController',
+      resolve: {
+        league: function() {
+          return team.league;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(params) {
+      leagueService.sendCommishMessage(params.league, params.message)
+    }, function () {
+      $log.debug('Contact league modal dismissed...');
+    });
+
+  };
 
   $scope.updateMessage = function(team) {
 
@@ -129,5 +145,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'gameService'];
+ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService'];
 module.exports = ViewTeamController;
