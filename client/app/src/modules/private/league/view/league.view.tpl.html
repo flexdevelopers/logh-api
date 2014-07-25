@@ -56,7 +56,7 @@
           <div class="row">
             <div class="league-name col-sm-6 col-md-6"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
-              <span class="current-pick" ng-show="team.active">Current Pick: [ {{team.last_pick_squad_name}} ]</span>
+              <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Current Pick: [ {{team.last_pick_squad_name}} ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
               <span class="badge">View</span>
             </div>
@@ -79,7 +79,7 @@
           <div class="row">
             <div class="league-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-8 col-md-8">
-              <span class="current-pick" ng-show="team.active">Last Pick: [ {{team.last_pick_squad_name}} ]</span>
+              <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Last Pick: [ {{team.last_pick_squad_name}} ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
               <span class="badge">View</span>
             </div>

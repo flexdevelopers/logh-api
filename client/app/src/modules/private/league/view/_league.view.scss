@@ -11,10 +11,6 @@
     .manage-custom-search-form {
       margin: 5px 0 5px 0;
     }
-    .inactive-team {
-      font-size: 11px;
-      color: #a94442;
-    }
   }
 
   @media all and (max-width: 550px) {
@@ -83,6 +79,10 @@
       .coach-name, .current-pick {
         font-size: 11px;
         color: #999;
+      }
+      .inactive-team, .no-pick {
+        font-size: 11px;
+        color: #a94442;
       }
       .badge {
         float: right;

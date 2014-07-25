@@ -34,6 +34,10 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return team.coach_names[0]; // todo: only handles the first team coach
   };
 
+  $scope.hasNoPick = function(team) {
+    return team.last_pick_squad_name == 'None';
+  };
+
   $scope.editLeague = function(league) {
     $location.path($location.path() + '/edit');
   };
