@@ -3,6 +3,8 @@ class API::PicksController < API::BaseController
   before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update]
   before_action :_set_pick, only: [:show, :update]
   before_action :_verify_team_is_active, only: [:create, :update]
+  before_action :_verify_team_is_alive, only: [:create, :update]
+  before_action :_verify_pick_week, only: [:create, :update]
   before_action :_verify_team_management, only: [:create, :update]
 
   # GET /api/teams/:team_id/picks/regular
@@ -31,6 +33,7 @@ class API::PicksController < API::BaseController
   # POST /api/teams/:team_id/picks
   def create
     @pick = @team.picks.where(week: Week.find(_pick_params[:week_id])).first_or_initialize
+    return forbidden("A pick is locked when it's game has started" ) if @pick.locked?
     if @pick.update_attributes(_pick_params)
       render json: { message: { type: SUCCESS, content: "Pick updated" } }, status: :ok
     else
@@ -70,8 +73,16 @@ class API::PicksController < API::BaseController
       forbidden('Cannot make picks for an inactive team') if !@team.active
     end
 
+    def _verify_team_is_alive
+      forbidden('Cannot make picks for a dead team') if !@team.alive
+    end
+
     def _verify_team_management
       forbidden('Only a coach can manage picks') unless _is_coach_of(@team)
+    end
+
+    def _verify_pick_week
+      forbidden('Can only make picks for the current week') if @team.league.current_week.id != _pick_params[:week_id]
     end
 
     def _is_coach_of(team)
