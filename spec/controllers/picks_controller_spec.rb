@@ -109,28 +109,6 @@ describe API::PicksController do
     end
   end
 
-  #PATCH/PUT /api/teams/:team_id/picks/:id
-  #todo: nothing to update yet - this route needs to be updated
-  describe '#update' do
-    context 'when the current user is a coach of the team' do
-      let(:pick) { FactoryGirl.create(:pick, team: coached_team) }
-      let(:new_squad) { FactoryGirl.create(:squad, name: 'Seattle Seahawks', abbrev: 'SEA') }
-      before { pick.squad = new_squad }
-      it 'updates a pick' do
-        patch :update, team_id: pick.team.id, id: pick.id, pick: pick.attributes
-        expect(response).to be_success
-        expect(pick.squad).to eq(new_squad)
-      end
-    end
-    context 'when the current user is not a coach of the team' do
-      let(:pick) { FactoryGirl.create(:pick, team: non_coached_team) }
-      it 'returns unauthorized' do
-        patch :update, team_id: pick.team.id, id: pick.id, pick: pick.attributes
-        expect(response.status).to eq(403)
-      end
-    end
-  end
-
   #DELETE /api/teams/:team_id/picks/:id
   describe '#destroy' do
     context 'when the current user is a coach of the team' do

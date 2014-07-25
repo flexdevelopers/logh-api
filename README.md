@@ -74,7 +74,6 @@ And then you can do this, for example:
 * GET         /api/teams/:team_id/picks/playoff                 [ playoff season team picks ]
 * POST        /api/teams/:team_id/picks                         [ create pick ] { week_id*, week_type_id*, squad_id* }
 * GET         /api/teams/:team_id/picks/:id                     [ show pick ]
-* PATCH/PUT   /api/teams/:team_id/picks/:id                     [ update pick ] { week_id*, week_type_id*, squad_id* }
 * DELETE      /api/teams/:team_id/picks/:id                     [ destroy pick ]
 
 ##### Games

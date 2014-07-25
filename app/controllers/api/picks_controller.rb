@@ -41,15 +41,6 @@ class API::PicksController < API::BaseController
     end
   end
 
-  # PATCH/PUT /api/teams/:team_id/picks/1
-  def update
-    if @pick.update(_pick_params)
-      head :no_content
-    else
-      error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
-    end
-  end
-
   # DELETE /api/teams/:team_id/picks/1
   def destroy
     return forbidden('You cannot delete a pick')
