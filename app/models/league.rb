@@ -38,12 +38,4 @@ class League < ActiveRecord::Base
     User.where(id: commish_ids).map(&:email)
   end
 
-  def current_week
-    if self.started?
-      self.season.weeks.started.order(starts_at: :desc)[0] # current week
-    else
-      self.start_week
-    end
-  end
-
 end

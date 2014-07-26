@@ -37,8 +37,9 @@ class Team < ActiveRecord::Base
   end
 
   def current_pick
-    current_week = self.league.current_week
-    current_week.picks.find_by(team: self)
+    # this can be nil
+    current_week = self.league.season.current_week
+    current_week.picks.find_by(team: self) if current_week
   end
 
   def kill
