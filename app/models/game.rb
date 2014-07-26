@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
   end
 
   def started?
-    self.starts_at <= Time.zone.now.to_date
+    self.starts_at <= Time.zone.now
   end
 
   def week_type_id
