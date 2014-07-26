@@ -11,7 +11,12 @@ class API::GamesController < API::BaseController
 
   # GET /api/games/current?league_id=27
   def current
-    @games = @league.current_week.games
+    if @league.started?
+      week = @league.season.current_week
+    else
+      week = @league.start_week
+    end
+    @games = week.games
     respond_with @games
   end
 
