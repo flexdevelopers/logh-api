@@ -1,4 +1,4 @@
-var EditLeagueController = function($scope, $log, $location, league) {
+var EditLeagueController = function(league, $scope, $log, $location, leagueService) {
 
     $scope.leagueData = league.data;
 
@@ -7,11 +7,7 @@ var EditLeagueController = function($scope, $log, $location, league) {
     };
 
     $scope.updateLeague = function(league) {
-        $scope.dispatch('UpdateLeagueEvent', { leagueParams: league });
-    };
-
-    $scope.canUpdateStartWeek = function(league) {
-      return !league.started && league.team_count == 0;
+        leagueService.updateLeague(league);
     };
 
     /**
@@ -24,5 +20,5 @@ var EditLeagueController = function($scope, $log, $location, league) {
 
 };
 
-EditLeagueController.$inject = ['$scope', '$log', '$location', 'league'];
+EditLeagueController.$inject = ['league', '$scope', '$log', '$location', 'leagueService'];
 module.exports = EditLeagueController;
