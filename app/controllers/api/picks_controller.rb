@@ -1,11 +1,12 @@
 class API::PicksController < API::BaseController
   before_action :_set_user, only: [:regular, :playoff, :index, :show]
-  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create, :update]
-  before_action :_set_pick, only: [:show, :update]
-  before_action :_verify_team_is_active, only: [:create, :update]
-  before_action :_verify_team_is_alive, only: [:create, :update]
-  before_action :_verify_pick_week, only: [:create, :update]
-  before_action :_verify_team_management, only: [:create, :update]
+  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create]
+  before_action :_set_pick, only: [:show]
+  before_action :_verify_team_management, only: [:create]
+  before_action :_verify_team_is_active, only: [:create]
+  before_action :_verify_team_is_alive, only: [:create]
+  before_action :_verify_league_has_started, only: [:create]
+  before_action :_verify_pick_week, only: [:create]
 
   # GET /api/teams/:team_id/picks/regular
   def regular
@@ -76,8 +77,13 @@ class API::PicksController < API::BaseController
       forbidden('Only a coach can manage picks') unless _is_coach_of(@team)
     end
 
+    def _verify_league_has_started
+      forbidden("Can only make picks once the league has started - #{@team.league.start_week.display}") unless @team.league.started?
+    end
+
     def _verify_pick_week
-      forbidden('Can only make picks for the current week') if @team.league.current_week.id != _pick_params[:week_id]
+      current_week = @team.league.season.current_week
+      forbidden("Can only make picks for the current week - #{current_week.display}") if current_week && current_week.id != _pick_params[:week_id]
     end
 
     def _is_coach_of(team)
