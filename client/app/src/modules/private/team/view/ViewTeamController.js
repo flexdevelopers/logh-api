@@ -112,6 +112,10 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
   $scope.makePick = function(team) {
 
+    if (!$scope.isCoach(team)) {
+      return;
+    }
+
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
       controller: 'PickMakeController',

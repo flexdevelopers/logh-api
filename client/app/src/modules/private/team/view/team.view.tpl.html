@@ -9,7 +9,7 @@
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
-    <div class="coach-actions btn-group" dropdown>
+    <div class="coach-actions btn-group" ng-show="isCoach(teamData)" dropdown>
       <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-click="makePick(teamData)">Make Pick</button>
       <button type="button" class="btn btn-primary btn-sm dropdown-toggle">
         <span class="caret"></span>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
-              <span class="badge" ng-show="teamData.alive && isCoach(teamData) && !pick.locked">Change</span>
+              <span class="badge" ng-show="teamData.alive && !pick.locked && isCoach(teamData)">Change</span>
             </div>
           </div>
         </a>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
-              <span class="badge" ng-show="teamData.alive && isCoach(teamData) && !pick.locked">Change</span>
+              <span class="badge" ng-show="teamData.alive && !pick.locked && isCoach(teamData)">Change</span>
             </div>
           </div>
         </a>
