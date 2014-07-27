@@ -29,6 +29,7 @@
         <span class="sr-only">Commish Actions</span>
       </button>
       <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
         <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>
         <li ng-show="!leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
         <li ng-show="!leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
