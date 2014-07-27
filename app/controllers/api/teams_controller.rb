@@ -86,7 +86,7 @@ class API::TeamsController < API::BaseController
     return forbidden('Only the commish can activate an inactive team') if !_is_commish_of?(@league)
     if @team.update_attributes(active: true)
       TeamMailer.activate_notify(@team).deliver
-      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been activated" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been reactivated" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

@@ -17,7 +17,7 @@
         <span class="sr-only">Coach Actions</span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join League ({{leagueData.max_teams_per_user}} times max)</a></li>
+        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join league ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li><a ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</a></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
@@ -73,7 +73,7 @@
           <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
         <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
-            <input type="checkbox" ng-model="teamOptions.inactive" checked> show inactive teams
+            <input type="checkbox" ng-model="teamOptions.inactive" checked> show deactivated teams
         </div>
       </div>
       <div style="clear: both;"></div>
@@ -102,7 +102,7 @@
           <pagination boundary-links="true" max-size="4" total-items="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
         <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
-          <input type="checkbox" ng-model="teamOptions.inactive" checked> show inactive teams
+          <input type="checkbox" ng-model="teamOptions.inactive" checked> show deactivated teams
         </div>
       </div>
       <div style="clear: both;"></div>
