@@ -51,6 +51,10 @@
   }
 
   .league-name-link {
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-left: 0;
     padding-right: 0;
     font-size: 24px;
