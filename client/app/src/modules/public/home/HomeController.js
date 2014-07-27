@@ -11,6 +11,14 @@ var HomeController = function($scope, $log, $location, seasonModel) {
         $location.path('/season/' + season.id + '/leagues/public');
     };
 
+    $scope.viewTeams = function(season) {
+      $location.path('/season/' + season.id + '/teams/alive');
+    };
+
+    $scope.viewLeagues = function(season) {
+      $location.path('/season/' + season.id + '/leagues');
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
