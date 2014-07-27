@@ -9,6 +9,8 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 10;
 
+  $scope.teamOptions = { active: true, inactive: false };
+
   $scope.message = function(league) {
     var message = 'Zip. Zilch. Nada.';
     if (league.message && league.message.length > 0) {

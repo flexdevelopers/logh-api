@@ -52,7 +52,7 @@
         <i class="glyphicon glyphicon-thumbs-up"></i> Alive Teams
       </tab-heading>
       <div class="alive-teams list-group">
-        <a ng-repeat="team in aliveTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
+        <a ng-repeat="team in aliveTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-6 col-md-6"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
@@ -63,19 +63,25 @@
           </div>
         </a>
       </div>
-      <div class="alive-teams-pagination" ng-show="(aliveTeams | filter:search:strict).length > 0">
-        <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+      <div>
+        <div class="alert alert-info" ng-show="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length == 0">
+          No teams found
+        </div>
+        <div class="alive-teams-pagination" ng-show="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
+          <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
+        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
+            <input type="checkbox" ng-model="teamOptions.inactive" checked> show inactive teams
+        </div>
       </div>
-      <div class="alert alert-info" ng-show="(aliveTeams | filter:search:strict).length == 0">
-        No teams found
-      </div>
+      <div style="clear: both;"></div>
     </tab>
     <tab select="resetSearch()">
       <tab-heading>
         <i class="glyphicon glyphicon-thumbs-down"></i> Dead Teams
       </tab-heading>
       <div class="dead-teams list-group">
-        <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
+        <a ng-repeat="team in deadTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-8 col-md-8">
@@ -86,12 +92,18 @@
           </div>
         </a>
       </div>
-      <div class="dead-teams-pagination" ng-show="(deadTeams | filter:search:strict).length > 0">
-        <pagination boundary-links="true" max-size="4" total-items="(deadTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+      <div>
+        <div class="alert alert-info" ng-show="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length == 0">
+          No teams found
+        </div>
+        <div class="dead-teams-pagination" ng-show="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
+          <pagination boundary-links="true" max-size="4" total-items="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
+        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
+          <input type="checkbox" ng-model="teamOptions.inactive" checked> show inactive teams
+        </div>
       </div>
-      <div class="alert alert-info" ng-show="(deadTeams | filter:search:strict).length == 0">
-        No teams found
-      </div>
+      <div style="clear: both;"></div>
     </tab>
   </tabset>
 </div>
