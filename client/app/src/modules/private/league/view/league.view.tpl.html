@@ -30,8 +30,8 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>
-        <li ng-show="leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
-        <li ng-show="!leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
+        <li ng-show="!leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
+        <li ng-show="!leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
     </div>
   </div>
