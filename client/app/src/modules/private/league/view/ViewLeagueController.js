@@ -44,6 +44,14 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     $location.path($location.path() + '/edit');
   };
 
+  $scope.openLeague = function(league) {
+    leagueService.openLeague(league)
+  };
+
+  $scope.closeLeague = function(league) {
+    leagueService.closeLeague(league)
+  };
+
   $scope.showTeam = function(team) {
     $location.path($location.path() + '/team/' + team.id);
   };

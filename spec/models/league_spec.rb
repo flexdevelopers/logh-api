@@ -5,6 +5,9 @@ describe League do
   it { should respond_to(:name) }
   its(:name) { should be_blank }
 
+  it { should respond_to(:open) }
+  its(:open) { should be_true }
+
   it { should respond_to(:public) }
   its(:public) { should be_true }
 

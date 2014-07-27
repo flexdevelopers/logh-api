@@ -19,7 +19,7 @@
       <ul class="dropdown-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join League ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li><a ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</a></li>
-        <li><a ng-click="contactCommish(leagueData)">Contact commish</a></li>
+        <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
     </div>
     <div ng-show="isCommish(leagueData)" class="commish-actions btn-group" dropdown>
@@ -29,7 +29,9 @@
         <span class="sr-only">Commish Actions</span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite Coach</a></li>
+        <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>
+        <li ng-show="leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
+        <li ng-show="!leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
     </div>
   </div>

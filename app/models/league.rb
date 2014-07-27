@@ -13,6 +13,7 @@ class League < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 25 }, uniqueness: { case_sensitive: false, scope: :season_id }
   validates :season, presence: true
+  validates :open, inclusion: { in: [true, false] }
   validates :public, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
@@ -27,6 +28,10 @@ class League < ActiveRecord::Base
 
   def started?
     start_week.started?
+  end
+
+  def closed?
+    !self.open
   end
 
   def commish_emails

@@ -1,4 +1,4 @@
-var LeagueService = function($http, $log, $location, $q, apiConfig, messageModel) {
+var LeagueService = function($http, $log, $location, $q, $state, apiConfig, messageModel) {
 
     this.getLeague = function(seasonId, leagueId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/leagues/" + leagueId)
@@ -92,6 +92,44 @@ var LeagueService = function($http, $log, $location, $q, apiConfig, messageModel
         return promise;
     };
 
+    this.openLeague = function(leagueParams) {
+      var promise = $http.get(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/open")
+        .success(function(data) {
+          $log.debug("LeagueService: openLeague success");
+          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+          // but may be resolved with future releases of angular-ui-router
+          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("LeagueService: openLeague failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
+    this.closeLeague = function(leagueParams) {
+      var promise = $http.get(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/close")
+        .success(function(data) {
+          $log.debug("LeagueService: closeLeague success");
+          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+          // but may be resolved with future releases of angular-ui-router
+          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("LeagueService: closeLeague failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
     this.updateLeagueMessage = function(leagueParams) {
       var deferred = $q.defer();
       $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/message",
@@ -164,5 +202,5 @@ var LeagueService = function($http, $log, $location, $q, apiConfig, messageModel
 
 };
 
-LeagueService.$inject = ['$http', '$log', '$location', '$q', 'apiConfig', 'messageModel'];
+LeagueService.$inject = ['$http', '$log', '$location', '$q', '$state', 'apiConfig', 'messageModel'];
 module.exports = LeagueService;
