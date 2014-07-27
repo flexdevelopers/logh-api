@@ -15,7 +15,7 @@ class Team < ActiveRecord::Base
   validates :message, allow_nil: true, length: { maximum: 200 }
 
   default_scope { includes(:league) }
-  default_scope { order("#{table_name}.name") }
+  default_scope { order(name: :asc) }
 
   scope :active, -> { where(active: true) }
 
@@ -40,6 +40,10 @@ class Team < ActiveRecord::Base
     # this can be nil
     current_week = self.league.season.current_week
     current_week.picks.find_by(team: self) if current_week
+  end
+
+  def correct_picks_count
+    self.picks.correct.count
   end
 
   def kill

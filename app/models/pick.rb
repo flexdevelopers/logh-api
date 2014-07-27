@@ -13,6 +13,8 @@ class Pick < ActiveRecord::Base
 
   default_scope { includes(:game).order('games.starts_at ASC') }
 
+  scope :correct, -> { where(correct: true) }
+
   def locked?
     game.started?
   end
