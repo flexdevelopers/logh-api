@@ -5,11 +5,24 @@
     </div>
 
     <div class="panel-body">
+      <div class="well well-sm">Note: Anyone can join a public league. Private leagues will require an invitation.</div>
         <form name="newLeagueForm" role="form" novalidate>
             <div class="row">
-                <div class="col-sm-6 col-md-6">
+              <div class="col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="newLeagueData.public" ng-checked="true" ng-value="true"> Public League
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="newLeagueData.public" ng-value="false"> Private League
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
                     <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.leagueName), 'has-feedback': hasError(newLeagueForm.leagueName)}">
-                        <label class="control-label" for="leagueName">League Name
+                        <label class="control-label" for="leagueName">League name:
                             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'required')">[ Required ]</small>
                             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
                         </label>
@@ -17,54 +30,37 @@
                         <span ng-show="hasError(newLeagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.maxTeams), 'has-feedback': hasError(newLeagueForm.maxTeams)}">
-                        <label class="control-label" for="maxTeams">Max Teams per User
-                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'required')">[ Number Required ]</small>
-                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ 1 - 100 ]</small>
-                            <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 1 - 100 ]</small>
-                        </label>
-                        <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 100" min="1" max="100" class="form-control" ng-model="newLeagueData.max_teams_per_user" logh-focus required>
-                        <span ng-show="hasError(newLeagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <label class="control-label" for="startWeek">Start Week</label>
-                        <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
+              </div>
+              <div class="row">
+                  <div class="col-sm-12 col-md-12">
+                      <div class="form-group">
+                          <label class="control-label" for="startWeek">Start week:</label>
+                          <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
                 <div class="col-sm-12 col-md-12">
-                  <div class="form-group">
-                    <label class="control-label" for="message">Message [ Optional ]</label>
-                    <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league here. You can change it at any time." rows="2" maxlength="200" ng-model="newLeagueData.message"></textarea>
+                  <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.maxTeams), 'has-feedback': hasError(newLeagueForm.maxTeams)}">
+                    <label class="control-label" title="foo bar today" for="maxTeams">Maximum number of teams a user can have:
+                      <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'required')">[ Number Required ]</small>
+                      <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ 1 - 100 ]</small>
+                      <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 1 - 100 ]</small>
+                    </label>
+                    <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 100" min="1" max="100" class="form-control" ng-model="newLeagueData.max_teams_per_user" logh-focus required>
+                    <span ng-show="hasError(newLeagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                   </div>
                 </div>
-            </div>
-
-          <hr>
-
-            <div class="row">
-                <div class="col-sm-6 col-md-6">
+              </div>
+              <div class="row">
+                  <div class="col-sm-12 col-md-12">
                     <div class="form-group">
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="newLeagueData.public" ng-checked="true" ng-value="true"> Public League
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" ng-model="newLeagueData.public" ng-value="false"> Private League
-                        </label>
+                      <label class="control-label" for="message">Message [ Optional ]</label>
+                      <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league here. You can change it at any time." rows="2" maxlength="200" ng-model="newLeagueData.message"></textarea>
                     </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-info btn-block" ng-disabled="newLeagueForm.$invalid" ng-click="createLeague(newLeagueData)">Create League</button>
-
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-info btn-block" ng-disabled="newLeagueForm.$invalid" ng-click="createLeague(newLeagueData)">Create League</button>
         </form>
     </div>
 </div>
