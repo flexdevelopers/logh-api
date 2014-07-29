@@ -1,5 +1,7 @@
 var UserService = function($http, $log, $state, $location, $window, $timeout, apiConfig, messageModel, userModel, seasonModel) {
 
+    var userService = this;
+
     this.signin = function(email, password) {
         var promise = $http.post(
             apiConfig.baseURL + "sessions",
@@ -11,6 +13,9 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
+                  if (redirect === '/') {
+                    userService.getCurrentUser();
+                  }
                 } else  {
                   $location.path('/season/' + seasonModel.season.id + '/teams/alive');
                 }
