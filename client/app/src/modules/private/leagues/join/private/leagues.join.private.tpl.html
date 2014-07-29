@@ -1,5 +1,5 @@
 <div class="private-leagues list-group">
-    <a ng-repeat="league in privateLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="showLeague(league)" class="list-group-item">
+    <a ng-repeat="league in privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="showLeague(league)" class="list-group-item">
         <div class="row">
             <div class="league-name col-sm-6 col-md-6"><i class="glyphicon glyphicon-remove" title="Closed league" ng-show="league.closed && !isCommish(league)"></i><i class="glyphicon glyphicon-user" title="My league" ng-show="isCommish(league)"></i> {{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
             <div class="col-sm-6 col-md-6">
@@ -11,11 +11,15 @@
 </div>
 
 <!--dynamic pagination-->
-<div class="private-league-pagination" ng-show="(privateLeagues | filter:search:strict).length > 0">
-    <pagination boundary-links="true" max-size="4" total-items="(privateLeagues | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+<div class="private-league-pagination" ng-show="(privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length > 0">
+    <pagination boundary-links="true" max-size="4" total-items="(privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
+<div class="closed-leagues-checkbox">
+  <label><input type="checkbox" ng-model="leagueOptions.closed"> show closed leagues</label>
+</div>
+<div style="clear: both;"></div>
 
-<div class="alert alert-info" ng-show="(privateLeagues | filter:search:strict).length == 0">
+<div class="alert alert-info" ng-show="(privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length == 0">
   No leagues found
 </div>
 

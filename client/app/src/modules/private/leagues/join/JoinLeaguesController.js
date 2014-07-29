@@ -1,5 +1,7 @@
 var JoinLeaguesController = function($scope, $log, $location, userModel) {
 
+  $scope.leagueOptions = { closed: false };
+
   $scope.publicLeagues = function(seasonId) {
     $location.path('/season/' + seasonId + '/leagues/public');
   };
