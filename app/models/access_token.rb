@@ -66,7 +66,8 @@ class AccessToken
 
     def _get_user
       user_id = @redis["access_token/#{token}/user_id"]
-      User.find(user_id) if user_id
+      user = User.find(user_id) if user_id
+      return user if user && user.active
     end
 
 end
