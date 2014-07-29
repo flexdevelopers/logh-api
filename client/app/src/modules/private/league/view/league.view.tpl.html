@@ -2,8 +2,9 @@
   <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
       <button type="button" class="league-name-link btn btn-link btn-lg" ng-class="{'disabled': !isCommish(leagueData)}" ng-disabled="!isCommish(leagueData)" ng-click="editLeague(leagueData)">
-        <i class="glyphicon glyphicon-lock" title="Private league" ng-show="!leagueData.public"></i>
-        <i class="glyphicon glyphicon-ok-sign" title="Public league" ng-show="leagueData.public"></i>
+        <i class="glyphicon glyphicon-remove" title="Closed league" ng-show="leagueData.closed"></i>
+        <i class="glyphicon glyphicon-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
+        <i class="glyphicon glyphicon-ok-sign" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
         {{leagueData.name}}
       </button>
       <small>{{starts(leagueData)}}</small>
