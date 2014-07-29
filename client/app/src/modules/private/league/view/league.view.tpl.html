@@ -74,7 +74,7 @@
         <div class="alive-teams-pagination" ng-show="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
           <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
-        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
+        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData) && aliveTeams.length > 0">
           <label><input type="checkbox" ng-model="teamOptions.inactive"> show deactivated teams</label>
         </div>
       </div>
@@ -103,7 +103,7 @@
         <div class="dead-teams-pagination" ng-show="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
           <pagination boundary-links="true" max-size="4" total-items="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
-        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
+        <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData) && deadTeams.length > 0">
           <label><input type="checkbox" ng-model="teamOptions.inactive"> show deactivated teams</label>
         </div>
       </div>
