@@ -1,5 +1,10 @@
 .league-content {
 
+  .join-league-menu, .league-commish-menu {
+    right: 0;
+    left: auto;
+  }
+
   .league-container {
     position: relative;
     .custom-search-form {

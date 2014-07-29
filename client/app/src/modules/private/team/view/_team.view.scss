@@ -25,6 +25,11 @@
     float: right;
   }
 
+  .make-pick-menu, .team-commish-menu {
+    right: 0;
+    left: auto;
+  }
+
   .commish-actions {
     padding: 15px 5px 0 0;
     float: right;

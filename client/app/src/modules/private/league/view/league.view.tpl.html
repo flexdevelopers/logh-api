@@ -16,7 +16,7 @@
         <span class="caret"></span>
         <span class="sr-only">Coach Actions</span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu join-league-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join league ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li><a ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</a></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
@@ -28,7 +28,7 @@
         <span class="caret"></span>
         <span class="sr-only">Commish Actions</span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu league-commish-menu" role="menu">
         <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
         <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>
         <li ng-show="!leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>

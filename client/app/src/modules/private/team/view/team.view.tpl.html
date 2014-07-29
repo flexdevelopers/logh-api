@@ -15,7 +15,7 @@
         <span class="caret"></span>
         <span class="sr-only">Coach Actions</span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu make-pick-menu" role="menu">
         <li><a ng-click="makePick(teamData)">Make a pick</a></li>
         <li><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
       </ul>
@@ -27,7 +27,7 @@
         <span class="caret"></span>
         <span class="sr-only">Commish Actions</span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu team-commish-menu" role="menu">
         <li><a ng-click="updateMessage(teamData)">Update team message</a></li>
         <li ng-show="!teamData.active && isCommish(teamData)"><a ng-click="activate(teamData)">Reactivate this team</a></li>
         <li ng-show="teamData.active && isCommish(teamData)"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
