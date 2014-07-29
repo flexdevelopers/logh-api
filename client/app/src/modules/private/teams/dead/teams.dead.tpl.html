@@ -14,6 +14,7 @@
 <div class="dead-teams-pagination" ng-show="(deadTeams | filter:search:strict).length > 0">
   <pagination boundary-links="true" max-size="4" total-items="(deadTeams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
+<div style="clear: both;"></div>
 
 <div class="alert alert-info" ng-show="deadTeams.length == 0">
   No dead teams :)
