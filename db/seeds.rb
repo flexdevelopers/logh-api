@@ -80,7 +80,7 @@ season1 = Season.create!(name: '2014-15 NFL Season', ends_at: Time.zone.parse('2
 season2 = Season.create!(name: '2015-16 NFL Season', ends_at: Time.zone.parse('2016-02-03 06:00'))
 
 # create weeks
-week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-04 06:00'), season: season1)
+week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-02 06:00'), season: season1)
 week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), season: season1)
 week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), season: season1)
 week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), season: season1)
@@ -393,8 +393,8 @@ Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visit
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
 # create 20 public and private leagues with random but unique names
 20.times do |i|
-  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.last.id)
-  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.last.id)
+  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
+  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
 end
 foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
 3.times do |i|
