@@ -56,6 +56,7 @@ FactoryGirl.define do
 
   factory :loser do |loser|
     loser.association :week
+    loser.association :game
     loser.association :squad
   end
 

@@ -54,16 +54,16 @@ class Game < ActiveRecord::Base
       remove_game_squads_from_losers
 
       if home_squad_score < visiting_squad_score
-        week.losers << Loser.create!(week: week, squad: home_squad)
+        week.losers << Loser.create!(week: week, game: self, squad: home_squad)
       elsif visiting_squad_score < home_squad_score
-        week.losers << Loser.create!(week: week, squad: visiting_squad)
+        week.losers << Loser.create!(week: week, game: self, squad: visiting_squad)
       end
 
     end
 
     def remove_game_squads_from_losers
       week.losers.each do |loser|
-        loser.destroy if loser.squad.id === home_squad.id || loser.squad.id === visiting_squad.id
+        loser.destroy if loser.game.id === self.id
       end
     end
 
