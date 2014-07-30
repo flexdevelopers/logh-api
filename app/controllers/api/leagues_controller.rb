@@ -60,7 +60,7 @@ class API::LeaguesController < API::BaseController
   # PUT /api/seasons/:season_id/leagues/1/message
   def message
     if @league.update_attributes(message: _league_params[:message])
-      LeagueMailer.message_notify(@league).deliver if params[:emailMessage] && _league_params[:message].length > 0
+      LeagueMailer.message_notify(@league) if params[:emailMessage] && _league_params[:message].length > 0
       render json: { message: { type: SUCCESS, content: "League message has been updated for #{@league[:name]}" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

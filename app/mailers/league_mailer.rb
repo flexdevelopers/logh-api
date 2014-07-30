@@ -9,11 +9,15 @@ class LeagueMailer < ActionMailer::Base
   end
 
   def message_notify(league)
+    league.coach_emails.each do |coach_email|
+      send_message(league, coach_email).deliver
+    end
+  end
+
+  def send_message(league, coach_email)
     # todo: need a better method for this like sendgrid
     @league = league
-    @league.coach_emails.each do |coach_email|
-      mail to: coach_email, subject: "The #{@league.name} league has a new message from the commish"
-    end
+    mail to: coach_email, subject: "The #{@league.name} league has a new message from the commish"
   end
 
 end
