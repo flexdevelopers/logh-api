@@ -3,7 +3,8 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
     var userService = this;
 
     this.signin = function(email, password) {
-        var promise = $http.post(
+      userModel.resetUser();
+      var promise = $http.post(
             apiConfig.baseURL + "sessions",
             { email: email, password: password })
             .success(function(data) {
@@ -67,7 +68,8 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
     };
 
     this.createUser = function(userParams) {
-        var promise = $http.post(apiConfig.baseURL + "users",
+      userModel.resetUser();
+      var promise = $http.post(apiConfig.baseURL + "users",
             { user: userParams })
             .success(function(data) {
                 $log.debug("UserService: createUser success");
