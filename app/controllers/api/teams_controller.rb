@@ -74,7 +74,7 @@ class API::TeamsController < API::BaseController
   def message
     return forbidden('Only the commish can send a message to a team') if !_is_commish_of?(@league)
     if @team.update_attributes(message: _team_params[:message])
-      TeamMailer.message_notify(@team).deliver
+      TeamMailer.message_notify(@team).deliver if params[:emailMessage] && _team_params[:message].length > 0
       render json: { message: { type: SUCCESS, content: "Team message has been updated for #{@team[:name]}" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

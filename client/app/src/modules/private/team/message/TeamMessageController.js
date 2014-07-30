@@ -2,8 +2,10 @@ var TeamMessageController = function(team, $modalInstance, $scope, $log) {
 
   $scope.teamData = angular.copy(team);
 
-  $scope.updateMessage = function(team) {
-    $modalInstance.close(team);
+  $scope.messageOptions = { sendEmail: true };
+
+  $scope.updateMessage = function(team, sendEmail) {
+    $modalInstance.close({ team: team, sendEmail: sendEmail});
   };
 
   $scope.cancel = function() {

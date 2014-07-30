@@ -45,8 +45,8 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
       }
     });
 
-    modalInstance.result.then(function(team) {
-      teamService.updateTeamMessage(team)
+    modalInstance.result.then(function(params) {
+      teamService.updateTeamMessage(params.team, params.sendEmail)
         .then(function(message) {
           $scope.teamData.message = message;
         });

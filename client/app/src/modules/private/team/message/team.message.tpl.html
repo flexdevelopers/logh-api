@@ -7,7 +7,7 @@
     <div class="form-group" ng-class="{'has-error': hasError(messageForm.message), 'has-feedback': hasError(messageForm.message)}">
       <label for="message" class="col-sm-2 control-label">Message:</label>
       <div class="col-sm-10">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for this team to see or leave it blank." rows="3" maxlength="200" ng-model="teamData.message"></textarea>
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message to put on the team's wall..." rows="3" maxlength="200" ng-model="teamData.message"></textarea>
         <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'maxlength')">Too Long</small>
         <span ng-show="hasError(messageForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
@@ -15,6 +15,9 @@
   </form>
 </div>
 <div class="modal-footer">
+  <div class="email-team-message-checkbox">
+    <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message to coach</label>
+  </div>
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(teamData)">Update</button>
+  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(teamData, messageOptions.sendEmail)">Update</button>
 </div>

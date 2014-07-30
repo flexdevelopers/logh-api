@@ -90,10 +90,10 @@ var TeamService = function($http, $log, $location, $state, $q, apiConfig, messag
         return promise;
     };
 
-    this.updateTeamMessage = function(teamParams) {
+    this.updateTeamMessage = function(teamParams, emailMessage) {
       var deferred = $q.defer();
       $http.put(apiConfig.baseURL + "leagues/" + teamParams.league.id + "/teams/" + teamParams.id + "/message",
-        { team: teamParams })
+        { team: teamParams, emailMessage: emailMessage })
         .success(function(data) {
           $log.debug("TeamService: updateTeamMessage success");
           messageModel.setMessage(data.message, false);
