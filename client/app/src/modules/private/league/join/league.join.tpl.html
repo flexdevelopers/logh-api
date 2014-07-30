@@ -5,9 +5,9 @@
 <div class="modal-body">
   <form name="joinForm" class="join-form form-horizontal" role="form" novalidate>
     <div class="form-group" ng-class="{'has-error': hasError(joinForm.teamName), 'has-feedback': hasError(joinForm.teamName)}">
-      <label for="teamName" class="col-sm-3 control-label">Team Name:</label>
-      <div class="col-sm-9">
-        <input id="teamName" name="teamName" type="text" class="form-control" placeholder="Enter a team name" ng-model="newTeamData.name" ng-maxlength="25" required>
+      <label for="teamName" class="col-sm-4 col-md-4 control-label">Give your team a name:</label>
+      <div class="col-sm-8 col-md-8">
+        <input id="teamName" name="teamName" type="text" class="form-control" placeholder="You can change this until the league starts..." ng-model="newTeamData.name" ng-maxlength="25" required>
         <small class="input-error" ng-show="hasPropertyError(joinForm.teamName, 'required')">Required</small>
         <small class="input-error" ng-show="hasPropertyError(joinForm.teamName, 'maxlength')">Too Long</small>
         <span ng-show="hasError(joinForm.teamName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
