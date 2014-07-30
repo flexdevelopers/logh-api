@@ -15,7 +15,6 @@ class TeamMailer < ActionMailer::Base
 
   def message_notify(team)
     @team = team
-    @league = @team.league
     mail to: @team.coach_emails, subject: "The commish has sent you a message"
   end
 

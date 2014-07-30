@@ -39,4 +39,9 @@ class League < ActiveRecord::Base
     User.where(id: commish_ids).map(&:email)
   end
 
+  def commish_names
+    commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
+    User.where(id: commish_ids).map(&:display_name)
+  end
+
 end

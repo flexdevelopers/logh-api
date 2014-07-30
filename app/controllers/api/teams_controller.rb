@@ -52,7 +52,7 @@ class API::TeamsController < API::BaseController
     @team.coaches << current_user
     if @team.save
       _mark_invitation_accepted() if _has_invitation_for?(@league)
-      render json: { team_id: @team.id, message: { type: SUCCESS, content: "#{@team[:name]} team created in #{@league[:name]} league" } }, status: :ok
+      render json: { team_id: @team.id, message: { type: SUCCESS, content: "The #{@team[:name]} team has joined the #{@league[:name]} league" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
