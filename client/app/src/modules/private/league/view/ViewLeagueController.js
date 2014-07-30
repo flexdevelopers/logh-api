@@ -88,8 +88,8 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       }
     });
 
-    modalInstance.result.then(function(league) {
-      leagueService.updateLeagueMessage(league)
+    modalInstance.result.then(function(params) {
+      leagueService.updateLeagueMessage(params.league, params.sendEmail)
         .then(function(message) {
           $scope.leagueData.message = message;
         });

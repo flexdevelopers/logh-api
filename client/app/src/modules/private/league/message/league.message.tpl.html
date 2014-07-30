@@ -15,6 +15,9 @@
   </form>
 </div>
 <div class="modal-footer">
+  <div class="email-league-message-checkbox">
+    <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message</label>
+  </div>
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(leagueData)">Update</button>
+  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(leagueData, messageOptions.sendEmail)">Update</button>
 </div>

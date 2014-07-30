@@ -34,6 +34,11 @@ class League < ActiveRecord::Base
     !self.open
   end
 
+  def coach_emails
+    emails = teams.active.map(&:coach_emails)
+    emails.flatten.uniq
+  end
+
   def commish_emails
     commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
     User.where(id: commish_ids).map(&:email)
