@@ -3,7 +3,7 @@ class API::SeasonsController < API::BaseController
 
   # GET /api/seasons/current
   def current
-    @season = Season.where('ends_at > ?', Time.zone.now).order('ends_at ASC')[0]
+    @season = Season.upcoming[0]
     respond_with @season
   end
 
