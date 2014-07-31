@@ -1,9 +1,10 @@
 class UserMailer < ActionMailer::Base
   default from: 'no-reply@loseorgohome.com'
 
-  def welcome(user)
+  def welcome(user, season)
     @user = user
-    mail to: user.email, subject: "Welcome to LoseOrGoHome.com, #{user.first_name}"
+    @season = season
+    mail to: user.email, subject: "Welcome to loseorgohome.com"
   end
 
   def reset(user, access_token)
