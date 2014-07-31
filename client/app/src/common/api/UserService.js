@@ -72,6 +72,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
         var token = $location.search().token;
         if (!_.isUndefined(token)) {
           $window.sessionStorage.token = token;
+          $location.search('token', null); // remove the token query param
         }
         var promise = $http.get(apiConfig.baseURL + "users/current")
             .success(function(data) {
