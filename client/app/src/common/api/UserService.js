@@ -50,10 +50,29 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             });
 
         return promise;
+    };
 
+    this.resetUser = function(email) {
+      var promise = $http.post(apiConfig.baseURL + "sessions/reset", { email: email })
+          .success(function(data) {
+            $log.debug("UserService: reset success");
+            messageModel.setMessage(data.message, false);
+            return data;
+          })
+          .error(function(data) {
+            $log.debug("UserService: reset failure");
+            messageModel.setMessage(data.message, false);
+            return data;
+          });
+
+      return promise;
     };
 
     this.getCurrentUser = function() {
+        var token = $location.search().token;
+        if (!_.isUndefined(token)) {
+          $window.sessionStorage.token = token;
+        }
         var promise = $http.get(apiConfig.baseURL + "users/current")
             .success(function(data) {
                 $log.debug("UserService: getCurrentUser success");
@@ -62,7 +81,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             })
             .error(function(data) {
                 $log.debug("UserService: getCurrentUser failed");
-            });
+          });
 
         return promise;
     };

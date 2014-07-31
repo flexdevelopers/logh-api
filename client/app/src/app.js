@@ -29,6 +29,7 @@ var loghApp = angular.module('loghApp', [
     // private modules
     // user
     require('./modules/private/user').name,
+    require('./modules/private/user/reset').name,
     // league
     require('./modules/private/league').name,
     require('./modules/private/league/new').name,

@@ -1,4 +1,4 @@
-var SigninController = function($scope, $log, $location) {
+var SigninController = function($scope, $log, $location, $modal, userService) {
 
     $scope.credentials = {
         email: '',
@@ -15,6 +15,20 @@ var SigninController = function($scope, $log, $location) {
         alert('tough shit');
     };
 
+    $scope.resetPassword = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/private/user/reset/user.reset.tpl.html',
+        controller: 'UserResetController'
+      });
+
+      modalInstance.result.then(function (email) {
+        userService.resetUser(email);
+      }, function () {
+        $log.debug('Reset password modal dismissed...');
+      });
+    };
+
     $scope.register = function() {
         $location.path('/register');
     };
@@ -29,5 +43,5 @@ var SigninController = function($scope, $log, $location) {
 
 };
 
-SigninController.$inject = ['$scope', '$log', '$location'];
+SigninController.$inject = ['$scope', '$log', '$location', '$modal', 'userService'];
 module.exports = SigninController;

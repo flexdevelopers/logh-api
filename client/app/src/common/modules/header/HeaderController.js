@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, userService, userModel, seasonModel) {
 
     $scope.isCollapsed = true;
 
@@ -52,9 +52,18 @@ var HeaderController = function($scope, $log, $location, userModel, seasonModel)
         $scope.dispatch("SignoutEvent");
     };
 
-    $scope.forgotPassword = function() {
-        // todo: implement this
-        alert('tough shit');
+    $scope.resetPassword = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/private/user/reset/user.reset.tpl.html',
+        controller: 'UserResetController'
+      });
+
+      modalInstance.result.then(function (email) {
+        userService.resetUser(email);
+      }, function () {
+        $log.debug('Reset password modal dismissed...');
+      });
     };
 
     /**
@@ -66,5 +75,5 @@ var HeaderController = function($scope, $log, $location, userModel, seasonModel)
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', 'userService', 'userModel', 'seasonModel'];
 module.exports = HeaderController;

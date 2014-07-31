@@ -1,0 +1,9 @@
+Hi <%= @user.first_name %>,
+
+A talking giraffe told me that you forget your password for loseorgohome.com? No worries. Follow the temporary link below to change your password:
+
+If you didn't make this request, ignore this email.
+
+<%= "http://www.loseorgohome.com/#/user?token=#{@access_token}" %>
+
+

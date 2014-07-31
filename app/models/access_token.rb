@@ -2,9 +2,9 @@ class AccessToken
   TTL = 20.minutes
 
   def initialize(existing_token = nil, redis = nil)
-    @token = existing_token || MicroToken.generate(128)
+    @token = existing_token || MicroToken.generate(64)
     @redis = redis || REDIS
-    self.last_seen = Time.now unless ttl < 1
+    self.last_seen = Time.now if ttl > 0
   end
 
   def token

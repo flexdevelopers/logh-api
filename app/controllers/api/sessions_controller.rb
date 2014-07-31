@@ -10,6 +10,16 @@ class API::SessionsController < API::BaseController
     render json: { token: access_token.token }
   end
 
+  # POST /api/sessions/reset
+  def reset
+    @user = User.find_by(email: params[:email])
+    return forbidden('Email address was not found') if !@user
+    access_token = current_access_token
+    access_token.user = @user
+    UserMailer.reset(@user, access_token.token).deliver
+    render json: { message: { type: SUCCESS, content: "Password reset link has been sent to #{@user.email}" } }, status: :ok
+  end
+
   # DELETE /api/sessions/destroy
   def destroy
     current_access_token.delete!

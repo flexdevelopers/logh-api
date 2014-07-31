@@ -15,6 +15,7 @@ $icon-font-path: "../assets/fonts/";
 // private
 // user
 @import "../modules/private/user/user";
+@import "../modules/private/user/reset/user.reset";
 // league
 @import "../modules/private/league/league";
 @import "../modules/private/league/new/league.new";
