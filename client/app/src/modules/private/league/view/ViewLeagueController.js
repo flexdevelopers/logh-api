@@ -133,7 +133,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     });
 
     modalInstance.result.then(function (invitation) {
-      leagueService.requestInvite(invitation)
+      leagueService.requestInvite(invitation);
     }, function () {
       $log.debug('Request invite modal dismissed...');
     });
@@ -153,6 +153,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     });
 
     modalInstance.result.then(function (invitation) {
+      leagueService.createInvite(invitation);
       $scope.dispatch('CreateLeagueInviteEvent', { inviteParams: invitation });
     }, function () {
       $log.debug('Invite coach modal dismissed...');
