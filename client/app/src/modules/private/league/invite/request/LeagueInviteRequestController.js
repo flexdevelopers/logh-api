@@ -2,7 +2,8 @@ var LeagueInviteRequestController = function(leagueId, $modalInstance, $scope, $
 
   $scope.invitation = {
     league_id: leagueId,
-    email: userModel.user.email
+    email: userModel.user.email,
+    message: ""
   };
 
   $scope.requestInvite = function (invitation) {
