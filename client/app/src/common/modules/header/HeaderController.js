@@ -1,4 +1,8 @@
-var HeaderController = function($scope, $log, $location, $modal, userService, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, userService, userModel, seasonModel) {
+
+    var scrollToTop = function() {
+      $anchorScroll(); // hacky?
+    };
 
     $scope.isCollapsed = true;
 
@@ -71,9 +75,10 @@ var HeaderController = function($scope, $log, $location, $modal, userService, us
      */
     var init = function () {
         $log.debug("header controller");
+        scrollToTop();
     };
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', 'userService', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$anchorScroll', 'userService', 'userModel', 'seasonModel'];
 module.exports = HeaderController;
