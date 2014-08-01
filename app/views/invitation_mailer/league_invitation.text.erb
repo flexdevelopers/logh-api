@@ -1,7 +1,13 @@
-Congratulations! <%= @league.commish_names[0] %> has invited you to join the <%= @league.name %> league at loseorgohome.com!
+Congrats! <%= @invitation.league.commish_names[0] %> has invited you to join the <%= @invitation.league.name %> league at loseorgohome.com!
 
-Join now and pick one loser every week. No intelligence required.
+<% if @invitation.message && @invitation.message.length > 0  %>
+He/she also included a message just for you:
 
-Follow this link to join the fun:
+<%= @invitation.message %>
 
-<%= "http://www.loseorgohome.com/#/season/#{@league.season_id}/league/#{@league.id}" %>
+*****
+
+<% end %>
+Join now and pick one loser every week. No intelligence required. Follow this link to join the fun:
+
+<%= "http://www.loseorgohome.com/#/season/#{@invitation.league.season_id}/league/#{@invitation.league.id}" %>

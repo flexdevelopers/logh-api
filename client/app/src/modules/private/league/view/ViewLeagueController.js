@@ -154,7 +154,6 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
     modalInstance.result.then(function (invitation) {
       leagueService.createInvite(invitation);
-      $scope.dispatch('CreateLeagueInviteEvent', { inviteParams: invitation });
     }, function () {
       $log.debug('Invite coach modal dismissed...');
     });

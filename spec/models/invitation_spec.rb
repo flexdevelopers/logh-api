@@ -8,6 +8,9 @@ describe Invitation do
   it { should respond_to(:email) }
   its(:email) { should be_blank }
 
+  it { should respond_to(:message) }
+  its(:message) { should be_blank }
+
   context 'when league is not present' do
     subject(:invitation) { FactoryGirl.build(:invitation, league: nil) }
     it { should_not be_valid }
@@ -49,6 +52,11 @@ describe Invitation do
     let(:mixed_case_email) { 'Foo@Bar.com' }
     subject(:invitation) { FactoryGirl.create(:invitation, email: mixed_case_email) }
     its(:email) { should eq(mixed_case_email.downcase) }
+  end
+
+  context 'when invitation has a message greater than 200 characters' do
+    subject(:invitation) { FactoryGirl.build(:invitation, message: 'a' * 201) }
+    it { should_not be_valid }
   end
 
 end

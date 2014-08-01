@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729033649) do
+ActiveRecord::Schema.define(version: 20140801022444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140729033649) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "accepted_at"
+    t.string   "message"
   end
 
   add_index "invitations", ["league_id", "email"], name: "index_invitations_on_league_id_and_email", unique: true, using: :btree

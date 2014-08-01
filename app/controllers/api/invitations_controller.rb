@@ -18,7 +18,7 @@ class API::InvitationsController < API::BaseController
   # POST /leagues/:league_id/invitations
   def create
     @invitation = @league.invitations.where(email: _invitation_params[:email]).first_or_initialize
-    if @invitation.save
+    if @invitation.update_attributes(_invitation_params)
       render json: { message: { type: SUCCESS, content: "An invite has been sent to #{@invitation.email}" } }, status: :ok
     else
       error(@invitation.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
