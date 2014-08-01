@@ -11,15 +11,16 @@
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
-    <div class="coach-actions btn-group" dropdown>
-      <button type="button" class="join-btn btn btn-primary btn-sm" ng-click="joinLeague(leagueData)">Join</button>
+    <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
+    <button type="button" class="request-invite-btn btn btn-default btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
+    <div ng-show="hasTeamInLeague()" class="coach-actions btn-group" dropdown>
+      <button type="button" class="coach-only-btn btn btn-primary btn-sm">Coach</button>
       <button type="button" class="btn btn-primary btn-sm dropdown-toggle">
         <span class="caret"></span>
         <span class="sr-only">Coach Actions</span>
       </button>
       <ul class="dropdown-menu join-league-menu" role="menu">
-        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join league ({{leagueData.max_teams_per_user}} times max)</a></li>
-        <li><a ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</a></li>
+        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
     </div>

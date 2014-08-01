@@ -19,13 +19,27 @@
   }
 
   @media all and (max-width: 550px) {
+    .request-invite-btn {
+      float: none !important;
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+    }
+    .join-btn {
+      float: none !important;
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+    }
     .coach-actions {
       float: none !important;
       padding: 0;
       margin-top: 5px;
       margin-bottom: 5px;
       width: 100%;
-      .join-btn {
+      .coach-only-btn {
         width: 90%;
       }
     }
@@ -71,6 +85,15 @@
   .commish-actions {
     padding: 15px 5px 0 0;
     float: right;
+  }
+
+  .join-btn, .request-invite-btn {
+    margin-top: 15px;
+    float: right;
+  }
+
+  .request-invite-btn {
+    margin-right: 5px;
   }
 
   .coach-actions {

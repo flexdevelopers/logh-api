@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, leagueService) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, teamService, leagueService) {
 
   $scope.leagueData = league.data;
 
@@ -26,6 +26,17 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.isCommish = function(league) {
     return league.commish_emails.indexOf(userModel.user.email) > -1;
+  };
+
+  $scope.hasTeamInLeague = function() {
+    var found = false;
+    var teams = _.union($scope.aliveTeams, $scope.deadTeams);
+    _.each(teams, function(team) {
+      if (team.coach_emails.indexOf(userModel.user.email) > -1) {
+        found = true;
+      }
+    });
+    return found;
   };
 
   $scope.isCoach = function(team) {
@@ -112,8 +123,8 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       }
     });
 
-    modalInstance.result.then(function (team) {
-      $scope.dispatch('CreateTeamEvent', { teamParams: team } );
+    modalInstance.result.then(function(team) {
+      teamService.createTeam(team);
     }, function () {
       $log.debug('Join league modal dismissed...');
     });
@@ -176,5 +187,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'leagueService'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;
