@@ -13,22 +13,18 @@
   <div class="col-sm-4 col-md-4">
     <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
     <button type="button" class="request-invite-btn btn btn-default btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
-    <div ng-show="hasTeamInLeague()" class="coach-actions btn-group" dropdown>
-      <button type="button" class="coach-only-btn btn btn-primary btn-sm">Coach</button>
-      <button type="button" class="btn btn-primary btn-sm dropdown-toggle">
-        <span class="caret"></span>
-        <span class="sr-only">Coach Actions</span>
+    <div class="btn-group coach-actions" ng-show="hasTeamInLeague()" dropdown is-open="coach.isopen">
+      <button type="button" class="coach-only-btn btn btn-primary btn-sm dropdown-toggle">
+        Coach <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu join-league-menu" role="menu">
+      <ul class="dropdown-menu league-coach-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
     </div>
-    <div ng-show="isCommish(leagueData)" class="commish-actions btn-group" dropdown>
-      <button type="button" class="commish-only-btn btn btn-default btn-sm">Commish</button>
-      <button type="button" class="btn btn-default btn-sm dropdown-toggle">
-        <span class="caret"></span>
-        <span class="sr-only">Commish Actions</span>
+    <div class="btn-group commish-actions" ng-show="isCommish(leagueData)" dropdown is-open="commish.isopen">
+      <button type="button" class="commish-only-btn btn btn-default btn-sm dropdown-toggle">
+        Commish <span class="caret"></span>
       </button>
       <ul class="dropdown-menu league-commish-menu" role="menu">
         <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
