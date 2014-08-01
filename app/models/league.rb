@@ -1,5 +1,4 @@
 class League < ActiveRecord::Base
-
   before_save { name.downcase! }
 
   belongs_to :season
@@ -26,6 +25,13 @@ class League < ActiveRecord::Base
   scope :private, -> { where(public: false) }
   scope :not_started, -> { joins(:start_week).where('starts_at > ?', Time.zone.now) }
 
+  def start_week_id=(value)
+    if value && value != self.start_week_id
+      notify_start_week_change
+    end
+    super
+  end
+
   def started?
     start_week.started?
   end
@@ -48,5 +54,11 @@ class League < ActiveRecord::Base
     commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
     User.where(id: commish_ids).map(&:display_name)
   end
+
+  private
+
+    def notify_start_week_change
+      LeagueMailer.start_week_change(self).deliver
+    end
 
 end
