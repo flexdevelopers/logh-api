@@ -19,6 +19,7 @@
       </button>
       <ul class="dropdown-menu league-coach-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
+        <li ng-show="!leagueData.started" class="divider"></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
     </div>
@@ -27,8 +28,10 @@
         Commish <span class="caret"></span>
       </button>
       <ul class="dropdown-menu league-commish-menu" role="menu">
-        <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
         <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>
+        <li ng-show="!leagueData.started" class="divider"></li>
+        <li><a ng-show="!leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
         <li ng-show="!leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
         <li ng-show="!leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
