@@ -3,7 +3,7 @@ class API::SeasonsController < API::BaseController
 
   # GET /api/seasons/current
   def current
-    @season = Season.upcoming[0]
+    @season = Season.active[0]
     respond_with @season
   end
 

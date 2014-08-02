@@ -3,8 +3,10 @@ class Season < ActiveRecord::Base
   has_many :leagues
 
   validates :name, presence: true, length: { maximum: 20 }
+  validates :active, inclusion: { in: [true, false] }
   validates :ends_at, presence: true
 
+  scope :active, -> { where(active: true) }
   scope :upcoming, -> { where('ends_at > ?', Time.zone.now).order(ends_at: :asc) }
 
   def current_week

@@ -1,6 +1,7 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
   before_action :_set_league, only: [:show, :update, :open, :close, :message, :contact]
+  before_action :_verify_season_is_active, only: [:create, :update]
   before_action :_verify_league_management, only: [:update, :open, :close, :message]
   before_action :_verify_start_week, only: [:create, :update]
 
@@ -109,6 +110,10 @@ class API::LeaguesController < API::BaseController
 
     def _set_league
       @league = @season.leagues.find(params[:id])
+    end
+
+    def _verify_season_is_active
+      forbidden('Can only create a league in the current season') unless @season.active
     end
 
     def _verify_league_management

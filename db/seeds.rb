@@ -76,8 +76,8 @@ Pick.destroy_all
 Loser.destroy_all
 
 # create seasons
-season1 = Season.create!(name: '2014-15 NFL Season', ends_at: Time.zone.parse('2015-02-02 06:00'))
-season2 = Season.create!(name: '2015-16 NFL Season', ends_at: Time.zone.parse('2016-02-03 06:00'))
+season1 = Season.create!(name: '2014-15 NFL Season', active: true, ends_at: Time.zone.parse('2015-02-02 06:00'))
+season2 = Season.create!(name: '2015-16 NFL Season', active: false, ends_at: Time.zone.parse('2016-02-03 06:00'))
 
 # create weeks
 week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-02 06:00'), season: season1)

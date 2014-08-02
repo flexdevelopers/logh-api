@@ -5,6 +5,9 @@ describe Season do
   it { should respond_to(:name) }
   its(:name) { should be_blank }
 
+  it { should respond_to(:active) }
+  its(:open) { should be_false }
+
   it { should respond_to(:ends_at) }
   its(:ends_at) { should be_nil }
 
