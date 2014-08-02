@@ -11,13 +11,13 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse">
       <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-        <li><a ng-click="joinLeague(season)">Join a league</a></li>
-        <li><a ng-click="createLeague(season)">Create a league</a></li>
+        <li><a ng-click="manageTeams(season)"><i class="glyphicon glyphicon-user"></i>  My teams</a></li>
+        <li><a ng-click="manageLeagues(season)"><i class="glyphicon icon-commish"></i>  My leagues</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon icon-cog settings-icon" title="User Settings"></i> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a ng-click="manageTeams(season)"><i class="glyphicon glyphicon-user"></i>  My teams</a></li>
-            <li><a ng-click="manageLeagues(season)"><i class="glyphicon icon-commish"></i>  My leagues</a></li>
+            <li><a ng-click="joinLeague(season)">Join a league</a></li>
+            <li><a ng-click="createLeague(season)">Create a league</a></li>
             <li class="divider"></li>
             <li><a ng-click="userProfile()">User Profile</a></li>
             <li><a ng-click="signout()">Sign Out</a></li>
