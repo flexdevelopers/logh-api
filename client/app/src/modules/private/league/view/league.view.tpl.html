@@ -1,10 +1,15 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
+    <!--<div class="col-sm-8 col-md-8">-->
+    <!--</div>-->
+    <!--<div class="col-sm-4 col-md-4">-->
+    <!--</div>-->
+
     <h3 class="league-name">
       <i class="glyphicon glyphicon-remove" title="Closed league" ng-show="leagueData.closed"></i>
       <i class="glyphicon icon-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
       <i class="glyphicon icon-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
-      {{leagueData.name}}
+      {{leagueData.name}} <br>
       <small>{{starts(leagueData)}}</small>
     </h3>
   </div>
