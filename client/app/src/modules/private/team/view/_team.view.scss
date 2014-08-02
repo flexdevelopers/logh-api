@@ -20,7 +20,7 @@
     }
   }
 
-  .coach-actions {
+  .coach-actions, .make-pick-btn {
     float: right;
   }
 
@@ -62,7 +62,7 @@
       margin-top: 5px;
       margin-bottom: 5px;
       .coach-btn {
-        width: 90%;
+        width: 100%;
       }
     }
     .commish-actions {
@@ -72,8 +72,16 @@
       margin-top: 5px;
       margin-bottom: 5px;
       .commish-btn {
-        width: 90%;
+        width: 100%;
       }
+    }
+    .make-pick-btn {
+      float: none !important;
+      padding: 0;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
     }
   }
 

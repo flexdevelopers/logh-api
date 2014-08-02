@@ -34,7 +34,14 @@
   </div>
 </div>
 <div class="team-message well well-sm"><strong>From the commish:</strong> <em>{{message(teamData)}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
-<h4>Picks</h4>
+<div class="row">
+  <div class="col-sm-8 col-md-8">
+    <h4>Picks</h4>
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
+  </div>
+</div>
 <hr>
 <div class="team-container" style="clear:both;">
   <tabset>
