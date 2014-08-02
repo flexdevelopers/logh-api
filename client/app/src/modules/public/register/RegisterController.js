@@ -1,5 +1,4 @@
-
-var RegisterController = function($scope, $log) {
+var RegisterController = function($scope, $log, $modal) {
 
     $scope.newUserData = {
         first_name: '',
@@ -21,7 +20,22 @@ var RegisterController = function($scope, $log) {
         return !input.$focused && input.$dirty && input.$error[property];
     };
 
-    /**
+    $scope.showTerms = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/public/register/terms/register.terms.tpl.html',
+        controller: 'RegisterTermsController'
+      });
+
+      modalInstance.result.then(function () {
+        // do nada
+      }, function () {
+        $log.debug('Terms and conditions modal closed...');
+      });
+
+    };
+
+  /**
      * Invoked on startup, like a constructor.
      */
     var init = function () {
@@ -31,5 +45,5 @@ var RegisterController = function($scope, $log) {
 
 };
 
-RegisterController.$inject = ['$scope', '$log'];
+RegisterController.$inject = ['$scope', '$log', '$modal'];
 module.exports = RegisterController;
