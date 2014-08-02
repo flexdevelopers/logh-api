@@ -4,7 +4,7 @@
     <h3 class="team-name">
       <i class="glyphicon glyphicon-thumbs-up" title="Alive" ng-show="teamData.alive"></i>
       <i class="glyphicon glyphicon-thumbs-down" title="Dead" ng-show="!teamData.alive"></i>
-      <button type="button" class="team-name-link btn btn-link btn-lg" ng-class="{'disabled': !isCoach(teamData) && !isCommish(teamData)}" ng-disabled="!isCoach(teamData) && !isCommish(teamData)" ng-click="editTeam(teamData)">{{teamData.name}}</button>
+      {{teamData.name}}
       <small><a ng-click="showLeague(teamData)">[ {{teamData.league.name}} ]</a></small>
     </h3>
   </div>
@@ -16,6 +16,7 @@
       <ul class="dropdown-menu team-coach-menu" role="menu">
         <li><a ng-click="makePick(teamData)">Make a pick</a></li>
         <li class="divider"></li>
+        <li><a ng-click="editTeam(teamData)">Edit team</a></li>
         <li><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
       </ul>
     </div>
@@ -24,6 +25,7 @@
         Commish <span class="caret"></span>
       </button>
       <ul class="dropdown-menu team-commish-menu" role="menu">
+        <li><a ng-click="editTeam(teamData)">Edit team</a></li>
         <li><a ng-click="updateMessage(teamData)">Update team message</a></li>
         <li ng-show="!teamData.active && isCommish(teamData)"><a ng-click="activate(teamData)">Reactivate this team</a></li>
         <li ng-show="teamData.active && isCommish(teamData)"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
