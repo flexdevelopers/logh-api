@@ -41,8 +41,8 @@
         <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
-              <i class="glyphicon glyphicon-lock" ng-show="pick.locked && pick.correct == null"></i>
-              <i class="glyphicon glyphicon-refresh" ng-show="!pick.locked && pick.correct == null"></i>
+              <i class="glyphicon icon-lock-sm" ng-show="pick.locked && pick.correct == null"></i>
+              <i class="glyphicon icon-unlock-sm" ng-show="!pick.locked && pick.correct == null"></i>
               <i class="glyphicon glyphicon-remove" ng-show="pick.correct === false"></i>
               <i class="glyphicon glyphicon-ok" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
@@ -63,8 +63,8 @@
         <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
-              <i class="glyphicon glyphicon-lock" ng-show="pick.locked && pick.correct == null"></i>
-              <i class="glyphicon glyphicon-refresh" ng-show="!pick.locked && pick.correct == null"></i>
+              <i class="glyphicon icon-lock-sm" ng-show="pick.locked && pick.correct == null"></i>
+              <i class="glyphicon icon-unlock-sm" ng-show="!pick.locked && pick.correct == null"></i>
               <i class="glyphicon glyphicon-remove" ng-show="pick.correct === false"></i>
               <i class="glyphicon glyphicon-ok" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
