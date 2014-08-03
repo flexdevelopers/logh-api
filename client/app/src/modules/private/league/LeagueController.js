@@ -1,7 +1,5 @@
 
-var LeagueController = function($scope, $log, weeks) {
-
-    $scope.weeks = weeks.data;
+var LeagueController = function($scope, $log) {
 
     $scope.hasError = function(input) {
         return !input.$focused && input.$dirty && input.$invalid;
@@ -21,5 +19,5 @@ var LeagueController = function($scope, $log, weeks) {
 
 };
 
-LeagueController.$inject = ['$scope', '$log', 'weeks'];
+LeagueController.$inject = ['$scope', '$log'];
 module.exports = LeagueController;

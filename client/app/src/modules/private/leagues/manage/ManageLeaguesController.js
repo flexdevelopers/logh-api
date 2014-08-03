@@ -1,9 +1,26 @@
-var ManagedLeaguesController = function($scope, $log, $location, managedLeagues) {
+var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location, $modal, weekService, leagueService) {
 
     $scope.managedLeagues = managedLeagues.data;
 
     $scope.createLeague = function(season) {
-        $location.path('/season/' + season.id + '/league/new');
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/private/league/new/league.new.tpl.html',
+        controller: 'NewLeagueController',
+        resolve: {
+          weeks: function() {
+            return weekService.getAvailableWeeks(season.id);
+          }
+        }
+
+      });
+
+      modalInstance.result.then(function(league) {
+        leagueService.createLeague(league);
+      }, function () {
+        $log.debug('Create league modal dismissed...');
+      });
+
     };
 
     $scope.viewLeague = function(league) {
@@ -25,6 +42,6 @@ var ManagedLeaguesController = function($scope, $log, $location, managedLeagues)
 
 };
 
-ManagedLeaguesController.$inject = ['$scope', '$log', '$location', 'managedLeagues'];
+ManagedLeaguesController.$inject = ['managedLeagues', '$scope', '$log', '$location', '$modal', 'weekService', 'leagueService'];
 module.exports = ManagedLeaguesController;
 

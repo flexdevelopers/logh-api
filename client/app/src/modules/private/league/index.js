@@ -21,11 +21,6 @@ module.exports = angular.module('loghApp.league', [])
                     footer: {
                         templateUrl: 'common/templates/footer.tpl.html'
                     }
-                },
-                resolve: {
-                    weeks: function(user, weekService, $stateParams) {
-                        return weekService.getAvailableWeeks($stateParams.seasonId);
-                    }
                 }
             });
         $urlRouterProvider.otherwise('/');

@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, userService, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -39,7 +39,24 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
     };
 
     $scope.createLeague = function(season) {
-      $location.path('/season/' + season.id + '/league/new');
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/private/league/new/league.new.tpl.html',
+        controller: 'NewLeagueController',
+        resolve: {
+          weeks: function() {
+            return weekService.getAvailableWeeks(season.id);
+          }
+        }
+
+      });
+
+      modalInstance.result.then(function(league) {
+        leagueService.createLeague(league);
+      }, function () {
+        $log.debug('Create league modal dismissed...');
+      });
+
     };
 
     $scope.manageTeams = function(season) {
@@ -91,5 +108,5 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$anchorScroll', 'userService', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel'];
 module.exports = HeaderController;

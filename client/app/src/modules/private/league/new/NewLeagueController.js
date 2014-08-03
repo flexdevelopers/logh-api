@@ -1,15 +1,21 @@
-var NewLeagueController = function($scope, $log, $stateParams) {
+var NewLeagueController = function(weeks, $scope, $log, $modalInstance) {
+
+    $scope.weeks = weeks.data;
 
     $scope.newLeagueData = {
         name: '',
-        season_id: $stateParams.seasonId,
+        season_id: $scope.weeks[0].season_id,
         start_week_id: $scope.weeks[0].id,
         public: true,
         max_teams_per_user: ''
     };
 
     $scope.createLeague = function(league) {
-        $scope.dispatch('CreateLeagueEvent', { leagueParams: league });
+      $modalInstance.close(league);
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
     };
 
     /**
@@ -22,5 +28,5 @@ var NewLeagueController = function($scope, $log, $stateParams) {
 
 };
 
-NewLeagueController.$inject = ['$scope', '$log', '$stateParams'];
+NewLeagueController.$inject = ['weeks', '$scope', '$log', '$modalInstance'];
 module.exports = NewLeagueController;
