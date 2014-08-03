@@ -6,9 +6,6 @@ require('./session/SignoutCommand');
 require('./user/GetCurrentUserCommand');
 require('./user/UpdateUserCommand');
 
-// league commands
-require('./league/CreateLeagueCommand');
-
 module.exports = angular.module('loghApp.commandConfig', [])
     .config(function($commangularProvider) {
 
@@ -23,10 +20,6 @@ module.exports = angular.module('loghApp.commandConfig', [])
             .add('GetCurrentUserCommand');
         $commangularProvider.mapTo('UpdateUserEvent').asSequence()
             .add('UpdateUserCommand');
-
-        // league events
-        $commangularProvider.mapTo('CreateLeagueEvent').asSequence()
-            .add('CreateLeagueCommand');
 
     }
 );
