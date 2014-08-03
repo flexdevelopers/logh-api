@@ -26,16 +26,26 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group" ng-class="{'has-error': hasError(newUserForm.email), 'has-feedback': hasError(newUserForm.email)}">
-      <label class="control-label" for="email">Email
-        <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
-        <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
-      </label>
-      <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" placeholder="Your email will NOT be shared with anybody..." logh-focus required>
-      <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    <div class="nickname row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="control-label" for="nickname">Nickname</label>
+          <input id="nickname" name="nickname" type="text" class="form-control" ng-model="newUserData.nickname">
+        </div>
+      </div>
     </div>
-
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group" ng-class="{'has-error': hasError(newUserForm.email), 'has-feedback': hasError(newUserForm.email)}">
+          <label class="control-label" for="email">Email
+            <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
+            <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
+          </label>
+          <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" placeholder="Your email will NOT be shared with anybody..." logh-focus required>
+          <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-sm-6 col-md-6">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.password), 'has-feedback': hasError(newUserForm.password)}">

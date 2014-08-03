@@ -3,6 +3,7 @@ var RegisterController = function($scope, $log, $modal, $modalInstance) {
     $scope.newUserData = {
         first_name: '',
         last_name: '',
+        nickname: '',
         email: '',
         password: '',
         password_confirmation: ''

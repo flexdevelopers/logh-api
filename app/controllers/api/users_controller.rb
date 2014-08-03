@@ -9,7 +9,11 @@ class API::UsersController < API::BaseController
 
   # POST /api/users
   def create
-    user = User.new(_user_params)
+    if (_user_params[:nickname] && _user_params[:nickname].length > 1)
+      # nickname is not a real field. only a spam catcher
+      return forbidden()
+    end
+    user = User.new(_user_params.except(:nickname)) # nickname is not a real field. only a spam catcher
     if user.save
       access_token = current_access_token
       access_token.user = user
@@ -34,7 +38,7 @@ class API::UsersController < API::BaseController
   private
 
     def _user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :nickname, :email, :password, :password_confirmation)
     end
 
 end
