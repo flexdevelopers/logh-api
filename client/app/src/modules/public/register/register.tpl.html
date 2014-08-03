@@ -32,7 +32,7 @@
         <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
         <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
       </label>
-      <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" logh-focus required>
+      <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" placeholder="Your email will NOT be shared with anybody..." logh-focus required>
       <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
 
