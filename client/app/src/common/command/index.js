@@ -4,7 +4,6 @@ require('./session/SignoutCommand');
 
 // user commands
 require('./user/GetCurrentUserCommand');
-require('./user/CreateUserCommand');
 require('./user/UpdateUserCommand');
 
 // league commands
@@ -22,8 +21,6 @@ module.exports = angular.module('loghApp.commandConfig', [])
         // user events
         $commangularProvider.mapTo('GetCurrentUserEvent').asSequence()
             .add('GetCurrentUserCommand');
-        $commangularProvider.mapTo('CreateUserEvent').asSequence()
-            .add('CreateUserCommand');
         $commangularProvider.mapTo('UpdateUserEvent').asSequence()
             .add('UpdateUserCommand');
 
