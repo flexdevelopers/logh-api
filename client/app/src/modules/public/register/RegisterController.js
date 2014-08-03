@@ -1,4 +1,4 @@
-var RegisterController = function($scope, $log, $modal) {
+var RegisterController = function($scope, $log, $modal, $modalInstance) {
 
     $scope.newUserData = {
         first_name: '',
@@ -8,8 +8,12 @@ var RegisterController = function($scope, $log, $modal) {
         password_confirmation: ''
     };
 
-    $scope.register = function(newUser) {
-        $scope.dispatch('CreateUserEvent', { userParams: newUser } );
+    $scope.register = function (newUser) {
+      $modalInstance.close(newUser);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
     };
 
     $scope.hasError = function(input) {
@@ -45,5 +49,5 @@ var RegisterController = function($scope, $log, $modal) {
 
 };
 
-RegisterController.$inject = ['$scope', '$log', '$modal'];
+RegisterController.$inject = ['$scope', '$log', '$modal', '$modalInstance'];
 module.exports = RegisterController;

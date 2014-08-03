@@ -19,6 +19,21 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
         $location.path('/');
     };
 
+    $scope.register = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/public/register/register.tpl.html',
+        controller: 'RegisterController'
+      });
+
+      modalInstance.result.then(function(newUser) {
+        userService.createUser(newUser);
+      }, function () {
+        $log.debug('Register modal dismissed...');
+      });
+
+    };
+
     $scope.joinLeague = function(season) {
         $location.path('/season/' + season.id + '/leagues/public');
     };
@@ -37,10 +52,6 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
 
     $scope.userProfile = function() {
         $location.path('/user');
-    };
-
-    $scope.register = function() {
-        $location.path('/register');
     };
 
     $scope.signin = function(credentials) {
