@@ -16,6 +16,14 @@ var EditLeagueController = function(weeks, league, $scope, $log, $location, $mod
       $modalInstance.dismiss('cancel');
     };
 
+    $scope.hasError = function(input) {
+      return !input.$focused && input.$dirty && input.$invalid;
+    };
+
+    $scope.hasPropertyError = function(input, property) {
+      return !input.$focused && input.$dirty && input.$error[property];
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
