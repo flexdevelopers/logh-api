@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, teamService, leagueService) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, weekService, teamService, leagueService) {
 
   $scope.leagueData = league.data;
 
@@ -52,7 +52,27 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.editLeague = function(league) {
-    $location.path($location.path() + '/edit');
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/league/edit/league.edit.tpl.html',
+      controller: 'EditLeagueController',
+      resolve: {
+        weeks: function() {
+          return weekService.getAvailableWeeks(league.season_id);
+        },
+        league: function() {
+          return league;
+        }
+      }
+
+    });
+
+    modalInstance.result.then(function(league) {
+      leagueService.updateLeague(league);
+    }, function () {
+      $log.debug('Edit league modal dismissed...');
+    });
+
   };
 
   $scope.openLeague = function(league) {
@@ -187,5 +207,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;

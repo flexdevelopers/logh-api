@@ -1,71 +1,69 @@
-<div class="panel panel-default edit-league">
-
-    <div class="panel-heading">
-        <a class="league-name" ng-click="showLeague(leagueData)">{{leagueData.name}}</a>
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Edit league</h3>
+</div>
+<div class="modal-body">
+  <div class="well well-sm"><strong>Note:</strong> <em>Public leagues allow anyone to join. Private leagues require an invitation.</em></div>
+  <form name="leagueForm" role="form" novalidate>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" ng-model="leagueData.public" ng-value="true"> Public League
+          </label>
+          <label class="radio-inline">
+            <input type="radio" ng-model="leagueData.public" ng-value="false"> Private League
+          </label>
+        </div>
+      </div>
     </div>
-
-    <div class="panel-body">
-      <div class="well well-sm"><strong>Note:</strong> <em>Public leagues allow anyone to join. Private leagues require an invitation.</em></div>
-      <form name="leagueForm" role="form" novalidate>
-            <fieldset ng-disabled="leagueData.started">
-              <div class="row">
-                <div class="col-sm-6 col-md-6">
-                  <div class="form-group">
-                    <label class="radio-inline">
-                      <input type="radio" ng-model="leagueData.public" ng-value="true"> Public League
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" ng-model="leagueData.public" ng-value="false"> Private League
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col-sm-12 col-md-12">
-                      <div class="form-group" ng-class="{'has-error': hasError(leagueForm.leagueName), 'has-feedback': hasError(leagueForm.leagueName)}">
-                          <label class="control-label" for="leagueName">League name:
-                              <small ng-show="hasPropertyError(leagueForm.leagueName, 'required')">[ Required ]</small>
-                              <small ng-show="hasPropertyError(leagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
-                          </label>
-                          <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="leagueData.name" ng-maxlength="25" required>
-                          <span ng-show="hasError(leagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-12">
-                  <div class="form-group">
-                    <label class="control-label" for="startWeek">Start week:</label>
-                    <select id="startWeek" name="startWeek" class="form-control" ng-show="!leagueData.started" ng-model="leagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
-                    <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.started" ng-model="leagueData.start_week" ng-disabled="true">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-12">
-                  <div class="form-group" ng-class="{'has-error': hasError(leagueForm.maxTeams), 'has-feedback': hasError(leagueForm.maxTeams)}">
-                    <label class="control-label" for="maxTeams">Maximum number of teams a user can have in this league:
-                      <small ng-show="hasPropertyError(leagueForm.maxTeams, 'required')">[ Number Required ]</small>
-                      <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 20 ]</small>
-                      <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 20 ]</small>
-                    </label>
-                    <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 20" min="1" max="20" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
-                    <span ng-show="hasError(leagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                  </div>
-                </div>
-              </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <label class="control-label" for="message">Message
-                                <small>[ Optional ]</small>
-                            </label>
-                            <textarea id="message" name="message" class="form-control" placeholder="Enter a message for you league here..." rows="2" maxlength="200" ng-model="leagueData.message"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-info btn-block" ng-disabled="leagueForm.$pristine || leagueForm.$invalid" ng-click="updateLeague(leagueData)">Update League</button>
-            </fieldset>
-        </form>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group" ng-class="{'has-error': hasError(leagueForm.leagueName), 'has-feedback': hasError(leagueForm.leagueName)}">
+          <label class="control-label" for="leagueName">League name:
+            <small ng-show="hasPropertyError(leagueForm.leagueName, 'required')">[ Required ]</small>
+            <small ng-show="hasPropertyError(leagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
+          </label>
+          <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="leagueData.name" ng-maxlength="25" required>
+          <span ng-show="hasError(leagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="control-label" for="startWeek">Start week:</label>
+          <select id="startWeek" name="startWeek" class="form-control" ng-show="!leagueData.started" ng-model="leagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
+          <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.started" ng-model="leagueData.start_week" ng-disabled="true">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group" ng-class="{'has-error': hasError(leagueForm.maxTeams), 'has-feedback': hasError(leagueForm.maxTeams)}">
+          <label class="control-label" for="maxTeams">Maximum number of teams a user can have in this league:
+            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'required')">[ Number Required ]</small>
+            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 20 ]</small>
+            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 20 ]</small>
+          </label>
+          <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 20" min="1" max="20" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
+          <span ng-show="hasError(leagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="control-label" for="message">Message
+            <small>[ Optional ]</small>
+          </label>
+          <textarea id="message" name="message" class="form-control" placeholder="Enter a message for you league here..." rows="2" maxlength="200" ng-model="leagueData.message"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-info btn-primary" ng-disabled="leagueForm.$pristine || leagueForm.$invalid" ng-click="updateLeague(leagueData)">Update</button>
 </div>
