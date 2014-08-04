@@ -1,10 +1,5 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
-    <!--<div class="col-sm-8 col-md-8">-->
-    <!--</div>-->
-    <!--<div class="col-sm-4 col-md-4">-->
-    <!--</div>-->
-
     <h3 class="league-name">
       <i class="glyphicon glyphicon-remove" title="Closed league" ng-show="leagueData.closed"></i>
       <i class="glyphicon icon-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
@@ -22,6 +17,8 @@
       </button>
       <ul class="dropdown-menu league-coach-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
+        <li ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)"><a ng-click="requestInvite(leagueData)">Request an invite</a></li>
+        <li ng-show="!leagueData.started" class="divider"></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
       </ul>
     </div>

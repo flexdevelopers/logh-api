@@ -12,7 +12,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.teamOptions = { active: true, inactive: false };
 
   $scope.message = function(league) {
-    var message = 'Nothing to see here. Move along.';
+    var message = 'I got nothing.';
     if (league.message && league.message.length > 0) {
       message = league.message;
     }
