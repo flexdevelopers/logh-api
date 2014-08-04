@@ -10,12 +10,10 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <div class="btn-group coach-actions" ng-show="isCoach(teamData)" dropdown is-open="coach.isopen">
-      <button type="button" class="coach-btn btn btn-primary btn-sm dropdown-toggle">
+      <button type="button" class="coach-btn btn btn-default btn-sm dropdown-toggle">
         Coach <span class="caret"></span>
       </button>
       <ul class="dropdown-menu team-coach-menu" role="menu">
-        <li><a ng-click="makePick(teamData)">Make a pick</a></li>
-        <li class="divider"></li>
         <li><a ng-click="editTeam(teamData)">Edit team</a></li>
         <li><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
       </ul>
@@ -39,7 +37,7 @@
     <h4>Picks</h4>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-success btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
+    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
   </div>
 </div>
 <hr>
