@@ -6,9 +6,11 @@ $icon-font-path: "../assets/fonts/";
 // common
 @import "../common/modules/header/header";
 @import "../common/modules/message/message";
+@import "../common/modules/footer/footer";
 
 // public
 @import "../modules/public/home/home";
+@import "../modules/public/faq/faq";
 @import "../modules/public/signin/signin";
 @import "../modules/public/register/register";
 @import "../modules/public/register/terms/register.terms";
@@ -45,12 +47,15 @@ $icon-font-path: "../assets/fonts/";
 // pick
 @import "../modules/private/pick/make/pick.make";
 
-* {
-  margin: 0;
+html {
+  //  for sticky footer
+  position: relative;
+  min-height: 100%;
 }
 
-html, body {
-  height: 100%;
+body {
+  //  for sticky footer
+  margin-bottom: 100px;
 }
 
 body.home {
@@ -62,17 +67,13 @@ body.home {
   background-size: cover;
 }
 
-.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .footer {
-  position:absolute;
-  bottom:0;
-  width: 100%;
+  //  for sticky footer
   background: #1b1b1b;
-  height: 80px;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   .links {
     font-size: 10px;
     text-transform: uppercase;
