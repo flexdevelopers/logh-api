@@ -45,23 +45,34 @@ $icon-font-path: "../assets/fonts/";
 // pick
 @import "../modules/private/pick/make/pick.make";
 
-body {
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body.home {
   padding-bottom: 20px;
-  background: #1b1b1b;
+  background: url(/resources/assets/images/cityscape.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .container-fluid {
   padding-left: 0;
   padding-right: 0;
-  background: white;
 }
 
 .footer {
+  position:absolute;
+  bottom:0;
+  width: 100%;
   background: #1b1b1b;
-  .container {
-    margin: 0 auto;
-    max-width: 1050px;
-  }
+  height: 80px;
   .links {
     font-size: 10px;
     text-transform: uppercase;

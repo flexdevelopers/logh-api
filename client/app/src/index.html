@@ -10,7 +10,7 @@
 
   </head>
 
-  <body ng-app="loghApp">
+  <body ng-app="loghApp" ng-controller="AppController" ng-class="{'home': isHome()}">
 
     <div class="app container-fluid" ui-view></div>
 
@@ -21,7 +21,15 @@
     <script src="resources/assets/js/app.js"></script>
     <script src="//localhost:35729/livereload.js"></script>
 
-</body>
+    <script type="text/javascript">
+      function AppController($scope, $state) {
+        $scope.isHome = function() {
+          return $state.current.name == 'public.home';
+        }
+      }
+    </script>
+
+  </body>
 
 </html>
 

@@ -1,4 +1,4 @@
-<div id="header" class="container">
+<div class="container">
   <div class="navbar-header">
     <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
       <span class="sr-only">Toggle navigation</span>
@@ -8,7 +8,7 @@
     </button>
     <a class="navbar-brand" ng-click="home()">loseorgohome.com</a>
   </div>
-  <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse" style="margin-right: 30px;">
+  <div collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
       <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="fa fa-user fa-fw"></i>  My teams</a></li>
       <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="fa fa-group fa-fw"></i>  My leagues</a></li>
