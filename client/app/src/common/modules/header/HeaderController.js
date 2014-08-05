@@ -23,6 +23,21 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
         $location.path('/');
     };
 
+    $scope.faq = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/public/faq/faq.tpl.html',
+        controller: 'FaqController'
+      });
+
+      modalInstance.result.then(function(newUser) {
+        userService.createUser(newUser);
+      }, function () {
+        $log.debug('FAQ modal dismissed...');
+      });
+
+    };
+
     $scope.register = function() {
 
       var modalInstance = $modal.open({

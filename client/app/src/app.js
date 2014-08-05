@@ -23,6 +23,7 @@ var loghApp = angular.module('loghApp', [
 
     // public modules
     require('./modules/public/home').name,
+    require('./modules/public/faq').name,
     require('./modules/public/signin').name,
     require('./modules/public/register').name,
     require('./modules/public/register/terms').name,
@@ -62,6 +63,7 @@ var loghApp = angular.module('loghApp', [
     // helper modules
     require('./common/modules/header').name,
     require('./common/modules/message').name,
+    require('./common/modules/footer').name,
 
     require('./common/aspects').name,
     require('./common/models').name,
