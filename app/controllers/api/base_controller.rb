@@ -31,7 +31,7 @@ class API::BaseController < ApplicationController
     end
 
     # 401 - authentication failures
-    def not_authorized(message = "Authorization failure. Please sign in or register.", type = DANGER)
+    def not_authorized(message = "Please sign in or register.", type = DANGER)
       error(message, type, :unauthorized)
     end
 

@@ -141,12 +141,16 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
         },
         responseError: function (rejection) {
             if (rejection.status === 401) {
-                var message = { type: 'danger', content: 'Please sign in or register' };
+                var message = rejection.data.message;
                 var path = $location.path();
                 $timeout(function () {
+                  userModel.resetUser();
+                  if ($location.path() == '/signin') {
+                    messageModel.setMessage(message, false);
+                  } else {
                     messageModel.setMessage(message, true);
-                    userModel.resetUser();
                     $location.path('/signin').search({ redirect: encodeURIComponent(path) });
+                  }
                 }, 200);
             }
             return $q.reject(rejection);
