@@ -9,6 +9,7 @@
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
+    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
     <div class="btn-group coach-actions" ng-show="isCoach(teamData)" dropdown is-open="coach.isopen">
       <button type="button" class="coach-btn btn btn-default btn-sm dropdown-toggle">
         <strong>Coach</strong> <span class="caret"></span>
@@ -32,14 +33,7 @@
   </div>
 </div>
 <div class="team-message well well-sm"><strong>From the commish:</strong> <em>{{message(teamData)}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
-<div class="row">
-  <div class="col-sm-8 col-md-8">
-    <h4>Picks</h4>
-  </div>
-  <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
-  </div>
-</div>
+<h4>Picks</h4>
 <hr>
 <div class="team-container" style="clear:both;">
   <tabset>
