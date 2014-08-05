@@ -1,9 +1,9 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
-      <i class="glyphicon glyphicon-remove" title="Closed league" ng-show="leagueData.closed"></i>
-      <i class="glyphicon icon-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
-      <i class="glyphicon icon-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
+      <i class="fa fa-times" title="Closed league" ng-show="leagueData.closed"></i>
+      <i class="fa fa-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
+      <i class="fa fa-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
       {{leagueData.name}} <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">NO NEW TEAMS</small> <br>
       <small>{{starts(leagueData)}} - {{leagueData.max_teams_per_user}} teams max per user</small>
     </h3>
@@ -52,12 +52,12 @@
   <tabset>
     <tab select="resetSearch()">
       <tab-heading>
-        <i class="glyphicon glyphicon-thumbs-up"></i> Alive Teams
+        <i class="fa fa-thumbs-up fa-fw"></i> Alive Teams
       </tab-heading>
       <div class="alive-teams list-group">
         <a ng-repeat="team in aliveTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
-            <div class="league-name col-sm-6 col-md-6"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
+            <div class="league-name col-sm-6 col-md-6"><i class="fa fa-user fa-fw" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
               <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Current Pick: [ {{team.last_pick_squad_name}} ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
@@ -81,12 +81,12 @@
     </tab>
     <tab select="resetSearch()">
       <tab-heading>
-        <i class="glyphicon glyphicon-thumbs-down"></i> Dead Teams
+        <i class="fa fa-thumbs-down fa-fw"></i> Dead Teams
       </tab-heading>
       <div class="dead-teams list-group">
         <a ng-repeat="team in deadTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
-            <div class="league-name col-sm-4 col-md-4"><i class="glyphicon glyphicon-user" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
+            <div class="league-name col-sm-4 col-md-4"><i class="fa fa-user fa-fw" ng-show="isCoach(team)"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-8 col-md-8">
               <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Last Pick: [ {{team.last_pick_squad_name}} ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>

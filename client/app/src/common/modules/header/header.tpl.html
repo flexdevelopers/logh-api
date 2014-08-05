@@ -10,10 +10,10 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse bs-js-navbar-collapse" style="margin-right: 30px;">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-      <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="glyphicon glyphicon-user"></i>  My teams</a></li>
-      <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="glyphicon icon-commish"></i>  My leagues</a></li>
+      <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="fa fa-user fa-fw"></i>  My teams</a></li>
+      <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="fa fa-group fa-fw"></i>  My leagues</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon icon-cog settings-icon" title="User Settings"></i> <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a ng-click="joinLeague(season)">Join a league</a></li>
           <li><a ng-click="createLeague(season)">Create a league</a></li>
@@ -32,13 +32,13 @@
             <form name="inlineSigninForm" role="form" ng-submit="signin(credentials); $event.stopPropagation();" novalidate>
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                  <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
                   <input type="email" class="form-control" style="cursor:auto;" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();" required>
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                   <input type="password" class="form-control" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" required>
                 </div>
               </div>
