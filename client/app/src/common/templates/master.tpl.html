@@ -1,7 +1,7 @@
 <div class="container">
 
     <!-- Header -->
-    <div ui-view="header"></div>
+    <nav class="navbar navbar-inverse" ui-view="header"></nav>
 
     <!-- Message -->
     <div ui-view="message"></div>
@@ -10,6 +10,7 @@
     <div class="content-view" ui-view="content" class="row"></div>
 
     <!-- Footer -->
-    <div ui-view="footer" class="row footer-row"></div>
+    <footer class="footer" ui-view="footer"></footer>
+
 
 </div>

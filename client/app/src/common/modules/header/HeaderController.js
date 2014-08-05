@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -13,6 +13,10 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
     $scope.credentials = {
         email: '',
         password: ''
+    };
+
+    $scope.isState = function(states) {
+      return _.indexOf(states, $state.current.name) > -1;
     };
 
     $scope.home = function() {
@@ -108,5 +112,5 @@ var HeaderController = function($scope, $log, $location, $modal, $anchorScroll, 
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel'];
 module.exports = HeaderController;
