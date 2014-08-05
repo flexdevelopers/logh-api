@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>loseorgohome.com - create or join an NFL suicide pool for free</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 
@@ -10,17 +10,26 @@
 
   </head>
 
-  <body ng-app="loghApp">
+  <body ng-app="loghApp" ng-controller="AppController" ng-class="{'home': isHome()}">
 
-    <div class="app container" ui-view></div>
+    <div class="app container-fluid" ui-view></div>
 
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-    <script src="resources/assets/js/underscore.js"></script>
+    <!--<script src="resources/assets/js/underscore.js"></script>-->
     <script src="resources/assets/js/shared-libs.js"></script>
     <script src="resources/assets/js/app.js"></script>
     <script src="//localhost:35729/livereload.js"></script>
 
-</body>
+    <script type="text/javascript">
+      function AppController($scope, $state) {
+        $scope.isHome = function() {
+          return $state.current.name == 'public.home';
+        }
+      }
+    </script>
+
+  </body>
 
 </html>
 
