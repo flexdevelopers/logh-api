@@ -13,7 +13,7 @@
     <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <div class="btn-group coach-actions" ng-show="hasTeamInLeague()" dropdown is-open="coach.isopen">
       <button type="button" class="coach-only-btn btn btn-default btn-sm dropdown-toggle">
-        Coach <span class="caret"></span>
+        <strong>Coach</strong> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu league-coach-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
@@ -24,7 +24,7 @@
     </div>
     <div class="btn-group commish-actions" ng-show="isCommish(leagueData)" dropdown is-open="commish.isopen">
       <button type="button" class="commish-only-btn btn btn-default btn-sm dropdown-toggle">
-        Commish <span class="caret"></span>
+        <strong>Commish</strong> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu league-commish-menu" role="menu">
         <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a coach to join</a></li>

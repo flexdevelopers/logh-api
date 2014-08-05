@@ -11,7 +11,7 @@
   <div class="col-sm-4 col-md-4">
     <div class="btn-group coach-actions" ng-show="isCoach(teamData)" dropdown is-open="coach.isopen">
       <button type="button" class="coach-btn btn btn-default btn-sm dropdown-toggle">
-        Coach <span class="caret"></span>
+        <strong>Coach</strong> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu team-coach-menu" role="menu">
         <li><a ng-click="editTeam(teamData)">Edit team</a></li>
@@ -20,7 +20,7 @@
     </div>
     <div class="btn-group commish-actions" ng-show="isCommish(teamData)" dropdown is-open="commish.isopen">
       <button type="button" class="commish-btn btn btn-default btn-sm dropdown-toggle">
-        Commish <span class="caret"></span>
+        <strong>Commish</strong> <span class="caret"></span>
       </button>
       <ul class="dropdown-menu team-commish-menu" role="menu">
         <li><a ng-click="editTeam(teamData)">Edit team</a></li>
