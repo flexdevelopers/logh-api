@@ -12,7 +12,7 @@ class LeagueMailer < ActionMailer::Base
     @league = league
 
     hdr = SmtpApiHeader.new
-    receiver = @league.coach_emails
+    receiver = @league.coach_emails.concat(@league.commish_emails)
     hdr.addTo(receiver)
 
     headers['X-SMTPAPI'] =  hdr.asJSON()
