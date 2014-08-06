@@ -30,7 +30,18 @@ var SigninController = function($scope, $log, $location, $modal, userService) {
     };
 
     $scope.register = function() {
-        $location.path('/register');
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/public/register/register.tpl.html',
+        controller: 'RegisterController'
+      });
+
+      modalInstance.result.then(function(newUser) {
+        userService.createUser(newUser);
+      }, function () {
+        $log.debug('Register modal dismissed...');
+      });
+
     };
 
     /**
