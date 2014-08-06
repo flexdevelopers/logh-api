@@ -18,7 +18,8 @@ module.exports = angular.module('loghApp.user', [])
                         controller: 'UserController'
                     },
                     footer: {
-                        templateUrl: 'common/templates/footer.tpl.html'
+                        templateUrl: 'common/modules/footer/footer.tpl.html',
+                        controller: 'FooterController'
                     }
                 }
             });

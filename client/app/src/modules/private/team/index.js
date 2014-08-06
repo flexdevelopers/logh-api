@@ -19,7 +19,8 @@ module.exports = angular.module('loghApp.team', [])
                         controller: 'TeamController'
                     },
                     footer: {
-                        templateUrl: 'common/templates/footer.tpl.html'
+                        templateUrl: 'common/modules/footer/footer.tpl.html',
+                        controller: 'FooterController'
                     }
                 }
             })
