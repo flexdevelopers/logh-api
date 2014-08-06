@@ -70,7 +70,7 @@ body.home {
 .footer {
   //  for sticky footer
   background: #1b1b1b;
-  height: 100px;
+  height: 80px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -244,6 +244,10 @@ body.home {
   color: #2a6496 !important;
   text-decoration: underline !important;
   background-color: transparent !important;
+}
+
+.sign-in-btn {
+  width: 75px;
 }
 
 

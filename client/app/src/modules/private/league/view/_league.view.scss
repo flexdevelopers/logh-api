@@ -29,6 +29,7 @@
     .join-btn {
       float: none !important;
       padding: 0;
+      margin-left: 5px;
       margin-top: 5px;
       margin-bottom: 5px;
       width: 100%;
@@ -82,10 +83,7 @@
 
   .join-btn, .request-invite-btn {
     float: right;
-  }
-
-  .request-invite-btn {
-    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .league-actions {
