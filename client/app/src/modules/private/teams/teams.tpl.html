@@ -1,27 +1,25 @@
-<div class="container">
-  <div class="teams-header-row row">
-    <div class="col-sm-9 col-md-9">
-      <h3>My teams</h3>
-    </div>
-    <div class="col-sm-3 col-md-3">
-      <div class="teams-btn-group">
-        <button type="button" class="create-team-btn btn btn-default btn-sm" ng-click="createTeam(seasonId)"><strong>Join League</strong></button>
-      </div>
+<div class="teams-header-row row">
+  <div class="col-sm-9 col-md-9">
+    <h3>My teams</h3>
+  </div>
+  <div class="col-sm-3 col-md-3">
+    <div class="teams-btn-group">
+      <button type="button" class="create-team-btn btn btn-default btn-sm" ng-click="createTeam(seasonId)"><strong>Join League</strong></button>
     </div>
   </div>
-  <hr>
-  <div class="teams-container">
-    <ul class="nav nav-tabs">
-      <li ng-class="{'active': isAliveState()}">
-        <a ng-click="aliveTeams(seasonId)"><i class="fa fa-thumbs-up fa-fw"></i> Alive Teams</a>
-      </li>
-      <li ng-class="{'active': !isAliveState()}">
-        <a ng-click="deadTeams(seasonId)"><i class="fa fa-thumbs-down fa-fw"></i> Dead Teams</a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- placeholder for alive and dead teams -->
-  <div class="teams-content" ui-view="teamsContent"></div>
 </div>
+<hr>
+<div class="teams-container">
+  <ul class="nav nav-tabs">
+    <li ng-class="{'active': isAliveState()}">
+      <a ng-click="aliveTeams(seasonId)"><i class="fa fa-thumbs-up fa-fw"></i> Alive Teams</a>
+    </li>
+    <li ng-class="{'active': !isAliveState()}">
+      <a ng-click="deadTeams(seasonId)"><i class="fa fa-thumbs-down fa-fw"></i> Dead Teams</a>
+    </li>
+  </ul>
+</div>
+
+<!-- placeholder for alive and dead teams -->
+<div class="teams-content" ui-view="teamsContent"></div>
 

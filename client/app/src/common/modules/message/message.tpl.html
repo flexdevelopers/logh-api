@@ -1,6 +1,4 @@
-<div class="container">
-  <div class="alert alert-dismissable alert-{{messageData.message.type}}" ng-show="messageData.message.loaded">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="dismissMessage(messageData)">&times;</button>
-    {{messageData.message.content}}
-  </div>
+<div class="alert alert-dismissable alert-{{messageData.message.type}}" ng-show="messageData.message.loaded">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="dismissMessage(messageData)">&times;</button>
+  {{messageData.message.content}}
 </div>
