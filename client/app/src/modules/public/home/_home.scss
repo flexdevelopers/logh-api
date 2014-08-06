@@ -3,9 +3,30 @@
   position: relative;
   text-align: center;
   padding: 30px 60px;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 .cta {
   margin: 10px 20px;
   width: 200px;
+}
+
+.header-jumbo {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1;
+  margin: 0 0 .2em;
+}
+
+@media screen and (min-width: 768px) {
+  .header-jumbo {
+    font-size: 64px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .header-jumbo {
+    font-size: 70px;
+  }
 }
