@@ -10,24 +10,17 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Make Pick</button>
-    <div class="btn-group coach-actions" ng-show="isCoach(teamData)" dropdown is-open="coach.isopen">
-      <button type="button" class="coach-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Coach</strong> <span class="caret"></span>
+    <div class="btn-group team-actions" ng-show="isCoach(teamData) || isCommish(teamData)" dropdown is-open="coach.isopen">
+      <button type="button" class="actions-btn btn btn-default btn-sm dropdown-toggle">
+        <strong>Actions</strong> <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu team-coach-menu" role="menu">
+      <ul class="dropdown-menu team-actions-menu" role="menu">
         <li><a ng-click="editTeam(teamData)">Edit team</a></li>
         <li><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
-      </ul>
-    </div>
-    <div class="btn-group commish-actions" ng-show="isCommish(teamData)" dropdown is-open="commish.isopen">
-      <button type="button" class="commish-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Commish</strong> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu team-commish-menu" role="menu">
-        <li><a ng-click="editTeam(teamData)">Edit team</a></li>
-        <li><a ng-click="updateMessage(teamData)">Update team message</a></li>
-        <li ng-show="!teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
-        <li ng-show="teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
+        <li ng-show="isCommish(teamData)" class="divider"></li>
+        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Update team message</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
       </ul>
     </div>
   </div>

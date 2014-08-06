@@ -24,12 +24,12 @@
     float: right;
   }
 
-  .team-coach-menu, .team-commish-menu {
+  .team-actions-menu {
     right: 0;
     left: auto;
   }
 
-  .commish-actions, .coach-actions {
+  .team-actions {
     padding: 0 5px 0 0;
     float: right;
   }
@@ -55,23 +55,13 @@
   }
 
   @media all and (max-width: 550px) {
-    .coach-actions {
+    .team-actions {
       float: none !important;
       padding: 0;
       width: 100%;
       margin-top: 5px;
       margin-bottom: 5px;
-      .coach-btn {
-        width: 100%;
-      }
-    }
-    .commish-actions {
-      float: none !important;
-      padding: 0;
-      width: 100%;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      .commish-btn {
+      .actions-btn {
         width: 100%;
       }
     }

@@ -12,28 +12,20 @@
   <div class="col-sm-4 col-md-4">
     <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
     <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
-    <div class="btn-group coach-actions" ng-show="hasTeamInLeague()" dropdown is-open="coach.isopen">
-      <button type="button" class="coach-only-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Coach</strong> <span class="caret"></span>
+    <div class="btn-group league-actions" ng-show="hasTeamInLeague() || isCommish(leagueData)" dropdown is-open="coach.isopen">
+      <button type="button" class="league-actions-btn btn btn-default btn-sm dropdown-toggle">
+        <strong>Actions</strong> <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu league-coach-menu" role="menu">
-        <li ng-show="!leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
-        <li ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)"><a ng-click="requestInvite(leagueData)">Request an invite</a></li>
-        <li ng-show="!leagueData.started" class="divider"></li>
+      <ul class="dropdown-menu league-actions-menu" role="menu">
+        <li ng-show="hasTeamInLeague() && !leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
+        <li ng-show="hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)"><a ng-click="requestInvite(leagueData)">Request an invite</a></li>
         <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
-      </ul>
-    </div>
-    <div class="btn-group commish-actions" ng-show="isCommish(leagueData)" dropdown is-open="commish.isopen">
-      <button type="button" class="commish-only-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Commish</strong> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu league-commish-menu" role="menu">
-        <li ng-show="!leagueData.started"><a ng-click="invite(leagueData.id)">Invite a friend to join</a></li>
-        <li ng-show="!leagueData.started" class="divider"></li>
-        <li><a ng-show="!leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
-        <li><a ng-click="updateMessage(leagueData)">Update league message</a></li>
-        <li ng-show="!leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
-        <li ng-show="!leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
+        <li ng-show="isCommish(leagueData)" class="divider"></li>
+        <li ng-show="isCommish(leagueData) && !leagueData.started"><a ng-click="invite(leagueData.id)">Invite a friend to join</a></li>
+        <li><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Update league message</a></li>
+        <li ng-show="isCommish(leagueData) && !leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
+        <li ng-show="isCommish(leagueData) && !leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
     </div>
   </div>
