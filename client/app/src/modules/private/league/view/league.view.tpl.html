@@ -6,7 +6,7 @@
       <i class="fa fa-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
       <i class="fa fa-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
       {{leagueData.name}} <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">NO NEW TEAMS</small> <br>
-      <small>{{starts(leagueData)}} - {{leagueData.max_teams_per_user}} teams max per user</small>
+      <small>{{starts(leagueData)}} - Join up to {{leagueData.max_teams_per_user}} times</small>
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
