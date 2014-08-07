@@ -13,6 +13,7 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
   };
 
   $scope.makePick = function(game, squad) {
+    if (game.started || $scope.hasSquadBeenUsed(game, squad)) return;
     var pick = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
