@@ -112,7 +112,7 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
   $scope.makePick = function(team, pick) {
 
-    if (!$scope.isCoach(team) || pick.locked) {
+    if (!$scope.isCoach(team) || (pick && pick.locked)) {
       return;
     }
 
