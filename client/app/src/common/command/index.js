@@ -4,7 +4,6 @@ require('./session/SignoutCommand');
 
 // user commands
 require('./user/GetCurrentUserCommand');
-require('./user/UpdateUserCommand');
 
 module.exports = angular.module('loghApp.commandConfig', [])
     .config(function($commangularProvider) {
@@ -18,8 +17,6 @@ module.exports = angular.module('loghApp.commandConfig', [])
         // user events
         $commangularProvider.mapTo('GetCurrentUserEvent').asSequence()
             .add('GetCurrentUserCommand');
-        $commangularProvider.mapTo('UpdateUserEvent').asSequence()
-            .add('UpdateUserCommand');
 
     }
 );

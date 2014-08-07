@@ -1,10 +1,10 @@
 
-var UserController = function($scope, $log, userModel) {
+var UserController = function($scope, $log, userModel, userService) {
 
     $scope.userData = angular.copy(userModel);
 
     $scope.update = function(user) {
-        $scope.dispatch('UpdateUserEvent', { userParams: user });
+        userService.updateUser(user);
     };
 
     $scope.hasError = function(input) {
@@ -29,5 +29,5 @@ var UserController = function($scope, $log, userModel) {
 
 };
 
-UserController.$inject = ['$scope', '$log', 'userModel'];
+UserController.$inject = ['$scope', '$log', 'userModel', 'userService'];
 module.exports = UserController;
