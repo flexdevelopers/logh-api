@@ -33,13 +33,13 @@
     <tab>
       <tab-heading>Regular Season</tab-heading>
       <div class="regular-picks list-group">
-        <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData)">
+        <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
               <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null"></i>
               <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null"></i>
-              <i class="fa fa-times fa-fw" ng-show="pick.correct === false"></i>
-              <i class="fa fa-check fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
+              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false"></i>
+              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
@@ -55,13 +55,13 @@
     <tab>
       <tab-heading>Playoffs</tab-heading>
       <div class="playoff-picks list-group">
-        <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData)">
+        <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
               <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null"></i>
               <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null"></i>
-              <i class="fa fa-times fa-fw" ng-show="pick.correct === false"></i>
-              <i class="fa fa-check fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
+              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false"></i>
+              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
