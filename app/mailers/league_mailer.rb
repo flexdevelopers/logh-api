@@ -16,6 +16,7 @@ class LeagueMailer < ActionMailer::Base
     hdr.addTo(receiver)
 
     headers['X-SMTPAPI'] =  hdr.asJSON()
+    logger.debug "SMTPAPI: #{hdr.asJSON()}"
 
     mail to: 'jeremy@loseorgohome.com', subject: "The #{@league.name} league has a new message from the commish"
   end
