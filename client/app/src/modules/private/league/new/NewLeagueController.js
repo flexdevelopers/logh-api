@@ -4,6 +4,7 @@ var NewLeagueController = function(weeks, $scope, $log, $modalInstance) {
 
     $scope.newLeagueData = {
         name: '',
+        nickname: '',
         season_id: $scope.weeks[0].season_id,
         start_week_id: $scope.weeks[0].id,
         public: true,

@@ -39,7 +39,11 @@ class API::LeaguesController < API::BaseController
 
   # POST /api/seasons/:season_id/leagues
   def create
-    @league = @season.leagues.new(_league_params)
+    if (_league_params[:nickname] && _league_params[:nickname].length > 0)
+      # nickname is not a real field. only a spam catcher
+      return forbidden()
+    end
+    @league = @season.leagues.new(_league_params.except(:nickname))
     @league.commishes << current_user
     if @league.save
       render json: { league_id: @league.id, message: { type: SUCCESS, content: "#{@league[:name]} league created" } }, status: :ok
@@ -101,7 +105,7 @@ class API::LeaguesController < API::BaseController
   private
 
     def _league_params
-      params.require(:league).permit(:name, :public, :start_week_id, :max_teams_per_user, :message)
+      params.require(:league).permit(:name, :nickname, :public, :start_week_id, :max_teams_per_user, :message)
     end
 
     def _set_season
