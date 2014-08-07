@@ -13,6 +13,8 @@ class Game < ActiveRecord::Base
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
+  default_scope { order(starts_at: :asc) }
+
   def display
     "#{visiting_squad.name} @ #{home_squad.name}"
   end
