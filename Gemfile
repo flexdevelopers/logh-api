@@ -50,8 +50,10 @@ gem 'figaro'
 # RABL (Ruby API Builder Language)
 gem 'rabl'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :production do
+  # Use unicorn as the app server
+  gem 'unicorn'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
