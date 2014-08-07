@@ -16,7 +16,10 @@
     <div class="managed-leagues list-group">
         <a ng-repeat="league in managedLeagues | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
             <div class="row">
-                <div class="league-name col-sm-6 col-md-6"><i class="fa fa-times fa-fw" title="Closed league" ng-show="league.closed"></i><i class="fa fa-user fa-fw" title="My league" ng-show="!league.closed"></i> {{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
+                <div class="league-name col-sm-6 col-md-6">
+                  <i class="fa fa-times fa-fw" title="My Closed league" ng-show="league.closed"></i>
+                  <i class="fa fa-unlock fa-fw" title="My Public league" ng-show="!league.closed && league.public"></i>
+                  <i class="fa fa-lock fa-fw" title="My Private league" ng-show="!league.closed && !league.public"></i> {{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
                 <div class="col-sm-6 col-md-6">
                     <span class="start-week">{{starts(league)}}</span>
                     <span class="badge">View</span>
