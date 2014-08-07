@@ -16,7 +16,7 @@ class Week < ActiveRecord::Base
   scope :started, -> { where('starts_at <= ?', Time.zone.now) }
 
   def display
-    "Week #{self.number} (#{self.starts_at.strftime("%m/%d/%Y")})"
+    "Week #{self.number} (#{self.starts_at.strftime("%b %-d")})"
   end
 
   def started?
