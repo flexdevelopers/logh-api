@@ -35,16 +35,26 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12 col-md-12">
+      <div class="col-sm-6 col-md-6">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.email), 'has-feedback': hasError(newUserForm.email)}">
           <label class="control-label" for="email">Email
             <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
           </label>
-          <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" placeholder="Your email will NOT be shared with anybody..." logh-focus required>
+          <input id="email" name="email" type="email" class="form-control" ng-model="newUserData.email" logh-focus required>
           <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group" ng-class="{'has-error': hasError(newUserForm.confirmEmail), 'has-feedback': hasError(newUserForm.confirmEmail)}">
+          <label class="control-label" for="confirmEmail">Confirm Email
+            <small ng-show="hasPropertyError(newUserForm.confirmEmail, 'match')">[ Doesn't Match ]</small>
+          </label>
+          <input id="confirmEmail" name="confirmEmail" type="email" class="form-control" ng-model="newUserData.email_confirmation" match="newUserData.email">
+          <span ng-show="hasError(newUserForm.confirmEmail)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+      </div>
+
     </div>
     <div class="row">
       <div class="col-sm-6 col-md-6">

@@ -5,6 +5,7 @@ var RegisterController = function($scope, $log, $modal, $modalInstance) {
         last_name: '',
         nickname: '',
         email: '',
+        email_confirmation: '',
         password: '',
         password_confirmation: ''
     };
