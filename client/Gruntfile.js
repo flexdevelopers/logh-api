@@ -16,13 +16,53 @@ module.exports = function (grunt) {
     //heroku - do nothing for now
     grunt.registerTask('heroku', []);
 
-    //dev tasks
-    grunt.registerTask('build-dev-all', ['clean','copy:dist','build-css-dev','build-js-dev','build-shared-libs-dev']);
-    grunt.registerTask('build-dev', ['copy:dist', 'build-css-dev', 'build-js-dev', 'build-shared-libs-dev']);
-    grunt.registerTask('build-css-dev', ['compass:dev']);
-    grunt.registerTask('build-js-dev', ['html2js','browserify2:app-dev']);
-    grunt.registerTask('build-shared-libs-dev', ['browserify2:shared-libs-dev']);
-
     // server task
-    grunt.registerTask('server', ['build-dev', 'watch']);
+    grunt.registerTask('server', [
+      'build-dev',
+      'watch'
+    ]);
+
+    // build tasks
+    grunt.registerTask('build', [
+      'copy:dist',
+      'build-css',
+      'build-js',
+      'build-shared-libs'
+    ]);
+
+    grunt.registerTask('build-dev', [
+      'copy:dist',
+      'build-css-dev',
+      'build-js-dev',
+      'build-shared-libs-dev']
+    );
+
+    // prod tasks
+    grunt.registerTask('build-css', [
+      'compass:prod'
+    ]);
+
+    grunt.registerTask('build-js', [
+      'html2js',
+      'browserify2:app-prod'
+    ]);
+
+    grunt.registerTask('build-shared-libs', [
+      'browserify2:shared-libs-prod'
+    ]);
+
+    // dev tasks
+    grunt.registerTask('build-css-dev', [
+      'compass:dev'
+    ]);
+
+    grunt.registerTask('build-js-dev', [
+      'html2js',
+      'browserify2:app-dev'
+    ]);
+
+    grunt.registerTask('build-shared-libs-dev', [
+      'browserify2:shared-libs-dev'
+    ]);
+
 };

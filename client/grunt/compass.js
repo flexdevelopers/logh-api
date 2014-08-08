@@ -1,4 +1,3 @@
-
 module.exports = {
     options: {
         sassDir: '<%= globalConfig.srcdir %>',
@@ -10,7 +9,7 @@ module.exports = {
         assetCacheBuster: false,
         raw: 'Sass::Script::Number.precision = 10\n'
     },
-    dist: {
+    prod: {
         options: {
             cssDir: '<%= globalConfig.resourcesdir %>',
             outputStyle: 'compressed',
@@ -21,8 +20,8 @@ module.exports = {
         options: {
             debugInfo: true,
             cssDir: '<%= globalConfig.resourcesdir %>',
-            outputStyle: 'compressed',
-            environment: 'production'
+            outputStyle: 'expanded',
+            environment: 'development'
         }
     }
 };
