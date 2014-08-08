@@ -10,7 +10,7 @@ describe Session do
 
   context 'when email is blank' do
     it 'should not be valid' do
-      session = Session.new(email: '', password: 'foobar')
+      session = Session.new(email: '', password: 'foobar852')
       expect(session).not_to be_valid
     end
   end

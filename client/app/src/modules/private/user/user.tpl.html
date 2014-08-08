@@ -35,10 +35,10 @@
                   <div class="form-group" ng-class="{'has-error': hasError(editUserForm.password), 'has-feedback': hasError(editUserForm.password)}">
                       <label class="control-label" for="password">New Password
                           <small ng-show="hasPropertyError(editUserForm.password, 'required')">[ Required ]</small>
-                          <small ng-show="hasPropertyError(editUserForm.password, 'minlength')">[ 6 - 15 Characters ]</small>
-                          <small ng-show="hasPropertyError(editUserForm.password, 'maxlength')">[ 6 - 15 Characters ]</small>
+                          <small ng-show="hasPropertyError(editUserForm.password, 'minlength')">[ 8 - 50 Characters ]</small>
+                          <small ng-show="hasPropertyError(editUserForm.password, 'maxlength')">[ 8 - 50 Characters ]</small>
                       </label>
-                      <input id="password" name="password" type="password" class="form-control" ng-model="userData.user.password" ng-minlength="6" ng-maxlength="15">
+                      <input id="password" name="password" type="password" class="form-control" ng-model="userData.user.password" ng-minlength="8" ng-maxlength="50">
                       <span ng-show="hasError(editUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
                   </div>
               </div>

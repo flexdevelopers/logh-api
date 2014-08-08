@@ -51,10 +51,10 @@
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.password), 'has-feedback': hasError(newUserForm.password)}">
           <label class="control-label" for="password">Password
             <small ng-show="hasPropertyError(newUserForm.password, 'required')">[ Required ]</small>
-            <small ng-show="hasPropertyError(newUserForm.password, 'minlength')">[ 6 - 15 Characters ]</small>
-            <small ng-show="hasPropertyError(newUserForm.password, 'maxlength')">[ 6 - 15 Characters ]</small>
+            <small ng-show="hasPropertyError(newUserForm.password, 'minlength')">[ 8 - 50 Characters ]</small>
+            <small ng-show="hasPropertyError(newUserForm.password, 'maxlength')">[ 8 - 50 Characters ]</small>
           </label>
-          <input id="password" name="password" type="password" class="form-control" ng-model="newUserData.password" ng-minlength="6" ng-maxlength="15" required>
+          <input id="password" name="password" type="password" class="form-control" ng-model="newUserData.password" ng-minlength="8" ng-maxlength="50" required>
           <span ng-show="hasError(newUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>

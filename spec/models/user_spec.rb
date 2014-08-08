@@ -88,18 +88,18 @@ describe User do
     it { should_not be_valid }
   end
 
-  context 'when password is less than 6 characters' do
-    subject(:user) { FactoryGirl.build(:user, password: 'f' * 5, password_confirmation: 'f' * 5) }
+  context 'when password is less than 8 characters' do
+    subject(:user) { FactoryGirl.build(:user, password: 'f' * 7, password_confirmation: 'f' * 7) }
     it { should_not be_valid }
   end
 
-  context 'when password is more than 15 characters' do
-    subject(:user) { FactoryGirl.build(:user, password: 'f' * 16, password_confirmation: 'f' * 16) }
+  context 'when password is more than 50 characters' do
+    subject(:user) { FactoryGirl.build(:user, password: 'f' * 51, password_confirmation: 'f' * 51) }
     it { should_not be_valid }
   end
 
   context 'when password does not match password confirmation' do
-    subject(:user) { FactoryGirl.build(:user, password: 'foobar', password_confirmation: 'barfoo') }
+    subject(:user) { FactoryGirl.build(:user, password: 'foobar852', password_confirmation: 'barfoo852') }
     it { should_not be_valid }
   end
 

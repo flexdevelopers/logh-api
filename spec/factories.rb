@@ -5,13 +5,13 @@ FactoryGirl.define do
     first_name              'Billy Bob'
     last_name               'Thorton'
     email
-    password                'foobar'
-    password_confirmation   'foobar'
+    password                'foobar852'
+    password_confirmation   'foobar852'
   end
 
   factory :session do
     email     'foo@bar.com'
-    password  'foobar'
+    password  'foobar852'
   end
 
   factory :league do |league|
