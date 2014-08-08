@@ -99,6 +99,9 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
                     $location.path(redirect);
+                    if (['/', '/signin', '/register'].indexOf(redirect) !== -1) {
+                      userService.getCurrentUser();
+                    }
                 } else  {
                   $location.path('/season/' + seasonModel.season.id + '/teams/alive');
                 }
