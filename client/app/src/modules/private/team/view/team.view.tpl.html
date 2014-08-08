@@ -25,7 +25,7 @@
     </div>
   </div>
 </div>
-<div class="team-message well well-sm"><i class="fa fa-comment fa-fw"></i> <strong>The commish says:</strong> <em>{{message(teamData)}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
+<div class="team-message well well-sm"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish says:</strong> <em>{{message(teamData)}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
 <h4>Picks</h4>
 <hr>
 <div class="team-container" style="clear:both;">
@@ -36,10 +36,10 @@
         <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
-              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null"></i>
-              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null"></i>
-              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false"></i>
-              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
+              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
+              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
+              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
+              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>
@@ -58,10 +58,10 @@
         <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
           <div class="row">
             <div class="week-name col-sm-8 col-md-8">
-              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null"></i>
-              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null"></i>
-              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false"></i>
-              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
+              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
+              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
+              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
+              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> [ {{pick.squad_name}} ] <span class="game">{{pick.game_display}}</span>
             </div>
             <div class="col-sm-4 col-md-4">
               <span class="week-loser">{{pick.week_display}}</span>

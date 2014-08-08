@@ -10,9 +10,9 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw"></i> FAQ</a></li>
-      <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="fa fa-user fa-fw"></i>  My teams</a></li>
-      <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="fa fa-group fa-fw"></i>  My leagues</a></li>
+      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i> FAQ</a></li>
+      <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="fa fa-user fa-fw" title="My teams"></i> My teams</a></li>
+      <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="fa fa-group fa-fw" title="My leagues"></i> My leagues</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -25,7 +25,7 @@
       </li>
     </ul>
     <ul ng-show="!userData.user.loaded" class="nav navbar-nav navbar-right">
-      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw"></i> FAQ</a></li>
+      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i> FAQ</a></li>
       <li><a ng-click="register()">Register</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>

@@ -1,7 +1,7 @@
 <div class="dead-teams list-group">
   <a ng-repeat="team in deadTeams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(seasonId, team)" class="list-group-item">
         <div class="row">
-            <div class="team-name col-sm-6 col-md-6"><i class="fa fa-comment fa-fw" ng-show="team.message.length > 0"></i> {{team.name}} <span class="team-league">{{team.league.name}}</span></div>
+            <div class="team-name col-sm-6 col-md-6"><i class="fa fa-comment fa-fw" ng-show="team.message.length > 0" title="Has message from commish"></i> {{team.name}} <span class="team-league">{{team.league.name}}</span></div>
             <div class="col-sm-6 col-md-6">
                 <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Last Pick: [ {{team.last_pick_squad_name}} ]</span>
                 <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
