@@ -19,7 +19,7 @@
       <ul class="dropdown-menu league-actions-menu" role="menu">
         <li ng-show="hasTeamInLeague() && !leagueData.started"><a ng-click="joinLeague(leagueData)">Join again ({{leagueData.max_teams_per_user}} times max)</a></li>
         <li ng-show="hasTeamInLeague() && !leagueData.started && !leagueData.public && !isCommish(leagueData)"><a ng-click="requestInvite(leagueData)">Request an invite</a></li>
-        <li><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
+        <li ng-show="!isCommish(leagueData)"><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
         <li ng-show="isCommish(leagueData)" class="divider"></li>
         <li ng-show="isCommish(leagueData) && !leagueData.started"><a ng-click="invite(leagueData.id)">Invite a friend to join</a></li>
         <li><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
