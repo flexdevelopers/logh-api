@@ -34,13 +34,19 @@ class Week < ActiveRecord::Base
     def mark_picks_correct_or_not
       return if self.complete == false # only update if the week is complete
 
-      picks.each do |pick|
-        if losers.find_by(squad: pick.squad)
-          pick.correct = true
-        else
-          pick.correct = false
+      self.season.leagues.each do |season_league|
+        season_league.teams.alive.each do |alive_team|
+          pick = self.picks.find_by(team: alive_team)
+          if !pick
+            alive_team.kill # the team made no pick so kill it
+            return
+          end
+          if self.losers.include?(pick.squad)
+            pick.correct = true
+          else
+            pick.correct = false
+          end
         end
-        pick.save
       end
     end
 end
