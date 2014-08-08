@@ -5,6 +5,10 @@
     left: auto;
   }
 
+  .team-name.inactive {
+    text-decoration: line-through;
+  }
+
   .league-container {
     position: relative;
     .custom-search-form {
