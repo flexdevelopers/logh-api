@@ -5,7 +5,7 @@ var LeaguesController = function($scope, $log, $state, $stateParams, seasonModel
 
     // pagination
     $scope.currentLeaguePage = 1;
-    $scope.leaguesPerPage = 10;
+    $scope.leaguesPerPage = 100;
 
     $scope.seasonId = $stateParams.seasonId;
 

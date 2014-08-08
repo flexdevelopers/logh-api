@@ -4,7 +4,7 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
 
     // pagination
     $scope.currentTeamPage = 1;
-    $scope.teamsPerPage = 10;
+    $scope.teamsPerPage = 100;
 
     $scope.isAliveState = function() {
         return $state.current.name == 'private.teams.alive';
