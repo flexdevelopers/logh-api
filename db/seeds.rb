@@ -80,23 +80,23 @@ season1 = Season.create!(name: '2014-15 NFL Season', active: true, ends_at: Time
 season2 = Season.create!(name: '2015-16 NFL Season', active: false, ends_at: Time.zone.parse('2016-02-03 06:00'))
 
 # create weeks
-week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-02 06:00'), season: season1)
-week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), season: season1)
-week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), season: season1)
-week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), season: season1)
-week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), season: season1)
-week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), season: season1)
-week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), season: season1)
-week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), season: season1)
-week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), season: season1)
-week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), season: season1)
-week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), season: season1)
-week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), season: season1)
-week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), season: season1)
-week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), season: season1)
-week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), season: season1)
-week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), season: season1)
-week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), season: season1)
+week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-02 06:00'), ends_at: Time.zone.parse('2014-09-08 23:59'), season: season1)
+week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), ends_at: Time.zone.parse('2014-09-15 23:59'), season: season1)
+week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), ends_at: Time.zone.parse('2014-09-22 23:59'), season: season1)
+week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), ends_at: Time.zone.parse('2014-09-29 23:59'), season: season1)
+week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), ends_at: Time.zone.parse('2014-10-06 23:59'), season: season1)
+week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), ends_at: Time.zone.parse('2014-10-13 23:59'), season: season1)
+week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), ends_at: Time.zone.parse('2014-10-20 23:59'), season: season1)
+week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), ends_at: Time.zone.parse('2014-10-27 23:59'), season: season1)
+week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), ends_at: Time.zone.parse('2014-11-03 23:59'), season: season1)
+week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), ends_at: Time.zone.parse('2014-11-10 23:59'), season: season1)
+week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), ends_at: Time.zone.parse('2014-11-17 23:59'), season: season1)
+week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), ends_at: Time.zone.parse('2014-11-24 23:59'), season: season1)
+week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), ends_at: Time.zone.parse('2014-12-01 23:59'), season: season1)
+week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), ends_at: Time.zone.parse('2014-12-08 23:59'), season: season1)
+week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), ends_at: Time.zone.parse('2014-12-15 23:59'), season: season1)
+week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), ends_at: Time.zone.parse('2014-12-22 23:59'), season: season1)
+week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), ends_at: Time.zone.parse('2014-12-29 23:59'), season: season1)
 
 # create games
 # week 1
@@ -390,7 +390,7 @@ Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visit
 Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: rams, home_squad: seahawks)
 
 # create a user and a league for that user and a few teams for that user in that league
-user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
+user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar852', password_confirmation: 'foobar852')
 # create 20 public and private leagues with random but unique names
 20.times do |i|
   League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
@@ -402,7 +402,7 @@ foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, comm
 end
 
 # create another user and a few teams for that user
-user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com', password: 'barfoo', password_confirmation: 'barfoo')
+user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com', password: 'barfoo852', password_confirmation: 'barfoo852')
 3.times do |i|
   Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
 end

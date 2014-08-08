@@ -11,6 +11,9 @@ describe Week do
   it { should respond_to(:starts_at) }
   its(:starts_at) { should be_nil }
 
+  it { should respond_to(:starts_at) }
+  its(:ends_at) { should be_nil }
+
   it { should respond_to(:season) }
   its(:season) { should be_nil }
 
@@ -33,6 +36,11 @@ describe Week do
 
   context 'when week has no start date/time' do
     subject(:week) { FactoryGirl.build(:week, starts_at: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when week has no end date/time' do
+    subject(:week) { FactoryGirl.build(:week, ends_at: nil) }
     it { should_not be_valid }
   end
 

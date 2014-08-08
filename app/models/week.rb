@@ -8,6 +8,7 @@ class Week < ActiveRecord::Base
 
   validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
   validates :starts_at, presence: true
+  validates :ends_at, presence: true
   validates :season, presence: true
   validates :week_type, presence: true
   validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
@@ -16,7 +17,7 @@ class Week < ActiveRecord::Base
   scope :started, -> { where('starts_at <= ?', Time.zone.now) }
 
   def display
-    "Week #{self.number} (#{self.starts_at.strftime("%b %-d")})"
+    "Week #{self.number} (#{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")})"
   end
 
   def started?
