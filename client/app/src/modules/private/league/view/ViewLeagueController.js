@@ -7,7 +7,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   // pagination
   $scope.currentTeamPage = 1;
-  $scope.teamsPerPage = 10;
+  $scope.teamsPerPage = 100;
 
   $scope.teamOptions = { active: true, inactive: false };
 
