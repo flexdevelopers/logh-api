@@ -20,6 +20,9 @@ describe Game do
   it { should respond_to(:visiting_squad_score) }
   its(:visiting_squad_score) { should eq(0) }
 
+  it { should respond_to(:complete) }
+  its(:complete) { should be_false }
+
   context 'when it has no week' do
     subject(:game) { FactoryGirl.build(:game, week: nil) }
     it { should_not be_valid }

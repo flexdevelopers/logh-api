@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140808015722) do
+ActiveRecord::Schema.define(version: 20140809023453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,14 +25,15 @@ ActiveRecord::Schema.define(version: 20140808015722) do
   add_index "api_keys", ["token"], name: "index_api_keys_on_token", unique: true, using: :btree
 
   create_table "games", force: true do |t|
-    t.datetime "starts_at",                        null: false
+    t.datetime "starts_at",                            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "week_id",                          null: false
-    t.integer  "home_squad_id",                    null: false
-    t.integer  "visiting_squad_id",                null: false
-    t.integer  "home_squad_score",     default: 0, null: false
-    t.integer  "visiting_squad_score", default: 0, null: false
+    t.integer  "week_id",                              null: false
+    t.integer  "home_squad_id",                        null: false
+    t.integer  "visiting_squad_id",                    null: false
+    t.integer  "home_squad_score",     default: 0,     null: false
+    t.integer  "visiting_squad_score", default: 0,     null: false
+    t.boolean  "complete",             default: false
   end
 
   add_index "games", ["week_id", "home_squad_id"], name: "index_games_on_week_id_and_home_squad_id", unique: true, using: :btree

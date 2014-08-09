@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Edit Game</h3>
+</div>
+<div class="modal-body">
+  <h4>{{gameData.display}}</h4>
+  <form style="padding: 10px;" name="editGameForm" class="edit-game-form form-horizontal" role="form" novalidate>
+    <div class="form-group">
+      <label for="visitorScore" class="col-sm-6 control-label">{{gameData.squads[0].name}} Score:</label>
+      <div class="col-sm-6">
+        <input id="visitorScore" name="visitorScore" type="text" class="form-control" ng-model="gameData.visiting_squad_score">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="homeScore" class="col-sm-6 control-label">{{gameData.squads[1].name}} Score:</label>
+      <div class="col-sm-6">
+        <input id="homeScore" name="homeScore" type="text" class="form-control" ng-model="gameData.home_squad_score">
+      </div>
+    </div>
+    <div class="form-group">
+      <label><input type="checkbox" ng-model="gameData.complete"> completed</label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-click="editGame(gameData)">Update</button>
+</div>

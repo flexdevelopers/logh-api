@@ -12,6 +12,7 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_id, presence: true, uniqueness: { scope: :week_id }
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :complete, inclusion: { in: [true, false] }
 
   default_scope { order(starts_at: :asc) }
 
@@ -53,18 +54,20 @@ class Game < ActiveRecord::Base
 
     def set_loser
 
-      remove_game_squads_from_losers
+      remove_game_squads_from_losers()
+
+      return unless self.complete
 
       if home_squad_score < visiting_squad_score
-        week.losers << Loser.create!(week: week, game: self, squad: home_squad)
+        self.week.losers << Loser.create!(week: week, game: self, squad: home_squad)
       elsif visiting_squad_score < home_squad_score
-        week.losers << Loser.create!(week: week, game: self, squad: visiting_squad)
+        self.week.losers << Loser.create!(week: week, game: self, squad: visiting_squad)
       end
 
     end
 
     def remove_game_squads_from_losers
-      week.losers.each do |loser|
+      self.week.losers.each do |loser|
         loser.destroy if loser.game.id === self.id
       end
     end

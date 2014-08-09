@@ -14,7 +14,7 @@ class API::Admin::GamesController < API::GamesController
   # PUT/PATCH /api/admin/weeks/:week_id/games/:id
   def update
     if @game.update(_game_params)
-      head :no_content
+      render json: { message: { type: SUCCESS, content: "Game has been updated" } }, status: :ok
     else
       error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -28,7 +28,7 @@ class API::Admin::GamesController < API::GamesController
   private
 
     def _game_params
-      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score)
+      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score, :complete)
     end
 
     def _verify_admin

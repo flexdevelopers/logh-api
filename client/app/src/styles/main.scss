@@ -46,6 +46,10 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/teams/dead/teams.dead";
 // pick
 @import "../modules/private/pick/make/pick.make";
+// game
+@import "../modules/private/admin/admin";
+@import "../modules/private/admin/games/admin.games";
+@import "../modules/private/admin/games/edit/games.edit";
 
 html {
   //  for sticky footer
