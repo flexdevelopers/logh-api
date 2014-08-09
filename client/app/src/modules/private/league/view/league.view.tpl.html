@@ -5,8 +5,10 @@
       <i class="fa fa-times" title="Closed league" ng-show="leagueData.closed"></i>
       <i class="fa fa-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
       <i class="fa fa-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
-      {{leagueData.name}} <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">NO NEW TEAMS</small> <br>
-      <small>{{starts(leagueData)}} - Join up to {{leagueData.max_teams_per_user}} times</small>
+      {{leagueData.name}} <small><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
+      <small ng-show="leagueData.started">{{starts(leagueData)}}</small>
+      <small ng-show="!leagueData.closed && !leagueData.started">{{starts(leagueData)}} - Join up to {{leagueData.max_teams_per_user}} times</small>
+      <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
