@@ -1,4 +1,4 @@
-var AdminGamesController = function(week, games, $scope, $modal, gameService) {
+var AdminGamesController = function(week, games, $scope, $modal, gameService, weekService) {
 
   $scope.weekData = week.data;
 
@@ -24,6 +24,13 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService) {
 
   };
 
+  $scope.completeWeek = function(week) {
+    weekService.completeWeek(week)
+      .then(function() {
+        $scope.weekData.complete = true;
+      });
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -32,5 +39,5 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService) {
   init();
 };
 
-AdminGamesController.$inject = ['week', 'games', '$scope', '$modal', 'gameService'];
+AdminGamesController.$inject = ['week', 'games', '$scope', '$modal', 'gameService', 'weekService'];
 module.exports = AdminGamesController;

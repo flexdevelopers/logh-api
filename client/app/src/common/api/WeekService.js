@@ -1,4 +1,4 @@
-var WeekService = function($http, $log, apiConfig, seasonModel) {
+var WeekService = function($http, $log, $q, apiConfig, seasonModel, messageModel) {
 
     this.getAvailableWeeks = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/available")
@@ -28,7 +28,24 @@ var WeekService = function($http, $log, apiConfig, seasonModel) {
         return promise;
     };
 
+    this.completeWeek = function(week) {
+      var deferred = $q.defer();
+      $http.put(apiConfig.baseURL + "admin/seasons/" + week.season_id + "/weeks/" + week.id + "/complete")
+            .success(function(data) {
+                $log.debug("WeekService: completeWeek success");
+                messageModel.setMessage(data.message, false);
+                deferred.resolve();
+            })
+            .error(function(data) {
+                $log.debug("WeekService: completeWeek failed");
+                messageModel.setMessage(data.message, false);
+                deferred.reject();
+            });
+
+        return deferred.promise;
+    };
+
 };
 
-WeekService.$inject = ['$http', '$log', 'apiConfig', 'seasonModel'];
+WeekService.$inject = ['$http', '$log', '$q', 'apiConfig', 'seasonModel', 'messageModel'];
 module.exports = WeekService;

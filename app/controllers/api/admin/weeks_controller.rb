@@ -1,6 +1,15 @@
 class API::Admin::WeeksController < API::WeeksController
-  before_action :_set_week, only: [:update]
+  before_action :_set_week, only: [ :update, :complete ]
   before_action :_verify_admin
+
+  # PUT /api/admin/seasons/:season_id/weeks/:id/complete
+  def complete
+    if @week.update_attributes(complete: true)
+      render json: { message: { type: SUCCESS, content: "Week #{@week[:number]} has been marked complete" } }, status: :ok
+    else
+      error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
 
   # POST /api/admin/seasons/:season_id/weeks
   def create

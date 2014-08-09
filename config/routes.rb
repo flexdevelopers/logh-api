@@ -67,7 +67,9 @@ LoghApi::Application.routes.draw do
       resources :users, only: [:index, :show, :update, :destroy]
 
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
-        resources :weeks, only: [:create, :update, :destroy]
+        resources :weeks, only: [:create, :update, :destroy] do
+          put 'complete', on: :member, to: 'weeks#complete'
+        end
       end
 
       resources :weeks, only:[] do
