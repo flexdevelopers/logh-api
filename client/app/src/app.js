@@ -146,20 +146,27 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
             return config;
         },
         responseError: function (rejection) {
-            if (rejection.status === 401) {
-                var message = rejection.data.message;
+          var message;
+          if (rejection.status === 401) {
                 var path = $location.path();
+                message = rejection.data.message;
                 $timeout(function () {
                   userModel.resetUser();
-                  if ($location.path() == '/signin') {
-                    messageModel.setMessage(message, false);
-                  } else {
-                    messageModel.setMessage(message, true);
-                    $location.path('/signin').search({ redirect: encodeURIComponent(path) });
-                  }
+                    if ($location.path() == '/signin') {
+                        messageModel.setMessage(message, false);
+                    } else {
+                        messageModel.setMessage(message, true);
+                        $location.path('/signin').search({ redirect: encodeURIComponent(path) });
+                    }
                 }, 200);
-            }
-            return $q.reject(rejection);
+          } else if (rejection.status === 404) {
+              message = { type: 'danger', content: 'Houston, we have a problem. Page not found.' };
+              $timeout(function () {
+                  messageModel.setMessage(message, true);
+                  $location.path('/');
+              }, 200);
+          }
+          return $q.reject(rejection);
         }
     };
 });
