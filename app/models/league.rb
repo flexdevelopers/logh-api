@@ -18,8 +18,7 @@ class League < ActiveRecord::Base
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
   validates :message, allow_nil: true, length: { maximum: 200 }
 
-  default_scope { includes(:start_week) }
-  default_scope { order(:name) }
+  default_scope { includes(:start_week).order(name: :asc) }
 
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }
@@ -39,12 +38,12 @@ class League < ActiveRecord::Base
   end
 
   def commish_emails
-    commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
+    commish_ids = league_commishes.map(&:user_id)
     User.where(id: commish_ids).map(&:email)
   end
 
   def commish_names
-    commish_ids = LeagueCommish.where(league_id: self.id).map(&:user_id)
+    commish_ids = league_commishes.map(&:user_id)
     User.where(id: commish_ids).map(&:display_name)
   end
 

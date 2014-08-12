@@ -14,8 +14,7 @@ class Team < ActiveRecord::Base
   validates :alive, inclusion: { in: [true, false] }
   validates :message, allow_nil: true, length: { maximum: 200 }
 
-  default_scope { includes(:league) }
-  default_scope { order(name: :asc) }
+  default_scope { includes(:league).order(name: :asc) }
 
   scope :active, -> { where(active: true) }
 
@@ -27,12 +26,12 @@ class Team < ActiveRecord::Base
   end
 
   def coach_emails
-    coach_ids = TeamCoach.where(team_id: self.id).map(&:user_id)
+    coach_ids = team_coaches.map(&:user_id)
     User.where(id: coach_ids).map(&:email)
   end
 
   def coach_names
-    coach_ids = TeamCoach.where(team_id: self.id).map(&:user_id)
+    coach_ids = team_coaches.map(&:user_id)
     User.where(id: coach_ids).map(&:display_name)
   end
 
