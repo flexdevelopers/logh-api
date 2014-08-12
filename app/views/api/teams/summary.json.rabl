@@ -1,7 +1,8 @@
 object @team
-attributes :id, :name, :active, :alive, :message
-node(:commish_emails) { |team| team.commish_emails }
+attributes :id, :name, :active, :alive
+node(:correct_picks_count) { |team| team.correct_picks_count }
 node(:coach_emails) { |team| team.coach_emails }
+node(:coach_names) { |team| team.coach_names }
 node(:last_pick_squad_name) do |team|
   if team.alive
     if !team.current_pick
@@ -21,7 +22,4 @@ node(:last_pick_squad_name) do |team|
       "No Pick"
     end
   end
-end
-child :league do
-  attributes :id, :name, :season_id, :started?
 end
