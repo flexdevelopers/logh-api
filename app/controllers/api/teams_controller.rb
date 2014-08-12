@@ -9,9 +9,9 @@ class API::TeamsController < API::BaseController
   def alive
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = Team.where('league_id = ?', params[:league_id]).alive
+        @teams = @league.teams.alive
       else
-        @teams = Team.where('league_id = ?', params[:league_id]).active.alive
+        @teams = @league.teams.active.alive
       end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive
@@ -23,9 +23,9 @@ class API::TeamsController < API::BaseController
   def dead
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = Team.where('league_id = ?', params[:league_id]).dead.sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
       else
-        @teams = Team.where('league_id = ?', params[:league_id]).active.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.active.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
       end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead
