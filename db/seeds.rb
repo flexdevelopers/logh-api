@@ -390,20 +390,21 @@ Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visit
 Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: rams, home_squad: seahawks)
 
 # create a user and a league for that user and a few teams for that user in that league
-user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar852', password_confirmation: 'foobar852')
+user1 = User.create!(first_name: 'Jeremy', last_name: 'Mitchell', admin: true, email: 'mitchell852@gmail.com', password: 'foobar852', password_confirmation: 'foobar852')
+user2 = User.create!(first_name: 'Tate', last_name: 'Mitchell', email: 'tatecmitchell@gmail.com', password: '00001221', password_confirmation: '00001221')
+user3 = User.create!(first_name: 'Joie', last_name: 'Mitchell', email: 'joiemitchell@gmail.com', password: 'artrules', password_confirmation: 'artrules')
+user4 = User.create!(first_name: 'Mason', last_name: 'Mitchell', email: 'masonmitchell852@foobar.com', password: 'artrules', password_confirmation: 'artrules')
 # create 20 public and private leagues with random but unique names
-20.times do |i|
-  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
-  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
+200.times do |i|
+  user = [user1, user2, user3, user4].sample
+  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
+  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
 end
-foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
-3.times do |i|
-  Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
-end
-
-# create another user and a few teams for that user
-user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com', password: 'barfoo852', password_confirmation: 'barfoo852')
-3.times do |i|
-  Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
+league_count = League.all.count
+111.times do |i|
+  Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user1])
+  Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user2])
+  Team.create!(name: "#{user3[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user3])
+  Team.create!(name: "#{user4[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user4])
 end
 
