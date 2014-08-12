@@ -11,8 +11,15 @@ module.exports = angular.module('loghApp.team.view', [])
           }
         },
         resolve: {
-          team: function(teamService, $stateParams) {
+          team: function(user, teamService, $stateParams) {
             return teamService.getTeam($stateParams.leagueId, $stateParams.teamId);
+          },
+          leagueTeams: function(team, teamService, $stateParams, userModel) {
+            if (team.data.coach_emails.indexOf(userModel.user.email) > -1) {
+              return teamService.getLeagueTeams($stateParams.leagueId);
+            } else {
+              return { data: [] };
+            }
           },
           regularPicks: function(team, pickService) {
             return pickService.getRegularPicks({ teamId: team.data.id });

@@ -52,6 +52,21 @@ var TeamService = function($http, $log, $location, $state, $q, apiConfig, messag
         return promise;
     };
 
+    this.getLeagueTeams = function(leagueId) {
+        var apiUrl = apiConfig.baseURL + "leagues/" + leagueId + "/teams";
+        var promise = $http.get(apiUrl)
+            .success(function(data) {
+                $log.debug("TeamService: getLeagueTeams success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("TeamService: getLeagueTeams failed");
+                return data;
+            });
+
+        return promise;
+    };
+
 
     this.createTeam = function(teamParams) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams",

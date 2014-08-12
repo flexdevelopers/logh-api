@@ -1,6 +1,7 @@
-var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService, pickService) {
 
   $scope.teamData = team.data;
+  $scope.leagueTeams = leagueTeams.data;
 
   $scope.regularPicks = regularPicks.data;
   $scope.playoffPicks = playoffPicks.data;
@@ -83,6 +84,10 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
     alert('popup a modal'); // todo: what is this doing here?
   };
 
+  $scope.showTeam = function(team) {
+    $location.path('/season/' + team.league.season_id + '/league/' + team.league.id + '/team/' + team.id);
+  };
+
   $scope.showLeague = function(team) {
     $location.path('/season/' + team.league.season_id + '/league/' + team.league.id);
   };
@@ -151,5 +156,5 @@ var ViewTeamController = function(team, regularPicks, playoffPicks, $scope, $log
 
 };
 
-ViewTeamController.$inject = ['team', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

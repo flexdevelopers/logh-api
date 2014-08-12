@@ -34,7 +34,7 @@ class API::TeamsController < API::BaseController
 
   # GET /api/leagues/:league_id/teams
   def index
-    @teams = @league.teams
+    @teams = current_user.teams.where(league: @league)
     respond_with @teams
   end
 
