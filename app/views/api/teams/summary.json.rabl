@@ -23,3 +23,6 @@ node(:last_pick_squad_name) do |team|
     end
   end
 end
+child :league do
+  attributes :id, :name, :season_id, :started?
+end
