@@ -14,7 +14,7 @@ class API::TeamsController < API::BaseController
         @teams = @league.teams.active.alive
       end
     else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive.sort_by { |team| [team.league.name, team.name] }
     end
   end
 
