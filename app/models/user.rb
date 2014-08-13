@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   private
 
   def welcome_notification
-    UserMailer.welcome(self, Season.upcoming[0]).deliver
+    UserMailer.welcome(self, Season.active).deliver
   end
 
 end
