@@ -1,3 +1,3 @@
 collection @teams
 
-extends 'api/teams/show'
+extends 'api/teams/minimal'
