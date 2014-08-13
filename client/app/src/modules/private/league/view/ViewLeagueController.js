@@ -48,7 +48,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.hasNoPick = function(team) {
-    return team.last_pick_squad_name == 'None';
+    return team.last_pick_squad_name == 'No Pick';
   };
 
   $scope.editLeague = function(league) {
