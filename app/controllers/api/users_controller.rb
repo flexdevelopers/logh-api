@@ -7,6 +7,16 @@ class API::UsersController < API::BaseController
     respond_with @user
   end
 
+  # PUT /api/users/abuse
+  def abuse
+    if params[:message] && params[:message].length > 0
+      UserMailer.report_abuse(params[:message], current_user).deliver
+      render json: { message: { type: SUCCESS, content: "We're on it! Thanks for letting us know." } }, status: :ok
+    else
+      render json: { message: { type: WARNING, content: "Sorry. We did not get your message." } }, status: :ok
+    end
+  end
+
   # POST /api/users
   def create
     if (_user_params[:nickname] && _user_params[:nickname].length > 1)

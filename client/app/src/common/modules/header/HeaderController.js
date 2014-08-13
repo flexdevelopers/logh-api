@@ -25,15 +25,24 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     $scope.faq = function() {
 
-      var modalInstance = $modal.open({
+      $modal.open({
         templateUrl: 'modules/public/faq/faq.tpl.html',
         controller: 'FaqController'
       });
 
-      modalInstance.result.then(function(newUser) {
-        userService.createUser(newUser);
+    };
+
+    $scope.reportAbuse = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'modules/public/abuse/abuse.tpl.html',
+        controller: 'AbuseController'
+      });
+
+      modalInstance.result.then(function(message) {
+        userService.reportAbuse(message);
       }, function () {
-        $log.debug('FAQ modal dismissed...');
+        $log.debug('report abuse modal dismissed...');
       });
 
     };

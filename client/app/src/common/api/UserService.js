@@ -134,6 +134,23 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
         return promise;
     };
 
+    this.reportAbuse = function(message) {
+        var promise = $http.put(apiConfig.baseURL + "users/abuse",
+            { message: message })
+            .success(function(data) {
+                $log.debug("UserService: reportAbuse success");
+                messageModel.setMessage(data.message, false);
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("UserService: reportAbuse failed");
+                messageModel.setMessage(data.message, false);
+                return data;
+            });
+
+        return promise;
+    };
+
 };
 
 UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel', 'seasonModel'];

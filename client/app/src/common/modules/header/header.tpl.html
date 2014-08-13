@@ -10,15 +10,15 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i> FAQ</a></li>
       <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)"><i class="fa fa-user fa-fw" title="My teams"></i> My teams</a></li>
       <li ng-class="{'active': isState(['private.leagues.manage'])}"><a ng-click="manageLeagues(season)"><i class="fa fa-group fa-fw" title="My leagues"></i> My leagues</a></li>
+      <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(season)">Join a league</a></li>
+      <li><a ng-click="createLeague(season)">Create a league</a></li>
+      <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i></a></li>
+      <li><a ng-click="reportAbuse()"><i class="fa fa-exclamation-circle fa-fw" title="Report Abuse"></i></a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a ng-click="joinLeague(season)">Join a league</a></li>
-          <li><a ng-click="createLeague(season)">Create a league</a></li>
-          <li class="divider"></li>
           <li><a ng-click="userProfile()">User Profile</a></li>
           <li><a ng-click="signout()">Sign Out</a></li>
         </ul>

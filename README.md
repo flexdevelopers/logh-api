@@ -25,6 +25,7 @@ And then you can do this, for example:
 * POST        /api/users                                       [ create user ] { email*, first_name*, last_name*, password*, password_confirmation* }
 * GET         /api/users/current                               [ show current user ]
 * PATCH       /api/users/current                               [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
+* PUT         /api/users/abuse                                 [ report abuse ] { message* }
 
 ##### Seasons
 ---

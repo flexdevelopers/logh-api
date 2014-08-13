@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Report Abuse</h3>
+</div>
+<div class="modal-body">
+  <form name="abuseForm" class="contact-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(abuseForm.message), 'has-feedback': hasError(abuseForm.message)}">
+      <label for="message" class="col-sm-2 control-label">Message:</label>
+      <div class="col-sm-10">
+        <textarea id="message" name="message" class="form-control" placeholder="Tell us what kind of abuse you have seen..." rows="3" maxlength="200" ng-model="abuseMessage" required></textarea>
+        <small class="input-error" ng-show="hasPropertyError(abuseForm.message, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(abuseForm.message, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(abuseForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="abuseForm.$pristine || abuseForm.$invalid" ng-click="reportAbuse(abuseMessage)">Report</button>
+</div>
