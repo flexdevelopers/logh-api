@@ -11,14 +11,6 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.teamOptions = { active: true, inactive: false };
 
-  $scope.message = function(league) {
-    var message = 'I got nothing.';
-    if (league.message && league.message.length > 0) {
-      message = league.message;
-    }
-    return message;
-  };
-
   $scope.starts = function(league) {
     var startsLabel = (league.started) ? 'Started ' : 'Starts ';
     return startsLabel + league.start_week;

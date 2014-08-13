@@ -6,14 +6,6 @@ var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks,
   $scope.regularPicks = regularPicks.data;
   $scope.playoffPicks = playoffPicks.data;
 
-  $scope.message = function(team) {
-    var message = "Zip. Zilch. Nada";
-    if (team.message && team.message.length > 0) {
-      message = team.message;
-    }
-    return message;
-  };
-
   $scope.contactCommish = function(team) {
 
     var modalInstance = $modal.open({
@@ -85,7 +77,8 @@ var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks,
   };
 
   $scope.showTeam = function(team) {
-    $location.path('/season/' + team.league.season_id + '/league/' + team.league.id + '/team/' + team.id);
+    var teamPath = $location.path().replace(/[^\/]*$/, team.id);
+    $location.path(teamPath);
   };
 
   $scope.showLeague = function(team) {
