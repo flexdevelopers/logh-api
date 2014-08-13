@@ -1,5 +1,25 @@
 .league-content {
 
+  @media all and (max-width: 550px) {
+    .header-row {
+      .league-name {
+        max-width: 275px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 24px;
+        &.disabled {
+          color: #000;
+        }
+      }
+      .edit-league {
+        display: none;
+      }
+    }
+  }
+
   .winner-icon {
     color: #8a6d3b;
   }
@@ -28,6 +48,13 @@
 
   @media all and (max-width: 550px) {
     .request-invite-btn {
+      float: none !important;
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+    }
+    .invite-btn {
       float: none !important;
       padding: 0;
       margin-top: 5px;
@@ -67,31 +94,23 @@
 
   .league-name {
     margin-top: 0;
-    small {
-      font-size: 55%;
-    }
     small.closed-text {
       font-size: 55%;
       color: #a94442;
     }
   }
 
-  .league-name-link {
-    max-width: 280px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-left: 0;
-    padding-right: 0;
-    font-size: 24px;
-    &.disabled {
-      color: #000;
-    }
-  }
-
-  .join-btn, .request-invite-btn {
+  .join-btn, .request-invite-btn, .invite-btn {
     float: right;
     margin-left: 5px;
+  }
+
+  @media all and (max-width: 550px) {
+    .join-btn, .request-invite-btn, .invite-btn {
+      height: 30px;
+      float: none;
+      margin-left: 0;
+    }
   }
 
   .league-actions {

@@ -22,7 +22,7 @@
         <li><a ng-click="editTeam(teamData)">Edit team</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
         <li ng-show="isCommish(teamData)" class="divider"></li>
-        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Update team message</a></li>
+        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
         <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
         <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
       </ul>
