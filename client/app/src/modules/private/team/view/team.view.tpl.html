@@ -10,7 +10,7 @@
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span ng-show="team.alive"><i class="fa fa-thumbs-up fa-fw"></i></span><span ng-show="!team.alive"><i class="fa fa-thumbs-down fa-fw"></i></span> <span class="other-team-name">{{team.name}}</span></a></li>
       </ul>
     </div>
-    <h3 class="team-league-name"><small><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> {{teamData.league.name}} league</a></small></h3>
+    <h3 class="team-league-name"><small><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> {{teamData.league.name}}</a></small></h3>
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)">Pick Loser</button>
@@ -30,8 +30,9 @@
   </div>
 </div>
 <div class="team-message well well-sm" ng-show="teamData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish has a message for this team:</strong> <em>{{teamData.message}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
-<h4>Losers</h4>
 <hr>
+<h4>Losers</h4>
+  <br>
 <div class="team-container" style="clear:both;">
   <tabset>
     <tab>

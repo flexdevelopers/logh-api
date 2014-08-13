@@ -7,8 +7,7 @@
       <i class="fa fa-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
       <i class="fa fa-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
       {{leagueData.name}} <small><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
-      <small ng-show="leagueData.started">{{starts(leagueData)}}</small>
-      <small ng-show="!leagueData.closed && !leagueData.started">{{starts(leagueData)}}<br>Join up to {{leagueData.max_teams_per_user}} times</small>
+      <small>{{starts(leagueData)}}</small>
       <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
@@ -23,7 +22,7 @@
         <li ng-show="!isCommish(leagueData)"><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
         <li ng-show="isCommish(leagueData) && !leagueData.started"><a ng-click="invite(leagueData.id)">Invite a friend to join</a></li>
         <li><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
-        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Update league message</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Create / update league message</a></li>
         <li ng-show="isCommish(leagueData) && !leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
         <li ng-show="isCommish(leagueData) && !leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
@@ -31,8 +30,9 @@
   </div>
 </div>
 <div class="league-message well well-sm" ng-show="leagueData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <em>{{leagueData.message}}</em> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></div>
-<h4>Teams ({{leagueData.team_count}})</h4>
 <hr>
+<h4>Teams ({{leagueData.team_count}}) <small ng-show="!leagueData.started">Join up to {{leagueData.max_teams_per_user}} times</small></h4>
+<br>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
     <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
