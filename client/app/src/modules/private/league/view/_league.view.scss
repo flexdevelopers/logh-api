@@ -79,6 +79,13 @@
         width: 100%;
       }
     }
+    .inactive-teams-checkbox {
+      float: none !important;
+    }
+
+  }
+
+  @media all and (max-width: 550px) {
     .league-container {
       .custom-search-form {
         width: 100%;
@@ -86,10 +93,6 @@
         margin: 5px 0 5px 0;
       }
     }
-    .inactive-teams-checkbox {
-      float: none !important;
-    }
-
   }
 
   .league-name {
