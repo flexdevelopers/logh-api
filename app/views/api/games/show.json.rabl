@@ -6,7 +6,4 @@ node(:week_display) { |game| game.week.display }
 node(:start_display) { |game| game.start_display }
 node(:week_type_id) { |game| game.week_type_id }
 node(:squads) { |game| game.squads }
-child :week do
-  attributes :number
-end
 
