@@ -4,7 +4,7 @@ var OpenLeagueFilter = function() {
       return leagues;
     }
     var openLeagues = _.filter(leagues, function(league) {
-      return !league.closed;
+      return league.open;
     });
     return openLeagues;
   };

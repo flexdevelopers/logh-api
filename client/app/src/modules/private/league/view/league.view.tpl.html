@@ -3,12 +3,12 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
-      <i class="fa fa-times" title="Closed league" ng-show="leagueData.closed"></i>
-      <i class="fa fa-lock" title="Private league" ng-show="!leagueData.closed && !leagueData.public"></i>
-      <i class="fa fa-unlock" title="Public league" ng-show="!leagueData.closed && leagueData.public"></i>
+      <i class="fa fa-times" title="Closed league" ng-show="!leagueData.open"></i>
+      <i class="fa fa-lock" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
+      <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
       {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
       <small>{{starts(leagueData)}}</small>
-      <small class="closed-text" ng-show="leagueData.closed && !leagueData.started">CLOSED TO NEW TEAMS</small>
+      <small class="closed-text" ng-show="!leagueData.open && !leagueData.started">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
@@ -23,8 +23,6 @@
         <li ng-show="!isCommish(leagueData)"><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
         <li><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
-        <li ng-show="isCommish(leagueData) && !leagueData.started && leagueData.closed"><a ng-click="openLeague(leagueData)">Open league to new teams</a></li>
-        <li ng-show="isCommish(leagueData) && !leagueData.started && !leagueData.closed"><a ng-click="closeLeague(leagueData)">Close league to new teams</a></li>
       </ul>
     </div>
   </div>

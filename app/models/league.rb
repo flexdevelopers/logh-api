@@ -28,10 +28,6 @@ class League < ActiveRecord::Base
     start_week.started?
   end
 
-  def closed?
-    !self.open
-  end
-
   def coach_emails
     emails = teams.active.map(&:coach_emails)
     emails.flatten.uniq
