@@ -46,7 +46,7 @@ class Team < ActiveRecord::Base
   end
 
   def kill
-    self.update(alive: false)
+    self.update!(alive: false)
   end
 
 end
