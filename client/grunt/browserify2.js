@@ -45,7 +45,7 @@ module.exports = {
                         'angular-resource/angular-resource.min.js',
                         'angular-route/angular-route.min.js',
                         'angular-sanitize/angular-sanitize.min.js',
-                        'angular-ui-router/release/angular-ui-router.min.js',
+                        'angular-ui-router/release/angular-ui-router.js',
                         'angular-ui-router.stateHelper/statehelper.min.js',
                         'bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js',
                         'commangular/dist/commangular.min.js',
