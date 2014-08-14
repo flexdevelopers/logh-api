@@ -34,13 +34,20 @@ class Week < ActiveRecord::Base
     def kill_teams_with_no_pick
       return unless self.complete == true # only update if the week is complete
 
-      self.season.leagues.each do |season_league|
-        season_league.teams.alive.each do |alive_team|
-          pick = self.picks.find_by(team: alive_team)
-          if !pick
-            alive_team.kill # the team made no pick so kill it
+      begin
+        transaction do
+          self.season.leagues.each do |season_league|
+            season_league.teams.alive.each do |alive_team|
+              pick = self.picks.find_by(team: alive_team)
+              if !pick
+                alive_team.kill # the team made no pick so kill it
+              end
+            end
           end
         end
+      rescue => e
+        puts "Game update failed"
       end
+
     end
 end

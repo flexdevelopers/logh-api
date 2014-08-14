@@ -7,7 +7,6 @@ class Game < ActiveRecord::Base
 
   after_create :ensure_no_squad_duplication
   after_update :set_loser
-  after_update :clean_house
 
   validates :week, presence: true
   validates :starts_at, presence: true
@@ -57,12 +56,22 @@ class Game < ActiveRecord::Base
 
     def set_loser
 
-      remove_game_squads_from_losers()
+      begin
+        transaction do
 
-      if home_squad_score < visiting_squad_score
-        self.week.losers << Loser.create!(week: week, game: self, squad: home_squad)
-      elsif visiting_squad_score < home_squad_score
-        self.week.losers << Loser.create!(week: week, game: self, squad: visiting_squad)
+          remove_game_squads_from_losers()
+
+          if home_squad_score < visiting_squad_score
+            self.week.losers.create!(week: week, game: self, squad: home_squad)
+          elsif visiting_squad_score < home_squad_score
+            self.week.losers.create!(week: week, game: self, squad: visiting_squad)
+          end
+
+          clean_house()
+
+        end
+      rescue => e
+        puts "Game update failed"
       end
 
     end
@@ -75,9 +84,9 @@ class Game < ActiveRecord::Base
 
       self.picks.each do |game_pick|
         if self.week.losers.find_by(squad_id: game_pick.squad_id)
-          game_pick.update(correct: true)
+          game_pick.update!(correct: true)
         else
-          game_pick.update(correct: false)
+          game_pick.update!(correct: false)
           team = Team.find(game_pick.team_id)
           team.kill # the team made a bad pick so kill it
         end
@@ -88,7 +97,7 @@ class Game < ActiveRecord::Base
 
     def remove_game_squads_from_losers
       self.week.losers.each do |loser|
-        loser.destroy if loser.game.id === self.id
+        loser.destroy! if loser.game.id === self.id
       end
     end
 
