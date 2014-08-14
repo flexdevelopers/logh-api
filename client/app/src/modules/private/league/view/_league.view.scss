@@ -46,7 +46,7 @@
     }
   }
 
-  @media all and (max-width: 550px) {
+  @media all and (max-width: 768px) {
     .request-invite-btn {
       float: none !important;
       padding: 0;
@@ -105,7 +105,7 @@
     margin-left: 5px;
   }
 
-  @media all and (max-width: 550px) {
+  @media all and (max-width: 768px) {
     .join-btn, .request-invite-btn, .invite-btn {
       height: 30px;
       float: none;
