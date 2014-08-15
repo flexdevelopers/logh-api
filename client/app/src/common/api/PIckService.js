@@ -1,31 +1,15 @@
 var PickService = function($http, $log, $state, apiConfig, messageModel) {
 
-  this.getRegularPicks = function(params) {
-    var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks/regular";
+  this.getPicks = function(params) {
+    var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks";
 
     var promise = $http.get(apiUrl)
       .success(function(data) {
-        $log.debug("PickService: getRegularPicks success");
+        $log.debug("PickService: getPicks success");
         return data;
       })
       .error(function(data) {
-        $log.debug("PickService: getRegularPicks failed");
-        return data;
-      });
-
-    return promise;
-  };
-
-  this.getPlayoffPicks = function(params) {
-    var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks/playoff";
-
-    var promise = $http.get(apiUrl)
-      .success(function(data) {
-        $log.debug("PickService: getPlayoffPicks success");
-        return data;
-      })
-      .error(function(data) {
-        $log.debug("PickService: getPlayoffPicks failed");
+        $log.debug("PickService: getPicks failed");
         return data;
       });
 

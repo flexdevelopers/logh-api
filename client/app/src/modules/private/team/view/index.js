@@ -21,11 +21,8 @@ module.exports = angular.module('loghApp.team.view', [])
               return { data: [] };
             }
           },
-          regularPicks: function(team, pickService) {
-            return pickService.getRegularPicks({ teamId: team.data.id });
-          },
-          playoffPicks: function(team, pickService) {
-            return pickService.getPlayoffPicks({ teamId: team.data.id });
+          picks: function(team, pickService) {
+            return pickService.getPicks({ teamId: team.data.id });
           }
         }
       });

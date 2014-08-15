@@ -1,10 +1,9 @@
-var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks, $scope, $log, $modal, $location, seasonModel, userModel, teamService, leagueService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, teamService, leagueService, gameService, pickService) {
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
 
-  $scope.regularPicks = regularPicks.data;
-  $scope.playoffPicks = playoffPicks.data;
+  $scope.picks = picks.data;
 
   $scope.contactCommish = function(team) {
 
@@ -111,6 +110,7 @@ var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks,
   $scope.makePick = function(team, pick) {
 
     if (!$scope.isCoach(team) || (pick && pick.locked)) {
+      messageModel.setMessage({ type: 'danger', content: 'This pick is locked and cannot be changed.' }, false);
       return;
     }
 
@@ -118,11 +118,8 @@ var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks,
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
       controller: 'PickMakeController',
       resolve: {
-        regularPicks: function() {
-          return $scope.regularPicks;
-        },
-        playoffPicks: function() {
-          return $scope.playoffPicks;
+        picks: function() {
+          return $scope.picks;
         },
         currentGames: function() {
           return gameService.getCurrentGames(team.league.id);
@@ -149,5 +146,5 @@ var ViewTeamController = function(team, leagueTeams, regularPicks, playoffPicks,
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'regularPicks', 'playoffPicks', '$scope', '$log', '$modal', '$location', 'seasonModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

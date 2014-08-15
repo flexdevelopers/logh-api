@@ -49,10 +49,7 @@ LoghApi::Application.routes.draw do
     end
 
     resources :teams, only: [] do
-      resources :picks, only: [:index, :show, :create, :destroy] do
-        get 'regular', on: :collection, to: 'picks#regular'
-        get 'playoff', on: :collection, to: 'picks#playoff'
-      end
+      resources :picks, only: [:index, :show, :create, :destroy]
     end
 
     resources :weeks, only:[] do

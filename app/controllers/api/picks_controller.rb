@@ -8,18 +8,6 @@ class API::PicksController < API::BaseController
   before_action :_verify_league_has_started, only: [:create]
   before_action :_verify_pick_week, only: [:create]
 
-  # GET /api/teams/:team_id/picks/regular
-  def regular
-    regular_week_type_id = WeekType.find_by(code: 'reg').id
-    @picks = @team.picks.joins(:week).where(week_type_id: regular_week_type_id)
-  end
-
-  # GET /api/teams/:team_id/picks/playoff
-  def playoff
-    playoff_week_type_id = WeekType.find_by(code: 'play').id
-    @picks = @team.picks.joins(:week).where(week_type_id: playoff_week_type_id)
-  end
-
   # GET /api/teams/:team_id/picks
   def index
     @picks = @team.picks

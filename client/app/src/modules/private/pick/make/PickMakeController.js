@@ -1,8 +1,6 @@
-var PickMakeController = function(regularPicks, playoffPicks, currentGames, $modalInstance, $scope, $log) {
+var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $log) {
 
-  var regularPicks = regularPicks;
-  var playoffPicks = playoffPicks;
-  var picks = _.union(regularPicks, playoffPicks);
+  var picks = picks;
 
   $scope.games = currentGames.data;
 
@@ -60,5 +58,5 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
   init();
 };
 
-PickMakeController.$inject = ['regularPicks', 'playoffPicks', 'currentGames', '$modalInstance', '$scope', '$log'];
+PickMakeController.$inject = ['picks', 'currentGames', '$modalInstance', '$scope', '$log'];
 module.exports = PickMakeController;

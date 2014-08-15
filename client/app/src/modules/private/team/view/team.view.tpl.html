@@ -7,7 +7,7 @@
         <i class="fa fa-thumbs-down fa-fw" title="Dead" ng-show="!teamData.alive"></i> <strong><span ng-class="{'team-alive': teamData.alive, 'team-dead': !teamData.alive}">{{teamData.name}} <span ng-show="isCoach(teamData) && leagueTeams.length > 1" class="caret"></span></span></strong>
       </button>
       <ul class="dropdown-menu teams-btn-menu" role="menu">
-        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span ng-show="team.alive"><i class="fa fa-thumbs-up fa-fw"></i></span><span ng-show="!team.alive"><i class="fa fa-thumbs-down fa-fw"></i></span> <span class="other-team-name">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad_name}}</span></a></li>
+        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span ng-show="team.active && team.alive"><i class="fa fa-thumbs-up fa-fw"></i></span><span ng-show="team.active && !team.alive"><i class="fa fa-thumbs-down fa-fw"></i></span><span ng-show="!team.active"><i class="fa fa-times fa-fw"></i></span> <span class="other-team-name" ng-class="{'team-inactive': !team.active}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad_name}}</span></a></li>
       </ul>
     </div>
     <h3 class="team-league-name"><small><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> {{teamData.league.name}}</a></small></h3>
@@ -34,50 +34,23 @@
 <h4>Losers</h4>
   <br>
 <div class="team-container" style="clear:both;">
-  <tabset>
-    <tab>
-      <tab-heading>Regular Season</tab-heading>
-      <div class="regular-picks list-group">
-        <a ng-repeat="pick in regularPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
-          <div class="row">
-            <div class="week-name col-sm-8 col-md-8">
-              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
-              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
-              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">{{pick.game_display}}</span>
-            </div>
-            <div class="col-sm-4 col-md-4">
-              <span class="week-loser">{{pick.week_display}}</span>
-              <span class="badge" ng-show="teamData.alive && !pick.locked && isCoach(teamData)">Change</span>
-            </div>
+    <div class="team-picks list-group">
+      <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">
+        <div class="row">
+          <div class="week-name col-sm-8 col-md-8">
+            <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
+            <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
+            <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
+            <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">{{pick.game_display}}</span>
           </div>
-        </a>
-      </div>
-      <div class="alert alert-info" ng-show="regularPicks.length == 0">
-        No regular season picks
-      </div>
-    </tab>
-    <tab>
-      <tab-heading>Playoffs</tab-heading>
-      <div class="playoff-picks list-group">
-        <a ng-repeat="pick in playoffPicks" class="list-group-item" ng-click="makePick(teamData, pick)">
-          <div class="row">
-            <div class="week-name col-sm-8 col-md-8">
-              <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
-              <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
-              <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-              <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">{{pick.game_display}}</span>
-            </div>
-            <div class="col-sm-4 col-md-4">
-              <span class="week-loser">{{pick.week_display}}</span>
-              <span class="badge" ng-show="teamData.alive && !pick.locked && isCoach(teamData)">Change</span>
-            </div>
+          <div class="col-sm-4 col-md-4">
+            <span class="week-loser">{{pick.week_display}}</span>
+            <span class="week-type badge">{{pick.week_type}}</span>
           </div>
-        </a>
-      </div>
-      <div class="alert alert-info" ng-show="playoffPicks.length == 0">
-        No playoff picks
-      </div>
-    </tab>
-  </tabset>
+        </div>
+      </a>
+    </div>
+    <div class="alert alert-info" ng-show="picks.length == 0">
+      No picks
+    </div>
 </div>
