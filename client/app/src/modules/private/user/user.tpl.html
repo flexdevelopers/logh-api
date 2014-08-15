@@ -34,7 +34,6 @@
               <div class="col-sm-6 col-md-6">
                   <div class="form-group" ng-class="{'has-error': hasError(editUserForm.password), 'has-feedback': hasError(editUserForm.password)}">
                       <label class="control-label" for="password">New Password
-                          <small ng-show="hasPropertyError(editUserForm.password, 'required')">[ Required ]</small>
                           <small ng-show="hasPropertyError(editUserForm.password, 'minlength')">[ 8 - 50 Characters ]</small>
                           <small ng-show="hasPropertyError(editUserForm.password, 'maxlength')">[ 8 - 50 Characters ]</small>
                       </label>
