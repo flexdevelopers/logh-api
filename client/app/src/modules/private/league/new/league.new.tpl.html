@@ -24,7 +24,7 @@
             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
           </label>
-          <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="newLeagueData.name" ng-maxlength="25" required>
+          <input id="leagueName" name="leagueName" type="text" class="form-control" ng-model="newLeagueData.name" ng-maxlength="35" required>
           <span ng-show="hasError(newLeagueForm.leagueName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
@@ -48,7 +48,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.maxTeams), 'has-feedback': hasError(newLeagueForm.maxTeams)}">
-          <label class="control-label" for="maxTeams">Maximum number of teams a user can have in this league:
+          <label class="control-label" for="maxTeams">How many times can a user join:
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'required')">[ Number Required ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
