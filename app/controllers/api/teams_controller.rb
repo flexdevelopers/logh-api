@@ -9,13 +9,14 @@ class API::TeamsController < API::BaseController
   def alive
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.alive
+        @teams = @league.teams.alive.includes(:league, :picks, :coaches)
       else
-        @teams = @league.teams.active.alive
+        @teams = @league.teams.active.alive.includes(:league, :picks, :coaches)
       end
     else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive.sort_by { |team| [team.league.name, team.name] }
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive.includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }
     end
+    # rendered via app/views/api/teams/alive.json.rabl
   end
 
   # GET /api/seasons/:season_id/teams/dead
@@ -23,24 +24,25 @@ class API::TeamsController < API::BaseController
   def dead
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count, team.name] }
       else
-        @teams = @league.teams.active.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.active.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count, team.name] }
       end
     else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead.sort_by { |team| [team.league.name, team.name] }
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead.includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }
     end
+    # rendered via app/views/api/teams/dead.json.rabl
   end
 
   # GET /api/leagues/:league_id/teams
   def index
-    @teams = current_user.teams.where(league: @league)
-    respond_with @teams
+    @teams = current_user.teams.where(league: @league).includes(:league, :picks, :coaches)
+    respond_with @teams # rendered via app/views/api/teams/index.json.rabl
   end
 
   # GET /api/leagues/:league_id/teams/1
   def show
-    respond_with @team
+    respond_with @team # rendered via app/views/api/teams/show.json.rabl
   end
 
   # POST /api/leagues/:league_id/teams
@@ -120,7 +122,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _set_team
-      @team = @league.teams.find(params[:id]) if params[:id]
+      @team = @league.teams.includes(:league, :picks, :coaches).find(params[:id]) if params[:id]
     end
 
     def _verify_league_acceptance

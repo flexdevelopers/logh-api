@@ -10,13 +10,13 @@ class API::PicksController < API::BaseController
 
   # GET /api/teams/:team_id/picks
   def index
-    @picks = @team.picks
-    respond_with @picks
+    @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
+    respond_with @picks # rendered via app/views/api/picks/index.json.rabl
   end
 
   # GET /api/teams/:team_id/picks/1
   def show
-    respond_with @pick
+    respond_with @pick # rendered via app/views/api/picks/show.json.rabl
   end
 
   # POST /api/teams/:team_id/picks

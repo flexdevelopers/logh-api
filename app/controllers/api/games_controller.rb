@@ -5,7 +5,7 @@ class API::GamesController < API::BaseController
 
   # GET /api/weeks/:week_id/games
   def index
-    @games = @week.games
+    @games = @week.games.includes(:visiting_squad, :home_squad, :week)
     respond_with @games
   end
 
@@ -16,13 +16,13 @@ class API::GamesController < API::BaseController
     else
       week = @league.start_week
     end
-    @games = week.games
+    @games = week.games.includes(:visiting_squad, :home_squad, :week) # rendered via app/views/api/games/current.json.rabl
     respond_with @games
   end
 
   # GET /api/weeks/:week_id/games/:id
   def show
-    respond_with @game
+    respond_with @game # rendered via app/views/api/games/show.json.rabl
   end
 
   private

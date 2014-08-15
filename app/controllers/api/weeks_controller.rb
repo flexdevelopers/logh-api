@@ -5,18 +5,18 @@ class API::WeeksController < API::BaseController
   # GET /api/seasons/:season_id/weeks
   def index
     @weeks = @season.weeks.all
-    respond_with @weeks
+    respond_with @weeks # rendered via app/views/api/weeks/index.json.rabl
   end
 
   # GET /api/seasons/:season_id/weeks/available
   def available
     @weeks = @season.weeks.not_complete.order(starts_at: :asc)
-    respond_with @weeks
+    respond_with @weeks # rendered via app/views/api/weeks/available.json.rabl
   end
 
   # GET /api/seasons/:season_id/weeks/:id
   def show
-    respond_with @week
+    respond_with @week # rendered via app/views/api/weeks/show.json.rabl
   end
 
   private

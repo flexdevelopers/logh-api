@@ -7,34 +7,34 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues/managed
   def managed
-    @leagues = current_user.managed_leagues
+    @leagues = current_user.managed_leagues.includes(:teams, :start_week)
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
-    respond_with @leagues
+    respond_with @leagues # rendered via app/views/api/leagues/managed.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/public
   def public
-    @leagues = @season.leagues.public.start_week_not_complete
+    @leagues = @season.leagues.public.start_week_not_complete.includes(:teams, :start_week)
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
-    respond_with @leagues
+    respond_with @leagues # rendered via app/views/api/leagues/public.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/private
   def private
-    @leagues = @season.leagues.private.start_week_not_complete
+    @leagues = @season.leagues.private.start_week_not_complete.includes(:teams, :start_week)
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
-    respond_with @leagues
+    respond_with @leagues # rendered via app/views/api/leagues/private.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues
   def index
-    @leagues = @season.leagues
-    respond_with @leagues
+    @leagues = @season.leagues.includes(:teams, :start_week)
+    respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/1
   def show
-    respond_with @league
+    respond_with @league # rendered via app/views/api/leagues/show.json.rabl
   end
 
   # POST /api/seasons/:season_id/leagues
@@ -120,7 +120,7 @@ class API::LeaguesController < API::BaseController
     end
 
     def _set_league
-      @league = @season.leagues.find(params[:id])
+      @league = @season.leagues.includes(:teams, :start_week).find(params[:id])
     end
 
     def _verify_season_is_active

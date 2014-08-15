@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   belongs_to :week
-  belongs_to :home_squad, class_name: 'Squad', foreign_key: 'home_squad_id'
   belongs_to :visiting_squad, class_name: 'Squad', foreign_key: 'visiting_squad_id'
+  belongs_to :home_squad, class_name: 'Squad', foreign_key: 'home_squad_id'
 
   has_many :picks
 
@@ -37,8 +37,8 @@ class Game < ActiveRecord::Base
   def squads
     # visiting squad first, followed by home squad
     [
-        Rabl.render(Squad.find_by(id: self.visiting_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') }),
-        Rabl.render(Squad.find_by(id: self.home_squad_id), 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') })
+        Rabl.render(self.visiting_squad, 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') }),
+        Rabl.render(self.home_squad, 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') })
     ]
   end
 
