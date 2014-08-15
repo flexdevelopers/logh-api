@@ -11,7 +11,7 @@ class API::UsersController < API::BaseController
   def abuse
     if params[:message] && params[:message].length > 0
       UserMailer.report_abuse(params[:message], current_user).deliver
-      render json: { message: { type: SUCCESS, content: "We're on it! Thanks for letting us know." } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "Thank you. We've received your message." } }, status: :ok
     else
       render json: { message: { type: WARNING, content: "Sorry. We did not get your message." } }, status: :ok
     end
@@ -29,7 +29,7 @@ class API::UsersController < API::BaseController
       access_token.user = user
       render json: {
           token: access_token.token,
-          message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Kick some booty!" }
+          message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Let's get it on!" }
       }
     else
       error(user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

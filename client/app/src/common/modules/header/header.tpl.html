@@ -15,10 +15,10 @@
       <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(season)">Join</a></li>
       <li><a ng-click="createLeague(season)">Create</a></li>
       <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i></a></li>
-      <li><a ng-click="reportAbuse()"><i class="fa fa-exclamation-circle fa-fw" title="Report Abuse"></i></a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu">
+          <li><a ng-click="reportAbuse()">Contact Us</a></li>
           <li><a ng-click="userProfile()">User Profile</a></li>
           <li><a ng-click="signout()">Sign Out</a></li>
         </ul>
