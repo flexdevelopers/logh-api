@@ -1,9 +1,9 @@
-var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, teamService, leagueService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $location, messageModel, userModel, teamService, leagueService, gameService, pickService) {
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
 
-  $scope.picks = picks.data;
+  $scope.picks = $scope.teamData.picks;
 
   $scope.contactCommish = function(team) {
 
@@ -146,5 +146,5 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;
