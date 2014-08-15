@@ -34,7 +34,6 @@
     }
   }
 
-
   .fa-thumbs-up {
     color: #3c763d;
   }
@@ -49,6 +48,10 @@
 
   .team-dead, .pick-incorrect {
     color: #a94442;
+  }
+
+  .team-inactive {
+    text-decoration: line-through;
   }
 
   .team-name-link {
@@ -86,13 +89,13 @@
     position: relative;
   }
 
-  .regular-picks, .playoff-picks {
+  .team-picks {
     .list-group-item {
       .game, .week-loser {
         font-size: 11px;
         color: #999;
       }
-      .badge {
+      .week-type {
         float: right;
       }
     }

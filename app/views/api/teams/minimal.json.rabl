@@ -1,5 +1,5 @@
 object @team
-attributes :id, :name, :alive
+attributes :id, :name, :active, :alive
 node(:last_pick_squad_name) do |team|
   if team.alive
     if team.current_pick
