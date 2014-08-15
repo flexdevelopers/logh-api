@@ -28,7 +28,7 @@ class API::TeamsController < API::BaseController
         @teams = @league.teams.active.dead.sort_by { |team| [-team.correct_picks_count, team.name] }
       end
     else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead.sort_by { |team| [team.league.name, team.name] }
     end
   end
 
