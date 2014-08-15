@@ -11,7 +11,7 @@ class API::BaseController < ApplicationController
   private
 
     def authenticate
-      not_authorized() unless access_token_validated && signed_in?
+      not_authorized("Please sign in or register.", WARNING) unless access_token_validated && signed_in?
     end
 
     def access_token_validated
@@ -31,7 +31,7 @@ class API::BaseController < ApplicationController
     end
 
     # 401 - authentication failures
-    def not_authorized(message = "Please sign in or register.", type = DANGER)
+    def not_authorized(message = "Authentication failure.", type = DANGER)
       error(message, type, :unauthorized)
     end
 
