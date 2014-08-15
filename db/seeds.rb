@@ -12,7 +12,7 @@ Squad.destroy_all
 
 # create week types
 WeekType.create(code: 'reg', description: 'Regular Season')
-WeekType.create(code: 'play', description: 'Playoff')
+WeekType.create(code: 'play', description: 'Playoffs')
 
 # create squads
 # afc east
@@ -84,25 +84,25 @@ week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts
 week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), ends_at: Time.zone.parse('2014-09-15 23:59'), season: season1)
 week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), ends_at: Time.zone.parse('2014-09-22 23:59'), season: season1)
 week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), ends_at: Time.zone.parse('2014-09-29 23:59'), season: season1)
-week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), ends_at: Time.zone.parse('2014-10-06 23:59'), season: season1)
-week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), ends_at: Time.zone.parse('2014-10-13 23:59'), season: season1)
-week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), ends_at: Time.zone.parse('2014-10-20 23:59'), season: season1)
-week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), ends_at: Time.zone.parse('2014-10-27 23:59'), season: season1)
-week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), ends_at: Time.zone.parse('2014-11-03 23:59'), season: season1)
-week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), ends_at: Time.zone.parse('2014-11-10 23:59'), season: season1)
-week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), ends_at: Time.zone.parse('2014-11-17 23:59'), season: season1)
-week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), ends_at: Time.zone.parse('2014-11-24 23:59'), season: season1)
-week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), ends_at: Time.zone.parse('2014-12-01 23:59'), season: season1)
-week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), ends_at: Time.zone.parse('2014-12-08 23:59'), season: season1)
-week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), ends_at: Time.zone.parse('2014-12-15 23:59'), season: season1)
-week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), ends_at: Time.zone.parse('2014-12-22 23:59'), season: season1)
-week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), ends_at: Time.zone.parse('2014-12-28 23:59'), season: season1)
+# week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), ends_at: Time.zone.parse('2014-10-06 23:59'), season: season1)
+# week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), ends_at: Time.zone.parse('2014-10-13 23:59'), season: season1)
+# week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), ends_at: Time.zone.parse('2014-10-20 23:59'), season: season1)
+# week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), ends_at: Time.zone.parse('2014-10-27 23:59'), season: season1)
+# week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), ends_at: Time.zone.parse('2014-11-03 23:59'), season: season1)
+# week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), ends_at: Time.zone.parse('2014-11-10 23:59'), season: season1)
+# week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), ends_at: Time.zone.parse('2014-11-17 23:59'), season: season1)
+# week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), ends_at: Time.zone.parse('2014-11-24 23:59'), season: season1)
+# week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), ends_at: Time.zone.parse('2014-12-01 23:59'), season: season1)
+# week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), ends_at: Time.zone.parse('2014-12-08 23:59'), season: season1)
+# week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), ends_at: Time.zone.parse('2014-12-15 23:59'), season: season1)
+# week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), ends_at: Time.zone.parse('2014-12-22 23:59'), season: season1)
+# week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), ends_at: Time.zone.parse('2014-12-28 23:59'), season: season1)
 
 # create playoff weeks
-# week18 = Week.create!(number: 18, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2014-12-29 06:00'), ends_at: Time.zone.parse('2015-01-04 23:59'), season: season1)
-# week19 = Week.create!(number: 19, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-05 06:00'), ends_at: Time.zone.parse('2015-01-11 23:59'), season: season1)
-# week20 = Week.create!(number: 20, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-12 06:00'), ends_at: Time.zone.parse('2015-01-18 23:59'), season: season1)
-# week21 = Week.create!(number: 21, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-19 06:00'), ends_at: Time.zone.parse('2015-02-01 23:59'), season: season1)
+week18 = Week.create!(number: 18, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2014-12-29 06:00'), ends_at: Time.zone.parse('2015-01-04 23:59'), season: season1)
+week19 = Week.create!(number: 19, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-05 06:00'), ends_at: Time.zone.parse('2015-01-11 23:59'), season: season1)
+week20 = Week.create!(number: 20, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-12 06:00'), ends_at: Time.zone.parse('2015-01-18 23:59'), season: season1)
+week21 = Week.create!(number: 21, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-19 06:00'), ends_at: Time.zone.parse('2015-02-01 23:59'), season: season1)
 
 # create games
 # week 1
@@ -159,7 +159,7 @@ Game.create!(starts_at: Time.zone.parse('2014-09-21 16:25'), week: week3, visiti
 Game.create!(starts_at: Time.zone.parse('2014-09-21 20:30'), week: week3, visiting_squad: steelers, home_squad: panthers)
 Game.create!(starts_at: Time.zone.parse('2014-09-22 20:30'), week: week3, visiting_squad: bears, home_squad: jets)
 
-# week 4
+week 4
 Game.create!(starts_at: Time.zone.parse('2014-09-25 20:25'), week: week4, visiting_squad: giants, home_squad: redskins)
 Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: packers, home_squad: bears)
 Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: bills, home_squad: texans)
@@ -395,41 +395,41 @@ Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visit
 Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: cardinals, home_squad: niners)
 Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: rams, home_squad: seahawks)
 
-# # week 18
-# Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: giants, home_squad: seahawks)
-# Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: packers, home_squad: eagles)
-# Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: patriots, home_squad: chargers)
-# Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: broncos, home_squad: browns)
-#
-# # week 19
-# Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: giants, home_squad: niners)
-# Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: packers, home_squad: saints)
-# Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: patriots, home_squad: ravens)
-# Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: broncos, home_squad: colts)
-#
-# # week 20
-# Game.create!(starts_at: Time.zone.parse('2015-01-17 13:00'), week: week20, visiting_squad: packers, home_squad: niners)
-# Game.create!(starts_at: Time.zone.parse('2015-01-18 13:00'), week: week20, visiting_squad: broncos, home_squad: ravens)
-#
-# # week 21
-# Game.create!(starts_at: Time.zone.parse('2015-02-01 13:00'), week: week21, visiting_squad: broncos, home_squad: niners)
+# week 18
+Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: giants, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: packers, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: patriots, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: broncos, home_squad: browns)
+
+# week 19
+Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: giants, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: packers, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: patriots, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: broncos, home_squad: colts)
+
+# week 20
+Game.create!(starts_at: Time.zone.parse('2015-01-17 13:00'), week: week20, visiting_squad: packers, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2015-01-18 13:00'), week: week20, visiting_squad: broncos, home_squad: ravens)
+
+# week 21
+Game.create!(starts_at: Time.zone.parse('2015-02-01 13:00'), week: week21, visiting_squad: broncos, home_squad: niners)
 
 # create a user and a league for that user and a few teams for that user in that league
-# user1 = User.create!(first_name: 'Jeremy', last_name: 'Mitchell', admin: true, email: 'mitchell852@gmail.com', password: 'foobar852', password_confirmation: 'foobar852')
-# user2 = User.create!(first_name: 'Tate', last_name: 'Mitchell', email: 'tatecmitchell@gmail.com', password: '00001221', password_confirmation: '00001221')
-# user3 = User.create!(first_name: 'Joie', last_name: 'Mitchell', email: 'j@f.com', password: 'i love wine', password_confirmation: 'i love wine')
-# user4 = User.create!(first_name: 'Mason', last_name: 'Mitchell', email: 'm@f.com', password: 'i love pizza', password_confirmation: 'i love pizza')
+user1 = User.create!(first_name: 'Jeremy', last_name: 'Mitchell', admin: true, email: 'mitchell852@gmail.com', password: 'foobar852', password_confirmation: 'foobar852')
+user2 = User.create!(first_name: 'Tate', last_name: 'Mitchell', email: 'tatecmitchell@gmail.com', password: '00001221', password_confirmation: '00001221')
+user3 = User.create!(first_name: 'Joie', last_name: 'Mitchell', email: 'j@f.com', password: 'i love wine', password_confirmation: 'i love wine')
+user4 = User.create!(first_name: 'Mason', last_name: 'Mitchell', email: 'm@f.com', password: 'i love pizza', password_confirmation: 'i love pizza')
 # create 20 public and private leagues with random but unique names
-# 200.times do |i|
-#   user = [user1, user2, user3, user4].sample
-#   League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
-#   League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
-# end
-# league_count = League.all.count
-# 111.times do |i|
-#   Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user1])
-#   Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user2])
-#   Team.create!(name: "#{user3[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user3])
-#   Team.create!(name: "#{user4[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user4])
-# end
+200.times do |i|
+  user = [user1, user2, user3, user4].sample
+  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
+  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [ user ], season: season1, start_week_id: Week.first.id)
+end
+league_count = League.all.count
+111.times do |i|
+  Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user1])
+  Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user2])
+  Team.create!(name: "#{user3[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user3])
+  Team.create!(name: "#{user4[:first_name]} Team ##{i}", league: League.all[(0..league_count-1).to_a.sample], coaches: [user4])
+end
 
