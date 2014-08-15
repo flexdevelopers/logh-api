@@ -67,12 +67,12 @@ class API::PicksController < API::BaseController
     end
 
     def _verify_league_has_started
-      forbidden("Can only make picks once the league has started - #{@team.league.start_week.display}") unless @team.league.started?
+      forbidden("You can only make picks once the league has started - #{@team.league.start_week.display}") unless @team.league.started?
     end
 
     def _verify_pick_week
       current_week = @team.league.season.current_week
-      forbidden("Can only make picks for the current week - #{current_week.display}") if current_week && current_week.id != _pick_params[:week_id]
+      forbidden("You can only make picks for the current week - #{current_week.display}") if current_week && current_week.id != _pick_params[:week_id]
     end
 
     def _is_coach_of(team)

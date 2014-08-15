@@ -19,10 +19,10 @@
                 <div class="league-name col-sm-6 col-md-6">
                   <i class="fa fa-times fa-fw" title="My Closed league" ng-show="!league.open"></i>
                   <i class="fa fa-unlock fa-fw" title="My Public league" ng-show="league.open && league.public"></i>
-                  <i class="fa fa-lock fa-fw" title="My Private league" ng-show="league.open && !league.public"></i> {{league.name}} <span class="team-count">{{league.team_count}} teams</span></div>
+                  <i class="fa fa-lock fa-fw" title="My Private league" ng-show="league.open && !league.public"></i> {{league.name}}</div>
                 <div class="col-sm-6 col-md-6">
                     <span class="start-week">{{starts(league)}}</span>
-                    <span class="badge">View</span>
+                    <span class="badge">{{league.team_count}} teams</span>
                 </div>
             </div>
         </a>

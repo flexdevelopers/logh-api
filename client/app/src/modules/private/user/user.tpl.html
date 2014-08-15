@@ -44,7 +44,7 @@
               <div class="col-sm-6 col-md-6">
                   <div class="form-group" ng-class="{'has-error': hasError(editUserForm.confirmPassword), 'has-feedback': hasError(editUserForm.confirmPassword)}">
                       <label class="control-label" for="confirmPassword">Confirm New Password
-                          <small ng-show="hasPropertyError(editUserForm.confirmPassword, 'match')">[ Doesn't Match ]</small>
+                          <small ng-show="hasPropertyError(editUserForm.confirmPassword, 'match')">[ No Match ]</small>
                       </label>
                       <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="userData.user.password_confirmation" match="userData.user.password">
                       <span ng-show="hasError(editUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
