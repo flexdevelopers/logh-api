@@ -46,7 +46,7 @@ class Week < ActiveRecord::Base
           end
         end
       rescue => e
-        puts "Game update failed"
+        puts "Week update failed"
       end
 
     end

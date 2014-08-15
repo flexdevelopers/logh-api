@@ -4,7 +4,7 @@ class API::Admin::WeeksController < API::WeeksController
 
   # PUT /api/admin/seasons/:season_id/weeks/:id/complete
   def complete
-    if @week.update_attributes(complete: true)
+    if @week.update_attributes(complete: true) # this kicks off some fun. see week.rb
       render json: { message: { type: SUCCESS, content: "Week #{@week[:number]} has been marked complete" } }, status: :ok
     else
       error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

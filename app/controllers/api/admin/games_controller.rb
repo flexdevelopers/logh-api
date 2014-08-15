@@ -13,7 +13,7 @@ class API::Admin::GamesController < API::GamesController
 
   # PUT/PATCH /api/admin/weeks/:week_id/games/:id
   def update
-    if @game.update(_game_params)
+    if @game.update(_game_params) # this kicks off some fun. see game.rb#afterupdate
       render json: { message: { type: SUCCESS, content: "Game has been updated" } }, status: :ok
     else
       error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
