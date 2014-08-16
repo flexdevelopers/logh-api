@@ -1,4 +1,4 @@
-var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location, $modal, weekService, leagueService) {
+var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location, $modal, messageModel, weekService, leagueService) {
 
     $scope.managedLeagues = managedLeagues.data;
 
@@ -19,6 +19,7 @@ var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location,
         leagueService.createLeague(league);
       }, function () {
         $log.debug('Create league modal dismissed...');
+        messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
       });
 
     };
@@ -42,6 +43,6 @@ var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location,
 
 };
 
-ManagedLeaguesController.$inject = ['managedLeagues', '$scope', '$log', '$location', '$modal', 'weekService', 'leagueService'];
+ManagedLeaguesController.$inject = ['managedLeagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'weekService', 'leagueService'];
 module.exports = ManagedLeaguesController;
 

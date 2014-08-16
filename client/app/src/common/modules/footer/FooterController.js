@@ -1,4 +1,4 @@
-var FooterController = function($scope, $log, $modal, $location, weekService, leagueService, seasonModel) {
+var FooterController = function($scope, $log, $modal, $location, weekService, leagueService, seasonModel, messageModel) {
 
   $scope.season = seasonModel.season;
 
@@ -22,6 +22,7 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
     modalInstance.result.then(function(league) {
       leagueService.createLeague(league);
     }, function () {
+      messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
       $log.debug('Create league modal dismissed...');
     });
 
@@ -44,5 +45,5 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
   init();
 };
 
-FooterController.$inject = ['$scope', '$log', '$modal', '$location', 'weekService', 'leagueService', 'seasonModel'];
+FooterController.$inject = ['$scope', '$log', '$modal', '$location', 'weekService', 'leagueService', 'seasonModel', 'messageModel'];
 module.exports = FooterController;

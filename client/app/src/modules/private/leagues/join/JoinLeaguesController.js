@@ -1,4 +1,4 @@
-var JoinLeaguesController = function($scope, $log, $location, $modal, userModel, seasonModel, weekService, leagueService) {
+var JoinLeaguesController = function($scope, $log, $location, $modal, userModel, seasonModel, messageModel, weekService, leagueService) {
 
   $scope.season = seasonModel.season;
 
@@ -39,6 +39,7 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
       leagueService.createLeague(league);
     }, function () {
       $log.debug('Create league modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
     });
 
   };
@@ -53,5 +54,5 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
 
 };
 
-JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', 'userModel', 'seasonModel', 'weekService', 'leagueService'];
+JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', 'userModel', 'seasonModel', 'messageModel', 'weekService', 'leagueService'];
 module.exports = JoinLeaguesController;

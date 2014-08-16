@@ -21,6 +21,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       leagueService.sendCommishMessage(params.league, params.message)
     }, function () {
       $log.debug('Contact league modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
     });
 
   };
@@ -45,6 +46,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
     }, function () {
       $log.debug('Team message modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Update team message cancelled' }, false);
     });
 
   };
@@ -103,14 +105,19 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
         });
     }, function () {
       $log.debug('Edit team modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Edit team cancelled' }, false);
     });
 
   };
 
   $scope.makePick = function(team, pick) {
 
-    if (!$scope.isCoach(team) || (pick && pick.locked)) {
-      messageModel.setMessage({ type: 'danger', content: 'This pick is locked and cannot be changed.' }, false);
+    if (!$scope.isCoach(team)) {
+      return;
+    }
+
+    if (pick && pick.locked) {
+      messageModel.setMessage({ type: 'danger', content: 'Your current pick for the week is locked as the game has already started' }, false);
       return;
     }
 
@@ -132,6 +139,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       pickService.createPick(pick);
     }, function () {
       $log.debug('Make pick modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Make pick cancelled' }, false);
     });
 
   };

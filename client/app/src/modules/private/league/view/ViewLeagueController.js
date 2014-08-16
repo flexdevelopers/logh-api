@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, weekService, teamService, leagueService) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, messageModel, weekService, teamService, leagueService) {
 
   $scope.leagueData = league.data;
 
@@ -71,6 +71,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       leagueService.updateLeague(league);
     }, function () {
       $log.debug('Edit league modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Edit league cancelled' }, false);
     });
 
   };
@@ -103,6 +104,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       leagueService.sendCommishMessage(params.league, params.message)
     }, function () {
       $log.debug('Contact league modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
     });
 
   };
@@ -127,6 +129,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
     }, function () {
       $log.debug('League message modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Update league message cancelled' }, false);
     });
 
   };
@@ -147,6 +150,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       teamService.createTeam(team);
     }, function () {
       $log.debug('Join league modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Join league cancelled' }, false);
     });
 
   };
@@ -167,6 +171,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       leagueService.requestInvite(invitation);
     }, function () {
       $log.debug('Request invite modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Request invite cancelled' }, false);
     });
 
   };
@@ -187,6 +192,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
       leagueService.createInvite(invitation);
     }, function () {
       $log.debug('Invite coach modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Invite cancelled' }, false);
     });
   };
 
@@ -207,5 +213,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'weekService', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'messageModel', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;

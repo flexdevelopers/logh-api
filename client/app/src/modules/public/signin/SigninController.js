@@ -1,4 +1,4 @@
-var SigninController = function($scope, $log, $location, $modal, userService) {
+var SigninController = function($scope, $log, $location, $modal, messageModel, userService) {
 
     $scope.credentials = {
         email: '',
@@ -26,6 +26,7 @@ var SigninController = function($scope, $log, $location, $modal, userService) {
         userService.resetUser(email);
       }, function () {
         $log.debug('Reset password modal dismissed...');
+        messageModel.setMessage({ type: 'warning', content: 'Reset password cancelled' }, false);
       });
     };
 
@@ -40,6 +41,7 @@ var SigninController = function($scope, $log, $location, $modal, userService) {
         userService.createUser(newUser);
       }, function () {
         $log.debug('Register modal dismissed...');
+        messageModel.setMessage({ type: 'warning', content: 'Register cancelled' }, false);
       });
 
     };
@@ -54,5 +56,5 @@ var SigninController = function($scope, $log, $location, $modal, userService) {
 
 };
 
-SigninController.$inject = ['$scope', '$log', '$location', '$modal', 'userService'];
+SigninController.$inject = ['$scope', '$log', '$location', '$modal', 'messageModel', 'userService'];
 module.exports = SigninController;

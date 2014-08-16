@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel, messageModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -42,7 +42,8 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       modalInstance.result.then(function(message) {
         userService.reportAbuse(message);
       }, function () {
-        $log.debug('report abuse modal dismissed...');
+        messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
+        $log.debug('contact us dismissed...');
       });
 
     };
@@ -57,6 +58,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       modalInstance.result.then(function(newUser) {
         userService.createUser(newUser);
       }, function () {
+        messageModel.setMessage({ type: 'warning', content: 'Register cancelled' }, false);
         $log.debug('Register modal dismissed...');
       });
 
@@ -82,6 +84,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       modalInstance.result.then(function(league) {
         leagueService.createLeague(league);
       }, function () {
+        messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
         $log.debug('Create league modal dismissed...');
       });
 
@@ -122,6 +125,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       modalInstance.result.then(function (email) {
         userService.resetUser(email);
       }, function () {
+        messageModel.setMessage({ type: 'warning', content: 'Reset password cancelled' }, false);
         $log.debug('Reset password modal dismissed...');
       });
     };
@@ -136,5 +140,5 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel', 'messageModel'];
 module.exports = HeaderController;

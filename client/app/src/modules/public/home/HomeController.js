@@ -1,4 +1,4 @@
-var HomeController = function($scope, $log, $location, $modal, seasonModel, weekService, leagueService) {
+var HomeController = function($scope, $log, $location, $modal, seasonModel, messageModel, weekService, leagueService) {
 
     $scope.season = seasonModel.season;
 
@@ -19,6 +19,7 @@ var HomeController = function($scope, $log, $location, $modal, seasonModel, week
         leagueService.createLeague(league);
       }, function () {
         $log.debug('Create league modal dismissed...');
+        messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
       });
 
     };
@@ -44,5 +45,5 @@ var HomeController = function($scope, $log, $location, $modal, seasonModel, week
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'seasonModel', 'weekService', 'leagueService'];
+HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'seasonModel', 'messageModel', 'weekService', 'leagueService'];
 module.exports = HomeController;
