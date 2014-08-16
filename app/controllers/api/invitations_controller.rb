@@ -1,6 +1,5 @@
 class API::InvitationsController < API::BaseController
   before_action :_set_league
-  before_action :_verify_league_management, except: :new
   before_action :_verify_league_status
 
   # POST /leagues/:league_id/invitations/new
@@ -17,9 +16,10 @@ class API::InvitationsController < API::BaseController
 
   # POST /leagues/:league_id/invitations
   def create
+    return forbidden('Only the commish can send an invite for a private league') if !@league.public && !_is_commish_of?(@league)
     @invitation = @league.invitations.where(email: _invitation_params[:email]).first_or_initialize
     if @invitation.update_attributes(_invitation_params)
-      InvitationMailer.league_invitation(@invitation).deliver
+      InvitationMailer.league_invitation(@invitation, current_user).deliver
       render json: { message: { type: SUCCESS, content: "An invite has been sent to #{@invitation.email}" } }, status: :ok
     else
       error(@invitation.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
@@ -37,16 +37,12 @@ class API::InvitationsController < API::BaseController
       @league = League.find(params[:league_id])
     end
 
-    def _verify_league_management
-      _is_commish_of?(@league)
-    end
-
     def _verify_league_status
       forbidden("It is too late. The league's first week is already complete.") if @league.start_week.complete
     end
 
     def _is_commish_of?(league)
-      forbidden('Only the commish can send a league invite') unless current_user.managed_leagues.include?(league)
+      current_user.managed_leagues.include?(league)
     end
 
     def _invitation_params

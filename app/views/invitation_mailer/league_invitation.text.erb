@@ -1,4 +1,4 @@
-Congrats! <%= @invitation.league.commish_names[0] %> has invited you to join the <%= @invitation.league.name %> league at loseorgohome.com!
+Congrats! <%= @user.display_name %> has invited you to join the <%= @invitation.league.name %> league at loseorgohome.com!
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included:

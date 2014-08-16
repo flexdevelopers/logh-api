@@ -13,7 +13,7 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
-    <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+    <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <div class="btn-group league-actions" ng-show="hasTeamInLeague() || isCommish(leagueData)" dropdown is-open="commish.isopen">
       <button type="button" class="league-actions-btn btn btn-default btn-sm dropdown-toggle">
