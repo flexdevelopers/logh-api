@@ -29,7 +29,7 @@ class API::PicksController < API::BaseController
       return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(_pick_params[:game_id]).started?
     end
     if @pick.update_attributes(_pick_params)
-      render json: { message: { type: SUCCESS, content: "Pick updated for #{week.display}" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "You picked #{@pick.squad.name} to lose in #{week.display}" } }, status: :ok
     else
       error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

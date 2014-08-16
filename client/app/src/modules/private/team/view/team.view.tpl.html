@@ -37,15 +37,14 @@
     <div class="team-picks list-group">
       <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">
         <div class="row">
-          <div class="week-name col-sm-7 col-md-7">
+          <div class="week-name col-sm-6 col-md-6">
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-            <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">{{pick.game_display}}</span>
+            <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad" ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
           </div>
-          <div class="col-sm-5 col-md-5">
-            <span class="week-loser">{{pick.week_display}}</span>
-            <span class="week-type badge">{{pick.week_type}}</span>
+          <div class="col-sm-6 col-md-6">
+            <span class="game">{{pick.game_display}}</span>
           </div>
         </div>
       </a>
