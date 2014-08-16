@@ -20,6 +20,9 @@ module.exports = angular.module('loghApp.team.view', [])
             } else {
               return { data: [] };
             }
+          },
+          picks: function(team, pickService) {
+            return pickService.getPicks({ teamId: team.data.id });
           }
         }
       });

@@ -122,7 +122,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _set_team
-      @team = @league.teams.includes(:league, :picks, :coaches).find(params[:id]) if params[:id]
+      @team = @league.teams.includes(:league, :coaches).find(params[:id]) if params[:id]
     end
 
     def _verify_league_acceptance
