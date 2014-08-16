@@ -72,11 +72,8 @@ FactoryGirl.define do
   end
 
   factory :week_type do
-    code          'reg'
     description   'Regular Season'
-
     factory :playoff_week_type do
-      code          'play'
       description   'Playoff'
     end
   end
