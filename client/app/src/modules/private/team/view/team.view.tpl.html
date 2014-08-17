@@ -31,8 +31,7 @@
 </div>
 <div class="team-message well well-sm" ng-show="teamData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish has a message for this team:</strong> <em>{{teamData.message}}</em> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
 <hr>
-<h4>Losers</h4>
-<hr>
+<h4 class="losers-heading">Loser Picks</h4>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
       <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">

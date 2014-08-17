@@ -1,3 +1,11 @@
+@media all and (max-width: 550px) {
+  .leagues-container {
+    .leagues {
+      display: none;
+    }
+  }
+}
+
 .closed-leagues-checkbox {
   float: right;
   margin: 5px;

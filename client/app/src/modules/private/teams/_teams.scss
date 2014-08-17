@@ -25,6 +25,10 @@
     position: relative;
   }
 
+  .inactive-team-name {
+    text-decoration: line-through;
+  }
+
   .alive-teams, .dead-teams {
     .list-group-item {
       .team-league, .current-pick {

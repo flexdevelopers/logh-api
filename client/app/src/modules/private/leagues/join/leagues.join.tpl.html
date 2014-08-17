@@ -12,10 +12,10 @@
 <div class="leagues-container">
     <ul class="nav nav-tabs">
         <li ng-class="{'active': isPublic()}" ng-click="resetSearch()">
-            <a ng-click="publicLeagues(seasonId)"><i class="fa fa-unlock fa-fw" title="Public leagues"></i> Public</a>
+            <a ng-click="publicLeagues(seasonId)"><i class="fa fa-unlock fa-fw" title="Public leagues"></i> Public <span class="leagues">Leagues</span></a>
         </li>
         <li ng-class="{'active': !isPublic()}" ng-click="resetSearch()">
-            <a ng-click="privateLeagues(seasonId)"><i class="fa fa-lock fa-fw" title="Private leagues"></i> Private</a>
+            <a ng-click="privateLeagues(seasonId)"><i class="fa fa-lock fa-fw" title="Private leagues"></i> Private <span class="leagues">Leagues</span></a>
         </li>
     </ul>
     <div class="input-group custom-search-form">
