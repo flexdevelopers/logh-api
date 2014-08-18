@@ -12,13 +12,23 @@
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
       <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(season)">Join League</a></li>
       <li><a ng-click="createLeague(season)">Create League</a></li>
-      <li ng-class="{'active': isState(['private.teams.alive', 'private.teams.dead'])}"><a ng-click="manageTeams(season)">My Teams</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coach <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a ng-click="myTeams(season)">My Teams</a></li>
+          <li><a ng-click="myLeagues(season)">My Leagues</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commish <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a ng-click="managedLeagues(season)">Managed Leagues</a></li>
+        </ul>
+      </li>
       <li><a ng-click="faq()"><i class="fa fa-question-circle fa-fw" title="FAQ"></i></a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a ng-click="manageLeagues(season)">My Managed Leagues</a></li>
-          <li class="divider"></li>
           <li><a ng-click="reportAbuse()">Contact Us</a></li>
           <li class="divider"></li>
           <li><a ng-click="userProfile()">User Profile</a></li>

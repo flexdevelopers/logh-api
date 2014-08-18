@@ -90,11 +90,15 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    $scope.manageTeams = function(season) {
+    $scope.myTeams = function(season) {
         $location.path('/season/' + season.id + '/teams/alive');
     };
 
-    $scope.manageLeagues = function(season) {
+    $scope.myLeagues = function(season) {
+        alert('my leagues');
+    };
+
+    $scope.managedLeagues = function(season) {
         $location.path('/season/' + season.id + '/leagues');
     };
 
