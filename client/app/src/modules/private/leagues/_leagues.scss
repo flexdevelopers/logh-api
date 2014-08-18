@@ -11,7 +11,7 @@
   }
 }
 
-.public-leagues, .private-leagues, .managed-leagues {
+.public-leagues, .private-leagues, .managed-leagues, .my-leagues {
   .list-group-item {
     .team-count, .start-week {
       font-size: 11px;
@@ -23,7 +23,7 @@
   }
 }
 
-.public-league-pagination, .private-league-pagination, .manage-league-pagination {
+.public-league-pagination, .private-league-pagination, .manage-league-pagination, .my-league-pagination {
   width: 260px;
   margin: -20px auto 0 0;
   float: left;

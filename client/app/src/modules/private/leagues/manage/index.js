@@ -3,7 +3,7 @@ module.exports = angular.module('loghApp.leagues.manage', [])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.leagues.manage', {
-        url: '',
+        url: '/managed',
         views: {
           leaguesContent: {
             templateUrl: 'modules/private/leagues/manage/leagues.manage.tpl.html',

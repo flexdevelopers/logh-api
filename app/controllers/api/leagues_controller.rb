@@ -28,7 +28,9 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues
   def index
-    @leagues = @season.leagues.includes(:teams, :start_week)
+    @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id])
+    @leagues = @teams.map(&:league).flatten.uniq
+    @leagues = @leagues.sort_by { |league| [ league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 

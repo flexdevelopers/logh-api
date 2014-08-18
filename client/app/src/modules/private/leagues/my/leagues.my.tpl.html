@@ -1,0 +1,39 @@
+<div class="my-leagues-header-row row">
+  <div class="col-sm-9 col-md-9">
+    <h3>I am in these leagues...</h3>
+  </div>
+  <div class="col-sm-3 col-md-3">
+    <div class="my-leagues-btn-group">
+      <button type="button" class="join-league-btn btn btn-default btn-sm" ng-click="joinLeague(season)"><strong>Join League</strong></button>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div ng-show="leagues.length > 0" class="leagues-container">
+
+  <div class="my-leagues list-group">
+    <a ng-repeat="league in leagues | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
+      <div class="row">
+        <div class="league-name col-sm-6 col-md-6">
+          <i class="fa fa-times fa-fw" title="My Closed league" ng-show="!league.open"></i>
+          <i class="fa fa-unlock fa-fw" title="My Public league" ng-show="league.open && league.public"></i>
+          <i class="fa fa-lock fa-fw" title="My Private league" ng-show="league.open && !league.public"></i> {{league.name}}</div>
+        <div class="col-sm-6 col-md-6">
+          <span class="start-week">{{starts(league)}}</span>
+          <span class="badge">{{league.team_count}} teams</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="my-league-pagination" ng-show="leagues.length > leaguesPerPage">
+    <pagination boundary-links="true" max-size="4" total-items="leagues.length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  </div>
+  <div style="clear: both;"></div>
+</div>
+
+<!--if you have no leagues-->
+<div class="alert alert-info" ng-show="leagues.length == 0">
+  You are in no leagues. <a class="alert-link" ng-click="joinLeague(season)">Join</a> one today.
+</div>
