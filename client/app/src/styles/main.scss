@@ -46,6 +46,10 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/teams/teams";
 @import "../modules/private/teams/alive/teams.alive";
 @import "../modules/private/teams/dead/teams.dead";
+// play
+@import "../modules/private/play/play";
+@import "../modules/private/play/leagues/play.leagues";
+@import "../modules/private/play/teams/play.teams";
 // pick
 @import "../modules/private/pick/make/pick.make";
 // game

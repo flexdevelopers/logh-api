@@ -64,6 +64,10 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
+    $scope.play = function(season) {
+        $location.path('/season/' + season.id + '/play');
+    };
+
     $scope.joinLeague = function(season) {
         $location.path('/season/' + season.id + '/leagues/public');
     };
@@ -88,18 +92,6 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
         $log.debug('Create league modal dismissed...');
       });
 
-    };
-
-    $scope.myTeams = function(season) {
-        $location.path('/season/' + season.id + '/teams/alive');
-    };
-
-    $scope.myLeagues = function(season) {
-      $location.path('/season/' + season.id + '/leagues');
-    };
-
-    $scope.managedLeagues = function(season) {
-        $location.path('/season/' + season.id + '/leagues/managed');
     };
 
     $scope.userProfile = function() {

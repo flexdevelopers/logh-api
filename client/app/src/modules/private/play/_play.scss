@@ -1,0 +1,45 @@
+.teams-alert, .leagues-alert {
+  margin: 20px 0;
+}
+
+.play-header-row {
+  margin-bottom: 15px;
+}
+
+.play-btn-group {
+  padding-top: 20px;
+  float: right;
+}
+
+@media all and (max-width: 767px) {
+  .play-btn-group {
+    float: none !important;
+    padding: 0;
+  }
+  .create-league-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .join-league-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.list-group-item {
+  .team-league, .current-pick {
+    font-size: 11px;
+    color: #999;
+  }
+  .inactive-team, .no-pick {
+    font-size: 11px;
+    color: #a94442;
+  }
+  .badge {
+    float: right;
+  }
+}
+
+

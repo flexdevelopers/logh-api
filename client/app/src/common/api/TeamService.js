@@ -14,6 +14,21 @@ var TeamService = function($http, $log, $location, $state, $q, apiConfig, messag
         return promise;
     };
 
+    this.getAllTeams = function(params) {
+        var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/all";
+        var promise = $http.get(apiUrl)
+            .success(function(data) {
+                $log.debug("TeamService: getAllTeams success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("TeamService: getAllTeams failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.getAliveTeams = function(params) {
         var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/alive";
         if (params.leagueId) {

@@ -4,6 +4,12 @@ class API::TeamsController < API::BaseController
   before_action :_set_team, only: [:show, :update, :message, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
 
+  # GET /api/seasons/:season_id/teams/all
+  def all
+    @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }
+    # rendered via app/views/api/teams/all.json.rabl
+  end
+
   # GET /api/seasons/:season_id/teams/alive
   # GET /api/seasons/:season_id/teams/alive?league_id=:league_id
   def alive

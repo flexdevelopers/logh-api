@@ -1,0 +1,24 @@
+<div ng-show="leagues.length > 0" class="leagues-container">
+  <div class="my-leagues list-group">
+    <a ng-repeat="league in leagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
+      <div class="row">
+        <div class="league-name col-sm-6 col-md-6">
+          <i class="fa fa-group fa-fw" title="My Public league" ng-show="isCommish(league)"></i> {{league.name}}</div>
+        <div class="col-sm-6 col-md-6">
+          <span class="start-week">{{starts(league)}}</span>
+          <span class="badge">{{league.team_count}} teams</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="my-league-pagination" ng-show="leagues.length > leaguesPerPage">
+    <pagination boundary-links="true" max-size="4" total-items="leagues.length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  </div>
+  <div style="clear: both;"></div>
+</div>
+
+<!--if you have no leagues-->
+<div class="leagues-alert alert alert-info" ng-show="leagues.length == 0">
+  You are in no leagues. <a class="alert-link" ng-click="joinLeague(season)">Join a league</a> or <a class="alert-link" ng-click="createLeague(season)">create a league</a> now.
+</div>

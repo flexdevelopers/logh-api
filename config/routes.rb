@@ -29,6 +29,7 @@ LoghApi::Application.routes.draw do
         put 'message', on: :member, to: 'leagues#message'
       end
       resources :teams, only: [] do
+        get 'all', on: :collection, to: 'teams#all'
         get 'alive', on: :collection, to: 'teams#alive'
         get 'dead', on: :collection, to: 'teams#dead'
       end
