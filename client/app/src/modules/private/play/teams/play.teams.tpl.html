@@ -26,7 +26,9 @@
 </div>
 
 <div class="dead-teams-checkbox">
-  <label><input type="checkbox" ng-model="teamOptions.dead"> show dead teams</label>
+  <a ng-show="teamOptions.dead == true" ng-click="teamOptions.dead = false">[ Hide Dead Teams ]</a>
+  <a ng-show="teamOptions.dead == false" ng-click="teamOptions.dead = true">[ Show Dead Teams ]</a>
 </div>
+
 
 

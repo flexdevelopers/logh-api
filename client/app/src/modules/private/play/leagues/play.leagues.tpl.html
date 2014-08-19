@@ -24,7 +24,8 @@
 </div>
 
 <div class="managed-leagues-checkbox">
-  <label><input type="checkbox" ng-model="leagueOptions.managed"> show managed leagues</label>
+  <a ng-show="leagueOptions.managed == true" ng-click="leagueOptions.managed = false">[ Hide Managed Leagues ]</a>
+  <a ng-show="leagueOptions.managed == false" ng-click="leagueOptions.managed = true">[ Show Managed Leagues ]</a>
 </div>
 
 
