@@ -1,6 +1,6 @@
 <div ng-show="teams.length > 0" class="leagues-container">
   <div class="my-teams list-group">
-    <a ng-repeat="team in teams | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(season, team)" class="list-group-item">
+    <a ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(season, team)" class="list-group-item">
       <div class="row">
         <div class="league-name foo-bar col-sm-6 col-md-6">
           <i class="fa fa-comment fa-fw" ng-show="team.message.length > 0" title="Has message from commish"></i>
@@ -21,6 +21,12 @@
   <div style="clear: both;"></div>
 </div>
 
-<div class="teams-alert alert alert-info" ng-show="teams.length == 0">
+<div class="teams-alert alert alert-info" ng-show="(teams | aliveTeamFilter:teamOptions | filter:search:strict).length == 0">
   No teams :( Maybe you should <a class="alert-link" ng-click="joinLeague(season)">join a league</a> pronto!
 </div>
+
+<div class="dead-teams-checkbox">
+  <label><input type="checkbox" ng-model="teamOptions.dead"> show dead teams</label>
+</div>
+
+

@@ -1,6 +1,6 @@
 <div ng-show="leagues.length > 0" class="leagues-container">
   <div class="my-leagues list-group">
-    <a ng-repeat="league in leagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
+    <a ng-repeat="league in leagues | managedLeagueFilter:leagueOptions | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="viewLeague(league)" class="list-group-item">
       <div class="row">
         <div class="league-name col-sm-6 col-md-6">
           <i class="fa fa-group fa-fw" title="My Public league" ng-show="isCommish(league)"></i> {{league.name}}</div>
@@ -19,6 +19,12 @@
 </div>
 
 <!--if you have no leagues-->
-<div class="leagues-alert alert alert-info" ng-show="leagues.length == 0">
+<div class="leagues-alert alert alert-info" ng-show="(leagues | managedLeagueFilter:leagueOptions | filter:search:strict).length == 0">
   You are in no leagues. <a class="alert-link" ng-click="joinLeague(season)">Join a league</a> or <a class="alert-link" ng-click="createLeague(season)">create a league</a> now.
 </div>
+
+<div class="managed-leagues-checkbox">
+  <label><input type="checkbox" ng-model="leagueOptions.managed"> show managed leagues</label>
+</div>
+
+

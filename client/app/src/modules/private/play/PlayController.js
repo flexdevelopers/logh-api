@@ -2,6 +2,9 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
 
   $scope.season = seasonModel.season;
 
+  $scope.teamOptions = { alive: true, dead: true };
+  $scope.leagueOptions = { managed: true };
+
   $scope.myTeams = function(season) {
     $location.path('/season/' + season.id + '/my/teams');
   };
