@@ -112,14 +112,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   $scope.makePick = function(team, pick) {
 
-    if (!$scope.isCoach(team)) {
-      return;
-    }
-
-    if (pick && pick.locked) {
-      messageModel.setMessage({ type: 'danger', content: 'Your current pick for the week is locked as the game has already started' }, false);
-      return;
-    }
+    if (!$scope.isCoach(team) || (pick && pick.locked)) return;
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
@@ -139,7 +132,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       pickService.createPick(pick);
     }, function () {
       $log.debug('Make pick modal dismissed...');
-      messageModel.setMessage({ type: 'warning', content: 'Make pick cancelled' }, false);
+      messageModel.setMessage({ type: 'warning', content: 'Pick loser cancelled' }, false);
     });
 
   };
