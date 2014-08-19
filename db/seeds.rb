@@ -8,11 +8,14 @@
 
 # Reference data
 WeekType.destroy_all
+Season.destroy_all
+Week.destroy_all
+Game.destroy_all
 Squad.destroy_all
 
 # create week types
-WeekType.create(code: 'reg', description: 'Regular Season')
-WeekType.create(code: 'play', description: 'Playoffs')
+reg = WeekType.create(description: 'NFL Regular Season')
+play = WeekType.create(description: 'NFL Playoffs')
 
 # create squads
 # afc east
@@ -64,10 +67,6 @@ bucs = Squad.create(name: 'Tampa Bay Buccaneers', abbrev: 'BUF')
 panthers = Squad.create(name: 'Carolina Panthers', abbrev: 'BUF')
 
 # Transactional data
-Season.destroy_all
-Week.destroy_all
-Game.destroy_all
-
 User.destroy_all
 League.destroy_all
 Team.destroy_all
@@ -80,29 +79,29 @@ season1 = Season.create!(name: '2014-15 NFL Season', active: true, ends_at: Time
 season2 = Season.create!(name: '2015-16 NFL Season', active: false, ends_at: Time.zone.parse('2016-02-03 06:00'))
 
 # create regular season weeks
-week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-01 06:00'), ends_at: Time.zone.parse('2014-09-08 23:59'), season: season1)
-week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), ends_at: Time.zone.parse('2014-09-15 23:59'), season: season1)
-week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), ends_at: Time.zone.parse('2014-09-22 23:59'), season: season1)
-week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), ends_at: Time.zone.parse('2014-09-29 23:59'), season: season1)
-week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), ends_at: Time.zone.parse('2014-10-06 23:59'), season: season1)
-week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), ends_at: Time.zone.parse('2014-10-13 23:59'), season: season1)
-week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), ends_at: Time.zone.parse('2014-10-20 23:59'), season: season1)
-week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), ends_at: Time.zone.parse('2014-10-27 23:59'), season: season1)
-week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), ends_at: Time.zone.parse('2014-11-03 23:59'), season: season1)
-week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), ends_at: Time.zone.parse('2014-11-10 23:59'), season: season1)
-week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), ends_at: Time.zone.parse('2014-11-17 23:59'), season: season1)
-week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), ends_at: Time.zone.parse('2014-11-24 23:59'), season: season1)
-week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), ends_at: Time.zone.parse('2014-12-01 23:59'), season: season1)
-week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), ends_at: Time.zone.parse('2014-12-08 23:59'), season: season1)
-week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), ends_at: Time.zone.parse('2014-12-15 23:59'), season: season1)
-week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), ends_at: Time.zone.parse('2014-12-22 23:59'), season: season1)
-week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), ends_at: Time.zone.parse('2014-12-28 23:59'), season: season1)
+week1 = Week.create!(number: 1, week_type: reg, starts_at: Time.zone.parse('2014-09-01 06:00'), ends_at: Time.zone.parse('2014-09-08 23:59'), season: season1)
+week2 = Week.create!(number: 2, week_type: reg, starts_at: Time.zone.parse('2014-09-09 06:00'), ends_at: Time.zone.parse('2014-09-15 23:59'), season: season1)
+week3 = Week.create!(number: 3, week_type: reg, starts_at: Time.zone.parse('2014-09-16 06:00'), ends_at: Time.zone.parse('2014-09-22 23:59'), season: season1)
+week4 = Week.create!(number: 4, week_type: reg, starts_at: Time.zone.parse('2014-09-23 06:00'), ends_at: Time.zone.parse('2014-09-29 23:59'), season: season1)
+week5 = Week.create!(number: 5, week_type: reg, starts_at: Time.zone.parse('2014-09-30 06:00'), ends_at: Time.zone.parse('2014-10-06 23:59'), season: season1)
+week6 = Week.create!(number: 6, week_type: reg, starts_at: Time.zone.parse('2014-10-07 06:00'), ends_at: Time.zone.parse('2014-10-13 23:59'), season: season1)
+week7 = Week.create!(number: 7, week_type: reg, starts_at: Time.zone.parse('2014-10-14 06:00'), ends_at: Time.zone.parse('2014-10-20 23:59'), season: season1)
+week8 = Week.create!(number: 8, week_type: reg, starts_at: Time.zone.parse('2014-10-21 06:00'), ends_at: Time.zone.parse('2014-10-27 23:59'), season: season1)
+week9 = Week.create!(number: 9, week_type: reg, starts_at: Time.zone.parse('2014-10-28 06:00'), ends_at: Time.zone.parse('2014-11-03 23:59'), season: season1)
+week10 = Week.create!(number: 10, week_type: reg, starts_at: Time.zone.parse('2014-11-04 06:00'), ends_at: Time.zone.parse('2014-11-10 23:59'), season: season1)
+week11 = Week.create!(number: 11, week_type: reg, starts_at: Time.zone.parse('2014-11-11 06:00'), ends_at: Time.zone.parse('2014-11-17 23:59'), season: season1)
+week12 = Week.create!(number: 12, week_type: reg, starts_at: Time.zone.parse('2014-11-18 06:00'), ends_at: Time.zone.parse('2014-11-24 23:59'), season: season1)
+week13 = Week.create!(number: 13, week_type: reg, starts_at: Time.zone.parse('2014-11-25 06:00'), ends_at: Time.zone.parse('2014-12-01 23:59'), season: season1)
+week14 = Week.create!(number: 14, week_type: reg, starts_at: Time.zone.parse('2014-12-02 06:00'), ends_at: Time.zone.parse('2014-12-08 23:59'), season: season1)
+week15 = Week.create!(number: 15, week_type: reg, starts_at: Time.zone.parse('2014-12-09 06:00'), ends_at: Time.zone.parse('2014-12-15 23:59'), season: season1)
+week16 = Week.create!(number: 16, week_type: reg, starts_at: Time.zone.parse('2014-12-16 06:00'), ends_at: Time.zone.parse('2014-12-22 23:59'), season: season1)
+week17 = Week.create!(number: 17, week_type: reg, starts_at: Time.zone.parse('2014-12-23 06:00'), ends_at: Time.zone.parse('2014-12-28 23:59'), season: season1)
 
 # create playoff weeks
-week18 = Week.create!(number: 18, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2014-12-29 06:00'), ends_at: Time.zone.parse('2015-01-04 23:59'), season: season1)
-week19 = Week.create!(number: 19, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-05 06:00'), ends_at: Time.zone.parse('2015-01-11 23:59'), season: season1)
-week20 = Week.create!(number: 20, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-12 06:00'), ends_at: Time.zone.parse('2015-01-18 23:59'), season: season1)
-week21 = Week.create!(number: 21, week_type: WeekType.find_by(code: 'play'), starts_at: Time.zone.parse('2015-01-19 06:00'), ends_at: Time.zone.parse('2015-02-01 23:59'), season: season1)
+week18 = Week.create!(number: 18, week_type: play, starts_at: Time.zone.parse('2014-12-29 06:00'), ends_at: Time.zone.parse('2015-01-04 23:59'), season: season1)
+week19 = Week.create!(number: 19, week_type: play, starts_at: Time.zone.parse('2015-01-05 06:00'), ends_at: Time.zone.parse('2015-01-11 23:59'), season: season1)
+week20 = Week.create!(number: 20, week_type: play, starts_at: Time.zone.parse('2015-01-12 06:00'), ends_at: Time.zone.parse('2015-01-18 23:59'), season: season1)
+week21 = Week.create!(number: 21, week_type: play, starts_at: Time.zone.parse('2015-01-19 06:00'), ends_at: Time.zone.parse('2015-02-01 23:59'), season: season1)
 
 # create games
 # week 1
