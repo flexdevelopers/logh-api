@@ -65,7 +65,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     };
 
     $scope.play = function(season) {
-        $location.path('/season/' + season.id + '/play');
+        $location.path('/season/' + season.id + '/my/teams');
     };
 
     $scope.joinLeague = function(season) {

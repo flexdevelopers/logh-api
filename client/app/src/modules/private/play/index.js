@@ -4,7 +4,7 @@ module.exports = angular.module('loghApp.play', [])
     $stateProvider
       .state('private.play', {
         abstract: true,
-        url: 'season/{seasonId}/play',
+        url: 'season/{seasonId}/my',
         views: {
           header: {
             templateUrl: 'common/modules/header/header.tpl.html',

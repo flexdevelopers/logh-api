@@ -3,7 +3,7 @@ module.exports = angular.module('loghApp.play.teams', [])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.play.teams', {
-        url: '',
+        url: '/teams',
         views: {
           playContent: {
             templateUrl: 'modules/private/play/teams/play.teams.tpl.html',

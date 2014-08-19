@@ -3,11 +3,11 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
   $scope.season = seasonModel.season;
 
   $scope.myTeams = function(season) {
-    $location.path('/season/' + season.id + '/play');
+    $location.path('/season/' + season.id + '/my/teams');
   };
 
   $scope.myLeagues = function(season) {
-    $location.path('/season/' + season.id + '/play/leagues');
+    $location.path('/season/' + season.id + '/my/leagues');
   };
 
   $scope.resetSearch = function() {
