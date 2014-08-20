@@ -1,5 +1,5 @@
 var ApplicationService =
-    function($window, $location, $log, $commangular) {
+    function($window, $location, $log) {
 
         /**
          *  Application Startup Process
@@ -9,7 +9,13 @@ var ApplicationService =
         };
 
         var startupProcess = function() {
-            // anything you want to happen on app startup
+          forceSsl();
+        };
+
+        var forceSsl = function () {
+          if ($location.protocol() != 'https') {
+            $window.location.href = $location.absUrl().replace('http', 'https');
+          }
         };
 
         /**
@@ -22,5 +28,5 @@ var ApplicationService =
 
     };
 
-ApplicationService.$inject = ['$window', '$location', '$log', '$commangular'];
+ApplicationService.$inject = ['$window', '$location', '$log'];
 module.exports = ApplicationService;
