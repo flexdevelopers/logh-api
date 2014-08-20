@@ -14,7 +14,7 @@ LoghApi::Application.routes.draw do
     resources :users, only: [:create] do
       get 'current', on: :collection, to: 'users#current'
       put 'current', on: :collection, to: 'users#update'
-      put 'abuse', on: :collection, to: 'users#abuse'
+      put 'contact', on: :collection, to: 'users#contact'
     end
 
     resources :seasons, only: [] do

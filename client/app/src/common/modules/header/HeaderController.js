@@ -32,7 +32,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    $scope.reportAbuse = function() {
+    $scope.contactUs = function() {
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/public/abuse/abuse.tpl.html',
@@ -40,7 +40,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       });
 
       modalInstance.result.then(function(message) {
-        userService.reportAbuse(message);
+        userService.contactUs(message);
       }, function () {
         messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
         $log.debug('contact us dismissed...');

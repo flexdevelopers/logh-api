@@ -134,16 +134,16 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
         return promise;
     };
 
-    this.reportAbuse = function(message) {
-        var promise = $http.put(apiConfig.baseURL + "users/abuse",
+    this.contactUs = function(message) {
+        var promise = $http.put(apiConfig.baseURL + "users/contact",
             { message: message })
             .success(function(data) {
-                $log.debug("UserService: reportAbuse success");
+                $log.debug("UserService: contactUs success");
                 messageModel.setMessage(data.message, false);
                 return data;
             })
             .error(function(data) {
-                $log.debug("UserService: reportAbuse failed");
+                $log.debug("UserService: contactUs failed");
                 messageModel.setMessage(data.message, false);
                 return data;
             });

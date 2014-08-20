@@ -7,10 +7,10 @@ class API::UsersController < API::BaseController
     respond_with @user
   end
 
-  # PUT /api/users/abuse
-  def abuse
+  # PUT /api/users/contact
+  def contact
     if params[:message] && params[:message].length > 0
-      UserMailer.report_abuse(params[:message], current_user).deliver
+      UserMailer.contact_us(params[:message], current_user).deliver
       render json: { message: { type: SUCCESS, content: "Thank you. We've received your message." } }, status: :ok
     else
       render json: { message: { type: WARNING, content: "Sorry. We did not get your message." } }, status: :ok

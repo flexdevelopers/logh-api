@@ -13,10 +13,10 @@ class UserMailer < ActionMailer::Base
     mail to: user.email, subject: "Password reset for loseorgohome.com"
   end
 
-  def report_abuse(message, user)
+  def contact_us(message, user)
     @message = message
     @user = user
-    mail to: 'jeremy@loseorgohome.com', subject: "Abuse has been reported - #{Time.zone.now.strftime("%a, %b %e %l:%M %p %Z")}"
+    mail to: 'jeremy@loseorgohome.com', subject: "Contact us submitted - #{Time.zone.now.strftime("%a, %b %e %l:%M %p %Z")}"
   end
 
 end

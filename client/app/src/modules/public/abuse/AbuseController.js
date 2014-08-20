@@ -2,7 +2,7 @@ var AbuseController = function($modalInstance, $scope, $log) {
 
   $scope.abuseMessage = '';
 
-  $scope.reportAbuse = function(message) {
+  $scope.contactUs = function(message) {
     $modalInstance.close(message);
   };
 
