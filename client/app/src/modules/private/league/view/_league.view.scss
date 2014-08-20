@@ -20,6 +20,13 @@
     }
   }
 
+  .inactive-teams-checkbox {
+    position: absolute;
+    right: 210px;
+    top: 15px;
+    font-size: 11px;
+  }
+
   .winner-icon {
     color: #8a6d3b;
   }
@@ -80,9 +87,11 @@
       }
     }
     .inactive-teams-checkbox {
-      float: none !important;
+      font-size: 10px;
+      .teams {
+        display: none;
+      }
     }
-
   }
 
   @media all and (max-width: 550px) {
@@ -144,10 +153,6 @@
     width: 253px;
     margin: -20px auto 0 0;
     float: left;
-  }
-
-  .inactive-teams-checkbox {
-    float: right;
   }
 
 }
