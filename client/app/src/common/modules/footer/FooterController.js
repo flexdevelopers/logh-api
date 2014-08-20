@@ -2,6 +2,10 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
 
   $scope.season = seasonModel.season;
 
+  $scope.play = function(season) {
+    $location.path('/season/' + season.id + '/my/teams');
+  };
+
   $scope.joinLeague = function(season) {
     $location.path('/season/' + season.id + '/leagues/public');
   };
@@ -26,18 +30,6 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
       $log.debug('Create league modal dismissed...');
     });
 
-  };
-
-  $scope.myTeams = function(season) {
-    $location.path('/season/' + season.id + '/teams/alive');
-  };
-
-  $scope.myLeagues = function(season) {
-    $location.path('/season/' + season.id + '/leagues');
-  };
-
-  $scope.managedLeagues = function(season) {
-    $location.path('/season/' + season.id + '/leagues/managed');
   };
 
   /**
