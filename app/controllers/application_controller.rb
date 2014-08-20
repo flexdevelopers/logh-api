@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  force_ssl if: :ssl_configured?
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
@@ -12,11 +11,5 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Headers'] = '*, X-Requested-With, X-Prototype-Version, X-CSRF-Token, Content-Type'
     headers['Access-Control-Max-Age'] = "1728000"
   end
-
-  private
-
-    def ssl_configured?
-      Rails.env.production?
-    end
 
 end
