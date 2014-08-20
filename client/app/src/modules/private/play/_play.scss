@@ -11,6 +11,13 @@
   float: right;
 }
 
+.managed-leagues-checkbox, .dead-teams-checkbox {
+  position: absolute;
+  right: 210px;
+  top: 15px;
+  font-size: 11px;
+}
+
 @media all and (max-width: 767px) {
   .play-btn-group {
     float: none !important;
@@ -25,6 +32,18 @@
     width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
+  }
+  .managed-leagues-checkbox, .dead-teams-checkbox {
+    font-size: 10px;
+    .teams, .leagues {
+      display: none;
+    }
+  }
+}
+
+@media all and (max-width: 550px) {
+  .managed-leagues-checkbox, .dead-teams-checkbox {
+    right: 0;
   }
 }
 

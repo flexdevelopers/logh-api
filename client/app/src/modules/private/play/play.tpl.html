@@ -21,11 +21,19 @@
   </ul>
   <div class="input-group custom-search-form">
     <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </span>
+  </div>
+  <div class="dead-teams-checkbox" ng-show="isState(['private.play.teams'])">
+    <a ng-show="teamOptions.dead == true" ng-click="teamOptions.dead = false">[ Hide Dead<span class="teams"> Teams</span> ]</a>
+    <a ng-show="teamOptions.dead == false" ng-click="teamOptions.dead = true">[ Show Dead<span class="teams"> Teams</span> ]</a>
+  </div>
+  <div class="managed-leagues-checkbox" ng-show="isState(['private.play.leagues'])">
+    <a ng-show="leagueOptions.managed == true" ng-click="leagueOptions.managed = false">[ Hide Managed<span class="leagues"> Leagues</span> ]</a>
+    <a ng-show="leagueOptions.managed == false" ng-click="leagueOptions.managed = true">[ Show Managed<span class="leagues"> Leagues</span> ]</a>
   </div>
 </div>
 
