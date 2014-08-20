@@ -11,6 +11,15 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.teamOptions = { active: true, inactive: false };
 
+  $scope.teamQuery = '';
+
+  $scope.search = function(item) {
+    if (item.name.indexOf($scope.teamQuery) != -1 || item.coach_names[0].indexOf($scope.teamQuery) != -1) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.starts = function(league) {
     var startsLabel = (league.started) ? 'Started ' : 'Starts ';
     return startsLabel + league.start_week_display;
@@ -197,9 +206,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.resetSearch = function() {
-    $scope.search = {
-      name: ""
-    };
+    $scope.teamQuery = '';
     $scope.currentTeamPage = 1;
   };
 

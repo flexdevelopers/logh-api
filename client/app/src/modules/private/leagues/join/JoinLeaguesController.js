@@ -4,6 +4,8 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
 
   $scope.leagueOptions = { closed: false };
 
+  $scope.leagueQuery = '';
+
   $scope.publicLeagues = function(seasonId) {
     $location.path('/season/' + seasonId + '/leagues/public');
   };
@@ -12,10 +14,15 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
     $location.path('/season/' + seasonId + '/leagues/private');
   };
 
+  $scope.search = function(item) {
+    if (item.name.indexOf($scope.leagueQuery) != -1 || item.commish_names[0].indexOf($scope.leagueQuery) != -1) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.resetSearch = function() {
-    $scope.search = {
-      name: ""
-    };
+    $scope.leagueQuery = '';
   };
 
   $scope.isCommish = function(league) {

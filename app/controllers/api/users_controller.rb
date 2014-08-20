@@ -29,7 +29,7 @@ class API::UsersController < API::BaseController
       access_token.user = user
       render json: {
           token: access_token.token,
-          message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Let's get it on!" }
+          message: { type: SUCCESS, content: "User created for #{access_token.user.email}. Good luck!" }
       }
     else
       error(user.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

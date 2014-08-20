@@ -33,7 +33,7 @@
 <br>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
-    <input type="text" class="form-control" placeholder="Filter by name..." ng-model="search.name">
+    <input type="text" class="form-control" placeholder="Filter..." ng-model="teamQuery">
       <span class="input-group-btn">
           <button class="btn btn-default" type="button">
             <span class="glyphicon glyphicon-search"></span>
@@ -55,7 +55,7 @@
             <div class="league-name col-sm-6 col-md-6 team-name" ng-class="{'inactive': !team.active}">
               <i class="winner-icon fa fa-trophy fa-fw" ng-show="team.active && leagueData.start_week_complete && aliveTeams.length == 1" title="Winner"></i>
               <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
-              <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team) && !hasWinner(leagueData, aliveTeams)" title="My team"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
+              <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team) && !hasWinner(leagueData, aliveTeams)" title="My team"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
               <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Current Loser: {{team.last_pick_squad_name}}</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
@@ -83,7 +83,7 @@
           <div class="row">
             <div class="league-name col-sm-4 col-md-4 team-name" ng-class="{'inactive': !team.active}">
               <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team)" title="My team"></i>
-              <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
+              <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
             <div class="col-sm-8 col-md-8">
               <span class="current-pick no-pick" ng-show="team.active">Last Loser: {{team.last_pick_squad_name}}</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>

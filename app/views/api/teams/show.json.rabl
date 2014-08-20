@@ -2,6 +2,7 @@ object @team
 attributes :id, :name, :active, :alive, :message
 node(:commish_emails) { |team| team.commish_emails }
 node(:coach_emails) { |team| team.coach_emails }
+node(:pick_count) { |team| team.picks.count }
 node(:last_pick_squad_name) do |team|
   if team.alive
     if !team.current_pick
