@@ -66,11 +66,11 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
   };
 
   $scope.isCommish = function(team) {
-    return team.commish_emails.indexOf(userModel.user.email) > -1;
+    return team.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
   $scope.isCoach = function(team) {
-    return team.coach_emails.indexOf(userModel.user.email) > -1;
+    return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
 
   $scope.editTeam = function(team) {

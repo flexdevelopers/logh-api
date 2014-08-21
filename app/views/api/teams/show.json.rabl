@@ -1,14 +1,14 @@
 object @team
 attributes :id, :name, :active, :alive, :message
-node(:commish_emails) { |team| team.commish_emails }
-node(:coach_emails) { |team| team.coach_emails }
+node(:commish_ids) { |team| team.commish_ids }
+node(:coach_ids) { |team| team.coach_ids }
 node(:pick_count) { |team| team.picks.count }
 node(:last_pick_squad_name) do |team|
   if team.alive
     if !team.current_pick
       "No Pick"
     else
-      if team.current_pick.locked? || team.coach_emails.include?(@user.email)
+      if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         team.current_pick.squad.name
       else
         "Hidden"

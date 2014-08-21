@@ -15,7 +15,7 @@ module.exports = angular.module('loghApp.team.view', [])
             return teamService.getTeam($stateParams.leagueId, $stateParams.teamId);
           },
           leagueTeams: function(team, teamService, $stateParams, userModel) {
-            if (team.data.coach_emails.indexOf(userModel.user.email) > -1) {
+            if (team.data.coach_ids.indexOf(userModel.user.id) > -1) {
               return teamService.getLeagueTeams($stateParams.leagueId);
             } else {
               return { data: [] };

@@ -4,4 +4,4 @@ node(:started) { |league| league.started? }
 node(:team_count) { |league| league.teams.active.count }
 node(:start_week_display) { |league| league.start_week.display }
 node(:start_week_complete) { |league| league.start_week.complete }
-node(:commish_emails) { |league| league.commish_emails }
+node(:commish_ids) { |league| league.commish_ids }

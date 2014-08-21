@@ -26,7 +26,7 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
   };
 
   $scope.isCommish = function(league) {
-    return league.commish_emails.indexOf(userModel.user.email) > -1;
+    return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
   $scope.createLeague = function(season) {

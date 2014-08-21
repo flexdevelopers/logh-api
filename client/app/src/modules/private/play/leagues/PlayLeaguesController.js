@@ -42,7 +42,7 @@ var PlayLeaguesController = function(leagues, $scope, $log, $location, $modal, u
   };
 
   $scope.isCommish = function(league) {
-    return league.commish_emails.indexOf(userModel.user.email) > -1;
+    return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
   /**

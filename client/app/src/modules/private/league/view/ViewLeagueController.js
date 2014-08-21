@@ -34,14 +34,14 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.isCommish = function(league) {
-    return league.commish_emails.indexOf(userModel.user.email) > -1;
+    return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
   $scope.hasTeamInLeague = function() {
     var found = false;
     var teams = _.union($scope.aliveTeams, $scope.deadTeams);
     _.each(teams, function(team) {
-      if (team.coach_emails.indexOf(userModel.user.email) > -1) {
+      if (team.coach_ids.indexOf(userModel.user.id) > -1) {
         found = true;
       }
     });
@@ -49,7 +49,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.isCoach = function(team) {
-    return team.coach_emails.indexOf(userModel.user.email) > -1;
+    return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
 
   $scope.coachName = function(team) {
