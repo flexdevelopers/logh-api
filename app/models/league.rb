@@ -22,6 +22,8 @@ class League < ActiveRecord::Base
 
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }
+
+  scope :started, -> { joins(:start_week).where('starts_at <= ?', Time.zone.now) }
   scope :start_week_not_complete, -> { joins(:start_week).where('complete = ?', false) }
 
   def started?
@@ -33,14 +35,20 @@ class League < ActiveRecord::Base
     emails.flatten.uniq
   end
 
+  def commish_ids
+    @commish_ids ||= commishes.map(&:id)
+  end
+
   def commish_emails
-    commish_ids = league_commishes.map(&:user_id)
-    User.where(id: commish_ids).map(&:email)
+    @commish_emails ||= commishes.map(&:email)
   end
 
   def commish_names
-    commish_ids = league_commishes.map(&:user_id)
-    User.where(id: commish_ids).map(&:display_name)
+    @commish_names ||= commishes.map(&:display_name)
+  end
+
+  def active_team_count
+    @active_team_count ||= teams.active.count
   end
 
 end
