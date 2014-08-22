@@ -40,7 +40,7 @@
           </button>
       </span>
   </div>
-  <div class="inactive-teams-checkbox" ng-show="isCommish(leagueData)">
+  <div class="inactive-teams-checkbox" ng-class="{'not-started': !leagueData.start_week_complete}" ng-show="isCommish(leagueData)">
     <a ng-show="teamOptions.inactive == true" ng-click="teamOptions.inactive = false">[ Hide Deactivated<span class="teams"> Teams</span> ]</a>
     <a ng-show="teamOptions.inactive == false" ng-click="teamOptions.inactive = true">[ Show Deactivated<span class="teams"> Teams</span> ]</a>
   </div>
