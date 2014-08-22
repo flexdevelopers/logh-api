@@ -21,18 +21,24 @@ class Team < ActiveRecord::Base
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
 
+  def commish_ids
+    league.commish_ids
+  end
+
   def commish_emails
     league.commish_emails
   end
 
+  def coach_ids
+    @coach_ids ||= coaches.map(&:id)
+  end
+
   def coach_emails
-    coach_ids = team_coaches.map(&:user_id)
-    User.where(id: coach_ids).map(&:email)
+    @coach_emails ||= coaches.map(&:email)
   end
 
   def coach_names
-    coach_ids = team_coaches.map(&:user_id)
-    User.where(id: coach_ids).map(&:display_name)
+    @coach_names ||= coaches.map(&:display_name)
   end
 
   def current_pick
