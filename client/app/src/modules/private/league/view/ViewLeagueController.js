@@ -14,7 +14,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.teamQuery = '';
 
   $scope.search = function(item) {
-    if (item.name.indexOf($scope.teamQuery) != -1 || item.coach_names[0].indexOf($scope.teamQuery) != -1) {
+    if (item.name.indexOf($scope.teamQuery) != -1 || item.coach_names.join(', ').indexOf($scope.teamQuery) != -1) {
       return true;
     }
     return false;
@@ -53,7 +53,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   };
 
   $scope.coachName = function(team) {
-    return team.coach_names[0]; // todo: only handles the first team coach
+    return team.coach_names.join(', ');
   };
 
   $scope.hasNoPick = function(team) {

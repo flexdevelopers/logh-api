@@ -1,7 +1,7 @@
 <div class="private-leagues list-group">
     <a ng-repeat="league in privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="showLeague(league)" class="list-group-item">
         <div class="row">
-            <div class="league-name col-sm-6 col-md-6" ng-class="{'closed': !league.open}"><i class="fa fa-times fa-fw" title="Closed league" ng-show="!league.open"></i> {{league.name}} <span class="team-count">Join up to {{league.max_teams_per_user}} times<br>Commish: {{league.commish_names[0]}}</span></div>
+            <div class="league-name col-sm-6 col-md-6" ng-class="{'closed': !league.open}"><i class="fa fa-times fa-fw" title="Closed league" ng-show="!league.open"></i> {{league.name}} <span class="team-count">Join up to {{league.max_teams_per_user}} times<br>Commish: {{league.commish_names.join(', ')}}</span></div>
             <div class="col-sm-6 col-md-6">
                 <span class="start-week">Starts {{league.start_week}}</span>
                 <span class="badge">{{league.team_count}} teams</span>

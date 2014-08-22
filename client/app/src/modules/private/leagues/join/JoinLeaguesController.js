@@ -15,7 +15,7 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
   };
 
   $scope.search = function(item) {
-    if (item.name.indexOf($scope.leagueQuery) != -1 || item.commish_names[0].indexOf($scope.leagueQuery) != -1) {
+    if (item.name.indexOf($scope.leagueQuery) != -1 || item.commish_names.join(', ').indexOf($scope.leagueQuery) != -1) {
       return true;
     }
     return false;
