@@ -6,7 +6,7 @@ node(:coach_names) { |team| team.coach_names }
 node(:last_pick_squad_name) do |team|
   if team.alive
     if !team.current_pick
-      "No Pick"
+      "None"
     else
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         team.current_pick.squad.name
@@ -16,11 +16,7 @@ node(:last_pick_squad_name) do |team|
     end
   else
     incorrect_pick = team.picks.where(correct: false)[0]
-    if incorrect_pick
-      "#{incorrect_pick.squad.name} (Week #{incorrect_pick.week.number})"
-    else
-      "No Pick"
-    end
+    "#{incorrect_pick.squad.name} (Week #{incorrect_pick.week.number})"
   end
 end
 child :league do

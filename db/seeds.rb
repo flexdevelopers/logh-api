@@ -18,6 +18,10 @@ reg = WeekType.create(description: 'NFL Regular Season')
 play = WeekType.create(description: 'NFL Playoffs')
 
 # create squads
+
+# null squad used for 'no pick' teams
+Squad.create(name: 'None', abbrev: 'NON')
+
 # afc east
 bills = Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
 dolphins = Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')

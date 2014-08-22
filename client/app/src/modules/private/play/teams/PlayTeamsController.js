@@ -11,7 +11,7 @@ var PlayTeamsController = function(teams, $scope, $log, $location) {
   };
 
   $scope.hasNoPick = function(team) {
-    return team.last_pick_squad_name == 'No Pick';
+    return team.last_pick_squad_name == 'None';
   };
 
   /**
