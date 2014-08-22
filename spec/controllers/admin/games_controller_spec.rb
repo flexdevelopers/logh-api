@@ -93,55 +93,6 @@ describe API::Admin::GamesController do
         expect(game.visiting_squad_score).to eq(27)
       end
     end
-    context 'when visiting squad score is less than home squad score' do
-      subject(:game) { FactoryGirl.create(:game) }
-      it 'should add visiting squad to the weeks losers' do
-        game[:home_squad_score] = 34
-        game[:visiting_squad_score] = 24
-        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-        expect(response).to be_success
-        expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(1)
-        expect(game.week.losers.where(squad: game.home_squad).length).to eq(0)
-      end
-    end
-    context 'when home squad score is less than visiting squad score' do
-      subject(:game) { FactoryGirl.create(:game) }
-      it 'should add home squad to the weeks losers' do
-        game[:home_squad_score] = 21
-        game[:visiting_squad_score] = 28
-        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-        expect(response).to be_success
-        expect(game.week.losers.where(squad: game.home_squad).length).to eq(1)
-        expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
-      end
-    end
-    context 'when home squad score equals visiting squad score' do
-      subject(:game) { FactoryGirl.create(:game) }
-      it 'should not add either squad to the weeks losers' do
-        game[:home_squad_score] = game[:visiting_squad_score] = 14
-        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-        expect(response).to be_success
-        expect(game.week.losers.where(squad: game.home_squad).length).to eq(0)
-        expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
-      end
-    end
-    context 'when game score is updated multiple times with different results' do
-      subject(:game) { FactoryGirl.create(:game) }
-      it 'both opponents should not be marked as losers' do
-        game[:home_squad_score] = 24
-        game[:visiting_squad_score] = 14
-        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-        expect(response).to be_success
-        expect(game.week.losers.find_by(squad: game.visiting_squad)).not_to be_nil
-        game[:home_squad_score] = 14
-        game[:visiting_squad_score] = 24
-        patch :update, week_id: game.week.id, id: game.id, game: game.attributes
-        expect(response).to be_success
-        expect(game.week.losers.where(squad: game.home_squad).length).to eq(1)
-        expect(game.week.losers.where(squad: game.visiting_squad).length).to eq(0)
-      end
-    end
-
   end
 
   # DELETE /api/admin/weeks/:week_id/games/:id

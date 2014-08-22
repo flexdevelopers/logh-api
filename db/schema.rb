@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816210206) do
+ActiveRecord::Schema.define(version: 20140821233923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140816210206) do
     t.integer  "home_squad_score",     default: 0,     null: false
     t.integer  "visiting_squad_score", default: 0,     null: false
     t.boolean  "complete",             default: false
+    t.integer  "loser_squad_id"
   end
 
   add_index "games", ["week_id", "home_squad_id"], name: "index_games_on_week_id_and_home_squad_id", unique: true, using: :btree
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(version: 20140816210206) do
     t.integer  "squad_id",     null: false
     t.boolean  "correct"
     t.integer  "week_type_id", null: false
-    t.integer  "game_id",      null: false
+    t.integer  "game_id"
   end
 
   add_index "picks", ["team_id", "squad_id", "week_type_id"], name: "index_picks_on_team_id_and_squad_id_and_week_type_id", unique: true, using: :btree
