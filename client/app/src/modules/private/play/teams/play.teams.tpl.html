@@ -2,7 +2,7 @@
   <div class="my-teams list-group">
     <a ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(season, team)" class="list-group-item">
       <div class="row">
-        <div class="league-name foo-bar col-sm-6 col-md-6">
+        <div class="league-name col-sm-6 col-md-6">
           <i class="fa fa-comment fa-fw" ng-show="team.message.length > 0" title="Has message from commish"></i>
           <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
           <i class="fa fa-thumbs-down fa-fw" title="Dead Team" ng-show="team.active && !team.alive"></i> <span ng-class="{'inactive-team-name': !team.active}">{{team.name}}</span> <span class="team-league">{{team.league.name}}</span></div>
