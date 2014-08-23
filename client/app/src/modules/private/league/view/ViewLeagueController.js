@@ -48,6 +48,17 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return found;
   };
 
+  $scope.hasDeactivatedTeams = function() {
+    var foundDeactivated = false;
+    var teams = _.union($scope.aliveTeams, $scope.deadTeams);
+    _.each(teams, function(team) {
+      if (team.active == false) {
+        foundDeactivated = true;
+      }
+    });
+    return foundDeactivated;
+  };
+
   $scope.isCoach = function(team) {
     return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
