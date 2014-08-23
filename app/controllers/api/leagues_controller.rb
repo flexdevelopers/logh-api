@@ -8,21 +8,21 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues/managed
   def managed
     @leagues = current_user.managed_leagues.includes(:teams, :start_week)
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/managed.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/public
   def public
     @leagues = @season.leagues.public.start_week_not_complete.includes(:teams, :start_week)
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/public.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/private
   def private
     @leagues = @season.leagues.private.start_week_not_complete.includes(:teams, :start_week)
-    @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
+    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/private.json.rabl
   end
 
@@ -30,7 +30,7 @@ class API::LeaguesController < API::BaseController
   def index
     # get the leagues you are in and the leagues that you manage
     teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league)
-    @leagues = (teams.map(&:league) + current_user.managed_leagues).uniq.sort_by { |league| [ league.name ] }
+    @leagues = (teams.map(&:league) + current_user.managed_leagues).uniq.sort_by { |league| [ league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 
