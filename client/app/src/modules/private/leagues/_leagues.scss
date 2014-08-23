@@ -1,7 +1,7 @@
 .leagues-container {
   position: relative;
   .custom-search-form {
-    width: 200px;
+    width: 300px;
     position: absolute;
     right: 0;
     top: 0;
@@ -29,7 +29,7 @@
   float: left;
 }
 
-@media all and (max-width: 550px) {
+@media all and (max-width: 767px) {
   .leagues-container {
     .custom-search-form {
       width: 100%;

@@ -22,7 +22,7 @@
 
   .inactive-teams-checkbox {
     position: absolute;
-    right: 210px;
+    right: 280px;
     top: 15px;
     font-size: 11px;
   }
@@ -43,7 +43,7 @@
   .league-container {
     position: relative;
     .custom-search-form {
-      width: 200px;
+      width: 275px;
       position: absolute;
       right: 0;
       top: 0;
@@ -95,9 +95,6 @@
         top: -25px;
       }
     }
-  }
-
-  @media all and (max-width: 550px) {
     .league-container {
       .custom-search-form {
         width: 100%;

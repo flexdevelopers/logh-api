@@ -14,6 +14,13 @@ var PlayTeamsController = function(teams, $scope, $log, $location) {
     return team.last_pick_squad_name == 'None';
   };
 
+  $scope.search = function(item) {
+    if (item.name.indexOf($scope.query) != -1 || item.league.name.indexOf($scope.query) != -1) {
+      return true;
+    }
+    return false;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */

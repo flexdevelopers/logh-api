@@ -5,6 +5,8 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
   $scope.teamOptions = { alive: true, dead: true };
   $scope.leagueOptions = { managed: true };
 
+  $scope.query = '';
+
   $scope.myTeams = function(season) {
     $location.path('/season/' + season.id + '/my/teams');
   };
@@ -14,9 +16,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
   };
 
   $scope.resetSearch = function() {
-    $scope.search = {
-      name: ""
-    };
+    $scope.query = '';
   };
 
   $scope.isState = function(states) {

@@ -45,6 +45,13 @@ var PlayLeaguesController = function(leagues, $scope, $log, $location, $modal, u
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
+  $scope.search = function(item) {
+    if (item.name.indexOf($scope.query) != -1 || item.commish_names.join(', ').indexOf($scope.query) != -1) {
+      return true;
+    }
+    return false;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
