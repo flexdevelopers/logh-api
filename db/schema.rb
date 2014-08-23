@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821233923) do
+ActiveRecord::Schema.define(version: 20140823223942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,17 +78,6 @@ ActiveRecord::Schema.define(version: 20140821233923) do
 
   add_index "leagues", ["name", "season_id"], name: "index_leagues_on_name_and_season_id", unique: true, using: :btree
   add_index "leagues", ["season_id"], name: "index_leagues_on_season_id", using: :btree
-
-  create_table "losers", force: true do |t|
-    t.integer  "week_id",    null: false
-    t.integer  "squad_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "game_id"
-  end
-
-  add_index "losers", ["week_id", "squad_id"], name: "index_losers_on_week_id_and_squad_id", unique: true, using: :btree
-  add_index "losers", ["week_id"], name: "index_losers_on_week_id", using: :btree
 
   create_table "picks", force: true do |t|
     t.datetime "created_at"
