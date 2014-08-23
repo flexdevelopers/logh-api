@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Reference data
-WeekType.destroy_all
 Season.destroy_all
 Week.destroy_all
+WeekType.destroy_all
 Game.destroy_all
 Squad.destroy_all
 
@@ -20,55 +20,55 @@ play = WeekType.create(description: 'NFL Playoffs')
 # create squads
 
 # null squad used for 'no pick' teams
-Squad.create(name: 'None', abbrev: 'NON')
+Squad.create(name: 'None', abbrev: 'NONE')
 
 # afc east
 bills = Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
 dolphins = Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')
-patriots = Squad.create(name: 'New England Patriots', abbrev: 'NEP')
+patriots = Squad.create(name: 'New England Patriots', abbrev: 'NE')
 jets = Squad.create(name: 'New York Jets', abbrev: 'NYJ')
 
 # afc west
 broncos = Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
-chiefs = Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
+chiefs = Squad.create(name: 'Kansas City Chiefs', abbrev: 'KC')
 raiders = Squad.create(name: 'Oakland Raiders', abbrev: 'OAK')
-chargers = Squad.create(name: 'San Diego Chargers', abbrev: 'SDC')
+chargers = Squad.create(name: 'San Diego Chargers', abbrev: 'SD')
 
 # afc north
-bengals = Squad.create(name: 'Cincinnati Bengals', abbrev: 'BEN')
-browns = Squad.create(name: 'Cleveland Browns', abbrev: 'BUF')
-steelers = Squad.create(name: 'Pittsburgh Steelers', abbrev: 'BUF')
-ravens = Squad.create(name: 'Baltimore Ravens', abbrev: 'BUF')
+bengals = Squad.create(name: 'Cincinnati Bengals', abbrev: 'CIN')
+browns = Squad.create(name: 'Cleveland Browns', abbrev: 'CLE')
+steelers = Squad.create(name: 'Pittsburgh Steelers', abbrev: 'PIT')
+ravens = Squad.create(name: 'Baltimore Ravens', abbrev: 'BAL')
 
 # afc south
-texans = Squad.create(name: 'Houston Texans', abbrev: 'BUF')
-titans = Squad.create(name: 'Tennessee Titans', abbrev: 'BUF')
-colts = Squad.create(name: 'Indianapolis Colts', abbrev: 'BUF')
-jaguars = Squad.create(name: 'Jacksonville Jaguars', abbrev: 'BUF')
+texans = Squad.create(name: 'Houston Texans', abbrev: 'HOU')
+titans = Squad.create(name: 'Tennessee Titans', abbrev: 'TEN')
+colts = Squad.create(name: 'Indianapolis Colts', abbrev: 'IND')
+jaguars = Squad.create(name: 'Jacksonville Jaguars', abbrev: 'JAC')
 
 # nfc east
-cowboys = Squad.create(name: 'Dallas Cowboys', abbrev: 'BUF')
-giants = Squad.create(name: 'New York Giants', abbrev: 'BUF')
-eagles = Squad.create(name: 'Philadelphia Eagles', abbrev: 'BUF')
-redskins = Squad.create(name: 'Washington Redskins', abbrev: 'BUF')
+cowboys = Squad.create(name: 'Dallas Cowboys', abbrev: 'DAL')
+giants = Squad.create(name: 'New York Giants', abbrev: 'NYG')
+eagles = Squad.create(name: 'Philadelphia Eagles', abbrev: 'PHI')
+redskins = Squad.create(name: 'Washington Redskins', abbrev: 'WAS')
 
 # nfc west
-rams = Squad.create(name: 'St. Louis Rams', abbrev: 'BUF')
-cardinals = Squad.create(name: 'Arizona Cardinals', abbrev: 'BUF')
-niners = Squad.create(name: 'San Francisco 49ers', abbrev: 'BUF')
-seahawks = Squad.create(name: 'Seattle Seahawks', abbrev: 'BUF')
+rams = Squad.create(name: 'St. Louis Rams', abbrev: 'STL')
+cardinals = Squad.create(name: 'Arizona Cardinals', abbrev: 'ARI')
+niners = Squad.create(name: 'San Francisco 49ers', abbrev: 'SF')
+seahawks = Squad.create(name: 'Seattle Seahawks', abbrev: 'SEA')
 
 # nfc north
-bears = Squad.create(name: 'Chicago Bears', abbrev: 'BUF')
-lions = Squad.create(name: 'Detroit Lions', abbrev: 'BUF')
-packers = Squad.create(name: 'Green Bay Packers', abbrev: 'BUF')
-vikings = Squad.create(name: 'Minnesota Vikings', abbrev: 'BUF')
+bears = Squad.create(name: 'Chicago Bears', abbrev: 'CHI')
+lions = Squad.create(name: 'Detroit Lions', abbrev: 'DET')
+packers = Squad.create(name: 'Green Bay Packers', abbrev: 'GB')
+vikings = Squad.create(name: 'Minnesota Vikings', abbrev: 'MIN')
 
 # nfc south
-falcons = Squad.create(name: 'Atlanta Falcons', abbrev: 'BUF')
-saints = Squad.create(name: 'New Orleans Saints', abbrev: 'BUF')
-bucs = Squad.create(name: 'Tampa Bay Buccaneers', abbrev: 'BUF')
-panthers = Squad.create(name: 'Carolina Panthers', abbrev: 'BUF')
+falcons = Squad.create(name: 'Atlanta Falcons', abbrev: 'ATL')
+saints = Squad.create(name: 'New Orleans Saints', abbrev: 'NO')
+bucs = Squad.create(name: 'Tampa Bay Buccaneers', abbrev: 'TB')
+panthers = Squad.create(name: 'Carolina Panthers', abbrev: 'CAR')
 
 # Transactional data
 User.destroy_all
@@ -76,11 +76,8 @@ League.destroy_all
 Team.destroy_all
 Pick.destroy_all
 
-Loser.destroy_all
-
 # create seasons
 season1 = Season.create!(name: '2014-15 NFL Season', active: true, ends_at: Time.zone.parse('2015-02-02 06:00'))
-season2 = Season.create!(name: '2015-16 NFL Season', active: false, ends_at: Time.zone.parse('2016-02-03 06:00'))
 
 # create regular season weeks
 week1 = Week.create!(number: 1, week_type: reg, starts_at: Time.zone.parse('2014-09-01 06:00'), ends_at: Time.zone.parse('2014-09-08 23:59'), season: season1)

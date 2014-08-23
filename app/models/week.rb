@@ -35,7 +35,7 @@ class Week < ActiveRecord::Base
 
       return unless self.complete == true # only update if the week is complete
 
-      null_squad = Squad.find_by(abbrev: 'NON')
+      null_squad = Squad.find_by(abbrev: 'NONE')
 
       begin
         transaction do
