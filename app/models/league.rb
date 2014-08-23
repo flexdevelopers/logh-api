@@ -10,7 +10,7 @@ class League < ActiveRecord::Base
   has_many :teams, dependent: :destroy
   has_many :invitations, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 35 }, uniqueness: { case_sensitive: false, scope: :season_id }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false, scope: :season_id }
   validates :season, presence: true
   validates :open, inclusion: { in: [true, false] }
   validates :public, inclusion: { in: [true, false] }

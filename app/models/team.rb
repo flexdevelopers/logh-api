@@ -8,7 +8,7 @@ class Team < ActiveRecord::Base
   has_many :team_coaches
   has_many :coaches, through: :team_coaches
 
-  validates :name, presence: true, length: { maximum: 35 }, uniqueness: { case_sensitive: false, scope: :league_id }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false, scope: :league_id }
   validates :league, presence: true
   validates :active, inclusion: { in: [true, false] }
   validates :alive, inclusion: { in: [true, false] }

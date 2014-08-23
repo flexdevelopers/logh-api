@@ -28,8 +28,8 @@ describe Team do
     it { should_not be_valid }
   end
 
-  context 'when name is greater than 35 characters' do
-    subject(:team) { FactoryGirl.build(:team, name: 'a' * 36) }
+  context 'when name is greater than 30 characters' do
+    subject(:team) { FactoryGirl.build(:team, name: 'a' * 31) }
     it { should_not be_valid }
   end
 
