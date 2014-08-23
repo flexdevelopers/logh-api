@@ -1,7 +1,7 @@
 <div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 1"><strong>{{winner(aliveTeams)}}</strong> has earned the prestigious Loser Trophy! Congrats all around...</div>
 <div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see how everyone did.</div>
 <div class="header-row row">
-  <div class="col-sm-8 col-md-8">
+  <div class="col-sm-7 col-md-7">
     <h3 class="league-name">
       <i class="fa fa-times" title="Closed league" ng-show="!leagueData.open"></i>
       <i class="fa fa-lock" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
@@ -11,7 +11,7 @@
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
-  <div class="col-sm-4 col-md-4">
+  <div class="col-sm-5 col-md-5">
     <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
     <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
