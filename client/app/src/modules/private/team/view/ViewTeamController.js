@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, teamService, leagueService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, userService, teamService, leagueService, gameService, pickService) {
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
@@ -22,6 +22,22 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     }, function () {
       $log.debug('Contact league modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
+    });
+
+  };
+
+  $scope.reportAbuse = function() {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/public/abuse/abuse.tpl.html',
+      controller: 'AbuseController'
+    });
+
+    modalInstance.result.then(function(message) {
+      userService.contactUs(message);
+    }, function () {
+      messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
+      $log.debug('contact us dismissed...');
     });
 
   };
@@ -147,5 +163,5 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'teamService', 'leagueService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'userService', 'teamService', 'leagueService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

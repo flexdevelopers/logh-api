@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, messageModel, weekService, teamService, leagueService) {
+var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, messageModel, userService, weekService, teamService, leagueService) {
 
   $scope.leagueData = league.data;
 
@@ -129,6 +129,22 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   };
 
+  $scope.reportAbuse = function() {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/public/abuse/abuse.tpl.html',
+      controller: 'AbuseController'
+    });
+
+    modalInstance.result.then(function(message) {
+      userService.contactUs(message);
+    }, function () {
+      messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
+      $log.debug('contact us dismissed...');
+    });
+
+  };
+
   $scope.updateMessage = function(league) {
 
     var modalInstance = $modal.open({
@@ -231,5 +247,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'messageModel', 'weekService', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;
