@@ -46,7 +46,7 @@ var PlayLeaguesController = function(leagues, $scope, $log, $location, $modal, u
   };
 
   $scope.search = function(item) {
-    if (item.name.indexOf($scope.query) != -1 || item.commish_names.join(', ').indexOf($scope.query) != -1) {
+    if (item.name.indexOf($scope.query.toLowerCase()) != -1 || item.commish_names.join(', ').indexOf($scope.query.toLowerCase()) != -1) {
       return true;
     }
     return false;

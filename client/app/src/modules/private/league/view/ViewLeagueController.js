@@ -14,7 +14,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
   $scope.teamQuery = '';
 
   $scope.search = function(item) {
-    if (item.name.indexOf($scope.teamQuery) != -1 || item.coach_names.join(', ').indexOf($scope.teamQuery) != -1) {
+    if (item.name.indexOf($scope.teamQuery.toLowerCase()) != -1 || item.coach_names.join(', ').indexOf($scope.teamQuery.toLowerCase()) != -1) {
       return true;
     }
     return false;
