@@ -131,6 +131,10 @@
 
   .league-message {
     margin-top: 10px;
+    .league-message-text {
+      display: inline-block;
+      margin: 0;
+    }
   }
 
   .alive-teams, .dead-teams {
