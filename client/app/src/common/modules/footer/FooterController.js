@@ -3,7 +3,7 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
   $scope.season = seasonModel.season;
 
   $scope.play = function(season) {
-    $location.path('/season/' + season.id + '/my/teams');
+    $location.path('/season/' + season.id + '/my/leagues');
   };
 
   $scope.joinLeague = function(season) {
