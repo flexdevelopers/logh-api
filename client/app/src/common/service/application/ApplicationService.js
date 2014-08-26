@@ -1,5 +1,4 @@
-var ApplicationService =
-    function($window, $location, $log) {
+var ApplicationService = function($window, $location, $log, messageModel) {
 
         /**
          *  Application Startup Process
@@ -10,12 +9,23 @@ var ApplicationService =
 
         var startupProcess = function() {
           forceSsl();
+          checkSessionStorage();
         };
 
         var forceSsl = function () {
           if ($location.protocol() != 'https') {
             $window.location.href = $location.absUrl().replace('http', 'https');
           }
+        };
+
+        var checkSessionStorage = function() {
+
+          try {
+            $window.sessionStorage.test = 2; // try to use sessionStorage
+          } catch (e) {
+            messageModel.setMessage({ type: 'danger', content: 'You are in Privacy Mode. This app will not function properly. Turn off Privacy Mode.' }, true);
+          }
+
         };
 
         /**
@@ -28,5 +38,5 @@ var ApplicationService =
 
     };
 
-ApplicationService.$inject = ['$window', '$location', '$log'];
+ApplicationService.$inject = ['$window', '$location', '$log', 'messageModel'];
 module.exports = ApplicationService;
