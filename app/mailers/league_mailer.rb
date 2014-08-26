@@ -21,4 +21,10 @@ class LeagueMailer < ActionMailer::Base
     mail to: 'jeremy@loseorgohome.com', subject: "The #{@league.name} league has a new message from the commish"
   end
 
+  def team_joined(team)
+    @team = team
+    @league = @team.league
+    mail to: @league.commish_emails, subject: "A new team has joined the #{@league.name} league"
+  end
+
 end
