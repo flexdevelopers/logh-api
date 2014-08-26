@@ -89,10 +89,6 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
 
-  $scope.editTeam = function(team) {
-    alert('popup a modal'); // todo: what is this doing here?
-  };
-
   $scope.showTeam = function(team) {
     var teamPath = $location.path().replace(/[^\/]*$/, team.id);
     $location.path(teamPath);
