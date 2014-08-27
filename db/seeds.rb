@@ -396,13 +396,20 @@
 # Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: rams, home_squad: seahawks)
 #
 # # week 18
-# # TBD
+# Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: giants, home_squad: seahawks)
+# Game.create!(starts_at: Time.zone.parse('2015-01-03 13:00'), week: week18, visiting_squad: packers, home_squad: eagles)
+# Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: patriots, home_squad: chargers)
+# Game.create!(starts_at: Time.zone.parse('2015-01-04 13:00'), week: week18, visiting_squad: broncos, home_squad: browns)
 #
 # # week 19
-# # TBD
+# Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: giants, home_squad: niners)
+# Game.create!(starts_at: Time.zone.parse('2015-01-10 13:00'), week: week19, visiting_squad: packers, home_squad: saints)
+# Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: patriots, home_squad: ravens)
+# Game.create!(starts_at: Time.zone.parse('2015-01-11 13:00'), week: week19, visiting_squad: broncos, home_squad: colts)
 #
 # # week 20
-# # TBD
+# Game.create!(starts_at: Time.zone.parse('2015-01-17 13:00'), week: week20, visiting_squad: packers, home_squad: niners)
+# Game.create!(starts_at: Time.zone.parse('2015-01-18 13:00'), week: week20, visiting_squad: broncos, home_squad: ravens)
 #
 # # week 21
-# # TBD
+# Game.create!(starts_at: Time.zone.parse('2015-02-01 13:00'), week: week21, visiting_squad: broncos, home_squad: niners)
