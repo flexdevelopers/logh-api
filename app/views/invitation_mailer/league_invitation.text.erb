@@ -1,4 +1,4 @@
-Congrats! <%= @user.display_name %> has invited you to join the "<%= @invitation.league.name %>" league! No intelligence required. Simply pick one NFL loser a week.
+Congrats! <%= @user.display_name %> has invited you to join <%= @invitation.league.name %>! No intelligence required. Simply pick one NFL loser each week. Get it right and move on to the next week. Get it wrong and you're out. The last team remaining wins!
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included:
@@ -8,6 +8,6 @@ A message was also included:
 *****
 
 <% end %>
-To join the fun, follow this link and hit the 'Join' button:
+To join <%= @invitation.league.name %>, follow this link and hit the 'Join' button:
 
 <%= "https://www.loseorgohome.com/#/season/#{@invitation.league.season_id}/league/#{@invitation.league.id}" %>

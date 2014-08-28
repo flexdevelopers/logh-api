@@ -5,7 +5,7 @@ class LeagueMailer < ActionMailer::Base
     @league = league
     @user = user
     @message = message
-    mail to: @league.commish_emails, subject: "You have a message regarding the #{@league.name} league"
+    mail to: @league.commish_emails, subject: "You have a message regarding #{@league.name}"
   end
 
   def message_notify(league)
@@ -18,13 +18,13 @@ class LeagueMailer < ActionMailer::Base
     headers['X-SMTPAPI'] =  hdr.asJSON()
     puts "SMTPAPI: #{hdr.asJSON()}"
 
-    mail to: 'jeremy@loseorgohome.com', subject: "The #{@league.name} league has a new message from the commish"
+    mail to: 'jeremy@loseorgohome.com', subject: "#{@league.name} has a new message from the commish"
   end
 
   def team_joined(team)
     @team = team
     @league = @team.league
-    mail to: @league.commish_emails, subject: "A new team has joined the #{@league.name} league"
+    mail to: @league.commish_emails, subject: "A new team has joined #{@league.name}"
   end
 
 end

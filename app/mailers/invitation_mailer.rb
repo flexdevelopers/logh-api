@@ -4,7 +4,7 @@ class InvitationMailer < ActionMailer::Base
   def league_invitation(invitation, user)
     @invitation = invitation
     @user = user
-    mail to: invitation.email, subject: "You have been invited to join a league at loseorgohome.com"
+    mail to: invitation.email, subject: "You have been invited to join a league at LoseOrGoHome.com"
   end
 
   def request_invitation(league, requestor_email, requestor_message)

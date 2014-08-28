@@ -4,13 +4,13 @@ class UserMailer < ActionMailer::Base
   def welcome(user, season)
     @user = user
     @season = season
-    mail to: user.email, subject: "Welcome to loseorgohome.com"
+    mail to: user.email, subject: "Welcome to LoseOrGoHome.com"
   end
 
   def reset(user, access_token)
     @user = user
     @access_token = access_token
-    mail to: user.email, subject: "Password reset for loseorgohome.com"
+    mail to: user.email, subject: "Password reset for LoseOrGoHome.com"
   end
 
   def contact_us(message, user)
