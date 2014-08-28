@@ -29,30 +29,23 @@ class Week < ActiveRecord::Base
     kill_teams_with_no_pick
   end
 
-  private
+  def kill_teams_with_no_pick
 
-    def kill_teams_with_no_pick
+    return unless self.complete == true # only update if the week is complete
 
-      return unless self.complete == true # only update if the week is complete
+    null_squad = Squad.find_by(abbrev: 'NONE')
 
-      null_squad = Squad.find_by(abbrev: 'NONE')
-
-      begin
-        transaction do
-          self.season.leagues.started.each do |started_league|
-            started_league.teams.alive.each do |alive_team|
-              pick = self.picks.find_by(team: alive_team)
-              if !pick
-                # give that team a 'null squad' pick and then kill the team
-                Pick.create!(week: self, week_type: self.week_type, team: alive_team, game: nil, squad: null_squad, correct: false)
-                alive_team.kill #todo: make game id nullable for pick
-              end
-            end
-          end
+    self.season.leagues.started.each do |started_league|
+      started_league.teams.alive.each do |alive_team|
+        pick = self.picks.find_by(team: alive_team)
+        if !pick
+          # give the team that made no pick a 'null squad' pick and then kill the team
+          Pick.create!(week: self, week_type: self.week_type, team: alive_team, game: nil, squad: null_squad, correct: false)
+          alive_team.kill
         end
-      rescue => e
-        puts "Week update failed"
       end
-
     end
+
+  end
+
 end
