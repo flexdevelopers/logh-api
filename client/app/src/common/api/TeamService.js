@@ -138,6 +138,24 @@ var TeamService = function($http, $log, $location, $state, $q, apiConfig, messag
       return deferred.promise;
     };
 
+    this.sendCommishMessage = function(teamParams, message) {
+      var deferred = $q.defer();
+      $http.put(apiConfig.baseURL + "leagues/" + teamParams.league.id + "/teams/" + teamParams.id + "/contact",
+        { contact: message })
+        .success(function(data) {
+          $log.debug("TeamService: sendCommishMessage success");
+          messageModel.setMessage(data.message, false);
+          deferred.resolve();
+        })
+        .error(function(data) {
+          $log.debug("TeamService: sendCommishMessage failed");
+          messageModel.setMessage(data.message, false);
+          deferred.reject();
+        });
+
+      return deferred.promise;
+    };
+
     this.activateTeam = function(team) {
         var deferred = $q.defer();
         $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/activate")

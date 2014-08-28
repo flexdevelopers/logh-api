@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, userService, teamService, leagueService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, userService, teamService, gameService, pickService) {
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
@@ -18,7 +18,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     });
 
     modalInstance.result.then(function(params) {
-      leagueService.sendCommishMessage(params.league, params.message)
+      teamService.sendCommishMessage(team, params.message)
     }, function () {
       $log.debug('Contact league modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
@@ -159,5 +159,5 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'userService', 'teamService', 'leagueService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

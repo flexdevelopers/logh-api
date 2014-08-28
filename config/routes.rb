@@ -43,6 +43,7 @@ LoghApi::Application.routes.draw do
         put 'activate', on: :member, to: 'teams#activate'
         put 'deactivate', on: :member, to: 'teams#deactivate'
         put 'message', on: :member, to: 'teams#message'
+        put 'contact', on: :member, to: 'teams#contact'
       end
       resources :invitations, only: [:index, :create, :destroy] do
         post 'new', on: :collection, to: 'invitations#new'

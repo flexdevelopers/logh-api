@@ -1,6 +1,13 @@
 class TeamMailer < ActionMailer::Base
   default from: 'no-reply@loseorgohome.com'
 
+  def contact_commish(team, user, message)
+    @team = team
+    @user = user
+    @message = message
+    mail to: @team.league.commish_emails, subject: "You have a message from a team in the #{@team.league.name} league"
+  end
+
   def activate_notify(team)
     @team = team
     @league = @team.league

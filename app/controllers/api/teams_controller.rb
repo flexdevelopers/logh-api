@@ -1,7 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:all, :alive, :dead, :index, :show]
   before_action :_set_league
-  before_action :_set_team, only: [:show, :update, :message, :activate, :deactivate]
+  before_action :_set_team, only: [:show, :update, :message, :contact, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/all
@@ -89,6 +89,13 @@ class API::TeamsController < API::BaseController
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
+  end
+
+  # PUT /api/leagues/:league_id/teams/1/contact
+  def contact
+    return forbidden('Only coaches can contact the commish') unless _is_coach_of?(@team)
+    TeamMailer.contact_commish(@team, current_user, params[:contact]).deliver
+    render json: { message: { type: SUCCESS, content: 'Your message has been sent to the commish' } }, status: :ok
   end
 
   # PUT /api/leagues/:league_id/teams/1/activate
