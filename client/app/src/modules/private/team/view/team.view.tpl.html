@@ -33,7 +33,7 @@
     </div>
   </div>
 </div>
-<div class="team-message well well-sm" ng-show="(isCommish(teamData) || isCoach(teamData)) && teamData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish has a message for this team:</strong> <p class="team-message-text" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
+<div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish says:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">Nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a></div>
 <hr>
 <h4 class="losers-heading">Loser Picks ({{teamData.pick_count}})</h4>
 <div class="team-container" style="clear:both;">

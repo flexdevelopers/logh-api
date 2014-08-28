@@ -29,7 +29,7 @@
     </div>
   </div>
 </div>
-<div class="league-message well well-sm" ng-show="(!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)) && leagueData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <p class="league-message-text" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></div>
+<div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">Nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></div>
 <hr>
 <h4>Teams ({{leagueData.team_count}}) <small ng-show="!leagueData.start_week_complete"><a ng-click="joinLeague(leagueData)">[ Join up to {{leagueData.max_teams_per_user}} times ]</a></small></h4>
 <br>
