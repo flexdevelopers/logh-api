@@ -1,5 +1,5 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
-<div class="alert alert-warning" ng-show="teamData.active && !teamData.started">You cannot make picks until the league starts - {{teamData.start_week_display}}</div>
+<div class="alert alert-warning" ng-show="teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamsDropdown.isopen">

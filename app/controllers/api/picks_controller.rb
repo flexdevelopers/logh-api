@@ -25,7 +25,7 @@ class API::PicksController < API::BaseController
     week = Week.find(_pick_params[:week_id])
     @pick = @team.picks.where(week: week).first_or_initialize
     if @pick.persisted? # existing pick
-      return forbidden("Your current pick for the week is locked as the game has already started" ) if @pick.locked?
+      return forbidden("Your current pick for the week is locked. The game has already started" ) if @pick.locked?
     end
     if @pick.update_attributes(_pick_params)
       render json: { message: { type: SUCCESS, content: "You picked #{@pick.squad.name} to lose in #{week.display}" } }, status: :ok
@@ -66,7 +66,7 @@ class API::PicksController < API::BaseController
     end
 
     def _verify_league_has_started
-      forbidden("You can only make picks once the league has started - #{@team.league.start_week.display}") unless @team.league.started?
+      forbidden("Hey, what did I say? No picks until the league starts - #{@team.league.start_week.display}") unless @team.league.started?
     end
 
     def _verify_pick_week
