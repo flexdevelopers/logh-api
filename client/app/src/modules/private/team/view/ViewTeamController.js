@@ -81,6 +81,10 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       });
   };
 
+  $scope.hasNoPick = function(team) {
+    return team.last_pick_squad_name == 'None';
+  };
+
   $scope.isCommish = function(team) {
     return team.commish_ids.indexOf(userModel.user.id) > -1;
   };

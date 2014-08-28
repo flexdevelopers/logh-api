@@ -25,14 +25,6 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return startsLabel + league.start_week_display;
   };
 
-  $scope.winner = function(aliveTeams) {
-    var winnerName = "None";
-    if (aliveTeams.length == 1) {
-      winnerName = aliveTeams[0].name;
-    }
-    return winnerName;
-  };
-
   $scope.isCommish = function(league) {
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };

@@ -1,4 +1,6 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
+<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">This team has no pick for the current week. Pick a loser before it's too late, buddy.</div>
+<div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. I guess you're not the loser you thought you were.</div>
 <div class="alert alert-warning" ng-show="teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
@@ -25,6 +27,7 @@
         <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
         <li><a ng-click="reportAbuse()">Report abuse</a></li>
+        <li><a ng-click="reportAbuse()">Report a bug</a></li>
         <li ng-show="isCommish(teamData)" class="divider"></li>
         <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
         <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
@@ -33,9 +36,9 @@
     </div>
   </div>
 </div>
-<div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>The commish says:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">Nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ Update ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ Contact Commish ]</a></div>
+<div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>A private message from the commish:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">Nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact commish ]</a></div>
 <hr>
-<h4 class="losers-heading">Loser Picks ({{teamData.pick_count}}) <small ng-show="teamData.started && isCoach(teamData)"><a ng-click="makePick(teamData)">[ Pick Loser ]</a></small></h4>
+<h4 class="losers-heading">Loser Picks ({{teamData.pick_count}}) <small ng-show="teamData.started && isCoach(teamData)"><a ng-click="makePick(teamData)">[ pick loser ]</a></small></h4>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
       <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">
