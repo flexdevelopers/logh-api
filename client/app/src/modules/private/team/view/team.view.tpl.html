@@ -49,7 +49,7 @@
             <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
             <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad" ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
           </div>
-          <div class="col-sm-6 col-md-6">
+          <div class="col-sm-6 col-md-6" style="text-align: right;">
             <span class="game">{{pick.game_display}}</span>
           </div>
         </div>
