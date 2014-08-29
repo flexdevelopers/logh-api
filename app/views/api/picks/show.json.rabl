@@ -1,5 +1,12 @@
 object @pick
-attributes :id, :team_id, :squad_id, :week_type_id, :correct
+attributes :id, :team_id, :week_type_id, :correct
+node(:squad_id) do |pick|
+  if pick.locked? || pick.coach_ids.include?(@user.id)
+    pick.squad_id
+  else
+    0
+  end
+end
 node(:locked) { |pick| pick.locked? }
 node(:week_type) { |pick| pick.week_type.description }
 node(:week_number) { |pick| pick.week.number }
