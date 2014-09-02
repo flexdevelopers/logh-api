@@ -1,5 +1,5 @@
 class API::TeamsController < API::BaseController
-  before_action :_set_user, only: [:alive, :dead, :index, :show]
+  before_action :_set_user, only: [:all, :alive, :dead, :index, :show]
   before_action :_set_league
   before_action :_set_team, only: [:show, :update, :message, :activate, :deactivate]
   before_action :_verify_league_acceptance, only: [:create]
