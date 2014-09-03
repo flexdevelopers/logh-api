@@ -27,6 +27,12 @@
 
   .pick-squad {
     font-size: 13px;
+    .pick-squad-name {
+      display: inline;
+    }
+    .pick-squad-abbrev {
+      display: none;
+    }
   }
 
   .game-column {
@@ -42,6 +48,15 @@
     }
     .game-column {
       text-align: left;
+    }
+    .pick-squad {
+      font-size: 13px;
+      .pick-squad-name {
+        display: none;
+      }
+      .pick-squad-abbrev {
+        display: inline;
+      }
     }
   }
 

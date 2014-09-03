@@ -47,7 +47,7 @@
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-thumbs-down fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-            <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad" ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}">[ {{pick.squad_name}} ]</span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
+            <i class="fa fa-thumbs-up fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad" ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}"> <span class="pick-squad-name">[ {{pick.squad_name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad_abbrev}} ]</span></span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
           </div>
           <div class="game-column col-sm-6 col-md-6">
             <span class="game">{{pick.game_display}}</span>

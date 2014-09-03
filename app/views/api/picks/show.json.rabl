@@ -24,3 +24,10 @@ node(:squad_name) do |pick|
     "Hidden"
   end
 end
+node(:squad_abbrev) do |pick|
+  if pick.locked? || pick.coach_ids.include?(@user.id)
+    pick.squad.abbrev
+  else
+    "Hidden"
+  end
+end
