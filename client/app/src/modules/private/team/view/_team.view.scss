@@ -29,12 +29,19 @@
     font-size: 13px;
   }
 
+  .game-column {
+    text-align: right;
+  }
+
   @media all and (max-width: 550px) {
     .teams-btn-link {
       max-width: 285px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .game-column {
+      text-align: left;
     }
   }
 
