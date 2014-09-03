@@ -12,11 +12,11 @@
 <hr>
 <div class="leagues-container">
   <ul class="nav nav-tabs">
-    <li ng-class="{'active': isState(['private.play.leagues'])}" ng-click="resetSearch()">
-      <a ng-click="myLeagues(season)"><span class="my-leagues">My Leagues</span></a>
-    </li>
     <li ng-class="{'active': isState(['private.play.teams'])}" ng-click="resetSearch()">
       <a ng-click="myTeams(season)"><span class="my-teams">My Teams</span></a>
+    </li>
+    <li ng-class="{'active': isState(['private.play.leagues'])}" ng-click="resetSearch()">
+      <a ng-click="myLeagues(season)"><span class="my-leagues">My Leagues</span></a>
     </li>
   </ul>
   <div class="input-group custom-search-form">
