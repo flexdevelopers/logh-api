@@ -1,3 +1,3 @@
 collection @leagues
 
-extends 'api/leagues/show'
+extends 'api/leagues/summary'
