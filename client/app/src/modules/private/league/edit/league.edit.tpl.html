@@ -34,7 +34,7 @@
         <div class="form-group">
           <label class="control-label" for="startWeek">Start week:</label>
           <select id="startWeek" name="startWeek" class="form-control" ng-show="!leagueData.started" ng-model="leagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
-          <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.started" ng-model="leagueData.start_week" ng-disabled="true">
+          <input id="startWeekDisplay" name="startWeekDisplay" type="text" class="form-control" ng-show="leagueData.started" ng-model="leagueData.start_week_display" ng-disabled="true">
         </div>
       </div>
     </div>

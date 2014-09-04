@@ -6,7 +6,7 @@
       <i class="fa fa-times" title="Closed league" ng-show="!leagueData.open"></i>
       <i class="fa fa-lock" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
       <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
-      {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
+      {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData)" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
       <small>{{starts(leagueData)}}</small>
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
@@ -21,7 +21,7 @@
       </button>
       <ul class="dropdown-menu league-actions-menu" role="menu">
         <li ng-show="!isCommish(leagueData)"><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
-        <li><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
       </ul>
     </div>

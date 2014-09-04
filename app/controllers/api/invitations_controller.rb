@@ -41,7 +41,7 @@ class API::InvitationsController < API::BaseController
     end
 
     def _verify_league_status
-      forbidden('The league has already started') if @league.started?
+      forbidden("It is too late. The league's first week is already complete.") if @league.start_week.complete
     end
 
     def _is_commish_of?(league)
