@@ -14,14 +14,14 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues/public
   def public
-    @leagues = @season.leagues.public.not_started
+    @leagues = @season.leagues.public.start_week_not_complete
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
     respond_with @leagues
   end
 
   # GET /api/seasons/:season_id/leagues/private
   def private
-    @leagues = @season.leagues.private.not_started
+    @leagues = @season.leagues.private.start_week_not_complete
     @leagues = @leagues.sort_by { |league| [league.start_week.starts_at, league.name] }
     respond_with @leagues
   end

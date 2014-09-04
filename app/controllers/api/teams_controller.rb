@@ -45,8 +45,8 @@ class API::TeamsController < API::BaseController
 
   # POST /api/leagues/:league_id/teams
   def create
-    return forbidden('The league has been closed to new teams') if @league.closed?
-    return forbidden('The league has already started') if @league.started?
+    return forbidden('The league has been closed to new teams') if !@league.open
+    return forbidden("You are too late. The league's first week is already complete.") if @league.start_week.complete
     return forbidden("The league only allows #{@league.max_teams_per_user} teams per user") if !_can_add_team_to?(@league)
     @team = @league.teams.new(_team_params)
     @team.coaches << current_user

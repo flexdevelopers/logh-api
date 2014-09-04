@@ -13,7 +13,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.starts = function(league) {
     var startsLabel = (league.started) ? 'Started ' : 'Starts ';
-    return startsLabel + league.start_week;
+    return startsLabel + league.start_week_display;
   };
 
   $scope.winner = function(aliveTeams) {

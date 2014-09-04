@@ -1,5 +1,5 @@
-<div class="alert alert-success" ng-show="leagueData.started && aliveTeams.length == 1"><strong>{{winner(aliveTeams)}}</strong> has earned the prestigious Loser Trophy! Congrats all around...</div>
-<div class="alert alert-success" ng-show="leagueData.started && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see how everyone did.</div>
+<div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 1"><strong>{{winner(aliveTeams)}}</strong> has earned the prestigious Loser Trophy! Congrats all around...</div>
+<div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see how everyone did.</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
@@ -8,13 +8,13 @@
       <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
       {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.started" ng-click="editLeague(leagueData)">[ Edit ]</a></small> <br>
       <small>{{starts(leagueData)}}</small>
-      <small class="closed-text" ng-show="!leagueData.open && !leagueData.started">CLOSED TO NEW TEAMS</small>
+      <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!leagueData.started" ng-click="joinLeague(leagueData)">Join</button>
-    <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.started && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
-    <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!leagueData.started && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
+    <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
+    <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && isCommish(leagueData)" ng-click="invite(leagueData.id)">Invite</button>
+    <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <div class="btn-group league-actions" ng-show="hasTeamInLeague() || isCommish(leagueData)" dropdown is-open="commish.isopen">
       <button type="button" class="league-actions-btn btn btn-default btn-sm dropdown-toggle">
         <strong>Actions</strong> <span class="caret"></span>
@@ -29,7 +29,7 @@
 </div>
 <div class="league-message well well-sm" ng-show="leagueData.message.length > 0"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <em>{{leagueData.message}}</em> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ Update ]</a></div>
 <hr>
-<h4>Teams ({{leagueData.team_count}}) <small ng-show="!leagueData.started">Join up to {{leagueData.max_teams_per_user}} times</small></h4>
+<h4>Teams ({{leagueData.team_count}}) <small>Join up to {{leagueData.max_teams_per_user}} times</small></h4>
 <br>
 <div class="league-container" style="clear:both;">
   <div class="input-group custom-search-form">
@@ -49,7 +49,7 @@
         <a ng-repeat="team in aliveTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-6 col-md-6 team-name" ng-class="{'inactive': !team.active}">
-              <i class="winner-icon fa fa-trophy fa-fw" ng-show="team.active && leagueData.started && aliveTeams.length == 1" title="Winner"></i>
+              <i class="winner-icon fa fa-trophy fa-fw" ng-show="team.active && leagueData.start_week_complete && aliveTeams.length == 1" title="Winner"></i>
               <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
               <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team) && !hasWinner(leagueData, aliveTeams)" title="My team"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">

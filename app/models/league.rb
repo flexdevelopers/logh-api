@@ -22,7 +22,7 @@ class League < ActiveRecord::Base
 
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }
-  scope :not_started, -> { joins(:start_week).where('starts_at > ?', Time.zone.now) }
+  scope :start_week_not_complete, -> { joins(:start_week).where('complete = ?', false) }
 
   def started?
     start_week.started?
