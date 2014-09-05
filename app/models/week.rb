@@ -31,6 +31,8 @@ class Week < ActiveRecord::Base
 
   def kill_teams_with_no_pick
 
+    return # putting this in until a confirmation dialog is put in place
+
     return unless self.complete == true # only update if the week is complete
 
     null_squad = Squad.find_by(abbrev: 'NONE')
