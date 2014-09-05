@@ -81,8 +81,8 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       });
   };
 
-  $scope.hasNoPick = function(team) {
-    return team.last_pick_squad_name == 'No Pick';
+  $scope.hasPick = function(team) {
+    return team.last_pick_squad_name != 'No Pick';
   };
 
   $scope.isCommish = function(team) {
