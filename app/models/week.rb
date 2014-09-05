@@ -14,6 +14,7 @@ class Week < ActiveRecord::Base
   validates :complete, inclusion: { in: [true, false] } # weirdness with validating presence on boolean fields
 
   scope :started, -> { where('starts_at <= ?', Time.zone.now) }
+  scope :not_started, -> { where('starts_at > ?', Time.zone.now) }
   scope :not_complete, -> { where('complete = ?', false) }
 
   def display
