@@ -6,6 +6,12 @@ var PickMakeController = function(regularPicks, playoffPicks, currentGames, $mod
 
   $scope.games = currentGames.data;
 
+  $scope.getScore = function(game, index) {
+    // warning: magic numbers ahead
+    var score = (index === 0) ? game.visiting_squad_score : game.home_squad_score;
+    return score;
+  };
+
   $scope.makePick = function(game, squad) {
     var pick = {
       week_id: game.week_id,
