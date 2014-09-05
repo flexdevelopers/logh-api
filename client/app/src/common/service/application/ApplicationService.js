@@ -9,7 +9,7 @@ var ApplicationService = function($window, $location, $log, messageModel) {
 
         var startupProcess = function() {
           forceSsl();
-          checkSessionStorage();
+          checkHtml5Storage();
         };
 
         var forceSsl = function () {
@@ -18,12 +18,13 @@ var ApplicationService = function($window, $location, $log, messageModel) {
           }
         };
 
-        var checkSessionStorage = function() {
+        var checkHtml5Storage = function() {
 
           try {
-            $window.sessionStorage.test = 2; // try to use sessionStorage
+            $window.sessionStorage.foo = 'bar'; // try to use sessionStorage
+            $window.localStorage.bar = 'foo'; // try to use localStorage
           } catch (e) {
-            messageModel.setMessage({ type: 'danger', content: 'You are in Privacy Mode. This app will not function properly. Turn off Privacy Mode.' }, true);
+            messageModel.setMessage({ type: 'danger', content: 'You are in Privacy Mode. This app will not function properly. Turn off Privacy Mode.'}, true);
           }
 
         };
