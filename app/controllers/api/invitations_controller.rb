@@ -17,7 +17,7 @@ class API::InvitationsController < API::BaseController
   # POST /leagues/:league_id/invitations
   def create
     return forbidden('Only the commish can send an invite for a private league') if !@league.public && !_is_commish_of?(@league)
-    @invitation = @league.invitations.where(email: _invitation_params[:email]).first_or_initialize
+    @invitation = @league.invitations.where(email: _invitation_params[:email].downcase).first_or_initialize
     if @invitation.update_attributes(_invitation_params)
       InvitationMailer.league_invitation(@invitation, current_user).deliver
       render json: { message: { type: SUCCESS, content: "An invite has been sent to #{@invitation.email}" } }, status: :ok
