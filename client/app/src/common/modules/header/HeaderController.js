@@ -4,6 +4,16 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       $anchorScroll(); // hacky?
     };
 
+    var checkHtml5Storage = function() {
+
+      try {
+        localStorage.test = Math.floor(Math.random() * 6000000) + 1;
+      } catch (e) {
+        messageModel.setMessage({ type: 'danger', content: 'You are in Privacy Mode. This app will not function properly. Turn off Privacy Mode.'}, false);
+      }
+
+    };
+
     $scope.isCollapsed = true;
 
     $scope.userData = userModel;
@@ -132,6 +142,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     var init = function () {
         $log.debug("header controller");
         scrollToTop();
+        checkHtml5Storage();
     };
     init();
 };
