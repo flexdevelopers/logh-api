@@ -7,6 +7,22 @@
     }
   }
 
+  .fa-thumbs-up {
+    color: #3c763d;
+  }
+
+  .fa-thumbs-down {
+    color: #a94442;
+  }
+
+  .team-alive, .pick-correct {
+    color: #3c763d;
+  }
+
+  .team-dead, .pick-incorrect {
+    color: #a94442;
+  }
+
   .team-name-link {
     max-width: 230px;
     white-space: nowrap;
