@@ -54,6 +54,7 @@ class API::LeaguesController < API::BaseController
 
   # PATCH/PUT /api/seasons/:season_id/leagues/1
   def update
+    return forbidden("It's too late to edit the league") if @league.start_week.complete
     if @league.started?
       league_params = _league_params.except(:start_week_id) # no updating the start week after the league has started
     else
