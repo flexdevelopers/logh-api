@@ -10,7 +10,7 @@ class API::WeeksController < API::BaseController
 
   # GET /api/seasons/:season_id/weeks/available
   def available
-    @weeks = @season.weeks.not_started.order(starts_at: :asc)
+    @weeks = @season.weeks.not_complete.order(starts_at: :asc)
     respond_with @weeks
   end
 
