@@ -162,6 +162,14 @@
     .pick-squad {
       font-size: 11px;
     }
+    .team-picks {
+      .week-name, .game-column {
+        text-align: center;
+      }
+      .game {
+        font-size: 10px;
+      }
+    }
   }
 
 }
