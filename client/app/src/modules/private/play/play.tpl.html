@@ -1,6 +1,6 @@
 <div class="play-header-row row">
   <div class="col-sm-7 col-md-7">
-    <h3>Let's play...</h3>
+    <h3>Let's play... <small ng-show="isState(['private.play.teams'])"><a ng-show="teamOptions.dead == true" ng-click="teamOptions.dead = false">[ hide dead teams ]</a><a ng-show="teamOptions.dead == false" ng-click="teamOptions.dead = true">[ show dead teams ]</a></small></h3>
   </div>
   <div class="col-sm-5 col-md-5">
     <div class="play-btn-group">
@@ -10,32 +10,23 @@
   </div>
 </div>
 <hr>
-<div class="leagues-container">
-  <ul class="nav nav-tabs">
-    <li ng-class="{'active': isState(['private.play.teams'])}" ng-click="resetSearch()">
-      <a ng-click="myTeams(season)"><span class="my-teams">My Teams</span></a>
-    </li>
-    <li ng-class="{'active': isState(['private.play.leagues'])}" ng-click="resetSearch()">
-      <a ng-click="myLeagues(season)"><span class="my-leagues">My Leagues</span></a>
-    </li>
-  </ul>
-  <div class="input-group custom-search-form">
-    <input type="text" class="form-control" placeholder="Filter..." ng-model="query">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
-          <span class="glyphicon glyphicon-search"></span>
-        </button>
-    </span>
-  </div>
-  <div class="dead-teams-checkbox" ng-show="isState(['private.play.teams'])">
-    <a ng-show="teamOptions.dead == true" ng-click="teamOptions.dead = false">[ Hide Dead Teams ]</a>
-    <a ng-show="teamOptions.dead == false" ng-click="teamOptions.dead = true">[ Show Dead Teams ]</a>
-  </div>
-  <!--<div class="managed-leagues-checkbox" ng-show="isState(['private.play.leagues'])">-->
-    <!--<a ng-show="leagueOptions.managed == true" ng-click="leagueOptions.managed = false">[ Hide Managed<span class="leagues"> Leagues</span> ]</a>-->
-    <!--<a ng-show="leagueOptions.managed == false" ng-click="leagueOptions.managed = true">[ Show Managed<span class="leagues"> Leagues</span> ]</a>-->
-  <!--</div>-->
+<div class="input-group custom-search-form">
+  <input type="text" class="form-control" placeholder="Filter..." ng-model="query">
+  <span class="input-group-btn">
+      <button class="btn btn-default" type="button">
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+  </span>
 </div>
+<hr>
+<ul class="nav nav-tabs nav-justified">
+  <li ng-class="{'active': isState(['private.play.teams'])}" ng-click="resetSearch()">
+    <a ng-click="myTeams(season)"><span class="my-teams">My Teams</span></a>
+  </li>
+  <li ng-class="{'active': isState(['private.play.leagues'])}" ng-click="resetSearch()">
+    <a ng-click="myLeagues(season)"><span class="my-leagues">My Leagues</span></a>
+  </li>
+</ul>
 
 <div class="play-content" ui-view="playContent"></div>
 
