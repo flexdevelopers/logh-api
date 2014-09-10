@@ -31,22 +31,24 @@
 </div>
 <div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">Nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact commish ]</a></div>
 <hr>
-<h4>Teams ({{leagueData.team_count}}) <small ng-show="!leagueData.start_week_complete"><a ng-click="joinLeague(leagueData)">[ join up to {{leagueData.max_teams_per_user}} times ]</a></small></h4>
-<br>
-<div class="league-container" style="clear:both;">
-  <div class="input-group custom-search-form">
-    <input type="text" class="form-control" placeholder="Filter by team name or coach..." ng-model="teamQuery">
+<div class="row">
+  <div class="col-sm-7 col-md-7">
+    <h4>Teams ({{leagueData.team_count}}) <small><a ng-show="!leagueData.start_week_complete && !isCommish(leagueData)" ng-click="joinLeague(leagueData)">[ join up to {{leagueData.max_teams_per_user}} times ]</a> <a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="teamOptions.inactive = false">[ hide deactivated<span class="teams"> teams</span> ]</a><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">[ show deactivated<span class="teams"> teams</span> ]</a></small></h4>
+  </div>
+  <div class="col-sm-5 col-md-5">
+    <div class="input-group custom-search-form">
+      <input type="text" class="form-control" placeholder="Filter by team name or coach..." ng-model="teamQuery">
       <span class="input-group-btn">
           <button class="btn btn-default" type="button">
             <span class="glyphicon glyphicon-search"></span>
           </button>
       </span>
+    </div>
   </div>
-  <div class="inactive-teams-checkbox" ng-class="{'not-started': !leagueData.start_week_complete}" ng-show="isCommish(leagueData) && hasDeactivatedTeams()">
-    <a ng-show="teamOptions.inactive == true" ng-click="teamOptions.inactive = false">[ Hide Deactivated<span class="teams"> Teams</span> ]</a>
-    <a ng-show="teamOptions.inactive == false" ng-click="teamOptions.inactive = true">[ Show Deactivated<span class="teams"> Teams</span> ]</a>
-  </div>
-  <tabset>
+</div>
+<hr>
+<div class="league-container">
+  <tabset justified="true">
     <tab select="resetSearch()">
       <tab-heading>
         <i class="fa fa-thumbs-up fa-fw" title="Alive teams"></i> Alive Teams
