@@ -9,24 +9,23 @@
   </div>
 </div>
 <hr>
-<div class="leagues-container">
-    <ul class="nav nav-tabs">
-        <li ng-class="{'active': isPublic()}" ng-click="resetSearch()">
-            <a ng-click="publicLeagues(seasonId)"><i class="fa fa-unlock fa-fw" title="Public leagues"></i> Public <span class="leagues">Leagues</span></a>
-        </li>
-        <li ng-class="{'active': !isPublic()}" ng-click="resetSearch()">
-            <a ng-click="privateLeagues(seasonId)"><i class="fa fa-lock fa-fw" title="Private leagues"></i> Private <span class="leagues">Leagues</span></a>
-        </li>
-    </ul>
-    <div class="input-group custom-search-form">
-        <input type="text" class="form-control" placeholder="Filter by league name or commish..." ng-model="leagueQuery">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-    </div>
+<div class="input-group custom-search-form">
+  <input type="text" class="form-control" placeholder="Filter by league name or commish..." ng-model="leagueQuery">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </span>
 </div>
+<hr>
+<ul class="nav nav-tabs nav-justified">
+    <li ng-class="{'active': isPublic()}" ng-click="resetSearch()">
+        <a ng-click="publicLeagues(seasonId)"><i class="fa fa-unlock fa-fw" title="Public leagues"></i> Public <span class="leagues">Leagues</span></a>
+    </li>
+    <li ng-class="{'active': !isPublic()}" ng-click="resetSearch()">
+        <a ng-click="privateLeagues(seasonId)"><i class="fa fa-lock fa-fw" title="Private leagues"></i> Private <span class="leagues">Leagues</span></a>
+    </li>
+</ul>
 
 
 
