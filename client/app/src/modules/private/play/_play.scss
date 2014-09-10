@@ -2,8 +2,15 @@
   margin: 20px 0;
 }
 
+
+
 .play-header-row {
   margin-bottom: 15px;
+  .my-teams-header {
+    small {
+      font-size: 65%;
+    }
+  }
 }
 
 .play-btn-group {
