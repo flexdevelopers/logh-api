@@ -2,7 +2,17 @@
   margin: 20px 0;
 }
 
+.filter-team-league {
+  width: 100%;
+}
 
+.my-teams, .my-leagues {
+  .list-group-item:first-child {
+    border-top: none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
 
 .play-header-row {
   margin-bottom: 15px;

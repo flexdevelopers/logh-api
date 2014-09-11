@@ -10,15 +10,6 @@
   </div>
 </div>
 <hr>
-<div class="input-group custom-search-form">
-  <input type="text" class="form-control" placeholder="Filter..." ng-model="query">
-  <span class="input-group-btn">
-      <button class="btn btn-default" type="button">
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
-  </span>
-</div>
-<hr>
 <ul class="nav nav-tabs nav-justified">
   <li ng-class="{'active': isState(['private.play.teams'])}" ng-click="resetSearch()">
     <a ng-click="myTeams(season)"><span class="my-teams">My Teams</span></a>
@@ -27,6 +18,9 @@
     <a ng-click="myLeagues(season)"><span class="my-leagues">My Leagues</span></a>
   </li>
 </ul>
+<div class="input-group custom-search-form filter-team-league">
+  <input type="text" class="form-control" placeholder="Search by name..." ng-model="query">
+</div>
 
 <div class="play-content" ui-view="playContent"></div>
 

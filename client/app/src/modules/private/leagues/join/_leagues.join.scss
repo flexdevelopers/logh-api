@@ -6,6 +6,18 @@
   }
 }
 
+.filter-league-join {
+  width: 100%;
+}
+
+.public-leagues, .private-leagues {
+  .list-group-item:first-child {
+    border-top: none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
+
 .closed-leagues-checkbox {
   float: right;
   margin: 5px;
