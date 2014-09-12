@@ -3,6 +3,7 @@
   <h4 class="modal-title">Pick a Loser <br> {{games[0].week_display}}</h4>
 </div>
 <div class="modal-body">
+  <div class="well well-sm"><strong>Note:</strong> <em>Teams you have already picked are crossed out.</em></div>
   <div ng-repeat-start="game in games" class="week-games list-group">
     <h4 ng-class="{'invalid-game': game.started}">{{game.display}} <br> <small>{{starts(game)}}</small></h4>
     <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': game.started || hasSquadBeenUsed(game, squad)}">
