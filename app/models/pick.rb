@@ -23,9 +23,4 @@ class Pick < ActiveRecord::Base
     team.coach_emails
   end
 
-  def correct=(value)
-    super
-    team.kill if self.correct == false
-  end
-
 end

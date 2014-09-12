@@ -39,12 +39,13 @@ class Week < ActiveRecord::Base
           pick = self.picks.find_by(team: alive_team)
           if !pick
             alive_team.kill # the team made no pick so kill it
-            return
+            next
           end
           if self.losers.find_by(squad_id: pick.squad_id)
-            pick.correct = true
+            pick.update(correct: true)
           else
-            pick.correct = false
+            pick.update(correct: false)
+            alive_team.kill # the team made a bad pick so kill it
           end
         end
       end
