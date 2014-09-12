@@ -133,7 +133,7 @@ class API::LeaguesController < API::BaseController
 
     def _verify_start_week
       start_week = Week.find(_league_params[:start_week_id])
-      forbidden('Start week is invalid') unless start_week.starts_at > Time.zone.now
+      forbidden('Start week is invalid') if start_week.complete
     end
 
     def _is_commish_of(league)
