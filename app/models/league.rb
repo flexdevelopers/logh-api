@@ -40,7 +40,7 @@ class League < ActiveRecord::Base
 
   def current_week
     if self.started?
-      self.season.weeks.started.order('starts_at DESC')[0] # current week
+      self.season.weeks.started.order(starts_at: :desc)[0] # current week
     else
       self.start_week
     end
