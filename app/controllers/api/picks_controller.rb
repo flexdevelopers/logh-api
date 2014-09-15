@@ -33,7 +33,11 @@ class API::PicksController < API::BaseController
   # POST /api/teams/:team_id/picks
   def create
     @pick = @team.picks.where(week: Week.find(_pick_params[:week_id])).first_or_initialize
-    return forbidden("A pick is locked when it's game has started" ) if @pick.locked?
+    if @pick.persisted? # existing pick
+      return forbidden("Your current pick for the week is locked" ) if @pick.locked?
+    else # new pick
+      return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(_pick_params[:game_id]).started?
+    end
     if @pick.update_attributes(_pick_params)
       render json: { message: { type: SUCCESS, content: "Pick updated" } }, status: :ok
     else
