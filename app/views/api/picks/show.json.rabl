@@ -1,12 +1,5 @@
 object @pick
 attributes :id, :team_id, :week_type_id, :correct
-node(:squad_id) do |pick|
-  if pick.locked? || pick.coach_ids.include?(@user.id)
-    pick.squad_id
-  else
-    0
-  end
-end
 node(:locked) { |pick| pick.locked? }
 node(:week_type) { |pick| pick.week_type.description }
 node(:week_number) { |pick| pick.week.number }
@@ -17,17 +10,18 @@ node(:game_display) do |pick|
     ""
   end
 end
-node(:squad_name) do |pick|
+node(:squad) do |pick|
   if pick.locked? || pick.coach_ids.include?(@user.id)
-    pick.squad.name
+    {
+        id: pick.squad.id,
+        name: pick.squad.name,
+        abbrev: pick.squad.abbrev
+    }
   else
-    "Hidden"
-  end
-end
-node(:squad_abbrev) do |pick|
-  if pick.locked? || pick.coach_ids.include?(@user.id)
-    pick.squad.abbrev
-  else
-    "Hidden"
+    {
+        id: 0,
+        name: "Hidden",
+        abbrev: "Hidden"
+    }
   end
 end

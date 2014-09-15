@@ -1,11 +1,17 @@
 object @team
 attributes :id, :name, :active, :alive
-node(:last_pick_squad_name) do |team|
+node(:last_pick_squad) do |team|
   if team.alive
     if team.current_pick
-      team.current_pick.squad.name
+      {
+          name: team.current_pick.squad.name,
+          abbrev: team.current_pick.squad.name
+      }
     else
-      "No Pick"
+      {
+          name: "No Pick",
+          abbrev: "No Pick"
+      }
     end
   end
 end
