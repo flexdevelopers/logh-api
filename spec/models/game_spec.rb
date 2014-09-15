@@ -20,6 +20,9 @@ describe Game do
   it { should respond_to(:visiting_squad_score) }
   its(:visiting_squad_score) { should eq(0) }
 
+  it { should respond_to(:picks) }
+  its(:picks) { should be_empty }
+
   it { should respond_to(:complete) }
   its(:complete) { should be_false }
 

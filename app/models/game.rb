@@ -3,8 +3,11 @@ class Game < ActiveRecord::Base
   belongs_to :home_squad, class_name: 'Squad', foreign_key: 'home_squad_id'
   belongs_to :visiting_squad, class_name: 'Squad', foreign_key: 'visiting_squad_id'
 
+  has_many :picks
+
   after_create :ensure_no_squad_duplication
   after_update :set_loser
+  after_update :clean_house
 
   validates :week, presence: true
   validates :starts_at, presence: true
@@ -56,12 +59,29 @@ class Game < ActiveRecord::Base
 
       remove_game_squads_from_losers()
 
-      return unless self.complete
-
       if home_squad_score < visiting_squad_score
         self.week.losers << Loser.create!(week: week, game: self, squad: home_squad)
       elsif visiting_squad_score < home_squad_score
         self.week.losers << Loser.create!(week: week, game: self, squad: visiting_squad)
+      end
+
+    end
+
+    # mark picks correct or not and kill teams with bad or no picks
+    # teams with no pick is handled in week.complete=()
+    def clean_house
+
+      return unless self.complete
+
+      self.picks.each do |game_pick|
+        if self.week.losers.find_by(squad_id: game_pick.squad_id)
+          game_pick.update(correct: true)
+        else
+          game_pick.update(correct: false)
+          team = Team.find(game_pick.team_id)
+          team.kill # the team made a bad pick so kill it
+        end
+
       end
 
     end
