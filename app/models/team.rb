@@ -36,6 +36,11 @@ class Team < ActiveRecord::Base
     User.where(id: coach_ids).map(&:display_name)
   end
 
+  def current_pick
+    current_week = self.league.current_week
+    current_week.picks.find_by(team: self)
+  end
+
   def kill
     self.update(alive: false)
   end
