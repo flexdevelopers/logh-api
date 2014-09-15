@@ -60,7 +60,7 @@
               <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
               <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team)" title="My team"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
-              <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Current Loser: {{team.last_pick_squad.name}}</span>
+              <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Current Loser: [ <span class="current-loser-name">{{team.last_pick_squad.name}}</span><span class="current-loser-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
               <span class="badge">{{team.correct_picks_count}} correct</span>
             </div>
@@ -88,7 +88,7 @@
               <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team)" title="My team"></i>
               <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
             <div class="col-sm-8 col-md-8">
-              <span class="current-pick no-pick" ng-show="team.active">Last Pick: {{team.last_pick_squad.name}}</span>
+              <span class="current-pick no-pick" ng-show="team.active">Last Pick: [ <span class="last-pick-name">{{team.last_pick_squad.name}}</span><span class="last-pick-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
               <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
               <span class="badge">{{team.correct_picks_count}} correct</span>
             </div>

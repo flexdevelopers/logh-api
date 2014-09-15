@@ -2,4 +2,22 @@
   .dead-team-name {
     color: #a94442;
   }
+  .current-loser-name {
+    display: inline;
+  }
+  .current-loser-abbrev {
+    display: none;
+  }
 }
+
+@media all and (max-width: 550px) {
+  .my-teams {
+    .current-loser-name {
+      display: none;
+    }
+    .current-loser-abbrev {
+      display: inline;
+    }
+  }
+}
+

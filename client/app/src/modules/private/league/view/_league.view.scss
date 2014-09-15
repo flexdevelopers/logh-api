@@ -18,6 +18,22 @@
         display: none;
       }
     }
+
+    .alive-teams, .dead-teams {
+      .last-pick-name {
+        display: none;
+      }
+      .last-pick-abbrev {
+        display: inline;
+      }
+      .current-loser-name {
+        display: none;
+      }
+      .current-loser-abbrev {
+        display: inline;
+      }
+    }
+
   }
 
   .inactive-teams-checkbox {
@@ -149,6 +165,18 @@
       .badge {
         float: right;
       }
+    }
+    .last-pick-name {
+      display: inline;
+    }
+    .last-pick-abbrev {
+      display: none;
+    }
+    .current-loser-name {
+      display: inline;
+    }
+    .current-loser-abbrev {
+      display: none;
     }
   }
 
