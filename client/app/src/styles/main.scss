@@ -285,3 +285,10 @@ body.home {
   width: 75px;
 }
 
+@media screen and (max-width: 550px) {
+  // phone
+  .list-group-item {
+    padding: 10px 5px;
+  }
+}
+
