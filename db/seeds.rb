@@ -15,14 +15,53 @@ WeekType.create(code: 'reg', description: 'Regular Season')
 WeekType.create(code: 'play', description: 'Playoff')
 
 # create squads
-home_squads = []
-visiting_squads = []
-home_squads << Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
-home_squads << Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')
-home_squads << Squad.create(name: 'New England Patriots', abbrev: 'NEP')
-visiting_squads << Squad.create(name: 'New York Jets', abbrev: 'NYJ')
-visiting_squads << Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
-visiting_squads << Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
+# afc east
+bills = Squad.create(name: 'Buffalo Bills', abbrev: 'BUF')
+dolphins = Squad.create(name: 'Miami Dolphins', abbrev: 'MIA')
+patriots = Squad.create(name: 'New England Patriots', abbrev: 'NEP')
+jets = Squad.create(name: 'New York Jets', abbrev: 'NYJ')
+
+# afc west
+broncos = Squad.create(name: 'Denver Broncos', abbrev: 'DEN')
+chiefs = Squad.create(name: 'Kansas City Chiefs', abbrev: 'KCC')
+raiders = Squad.create(name: 'Oakland Raiders', abbrev: 'OAK')
+chargers = Squad.create(name: 'San Diego Chargers', abbrev: 'SDC')
+
+# afc north
+bengals = Squad.create(name: 'Cincinnati Bengals', abbrev: 'BEN')
+browns = Squad.create(name: 'Cleveland Browns', abbrev: 'BUF')
+steelers = Squad.create(name: 'Pittsburgh Steelers', abbrev: 'BUF')
+ravens = Squad.create(name: 'Baltimore Ravens', abbrev: 'BUF')
+
+# afc south
+texans = Squad.create(name: 'Houston Texans', abbrev: 'BUF')
+titans = Squad.create(name: 'Tennessee Titans', abbrev: 'BUF')
+colts = Squad.create(name: 'Indianapolis Colts', abbrev: 'BUF')
+jaguars = Squad.create(name: 'Jacksonville Jaguars', abbrev: 'BUF')
+
+# nfc east
+cowboys = Squad.create(name: 'Dallas Cowboys', abbrev: 'BUF')
+giants = Squad.create(name: 'New York Giants', abbrev: 'BUF')
+eagles = Squad.create(name: 'Philadelphia Eagles', abbrev: 'BUF')
+redskins = Squad.create(name: 'Washington Redskins', abbrev: 'BUF')
+
+# nfc west
+rams = Squad.create(name: 'St. Louis Rams', abbrev: 'BUF')
+cardinals = Squad.create(name: 'Arizona Cardinals', abbrev: 'BUF')
+niners = Squad.create(name: 'San Francisco 49ers', abbrev: 'BUF')
+seahawks = Squad.create(name: 'Seattle Seahawks', abbrev: 'BUF')
+
+# nfc north
+bears = Squad.create(name: 'Chicago Bears', abbrev: 'BUF')
+lions = Squad.create(name: 'Detroit Lions', abbrev: 'BUF')
+packers = Squad.create(name: 'Green Bay Packers', abbrev: 'BUF')
+vikings = Squad.create(name: 'Minnesota Vikings', abbrev: 'BUF')
+
+# nfc south
+falcons = Squad.create(name: 'Atlanta Falcons', abbrev: 'BUF')
+saints = Squad.create(name: 'New Orleans Saints', abbrev: 'BUF')
+bucs = Squad.create(name: 'Tampa Bay Buccaneers', abbrev: 'BUF')
+panthers = Squad.create(name: 'Carolina Panthers', abbrev: 'BUF')
 
 # Transactional data
 Season.destroy_all
@@ -36,47 +75,335 @@ Pick.destroy_all
 
 Loser.destroy_all
 
+# create seasons
+season1 = Season.create!(name: '2014-15 NFL Season', ends_at: Time.zone.parse('2015-02-02 06:00'))
+season2 = Season.create!(name: '2015-16 NFL Season', ends_at: Time.zone.parse('2016-02-03 06:00'))
 
-# create a season
-season = Season.create!(name: '2014-15 NFL Season')
+# create weeks
+week1 = Week.create!(number: 1, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-04 06:00'), season: season1)
+week2 = Week.create!(number: 2, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-09 06:00'), season: season1)
+week3 = Week.create!(number: 3, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-16 06:00'), season: season1)
+week4 = Week.create!(number: 4, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-23 06:00'), season: season1)
+week5 = Week.create!(number: 5, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-09-30 06:00'), season: season1)
+week6 = Week.create!(number: 6, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-07 06:00'), season: season1)
+week7 = Week.create!(number: 7, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-14 06:00'), season: season1)
+week8 = Week.create!(number: 8, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-21 06:00'), season: season1)
+week9 = Week.create!(number: 9, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-10-28 06:00'), season: season1)
+week10 = Week.create!(number: 10, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-04 06:00'), season: season1)
+week11 = Week.create!(number: 11, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-11 06:00'), season: season1)
+week12 = Week.create!(number: 12, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-18 06:00'), season: season1)
+week13 = Week.create!(number: 13, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-11-25 06:00'), season: season1)
+week14 = Week.create!(number: 14, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-02 06:00'), season: season1)
+week15 = Week.create!(number: 15, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-09 06:00'), season: season1)
+week16 = Week.create!(number: 16, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-16 06:00'), season: season1)
+week17 = Week.create!(number: 17, week_type: WeekType.find_by(code: 'reg'), starts_at: Time.zone.parse('2014-12-23 06:00'), season: season1)
 
-# create 5 weeks for the season
-5.times do |i|
-  week = Week.create!(number: i + 1, week_type: WeekType.find_by(code: 'reg'), starts_at: (i - 3).weeks.from_now.to_date, season: season)
-  # create 3 games for each week
-  3.times do |i|
-    game = Game.create!(starts_at: week.starts_at + 1.day, week: week, home_squad: home_squads[i], visiting_squad: visiting_squads[i] )
-    game.update(home_squad_score: 45, visiting_squad_score: 24)
-  end
-end
+# create games
+# week 1
+Game.create!(starts_at: Time.zone.parse('2014-09-04 20:30'), week: week1, visiting_squad: packers, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: saints, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: vikings, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: browns, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: jaguars, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: raiders, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: bengals, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: bills, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: redskins, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: titans, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 13:00'), week: week1, visiting_squad: patriots, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 16:25'), week: week1, visiting_squad: panthers, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 16:25'), week: week1, visiting_squad: niners, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-09-07 20:30'), week: week1, visiting_squad: colts, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-09-08 19:10'), week: week1, visiting_squad: giants, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-09-08 22:20'), week: week1, visiting_squad: chargers, home_squad: cardinals)
+
+# week 2
+Game.create!(starts_at: Time.zone.parse('2014-09-11 20:25'), week: week2, visiting_squad: steelers, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: dolphins, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: jaguars, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: cowboys, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: cardinals, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: patriots, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: saints, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: falcons, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 13:00'), week: week2, visiting_squad: lions, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 16:05'), week: week2, visiting_squad: rams, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 16:05'), week: week2, visiting_squad: seahawks, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 16:25'), week: week2, visiting_squad: texans, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 16:25'), week: week2, visiting_squad: jets, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 16:25'), week: week2, visiting_squad: chiefs, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-09-14 20:30'), week: week2, visiting_squad: bears, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-09-15 20:30'), week: week2, visiting_squad: eagles, home_squad: colts)
+
+# week 3
+Game.create!(starts_at: Time.zone.parse('2014-09-18 20:25'), week: week3, visiting_squad: bucs, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: chargers, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: cowboys, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: redskins, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: texans, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: vikings, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: titans, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: ravens, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: packers, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: colts, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 13:00'), week: week3, visiting_squad: raiders, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 16:05'), week: week3, visiting_squad: niners, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 16:25'), week: week3, visiting_squad: broncos, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 16:25'), week: week3, visiting_squad: chiefs, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-09-21 20:30'), week: week3, visiting_squad: steelers, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-09-22 20:30'), week: week3, visiting_squad: bears, home_squad: jets)
+
+# week 4
+Game.create!(starts_at: Time.zone.parse('2014-09-25 20:25'), week: week4, visiting_squad: giants, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: packers, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: bills, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: titans, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: panthers, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: lions, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: bucs, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 13:00'), week: week4, visiting_squad: dolphins, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 16:05'), week: week4, visiting_squad: jaguars, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 16:25'), week: week4, visiting_squad: falcons, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 16:25'), week: week4, visiting_squad: eagles, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-09-28 20:30'), week: week4, visiting_squad: saints, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-09-29 20:30'), week: week4, visiting_squad: patriots, home_squad: chiefs)
+
+# week 5
+Game.create!(starts_at: Time.zone.parse('2014-10-02 20:25'), week: week5, visiting_squad: vikings, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: bears, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: browns, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: rams, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: falcons, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: bucs, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: texans, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: bills, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: ravens, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 13:00'), week: week5, visiting_squad: steelers, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 16:05'), week: week5, visiting_squad: cardinals, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 16:25'), week: week5, visiting_squad: chiefs, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 16:25'), week: week5, visiting_squad: jets, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-10-05 20:30'), week: week5, visiting_squad: bengals, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-10-06 20:30'), week: week5, visiting_squad: seahawks, home_squad: redskins)
+
+# week 6
+Game.create!(starts_at: Time.zone.parse('2014-10-09 20:25'), week: week6, visiting_squad: colts, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: bears, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: jaguars, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: ravens, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: broncos, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: lions, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: patriots, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: panthers, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: steelers, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 13:00'), week: week6, visiting_squad: packers, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 16:05'), week: week6, visiting_squad: chargers, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 16:25'), week: week6, visiting_squad: cowboys, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 16:25'), week: week6, visiting_squad: redskins, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-10-12 20:30'), week: week6, visiting_squad: giants, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-10-13 20:30'), week: week6, visiting_squad: niners, home_squad: rams)
+
+# week 7
+Game.create!(starts_at: Time.zone.parse('2014-10-16 20:25'), week: week7, visiting_squad: jets, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: falcons, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: titans, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: seahawks, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: browns, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: bengals, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: vikings, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: dolphins, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: saints, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 13:00'), week: week7, visiting_squad: panthers, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 16:05'), week: week7, visiting_squad: chiefs, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 16:25'), week: week7, visiting_squad: cardinals, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 16:25'), week: week7, visiting_squad: giants, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-10-19 20:30'), week: week7, visiting_squad: niners, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-10-20 20:30'), week: week7, visiting_squad: texans, home_squad: steelers)
+
+# week 8
+Game.create!(starts_at: Time.zone.parse('2014-10-23 20:25'), week: week8, visiting_squad: chargers, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 09:30'), week: week8, visiting_squad: lions, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: rams, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: texans, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: vikings, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: seahawks, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: ravens, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: dolphins, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: bears, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 13:00'), week: week8, visiting_squad: bills, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 16:05'), week: week8, visiting_squad: eagles, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 16:25'), week: week8, visiting_squad: raiders, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 16:25'), week: week8, visiting_squad: colts, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-10-26 20:30'), week: week8, visiting_squad: packers, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-10-27 20:30'), week: week8, visiting_squad: redskins, home_squad: cowboys)
+
+# week 9
+Game.create!(starts_at: Time.zone.parse('2014-10-30 20:25'), week: week9, visiting_squad: saints, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: bucs, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: cardinals, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: eagles, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: jets, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: jaguars, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: chargers, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 13:00'), week: week9, visiting_squad: redskins, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 16:05'), week: week9, visiting_squad: rams, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 16:25'), week: week9, visiting_squad: broncos, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 16:25'), week: week9, visiting_squad: raiders, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-11-02 20:30'), week: week9, visiting_squad: ravens, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-11-03 20:30'), week: week9, visiting_squad: colts, home_squad: giants)
+
+# week 10
+Game.create!(starts_at: Time.zone.parse('2014-11-06 20:25'), week: week10, visiting_squad: browns, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: chiefs, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: dolphins, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: cowboys, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: niners, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: titans, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: steelers, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 13:00'), week: week10, visiting_squad: falcons, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 16:05'), week: week10, visiting_squad: broncos, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 16:25'), week: week10, visiting_squad: rams, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 16:25'), week: week10, visiting_squad: giants, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-11-09 20:30'), week: week10, visiting_squad: bears, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-11-10 20:30'), week: week10, visiting_squad: panthers, home_squad: eagles)
+
+# week 11
+Game.create!(starts_at: Time.zone.parse('2014-11-13 20:25'), week: week11, visiting_squad: bills, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: vikings, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: texans, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: eagles, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: seahawks, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: falcons, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: bengals, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: bucs, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: broncos, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 13:00'), week: week11, visiting_squad: niners, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 16:05'), week: week11, visiting_squad: raiders, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 16:25'), week: week11, visiting_squad: lions, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-11-16 20:30'), week: week11, visiting_squad: patriots, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-11-17 20:30'), week: week11, visiting_squad: steelers, home_squad: titans)
+
+# week 12
+Game.create!(starts_at: Time.zone.parse('2014-11-20 20:25'), week: week12, visiting_squad: chiefs, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: browns, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: titans, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: lions, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: packers, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: jaguars, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: bengals, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: jets, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 13:00'), week: week12, visiting_squad: bucs, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 16:05'), week: week12, visiting_squad: cardinals, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 16:05'), week: week12, visiting_squad: rams, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 16:25'), week: week12, visiting_squad: dolphins, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 16:25'), week: week12, visiting_squad: redskins, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-11-23 20:30'), week: week12, visiting_squad: cowboys, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-11-24 20:30'), week: week12, visiting_squad: ravens, home_squad: saints)
+
+# week 13
+Game.create!(starts_at: Time.zone.parse('2014-11-27 12:30'), week: week13, visiting_squad: bears, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-11-27 16:30'), week: week13, visiting_squad: eagles, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-11-27 20:30'), week: week13, visiting_squad: seahawks, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: redskins, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: titans, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: browns, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: chargers, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: giants, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: bengals, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: raiders, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: saints, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 13:00'), week: week13, visiting_squad: panthers, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 16:05'), week: week13, visiting_squad: cardinals, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 16:25'), week: week13, visiting_squad: patriots, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-11-30 20:30'), week: week13, visiting_squad: broncos, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-12-01 20:30'), week: week13, visiting_squad: dolphins, home_squad: jets)
+
+# week 14
+Game.create!(starts_at: Time.zone.parse('2014-12-04 20:25'), week: week14, visiting_squad: cowboys, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: steelers, home_squad: bengals)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: rams, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: giants, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: panthers, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: jets, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: ravens, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: colts, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: bucs, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 13:00'), week: week14, visiting_squad: texans, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 16:05'), week: week14, visiting_squad: bills, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 16:05'), week: week14, visiting_squad: chiefs, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 16:25'), week: week14, visiting_squad: seahawks, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 16:25'), week: week14, visiting_squad: niners, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-12-07 20:30'), week: week14, visiting_squad: patriots, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-12-08 20:30'), week: week14, visiting_squad: falcons, home_squad: packers)
+
+# week 15
+Game.create!(starts_at: Time.zone.parse('2014-12-11 20:25'), week: week15, visiting_squad: cardinals, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: steelers, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: redskins, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: dolphins, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: raiders, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: texans, home_squad: colts)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: jaguars, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: packers, home_squad: bills)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: bucs, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: bengals, home_squad: browns)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 13:00'), week: week15, visiting_squad: vikings, home_squad: lions)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 16:05'), week: week15, visiting_squad: jets, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 16:05'), week: week15, visiting_squad: broncos, home_squad: chargers)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 16:25'), week: week15, visiting_squad: niners, home_squad: seahawks)
+Game.create!(starts_at: Time.zone.parse('2014-12-14 20:30'), week: week15, visiting_squad: cowboys, home_squad: eagles)
+Game.create!(starts_at: Time.zone.parse('2014-12-15 20:30'), week: week15, visiting_squad: saints, home_squad: bears)
+
+# week 16
+Game.create!(starts_at: Time.zone.parse('2014-12-18 20:25'), week: week16, visiting_squad: titans, home_squad: jaguars)
+Game.create!(starts_at: Time.zone.parse('2014-12-20 13:00'), week: week16, visiting_squad: chargers, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-12-20 13:00'), week: week16, visiting_squad: eagles, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: vikings, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: ravens, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: lions, home_squad: bears)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: browns, home_squad: panthers)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: falcons, home_squad: saints)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: packers, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: chiefs, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 13:00'), week: week16, visiting_squad: patriots, home_squad: jets)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 16:05'), week: week16, visiting_squad: giants, home_squad: rams)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 16:25'), week: week16, visiting_squad: bills, home_squad: raiders)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 16:25'), week: week16, visiting_squad: colts, home_squad: cowboys)
+Game.create!(starts_at: Time.zone.parse('2014-12-21 20:30'), week: week16, visiting_squad: seahawks, home_squad: cardinals)
+Game.create!(starts_at: Time.zone.parse('2014-12-22 20:30'), week: week16, visiting_squad: broncos, home_squad: bengals)
+
+# week 17
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: panthers, home_squad: falcons)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: browns, home_squad: ravens)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: cowboys, home_squad: redskins)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: colts, home_squad: titans)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: lions, home_squad: packers)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: jaguars, home_squad: texans)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: chargers, home_squad: chiefs)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: jets, home_squad: dolphins)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: bears, home_squad: vikings)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: bills, home_squad: patriots)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: eagles, home_squad: giants)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: bengals, home_squad: steelers)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 13:00'), week: week17, visiting_squad: saints, home_squad: bucs)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: raiders, home_squad: broncos)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: cardinals, home_squad: niners)
+Game.create!(starts_at: Time.zone.parse('2014-12-28 16:25'), week: week17, visiting_squad: rams, home_squad: seahawks)
 
 # create a user and a league for that user and a few teams for that user in that league
 user1 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'foo@bar.com', password: 'foobar', password_confirmation: 'foobar')
 # create 20 public and private leagues with random but unique names
 20.times do |i|
-  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.last.id)
-  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.last.id)
+  League.create!(name: "#{('a'..'j').to_a.shuffle[0..9].join} #{i}", public: true, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.last.id)
+  League.create!(name: "#{('k'..'z').to_a.shuffle[0..9].join} #{i}", public: false, max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.last.id)
 end
-foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season, start_week_id: Week.first.id)
+foo_league = League.create!(name: "Foo League 852", max_teams_per_user: 10, commishes: [user1], season: season1, start_week_id: Week.first.id)
 3.times do |i|
-  team = Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
-  # and 3 picks for that team
-  3.times do |i|
-    week = Week.find_by(number: i + 2, season: season)
-    game = week.games[i]
-    Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: home_squads[i])
-  end
+  Team.create!(name: "#{user1[:first_name]} Team ##{i}", league: foo_league, coaches: [user1])
 end
 
 # create another user and a few teams for that user
 user2 = User.create!(first_name: 'Bob', last_name: 'Marley', email: 'bar@foo.com', password: 'barfoo', password_confirmation: 'barfoo')
 3.times do |i|
-  team = Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
-  # and 3 picks for that team
-  3.times do |i|
-    week = Week.find_by(number: i + 2, season: season)
-    game = week.games[i]
-    Pick.create!(team: team, week: week, game: game, week_type: week.week_type, squad: visiting_squads[i])
-  end
+  Team.create!(name: "#{user2[:first_name]} Team ##{i}", league: foo_league, coaches: [user2])
 end
 
