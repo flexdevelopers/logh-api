@@ -4,7 +4,7 @@ node(:started) { |team| team.league.started? }
 node(:start_week_display) { |team| team.league.start_week.display }
 node(:commish_ids) { |team| team.commish_ids }
 node(:coach_ids) { |team| team.coach_ids }
-node(:pick_count) { |team| team.picks.count }
+node(:pick_count) { |team| team.picks.correct.count }
 node(:last_pick_squad) do |team|
   if team.alive
     if !team.current_pick
