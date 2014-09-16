@@ -14,7 +14,7 @@
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span ng-show="team.active && !team.alive"><i class="fa fa-thumbs-down fa-fw"></i></span><span ng-show="!team.active"><i class="fa fa-times fa-fw"></i></span> <span class="other-team-name" ng-class="{'team-inactive': !team.active}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.name}}</span></a></li>
       </ul>
     </div>
-    <h4 class="team-league-name"><a ng-click="showLeague(teamData)">{{teamData.league.name}}</a> <small>Coach: {{teamData.coach_names.join(', ')}}</small></h4>
+    <h4 class="team-league-name"><a ng-click="showLeague(teamData)">[ {{teamData.league.name}} ]</a> <small>Coach: {{teamData.coach_names.join(', ')}}</small></h4>
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="!teamData.started">Pick Loser</button>
