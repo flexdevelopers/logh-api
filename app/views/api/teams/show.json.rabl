@@ -17,7 +17,7 @@ node(:last_pick_squad) do |team|
             abbrev: "#{team.current_pick.squad.abbrev} | Week #{team.current_pick.week.number}"
         }
       else
-        { name: "Hidden", abbrev: "Hidden" }
+        { name: "Hidden | Week #{team.current_pick.week.number}", abbrev: "Hidden | Week #{team.current_pick.week.number}" }
       end
     end
   else
