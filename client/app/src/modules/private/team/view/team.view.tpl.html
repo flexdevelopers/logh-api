@@ -5,12 +5,12 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamsDropdown.isopen">
-      <button type="button" class="teams-btn-link btn btn-link btn-lg dropdown-toggle" ng-disabled="!isCoach(teamData)">
-        <strong><span ng-class="{'team-inactive': !teamData.active || !teamData.alive}">{{teamData.name}} <span ng-show="isCoach(teamData)" class="caret"></span></span></strong>
+      <button type="button" class="teams-btn-link btn btn-link btn-lg dropdown-toggle" ng-disabled="!isCoach(teamData) || !teamData.active || !teamData.alive">
+        <strong><span ng-class="{'team-inactive': !teamData.active || !teamData.alive}">{{teamData.name}} <span ng-show="isCoach(teamData) && teamData.active && teamData.alive" class="caret"></span></span></strong>
       </button>
       <ul class="dropdown-menu teams-btn-menu" role="menu">
-        <li ng-show="isCommish(teamData) || (teamData.active && teamData.alive)"><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
-        <li class="divider" ng-show="(isCommish(teamData) || (teamData.active && teamData.alive)) && leagueTeams.length > 1"></li>
+        <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
+        <li class="divider" ng-show="leagueTeams.length > 1"></li>
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span ng-show="team.active && !team.alive"><i class="fa fa-thumbs-down fa-fw"></i></span><span ng-show="!team.active"><i class="fa fa-times fa-fw"></i></span> <span class="other-team-name" ng-class="{'team-inactive': !team.active}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.name}}</span></a></li>
       </ul>
     </div>
