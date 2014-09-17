@@ -25,27 +25,23 @@
         <li ng-show="isCommish(leagueData)" class="divider"></li>
         <li><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="teamOptions.inactive = false">Hide deactivated teams</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">Show deactivated teams</a></li>
       </ul>
     </div>
   </div>
 </div>
 <div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>The commish says:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">Nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact commish ]</a></div>
 <hr>
-<div class="row">
-  <div class="col-sm-7 col-md-7">
-    <h4>Teams ({{leagueData.team_count}}) <small><a ng-show="!leagueData.start_week_complete && !isCommish(leagueData)" ng-click="joinLeague(leagueData)">[ join up to {{leagueData.max_teams_per_user}} times ]</a> <a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="teamOptions.inactive = false">[ hide deactivated<span class="teams"> teams</span> ]</a><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">[ show deactivated<span class="teams"> teams</span> ]</a></small></h4>
-  </div>
-  <div class="col-sm-5 col-md-5">
-    <div class="input-group custom-search-form">
-      <input type="text" class="form-control" placeholder="Filter by team name or coach..." ng-model="teamQuery">
-      <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-      </span>
-    </div>
-  </div>
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a><i class="fa fa-group fa-fw" title="Teams"></i> Teams ({{leagueData.team_count}})</a>
+  </li>
+</ul>
+<div class="input-group custom-search-form filter-league-join">
+  <input type="text" class="form-control" placeholder="Search by team name or coach..." ng-model="teamQuery">
 </div>
+
 <div class="league-container">
   <div class="league-teams list-group">
     <a ng-repeat="team in leagueTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
