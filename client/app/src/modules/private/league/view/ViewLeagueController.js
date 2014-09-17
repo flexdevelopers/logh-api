@@ -1,9 +1,8 @@
-var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log, $modal, $location, userModel, messageModel, userService, weekService, teamService, leagueService) {
+var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $location, userModel, messageModel, userService, weekService, teamService, leagueService) {
 
   $scope.leagueData = league.data;
 
-  $scope.aliveTeams = aliveTeams.data;
-  $scope.deadTeams = deadTeams.data;
+  $scope.leagueTeams = leagueTeams.data;
 
   // pagination
   $scope.currentTeamPage = 1;
@@ -31,8 +30,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.hasTeamInLeague = function() {
     var found = false;
-    var teams = _.union($scope.aliveTeams, $scope.deadTeams);
-    _.each(teams, function(team) {
+    _.each($scope.leagueTeams, function(team) {
       if (team.coach_ids.indexOf(userModel.user.id) > -1) {
         found = true;
       }
@@ -42,8 +40,7 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
   $scope.hasDeactivatedTeams = function() {
     var foundDeactivated = false;
-    var teams = _.union($scope.aliveTeams, $scope.deadTeams);
-    _.each(teams, function(team) {
+    _.each($scope.leagueTeams, function(team) {
       if (team.active == false) {
         foundDeactivated = true;
       }
@@ -239,5 +236,5 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
 
 };
 
-ViewLeagueController.$inject = ['league', 'aliveTeams', 'deadTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league', 'leagueTeams', '$scope', '$log', '$modal', '$location', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;

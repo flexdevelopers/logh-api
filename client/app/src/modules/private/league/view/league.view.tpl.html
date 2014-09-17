@@ -48,62 +48,28 @@
 </div>
 <hr>
 <div class="league-container">
-  <tabset justified="true">
-    <tab select="resetSearch()">
-      <tab-heading>
-        <i class="fa fa-thumbs-up fa-fw" title="Alive teams"></i> Alive Teams
-      </tab-heading>
-      <div class="alive-teams list-group">
-        <a ng-repeat="team in aliveTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
-          <div class="row">
-            <div class="league-name col-sm-6 col-md-6 team-name" ng-class="{'inactive': !team.active}">
-              <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
-              <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team)" title="My team"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
-            <div class="col-sm-6 col-md-6">
-              <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Pick: [ <span class="current-loser-name">{{team.last_pick_squad.name}}</span><span class="current-loser-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
-              <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
-              <span class="badge">{{team.correct_picks_count}} correct</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div>
-        <div class="alert alert-info" ng-show="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length == 0">
-          No teams found
+  <div class="league-teams list-group">
+    <a ng-repeat="team in leagueTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
+      <div class="row">
+        <div class="league-name col-sm-6 col-md-6">
+          <i class="fa fa-times fa-fw" ng-show="(!isCoach(team) && !team.active) || (!isCoach(team) && !team.alive)"></i>
+          <i class="fa fa-check fa-fw" ng-show="!isCoach(team) && team.active && team.alive"></i>
+          <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i> <span class="team-name" ng-class="{'inactive': !team.active || !team.alive}">{{team.name}}</span><br><span class="coach-name">Coach: {{coachName(team)}}</span>
         </div>
-        <div class="alive-teams-pagination" ng-show="aliveTeams.length > teamsPerPage && (aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
-          <pagination boundary-links="true" max-size="4" total-items="(aliveTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        <div class="col-sm-6 col-md-6">
+          <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active">Pick: [ <span class="current-loser-name">{{team.last_pick_squad.name}}</span><span class="current-loser-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
+          <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
+          <span class="badge">{{team.correct_picks_count}} correct</span>
         </div>
       </div>
-      <div style="clear: both;"></div>
-    </tab>
-    <tab select="resetSearch()">
-      <tab-heading>
-        <i class="fa fa-thumbs-down fa-fw" title="Dead teams"></i> Dead Teams
-      </tab-heading>
-      <div class="dead-teams list-group">
-        <a ng-repeat="team in deadTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
-          <div class="row">
-            <div class="league-name col-sm-4 col-md-4 team-name" ng-class="{'inactive': !team.active}">
-              <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team)" title="My team"></i>
-              <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i> {{team.name}}<br><span class="coach-name">Coach: {{coachName(team)}}</span></div>
-            <div class="col-sm-8 col-md-8">
-              <span class="current-pick no-pick" ng-show="team.active">Pick: [ <span class="last-pick-name">{{team.last_pick_squad.name}}</span><span class="last-pick-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
-              <span class="inactive-team" ng-show="!team.active">Deactivated by the commish</span>
-              <span class="badge">{{team.correct_picks_count}} correct</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div>
-        <div class="alert alert-info" ng-show="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length == 0">
-          No teams found
-        </div>
-        <div class="dead-teams-pagination" ng-show="deadTeams.length > teamsPerPage && (deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
-          <pagination boundary-links="true" max-size="4" total-items="(deadTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-        </div>
-      </div>
-      <div style="clear: both;"></div>
-    </tab>
-  </tabset>
+    </a>
+  </div>
+  <div>
+    <div class="alert alert-info" ng-show="(leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length == 0">
+      No teams found
+    </div>
+    <div class="league-teams-pagination" ng-show="leagueTeams.length > teamsPerPage && (leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
+      <pagination boundary-links="true" max-size="4" total-items="(leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </div>
+  </div>
 </div>

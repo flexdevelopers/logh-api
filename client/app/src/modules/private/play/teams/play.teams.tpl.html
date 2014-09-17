@@ -3,9 +3,9 @@
     <a ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(season, team)" class="list-group-item">
       <div class="row">
         <div class="league-name col-sm-6 col-md-6">
-          <i class="fa fa-comment fa-fw" ng-show="team.active && team.message.length > 0" title="Has message from commish"></i>
-          <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
-          <i class="fa fa-thumbs-down fa-fw" title="Dead Team" ng-show="team.active && !team.alive"></i> <span ng-class="{'dead-team-name': !team.active}">{{team.name}}</span><br><span class="team-league">{{team.league.name}}</span></div>
+          <i class="fa fa-comment fa-fw" ng-show="team.active && team.alive && team.message.length > 0" title="Has message from commish"></i>
+          <i class="fa fa-check fa-fw" ng-show="team.active && team.alive"></i>
+          <i class="fa fa-times fa-fw" ng-show="!team.active || !team.alive"></i> <span ng-class="{'dead-team-name': !team.active || !team.alive}">{{team.name}}</span><br><span class="team-league">{{team.league.name}}</span></div>
         <div class="col-sm-6 col-md-6">
           <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active && team.started">Pick: [ <span class="current-loser-name">{{team.last_pick_squad.name}}</span><span class="current-loser-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
           <span class="current-pick" ng-show="team.active && !team.started">Starts {{team.start_week}}</span>

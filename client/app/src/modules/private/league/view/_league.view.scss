@@ -116,7 +116,7 @@
     }
   }
 
-  .alive-teams, .dead-teams {
+  .league-teams {
     .list-group-item {
       .coach-name, .current-pick {
         font-size: 11px;
@@ -144,7 +144,7 @@
     }
   }
 
-  .alive-teams-pagination, .dead-teams-pagination {
+  .league-teams-pagination {
     width: 253px;
     margin: -20px auto 0 0;
     float: left;
@@ -168,7 +168,7 @@
         display: none;
       }
     }
-    .alive-teams, .dead-teams {
+    .league-teams {
       .last-pick-name {
         display: none;
       }
