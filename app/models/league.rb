@@ -31,7 +31,7 @@ class League < ActiveRecord::Base
   end
 
   def coach_emails
-    emails = teams.active.map(&:coach_emails)
+    emails = teams.active.alive.map(&:coach_emails)
     emails.flatten.uniq
   end
 
