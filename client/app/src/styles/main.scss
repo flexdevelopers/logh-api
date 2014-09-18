@@ -244,6 +244,10 @@ body.home {
   100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 
+.list-group-item.inactive {
+  background-color: whitesmoke;
+}
+
 [ng-click] {
   cursor: pointer;
 }
