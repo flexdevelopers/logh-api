@@ -20,7 +20,7 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
   };
 
   $scope.starts = function(league) {
-    var startsLabel = (league.started) ? 'Started ' : 'Starts ';
+    var startsLabel = (league.started) ? 'Started: ' : 'Starts: ';
     return startsLabel + league.start_week_display;
   };
 

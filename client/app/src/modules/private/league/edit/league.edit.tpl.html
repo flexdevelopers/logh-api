@@ -6,7 +6,7 @@
   <div class="well well-sm"><strong>Note:</strong> <em>Public leagues allow anyone to join. Private leagues require an invitation from the commish.</em></div>
   <form name="leagueForm" role="form" novalidate>
     <div class="row">
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <label class="radio-inline">
             <input type="radio" ng-model="leagueData.public" ng-value="true"> Public League
@@ -17,6 +17,19 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" ng-model="leagueData.elimination" ng-value="true"> Single Elimination (Survivor)
+          </label>
+          <label class="radio-inline">
+            <input type="radio" ng-model="leagueData.elimination" ng-value="false"> No Elimination
+          </label>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(leagueForm.leagueName), 'has-feedback': hasError(leagueForm.leagueName)}">

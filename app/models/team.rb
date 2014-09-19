@@ -52,7 +52,7 @@ class Team < ActiveRecord::Base
   end
 
   def kill
-    self.update!(alive: false)
+    self.update!(alive: false) if self.league.elimination == true
   end
 
 end

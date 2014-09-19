@@ -85,9 +85,12 @@
 
   .league-name {
     margin-top: 0;
-    small.closed-text {
-      font-size: 55%;
-      color: #a94442;
+    small {
+      font-size: 60%;
+      &.closed-text {
+        font-size: 55%;
+        color: #a94442;
+      }
     }
   }
 

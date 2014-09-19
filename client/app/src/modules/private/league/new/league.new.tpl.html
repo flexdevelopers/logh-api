@@ -3,16 +3,28 @@
   <h3 class="modal-title">Create League</h3>
 </div>
 <div class="modal-body">
-  <div class="well well-sm"><strong>Note:</strong> <em>Public leagues allow anyone to join. Private leagues require an invitation from the commish.</em></div>
+  <div class="well well-sm"><em>Public leagues allow anyone to join. Private leagues require an invitation.</em></div>
   <form name="newLeagueForm" role="form" novalidate>
     <div class="row">
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <label class="radio-inline">
             <input type="radio" ng-model="newLeagueData.public" ng-checked="true" ng-value="true"> Public League
           </label>
           <label class="radio-inline">
             <input type="radio" ng-model="newLeagueData.public" ng-value="false"> Private League
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" ng-model="newLeagueData.elimination" ng-value="true"> Single Elimination (Survivor)
+          </label>
+          <label class="radio-inline">
+            <input type="radio" ng-model="newLeagueData.elimination" ng-value="false"> No Elimination
           </label>
         </div>
       </div>
