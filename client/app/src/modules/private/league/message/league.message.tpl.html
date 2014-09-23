@@ -12,7 +12,7 @@
       <div class="col-sm-8">
         <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see or leave it blank." rows="3" ng-maxlength="200" ng-model="leagueData.message"></textarea>
         <div class="email-league-message-checkbox">
-          <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message to alive teams</label>
+          <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message to <span ng-show="leagueData.elimination">alive</span><span ng-show="!leagueData.elimination">all</span> teams</label>
         </div>
         <span ng-show="hasError(messageForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
