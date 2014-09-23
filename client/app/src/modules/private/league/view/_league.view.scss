@@ -120,6 +120,10 @@
   }
 
   .league-teams {
+    .list-group-item:first-child {
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
     .list-group-item {
       .coach-name, .current-pick {
         font-size: 11px;

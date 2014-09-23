@@ -59,6 +59,11 @@
 }
 
 @media all and (max-width: 550px) {
+  .play-header-row {
+    .my-teams-header {
+      text-align: center;
+    }
+  }
   .managed-leagues-checkbox, .dead-teams-checkbox {
     right: 0;
   }
