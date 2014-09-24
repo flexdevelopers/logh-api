@@ -245,7 +245,9 @@ body.home {
 }
 
 .list-group-item.inactive {
-  background-color: whitesmoke;
+  color: #a94442;
+  background-color: #e4e4e4;
+  border-color: #a8a8a8;
 }
 
 [ng-click] {
