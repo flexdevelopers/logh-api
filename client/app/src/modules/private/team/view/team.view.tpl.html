@@ -1,5 +1,5 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
-<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">This team has no pick for the current week. <a class="alert-link" ng-click="makePick(teamData)" ng-disabled="!isCoach(teamData)">Pick a loser</a> before it's too late.</div>
+<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">This team has no pick for the current week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick a loser</a> before it's too late.</span></div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
@@ -17,7 +17,7 @@
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="!teamData.started">Pick Loser</button>
+    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started">Pick Loser</button>
     <div class="btn-group team-actions" ng-show="isCoach(teamData) || isCommish(teamData)" dropdown is-open="coach.isopen">
       <button type="button" class="actions-btn btn btn-default btn-sm dropdown-toggle">
         <strong>Actions</strong> <span class="caret"></span>
