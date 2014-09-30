@@ -3,14 +3,13 @@
   <h3 class="modal-title">Edit League</h3>
 </div>
 <div class="modal-body">
-  <div class="well well-sm"><em>Public leagues allow anyone to join. Private leagues require an invitation.</em></div>
   <form name="leagueForm" role="form" novalidate>
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <div class="btn-group league-type-btn-group">
-            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="true" uncheckable>Public League</label>
-            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="false" uncheckable>Private League</label>
+            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="true" uncheckable>Public League<br>(anyone can join)</label>
+            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="false" uncheckable>Private League<br>(requires invitation)</label>
           </div>
         </div>
       </div>
@@ -19,8 +18,8 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-show="!leagueData.started">
           <div class="btn-group league-format-btn-group">
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>No Elimination</label>
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Single Elimination</label>
+            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Champion League<br>(most correct picks)</label>
+            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Survivor League<br>(single elimination)</label>
           </div>
         </div>
         <div class="form-group" ng-show="leagueData.started">
