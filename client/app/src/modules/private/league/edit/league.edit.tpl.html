@@ -8,8 +8,8 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <div class="btn-group league-type-btn-group">
-            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="true" uncheckable>Public League<br>(anyone can join)</label>
-            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="false" uncheckable>Private League<br>(requires invitation)</label>
+            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="true" uncheckable>Public League<br><span class="small-gray">[ anyone can join ]</span></label>
+            <label class="btn btn-default league-type-btn" ng-model="leagueData.public" btn-radio="false" uncheckable>Private League<br><span class="small-gray">[ invite only ]</span></label>
           </div>
         </div>
       </div>
@@ -18,8 +18,8 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-show="!leagueData.started">
           <div class="btn-group league-format-btn-group">
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Champion League<br>(most correct picks)</label>
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Survivor League<br>(single elimination)</label>
+            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Champion League<br><span class="small-gray">[ most correct picks ]</span></label>
+            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Survivor League<br><span class="small-gray">[ single elimination ]</span></label>
           </div>
         </div>
         <div class="form-group" ng-show="leagueData.started">
