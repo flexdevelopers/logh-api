@@ -149,7 +149,7 @@ class API::TeamsController < API::BaseController
     end
 
     def _verify_league_acceptance
-      forbidden('Private leagues require an invitation') unless @league.public || _is_commish_of?(@league) || _has_invitation_for?(@league)
+      forbidden("An invitation has not been extended to #{current_user.email}. Please request an invitation.") unless @league.public || _is_commish_of?(@league) || _has_invitation_for?(@league)
     end
 
     def _is_commish_of?(league)
