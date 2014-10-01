@@ -6,9 +6,9 @@
       <i class="fa fa-lock" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
       <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
       {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">[ edit ]</a></small> <br>
+      <small ng-show="leagueData.elimination">Single Elimination (Last Team Standing)</small>
+      <small ng-show="!leagueData.elimination">No Elimination (Most Picks Wins)</small> <br>
       <small>{{starts(leagueData)}}</small> <br>
-      <small ng-show="leagueData.elimination">Format: Single Elimination (Survivor)</small>
-      <small ng-show="!leagueData.elimination">Format: No Elimination</small>
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
