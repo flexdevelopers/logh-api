@@ -296,3 +296,12 @@ body.home {
   width: 75px;
 }
 
+.custom-search-form {
+  padding: 10px;
+  background-color: #ddd;
+  margin-top: 1px;
+  input {
+    border-radius: 5px !important;
+  }
+}
+
