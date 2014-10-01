@@ -7,11 +7,9 @@
   <div ng-repeat-start="game in games" class="week-games list-group">
     <h5 ng-class="{'invalid-game': game.started}">{{game.display}}<br><small>{{starts(game)}}</small></h5>
     <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': game.started}">
-      <div class="row">
-        <div class="squad-name col-sm-6 col-md-6" ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}} <span ng-show="game.started">[ {{getScore(game, $index)}} ]</span></div>
-        <div class="col-sm-6 col-md-6">
-          <span class="badge" ng-show="!game.started && !hasSquadBeenUsed(game, squad)">Pick</span>
-        </div>
+      <div class="row game-row">
+        <span ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}} <span ng-show="game.started">[ {{getScore(game, $index)}} ]</span></span>
+        <span class="badge" ng-show="!game.started && !hasSquadBeenUsed(game, squad)">Pick</span>
       </div>
     </a>
   </div>
