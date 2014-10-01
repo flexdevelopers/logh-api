@@ -30,7 +30,7 @@ class API::LeaguesController < API::BaseController
   def index
     # get the leagues you are in and the leagues that you manage
     teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league)
-    @leagues = (teams.map(&:league) + current_user.managed_leagues).uniq.sort_by { |league| [ league.start_week.starts_at, league.name ] }
+    @leagues = (teams.map(&:league) + current_user.managed_leagues).uniq.sort_by { |league| [ league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 
