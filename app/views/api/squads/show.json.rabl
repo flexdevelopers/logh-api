@@ -1,2 +1,2 @@
 object @squad
-attributes :id, :name, :abbrev
+attributes :id, :name, :abbrev, :record
