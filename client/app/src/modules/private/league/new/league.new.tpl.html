@@ -8,24 +8,20 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="radio-inline">
-            <input type="radio" ng-model="newLeagueData.public" ng-checked="true" ng-value="true"> Public League
-          </label>
-          <label class="radio-inline">
-            <input type="radio" ng-model="newLeagueData.public" ng-value="false"> Private League
-          </label>
+          <div class="btn-group league-type-btn-group">
+            <label class="btn btn-default league-type-btn" ng-model="newLeagueData.public" btn-radio="true" uncheckable><i class="fa fa-unlock fa-fw"></i> Public League</label>
+            <label class="btn btn-default league-type-btn" ng-model="newLeagueData.public" btn-radio="false" uncheckable><i class="fa fa-lock fa-fw"></i> Private League</label>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="radio-inline">
-            <input type="radio" ng-model="newLeagueData.elimination" ng-value="true"> Single Elimination (Survivor)
-          </label>
-          <label class="radio-inline">
-            <input type="radio" ng-model="newLeagueData.elimination" ng-value="false"> No Elimination
-          </label>
+          <div class="btn-group league-format-btn-group">
+            <label class="btn btn-default league-format-btn" ng-model="newLeagueData.elimination" btn-radio="false" uncheckable>No Elimination</label>
+            <label class="btn btn-default league-format-btn" ng-model="newLeagueData.elimination" btn-radio="true" uncheckable>Single Elimination</label>
+          </div>
         </div>
       </div>
     </div>

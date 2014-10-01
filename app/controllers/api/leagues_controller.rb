@@ -58,7 +58,7 @@ class API::LeaguesController < API::BaseController
   def update
     return forbidden("It's too late to edit the league") if @league.start_week.complete
     if @league.started?
-      league_params = _league_params.except(:start_week_id) # no updating the start week after the league has started
+      league_params = _league_params.except(:start_week_id, :elimination) # no updating the start week or format after the league has started
     else
       league_params = _league_params
     end
