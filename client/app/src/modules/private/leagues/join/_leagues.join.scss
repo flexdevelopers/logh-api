@@ -1,11 +1,3 @@
-@media all and (max-width: 550px) {
-  .leagues-container {
-    .leagues {
-      display: none;
-    }
-  }
-}
-
 .filter-league-join {
   width: 100%;
 }
@@ -15,6 +7,9 @@
     border-top: none;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
+  }
+  .league-commish {
+
   }
 }
 
@@ -50,5 +45,20 @@
     float: none;
   }
 }
+
+@media all and (max-width: 550px) {
+  .leagues-container {
+    .leagues {
+      display: none;
+    }
+  }
+  .public-leagues, .private-leagues {
+    .league-commish {
+      display: none;
+    }
+  }
+
+}
+
 
 
