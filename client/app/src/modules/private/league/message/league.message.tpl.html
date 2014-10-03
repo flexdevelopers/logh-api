@@ -10,7 +10,7 @@
         <small class="input-error" ng-show="hasPropertyError(messageForm.message, 'maxlength')">[ Too Long ]</small>
       </label>
       <div class="col-sm-8">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see or leave it blank." rows="3" ng-maxlength="200" ng-model="leagueData.message"></textarea>
+        <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see or leave it blank." rows="3" ng-maxlength="500" ng-model="leagueData.message"></textarea>
         <div class="email-league-message-checkbox">
           <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message to <span ng-show="leagueData.elimination">alive</span><span ng-show="!leagueData.elimination">all</span> teams</label>
         </div>

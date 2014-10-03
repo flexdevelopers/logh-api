@@ -48,8 +48,8 @@ describe Team do
     it { should_not be_valid }
   end
 
-  context 'when team has a message greater than 200 characters' do
-    subject(:team) { FactoryGirl.build(:team, message: 'a' * 201) }
+  context 'when team has a message greater than 500 characters' do
+    subject(:team) { FactoryGirl.build(:team, message: 'a' * 501) }
     it { should_not be_valid }
   end
 

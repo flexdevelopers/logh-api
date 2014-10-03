@@ -55,8 +55,8 @@ describe League do
     it { should_not be_valid }
   end
 
-  context 'when league has a message greater than 200 characters' do
-    subject(:league) { FactoryGirl.build(:league, message: 'a' * 201) }
+  context 'when league has a message greater than 500 characters' do
+    subject(:league) { FactoryGirl.build(:league, message: 'a' * 501) }
     it { should_not be_valid }
   end
 
