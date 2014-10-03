@@ -7,7 +7,7 @@
       <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
       {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">[ edit ]</a></small> <br>
       <small ng-show="leagueData.elimination">Survivor League (single elimination)</small>
-      <small ng-show="!leagueData.elimination">Champion League (most correct picks)</small> <br>
+      <small ng-show="!leagueData.elimination">Biggest Loser League (most correct picks)</small> <br>
       <small>{{starts(leagueData)}}</small> <br>
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
