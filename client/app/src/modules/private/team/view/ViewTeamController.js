@@ -5,6 +5,10 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   $scope.picks = picks.data;
 
+  $scope.teamsDropdown = {
+    isopen: false
+  };
+
   $scope.contactCommish = function(team) {
 
     var modalInstance = $modal.open({
@@ -22,22 +26,6 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     }, function () {
       $log.debug('Contact league modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
-    });
-
-  };
-
-  $scope.reportAbuse = function() {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'modules/public/abuse/abuse.tpl.html',
-      controller: 'AbuseController'
-    });
-
-    modalInstance.result.then(function(message) {
-      userService.contactUs(message);
-    }, function () {
-      messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
-      $log.debug('contact us dismissed...');
     });
 
   };

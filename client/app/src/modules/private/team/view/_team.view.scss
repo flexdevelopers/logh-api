@@ -38,11 +38,17 @@
   }
 
   @media all and (max-width: 550px) {
-    .teams-btn-link {
-      max-width: 285px;
+    .team-name {
+      max-width: 275px;
+      display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .teams-dropdown {
+      .caret {
+        padding-bottom: 10px;
+      }
     }
     .game-column {
       text-align: left;

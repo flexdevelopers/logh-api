@@ -5,12 +5,16 @@
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamsDropdown.isopen">
-      <button type="button" class="teams-btn-link btn btn-link btn-lg dropdown-toggle" ng-disabled="!isCoach(teamData)">
-        <strong><span ng-class="{'team-inactive': !teamData.active || !teamData.alive}">{{teamData.name}} <span ng-show="isCoach(teamData)" class="caret"></span></span></strong>
+      <button type="button" class="teams-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCoach(teamData) && !isCommish(teamData)">
+        <strong><span ng-class="{'team-inactive': !teamData.active || !teamData.alive}"><span class="team-name">{{teamData.name}}</span> <span ng-show="isCoach(teamData) || isCommish(teamData)" class="caret"></span></span></strong>
       </button>
       <ul class="dropdown-menu teams-btn-menu" role="menu">
-        <li ng-show="teamData.active && teamData.alive"><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
-        <li class="divider" ng-show="teamData.active && teamData.alive && leagueTeams.length > 1"></li>
+        <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
+        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
+        <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
+        <li class="divider" ng-show="leagueTeams.length > 1"></li>
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.abbrev}}</span></a></li>
       </ul>
     </div>
@@ -18,21 +22,6 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started">Pick Loser</button>
-    <div class="btn-group team-actions" ng-show="isCoach(teamData) || isCommish(teamData)" dropdown is-open="coach.isopen">
-      <button type="button" class="actions-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Actions</strong> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu team-actions-menu" role="menu">
-        <li ng-show="isCommish(teamData) || (teamData.active && teamData.alive)"><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
-        <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
-        <li><a ng-click="reportAbuse()">Report abuse</a></li>
-        <li><a ng-click="reportAbuse()">Report a bug</a></li>
-        <li ng-show="isCommish(teamData)" class="divider"></li>
-        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
-        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
-        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
-      </ul>
-    </div>
   </div>
 </div>
 <div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">Nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
