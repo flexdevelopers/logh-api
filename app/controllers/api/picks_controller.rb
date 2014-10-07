@@ -28,7 +28,7 @@ class API::PicksController < API::BaseController
       return forbidden("Your current pick for the week is locked. The game has already started" ) if @pick.locked?
     end
     if @pick.update_attributes(_pick_params)
-      render json: { message: { type: SUCCESS, content: "You picked #{@pick.squad.name} to lose in #{week.display}" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "You picked #{@pick.squad.name} to lose in #{week.display}. Good luck!" } }, status: :ok
     else
       error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
