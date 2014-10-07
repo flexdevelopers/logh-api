@@ -18,7 +18,7 @@ class Week < ActiveRecord::Base
   scope :not_complete, -> { where('complete = ?', false) }
 
   def display
-    "Week #{self.number} (#{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")})"
+    "Week #{self.number} [ #{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")} ]"
   end
 
   def started?
