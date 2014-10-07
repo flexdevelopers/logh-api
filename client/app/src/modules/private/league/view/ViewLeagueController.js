@@ -12,6 +12,10 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
 
   $scope.teamQuery = '';
 
+  $scope.leagueDropdown = {
+    isopen: false
+  };
+
   $scope.search = function(item) {
     if (item.name.indexOf($scope.teamQuery.toLowerCase()) != -1 || item.coach_names.join(', ').indexOf($scope.teamQuery.toLowerCase()) != -1) {
       return true;

@@ -1,11 +1,22 @@
 <div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see the final results.</div>
 <div class="header-row row">
   <div class="col-sm-7 col-md-7">
-    <h3 class="league-name">
-      <i class="fa fa-times" title="Closed league" ng-show="!leagueData.open"></i>
-      <i class="fa fa-lock" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
-      <i class="fa fa-unlock" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
-      {{leagueData.name}} <small class="edit-league"><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">[ edit ]</a></small> <br>
+    <div class="btn-group leagues-dropdown" dropdown is-open="leagueDropdown.isopen">
+      <button type="button" class="leagues-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCommish(leagueData)">
+        <span class="league-name" ng-class="{'disabled': !isCommish(leagueData)}">
+        <i class="fa fa-times icon" title="Closed league" ng-show="!leagueData.open"></i>
+        <i class="fa fa-lock icon" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
+        <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
+        <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData)" class="caret"></span>
+      </button>
+      <ul class="dropdown-menu league-actions-menu" role="menu">
+        <li><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="teamOptions.inactive = false">Hide deactivated teams</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">Show deactivated teams</a></li>
+      </ul>
+    </div>
+    <h3 class="league-meta">
       <small ng-show="leagueData.elimination">Survivor League (single elimination)</small>
       <small ng-show="!leagueData.elimination">Biggest Loser League (most correct picks)</small> <br>
       <small>{{starts(leagueData)}}</small> <br>
@@ -16,24 +27,9 @@
     <button type="button" class="join-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
     <button type="button" class="invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary btn-sm" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
-    <div class="btn-group league-actions" ng-show="hasTeamInLeague() || isCommish(leagueData)" dropdown is-open="commish.isopen">
-      <button type="button" class="league-actions-btn btn btn-default btn-sm dropdown-toggle">
-        <strong>Actions</strong> <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu league-actions-menu" role="menu">
-        <li ng-show="!isCommish(leagueData)"><a ng-click="contactCommish(leagueData)">Contact the commish</a></li>
-        <li><a ng-click="reportAbuse()">Report abuse</a></li>
-        <li><a ng-click="reportAbuse()">Report a bug</a></li>
-        <li ng-show="isCommish(leagueData)" class="divider"></li>
-        <li><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="editLeague(leagueData)">Edit league</a></li>
-        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="teamOptions.inactive = false">Hide deactivated teams</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">Show deactivated teams</a></li>
-      </ul>
-    </div>
   </div>
 </div>
-<div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>Commish to league:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">Nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a></div>
+<div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>commish to league:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a></div>
 <ul class="nav nav-tabs">
   <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{leagueData.alive_team_count}} / </span>{{leagueData.team_count}} ]</a></li>
 </ul>
