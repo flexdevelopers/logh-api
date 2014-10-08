@@ -24,8 +24,12 @@ var ViewLeagueController = function(league, aliveTeams, deadTeams, $scope, $log,
     return startsLabel + league.start_week;
   };
 
-  $scope.hasWinner = function(league, aliveTeams) {
-    return league.started && aliveTeams.length == 1;
+  $scope.winner = function(aliveTeams) {
+    var winnerName = "None";
+    if (aliveTeams.length == 1) {
+      winnerName = aliveTeams[0].name;
+    }
+    return winnerName;
   };
 
   $scope.isCommish = function(league) {

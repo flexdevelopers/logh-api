@@ -1,4 +1,5 @@
-<div class="alert alert-success" ng-show="hasWinner(leagueData, aliveTeams)">This league has a winner!! Congrats all around...</div>
+<div class="alert alert-success" ng-show="leagueData.started && aliveTeams.length == 1"><strong>{{winner(aliveTeams)}}</strong> has earned the prestigious Loser Trophy! Congrats all around...</div>
+<div class="alert alert-success" ng-show="leagueData.started && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see how everyone did.</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <h3 class="league-name">
@@ -53,7 +54,7 @@
         <a ng-repeat="team in aliveTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)" class="list-group-item">
           <div class="row">
             <div class="league-name col-sm-6 col-md-6 team-name" ng-class="{'inactive': !team.active}">
-              <i class="fa fa-trophy fa-fw" ng-show="team.active && hasWinner(leagueData, aliveTeams)" title="Winner"></i>
+              <i class="winner-icon fa fa-trophy fa-fw" ng-show="team.active && leagueData.started && aliveTeams.length == 1" title="Winner"></i>
               <i class="fa fa-times fa-fw" title="Deactivated Team" ng-show="!team.active"></i>
               <i class="fa fa-user fa-fw" ng-show="team.active && isCoach(team) && !hasWinner(leagueData, aliveTeams)" title="My team"></i> {{team.name}} <span class="coach-name">{{coachName(team)}}</span></div>
             <div class="col-sm-6 col-md-6">
