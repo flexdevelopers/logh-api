@@ -1,5 +1,5 @@
 object @team
-attributes :id, :name, :active, :alive, :message
+attributes :id, :name, :active, :alive, :paid, :message
 node(:started) { |team| team.league.started? }
 node(:start_week) { |team| team.league.start_week.display }
 node(:correct_picks_count) { |team| team.correct_picks_count }

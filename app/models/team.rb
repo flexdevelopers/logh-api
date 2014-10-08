@@ -12,6 +12,7 @@ class Team < ActiveRecord::Base
   validates :league, presence: true
   validates :active, inclusion: { in: [true, false] }
   validates :alive, inclusion: { in: [true, false] }
+  validates :paid, inclusion: { in: [true, false] }
   validates :message, allow_nil: true, length: { maximum: 500 }
 
   default_scope -> { order(name: :asc) }

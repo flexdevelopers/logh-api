@@ -11,6 +11,9 @@ describe Team do
   it { should respond_to(:active) }
   its(:active) { should be_true }
 
+  it { should respond_to(:paid) }
+  its(:paid) { should be_false }
+
   it { should respond_to(:message) }
   its(:message) { should be_blank }
 
@@ -45,6 +48,11 @@ describe Team do
 
   context 'when alive is not present' do
     subject(:team) { FactoryGirl.build(:team, alive: nil) }
+    it { should_not be_valid }
+  end
+
+  context 'when paid is not present' do
+    subject(:team) { FactoryGirl.build(:team, paid: nil) }
     it { should_not be_valid }
   end
 
