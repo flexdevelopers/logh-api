@@ -1,7 +1,7 @@
 class API::InvitationsController < API::BaseController
   before_action :_set_league
   before_action :_verify_league_management, except: :new
-  before_action :_verify_league_status, except: :new
+  before_action :_verify_league_status
 
   # POST /leagues/:league_id/invitations/new
   def new
@@ -41,7 +41,7 @@ class API::InvitationsController < API::BaseController
     end
 
     def _verify_league_status
-      forbidden('Invites cannot be sent after the league has started') if @league.started?
+      forbidden('The league has already started') if @league.started?
     end
 
     def _is_commish_of?(league)
