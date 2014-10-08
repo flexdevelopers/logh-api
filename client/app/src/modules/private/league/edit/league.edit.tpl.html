@@ -43,10 +43,10 @@
         <div class="form-group" ng-class="{'has-error': hasError(leagueForm.maxTeams), 'has-feedback': hasError(leagueForm.maxTeams)}">
           <label class="control-label" for="maxTeams">Maximum number of teams a user can have in this league:
             <small ng-show="hasPropertyError(leagueForm.maxTeams, 'required')">[ Number Required ]</small>
-            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 20 ]</small>
-            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 20 ]</small>
+            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
+            <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
           </label>
-          <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 20" min="1" max="20" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
+          <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
           <span ng-show="hasError(leagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
