@@ -66,7 +66,9 @@ class API::LeaguesController < API::BaseController
   def message
     if @league.update_attributes(message: _league_params[:message])
       LeagueMailer.message_notify(@league).deliver if params[:emailMessage] && _league_params[:message].length > 0
-      render json: { message: { type: SUCCESS, content: "League message has been updated for #{@league[:name]}" } }, status: :ok
+      league_message = "League message has been updated for #{@league[:name]}"
+      league_message += " and emailed to all the coaches" if params[:emailMessage] && _league_params[:message].length > 0
+      render json: { message: { type: SUCCESS, content: league_message } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
