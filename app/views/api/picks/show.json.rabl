@@ -5,7 +5,7 @@ node(:week_type) { |pick| pick.week_type.description }
 node(:week_number) { |pick| pick.week.number }
 node(:game_display) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
-    if pick.locked?
+    if pick.locked? && pick.game.complete
       "#{pick.game.squads[0][:name]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:name]} [ #{pick.game.home_squad_score} ]"
     else
       "#{pick.game.squads[0][:name]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:name]} [ #{pick.game.home_squad.record} ]"
