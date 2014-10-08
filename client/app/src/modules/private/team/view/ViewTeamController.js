@@ -69,6 +69,20 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
       });
   };
 
+  $scope.paid = function(team) {
+    teamService.paidTeam(team)
+      .then(function(paid) {
+        team.paid = paid;
+      });
+  };
+
+  $scope.unpaid = function(team) {
+    teamService.unpaidTeam(team)
+      .then(function(paid) {
+        team.paid = paid;
+      });
+  };
+
   $scope.hasNoPick = function(team) {
     return team.last_pick_squad.name == 'No Pick';
   };

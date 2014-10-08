@@ -69,6 +69,8 @@ And then you can do this, for example:
 * PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ] { name* }
 * PATCH/PUT   /api/leagues/:league_id/teams/:id/activate        [ activate team ]
 * PATCH/PUT   /api/leagues/:league_id/teams/:id/deactivate      [ deactivate team ]
+* PATCH/PUT   /api/leagues/:league_id/teams/:id/paid            [ team paid ]
+* PATCH/PUT   /api/leagues/:league_id/teams/:id/unpaid          [ team unpaid ]
 * DELETE      /api/leagues/:league_id/teams/:id                 [ destroy team ]
 
 ##### Picks

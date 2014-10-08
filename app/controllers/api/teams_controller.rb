@@ -1,7 +1,7 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:all, :alive, :dead, :index, :show]
   before_action :_set_league
-  before_action :_set_team, only: [:show, :update, :message, :contact, :activate, :deactivate]
+  before_action :_set_team, only: [:show, :update, :message, :contact, :activate, :deactivate, :paid, :unpaid]
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/all
@@ -128,6 +128,26 @@ class API::TeamsController < API::BaseController
     if @team.update_attributes(active: false)
       TeamMailer.deactivate_notify(@team).deliver
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been deactivated" } }, status: :ok
+    else
+      error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PUT /api/leagues/:league_id/teams/1/paid
+  def paid
+    return forbidden('Only the commish can mark a team as paid') if !_is_commish_of?(@league)
+    if @team.update_attributes(paid: true)
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been marked as paid" } }, status: :ok
+    else
+      error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
+  # PUT /api/leagues/:league_id/teams/1/unpaid
+  def unpaid
+    return forbidden('Only the commish can mark a team as unpaid') if !_is_commish_of?(@league)
+    if @team.update_attributes(paid: false)
+      render json: { message: { type: SUCCESS, content: "#{@team[:name]} team has been marked as unpaid" } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

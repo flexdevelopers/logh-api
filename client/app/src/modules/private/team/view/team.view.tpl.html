@@ -12,6 +12,8 @@
       <ul class="dropdown-menu teams-btn-menu" role="menu">
         <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
         <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.paid"><a ng-click="paid(teamData)">Mark team as paid</a></li>
+        <li ng-show="isCommish(teamData) && teamData.paid"><a ng-click="unpaid(teamData)">Mark team as unpaid</a></li>
         <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
         <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
