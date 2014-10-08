@@ -2,11 +2,15 @@ Congrats! <%= @user.display_name %> has invited <%= @invitation.email %> to join
 
 Your job, if you accept, is to pick a different NFL loser each week. That's it!
 
+League details:
+
+Commish: <%= @invitation.league.commish_names.join(', ') %>
 <% if @invitation.league.elimination  %>
-Avoid elimination the longest and you win. Good luck!
+Format: LoseOrGoHome [ single elimination ]
 <% else %>
-Get the most picks right and you win. Good luck!
+Format: Biggest Loser [ no elimination ]
 <% end %>
+Starts: <%= @invitation.league.start_week.display %>
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included from <%= @user.display_name %>:
