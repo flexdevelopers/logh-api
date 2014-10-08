@@ -19,13 +19,13 @@
         <div class="form-group" ng-show="!leagueData.started">
           <div class="btn-group league-format-btn-group">
             <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Biggest Loser<br><span class="small-gray">[ most correct picks ]</span></label>
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Survivor<br><span class="small-gray">[ single elimination ]</span></label>
+            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="true" uncheckable>LoseOrGoHome<br><span class="small-gray">[ single elimination ]</span></label>
           </div>
         </div>
         <div class="form-group" ng-show="leagueData.started">
           <label class="control-label">League format:</label>
-          <input type="text" class="form-control" value="Biggest Loser [ most losers ]" ng-show="leagueData.elimination == false" ng-disabled="true">
-          <input type="text" class="form-control" value="Survivor [ single elimination ]" ng-show="leagueData.elimination == true" ng-disabled="true">
+          <input type="text" class="form-control" value="Biggest Loser [ no elimination ]" ng-show="leagueData.elimination == false" ng-disabled="true">
+          <input type="text" class="form-control" value="LoseOrGoHome [ single elimination ]" ng-show="leagueData.elimination == true" ng-disabled="true">
         </div>
       </div>
     </div>

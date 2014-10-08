@@ -8,7 +8,7 @@ var NewLeagueController = function(weeks, $scope, $log, $modalInstance) {
         season_id: $scope.weeks[0].season_id,
         start_week_id: $scope.weeks[0].id,
         public: true,
-        elimination: false,
+        elimination: true,
         max_teams_per_user: ''
     };
 
