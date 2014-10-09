@@ -1,5 +1,19 @@
 var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, userService, teamService, gameService, pickService) {
 
+  var activate = function(team) {
+    teamService.activateTeam(team)
+      .then(function(active) {
+        team.active = active;
+      });
+  };
+
+  var deactivate = function(team) {
+    teamService.deactivateTeam(team)
+      .then(function(active) {
+        team.active = active;
+      });
+  };
+
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
 
@@ -55,18 +69,40 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   };
 
-  $scope.activate = function(team) {
-    teamService.activateTeam(team)
-      .then(function(active) {
-        team.active = active;
-      });
+  $scope.confirmActivate = function(team) {
+    var modalInstance = $modal.open({
+      templateUrl: 'common/modules/confirm/confirm.tpl.html',
+      controller: 'ConfirmController',
+      resolve: {
+        message: function() {
+          return 'Are you sure you want to reactivate this team?';
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      activate(team);
+    }, function () {
+      $log.debug('Activate team cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Team reactivation cancelled' }, false);
+    });
   };
 
-  $scope.deactivate = function(team) {
-    teamService.deactivateTeam(team)
-      .then(function(active) {
-        team.active = active;
-      });
+  $scope.confirmDeactivate = function(team) {
+    var modalInstance = $modal.open({
+      templateUrl: 'common/modules/confirm/confirm.tpl.html',
+      controller: 'ConfirmController',
+      resolve: {
+        message: function() {
+          return 'Are you sure you want to deactivate this team?';
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      deactivate(team);
+    }, function () {
+      $log.debug('Deactivate team cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Team deactivation cancelled' }, false);
+    });
   };
 
   $scope.paid = function(team) {

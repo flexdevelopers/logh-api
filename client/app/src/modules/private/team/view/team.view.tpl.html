@@ -14,8 +14,8 @@
         <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
         <li ng-show="isCommish(teamData) && !teamData.paid"><a ng-click="paid(teamData)">Mark team as paid</a></li>
         <li ng-show="isCommish(teamData) && teamData.paid"><a ng-click="unpaid(teamData)">Mark team as unpaid</a></li>
-        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="activate(teamData)">Reactivate this team</a></li>
-        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="deactivate(teamData)">Deactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="confirmActivate(teamData)">Reactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="confirmDeactivate(teamData)">Deactivate this team</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
         <li class="divider" ng-show="leagueTeams.length > 1"></li>
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.abbrev}}</span></a></li>
