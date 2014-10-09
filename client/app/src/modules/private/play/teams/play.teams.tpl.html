@@ -10,7 +10,7 @@
           <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active && team.started">Pick: [ <span class="current-loser-name">{{team.last_pick_squad.name}}</span><span class="current-loser-abbrev">{{team.last_pick_squad.abbrev}}</span> ]</span>
           <span class="current-pick" ng-show="team.active && !team.started">Starts {{team.start_week}}</span>
           <span class="inactive-team" ng-show="!team.active">Contact the commish to reactivate team</span>
-          <span class="badge">Losers [ {{team.correct_picks_count}} ]</span>
+          <span class="badge">{{team.correct_picks_count}} loser<span ng-show="team.correct_picks_count !== 1">s</span></span>
         </div>
       </div>
     </a>
