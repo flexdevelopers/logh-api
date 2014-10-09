@@ -17,8 +17,7 @@
     </div>
     <h3 style="margin-top: 0;">
       <div class="league-meta" ng-class="{'show-meta': !leagueData.start_week_complete}">
-        <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small>
-        <small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
+        <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small><small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
         <small >{{starts(leagueData)}}</small>
       </div>
       <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
