@@ -74,6 +74,7 @@ var loghApp = angular.module('loghApp', [
     require('./common/modules/header').name,
     require('./common/modules/message').name,
     require('./common/modules/footer').name,
+    require('./common/modules/confirm').name,
 
     require('./common/aspects').name,
     require('./common/models').name,
