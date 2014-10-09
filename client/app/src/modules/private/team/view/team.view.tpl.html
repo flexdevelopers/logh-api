@@ -24,7 +24,7 @@
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary btn-sm" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started">Pick Loser</button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started">Pick Loser</button>
   </div>
 </div>
 <div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
