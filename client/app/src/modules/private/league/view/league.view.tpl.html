@@ -1,4 +1,3 @@
-<div class="alert alert-success" ng-show="leagueData.start_week_complete && aliveTeams.length == 0">Oops. All of the teams are now dead. Check the 'Dead Teams' tab to see the final results.</div>
 <div class="header-row row">
   <div class="col-sm-7 col-md-7">
     <div class="btn-group leagues-dropdown" dropdown is-open="leagueDropdown.isopen">
@@ -16,11 +15,13 @@
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="teamOptions.inactive = true">Show deactivated teams</a></li>
       </ul>
     </div>
-    <h3 class="league-meta">
-      <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small>
-      <small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
-      <small>{{starts(leagueData)}}</small> <br>
-      <small>Commish: {{leagueData.commish_names.join(', ')}}</small><br>
+    <h3 style="margin-top: 0;">
+      <div class="league-meta" ng-class="{'show-meta': !leagueData.start_week_complete}">
+        <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small>
+        <small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
+        <small >{{starts(leagueData)}}</small>
+      </div>
+      <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
@@ -28,6 +29,11 @@
     <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
     <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
+    <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
+      <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small>
+      <small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
+      <small>{{starts(leagueData)}}</small>
+    </h3>
   </div>
 </div>
 <div class="league-message well well-sm" ng-show="!leagueData.start_week_complete || hasTeamInLeague() || isCommish(leagueData)"><i class="fa fa-comment fa-fw" title="Message for the league"></i> <strong>commish to league:</strong> <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a></div>

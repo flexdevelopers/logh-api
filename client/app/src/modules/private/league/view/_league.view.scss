@@ -32,7 +32,15 @@
   }
 
   .league-meta {
-    margin-top: 0;
+    display: none;
+    &.show-meta {
+      display: block;
+    }
+  }
+
+  .league-meta-right {
+    margin-top: 5px;
+    text-align: right;
   }
 
   .league-container {
@@ -79,6 +87,12 @@
         left: 0;
         top: -25px;
       }
+    }
+    .league-meta {
+      display: block;
+    }
+    .league-meta-right {
+      display: none;
     }
   }
 
