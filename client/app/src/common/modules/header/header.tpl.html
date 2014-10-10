@@ -35,13 +35,13 @@
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-                  <input type="email" class="form-control" style="cursor:auto;" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();" autofocus required>
+                  <input type="email" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();" rc-verify-set autofocus required>
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                  <input type="password" class="form-control" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" required>
+                  <input type="password" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" rc-verify-set required>
                 </div>
               </div>
               <div>

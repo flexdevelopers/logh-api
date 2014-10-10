@@ -29,8 +29,7 @@
     <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
-      <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small>
-      <small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
+      <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small><small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
       <small>{{starts(leagueData)}}</small>
     </h3>
   </div>
