@@ -43,6 +43,15 @@
     text-align: right;
   }
 
+  .teams-tab {
+    position: relative;
+    .join-times {
+      position: absolute;
+      top: 17px;
+      right: 0;
+    }
+  }
+
   .league-container {
     position: relative;
     .custom-search-form {
@@ -51,9 +60,11 @@
       right: 0;
       top: 0;
     }
+    
     .manage-custom-search-form {
       margin: 5px 0 5px 0;
     }
+
   }
 
   @media all and (max-width: 767px) {
