@@ -8,7 +8,8 @@ class Pick < ActiveRecord::Base
   validates :week, presence: true
   validates :week_type, presence: true
   validates :team_id, presence: true, uniqueness: { scope: :week_id }
-  validates :squad_id, presence: true, uniqueness: { scope: [:team_id, :week_type_id] }
+  validates :squad_id, presence: true
+  validates :squad_id, uniqueness: { scope: [:team_id, :week_type_id] }, if: Proc.new { |pick| !pick.squad.none? }
 
   default_scope { includes(:week).order('weeks.starts_at ASC') }
 

@@ -8,6 +8,12 @@ describe Squad do
   it { should respond_to(:abbrev) }
   its(:abbrev) { should be_blank }
 
+  it { should respond_to(:record) }
+  its(:record) { should be_blank }
+
+  it { should respond_to(:none) }
+  its(:none) { should be_false }
+
   context 'when squad has no name' do
     subject(:squad) { FactoryGirl.build(:squad, name: '') }
     it { should_not be_valid }
