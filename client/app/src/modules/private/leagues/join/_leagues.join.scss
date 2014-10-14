@@ -2,6 +2,17 @@
   width: 100%;
 }
 
+.public-league-meta, .private-league-meta {
+  font-size: 11px;
+  color: #999;
+  .loseorgohome {
+    display: inline;
+  }
+  .logh {
+    display: none;
+  }
+}
+
 .public-leagues, .private-leagues {
   .list-group-item:first-child {
     border-top: none;
@@ -57,7 +68,14 @@
       display: none;
     }
   }
-
+  .public-league-meta, .private-league-meta {
+    .loseorgohome {
+      display: none;
+    }
+    .logh {
+      display: inline;
+    }
+  }
 }
 
 

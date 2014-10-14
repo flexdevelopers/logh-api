@@ -1,1 +1,22 @@
+.my-league-meta {
+  font-size: 11px;
+  color: #999;
+  .loseorgohome {
+    display: inline;
+  }
+  .logh {
+    display: none;
+  }
+}
+
+@media all and (max-width: 550px) {
+  .my-league-meta {
+    .loseorgohome {
+      display: none;
+    }
+    .logh {
+      display: inline;
+    }
+  }
+}
 
