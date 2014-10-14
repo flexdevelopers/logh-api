@@ -5,18 +5,18 @@
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick_squad.locked">Your pick is locked for the week</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
-    <div class="btn-group teams-dropdown" dropdown is-open="teamsDropdown.isopen">
+    <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
       <button type="button" class="teams-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCoach(teamData) && !isCommish(teamData)">
         <i class="fa fa-check fa-fw" ng-show="isCommish(teamData) && teamData.paid == true" title="Paid"></i> <strong><span class="team-name" ng-class="{'team-inactive': !teamData.active || !teamData.alive, 'disabled': !isCoach(teamData) && !isCommish(teamData)}">{{teamData.name}}</span> <span ng-show="isCoach(teamData) || isCommish(teamData)" class="caret"></span></strong>
       </button>
       <ul class="dropdown-menu teams-btn-menu" role="menu">
-        <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
-        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
-        <li ng-show="isCommish(teamData) && !teamData.paid"><a ng-click="paid(teamData)">Mark team as paid</a></li>
-        <li ng-show="isCommish(teamData) && teamData.paid"><a ng-click="unpaid(teamData)">Mark team as unpaid</a></li>
-        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="confirmActivate(teamData)">Reactivate this team</a></li>
-        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="confirmDeactivate(teamData)">Deactivate this team</a></li>
-        <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
+        <li><a ng-click="toggleDropdown($event);editTeam(teamData)">Edit {{teamData.name}}</a></li>
+        <li><a ng-show="isCommish(teamData)" ng-click="toggleDropdown($event);updateMessage(teamData)">Edit team message</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.paid"><a ng-click="toggleDropdown($event);paid(teamData)">Mark team as paid</a></li>
+        <li ng-show="isCommish(teamData) && teamData.paid"><a ng-click="toggleDropdown($event);unpaid(teamData)">Mark team as unpaid</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="toggleDropdown($event);confirmActivate(teamData)">Reactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="toggleDropdown($event);confirmDeactivate(teamData)">Deactivate this team</a></li>
+        <li ng-show="!isCommish(teamData)"><a ng-click="toggleDropdown($event);contactCommish(teamData)">Contact the commish</a></li>
         <li class="divider" ng-show="leagueTeams.length > 1"></li>
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.abbrev}}</span></a></li>
       </ul>

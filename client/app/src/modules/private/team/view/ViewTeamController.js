@@ -19,8 +19,14 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   $scope.picks = picks.data;
 
-  $scope.teamsDropdown = {
+  $scope.teamDropdown = {
     isopen: false
+  };
+
+  $scope.toggleDropdown = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.teamDropdown.isopen = !$scope.teamDropdown.isopen;
   };
 
   $scope.contactCommish = function(team) {

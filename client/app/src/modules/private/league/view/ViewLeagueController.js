@@ -16,6 +16,12 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
     isopen: false
   };
 
+  $scope.toggleDropdown = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.leagueDropdown.isopen = !$scope.leagueDropdown.isopen;
+  };
+
   $scope.search = function(item) {
     if (item.name.indexOf($scope.teamQuery.toLowerCase()) != -1 || item.coach_names.join(', ').indexOf($scope.teamQuery.toLowerCase()) != -1) {
       return true;
