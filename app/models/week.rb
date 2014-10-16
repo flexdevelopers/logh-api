@@ -49,4 +49,10 @@ class Week < ActiveRecord::Base
 
   end
 
+  def remind
+    self.season.leagues.started.find_each do |started_league|
+      LeagueMailer.pick_reminder(started_league, self).deliver
+    end
+  end
+
 end

@@ -24,6 +24,10 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService, we
 
   };
 
+  $scope.sendReminder = function(week) {
+    weekService.sendReminder(week);
+  };
+
   $scope.completeWeek = function(week) {
     weekService.completeWeek(week)
       .then(function() {

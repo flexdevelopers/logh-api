@@ -71,6 +71,7 @@ LoghApi::Application.routes.draw do
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
         resources :weeks, only: [:create, :update, :destroy] do
           put 'complete', on: :member, to: 'weeks#complete'
+          put 'remind', on: :member, to: 'weeks#remind'
         end
       end
 

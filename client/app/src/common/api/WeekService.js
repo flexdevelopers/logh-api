@@ -28,6 +28,22 @@ var WeekService = function($http, $log, $q, apiConfig, seasonModel, messageModel
         return promise;
     };
 
+    this.sendReminder = function(week) {
+        var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + week.season_id + "/weeks/" + week.id + "/remind")
+            .success(function(data) {
+                $log.debug("WeekService: sendReminder success");
+                messageModel.setMessage(data.message, false);
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("WeekService: sendReminder failed");
+                messageModel.setMessage(data.message, false);
+                return data;
+            });
+
+        return promise;
+    };
+
     this.completeWeek = function(week) {
       var deferred = $q.defer();
       $http.put(apiConfig.baseURL + "admin/seasons/" + week.season_id + "/weeks/" + week.id + "/complete")

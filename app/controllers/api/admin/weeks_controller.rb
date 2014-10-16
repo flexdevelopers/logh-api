@@ -1,5 +1,5 @@
 class API::Admin::WeeksController < API::WeeksController
-  before_action :_set_week, only: [ :update, :complete ]
+  before_action :_set_week, only: [ :update, :complete, :remind ]
   before_action :_verify_admin
 
   # PUT /api/admin/seasons/:season_id/weeks/:id/complete
@@ -9,6 +9,12 @@ class API::Admin::WeeksController < API::WeeksController
     else
       error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
+  end
+
+  # PUT /api/admin/seasons/:season_id/weeks/:id/remind
+  def remind
+    @week.remind
+    render json: { message: { type: SUCCESS, content: "Week #{@week[:number]} reminder has been sent" } }, status: :ok
   end
 
   # POST /api/admin/seasons/:season_id/weeks

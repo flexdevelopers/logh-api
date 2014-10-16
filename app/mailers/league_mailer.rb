@@ -10,15 +10,31 @@ class LeagueMailer < ActionMailer::Base
 
   def message_notify(league)
     @league = league
+    emails = @league.coach_emails.concat(@league.commish_emails) # these are currently coaches of active teams plus the commish
 
     hdr = SmtpApiHeader.new
-    receiver = @league.coach_emails.concat(@league.commish_emails)
+    receiver = emails
     hdr.addTo(receiver)
 
     headers['X-SMTPAPI'] =  hdr.asJSON()
     puts "SMTPAPI: #{hdr.asJSON()}"
 
     mail to: 'jeremy@loseorgohome.com', subject: "#{@league.name} has a new message from the commish"
+  end
+
+  def pick_reminder(league, week)
+    @league = league
+    @week = week
+    emails = @league.coach_emails # these are currently coaches of active teams
+
+    hdr = SmtpApiHeader.new
+    receiver = emails
+    hdr.addTo(receiver)
+
+    headers['X-SMTPAPI'] =  hdr.asJSON()
+    puts "SMTPAPI: #{hdr.asJSON()}"
+
+    mail to: 'jeremy@loseorgohome.com', subject: "Don't forget your week #{@week[:number]} picks for the \"#{@league.name}\" league"
   end
 
   def team_joined(team)
