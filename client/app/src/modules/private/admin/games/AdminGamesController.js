@@ -1,4 +1,11 @@
-var AdminGamesController = function(week, games, $scope, $modal, gameService, weekService) {
+var AdminGamesController = function(week, games, $scope, $log, $modal, gameService, weekService, messageModel) {
+
+  var completeWeek = function(week) {
+    weekService.completeWeek(week)
+      .then(function() {
+        $scope.weekData.complete = true;
+      });
+  };
 
   $scope.weekData = week.data;
 
@@ -20,6 +27,8 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService, we
     modalInstance.result.then(function(game) {
       gameService.updateGame(game);
     }, function () {
+      $log.debug('Game update cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Game update cancelled' }, false);
     });
 
   };
@@ -28,11 +37,22 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService, we
     weekService.sendReminder(week);
   };
 
-  $scope.completeWeek = function(week) {
-    weekService.completeWeek(week)
-      .then(function() {
-        $scope.weekData.complete = true;
-      });
+  $scope.confirmWeekComplete = function(week) {
+    var modalInstance = $modal.open({
+      templateUrl: 'common/modules/confirm/confirm.tpl.html',
+      controller: 'ConfirmController',
+      resolve: {
+        message: function() {
+          return 'Are you sure you want to mark this week as complete?';
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      completeWeek(week);
+    }, function () {
+      $log.debug('Complete week cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Week complete cancelled' }, false);
+    });
   };
 
   /**
@@ -43,5 +63,5 @@ var AdminGamesController = function(week, games, $scope, $modal, gameService, we
   init();
 };
 
-AdminGamesController.$inject = ['week', 'games', '$scope', '$modal', 'gameService', 'weekService'];
+AdminGamesController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'weekService', 'messageModel'];
 module.exports = AdminGamesController;
