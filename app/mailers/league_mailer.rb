@@ -10,7 +10,7 @@ class LeagueMailer < ActionMailer::Base
 
   def message_notify(league)
     @league = league
-    emails = @league.coach_emails.concat(@league.commish_emails) # these are currently coaches of active teams plus the commish
+    emails = @league.coach_emails.concat(@league.commish_emails) # these are currently coaches of active/alive teams plus the commish
 
     hdr = SmtpApiHeader.new
     receiver = emails
@@ -25,7 +25,7 @@ class LeagueMailer < ActionMailer::Base
   def pick_reminder(league, week)
     @league = league
     @week = week
-    emails = @league.coach_emails # these are currently coaches of active teams
+    emails = @league.coach_emails # these are currently coaches of active/alive teams
 
     hdr = SmtpApiHeader.new
     receiver = emails
