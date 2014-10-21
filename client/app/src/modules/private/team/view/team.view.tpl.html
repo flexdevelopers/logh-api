@@ -29,7 +29,11 @@
 </div>
 <div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><i class="fa fa-comment fa-fw" title="Message for this team"></i> <strong>commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
 <hr>
-<h4 class="losers-heading">Losers [ {{teamData.pick_count}} ]</h4>
+<div class="losers-tab">
+  <ul class="nav nav-tabs">
+    <li class="active"><a>Losers [ {{teamData.pick_count}} ]</a></li>
+  </ul>
+</div>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
       <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">
@@ -46,7 +50,7 @@
         </div>
       </a>
     </div>
-    <div class="alert alert-info" ng-show="picks.length == 0">
+    <div class="no-picks-alert alert alert-info" ng-show="picks.length == 0">
       No picks
     </div>
 </div>

@@ -30,6 +30,20 @@
     }
   }
 
+  .losers-tab {
+    position: relative;
+    margin-bottom: -1px;
+  }
+
+  .team-picks .list-group-item:first-child {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+
+  .no-picks-alert {
+    margin-top: 10px;
+  }
+
   .pick-squad {
     font-size: 13px;
     .pick-squad-name {
@@ -119,11 +133,6 @@
 
   .team-container {
     position: relative;
-  }
-
-  .losers-heading {
-    background-color: whitesmoke;
-    padding: 10px;
   }
 
   .team-picks {
