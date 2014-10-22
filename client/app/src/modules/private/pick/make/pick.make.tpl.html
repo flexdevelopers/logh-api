@@ -1,9 +1,9 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h4 class="modal-title">Pick a Loser <br> {{games[0].week_display}}</h4>
+  <h3 class="modal-title">Pick a Loser</h3>
 </div>
 <div class="modal-body">
-  <div class="well well-sm"><i class="fa fa-eye-slash fa-fw"></i> Pick will be hidden until game starts</div>
+  <div class="well well-sm"><strong>Week {{games[0].week_number}} ({{games[0].week_type}})</strong></div>
   <div ng-repeat-start="game in games" class="week-games list-group">
     <h5 ng-class="{'invalid-game': game.started}">{{game.display}}<br><small>{{starts(game)}}</small></h5>
     <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': game.started}">
