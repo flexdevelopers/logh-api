@@ -157,7 +157,7 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
     });
 
     modalInstance.result.then(function(params) {
-      leagueService.updateLeagueMessage(params.league, params.sendEmail)
+      leagueService.updateLeagueMessage(params.league, params.sendAlive, params.sendAll)
         .then(function(message) {
           $scope.leagueData.message = message;
         });

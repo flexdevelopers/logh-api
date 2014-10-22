@@ -2,10 +2,13 @@ var LeagueMessageController = function(league, $modalInstance, $scope, $log) {
 
   $scope.leagueData = angular.copy(league);
 
-  $scope.messageOptions = { sendEmail: false };
+  $scope.messageOptions = {
+    sendAlive: false,
+    sendAll: false
+  };
 
-  $scope.updateMessage = function(league, sendEmail) {
-    $modalInstance.close({ league: league, sendEmail: sendEmail });
+  $scope.updateMessage = function(league, sendAlive, sendAll) {
+    $modalInstance.close({ league: league, sendAlive: sendAlive, sendAll: sendAll });
   };
 
   $scope.cancel = function() {

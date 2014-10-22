@@ -11,8 +11,11 @@
       </label>
       <div class="col-sm-8">
         <textarea id="message" name="message" class="form-control" placeholder="Enter a message for your league to see or leave it blank." rows="3" ng-maxlength="500" ng-model="leagueData.message"></textarea>
+        <div class="email-league-message-checkbox" ng-show="leagueData.elimination">
+          <label><input type="checkbox" ng-model="messageOptions.sendAlive"> email message to alive teams</label>
+        </div>
         <div class="email-league-message-checkbox">
-          <label><input type="checkbox" ng-model="messageOptions.sendEmail"> email message to <span ng-show="leagueData.elimination">alive</span><span ng-show="!leagueData.elimination">all</span> teams</label>
+          <label><input type="checkbox" ng-model="messageOptions.sendAll"> email message to all teams</label>
         </div>
         <span ng-show="hasError(messageForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
@@ -21,5 +24,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(leagueData, messageOptions.sendEmail)">Update</button>
+  <button class="btn btn-primary" ng-disabled="messageForm.$pristine || messageForm.$invalid" ng-click="updateMessage(leagueData, messageOptions.sendAlive, messageOptions.sendAll)">Update</button>
 </div>

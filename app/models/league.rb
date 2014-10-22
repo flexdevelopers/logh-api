@@ -36,6 +36,11 @@ class League < ActiveRecord::Base
     emails.flatten.uniq
   end
 
+  def active_coach_emails
+    emails = teams.active.map(&:coach_emails)
+    emails.flatten.uniq
+  end
+
   def commish_ids
     @commish_ids ||= commishes.map(&:id)
   end

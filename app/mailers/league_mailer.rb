@@ -8,9 +8,10 @@ class LeagueMailer < ActionMailer::Base
     mail to: @league.commish_emails, subject: "You have a message regarding #{@league.name}"
   end
 
-  def message_notify(league)
+  def message_notify(league, emailAlive, emailAll)
     @league = league
-    emails = @league.coach_emails.concat(@league.commish_emails) # these are currently coaches of active/alive teams plus the commish
+    emails = @league.coach_emails.concat(@league.commish_emails) if emailAlive && !emailAll
+    emails = @league.active_coach_emails.concat(@league.commish_emails) if emailAll
 
     hdr = SmtpApiHeader.new
     receiver = emails
