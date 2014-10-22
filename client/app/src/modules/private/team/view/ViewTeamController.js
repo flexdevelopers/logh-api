@@ -79,9 +79,10 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     var modalInstance = $modal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
+      size: 'sm',
       resolve: {
         message: function() {
-          return 'Are you sure you want to reactivate this team?';
+          return 'Reactivate ' + team.name + '?';
         }
       }
     });
@@ -97,9 +98,10 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     var modalInstance = $modal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
+      size: 'sm',
       resolve: {
         message: function() {
-          return 'Are you sure you want to deactivate this team?';
+          return 'Deactivate ' + team.name + '?';
         }
       }
     });
