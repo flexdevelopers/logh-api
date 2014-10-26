@@ -2,7 +2,8 @@ var EditTeamController = function(team, $scope, $log, $modalInstance) {
 
     $scope.teamData = angular.copy(team);
 
-    $scope.editTeam = function (team) {
+    $scope.editTeam = function(team) {
+      team.name = team.name.toLowerCase();
       $modalInstance.close(team);
     };
 
