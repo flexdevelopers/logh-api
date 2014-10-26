@@ -31,10 +31,10 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
     };
 
     this.signout = function() {
-        var promise = $http.delete(apiConfig.baseURL + 'sessions/destroy')
+      userModel.resetUser();
+      var promise = $http.delete(apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
                 $log.debug("UserService: signout success");
-                userModel.resetUser();
                 if ($state.current.name == 'public.home') {
                     messageModel.setMessage(data.message, false);
                 } else {
