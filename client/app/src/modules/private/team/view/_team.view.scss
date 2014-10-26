@@ -85,20 +85,8 @@
     }
   }
 
-  .fa-thumbs-up {
-    color: #3c763d;
-  }
-
-  .fa-thumbs-down {
-    color: #a94442;
-  }
-
-  .team-alive, .pick-correct {
-    color: #3c763d;
-  }
-
   .pick-incorrect {
-    color: #a94442;
+    text-decoration: line-through;
   }
 
   .team-inactive {
