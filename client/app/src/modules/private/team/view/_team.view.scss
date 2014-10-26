@@ -145,6 +145,11 @@
       width: 100%;
       height: 30px;
     }
+    .team-picks {
+      .week-name, .game-column {
+        text-align: center;
+      }
+    }
   }
 
   @media all and (max-width: 550px) {
@@ -152,9 +157,6 @@
       font-size: 11px;
     }
     .team-picks {
-      .week-name, .game-column {
-        text-align: center;
-      }
       .game {
         font-size: 10px !important;
       }
