@@ -1,6 +1,6 @@
 <div class="signin-box panel panel-default">
   <div class="panel-body">
-    <form name="signinForm" role="form" ng-submit="signin(credentials)" novalidate>
+    <form name="signinForm" role="form" ng-submit="signin({ email: credentials.email.toLowerCase(), password: credentials.password })" novalidate>
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>

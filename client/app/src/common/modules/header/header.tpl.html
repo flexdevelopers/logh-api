@@ -31,7 +31,7 @@
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
         <div class="dropdown-menu panel panel-default">
           <div class="inline-signin-form panel-body">
-            <form name="inlineSigninForm" role="form" ng-submit="signin(credentials); $event.stopPropagation();" novalidate>
+            <form name="inlineSigninForm" role="form" ng-submit="signin({ email: credentials.email.toLowerCase(), password: credentials.password }); $event.stopPropagation();" novalidate>
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
