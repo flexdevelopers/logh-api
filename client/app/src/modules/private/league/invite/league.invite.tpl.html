@@ -24,8 +24,14 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-default btn-block" ng-click="resetInvite()">Reset</button>
-    <button class="btn btn-primary btn-block" ng-disabled="inviteForm.$invalid" ng-click="sendInvite(invitation)">Send</button>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <button class="btn btn-default btn-block" ng-click="resetInvite()">Reset</button>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <button class="btn btn-primary btn-block" ng-disabled="inviteForm.$invalid" ng-click="sendInvite(invitation)">Send</button>
+      </div>
+    </div>
   </form>
   <div ng-show="isCommish">
     <hr>
@@ -33,6 +39,7 @@
       <ul class="nav nav-tabs">
         <li class="active"><a>Invites [ {{invitations.length}} ]</a></li>
       </ul>
+      <span class="click-to-edit">[ click to edit ]</span>
     </div>
     <div class="league-invites">
       <div class="list-group">
