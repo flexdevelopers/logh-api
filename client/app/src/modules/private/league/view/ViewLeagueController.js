@@ -211,7 +211,7 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
 
   };
 
-  $scope.invite = function(leagueId) {
+  $scope.invite = function(leagueId, isCommish) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
@@ -219,11 +219,21 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
       resolve: {
         leagueId: function() {
           return leagueId;
+        },
+        isCommish: function() {
+          return isCommish;
+        },
+        invitations: function() {
+          if (isCommish) {
+            return leagueService.getInvites(leagueId);
+          } else {
+            return { data: [] };
+          }
         }
       }
     });
 
-    modalInstance.result.then(function (invitation) {
+    modalInstance.result.then(function(invitation) {
       leagueService.createInvite(invitation);
     }, function () {
       $log.debug('Invite coach modal dismissed...');

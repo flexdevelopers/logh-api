@@ -6,3 +6,27 @@
   color: #a94442;
   font-weight: bold;
 }
+
+.invites-tab {
+  position: relative;
+  margin-bottom: -1px;
+}
+
+.league-invites {
+
+  .list-group-item:first-child {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .list-group-item {
+
+    .sent-date, .invite-msg {
+      font-size: 11px;
+      color: #999;
+    }
+
+  }
+
+}
+

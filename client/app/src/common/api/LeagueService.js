@@ -182,7 +182,21 @@ var LeagueService = function($http, $log, $location, $q, $state, apiConfig, mess
         return deferred.promise;
     };
 
-  this.createInvite = function(inviteParams) {
+    this.getInvites = function(leagueId) {
+      var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/invitations")
+        .success(function(data) {
+          $log.debug("LeagueService: getInvites success");
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("LeagueService: getInvites failed");
+          return data;
+        });
+
+      return promise;
+    };
+
+    this.createInvite = function(inviteParams) {
         var promise = $http.post(apiConfig.baseURL + "leagues/" + inviteParams.league_id + "/invitations",
             { invitation: inviteParams })
             .success(function(data) {

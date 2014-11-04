@@ -1,29 +1,55 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3 class="modal-title">Invite Friend</h3>
+  <h3 class="modal-title">Invite Friends</h3>
 </div>
 <div class="modal-body">
-  <form name="inviteForm" class="invite-form form-horizontal" role="form" novalidate>
-    <div class="form-group" ng-class="{'has-error': hasError(inviteForm.email), 'has-feedback': hasError(inviteForm.email)}">
-      <label for="email" class="col-sm-2 control-label">Email:</label>
-      <div class="col-sm-10">
-        <input id="email" name="email" type="email" class="form-control" placeholder="Enter email" ng-model="invitation.email" required>
-        <small class="input-error" ng-show="hasPropertyError(inviteForm.email, 'required')">Required</small>
-        <small class="input-error" ng-show="hasPropertyError(inviteForm.email, 'email')">Invalid email</small>
-        <span ng-show="hasError(inviteForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+  <form name="inviteForm" class="invite-form" role="form" novalidate>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group" ng-class="{'has-error': hasError(inviteForm.emails), 'has-feedback': hasError(inviteForm.emails)}">
+          <label for="emails" class="control-label">Email(s):</label>
+          <input id="emails" name="emails" type="text" class="form-control" placeholder="Seperate emails with a space or comma..." ng-model="invitation.email" required>
+          <small class="input-error" ng-show="hasPropertyError(inviteForm.emails, 'required')">Required</small>
+          <span ng-show="hasError(inviteForm.emails)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
       </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': hasError(inviteForm.message), 'has-feedback': hasError(inviteForm.message)}">
-      <label for="message" class="col-sm-2 control-label">Message:</label>
-      <div class="col-sm-10">
-        <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="200" ng-model="invitation.message"></textarea>
-        <small class="input-error" ng-show="hasPropertyError(inviteForm.message, 'maxlength')">Too Long</small>
-        <span ng-show="hasError(inviteForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group" ng-class="{'has-error': hasError(inviteForm.message), 'has-feedback': hasError(inviteForm.message)}">
+          <label for="message" class="control-label">Message:</label>
+          <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="200" ng-model="invitation.message"></textarea>
+          <small class="input-error" ng-show="hasPropertyError(inviteForm.message, 'maxlength')">Too Long</small>
+          <span ng-show="hasError(inviteForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
       </div>
     </div>
+    <button class="btn btn-default btn-block" ng-click="resetInvite()">Reset</button>
+    <button class="btn btn-primary btn-block" ng-disabled="inviteForm.$invalid" ng-click="sendInvite(invitation)">Send</button>
   </form>
+  <div ng-show="isCommish">
+    <hr>
+    <div class="invites-tab">
+      <ul class="nav nav-tabs">
+        <li class="active"><a>Invites [ {{invitations.length}} ]</a></li>
+      </ul>
+    </div>
+    <div class="league-invites">
+      <div class="list-group">
+        <a ng-repeat="invite in invitations" class="list-group-item" ng-click="populateInvite(invite)">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <i class="fa fa-check fa-fw" ng-show="invite.accepted_at" title="Accepted"></i> {{invite.email}} <span class="sent-date"><span ng-show="!invite.accepted_at">Sent {{invite.updated_at}}</span><span ng-show="invite.accepted_at">Joined  {{invite.accepted_at}}</span></span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="no-picks-alert alert alert-info" ng-show="invitations.length == 0">
+        No invites
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="inviteForm.$pristine || inviteForm.$invalid" ng-click="invite(invitation)">Invite</button>
 </div>

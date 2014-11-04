@@ -1,16 +1,31 @@
-var LeagueInviteController = function(leagueId, $modalInstance, $scope, $log) {
+var LeagueInviteController = function(leagueId, isCommish, invitations, $modal, $modalInstance, $scope, $log) {
 
-  $scope.invitation = {
-    league_id: leagueId,
-    email: "",
-    message: ""
+  $scope.isCommish = isCommish;
+
+  $scope.invitations = invitations.data;
+
+  $scope.resetInvite = function() {
+    $scope.invitation = {
+      league_id: leagueId,
+      email: "",
+      message: ""
+    }
+  };
+  $scope.resetInvite();
+
+  $scope.populateInvite = function(invitation) {
+    $scope.invitation = {
+      league_id: invitation.league_id,
+      email: invitation.email,
+      message: invitation.message
+    }
   };
 
-  $scope.invite = function (invitation) {
+  $scope.sendInvite = function(invitation) {
     $modalInstance.close(invitation);
   };
 
-  $scope.cancel = function () {
+  $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
 
@@ -31,5 +46,5 @@ var LeagueInviteController = function(leagueId, $modalInstance, $scope, $log) {
   init();
 };
 
-LeagueInviteController.$inject = ['leagueId', '$modalInstance', '$scope', '$log'];
+LeagueInviteController.$inject = ['leagueId', 'isCommish', 'invitations', '$modal', '$modalInstance', '$scope', '$log'];
 module.exports = LeagueInviteController;

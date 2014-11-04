@@ -26,7 +26,7 @@
   </div>
   <div class="col-sm-5 col-md-5">
     <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
-    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id)">Invite</button>
+    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData))">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
       <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small><small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>
