@@ -2,7 +2,7 @@
 <div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No loser picked for this week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
-<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick_squad.locked">Your pick is locked for this week</div>
+<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick_squad.locked">Your pick is locked for {{teamData.last_pick_squad.week}}</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
@@ -24,7 +24,7 @@
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started">Pick Loser</button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span></button>
   </div>
 </div>
 <div class="team-message well well-sm" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
@@ -36,13 +36,13 @@
 </div>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
-      <a ng-repeat="pick in picks" class="list-group-item" ng-click="makePick(teamData, pick)">
+      <a ng-repeat="pick in picks" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked}">
         <div class="row">
           <div class="week-name col-sm-6 col-md-6">
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-times fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad" ng-class="{'pick-correct': pick.correct === true, 'pick-incorrect': pick.correct === false}"> <span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
+            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game">Week {{pick.week_number}} ({{pick.week_type}})</span>
           </div>
           <div class="game-column col-sm-6 col-md-6">
             <span class="game">{{pick.game_display}}</span>

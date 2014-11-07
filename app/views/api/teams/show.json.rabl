@@ -15,13 +15,15 @@ node(:last_pick_squad) do |team|
         {
             name: "#{team.current_pick.squad.name} | Week #{team.current_pick.week.number}",
             abbrev: "#{team.current_pick.squad.abbrev} | Week #{team.current_pick.week.number}",
-            locked: team.current_pick.locked?
+            locked: team.current_pick.locked?,
+            week: team.current_pick.week.display
         }
       else
         {
             name: "Hidden | Week #{team.current_pick.week.number}",
             abbrev: "Hidden | Week #{team.current_pick.week.number}",
-            locked: team.current_pick.locked?
+            locked: team.current_pick.locked?,
+            week: team.current_pick.week.display
         }
       end
     end

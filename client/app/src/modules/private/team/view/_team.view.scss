@@ -35,9 +35,20 @@
     margin-bottom: -1px;
   }
 
-  .team-picks .list-group-item:first-child {
-    border-top-right-radius: 0px;
-    border-top-left-radius: 0px;
+  .team-picks {
+    .list-group-item:first-child {
+      border-top-right-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+  }
+  
+  .team-pick {
+    &.locked {
+      cursor: default;
+      &:hover {
+        background-color: #ffffff;
+      }
+    }
   }
 
   .no-picks-alert {
@@ -83,10 +94,6 @@
         padding: 10px 5px;
       }
     }
-  }
-
-  .pick-incorrect {
-    text-decoration: line-through;
   }
 
   .team-inactive {
