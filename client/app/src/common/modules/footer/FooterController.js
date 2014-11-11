@@ -2,6 +2,10 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
 
   $scope.season = seasonModel.season;
 
+  $scope.home = function() {
+    $location.path('/');
+  };
+
   $scope.play = function(season) {
     $location.path('/season/' + season.id + '/my/teams');
   };
