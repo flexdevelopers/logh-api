@@ -49,6 +49,12 @@
         background-color: #ffffff;
       }
     }
+    &.incorrect {
+      background-color: #f5f5f5;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
   }
 
   .no-picks-alert {
