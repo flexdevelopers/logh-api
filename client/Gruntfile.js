@@ -16,10 +16,15 @@ module.exports = function (grunt) {
     //heroku - do nothing for now
     grunt.registerTask('heroku', []);
 
-    // server task
-    grunt.registerTask('server', [
+    // dev task
+    grunt.registerTask('dev', [
       'build-dev',
       'watch'
+    ]);
+
+    // prod task
+    grunt.registerTask('prod', [
+      'build'
     ]);
 
     // build tasks
