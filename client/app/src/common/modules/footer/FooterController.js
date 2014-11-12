@@ -1,39 +1,7 @@
-var FooterController = function($scope, $log, $modal, $location, weekService, leagueService, seasonModel, messageModel) {
-
-  $scope.season = seasonModel.season;
+var FooterController = function($scope, $log, $location) {
 
   $scope.home = function() {
     $location.path('/');
-  };
-
-  $scope.play = function(season) {
-    $location.path('/season/' + season.id + '/my/teams');
-  };
-
-  $scope.joinLeague = function(season) {
-    $location.path('/season/' + season.id + '/leagues/public');
-  };
-
-  $scope.createLeague = function(season) {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'modules/private/league/new/league.new.tpl.html',
-      controller: 'NewLeagueController',
-      resolve: {
-        weeks: function() {
-          return weekService.getAvailableWeeks(season.id);
-        }
-      }
-
-    });
-
-    modalInstance.result.then(function(league) {
-      leagueService.createLeague(league);
-    }, function () {
-      messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
-      $log.debug('Create league modal dismissed...');
-    });
-
   };
 
   /**
@@ -45,5 +13,5 @@ var FooterController = function($scope, $log, $modal, $location, weekService, le
   init();
 };
 
-FooterController.$inject = ['$scope', '$log', '$modal', '$location', 'weekService', 'leagueService', 'seasonModel', 'messageModel'];
+FooterController.$inject = ['$scope', '$log', '$location'];
 module.exports = FooterController;
