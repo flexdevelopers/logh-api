@@ -115,12 +115,12 @@ body.home {
     h1 {
       position: relative;
       left: -65px;
-      margin-bottom: -53px;
+      margin-bottom: -23px;
       width: 64px;
       opacity: 0.99;
       a {
         text-decoration: none;
-        padding: 35px 10px 7px 0;
+        padding: 7px 10px 5px 0;
         color: #fff;
         background: #000 0 -30px repeat-x;
         font-size: 10px;
@@ -128,19 +128,12 @@ body.home {
         display: block;
       }
     }
-    div {
-      height: 53px;
+    div.links {
+      height: 23px;
       background: #666;
       opacity: 0.6;
-      padding-top: 5px;
-      ul {
-        padding-left: 10px;
-      }
-      li {
-        list-style: none;
-        margin-top: 1px;
-      }
-      a {
+      padding: 5px 0 0 10px;
+      span {
         text-decoration: none;
         font-size: 10px;
         color: #fff;
