@@ -1,6 +1,6 @@
 <div ng-show="teams.length > 0" class="leagues-container">
   <div class="my-teams list-group">
-    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(season, team)">
+    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
       <div class="row">
         <div class="league-name col-sm-6 col-md-6">
           <i class="fa fa-comment fa-fw" ng-show="team.message.length > 0" title="Has message from commish"></i>
@@ -22,5 +22,5 @@
 </div>
 
 <div class="teams-alert alert alert-info" ng-show="(teams | aliveTeamFilter:teamOptions | filter:search:strict).length == 0">
-  No teams :( Maybe you'd like to <a class="alert-link" ng-click="joinLeague(season)">join a league</a> asap.
+  No results. Maybe you'd like to <a class="alert-link" ng-click="joinLeague()">join a league</a> asap.
 </div>

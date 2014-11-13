@@ -113,22 +113,14 @@ var loghApp = angular.module('loghApp', [
             .state('public', {
                 abstract: true,
                 url: '/',
-                templateUrl: 'common/templates/master.tpl.html',
-                resolve: {
-                    currentSeason: function(seasonService) {
-                        return seasonService.getCurrentSeason();
-                    }
-                }
+                templateUrl: 'common/templates/master.tpl.html'
             })
             .state('private', {
                 abstract: true,
                 url: '/',
                 templateUrl: 'common/templates/master.tpl.html',
                 resolve: {
-                    currentSeason: function(seasonService) {
-                        return seasonService.getCurrentSeason();
-                    },
-                    user: function(currentSeason, userService, userModel) {
+                    user: function(userService, userModel) {
                         if (userModel.user.loaded) {
                             return userModel.user;
                         } else {

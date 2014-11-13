@@ -11,8 +11,8 @@ module.exports = angular.module('loghApp.play.leagues', [])
           }
         },
         resolve: {
-          leagues: function(user, leagueService, seasonModel) {
-            return leagueService.getLeagues(seasonModel.season.id);
+          leagues: function(user, $stateParams, leagueService) {
+            return leagueService.getLeagues($stateParams.seasonId);
           }
         }
       })

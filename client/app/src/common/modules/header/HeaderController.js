@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, seasonModel, messageModel) {
+var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, seasonService, weekService, userService, leagueService, userModel, messageModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -14,11 +14,16 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
+    var getCurrentSeason = function() {
+      seasonService.getCurrentSeason()
+        .then(function(season) {
+          $scope.currentSeasonId = season.id;
+        });
+    };
+
     $scope.isCollapsed = true;
 
     $scope.userData = userModel;
-
-    $scope.season = seasonModel.season;
 
     $scope.credentials = {
         email: '',
@@ -74,26 +79,24 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    $scope.play = function(season) {
-        $location.path('/season/' + season.id + '/my/teams');
+    $scope.play = function(seasonId) {
+      $location.path('/season/' + seasonId + '/my/teams');
     };
 
-    $scope.joinLeague = function(season) {
-        $location.path('/season/' + season.id + '/leagues/public');
+    $scope.joinLeague = function(seasonId) {
+      $location.path('/season/' + seasonId + '/leagues/public');
     };
 
-    $scope.createLeague = function(season) {
-
+    $scope.createLeague = function(seasonId) {
       var modalInstance = $modal.open({
-        templateUrl: 'modules/private/league/new/league.new.tpl.html',
-        controller: 'NewLeagueController',
-        resolve: {
-          weeks: function() {
-            return weekService.getAvailableWeeks(season.id);
-          }
-        }
-
-      });
+            templateUrl: 'modules/private/league/new/league.new.tpl.html',
+            controller: 'NewLeagueController',
+            resolve: {
+              weeks: function() {
+                return weekService.getAvailableWeeks(seasonId);
+              }
+            }
+          });
 
       modalInstance.result.then(function(league) {
         leagueService.createLeague(league);
@@ -101,7 +104,6 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
         messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
         $log.debug('Create league modal dismissed...');
       });
-
     };
 
     $scope.userProfile = function() {
@@ -143,9 +145,10 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
         $log.debug("header controller");
         scrollToTop();
         checkHtml5Storage();
+        getCurrentSeason();
     };
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'seasonModel', 'messageModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'seasonService', 'weekService', 'userService', 'leagueService', 'userModel', 'messageModel'];
 module.exports = HeaderController;

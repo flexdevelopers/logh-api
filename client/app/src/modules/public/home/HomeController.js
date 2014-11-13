@@ -1,19 +1,22 @@
-var HomeController = function($scope, $log, $location, $modal, seasonModel, messageModel, weekService, leagueService) {
+var HomeController = function($scope, $log, $location, $modal, seasonService, weekService, leagueService, messageModel) {
 
-    $scope.season = seasonModel.season;
+    var getCurrentSeason = function() {
+      seasonService.getCurrentSeason()
+        .then(function(season) {
+          $scope.currentSeasonId = season.id;
+        });
+    };
 
-    $scope.createLeague = function(season) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'modules/private/league/new/league.new.tpl.html',
-        controller: 'NewLeagueController',
-        resolve: {
-          weeks: function() {
-            return weekService.getAvailableWeeks(season.id);
-          }
-        }
-
-      });
+    $scope.createLeague = function(seasonId) {
+        var modalInstance = $modal.open({
+            templateUrl: 'modules/private/league/new/league.new.tpl.html',
+            controller: 'NewLeagueController',
+            resolve: {
+              weeks: function() {
+                return weekService.getAvailableWeeks(seasonId);
+              }
+            }
+          });
 
       modalInstance.result.then(function(league) {
         leagueService.createLeague(league);
@@ -21,29 +24,21 @@ var HomeController = function($scope, $log, $location, $modal, seasonModel, mess
         $log.debug('Create league modal dismissed...');
         messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
       });
-
     };
 
-    $scope.joinLeague = function(season) {
-        $location.path('/season/' + season.id + '/leagues/public');
-    };
-
-    $scope.viewTeams = function(season) {
-      $location.path('/season/' + season.id + '/teams/alive');
-    };
-
-    $scope.viewLeagues = function(season) {
-      $location.path('/season/' + season.id + '/leagues');
+    $scope.joinLeague = function(seasonId) {
+      $location.path('/season/' + seasonId + '/leagues/public');
     };
 
     /**
      * Invoked on startup, like a constructor.
      */
     var init = function () {
-        $log.debug("home controller");
+      $log.debug("home controller");
+      getCurrentSeason();
     };
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'seasonModel', 'messageModel', 'weekService', 'leagueService'];
+HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'seasonService', 'weekService', 'leagueService', 'messageModel'];
 module.exports = HomeController;

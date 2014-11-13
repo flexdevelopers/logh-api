@@ -1,4 +1,4 @@
-var WeekService = function($http, $log, $q, apiConfig, seasonModel, messageModel) {
+var WeekService = function($http, $log, $q, apiConfig, messageModel) {
 
     this.getAvailableWeeks = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/available")
@@ -14,8 +14,8 @@ var WeekService = function($http, $log, $q, apiConfig, seasonModel, messageModel
         return promise;
     };
 
-    this.getWeek = function(weekId) {
-        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonModel.season.id + "/weeks/" + weekId)
+    this.getWeek = function(seasonId, weekId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/" + weekId)
             .success(function(data) {
                 $log.debug("WeekService: getWeek success");
                 return data;
@@ -63,5 +63,5 @@ var WeekService = function($http, $log, $q, apiConfig, seasonModel, messageModel
 
 };
 
-WeekService.$inject = ['$http', '$log', '$q', 'apiConfig', 'seasonModel', 'messageModel'];
+WeekService.$inject = ['$http', '$log', '$q', 'apiConfig', 'messageModel'];
 module.exports = WeekService;

@@ -1,17 +1,15 @@
-var JoinLeaguesController = function($scope, $log, $location, $modal, userModel, seasonModel, messageModel, weekService, leagueService) {
-
-  $scope.season = seasonModel.season;
+var JoinLeaguesController = function($scope, $log, $location, $modal, $stateParams, userModel, messageModel, weekService, leagueService) {
 
   $scope.leagueOptions = { closed: false };
 
   $scope.leagueQuery = '';
 
-  $scope.publicLeagues = function(seasonId) {
-    $location.path('/season/' + seasonId + '/leagues/public');
+  $scope.publicLeagues = function() {
+    $location.path('/season/' + $stateParams.seasonId + '/leagues/public');
   };
 
-  $scope.privateLeagues = function(seasonId) {
-    $location.path('/season/' + seasonId + '/leagues/private');
+  $scope.privateLeagues = function() {
+    $location.path('/season/' + $stateParams.seasonId + '/leagues/private');
   };
 
   $scope.search = function(item) {
@@ -29,14 +27,14 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
-  $scope.createLeague = function(season) {
+  $scope.createLeague = function() {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
         weeks: function() {
-          return weekService.getAvailableWeeks(season.id);
+          return weekService.getAvailableWeeks($stateParams.seasonId);
         }
       }
 
@@ -61,5 +59,5 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, userModel,
 
 };
 
-JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', 'userModel', 'seasonModel', 'messageModel', 'weekService', 'leagueService'];
+JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', '$stateParams', 'userModel', 'messageModel', 'weekService', 'leagueService'];
 module.exports = JoinLeaguesController;

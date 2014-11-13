@@ -1,4 +1,4 @@
-var UserService = function($http, $log, $state, $location, $window, $timeout, apiConfig, messageModel, userModel, seasonModel) {
+var UserService = function($http, $log, $state, $location, $window, $timeout, seasonService, apiConfig, messageModel, userModel) {
 
     var userService = this;
 
@@ -18,7 +18,10 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                       userService.getCurrentUser();
                     }
                 } else  {
-                  $location.path('/season/' + seasonModel.season.id + '/my/teams');
+                  seasonService.getCurrentSeason()
+                    .then(function(season) {
+                      $location.path('/season/' + season.id + '/my/teams');
+                    });
                 }
                 return data;
             })
@@ -103,7 +106,10 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                       userService.getCurrentUser();
                     }
                 } else  {
-                  $location.path('/season/' + seasonModel.season.id + '/my/teams');
+                  seasonService.getCurrentSeason()
+                    .then(function(season) {
+                      $location.path('/season/' + season.id + '/my/teams');
+                    });
                 }
                 return data;
             })
@@ -153,5 +159,5 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
 
 };
 
-UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'apiConfig', 'messageModel', 'userModel', 'seasonModel'];
+UserService.$inject = ['$http', '$log', '$state', '$location', '$window', '$timeout', 'seasonService', 'apiConfig', 'messageModel', 'userModel'];
 module.exports = UserService;

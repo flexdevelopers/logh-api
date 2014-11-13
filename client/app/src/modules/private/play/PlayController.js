@@ -1,18 +1,16 @@
-var PlayController = function($scope, $log, $location, $modal, $state, seasonModel, messageModel, weekService, leagueService) {
-
-  $scope.season = seasonModel.season;
+var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, weekService, leagueService) {
 
   $scope.teamOptions = { alive: true, dead: true };
   $scope.leagueOptions = { managed: true };
 
   $scope.query = '';
 
-  $scope.myTeams = function(season) {
-    $location.path('/season/' + season.id + '/my/teams');
+  $scope.myTeams = function() {
+    $location.path('/season/' + $stateParams.seasonId + '/my/teams');
   };
 
-  $scope.myLeagues = function(season) {
-    $location.path('/season/' + season.id + '/my/leagues');
+  $scope.myLeagues = function() {
+    $location.path('/season/' + $stateParams.seasonId + '/my/leagues');
   };
 
   $scope.resetSearch = function() {
@@ -30,7 +28,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
       controller: 'NewLeagueController',
       resolve: {
         weeks: function() {
-          return weekService.getAvailableWeeks(season.id);
+          return weekService.getAvailableWeeks($stateParams.seasonId);
         }
       }
 
@@ -45,8 +43,8 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
 
   };
 
-  $scope.joinLeague = function(season) {
-    $location.path('/season/' + season.id + '/leagues/public');
+  $scope.joinLeague = function() {
+    $location.path('/season/' + $stateParams.seasonId + '/leagues/public');
   };
 
     /**
@@ -59,5 +57,5 @@ var PlayController = function($scope, $log, $location, $modal, $state, seasonMod
 
 };
 
-PlayController.$inject = ['$scope', '$log', '$location', '$modal', '$state', 'seasonModel', 'messageModel', 'weekService', 'leagueService'];
+PlayController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$stateParams', 'messageModel', 'weekService', 'leagueService'];
 module.exports = PlayController;

@@ -11,8 +11,8 @@ module.exports = angular.module('loghApp.play.teams', [])
           }
         },
         resolve: {
-          teams: function(user, teamService, seasonModel) {
-            return teamService.getAllTeams({ seasonId: seasonModel.season.id });
+          teams: function(user, $stateParams, teamService) {
+            return teamService.getAllTeams({ seasonId: $stateParams.seasonId });
           }
         }
 

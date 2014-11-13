@@ -1,4 +1,4 @@
-var PlayTeamsController = function(teams, $scope, $log, $location) {
+var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location) {
 
   $scope.teams = teams.data;
 
@@ -6,8 +6,8 @@ var PlayTeamsController = function(teams, $scope, $log, $location) {
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 100;
 
-  $scope.showTeam = function(season, team) {
-    $location.path('/season/' + season.id + '/league/' + team.league.id + '/team/' + team.id);
+  $scope.showTeam = function(team) {
+    $location.path('/season/' + $stateParams.seasonId + '/league/' + team.league.id + '/team/' + team.id);
   };
 
   $scope.hasNoPick = function(team) {
@@ -31,5 +31,5 @@ var PlayTeamsController = function(teams, $scope, $log, $location) {
 
 };
 
-PlayTeamsController.$inject = ['teams', '$scope', '$log', '$location'];
+PlayTeamsController.$inject = ['teams', '$scope', '$log', '$stateParams', '$location'];
 module.exports = PlayTeamsController;

@@ -1,13 +1,8 @@
-
-var LeaguesController = function($scope, $log, $state, $stateParams, seasonModel) {
-
-    $scope.season = seasonModel.season;
+var LeaguesController = function($scope, $log, $state) {
 
     // pagination
     $scope.currentLeaguePage = 1;
     $scope.leaguesPerPage = 100;
-
-    $scope.seasonId = $stateParams.seasonId;
 
     $scope.isPublic = function() {
         return $state.current.name == 'private.leagues.join.public';
@@ -23,6 +18,6 @@ var LeaguesController = function($scope, $log, $state, $stateParams, seasonModel
 
 };
 
-LeaguesController.$inject = ['$scope', '$log', '$state', '$stateParams', 'seasonModel'];
+LeaguesController.$inject = ['$scope', '$log', '$state'];
 module.exports = LeaguesController;
 
