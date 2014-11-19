@@ -17,8 +17,7 @@ LoghApi::Application.routes.draw do
       put 'contact', on: :collection, to: 'users#contact'
     end
 
-    resources :seasons, only: [] do
-      get 'current', on: :collection, to: 'seasons#current'
+    resources :seasons, only: [:index] do
       resources :leagues, only: [:index, :show, :create, :update, :destroy] do
         get 'managed', on: :collection, to: 'leagues#managed'
         get 'public', on: :collection, to: 'leagues#public'

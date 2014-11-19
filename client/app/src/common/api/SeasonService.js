@@ -1,20 +1,20 @@
-var SeasonService = function($http, $log, $q, apiConfig) {
+var SeasonService = function($http, $log, apiConfig, seasonModel) {
 
-    this.getCurrentSeason = function() {
-        var deferred = $q.defer();
-        $http.get(apiConfig.baseURL + "seasons/current")
+    this.getSeasons = function() {
+        var promise = $http.get(apiConfig.baseURL + "seasons")
             .success(function(data) {
-                $log.debug("SeasonService: getCurrentSeason success");
-                deferred.resolve(data);
+                $log.debug("SeasonService: getSeasons success");
+                seasonModel.setSeasons(data);
+                return data;
             })
             .error(function(data) {
-                $log.debug("SeasonService: getCurrentSeason failed");
-                deferred.reject();
+                $log.debug("SeasonService: getSeasons failed");
+                return data;
             });
-        return deferred.promise;
+        return promise;
     };
 
 };
 
-SeasonService.$inject = ['$http', '$log', '$q', 'apiConfig'];
+SeasonService.$inject = ['$http', '$log', 'apiConfig', 'seasonModel'];
 module.exports = SeasonService;

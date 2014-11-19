@@ -6,8 +6,9 @@ class Season < ActiveRecord::Base
   validates :active, inclusion: { in: [true, false] }
   validates :ends_at, presence: true
 
-  scope :active, -> { find_by(active: true) }
-  scope :upcoming, -> { where('ends_at > ?', Time.zone.now).order(ends_at: :asc) }
+  def current?
+    self.ends_at > Time.zone.now
+  end
 
   def current_week
     # this can be nil if no weeks have started for the season

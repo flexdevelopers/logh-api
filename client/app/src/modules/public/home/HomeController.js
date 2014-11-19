@@ -1,13 +1,8 @@
-var HomeController = function($scope, $log, $location, $modal, seasonService, weekService, leagueService, messageModel) {
+var HomeController = function($scope, $log, $location, $modal, weekService, leagueService, messageModel, seasonModel) {
 
-    var getCurrentSeason = function() {
-      seasonService.getCurrentSeason()
-        .then(function(season) {
-          $scope.currentSeasonId = season.id;
-        });
-    };
+  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
 
-    $scope.createLeague = function(seasonId) {
+  $scope.createLeague = function(seasonId) {
         var modalInstance = $modal.open({
             templateUrl: 'modules/private/league/new/league.new.tpl.html',
             controller: 'NewLeagueController',
@@ -35,10 +30,9 @@ var HomeController = function($scope, $log, $location, $modal, seasonService, we
      */
     var init = function () {
       $log.debug("home controller");
-      getCurrentSeason();
     };
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'seasonService', 'weekService', 'leagueService', 'messageModel'];
+HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'weekService', 'leagueService', 'messageModel', 'seasonModel'];
 module.exports = HomeController;

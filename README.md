@@ -29,7 +29,7 @@ And then you can do this, for example:
 
 ##### Seasons
 ---
-* GET         /api/seasons/current                             [ show current season ]
+* GET         /api/seasons                                     [ all seasons ]
 
 ##### Weeks
 ---

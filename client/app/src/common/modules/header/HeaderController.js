@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, seasonService, weekService, userService, leagueService, userModel, messageModel) {
+var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, messageModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -14,12 +14,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    var getCurrentSeason = function() {
-      seasonService.getCurrentSeason()
-        .then(function(season) {
-          $scope.currentSeasonId = season.id;
-        });
-    };
+    $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
 
     $scope.isCollapsed = true;
 
@@ -145,10 +140,9 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
         $log.debug("header controller");
         scrollToTop();
         checkHtml5Storage();
-        getCurrentSeason();
     };
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'seasonService', 'weekService', 'userService', 'leagueService', 'userModel', 'messageModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
 module.exports = HeaderController;

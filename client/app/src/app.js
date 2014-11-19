@@ -113,7 +113,14 @@ var loghApp = angular.module('loghApp', [
             .state('public', {
                 abstract: true,
                 url: '/',
-                templateUrl: 'common/templates/master.tpl.html'
+                templateUrl: 'common/templates/master.tpl.html',
+                resolve: {
+                    seasons: function(seasonService, seasonModel) {
+                        if (!seasonModel.loaded) {
+                            return seasonService.getSeasons();
+                        }
+                    }
+                }
             })
             .state('private', {
                 abstract: true,
@@ -125,6 +132,11 @@ var loghApp = angular.module('loghApp', [
                             return userModel.user;
                         } else {
                             return userService.getCurrentUser();
+                        }
+                    },
+                    seasons: function(seasonService, seasonModel) {
+                        if (!seasonModel.loaded) {
+                            return seasonService.getSeasons();
                         }
                     }
                 }
