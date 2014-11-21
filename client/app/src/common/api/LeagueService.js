@@ -190,6 +190,7 @@ var LeagueService = function($http, $log, $location, $q, $state, apiConfig, mess
         })
         .error(function(data) {
           $log.debug("LeagueService: getInvites failed");
+          messageModel.setMessage(data.message, false);
           return data;
         });
 

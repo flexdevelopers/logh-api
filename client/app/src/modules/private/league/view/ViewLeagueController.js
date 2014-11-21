@@ -211,7 +211,7 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
 
   };
 
-  $scope.invite = function(leagueId, isCommish) {
+  $scope.invite = function(leagueId, isCommish, startWeekComplete) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
@@ -222,6 +222,9 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
         },
         isCommish: function() {
           return isCommish;
+        },
+        startWeekComplete: function() {
+          return startWeekComplete;
         },
         invitations: function() {
           if (isCommish) {
@@ -237,7 +240,6 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
       leagueService.createInvite(invitation);
     }, function () {
       $log.debug('Invite coach modal dismissed...');
-      messageModel.setMessage({ type: 'warning', content: 'Invite cancelled' }, false);
     });
   };
 

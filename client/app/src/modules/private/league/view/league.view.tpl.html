@@ -11,6 +11,7 @@
       <ul class="dropdown-menu league-actions-menu" role="menu">
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);updateMessage(leagueData)">Edit league message</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Manage invitations</a></li>
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);teamOptions.inactive = false">Hide deactivated teams</a></li>
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="toggleDropdown($event);teamOptions.inactive = true">Show deactivated teams</a></li>
       </ul>
@@ -26,7 +27,7 @@
   </div>
   <div class="col-sm-5 col-md-5">
     <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
-    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData))">Invite</button>
+    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
       <small ng-show="leagueData.elimination">LoseOrGoHome [ single elimination ]</small><small ng-show="!leagueData.elimination">Biggest Loser [ no elimination ]</small><br>

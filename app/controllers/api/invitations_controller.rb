@@ -1,6 +1,6 @@
 class API::InvitationsController < API::BaseController
   before_action :_set_league
-  before_action :_verify_league_status
+  before_action :_verify_league_status, except: :index
 
   # POST /leagues/:league_id/invitations/new
   # Create an invitation request for a league

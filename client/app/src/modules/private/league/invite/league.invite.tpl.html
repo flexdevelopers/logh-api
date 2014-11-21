@@ -3,43 +3,45 @@
   <h3 class="modal-title">Invite Friends</h3>
 </div>
 <div class="modal-body">
-  <form name="inviteForm" class="invite-form" role="form" novalidate>
-    <div class="row">
-      <div class="col-sm-12 col-md-12">
-        <div class="form-group" ng-class="{'has-error': hasError(inviteForm.emails), 'has-feedback': hasError(inviteForm.emails)}">
-          <label for="emails" class="control-label">Email(s):</label>
-          <input id="emails" name="emails" type="text" class="form-control" placeholder="Seperate emails with a space or comma..." ng-model="invitation.email" required>
-          <small class="input-error" ng-show="hasPropertyError(inviteForm.emails, 'required')">Required</small>
-          <span ng-show="hasError(inviteForm.emails)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+  <div ng-show="!startWeekComplete">
+    <form name="inviteForm" class="invite-form" role="form" novalidate>
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group" ng-class="{'has-error': hasError(inviteForm.emails), 'has-feedback': hasError(inviteForm.emails)}">
+            <label for="emails" class="control-label">Email(s):</label>
+            <input id="emails" name="emails" type="text" class="form-control" placeholder="Seperate emails with a space or comma..." ng-model="invitation.email" required>
+            <small class="input-error" ng-show="hasPropertyError(inviteForm.emails, 'required')">Required</small>
+            <span ng-show="hasError(inviteForm.emails)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-12">
-        <div class="form-group" ng-class="{'has-error': hasError(inviteForm.message), 'has-feedback': hasError(inviteForm.message)}">
-          <label for="message" class="control-label">Message:</label>
-          <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="400" ng-model="invitation.message"></textarea>
-          <small class="input-error" ng-show="hasPropertyError(inviteForm.message, 'maxlength')">Too Long</small>
-          <span ng-show="hasError(inviteForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="form-group" ng-class="{'has-error': hasError(inviteForm.message), 'has-feedback': hasError(inviteForm.message)}">
+            <label for="message" class="control-label">Message:</label>
+            <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="400" ng-model="invitation.message"></textarea>
+            <small class="input-error" ng-show="hasPropertyError(inviteForm.message, 'maxlength')">Too Long</small>
+            <span ng-show="hasError(inviteForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-md-6">
-        <button class="invite-reset-btn btn btn-default btn-block" ng-click="resetInvite()">Clear</button>
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <button class="invite-reset-btn btn btn-default btn-block" ng-click="resetInvite()">Clear</button>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <button class="invite-send-btn btn btn-primary btn-block" ng-disabled="inviteForm.$invalid" ng-click="sendInvite(invitation)">Send</button>
+        </div>
       </div>
-      <div class="col-sm-6 col-md-6">
-        <button class="invite-send-btn btn btn-primary btn-block" ng-disabled="inviteForm.$invalid" ng-click="sendInvite(invitation)">Send</button>
-      </div>
-    </div>
-  </form>
-  <div ng-show="isCommish">
+    </form>
     <hr>
+  </div>
+  <div ng-show="isCommish">
     <div class="invites-tab">
       <ul class="nav nav-tabs">
         <li class="active"><a>Invites [ {{invitations.length}} ]</a></li>
       </ul>
-      <span class="click-to-edit">[ click invite to edit ]</span>
+      <span class="click-to-edit" ng-show="!startWeekComplete">[ click invite to edit ]</span>
     </div>
     <div class="league-invites">
       <div class="list-group">
@@ -58,5 +60,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-default" ng-click="cancel()">Close</button>
 </div>
