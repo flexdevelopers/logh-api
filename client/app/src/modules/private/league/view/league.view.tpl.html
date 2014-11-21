@@ -9,7 +9,7 @@
         <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData)" class="caret"></span>
       </button>
       <ul class="dropdown-menu league-actions-menu" role="menu">
-        <li><a ng-show="isCommish(leagueData) && !leagueData.start_week_complete" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);updateMessage(leagueData)">Edit league message</a></li>
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);teamOptions.inactive = false">Hide deactivated teams</a></li>
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="toggleDropdown($event);teamOptions.inactive = true">Show deactivated teams</a></li>
