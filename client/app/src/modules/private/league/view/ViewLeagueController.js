@@ -243,6 +243,15 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
     });
   };
 
+  $scope.showDeactivatedTeams = function(show) {
+    $scope.teamOptions.inactive = show;
+    if (show) {
+      messageModel.setMessage({ type: 'info', content: 'Showing deactivated teams (if any)' }, false);
+    } else {
+      messageModel.setMessage({ type: 'info', content: 'Hiding deactivated teams (if any)' }, false);
+    }
+  };
+
   $scope.resetSearch = function() {
     $scope.teamQuery = '';
     $scope.currentTeamPage = 1;

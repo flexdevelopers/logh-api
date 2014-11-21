@@ -12,8 +12,8 @@
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);updateMessage(leagueData)">Edit league message</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Manage invitations</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);teamOptions.inactive = false">Hide deactivated teams</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="toggleDropdown($event);teamOptions.inactive = true">Show deactivated teams</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);showDeactivatedTeams(false);">Hide deactivated teams</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="toggleDropdown($event);showDeactivatedTeams(true);">Show deactivated teams</a></li>
       </ul>
     </div>
     <h3 style="margin-top: 0;">
