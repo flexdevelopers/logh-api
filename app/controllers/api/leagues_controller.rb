@@ -130,11 +130,11 @@ class API::LeaguesController < API::BaseController
     end
 
     def _verify_season_is_active
-      forbidden('Can only create a league in the current season') unless @season.active
+      forbidden('Can only create a league in the current season') unless @season.current?
     end
 
     def _verify_league_management
-      forbidden('Only the commish can update a league') unless _is_commish_of(@league)
+      forbidden('Only the commish can update a league') unless _is_commish_of(@league) || current_user.admin?
     end
 
     def _verify_start_week

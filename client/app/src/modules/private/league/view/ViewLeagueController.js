@@ -38,6 +38,10 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
+  $scope.isAdmin = function() {
+    return userModel.user.admin;
+  };
+
   $scope.hasTeamInLeague = function() {
     var found = false;
     _.each($scope.leagueTeams, function(team) {

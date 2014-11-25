@@ -1,15 +1,15 @@
 <div class="header-row row">
   <div class="col-sm-7 col-md-7">
     <div class="btn-group leagues-dropdown" dropdown is-open="leagueDropdown.isopen">
-      <button type="button" class="leagues-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCommish(leagueData)">
-        <span class="league-name" ng-class="{'disabled': !isCommish(leagueData)}">
+      <button type="button" class="leagues-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCommish(leagueData) && !isAdmin()">
+        <span class="league-name" ng-class="{'disabled': !isCommish(leagueData) && !isAdmin()}">
         <i class="fa fa-times icon" title="Closed league" ng-show="!leagueData.open"></i>
         <i class="fa fa-lock icon" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
         <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
-        <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData)" class="caret"></span>
+        <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData) || isAdmin()" class="caret"></span>
       </button>
       <ul class="dropdown-menu league-actions-menu" role="menu">
-        <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData) || isAdmin()" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);updateMessage(leagueData)">Edit league message</a></li>
         <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Manage invitations</a></li>
         <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);showDeactivatedTeams(false);">Hide deactivated teams</a></li>
