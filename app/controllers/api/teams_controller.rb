@@ -70,9 +70,7 @@ class API::TeamsController < API::BaseController
     if @team.save
       _mark_invitation_accepted() if _has_invitation_for?(@league)
       LeagueMailer.team_joined(@team).deliver
-      success_message = "The #{@team[:name]} team has joined the #{@league[:name]} league. "
-      success_message += "Feel free to pick your first loser anytime before a game starts." if @league.started?
-      success_message += "You can pick your first loser when the league starts - #{@league.start_week.display}" if !@league.started?
+      success_message = "The #{@team[:name]} team has joined the #{@league[:name]} league."
       render json: { team_id: @team.id, message: { type: SUCCESS, content: success_message } }, status: :ok
     else
       error(@team.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
@@ -81,9 +79,9 @@ class API::TeamsController < API::BaseController
 
   # PATCH/PUT /api/leagues/:league_id/teams/1
   def update
-    return forbidden('Only the coach or commish can edit a team') if !_is_coach_of?(@team) && !_is_commish_of?(@league)
-    return forbidden('Only the commish can edit a dead team') if !@team.alive && !_is_commish_of?(@league)
-    return forbidden('Only the commish can edit an inactive team') if !@team.active && !_is_commish_of?(@league)
+    return forbidden('Only the coach or commish can edit a team') if !_is_coach_of?(@team) && !_is_commish_of?(@league) && !current_user.admin?
+    return forbidden('Only the commish can edit a dead team') if !@team.alive && !_is_commish_of?(@league) && !current_user.admin?
+    return forbidden('Only the commish can edit an inactive team') if !@team.active && !_is_commish_of?(@league) && !current_user.admin?
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok
     else
