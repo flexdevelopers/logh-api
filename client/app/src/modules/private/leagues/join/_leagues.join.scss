@@ -69,16 +69,19 @@
 }
 
 @media all and (max-width: 550px) {
+
   .join-leagues-tabs {
     .leagues {
       display: none;
     }
   }
+
   .public-leagues, .private-leagues {
     .league-commish {
       display: none;
     }
   }
+
   .public-league-meta, .private-league-meta {
     .loseorgohome {
       display: none;
@@ -87,6 +90,18 @@
       display: inline;
     }
   }
+
+  .join-leagues-tabs {
+    position: relative;
+    margin-bottom: -1px;
+    .seasons {
+      position: relative;
+      width: 100%;
+      padding: 10px 10px 0 10px;
+      background-color: #ddd;
+    }
+  }
+
 }
 
 

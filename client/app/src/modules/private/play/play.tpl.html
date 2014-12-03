@@ -19,7 +19,9 @@
       <a ng-click="myLeagues()"><span class="my-leagues">My Leagues</span></a>
     </li>
   </ul>
-  <select class="seasons form-control" ng-change="changeSeason()" ng-model="selectedSeason.id" ng-options="season.id as season.name for season in seasons"></select>
+  <div class="seasons">
+    <select class="form-control" ng-change="changeSeason()" ng-model="selectedSeason.id" ng-options="season.id as season.name for season in seasons"></select>
+  </div>
 </div>
 <div class="input-group custom-search-form filter-team-league">
   <input type="text" class="form-control" placeholder="Search..." ng-model="query">

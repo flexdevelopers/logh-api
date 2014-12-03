@@ -18,7 +18,9 @@
       <a ng-click="privateLeagues()"><i class="fa fa-lock fa-fw" title="Private leagues"></i> Private <span class="leagues">Leagues</span></a>
     </li>
   </ul>
-  <select class="seasons form-control" ng-change="changeSeason()" ng-model="selectedSeason.id" ng-options="currentSeason.id as currentSeason.name for currentSeason in currentSeasons"></select>
+  <div class="seasons">
+    <select class="form-control" ng-change="changeSeason()" ng-model="selectedSeason.id" ng-options="currentSeason.id as currentSeason.name for currentSeason in currentSeasons"></select>
+  </div>
 </div>
 <div class="input-group custom-search-form filter-league-join">
   <input type="text" class="form-control" placeholder="Search..." ng-model="leagueQuery">
