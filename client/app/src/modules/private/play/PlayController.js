@@ -1,9 +1,22 @@
-var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, weekService, leagueService) {
+var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, seasonModel, weekService, leagueService) {
+
+  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
+
+  $scope.seasons = angular.copy(seasonModel.seasons).reverse();
+
+  $scope.selectedSeason = {
+    id: parseInt($stateParams.seasonId)
+  };
 
   $scope.teamOptions = { alive: true, dead: true };
   $scope.leagueOptions = { managed: true };
 
   $scope.query = '';
+
+  $scope.changeSeason = function() {
+    var newPath = $location.path().replace(/(\/season\/)\d/, '$1' + $scope.selectedSeason.id);
+    $location.path(newPath);
+  };
 
   $scope.myTeams = function() {
     $location.path('/season/' + $stateParams.seasonId + '/my/teams');
@@ -21,14 +34,14 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
     return _.indexOf(states, $state.current.name) > -1;
   };
 
-  $scope.createLeague = function(season) {
+  $scope.createLeague = function(seasonId) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
         weeks: function() {
-          return weekService.getAvailableWeeks($stateParams.seasonId);
+          return weekService.getAvailableWeeks(seasonId);
         }
       }
 
@@ -43,8 +56,8 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
   };
 
-  $scope.joinLeague = function() {
-    $location.path('/season/' + $stateParams.seasonId + '/leagues/public');
+  $scope.joinLeague = function(seasonId) {
+    $location.path('/season/' + seasonId + '/leagues/public');
   };
 
     /**
@@ -57,5 +70,5 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
 };
 
-PlayController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$stateParams', 'messageModel', 'weekService', 'leagueService'];
+PlayController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$stateParams', 'messageModel', 'seasonModel', 'weekService', 'leagueService'];
 module.exports = PlayController;

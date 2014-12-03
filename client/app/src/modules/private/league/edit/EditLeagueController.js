@@ -1,6 +1,8 @@
-var EditLeagueController = function(weeks, league, $scope, $log, $location, $modalInstance) {
+var EditLeagueController = function(weeks, league, $scope, $log, $location, $modalInstance, weekService, seasonModel) {
 
     $scope.weeks = weeks.data;
+
+    $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
     $scope.leagueData = angular.copy(league);
 
@@ -10,6 +12,13 @@ var EditLeagueController = function(weeks, league, $scope, $log, $location, $mod
 
     $scope.updateLeague = function(league) {
       $modalInstance.close(league);
+    };
+
+    $scope.getSeasonWeeks = function() {
+      weekService.getAvailableWeeks($scope.leagueData.season_id)
+        .then(function(response) {
+          $scope.weeks = response.data;
+        });
     };
 
     $scope.cancel = function() {
@@ -34,5 +43,5 @@ var EditLeagueController = function(weeks, league, $scope, $log, $location, $mod
 
 };
 
-EditLeagueController.$inject = ['weeks', 'league', '$scope', '$log', '$location', '$modalInstance'];
+EditLeagueController.$inject = ['weeks', 'league', '$scope', '$log', '$location', '$modalInstance', 'weekService', 'seasonModel'];
 module.exports = EditLeagueController;

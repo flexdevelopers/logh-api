@@ -47,6 +47,14 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
+          <label class="control-label" for="season">Season:</label>
+          <select id="season" name="season" class="form-control" ng-change="getSeasonWeeks()" ng-model="newLeagueData.season_id" ng-options="season.id as season.name for season in seasons"></select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
           <label class="control-label" for="startWeek">Start week:</label>
           <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
         </div>

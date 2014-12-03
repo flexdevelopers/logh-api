@@ -35,6 +35,17 @@
   font-size: 11px;
 }
 
+.teams-leagues-tabs {
+  position: relative;
+  margin-bottom: -1px;
+  .seasons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+  }
+}
+
 @media all and (max-width: 767px) {
   .play-btn-group {
     float: none !important;

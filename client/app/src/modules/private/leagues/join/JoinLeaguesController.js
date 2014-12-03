@@ -1,4 +1,12 @@
-var JoinLeaguesController = function($scope, $log, $location, $modal, $stateParams, userModel, messageModel, weekService, leagueService) {
+var JoinLeaguesController = function($scope, $log, $location, $modal, $stateParams, userModel, messageModel, seasonModel, weekService, leagueService) {
+
+  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
+
+  $scope.currentSeasons = angular.copy(seasonModel.currentSeasons);
+
+  $scope.selectedSeason = {
+    id: parseInt($stateParams.seasonId)
+  };
 
   $scope.leagueOptions = { closed: false };
 
@@ -10,6 +18,11 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
 
   $scope.privateLeagues = function() {
     $location.path('/season/' + $stateParams.seasonId + '/leagues/private');
+  };
+
+  $scope.changeSeason = function() {
+    var newPath = $location.path().replace(/(\/season\/)\d/, '$1' + $scope.selectedSeason.id);
+    $location.path(newPath);
   };
 
   $scope.search = function(item) {
@@ -27,14 +40,14 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
-  $scope.createLeague = function() {
+  $scope.createLeague = function(seasonId) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
         weeks: function() {
-          return weekService.getAvailableWeeks($stateParams.seasonId);
+          return weekService.getAvailableWeeks(seasonId);
         }
       }
 
@@ -59,5 +72,5 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
 
 };
 
-JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', '$stateParams', 'userModel', 'messageModel', 'weekService', 'leagueService'];
+JoinLeaguesController.$inject = ['$scope', '$log', '$location', '$modal', '$stateParams', 'userModel', 'messageModel', 'seasonModel', 'weekService', 'leagueService'];
 module.exports = JoinLeaguesController;

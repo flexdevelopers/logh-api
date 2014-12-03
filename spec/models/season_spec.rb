@@ -5,8 +5,8 @@ describe Season do
   it { should respond_to(:name) }
   its(:name) { should be_blank }
 
-  it { should respond_to(:active) }
-  its(:open) { should be_false }
+  it { should respond_to(:starts_at) }
+  its(:starts_at) { should be_nil }
 
   it { should respond_to(:ends_at) }
   its(:ends_at) { should be_nil }
@@ -21,6 +21,11 @@ describe Season do
 
   context 'when season name is greater than 20 characters' do
     subject(:season) { FactoryGirl.build(:season, name: 'a' * 21) }
+    it { should_not be_valid }
+  end
+
+  context 'when it has no starts_at' do
+    subject(:season) { FactoryGirl.build(:season, starts_at: nil) }
     it { should_not be_valid }
   end
 
