@@ -11,7 +11,7 @@ module.exports = function (grunt) {
     require('load-grunt-config')(grunt);
 
     //default task
-    grunt.registerTask('default', ['heroku']);
+    grunt.registerTask('default', ['dev']);
 
     //heroku - do nothing for now
     grunt.registerTask('heroku', []);
@@ -22,8 +22,8 @@ module.exports = function (grunt) {
       'watch'
     ]);
 
-    // prod task
-    grunt.registerTask('prod', [
+    // distribution task
+    grunt.registerTask('dist', [
       'build'
     ]);
 
