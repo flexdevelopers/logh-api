@@ -12,6 +12,7 @@ var ApplicationService = function($window, $location, $log) {
         };
 
         var forceSsl = function () {
+          if ($location.host() == 'localhost') return;
           if ($location.protocol() != 'https') {
             $window.location.href = $location.absUrl().replace('http', 'https');
           }
