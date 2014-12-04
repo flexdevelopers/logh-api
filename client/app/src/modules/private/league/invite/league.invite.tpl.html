@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-md-12">
           <div class="form-group" ng-class="{'has-error': hasError(inviteForm.emails), 'has-feedback': hasError(inviteForm.emails)}">
             <label for="emails" class="control-label">Email(s):</label>
-            <input id="emails" name="emails" type="text" class="form-control" placeholder="Seperate emails with a space or comma..." ng-model="invitation.email" required>
+            <input id="emails" name="emails" type="text" class="form-control" placeholder="Seperate emails with a space..." ng-model="invitation.email" required>
             <small class="input-error" ng-show="hasPropertyError(inviteForm.emails, 'required')">Required</small>
             <span ng-show="hasError(inviteForm.emails)" class="glyphicon glyphicon-remove form-control-feedback"></span>
           </div>
