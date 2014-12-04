@@ -14,6 +14,20 @@ var WeekService = function($http, $log, $q, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getSeasonWeeks = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks")
+            .success(function(data) {
+                $log.debug("WeekService: getSeasonWeeks success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("WeekService: getSeasonWeeks failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.getWeek = function(seasonId, weekId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/" + weekId)
             .success(function(data) {

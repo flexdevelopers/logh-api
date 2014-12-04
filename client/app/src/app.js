@@ -70,6 +70,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/admin/games').name,
     require('./modules/private/admin/games/edit').name,
     require('./modules/private/admin/seasons').name,
+    require('./modules/private/admin/weeks').name,
 
     // helper modules
     require('./common/modules/header').name,

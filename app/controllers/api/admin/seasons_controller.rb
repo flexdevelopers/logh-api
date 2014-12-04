@@ -11,7 +11,7 @@ class API::Admin::SeasonsController < API::SeasonsController
 
   # GET /api/admin/seasons/:id
   def show
-    render json: @season
+    respond_with @season # rendered via app/views/api/seasons/show.json.rabl
   end
 
   # POST /api/admin/seasons

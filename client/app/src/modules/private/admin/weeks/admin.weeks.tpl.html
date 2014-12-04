@@ -1,0 +1,13 @@
+<div class="season-weeks-header-row row">
+  <div class="col-sm-12 col-md-12">
+    <h3>{{season.name}} ({{season.start_display}} - {{season.end_display}})</h3>
+  </div>
+</div>
+<div class="season-weeks list-group">
+  <a ng-repeat="week in weeks" ng-click="showWeek(week)" class="list-group-item">
+    <div class="row">
+      <div class="col-sm-6 col-md-6"><i class="fa fa-check fa-fw" ng-show="week.complete === true" title="complete week"></i> {{week.display}}</div>
+      <div class="start-end col-sm-6 col-md-6"></div>
+    </div>
+  </a>
+</div>

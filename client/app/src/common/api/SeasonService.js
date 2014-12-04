@@ -14,6 +14,19 @@ var SeasonService = function($http, $log, apiConfig, seasonModel) {
         return promise;
     };
 
+    this.getSeason = function(seasonId) {
+        var promise = $http.get(apiConfig.baseURL + "admin/seasons/" + seasonId)
+            .success(function(data) {
+                $log.debug("SeasonService: getSeason success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("SeasonService: getSeason failed");
+                return data;
+            });
+        return promise;
+    };
+
 };
 
 SeasonService.$inject = ['$http', '$log', 'apiConfig', 'seasonModel'];

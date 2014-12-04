@@ -1,6 +1,10 @@
-var AdminSeasonsController = function($scope, seasonModel) {
+var AdminSeasonsController = function($scope, $location, seasonModel) {
 
   $scope.seasons = seasonModel.seasons;
+
+  $scope.showSeason = function(season) {
+    $location.path($location.path() + '/' + season.id + '/weeks');
+  };
 
   /**
    * Invoked on startup, like a constructor.
@@ -10,5 +14,5 @@ var AdminSeasonsController = function($scope, seasonModel) {
   init();
 };
 
-AdminSeasonsController.$inject = ['$scope', 'seasonModel'];
+AdminSeasonsController.$inject = ['$scope', '$location', 'seasonModel'];
 module.exports = AdminSeasonsController;

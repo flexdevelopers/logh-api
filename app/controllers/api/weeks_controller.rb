@@ -4,7 +4,7 @@ class API::WeeksController < API::BaseController
 
   # GET /api/seasons/:season_id/weeks
   def index
-    @weeks = @season.weeks.all
+    @weeks = @season.weeks.order(starts_at: :asc)
     respond_with @weeks # rendered via app/views/api/weeks/index.json.rabl
   end
 

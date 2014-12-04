@@ -3,7 +3,7 @@ module.exports = angular.module('loghApp.admin.games', [])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.admin.games', {
-        url: 'season/{seasonId}/week/{weekId}/games',
+        url: 'seasons/{seasonId}/weeks/{weekId}/games',
         views: {
           adminContent: {
             templateUrl: 'modules/private/admin/games/admin.games.tpl.html',
