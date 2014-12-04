@@ -12,6 +12,14 @@ class Season < ActiveRecord::Base
     self.starts_at <= Time.zone.now && self.ends_at > Time.zone.now
   end
 
+  def start_display
+    "#{starts_at.strftime("%m/%d/%Y")}"
+  end
+
+  def end_display
+    "#{ends_at.strftime("%m/%d/%Y")}"
+  end
+
   def current_week
     # this can be nil if no weeks have started for the season
     self.weeks.started.order(starts_at: :desc)[0]

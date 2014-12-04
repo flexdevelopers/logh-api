@@ -65,10 +65,11 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/play/teams').name,
     // pick
     require('./modules/private/pick/make').name,
-    // game
+    // admin
     require('./modules/private/admin').name,
     require('./modules/private/admin/games').name,
     require('./modules/private/admin/games/edit').name,
+    require('./modules/private/admin/seasons').name,
 
     // helper modules
     require('./common/modules/header').name,

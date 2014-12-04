@@ -1,0 +1,13 @@
+<div class="seasons-header-row row">
+  <div class="col-sm-12 col-md-12">
+    <h3>Seasons</h3>
+  </div>
+</div>
+<div class="seasons list-group">
+  <a ng-repeat="season in seasons" class="list-group-item">
+    <div class="row">
+      <div class="col-sm-6 col-md-6"><i class="fa fa-check fa-fw" ng-show="season.current === true" title="current season"></i> {{season.name}}</div>
+      <div class="start-end col-sm-6 col-md-6">Starts at: {{season.start_display}} | Ends at: {{season.end_display}}</div>
+    </div>
+  </a>
+</div>
