@@ -414,9 +414,6 @@
 # # week 21
 # Game.create!(starts_at: Time.zone.parse('2015-02-01 13:00'), week: week21, visiting_squad: broncos, home_squad: niners)
 
-Squad.update_all(squad_type: 'NFL')
-Squad.find_by(abbrev: 'NONE').update(squad_type: nil)
-
 hawks = Squad.create(name: 'Atlanta Hawks', abbrev: 'ATL', squad_type: 'NBA')
 nets = Squad.create(name: 'Brooklyn Nets', abbrev: 'BKN', squad_type: 'NBA')
 celtics = Squad.create(name: 'Boston Celtics', abbrev: 'BOS', squad_type: 'NBA')
