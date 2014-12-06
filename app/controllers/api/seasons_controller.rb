@@ -3,7 +3,7 @@ class API::SeasonsController < API::BaseController
 
   # GET /api/seasons
   def index
-    @seasons = Season.all.order(ends_at: :asc)
+    @seasons = Season.all.order(ends_at: :desc)
     respond_with @seasons # rendered via app/views/api/seasons/index.json.rabl
   end
 
