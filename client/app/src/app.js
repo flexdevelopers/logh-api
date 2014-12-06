@@ -180,6 +180,12 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
                   messageModel.setMessage(message, true);
                   $location.path('/');
               }, 200);
+          } else if (rejection.status.toString().match(/^5\d{2}$/)) {
+            // matches 5xx
+            message = { type: 'danger', content: 'Internal Server Error' };
+            $timeout(function () {
+              messageModel.setMessage(message, false);
+            }, 200);
           }
           return $q.reject(rejection);
         }
