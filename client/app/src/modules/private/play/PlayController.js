@@ -2,7 +2,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
   $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
 
-  $scope.seasons = angular.copy(seasonModel.seasons).reverse();
+  $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
 
   $scope.selectedSeason = {
     id: parseInt($stateParams.seasonId)
@@ -14,7 +14,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
   $scope.query = '';
 
   $scope.changeSeason = function() {
-    var newPath = $location.path().replace(/(\/season\/)\d/, '$1' + $scope.selectedSeason.id);
+    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + $scope.selectedSeason.id);
     $location.path(newPath);
   };
 
