@@ -1,7 +1,5 @@
 var JoinLeaguesController = function($scope, $log, $location, $modal, $stateParams, userModel, messageModel, seasonModel, weekService, leagueService) {
 
-  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
-
   $scope.currentSeasons = angular.copy(seasonModel.currentSeasons);
 
   $scope.selectedSeason = {
@@ -46,6 +44,9 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
+        seasonId: function() {
+          return seasonId;
+        },
         weeks: function() {
           return weekService.getAvailableWeeks(seasonId);
         }

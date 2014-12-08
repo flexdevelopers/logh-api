@@ -87,6 +87,9 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
             templateUrl: 'modules/private/league/new/league.new.tpl.html',
             controller: 'NewLeagueController',
             resolve: {
+              seasonId: function() {
+                return seasonId;
+              },
               weeks: function() {
                 return weekService.getAvailableWeeks(seasonId);
               }

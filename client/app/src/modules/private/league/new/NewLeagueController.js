@@ -1,4 +1,4 @@
-var NewLeagueController = function(weeks, $scope, $log, $modalInstance, weekService, seasonModel) {
+var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance, weekService, seasonModel) {
 
     $scope.weeks = weeks.data;
 
@@ -7,7 +7,7 @@ var NewLeagueController = function(weeks, $scope, $log, $modalInstance, weekServ
     $scope.newLeagueData = {
         name: '',
         nickname: '',
-        season_id: seasonModel.currentSeasons[0].id,
+        season_id: seasonId,
         start_week_id: $scope.weeks[0].id,
         public: true,
         elimination: true,
@@ -48,5 +48,5 @@ var NewLeagueController = function(weeks, $scope, $log, $modalInstance, weekServ
 
 };
 
-NewLeagueController.$inject = ['weeks', '$scope', '$log', '$modalInstance', 'weekService', 'seasonModel'];
+NewLeagueController.$inject = ['seasonId', 'weeks', '$scope', '$log', '$modalInstance', 'weekService', 'seasonModel'];
 module.exports = NewLeagueController;

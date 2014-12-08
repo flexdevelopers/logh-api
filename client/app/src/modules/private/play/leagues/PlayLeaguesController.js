@@ -12,6 +12,9 @@ var PlayLeaguesController = function(leagues, $scope, $log, $location, $modal, u
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
+        seasonId: function() {
+          return season.id;
+        },
         weeks: function() {
           return weekService.getAvailableWeeks(season.id);
         }

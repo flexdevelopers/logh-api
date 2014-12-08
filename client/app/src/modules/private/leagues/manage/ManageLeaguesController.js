@@ -8,6 +8,9 @@ var ManagedLeaguesController = function(managedLeagues, $scope, $log, $location,
         templateUrl: 'modules/private/league/new/league.new.tpl.html',
         controller: 'NewLeagueController',
         resolve: {
+          seasonId: function() {
+            return season.id;
+          },
           weeks: function() {
             return weekService.getAvailableWeeks(season.id);
           }

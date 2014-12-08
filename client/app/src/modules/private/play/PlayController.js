@@ -1,7 +1,5 @@
 var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, seasonModel, weekService, leagueService) {
 
-  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
-
   $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
 
   $scope.selectedSeason = {
@@ -40,6 +38,9 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController',
       resolve: {
+        seasonId: function() {
+          return seasonId;
+        },
         weeks: function() {
           return weekService.getAvailableWeeks(seasonId);
         }
