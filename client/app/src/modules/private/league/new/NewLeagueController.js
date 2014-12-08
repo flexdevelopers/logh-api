@@ -18,6 +18,7 @@ var NewLeagueController = function(weeks, $scope, $log, $modalInstance, weekServ
       weekService.getAvailableWeeks($scope.newLeagueData.season_id)
         .then(function(response) {
           $scope.weeks = response.data;
+          $scope.newLeagueData.start_week_id = $scope.weeks[0].id;
         });
     };
 
