@@ -47,7 +47,6 @@ describe API::Admin::WeeksController do
       let(:starts_at) { Time.zone.now }
       let(:playoff_week_type) { FactoryGirl.create(:playoff_week_type) }
       before do
-        week.number = 7
         week.starts_at = starts_at
         week.week_type = playoff_week_type
         week.complete = true
@@ -56,7 +55,6 @@ describe API::Admin::WeeksController do
         patch :update, season_id: week.season.id, id: week.id, week: week.attributes
         response.should be_success
         week.reload
-        expect(week.number).to eq(7)
         expect(week.starts_at).to eq(starts_at.to_date)
         expect(week.week_type).to eq(playoff_week_type)
         expect(week.complete).to be_true
