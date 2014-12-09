@@ -1,3 +1,7 @@
+.week-desc {
+  text-align: center;
+}
+
 .week-games {
 
   .game-row {
@@ -5,7 +9,9 @@
   }
 
   .invalid-game {
-    color: #a94442;
+    .game-display {
+      text-decoration: line-through;
+    }
   }
 
   .invalid-squad {
@@ -16,8 +22,7 @@
 
     &.disabled {
       cursor: not-allowed;
-      background-color: #f2dede;
-      border-color: #ebccd1;
+      background-color: #f5f5f5;
     }
 
     .game-display, .start-time {

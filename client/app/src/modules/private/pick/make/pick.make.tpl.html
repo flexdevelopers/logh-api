@@ -3,9 +3,9 @@
   <h4 class="modal-title">Pick a Loser</h4>
 </div>
 <div class="modal-body">
-  <div class="well well-sm"><strong>{{games[0].week_name}} [ {{games[0].week_type}} ]</strong><br>{{games[0].week_description}}</div>
+  <div class="week-desc well well-sm"><strong>{{games[0].week_name}} [ {{games[0].week_type}} ]</strong><br>{{games[0].week_description}}</div>
   <div ng-repeat-start="game in games" class="week-games list-group">
-    <h5 ng-class="{'invalid-game': game.started}">{{game.display}}<br><small>{{starts(game)}}</small></h5>
+    <h5 ng-class="{'invalid-game': game.started}"><span class="game-display">{{game.display}}</span><br><small>{{starts(game)}}</small></h5>
     <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': game.started}">
       <div class="row game-row">
         <span ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ]</span></span>
