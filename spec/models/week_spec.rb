@@ -2,8 +2,11 @@ require 'spec_helper'
 
 describe Week do
 
-  it { should respond_to(:number) }
-  its(:number) { should be_nil }
+  it { should respond_to(:name) }
+  its(:name) { should be_blank }
+
+  it { should respond_to(:description) }
+  its(:description) { should be_blank }
 
   it { should respond_to(:week_type) }
   its(:week_type) { should be_nil }
@@ -29,8 +32,13 @@ describe Week do
   it { should respond_to(:losers) }
   its(:losers) { should be_empty }
 
-  context 'when week has no number' do
-    subject(:week) { FactoryGirl.build(:week, number: nil) }
+  context 'when week has no name' do
+    subject(:week) { FactoryGirl.build(:week, name: '') }
+    it { should_not be_valid }
+  end
+
+  context 'when week has no description' do
+    subject(:week) { FactoryGirl.build(:week, description: '') }
     it { should_not be_valid }
   end
 

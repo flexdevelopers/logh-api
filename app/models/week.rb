@@ -6,7 +6,8 @@ class Week < ActiveRecord::Base
   has_many :picks
   has_many :losers
 
-  validates :number, presence: true, numericality: { greater_than: 0 }, uniqueness: { scope: :season }
+  validates :name, presence: true
+  validates :description, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   validates :season, presence: true
@@ -18,7 +19,7 @@ class Week < ActiveRecord::Base
   scope :not_complete, -> { where('complete = ?', false) }
 
   def display
-    "Week #{self.number} [ #{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")} ]"
+    "#{self.name} [ #{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")} ]"
   end
 
   def started?
