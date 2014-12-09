@@ -18,7 +18,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                       userService.getCurrentUser();
                     }
                 } else  {
-                  $location.path('/season/' + seasonModel.currentSeasons[0].id + '/my/teams');
+                  $location.path('/season/' + seasonModel.selectedSeasonId + '/my/teams');
                 }
                 return data;
             })
@@ -103,7 +103,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                       userService.getCurrentUser();
                     }
                 } else  {
-                  $location.path('/season/' + seasonModel.currentSeasons[0].id + '/my/teams');
+                  $location.path('/season/' + seasonModel.selectedSeasonId + '/my/teams');
                 }
                 return data;
             })

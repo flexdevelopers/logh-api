@@ -13,6 +13,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
   $scope.changeSeason = function() {
     var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + $scope.selectedSeason.id);
+    seasonModel.setSelectedSeasonId($scope.selectedSeason.id);
     $location.path(newPath);
   };
 

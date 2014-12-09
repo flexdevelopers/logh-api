@@ -10,9 +10,9 @@
   </div>
   <div collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
-      <li ng-class="{'active': isState(['private.play.teams', 'private.play.leagues'])}"><a ng-click="play(currentSeasonId)">My Teams & Leagues</a></li>
-      <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(currentSeasonId)">Join League</a></li>
-      <li><a ng-click="createLeague(currentSeasonId)">Create League</a></li>
+      <li ng-class="{'active': isState(['private.play.teams', 'private.play.leagues'])}"><a ng-click="play(selectedSeasonId)">My Teams & Leagues</a></li>
+      <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(selectedSeasonId)">Join League</a></li>
+      <li><a ng-click="createLeague(selectedSeasonId)">Create League</a></li>
       <li><a ng-click="faq()">FAQ</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>

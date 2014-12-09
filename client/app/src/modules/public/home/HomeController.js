@@ -1,6 +1,6 @@
 var HomeController = function($scope, $log, $location, $modal, weekService, leagueService, messageModel, seasonModel) {
 
-  $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
+  $scope.selectedSeasonId = seasonModel.selectedSeasonId;
 
   $scope.createLeague = function(seasonId) {
         var modalInstance = $modal.open({

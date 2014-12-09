@@ -20,6 +20,7 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
 
   $scope.changeSeason = function() {
     var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + $scope.selectedSeason.id);
+    seasonModel.setSelectedSeasonId($scope.selectedSeason.id);
     $location.path(newPath);
   };
 

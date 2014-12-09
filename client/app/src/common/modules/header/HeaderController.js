@@ -14,7 +14,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    $scope.currentSeasonId = seasonModel.currentSeasons[0].id;
+    $scope.selectedSeasonId = seasonModel.selectedSeasonId;
 
     $scope.isCollapsed = true;
 

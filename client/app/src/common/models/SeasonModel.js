@@ -5,15 +5,17 @@ var SeasonModel = function($log) {
   var seasons = [];
   var currentSeasons = [];
   var startedSeasons = [];
+  var selectedSeasonId;
   var loaded = false;
 
   this.seasons = seasons;
   this.currentSeasons = currentSeasons;
   this.startedSeasons = startedSeasons;
+  this.selectedSeasonId = selectedSeasonId;
   this.loaded = loaded;
 
   this.setSeasons = function(seasonsArray) {
-    if (!_.isArray(seasonsArray)) return;
+    if (!angular.isArray(seasonsArray)) return;
     model.seasons = seasonsArray;
     model.currentSeasons = _.filter(seasonsArray, function(season) {
       return season.current;
@@ -21,7 +23,12 @@ var SeasonModel = function($log) {
     model.startedSeasons = _.filter(seasonsArray, function(season) {
       return season.started;
     });
+    model.setSelectedSeasonId(model.currentSeasons[model.currentSeasons.length - 1].id);
     model.loaded = true;
+  };
+
+  this.setSelectedSeasonId = function(seasonId) {
+    model.selectedSeasonId = seasonId;
   };
 
   /**
