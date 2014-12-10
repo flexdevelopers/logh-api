@@ -37,9 +37,19 @@
 }
 
 @media all and (max-width: 550px) {
+
   .invite-reset-btn {
     margin-bottom: 10px;
   }
+
+  .league-invites {
+    .list-group-item {
+      .sent-date:before {
+        content: '\A';
+      }
+    }
+  }
+
 }
 
 
