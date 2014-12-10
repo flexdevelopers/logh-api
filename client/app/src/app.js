@@ -174,11 +174,6 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
                         $location.path('/signin').search({ redirect: encodeURIComponent(path) });
                     }
                 }, 200);
-          } else if (rejection.status === 403) {
-              message = { type: 'danger', content: 'Forbidden' };
-              $timeout(function () {
-                  messageModel.setMessage(message, false);
-              }, 200);
           } else if (rejection.status === 404) {
               message = { type: 'danger', content: 'Houston, we have a problem. Page not found.' };
               $timeout(function () {
