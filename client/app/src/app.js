@@ -91,6 +91,7 @@ var loghApp = angular.module('loghApp', [
     require('./common/directives/rcSubmit').name,
     require('./common/directives/rcVerifySet').name,
     require('./common/directives/requiredPattern').name,
+    require('./common/directives/selectOnClick').name,
 
     //modals
 

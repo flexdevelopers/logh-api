@@ -8,13 +8,13 @@
     <div class="form-group">
       <label for="visitorScore" class="col-sm-6 control-label">{{gameData.squads[0].name}} Score:</label>
       <div class="col-sm-6">
-        <input id="visitorScore" name="visitorScore" type="text" class="form-control" ng-model="gameData.visiting_squad_score">
+        <input id="visitorScore" name="visitorScore" type="number" class="form-control" ng-model="gameData.visiting_squad_score" select-on-click required>
       </div>
     </div>
     <div class="form-group">
       <label for="homeScore" class="col-sm-6 control-label">{{gameData.squads[1].name}} Score:</label>
       <div class="col-sm-6">
-        <input id="homeScore" name="homeScore" type="text" class="form-control" ng-model="gameData.home_squad_score">
+        <input id="homeScore" name="homeScore" type="number" class="form-control" ng-model="gameData.home_squad_score" select-on-click required>
       </div>
     </div>
     <div class="form-group">
@@ -24,5 +24,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-click="editGame(gameData)">Update</button>
+  <button class="btn btn-primary" ng-disabled="editGameForm.$invalid" ng-click="editGame(gameData)">Update</button>
 </div>
