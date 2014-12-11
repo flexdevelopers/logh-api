@@ -5,7 +5,7 @@ var AdminWeeksController = function(season, weeks, $scope, $location) {
   $scope.weeks = weeks.data;
 
   $scope.showWeek = function(week) {
-    $location.path($location.path() + '/' + week.id + '/games');
+    $location.path($location.path() + '/weeks/' + week.id);
   };
 
   /**

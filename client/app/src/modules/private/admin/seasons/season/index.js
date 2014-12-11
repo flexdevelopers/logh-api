@@ -1,13 +1,13 @@
-module.exports = angular.module('loghApp.admin.weeks', [])
-  .controller('AdminWeeksController', require('./AdminWeeksController'))
+module.exports = angular.module('loghApp.admin.season', [])
+  .controller('AdminSeasonController', require('./AdminSeasonController'))
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('private.admin.weeks', {
-        url: 'seasons/{seasonId}/weeks',
+      .state('private.admin.season', {
+        url: 'seasons/{seasonId}',
         views: {
           adminContent: {
-            templateUrl: 'modules/private/admin/weeks/admin.weeks.tpl.html',
-            controller: 'AdminWeeksController',
+            templateUrl: 'modules/private/admin/seasons/season/admin.season.tpl.html',
+            controller: 'AdminSeasonController',
             resolve: {
               season: function($stateParams, seasonService) {
                 return seasonService.getSeason($stateParams.seasonId);

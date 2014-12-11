@@ -3,7 +3,7 @@ var AdminSeasonsController = function($scope, $location, seasonModel) {
   $scope.seasons = seasonModel.seasons;
 
   $scope.showSeason = function(season) {
-    $location.path($location.path() + '/' + season.id + '/weeks');
+    $location.path($location.path() + '/' + season.id);
   };
 
   /**

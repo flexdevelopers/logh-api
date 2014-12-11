@@ -1,13 +1,13 @@
-module.exports = angular.module('loghApp.admin.games', [])
-  .controller('AdminGamesController', require('./AdminGamesController'))
+module.exports = angular.module('loghApp.admin.week', [])
+  .controller('AdminWeekController', require('./AdminWeekController'))
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('private.admin.games', {
-        url: 'seasons/{seasonId}/weeks/{weekId}/games',
+      .state('private.admin.week', {
+        url: 'seasons/{seasonId}/weeks/{weekId}',
         views: {
           adminContent: {
-            templateUrl: 'modules/private/admin/games/admin.games.tpl.html',
-            controller: 'AdminGamesController',
+            templateUrl: 'modules/private/admin/week/admin.week.tpl.html',
+            controller: 'AdminWeekController',
             resolve: {
               week: function($stateParams, weekService) {
                 return weekService.getWeek($stateParams.seasonId, $stateParams.weekId);

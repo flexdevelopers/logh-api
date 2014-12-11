@@ -55,10 +55,10 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/pick/make/pick.make";
 // admin
 @import "../modules/private/admin/admin";
-@import "../modules/private/admin/games/admin.games";
-@import "../modules/private/admin/games/edit/games.edit";
+@import "../modules/private/admin/game/admin.game";
 @import "../modules/private/admin/seasons/admin.seasons";
-@import "../modules/private/admin/weeks/admin.weeks";
+@import "../modules/private/admin/seasons/season/admin.season";
+@import "../modules/private/admin/week/admin.week";
 
 html {
   //  for sticky footer

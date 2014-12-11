@@ -1,4 +1,4 @@
-var AdminGamesController = function(week, games, $scope, $log, $modal, gameService, weekService, messageModel) {
+var AdminWeekController = function(week, games, $scope, $log, $modal, gameService, weekService, messageModel) {
 
   var completeWeek = function(week) {
     weekService.completeWeek(week)
@@ -14,8 +14,8 @@ var AdminGamesController = function(week, games, $scope, $log, $modal, gameServi
   $scope.editGame = function(game) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'modules/private/admin/games/edit/games.edit.tpl.html',
-      controller: 'GamesEditController',
+      templateUrl: 'modules/private/admin/game/admin.game.tpl.html',
+      controller: 'AdminGameController',
       resolve: {
         game: function() {
           return game;
@@ -63,5 +63,5 @@ var AdminGamesController = function(week, games, $scope, $log, $modal, gameServi
   init();
 };
 
-AdminGamesController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'weekService', 'messageModel'];
-module.exports = AdminGamesController;
+AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'weekService', 'messageModel'];
+module.exports = AdminWeekController;
