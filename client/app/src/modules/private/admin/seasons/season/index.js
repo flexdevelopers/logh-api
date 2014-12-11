@@ -14,6 +14,9 @@ module.exports = angular.module('loghApp.admin.season', [])
               },
               weeks: function($stateParams, weekService) {
                 return weekService.getSeasonWeeks($stateParams.seasonId);
+              },
+              leagues: function($stateParams, leagueService) {
+                return leagueService.getAllLeagues($stateParams.seasonId);
               }
             }
           }

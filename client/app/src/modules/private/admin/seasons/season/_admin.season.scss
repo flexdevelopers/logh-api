@@ -1,3 +1,10 @@
-.seasons-weeks-header-row {
+.seasons-weeks-header-row, .season-leagues-header-row {
   margin-bottom: 15px;
+}
+
+.season-leagues {
+  .league-commish {
+    font-size: 11px;
+    color: #999;
+  }
 }

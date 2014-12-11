@@ -68,6 +68,7 @@ LoghApi::Application.routes.draw do
       resources :users, only: [:index, :show, :update, :destroy]
 
       resources :seasons, only: [:index, :show, :create, :update, :destroy] do
+        resources :leagues, only: [:index]
         resources :weeks, only: [:create, :update, :destroy] do
           put 'complete', on: :member, to: 'weeks#complete'
           put 'remind', on: :member, to: 'weeks#remind'
@@ -77,8 +78,6 @@ LoghApi::Application.routes.draw do
       resources :weeks, only:[] do
         resources :games, only: [:create, :update, :destroy]
       end
-
-      resources :leagues, only: [:index]
 
     end
 

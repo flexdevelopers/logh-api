@@ -1,10 +1,11 @@
 class API::Admin::LeaguesController < API::LeaguesController
-  skip_before_action :_set_season
   before_action :_verify_admin
 
-  # GET /api/admin/leagues
+  # GET /api/admin/seasons/:season_id/leagues
   def index
-    render json: League.all
+    @leagues = @season.leagues.includes(:teams, :start_week)
+    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
+    respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 
   private

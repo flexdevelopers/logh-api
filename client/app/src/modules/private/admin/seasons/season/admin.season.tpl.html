@@ -1,6 +1,9 @@
+<div class="page-header">
+  <h3>{{season.name}} ({{season.start_display}} - {{season.end_display}})</h3>
+</div>
 <div class="season-weeks-header-row row">
   <div class="col-sm-12 col-md-12">
-    <h3>{{season.name}} ({{season.start_display}} - {{season.end_display}})</h3>
+    <h4>Weeks</h4>
   </div>
 </div>
 <div class="season-weeks list-group">
@@ -8,6 +11,37 @@
     <div class="row">
       <div class="col-sm-6 col-md-6"><i class="fa fa-check fa-fw" ng-show="week.complete === true" title="complete week"></i> {{week.display}}</div>
       <div class="start-end col-sm-6 col-md-6"></div>
+    </div>
+  </a>
+</div>
+<div class="season-leagues-header-row row">
+  <div class="col-sm-12 col-md-12">
+    <h4>Public Leagues</h4>
+  </div>
+</div>
+<div class="season-leagues list-group">
+  <a ng-repeat="publicLeague in publicLeagues" ng-click="showLeague(publicLeague)" class="list-group-item">
+    <div class="row">
+      <div class="league-name col-sm-6 col-md-6">{{publicLeague.name}}<br><span class="team-count league-commish">Commish: {{publicLeague.commish_names.join(', ')}}</span></div>
+      <div class="col-sm-6 col-md-6">
+        <span class="public-league-meta"><span ng-show="publicLeague.elimination"><span class="loseorgohome">LoseOrGoHome</span><span class="logh">LOGH</span> [ single elimination ]</span><span ng-show="!publicLeague.elimination">Biggest Loser [ no elimination ]</span><br>Starts {{publicLeague.start_week}}</span>
+        <span class="badge">{{publicLeague.team_count}} team<span ng-show="publicLeague .team_count !== 1">s</span></span>
+      </div>
+    </div>
+  </a>
+</div><div class="season-leagues-header-row row">
+  <div class="col-sm-12 col-md-12">
+    <h4>Private Leagues</h4>
+  </div>
+</div>
+<div class="season-leagues list-group">
+  <a ng-repeat="privateLeague in privateLeagues" ng-click="showLeague(privateLeague)" class="list-group-item">
+    <div class="row">
+      <div class="league-name col-sm-6 col-md-6">{{privateLeague.name}}<br><span class="team-count league-commish">Commish: {{privateLeague.commish_names.join(', ')}}</span></div>
+      <div class="col-sm-6 col-md-6">
+        <span class="private-league-meta"><span ng-show="privateLeague.elimination"><span class="loseorgohome">LoseOrGoHome</span><span class="logh">LOGH</span> [ single elimination ]</span><span ng-show="!privateLeague.elimination">Biggest Loser [ no elimination ]</span><br>Starts {{privateLeague.start_week}}</span>
+        <span class="badge">{{privateLeague.team_count}} team<span ng-show="privateLeague.team_count !== 1">s</span></span>
+      </div>
     </div>
   </a>
 </div>
