@@ -1,26 +1,24 @@
 var JoinLeaguesController = function($scope, $log, $location, $modal, $stateParams, userModel, messageModel, seasonModel, weekService, leagueService) {
 
-  $scope.currentSeasons = angular.copy(seasonModel.currentSeasons);
+  $scope.selectedSeasonId = parseInt($stateParams.seasonId);
 
-  $scope.selectedSeason = {
-    id: parseInt($stateParams.seasonId)
-  };
+  $scope.currentSeasons = angular.copy(seasonModel.currentSeasons);
 
   $scope.leagueOptions = { closed: false };
 
   $scope.leagueQuery = '';
 
-  $scope.publicLeagues = function() {
-    $location.path('/season/' + $stateParams.seasonId + '/leagues/public');
+  $scope.publicLeagues = function(seasonId) {
+    $location.path('/season/' + seasonId + '/leagues/public');
   };
 
-  $scope.privateLeagues = function() {
-    $location.path('/season/' + $stateParams.seasonId + '/leagues/private');
+  $scope.privateLeagues = function(seasonId) {
+    $location.path('/season/' + seasonId + '/leagues/private');
   };
 
-  $scope.changeSeason = function() {
-    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + $scope.selectedSeason.id);
-    seasonModel.setSelectedSeasonId($scope.selectedSeason.id);
+  $scope.changeSeason = function(seasonId) {
+    seasonModel.setSelectedSeasonId(seasonId);
+    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + seasonId);
     $location.path(newPath);
   };
 

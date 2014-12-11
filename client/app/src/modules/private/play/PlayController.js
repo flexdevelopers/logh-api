@@ -1,28 +1,26 @@
 var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, seasonModel, weekService, leagueService) {
 
-  $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
+  $scope.selectedSeasonId = parseInt($stateParams.seasonId);
 
-  $scope.selectedSeason = {
-    id: parseInt($stateParams.seasonId)
-  };
+  $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
 
   $scope.teamOptions = { alive: true, dead: true };
   $scope.leagueOptions = { managed: true };
 
   $scope.query = '';
 
-  $scope.changeSeason = function() {
-    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + $scope.selectedSeason.id);
-    seasonModel.setSelectedSeasonId($scope.selectedSeason.id);
+  $scope.changeSeason = function(seasonId) {
+    seasonModel.setSelectedSeasonId(seasonId);
+    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + seasonId);
     $location.path(newPath);
   };
 
-  $scope.myTeams = function() {
-    $location.path('/season/' + $stateParams.seasonId + '/my/teams');
+  $scope.myTeams = function(seasonId) {
+    $location.path('/season/' + seasonId + '/my/teams');
   };
 
-  $scope.myLeagues = function() {
-    $location.path('/season/' + $stateParams.seasonId + '/my/leagues');
+  $scope.myLeagues = function(seasonId) {
+    $location.path('/season/' + seasonId + '/my/leagues');
   };
 
   $scope.resetSearch = function() {

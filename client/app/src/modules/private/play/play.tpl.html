@@ -4,8 +4,8 @@
   </div>
   <div class="col-sm-5 col-md-5">
     <div class="play-btn-group">
-      <button type="button" class="join-league-btn btn btn-primary" ng-click="joinLeague(selectedSeason.id)">Join League</button>
-      <button type="button" class="create-league-btn btn btn-primary" ng-click="createLeague(selectedSeason.id)">Create League</button>
+      <button type="button" class="join-league-btn btn btn-primary" ng-click="joinLeague(selectedSeasonId)">Join League</button>
+      <button type="button" class="create-league-btn btn btn-primary" ng-click="createLeague(selectedSeasonId)">Create League</button>
     </div>
   </div>
 </div>
@@ -13,14 +13,14 @@
 <div class="teams-leagues-tabs">
   <ul class="nav nav-tabs">
     <li ng-class="{'active': isState(['private.play.teams'])}" ng-click="resetSearch()">
-      <a ng-click="myTeams()"><span class="my-teams">My Teams</span></a>
+      <a ng-click="myTeams(selectedSeasonId)"><span class="my-teams">My Teams</span></a>
     </li>
     <li ng-class="{'active': isState(['private.play.leagues'])}" ng-click="resetSearch()">
-      <a ng-click="myLeagues()"><span class="my-leagues">My Leagues</span></a>
+      <a ng-click="myLeagues(selectedSeasonId)"><span class="my-leagues">My Leagues</span></a>
     </li>
   </ul>
   <div class="seasons">
-    <select class="form-control" ng-change="changeSeason()" ng-model="selectedSeason.id" ng-options="startedSeason.id as startedSeason.name for startedSeason in startedSeasons"></select>
+    <select class="form-control" ng-change="changeSeason(selectedSeasonId)" ng-model="selectedSeasonId" ng-options="startedSeason.id as startedSeason.name for startedSeason in startedSeasons"></select>
   </div>
 </div>
 <div class="input-group custom-search-form filter-team-league">
