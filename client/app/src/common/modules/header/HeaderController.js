@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, weekService, userService, leagueService, userModel, messageModel, seasonModel) {
+var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, $stateParams, weekService, userService, leagueService, userModel, messageModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -14,7 +14,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
 
     };
 
-    $scope.selectedSeasonId = seasonModel.selectedSeasonId;
+    $scope.selectedSeasonId = (angular.isDefined($stateParams.seasonId)) ? parseInt($stateParams.seasonId) : seasonModel.selectedSeasonId;
 
     $scope.isCollapsed = true;
 
@@ -147,5 +147,5 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', 'weekService', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
+HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', '$stateParams', 'weekService', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
 module.exports = HeaderController;
