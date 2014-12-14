@@ -48,7 +48,7 @@
         <a ng-repeat="invite in invitations" class="list-group-item" ng-click="populateInvite(invite)">
           <div class="row">
             <div class="col-sm-12 col-md-12">
-              <i class="fa fa-check fa-fw" ng-show="invite.accepted_at" title="Accepted"></i> {{invite.email}} <span class="sent-date"><span ng-show="!invite.accepted_at">Sent {{invite.updated_at}}</span><span ng-show="invite.accepted_at">Joined  {{invite.accepted_at}}</span></span>
+              <i class="fa fa-check fa-fw" ng-show="invite.accepted_at" title="Accepted"></i> {{invite.email}}<br><span class="sent-date"><span ng-show="!invite.accepted_at">Sent {{invite.updated_at}}</span><span ng-show="invite.accepted_at">Joined  {{invite.accepted_at}}</span></span>
             </div>
           </div>
         </a>
