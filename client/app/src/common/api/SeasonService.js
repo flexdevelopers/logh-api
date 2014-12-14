@@ -1,4 +1,4 @@
-var SeasonService = function($http, $log, apiConfig, seasonModel) {
+var SeasonService = function($http, $log, apiConfig, messageModel, seasonModel) {
 
     this.getSeasons = function() {
         var promise = $http.get(apiConfig.baseURL + "seasons")
@@ -22,6 +22,7 @@ var SeasonService = function($http, $log, apiConfig, seasonModel) {
             })
             .error(function(data) {
                 $log.debug("SeasonService: getSeason failed");
+                messageModel.setMessage(data.message, false);
                 return data;
             });
         return promise;
@@ -29,5 +30,5 @@ var SeasonService = function($http, $log, apiConfig, seasonModel) {
 
 };
 
-SeasonService.$inject = ['$http', '$log', 'apiConfig', 'seasonModel'];
+SeasonService.$inject = ['$http', '$log', 'apiConfig', 'messageModel', 'seasonModel'];
 module.exports = SeasonService;
