@@ -22,7 +22,7 @@ var SeasonService = function($http, $log, apiConfig, messageModel, seasonModel) 
             })
             .error(function(data) {
                 $log.debug("SeasonService: getSeason failed");
-                messageModel.setMessage(data.message, false);
+                messageModel.setMessage(data.message, true);
                 return data;
             });
         return promise;
