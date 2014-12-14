@@ -4,6 +4,10 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location) {
 
   $scope.weeks = weeks.data;
 
+  $scope.privateQuery = '';
+
+  $scope.publicQuery = '';
+
   $scope.publicLeagues = _.filter(leagues.data, function(league) {
     return league.public;
   });

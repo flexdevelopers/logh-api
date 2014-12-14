@@ -3,7 +3,8 @@
 </div>
 <div class="season-weeks-header-row row">
   <div class="col-sm-12 col-md-12">
-    <h4>Weeks</h4>
+    <h4>Weeks [ {{weeks.length}} ]</h4>
+    <hr>
   </div>
 </div>
 <div class="season-weeks list-group">
@@ -17,10 +18,17 @@
 <div class="season-leagues-header-row row">
   <div class="col-sm-12 col-md-12">
     <h4>Public Leagues [ {{publicLeagues.length}} ]</h4>
+    <hr>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Filter public leagues..." ng-model="publicQuery">
+      <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
   </div>
 </div>
 <div class="season-leagues list-group">
-  <a ng-repeat="publicLeague in publicLeagues" ng-click="showLeague(publicLeague)" class="list-group-item">
+  <a ng-repeat="publicLeague in publicLeagues | filter:publicQuery:strict" ng-click="showLeague(publicLeague)" class="list-group-item">
     <div class="row">
       <div class="league-name col-sm-6 col-md-6">{{publicLeague.name}}<br><span class="team-count league-commish">Commish: {{publicLeague.commish_names.join(', ')}}</span></div>
       <div class="col-sm-6 col-md-6">
@@ -32,10 +40,17 @@
 </div><div class="season-leagues-header-row row">
   <div class="col-sm-12 col-md-12">
     <h4>Private Leagues [ {{privateLeagues.length}} ]</h4>
+    <hr>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Filter private leagues..." ng-model="privateQuery">
+      <span class="input-group-btn">
+          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
   </div>
 </div>
 <div class="season-leagues list-group">
-  <a ng-repeat="privateLeague in privateLeagues" ng-click="showLeague(privateLeague)" class="list-group-item">
+  <a ng-repeat="privateLeague in privateLeagues | filter:privateQuery:strict" ng-click="showLeague(privateLeague)" class="list-group-item">
     <div class="row">
       <div class="league-name col-sm-6 col-md-6">{{privateLeague.name}}<br><span class="team-count league-commish">Commish: {{privateLeague.commish_names.join(', ')}}</span></div>
       <div class="col-sm-6 col-md-6">
