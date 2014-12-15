@@ -12,8 +12,8 @@ node(:last_pick_squad) do |team|
     else
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         {
-            name: "#{team.current_pick.squad.name} | #{team.current_pick.week.name}",
-            abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.week.name}"
+            name: "#{team.current_pick.squad.name} | #{team.current_pick.game.start_display_short}",
+            abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.game.start_display_short}"
         }
       else
         { name: "Hidden | #{team.current_pick.week.name}", abbrev: "Hidden | #{team.current_pick.week.name}" }

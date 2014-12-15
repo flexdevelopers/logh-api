@@ -26,6 +26,10 @@ class Game < ActiveRecord::Base
     "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
   end
 
+  def start_display_short
+    "#{starts_at.strftime("%b %d")}"
+  end
+
   def started?
     self.starts_at <= Time.zone.now
   end
