@@ -18,8 +18,8 @@ node(:squad) do |pick|
   if pick.locked? || pick.coach_ids.include?(@user.id)
     {
         id: pick.squad.id,
-        name: pick.squad.name,
-        abbrev: pick.squad.abbrev
+        name: "#{pick.squad.name} | #{pick.game.start_display_short}",
+        abbrev: "#{pick.squad.abbrev} | #{pick.game.start_display_short}"
     }
   else
     {
