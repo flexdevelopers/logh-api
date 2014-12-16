@@ -3,7 +3,14 @@ attributes :id, :name, :active, :alive, :paid
 node(:last_pick_squad) do |team|
   if team.alive
     if !team.current_pick
-      { name: "No Pick", abbrev: "No Pick" }
+      if team.current_week
+        {
+            name: "No Pick | #{team.current_week.name}",
+            abbrev: "No Pick | #{team.current_week.name}"
+        }
+      else
+        { name: "No Pick", abbrev: "No Pick" }
+      end
     else
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         {

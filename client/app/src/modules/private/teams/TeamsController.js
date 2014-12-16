@@ -11,7 +11,7 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
     };
 
     $scope.hasNoPick = function(team) {
-      return team.last_pick_squad.name == 'No Pick';
+      return team.last_pick_squad.name.indexOf('No Pick') > -1;
     };
 
     $scope.createTeam = function(seasonId) {

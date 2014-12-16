@@ -9,7 +9,15 @@ node(:pick_count) { |team| team.picks.correct.count }
 node(:last_pick_squad) do |team|
   if team.alive
     if !team.current_pick
-      { name: "No Pick", abbrev: "No Pick", locked: false }
+      if team.current_week
+        {
+            name: "No Pick | #{team.current_week.name}",
+            abbrev: "No Pick | #{team.current_week.name}",
+            locked: false
+        }
+      else
+        { name: "No Pick", abbrev: "No Pick", locked: false }
+      end
     else
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         {

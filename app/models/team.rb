@@ -44,8 +44,12 @@ class Team < ActiveRecord::Base
 
   def current_pick
     # this can be nil
-    current_week = self.league.season.current_week
-    current_week.picks.find_by(team: self) if current_week
+    self.current_week.picks.find_by(team: self) if self.current_week
+  end
+
+  def current_week
+    # this can be nil
+    self.league.season.current_week
   end
 
   def correct_picks_count

@@ -71,7 +71,7 @@ var ViewLeagueController = function(league, leagueTeams, $scope, $log, $modal, $
   };
 
   $scope.hasNoPick = function(team) {
-    return team.last_pick_squad.name == 'No Pick';
+    return team.last_pick_squad.name.indexOf('No Pick') > -1;
   };
 
   $scope.editLeague = function(league) {
