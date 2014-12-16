@@ -16,10 +16,14 @@ node(:game_display) do |pick|
 end
 node(:squad) do |pick|
   if pick.locked? || pick.coach_ids.include?(@user.id)
+    name = pick.squad.name
+    abbrev = pick.squad.abbrev
+    name += " | #{pick.game.start_display_short}" if pick.game
+    abbrev += " | #{pick.game.start_display_short}" if pick.game
     {
         id: pick.squad.id,
-        name: "#{pick.squad.name} | #{pick.game.start_display_short}",
-        abbrev: "#{pick.squad.abbrev} | #{pick.game.start_display_short}"
+        name: name,
+        abbrev: abbrev
     }
   else
     {
