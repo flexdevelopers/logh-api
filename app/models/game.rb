@@ -27,7 +27,7 @@ class Game < ActiveRecord::Base
   end
 
   def start_display_short
-    "#{starts_at.strftime("%b %d")}"
+    "#{starts_at.strftime("%b %-d")}"
   end
 
   def started?
