@@ -109,7 +109,6 @@ var TeamService = function($http, $log, $location, $q, apiConfig, messageModel) 
                 $log.debug("TeamService: createTeam success");
                 var newTeamPath = $location.path() + '/team/' + data.team_id;
                 $location.path(newTeamPath); // navigate to the new team page
-                messageModel.setMessage(data.message, true);
                 return data;
             })
             .error(function(data) {
