@@ -59,7 +59,7 @@
             <i class="fa fa-unlock fa-fw" ng-show="!team.last_pick.locked && team.last_pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-times fa-fw" ng-show="team.last_pick.correct === false" title="Pick wrong"></i>
             <i class="fa fa-check fa-fw" ng-show="team.last_pick.correct === true" title="Pick correct"></i>
-            Pick: [ <span class="current-loser-name">{{team.last_pick.name}}</span><span class="current-loser-abbrev">{{team.last_pick.abbrev}}</span> ]
+            [ <span class="current-loser-name">{{team.last_pick.name}}</span><span class="current-loser-abbrev">{{team.last_pick.abbrev}}</span> ]
           </span>
           <span class="inactive-team current-pick" ng-show="!team.active">Team has been deactivated</span>
           <span class="badge">{{team.correct_picks_count}} loser<span ng-show="team.correct_picks_count !== 1">s</span></span>
