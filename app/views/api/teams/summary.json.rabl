@@ -51,12 +51,21 @@ node(:last_pick) do |team|
     end
   else
     incorrect_pick = team.picks.where(correct: false)[0]
-    {
-        name: "#{incorrect_pick.squad.name} | #{incorrect_pick.week.name}",
-        abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
-        locked: true,
-        correct: false
-    }
+    if incorrect_pick.game
+      {
+          name: "#{incorrect_pick.squad.name} | #{incorrect_pick.game.start_display_short} | #{incorrect_pick.week.name}",
+          abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.game.start_display_short} | #{incorrect_pick.week.name}",
+          locked: true,
+          correct: false
+      }
+    else
+      {
+          name: "#{incorrect_pick.squad.name} | #{incorrect_pick.week.name}",
+          abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
+          locked: true,
+          correct: false
+      }
+    end
   end
 end
 child :league do
