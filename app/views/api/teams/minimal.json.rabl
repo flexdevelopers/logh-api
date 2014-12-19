@@ -1,6 +1,6 @@
 object @team
 attributes :id, :name, :active, :alive, :paid
-node(:last_pick_squad) do |team|
+node(:last_pick) do |team|
   if team.alive
     if !team.current_pick
       if team.current_week

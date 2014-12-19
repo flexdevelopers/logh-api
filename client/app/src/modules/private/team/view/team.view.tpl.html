@@ -2,7 +2,7 @@
 <div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No loser picked for this week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
-<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick_squad.locked">Your pick is locked for {{teamData.last_pick_squad.week}}</div>
+<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick.locked">Your pick is locked for {{teamData.last_pick.week}}</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
@@ -18,13 +18,13 @@
         <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="toggleDropdown($event);confirmDeactivate(teamData)">Deactivate this team</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="toggleDropdown($event);contactCommish(teamData)">Contact the commish</a></li>
         <li class="divider" ng-show="leagueTeams.length > 1"></li>
-        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick_squad.abbrev}}</span></a></li>
+        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick.abbrev}}</span></a></li>
       </ul>
     </div>
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick_squad.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span></button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span></button>
   </div>
 </div>
 <div class="team-message alert alert-info" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>

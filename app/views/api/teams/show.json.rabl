@@ -6,7 +6,7 @@ node(:commish_ids) { |team| team.commish_ids }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
 node(:pick_count) { |team| team.picks.correct.count }
-node(:last_pick_squad) do |team|
+node(:last_pick) do |team|
   if team.alive
     if !team.current_pick
       if team.current_week
