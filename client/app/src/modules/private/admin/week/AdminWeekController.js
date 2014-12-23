@@ -7,6 +7,10 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
       });
   };
 
+  var sendReminder = function(week) {
+    weekService.sendReminder(week);
+  };
+
   $scope.weekData = week.data;
 
   $scope.games = games.data;
@@ -33,8 +37,22 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
 
   };
 
-  $scope.sendReminder = function(week) {
-    weekService.sendReminder(week);
+  $scope.confirmSendReminder = function(week) {
+    var modalInstance = $modal.open({
+      templateUrl: 'common/modules/confirm/confirm.tpl.html',
+      controller: 'ConfirmController',
+      resolve: {
+        message: function() {
+          return 'Are you sure you want to send weekly reminder?';
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      sendReminder(week);
+    }, function () {
+      $log.debug('Send reminder cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Send reminder cancelled' }, false);
+    });
   };
 
   $scope.confirmWeekComplete = function(week) {
