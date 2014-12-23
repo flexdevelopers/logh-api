@@ -30,6 +30,11 @@
     }
   }
 
+  .team-meta {
+    margin-top: 5px;
+    text-align: right;
+  }
+
   .losers-tab {
     position: relative;
     margin-bottom: -1px;
@@ -159,6 +164,10 @@
       .week-name, .game-column {
         text-align: center;
       }
+    }
+    .team-meta {
+      margin-top: 5px;
+      text-align: left;
     }
   }
 

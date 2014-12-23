@@ -25,6 +25,7 @@
   </div>
   <div class="col-sm-4 col-md-4">
     <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span></button>
+    <h3 class="team-meta" ng-show="!isCoach(teamData)"><small>Coach [ {{teamData.coach_names.join(', ')}} ]</small></h3>
   </div>
 </div>
 <div class="team-message alert alert-info" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
