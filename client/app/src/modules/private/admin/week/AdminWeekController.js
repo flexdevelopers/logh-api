@@ -18,8 +18,8 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
   $scope.editGame = function(game) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'modules/private/admin/game/admin.game.tpl.html',
-      controller: 'AdminGameController',
+      templateUrl: 'modules/private/admin/game/edit/admin.game.edit.tpl.html',
+      controller: 'AdminGameEditController',
       resolve: {
         game: function() {
           return game;

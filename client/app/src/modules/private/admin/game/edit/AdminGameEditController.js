@@ -1,4 +1,4 @@
-var AdminGameController = function(game, $scope, $modalInstance) {
+var AdminGameEditController = function(game, $scope, $modalInstance) {
 
   $scope.gameData = angular.copy(game);
 
@@ -18,5 +18,5 @@ var AdminGameController = function(game, $scope, $modalInstance) {
   init();
 };
 
-AdminGameController.$inject = ['game', '$scope', '$modalInstance'];
-module.exports = AdminGameController;
+AdminGameEditController.$inject = ['game', '$scope', '$modalInstance'];
+module.exports = AdminGameEditController;
