@@ -79,6 +79,8 @@ LoghApi::Application.routes.draw do
         resources :games, only: [:create, :update, :destroy]
       end
 
+      resources :squads, only: [:index]
+
     end
 
   end

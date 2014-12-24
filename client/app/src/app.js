@@ -68,6 +68,7 @@ var loghApp = angular.module('loghApp', [
     // admin
     require('./modules/private/admin').name,
     require('./modules/private/admin/game/edit').name,
+    require('./modules/private/admin/game/new').name,
     require('./modules/private/admin/seasons').name,
     require('./modules/private/admin/seasons/season').name,
     require('./modules/private/admin/week').name,

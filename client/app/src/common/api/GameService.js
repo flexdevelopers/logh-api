@@ -32,6 +32,26 @@ var GameService = function($http, $log, $state, apiConfig, messageModel) {
     return promise;
   };
 
+  this.createGame = function(gameParams) {
+    var promise = $http.post(apiConfig.baseURL + "admin/weeks/" + gameParams.week_id + "/games",
+      { game: gameParams })
+      .success(function(data) {
+        $log.debug("GameService: createGame success");
+        // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+        // but may be resolved with future releases of angular-ui-router
+        $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+        messageModel.setMessage(data.message, false);
+        return data;
+      })
+      .error(function(data) {
+        $log.debug("GameService: createGame failed");
+        messageModel.setMessage(data.message, false);
+        return data;
+      });
+
+    return promise;
+  };
+
   this.updateGame = function(gameParams) {
     var promise = $http.put(apiConfig.baseURL + "admin/weeks/" + gameParams.week_id + "/games/" + gameParams.id,
       { game: gameParams })

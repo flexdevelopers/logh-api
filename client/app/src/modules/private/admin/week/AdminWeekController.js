@@ -1,4 +1,4 @@
-var AdminWeekController = function(week, games, $scope, $log, $modal, gameService, weekService, messageModel) {
+var AdminWeekController = function(week, games, $scope, $log, $modal, gameService, squadService, weekService, messageModel) {
 
   var completeWeek = function(week) {
     weekService.completeWeek(week)
@@ -36,6 +36,31 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
     });
 
   };
+
+  $scope.createGame = function(week) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/admin/game/new/admin.game.new.tpl.html',
+      controller: 'AdminGameNewController',
+      resolve: {
+        week: function() {
+          return week;
+        },
+        squads: function() {
+          return squadService.getSquads();
+        }
+      }
+    });
+
+    modalInstance.result.then(function(game) {
+      gameService.createGame(game);
+    }, function () {
+      $log.debug('Create game modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Create game cancelled' }, false);
+    });
+
+  };
+
 
   $scope.confirmSendReminder = function(week) {
     var modalInstance = $modal.open({
@@ -81,5 +106,5 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
   init();
 };
 
-AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'weekService', 'messageModel'];
+AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'squadService', 'weekService', 'messageModel'];
 module.exports = AdminWeekController;
