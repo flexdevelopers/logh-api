@@ -8,8 +8,9 @@ module.exports = {
                 cwd: '<%= globalConfig.srcdir %>',
                 dest: '<%= globalConfig.resourcesdir %>',
                 src: [
+                    'assets/fonts/**/*',
                     'assets/images/**/*',
-                    'assets/fonts/**/*'
+                    'assets/js/**/*'
                 ]
             },
             {
