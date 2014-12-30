@@ -34,6 +34,7 @@ var loghApp = angular.module('loghApp', [
     // user
     require('./modules/private/user').name,
     require('./modules/private/user/reset').name,
+
     // league
     require('./modules/private/league').name,
     require('./modules/private/league/new').name,
@@ -44,6 +45,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/league/join').name,
     require('./modules/private/league/invite').name,
     require('./modules/private/league/invite/request').name,
+
     // leagues
     require('./modules/private/leagues').name,
     require('./modules/private/leagues/join').name,
@@ -51,21 +53,26 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/leagues/join/private').name,
     require('./modules/private/leagues/manage').name,
     require('./modules/private/leagues/my').name,
+
     // team
     require('./modules/private/team').name,
     require('./modules/private/team/view').name,
     require('./modules/private/team/edit').name,
     require('./modules/private/team/message').name,
+
     // teams
     require('./modules/private/teams').name,
     require('./modules/private/teams/alive').name,
     require('./modules/private/teams/dead').name,
+
     // play
     require('./modules/private/play').name,
     require('./modules/private/play/leagues').name,
     require('./modules/private/play/teams').name,
+
     // pick
     require('./modules/private/pick/make').name,
+
     // admin
     require('./modules/private/admin').name,
     require('./modules/private/admin/game/edit').name,
@@ -80,16 +87,17 @@ var loghApp = angular.module('loghApp', [
     require('./common/modules/footer').name,
     require('./common/modules/confirm').name,
 
-    require('./common/aspects').name,
     require('./common/models').name,
     require('./common/api').name,
     require('./common/command').name,
 
+    // services
     require('./common/service/application').name,
     require('./common/service/utils').name,
 
     //directives
     require('./common/directives/focus').name,
+    require('./common/directives/formattedDate').name,
     require('./common/directives/match').name,
     require('./common/directives/rcSubmit').name,
     require('./common/directives/rcVerifySet').name,
