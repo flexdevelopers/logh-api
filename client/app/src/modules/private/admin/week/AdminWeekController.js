@@ -1,4 +1,4 @@
-var AdminWeekController = function(week, games, $scope, $log, $modal, gameService, squadService, weekService, messageModel) {
+var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils, gameService, squadService, weekService, messageModel) {
 
   var completeWeek = function(week) {
     weekService.completeWeek(week)
@@ -14,6 +14,8 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
   $scope.weekData = week.data;
 
   $scope.games = games.data;
+
+  $scope.dateFormat = dateUtils.dateFormat;
 
   $scope.editGame = function(game) {
 
@@ -106,5 +108,5 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, gameServic
   init();
 };
 
-AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'gameService', 'squadService', 'weekService', 'messageModel'];
+AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'dateUtils', 'gameService', 'squadService', 'weekService', 'messageModel'];
 module.exports = AdminWeekController;

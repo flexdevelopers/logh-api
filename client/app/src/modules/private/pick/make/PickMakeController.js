@@ -1,4 +1,4 @@
-var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $log) {
+var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $log, dateUtils) {
 
   var picks = picks;
 
@@ -28,7 +28,7 @@ var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $
 
   $scope.starts = function(game) {
     var startsLabel = (game.started) ? 'Started ' : 'Starts ';
-    return startsLabel + game.start_display;
+    return startsLabel + dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT (Z)");
   };
 
   $scope.hasSquadBeenUsed = function(game, squad) {
@@ -58,5 +58,5 @@ var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $
   init();
 };
 
-PickMakeController.$inject = ['picks', 'currentGames', '$modalInstance', '$scope', '$log'];
+PickMakeController.$inject = ['picks', 'currentGames', '$modalInstance', '$scope', '$log', 'dateUtils'];
 module.exports = PickMakeController;
