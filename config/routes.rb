@@ -77,9 +77,12 @@ LoghApi::Application.routes.draw do
 
       resources :weeks, only:[] do
         resources :games, only: [:create, :update, :destroy]
+        resources :squads, only: [:index]
       end
 
-      resources :squads, only: [:index]
+      resources :squads, only: [] do
+        get 'all', on: :collection, to: 'squads#all'
+      end
 
     end
 

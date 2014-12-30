@@ -49,7 +49,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
           return week;
         },
         squads: function() {
-          return squadService.getSquads();
+          return squadService.getWeekSquads(week);
         }
       }
     });
