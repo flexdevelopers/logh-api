@@ -27,7 +27,6 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
           return game;
         }
       }
-
     });
 
     modalInstance.result.then(function(game) {
@@ -39,7 +38,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   };
 
-  $scope.createGame = function(week) {
+  $scope.createGame = function(week, games) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/admin/game/new/admin.game.new.tpl.html',
@@ -47,6 +46,13 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
       resolve: {
         week: function() {
           return week;
+        },
+        lastGame: function() {
+          if (games.length > 0) {
+            return games[games.length - 1]
+          } else {
+            return null
+          }
         },
         squads: function() {
           return squadService.getWeekSquads(week);

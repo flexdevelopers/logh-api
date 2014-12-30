@@ -1,4 +1,4 @@
-var AdminGameNewController = function(week, squads, $scope, $modalInstance) {
+var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInstance) {
 
   $scope.weekData = week;
 
@@ -8,7 +8,7 @@ var AdminGameNewController = function(week, squads, $scope, $modalInstance) {
     week_id: week.id,
     home_squad_id: squads.data[0].id,
     visiting_squad_id: squads.data[0].id,
-    starts_at: moment().format()
+    starts_at: (lastGame) ? lastGame.starts_at : moment().format()
   };
 
   $scope.closeStartsAt = function() {
@@ -34,5 +34,5 @@ var AdminGameNewController = function(week, squads, $scope, $modalInstance) {
   init();
 };
 
-AdminGameNewController.$inject = ['week', 'squads', '$scope', '$modalInstance'];
+AdminGameNewController.$inject = ['week', 'lastGame', 'squads', '$scope', '$modalInstance'];
 module.exports = AdminGameNewController;
