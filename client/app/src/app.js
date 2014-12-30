@@ -17,6 +17,7 @@ var loghApp = angular.module('loghApp', [
     'commangular',
     'ui.router',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'app.templates',
     'ui.router.stateHelper',
     'angular-loading-bar',

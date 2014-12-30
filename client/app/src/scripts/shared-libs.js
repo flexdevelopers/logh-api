@@ -4,6 +4,7 @@
 require('angular');
 require('ui-bootstrap');
 require('ui-bootstrap-tpls');
+require('datetimepicker');
 require('angular-cookies');
 require('angular-resource');
 require('angular-route');
