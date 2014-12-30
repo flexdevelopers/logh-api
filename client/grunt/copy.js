@@ -8,6 +8,7 @@ module.exports = {
                 cwd: '<%= globalConfig.srcdir %>',
                 dest: '<%= globalConfig.resourcesdir %>',
                 src: [
+                    'assets/css/**/*',
                     'assets/fonts/**/*',
                     'assets/images/**/*',
                     'assets/js/**/*'
