@@ -11,6 +11,12 @@ var AdminGameNewController = function(week, squads, $scope, $modalInstance) {
     starts_at: moment().format()
   };
 
+  $scope.closeStartsAt = function() {
+    $scope.startsAtDropdown = {
+      isopen: false
+    };
+  };
+  $scope.closeStartsAt();
 
   $scope.createGame = function(game) {
     $modalInstance.close(game);

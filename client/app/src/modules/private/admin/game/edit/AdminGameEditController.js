@@ -2,6 +2,13 @@ var AdminGameEditController = function(game, $scope, $modalInstance) {
 
   $scope.gameData = angular.copy(game);
 
+  $scope.closeStartsAt = function() {
+    $scope.startsAtDropdown = {
+      isopen: false
+    };
+  };
+  $scope.closeStartsAt();
+
   $scope.editGame = function(game) {
     $modalInstance.close(game);
   };
