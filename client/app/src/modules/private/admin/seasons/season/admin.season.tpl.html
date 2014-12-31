@@ -11,7 +11,9 @@
   <a ng-repeat="week in weeks" ng-click="showWeek(week)" class="list-group-item">
     <div class="row">
       <div class="col-sm-6 col-md-6"><i class="fa fa-check fa-fw" ng-show="week.complete === true" title="complete week"></i> {{week.display}}</div>
-      <div class="start-end col-sm-6 col-md-6"></div>
+      <div class="start-end col-sm-6 col-md-6">
+        <span class="badge">{{week.game_count}} game<span ng-show="week.game_count !== 1">s</span></span>
+      </div>
     </div>
   </a>
 </div>
