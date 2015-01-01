@@ -9,7 +9,7 @@ var AdminSeasonNewController = function($scope, $modalInstance) {
 
   $scope.newSeasonData = {
     name: '',
-    season_type: '',
+    season_type: $scope.seasonTypes[0],
     starts_at: moment().format(),
     ends_at: moment().format()
   };
@@ -34,6 +34,14 @@ var AdminSeasonNewController = function($scope, $modalInstance) {
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
+  };
+
+  $scope.hasError = function(input) {
+    return !input.$focused && input.$dirty && input.$invalid;
+  };
+
+  $scope.hasPropertyError = function(input, property) {
+    return !input.$focused && input.$dirty && input.$error[property];
   };
 
   /**
