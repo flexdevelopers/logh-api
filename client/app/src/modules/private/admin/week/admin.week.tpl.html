@@ -1,11 +1,13 @@
 <div class="games-header-row row">
-  <div class="col-sm-9 col-md-9">
+  <div class="col-sm-6 col-md-6">
     <h3>{{weekData.display}} <br>
       <small>Complete: {{weekData.complete}}</small></h3>
   </div>
-  <div class="col-sm-3 col-md-3">
-    <button type="button" class="complete-week-btn btn btn-danger btn-sm" ng-click="confirmWeekComplete(weekData)">Complete Week</button>
-    <button type="button" class="send-reminder-btn btn btn-default btn-sm" ng-click="confirmSendReminder(weekData)">Send Reminder</button>
+  <div class="col-sm-6 col-md-6">
+    <div class="week-btn-group">
+      <button type="button" class="send-reminder-btn btn btn-default" ng-click="confirmSendReminder(weekData)">Send Reminder</button>
+      <button type="button" class="create-game-btn btn btn-primary" ng-click="createGame(weekData, games)">Create Game</button>
+    </div>
   </div>
 </div>
 <div class="week-games list-group">
@@ -16,4 +18,6 @@
     </div>
   </a>
 </div>
-<button class="btn btn-primary" ng-click="createGame(weekData, games)">Create Game</button>
+<div class="complete-week-btn-group">
+  <button type="button" class="complete-week-btn btn btn-danger" ng-click="confirmWeekComplete(weekData)">Complete Week</button>
+</div>

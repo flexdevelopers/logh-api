@@ -7,10 +7,25 @@
   color: #999;
 }
 
-.complete-week-btn, .send-reminder-btn {
+.week-btn-group, .complete-week-btn-group {
+  padding-top: 20px;
   float: right;
-  margin-left: 5px;
-  margin-top: 20px;
 }
+
+@media all and (max-width: 767px) {
+
+  .week-btn-group, .complete-week-btn-group {
+    float: none !important;
+    padding: 0;
+  }
+
+  .send-reminder-btn, .create-game-btn, .complete-week-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+}
+
 
 
