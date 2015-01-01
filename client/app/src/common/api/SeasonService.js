@@ -1,17 +1,20 @@
-var SeasonService = function($http, $log, apiConfig, messageModel, seasonModel) {
+var SeasonService = function($http, $log, $state, $q, apiConfig, messageModel, seasonModel) {
 
-    this.getSeasons = function() {
-        var promise = $http.get(apiConfig.baseURL + "seasons")
+  var service = this;
+
+  this.getSeasons = function() {
+        var deferred = $q.defer();
+        $http.get(apiConfig.baseURL + "seasons")
             .success(function(data) {
                 $log.debug("SeasonService: getSeasons success");
                 seasonModel.setSeasons(data);
-                return data;
+                deferred.resolve(data);
             })
             .error(function(data) {
                 $log.debug("SeasonService: getSeasons failed");
-                return data;
+                deferred.reject();
             });
-        return promise;
+        return deferred.promise;
     };
 
     this.getSeason = function(seasonId) {
@@ -28,7 +31,33 @@ var SeasonService = function($http, $log, apiConfig, messageModel, seasonModel) 
         return promise;
     };
 
+    this.createSeason = function(seasonParams) {
+      var promise = $http.post(apiConfig.baseURL + "admin/seasons/",
+        { season: seasonParams })
+        .success(function(data) {
+          $log.debug("SeasonService: createSeason success");
+          messageModel.setMessage(data.message, false);
+          // need to call getSeasons() again to reset the seasonmodel
+          service.getSeasons()
+            .then(
+              function(response) {
+                // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+                // but may be resolved with future releases of angular-ui-router
+                $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+              }
+            );
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("SeasonService: createSeason failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
 };
 
-SeasonService.$inject = ['$http', '$log', 'apiConfig', 'messageModel', 'seasonModel'];
+SeasonService.$inject = ['$http', '$log', '$state', '$q', 'apiConfig', 'messageModel', 'seasonModel'];
 module.exports = SeasonService;

@@ -18,7 +18,7 @@ class API::Admin::SeasonsController < API::SeasonsController
   def create
     @season = Season.new(_season_params)
     if @season.save
-      render json: @season, status: :created, location: api_admin_season_path(@season)
+      render json: { message: { type: SUCCESS, content: "Season has been created" } }, status: :ok
     else
       error(@season.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
@@ -41,7 +41,7 @@ class API::Admin::SeasonsController < API::SeasonsController
   private
 
     def _season_params
-      params.require(:season).permit(:name, :ends_at)
+      params.require(:season).permit(:name, :starts_at, :ends_at)
     end
 
     def _set_season
