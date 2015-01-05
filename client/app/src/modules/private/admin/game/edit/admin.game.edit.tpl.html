@@ -18,6 +18,12 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="overtime" class="col-sm-6 control-label">Overtime:</label>
+      <div class="col-sm-6">
+        <input id="overtime" name="overtime" type="checkbox" ng-model="gameData.overtime">
+      </div>
+    </div>
+    <div class="form-group">
       <label class="col-sm-6 control-label">Starts At (Local Time):</label>
       <div class="col-sm-6">
         <div class="dropdown" is-open="startsAtDropdown.isopen">
@@ -34,7 +40,10 @@
       </div>
     </div>
     <div class="form-group">
-      <label><input type="checkbox" ng-model="gameData.complete"> completed</label>
+      <label for="complete" class="col-sm-6 control-label">Completed:</label>
+      <div class="col-sm-6">
+        <input id="complete" name="complete" type="checkbox" ng-model="gameData.complete">
+      </div>
     </div>
   </form>
 </div>
