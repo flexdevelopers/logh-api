@@ -52,14 +52,32 @@ class Game < ActiveRecord::Base
 
       return unless self.complete
 
+      season_type = self.week.season.season_type
+
       if home_squad_score < visiting_squad_score
         self.update_column(:loser_squad_id, home_squad.id)
-        home_squad.update_column(:losses, home_squad.losses + 1)
         visiting_squad.update_column(:wins, visiting_squad.wins + 1)
+        if season_type == 'NHL'
+          if self.overtime
+            home_squad.update_column(:ties, home_squad.ties + 1)
+          else
+            home_squad.update_column(:losses, home_squad.losses + 1)
+          end
+        else
+          home_squad.update_column(:losses, home_squad.losses + 1)
+        end
       elsif visiting_squad_score < home_squad_score
         self.update_column(:loser_squad_id, visiting_squad.id)
         home_squad.update_column(:wins, home_squad.wins + 1)
-        visiting_squad.update_column(:losses, visiting_squad.losses + 1)
+        if season_type == 'NHL'
+          if self.overtime
+            visiting_squad.update_column(:ties, visiting_squad.ties + 1)
+          else
+            visiting_squad.update_column(:losses, visiting_squad.losses + 1)
+          end
+        else
+          visiting_squad.update_column(:losses, visiting_squad.losses + 1)
+        end
       elsif visiting_squad_score == home_squad_score
         home_squad.update_column(:ties, home_squad.ties + 1)
         visiting_squad.update_column(:ties, visiting_squad.ties + 1)
