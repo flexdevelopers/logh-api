@@ -30,13 +30,15 @@ node(:squad) do |pick|
     {
         id: pick.squad.id,
         name: pick.squad.name,
-        abbrev: pick.squad.abbrev
+        abbrev: pick.squad.abbrev,
+        short: pick.squad.short
     }
   else
     {
         id: 0,
         name: "Hidden",
-        abbrev: "Hidden"
+        abbrev: "Hidden",
+        short: "Hidden"
     }
   end
 end

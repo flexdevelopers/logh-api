@@ -26,6 +26,11 @@ describe Squad do
     it { should_not be_valid }
   end
 
+  context 'when squad has no short' do
+    subject(:squad) { FactoryGirl.build(:squad, short: '') }
+    it { should_not be_valid }
+  end
+
   context 'when squad abbrev is exactly 3 characters' do
     subject(:squad) { FactoryGirl.build(:squad, abbrev: 'FOO') }
     it { should be_valid }

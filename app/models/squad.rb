@@ -5,6 +5,7 @@ class Squad < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 30 }
   validates :abbrev, presence: true
+  validates :short, presence: true
   validates :wins, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :losses, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :ties, presence: true, numericality: { greater_than_or_equal_to: 0 }
