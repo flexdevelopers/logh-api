@@ -68,6 +68,12 @@
 
   .pick-squad {
     font-size: 13px;
+    .pick-squad-name {
+      display: inline;
+    }
+    .pick-squad-abbrev {
+      display: none;
+    }
   }
 
   .game-column {
@@ -81,6 +87,15 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .pick-squad {
+      font-size: 13px;
+      .pick-squad-name {
+        display: none;
+      }
+      .pick-squad-abbrev {
+        display: inline;
+      }
     }
     .team-picks {
       .list-group-item {
