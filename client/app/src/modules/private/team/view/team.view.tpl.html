@@ -28,7 +28,7 @@
     <h3 class="team-meta" ng-show="!isCoach(teamData)"><small>Coach [ {{teamData.coach_names.join(', ')}} ]</small></h3>
   </div>
 </div>
-<div class="team-message alert alert-info" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
+<div class="team-message alert alert-info" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
 <hr>
 <div class="losers-tab">
   <ul class="nav nav-tabs">
@@ -39,13 +39,13 @@
     <div class="team-picks list-group">
       <a ng-repeat="pick in picks" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
         <div class="row">
-          <div class="week-name col-sm-6 col-md-6">
+          <div class="week-name col-sm-7 col-md-7">
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-times fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.short}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game"><span ng-show="pick.game_start.length > 0">{{pick.game_start}} | </span>{{pick.week_name}} ({{pick.week_type}})</span>
+            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game"><span ng-show="pick.game_start.length > 0">{{pick.game_start}} | </span>{{pick.week_name}} ({{pick.week_type}})</span>
           </div>
-          <div class="game-column col-sm-6 col-md-6">
+          <div class="game-column col-sm-5 col-md-5">
             <span class="game">{{pick.game_display}}</span>
           </div>
         </div>
