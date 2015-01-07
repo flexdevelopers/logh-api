@@ -1,5 +1,5 @@
 object @pick
-attributes :id, :team_id, :week_type_id, :correct
+attributes :id, :team_id, :week_id, :week_type_id, :correct
 node(:locked) { |pick| pick.locked? }
 node(:week_name) { |pick| pick.week.name }
 node(:week_type) { |pick| pick.week_type.description }
@@ -13,13 +13,10 @@ end
 node(:game_display) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
     if pick.locked? && pick.game.complete
-      if pick.game.overtime
-        "#{pick.game.squads[0][:name]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:name]} [ #{pick.game.home_squad_score} ] OT"
-      else
-        "#{pick.game.squads[0][:name]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:name]} [ #{pick.game.home_squad_score} ]"
-      end
+      ot = pick.game.overtime ? 'OT' : ''
+      "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{ot}"
     else
-      "#{pick.game.squads[0][:name]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:name]} [ #{pick.game.home_squad.record} ]"
+      "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
   else
     ""
