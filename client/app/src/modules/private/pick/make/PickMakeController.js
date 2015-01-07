@@ -34,7 +34,7 @@ var PickMakeController = function(picks, currentGames, $modalInstance, $scope, $
   $scope.hasSquadBeenUsed = function(game, squad) {
     var squadHasBeenUsed = false;
     _.each(picks, function(pick) {
-      if (pick.squad.id == squad.id && pick.week_type_id == game.week_type_id) {
+      if (pick.squad.id == squad.id && pick.week_type_id == game.week_type_id && pick.week_id != game.week_id) {
         squadHasBeenUsed = true;
       }
     });
