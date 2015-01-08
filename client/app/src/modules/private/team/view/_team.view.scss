@@ -140,7 +140,7 @@
 
   .team-picks {
     .list-group-item {
-      .game, .week-loser {
+      .game, .game-start, .week-loser {
         font-size: 11px;
         color: #999;
       }
@@ -176,7 +176,7 @@
       font-size: 11px;
     }
     .team-picks {
-      .game {
+      .game, .game-start {
         font-size: 10px !important;
       }
     }
