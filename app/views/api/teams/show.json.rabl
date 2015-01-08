@@ -21,7 +21,7 @@ node(:last_pick) do |team|
     else
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         {
-            name: "#{team.current_pick.squad.name} | #{team.current_pick.week.name}",
+            name: "#{team.current_pick.squad.short} | #{team.current_pick.week.name}",
             abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.week.name}",
             locked: team.current_pick.locked?,
             week: team.current_pick.week.display
@@ -38,7 +38,7 @@ node(:last_pick) do |team|
   else
     incorrect_pick = team.picks.where(correct: false)[0]
     {
-        name: "#{incorrect_pick.squad.name} | #{incorrect_pick.week.name}",
+        name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name}",
         abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
         locked: true
     }

@@ -27,14 +27,14 @@ node(:last_pick) do |team|
       if team.current_pick.locked? || team.coach_ids.include?(@user.id)
         if team.current_pick.game
           {
-              name: "#{team.current_pick.squad.name} | #{team.current_pick.game.start_display_short} | #{team.current_pick.week.name}",
-              abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.game.start_display_short} | #{team.current_pick.week.name}",
+              name: "#{team.current_pick.squad.short} | #{team.current_pick.week.name} | #{team.current_pick.game.start_display_short}",
+              abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.week.name} | #{team.current_pick.game.start_display_short}",
               correct: team.current_pick.correct,
               locked: team.current_pick.locked?
           }
         else
           {
-              name: "#{team.current_pick.squad.name} | #{team.current_pick.week.name}",
+              name: "#{team.current_pick.squad.short} | #{team.current_pick.week.name}",
               abbrev: "#{team.current_pick.squad.abbrev} | #{team.current_pick.week.name}",
               correct: team.current_pick.correct,
               locked: team.current_pick.locked?
@@ -53,14 +53,14 @@ node(:last_pick) do |team|
     incorrect_pick = team.picks.where(correct: false)[0]
     if incorrect_pick.game
       {
-          name: "#{incorrect_pick.squad.name} | #{incorrect_pick.game.start_display_short} | #{incorrect_pick.week.name}",
-          abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.game.start_display_short} | #{incorrect_pick.week.name}",
+          name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
+          abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
           locked: true,
           correct: false
       }
     else
       {
-          name: "#{incorrect_pick.squad.name} | #{incorrect_pick.week.name}",
+          name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name}",
           abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
           locked: true,
           correct: false
