@@ -1,8 +1,6 @@
 class Squad < ActiveRecord::Base
   default_scope  { order(:name) }
 
-  before_save { abbrev.upcase! }
-
   validates :name, presence: true, length: { maximum: 30 }
   validates :abbrev, presence: true
   validates :short, presence: true
@@ -13,7 +11,7 @@ class Squad < ActiveRecord::Base
 
   def record
     record_string = "#{self.wins}-#{self.losses}"
-    record_string += "-#{self.ties}" if self.ties > 0
+    record_string += "-#{self.ties}" if self.ties > 0 || squad_type == 'NHL'
     record_string
   end
 
