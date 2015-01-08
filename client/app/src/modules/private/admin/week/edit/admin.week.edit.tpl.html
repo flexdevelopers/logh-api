@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Edit Week</h3>
+</div>
+<div class="modal-body">
+  <h4>{{weekData.display}}</h4>
+  <hr>
+  <form name="editWeekForm" class="edit-week-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(editWeekForm.weekName), 'has-feedback': hasError(editWeekForm.weekName)}">
+      <label for="weekName" class="col-sm-3 control-label">Name:</label>
+      <div class="col-sm-9">
+        <input id="weekName" name="weekName" type="text" class="form-control" ng-model="weekData.name" ng-maxlength="30" required>
+        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekName, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekName, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(editWeekForm.weekName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(editWeekForm.weekDescription), 'has-feedback': hasError(editWeekForm.weekDescription)}">
+      <label for="weekDescription" class="col-sm-3 control-label">Description:</label>
+      <div class="col-sm-9">
+        <input id="weekDescription" name="weekDescription" type="text" class="form-control" ng-model="weekData.description" ng-maxlength="30" required>
+        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(editWeekForm.weekDescription)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="weekType" class="col-sm-3 control-label">Week Type:</label>
+      <div class="col-sm-9">
+        <select id="weekType" name="weekType" class="form-control" ng-model="weekData.week_type_id" ng-options="weekType.id as weekType.description for weekType in weekTypes"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Starts At:</label>
+      <div class="col-sm-9">
+        <div class="dropdown" is-open="startsAtDropdown.isopen">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" formatted-date data-ng-model="weekData.starts_at" ng-required="true" ng-disabled="true">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="weekData.starts_at" data-on-set-time="closeStartsAt()" data-datetimepicker-config="{ minuteStep: 5 }"/>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Ends At:</label>
+      <div class="col-sm-9">
+        <div class="dropdown" is-open="endsAtDropdown.isopen">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" formatted-date data-ng-model="weekData.ends_at" ng-required="true" ng-disabled="true">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="weekData.ends_at" data-on-set-time="closeEndsAt()" data-datetimepicker-config="{ minuteStep: 5 }"/>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="editWeekForm.$invalid" ng-click="editWeek(weekData)">Update</button>
+</div>

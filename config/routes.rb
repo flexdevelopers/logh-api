@@ -84,6 +84,8 @@ LoghApi::Application.routes.draw do
         get 'all', on: :collection, to: 'squads#all'
       end
 
+      resources :week_types, only: [:index]
+
     end
 
   end

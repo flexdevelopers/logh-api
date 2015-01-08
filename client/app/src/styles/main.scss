@@ -21,6 +21,7 @@ $icon-font-path: "../assets/fonts/";
 // user
 @import "../modules/private/user/user";
 @import "../modules/private/user/reset/user.reset";
+
 // league
 @import "../modules/private/league/league";
 @import "../modules/private/league/new/league.new";
@@ -31,6 +32,7 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/league/join/league.join";
 @import "../modules/private/league/invite/league.invite";
 @import "../modules/private/league/invite/request/league.invite.request";
+
 // leagues
 @import "../modules/private/leagues/leagues";
 @import "../modules/private/leagues/join/leagues.join";
@@ -38,21 +40,26 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/leagues/join/private/leagues.join.private";
 @import "../modules/private/leagues/manage/leagues.manage";
 @import "../modules/private/leagues/my/leagues.my";
+
 // team
 @import "../modules/private/team/team";
 @import "../modules/private/team/view/team.view";
 @import "../modules/private/team/edit/team.edit";
 @import "../modules/private/team/message/team.message";
+
 // teams
 @import "../modules/private/teams/teams";
 @import "../modules/private/teams/alive/teams.alive";
 @import "../modules/private/teams/dead/teams.dead";
+
 // play
 @import "../modules/private/play/play";
 @import "../modules/private/play/leagues/play.leagues";
 @import "../modules/private/play/teams/play.teams";
+
 // pick
 @import "../modules/private/pick/make/pick.make";
+
 // admin
 @import "../modules/private/admin/admin";
 @import "../modules/private/admin/game/edit/admin.game.edit";
@@ -61,6 +68,7 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/admin/seasons/season/admin.season";
 @import "../modules/private/admin/seasons/season/new/admin.season.new";
 @import "../modules/private/admin/week/admin.week";
+@import "../modules/private/admin/week/edit/admin.week.edit";
 
 html {
   //  for sticky footer

@@ -17,6 +17,30 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   $scope.dateFormat = dateUtils.dateFormat;
 
+  $scope.editWeek = function(week) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/admin/week/edit/admin.week.edit.tpl.html',
+      controller: 'AdminWeekEditController',
+      resolve: {
+        week: function() {
+          return week;
+        },
+        weekTypes: function() {
+          return weekService.getWeekTypes();
+        }
+      }
+    });
+
+    modalInstance.result.then(function(week) {
+      weekService.updateWeek(week);
+    }, function () {
+      $log.debug('Week update cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Week update cancelled' }, false);
+    });
+
+  };
+
   $scope.editGame = function(game) {
 
     var modalInstance = $modal.open({

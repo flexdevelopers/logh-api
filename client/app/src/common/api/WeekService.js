@@ -1,4 +1,4 @@
-var WeekService = function($http, $log, $q, apiConfig, messageModel) {
+var WeekService = function($http, $log, $q, $state, apiConfig, messageModel) {
 
     this.getAvailableWeeks = function(seasonId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/available")
@@ -42,6 +42,42 @@ var WeekService = function($http, $log, $q, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getWeekTypes = function() {
+        var apiUrl = apiConfig.baseURL + "admin/week_types";
+
+        var promise = $http.get(apiUrl)
+          .success(function(data) {
+            $log.debug("WeekService: getWeekTypes success");
+            return data;
+          })
+          .error(function(data) {
+            $log.debug("WeekService: getWeekTypes failed");
+            return data;
+        });
+
+      return promise;
+    };
+
+    this.updateWeek = function(weekParams) {
+      var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + weekParams.season_id + "/weeks/" + weekParams.id,
+        { week: weekParams })
+        .success(function(data) {
+          $log.debug("WeekService: updateWeek success");
+          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+          // but may be resolved with future releases of angular-ui-router
+          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("WeekService: updateWeek failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
     this.sendReminder = function(week) {
         var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + week.season_id + "/weeks/" + week.id + "/remind")
             .success(function(data) {
@@ -77,5 +113,5 @@ var WeekService = function($http, $log, $q, apiConfig, messageModel) {
 
 };
 
-WeekService.$inject = ['$http', '$log', '$q', 'apiConfig', 'messageModel'];
+WeekService.$inject = ['$http', '$log', '$q', '$state', 'apiConfig', 'messageModel'];
 module.exports = WeekService;

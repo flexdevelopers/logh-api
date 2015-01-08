@@ -30,7 +30,7 @@ class API::Admin::WeeksController < API::WeeksController
   # PATCH/PUT /api/admin/seasons/:season_id/weeks/:id
   def update
     if @week.update(_week_params)
-      head :no_content
+      render json: { message: { type: SUCCESS, content: "Week has been updated" } }, status: :ok
     else
       error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
