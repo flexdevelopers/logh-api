@@ -35,7 +35,7 @@ class Week < ActiveRecord::Base
 
     return unless self.complete == true # only update if the week is complete
 
-    null_squad = Squad.find_by(abbrev: 'NONE')
+    null_squad = Squad.find_by(none: true)
 
     self.season.leagues.started.each do |started_league|
       started_league.teams.alive.each do |alive_team|
