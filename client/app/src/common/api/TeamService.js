@@ -68,9 +68,9 @@ var TeamService = function($http, $log, $location, $q, apiConfig, messageModel) 
     };
 
     this.getAllLeagueTeams = function(params) {
-        var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/all";
-        if (params.leagueId) {
-            apiUrl += "?league_id=" + params.leagueId;
+        var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/all?league_id=" + params.leagueId;
+        if (params.weekId) {
+            apiUrl += "&week_id=" + params.weekId;
         }
 
         var promise = $http.get(apiUrl)

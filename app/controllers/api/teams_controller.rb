@@ -5,13 +5,23 @@ class API::TeamsController < API::BaseController
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/all
-  # GET /api/seasons/:season_id/teams/all?league_id=:league_id
+  # GET /api/seasons/:season_id/teams/all?league_id=:league_id&week_id=:week_id
   def all
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count, team.name ] }
+        if params[:week_id]
+          @week_id = params[:week_id]
+          @teams = @league.teams.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count({ week_id: params[:week_id] }), team.name ] }
+        else
+          @teams = @league.teams.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count({}), team.name ] }
+        end
       else
-        @teams = @league.teams.active.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count, team.name ] }
+        if params[:week_id]
+          @week_id = params[:week_id]
+          @teams = @league.teams.active.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count({ week_id: params[:week_id] }), team.name ] }
+        else
+          @teams = @league.teams.active.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, -team.correct_picks_count({}), team.name ] }
+        end
       end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, team.name ] }
@@ -39,9 +49,9 @@ class API::TeamsController < API::BaseController
   def dead
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count({}), team.name] }
       else
-        @teams = @league.teams.active.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count, team.name] }
+        @teams = @league.teams.active.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count({}), team.name] }
       end
     else
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead.includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }

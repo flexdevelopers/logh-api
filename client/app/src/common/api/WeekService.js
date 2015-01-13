@@ -28,6 +28,20 @@ var WeekService = function($http, $log, $q, $state, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getLeagueWeeks = function(options) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + options.seasonId + "/weeks?league_id=" + options.leagueId)
+            .success(function(data) {
+                $log.debug("WeekService: getLeagueWeeks success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("WeekService: getLeagueWeeks failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.getWeek = function(seasonId, weekId) {
         var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/" + weekId)
             .success(function(data) {

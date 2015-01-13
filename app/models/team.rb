@@ -52,8 +52,12 @@ class Team < ActiveRecord::Base
     self.league.season.current_week
   end
 
-  def correct_picks_count
-    self.picks.correct.count
+  def correct_picks_count(options)
+    if options[:week_id]
+      self.picks.correct.where('week_id = ?', options[:week_id]).count
+    else
+      self.picks.correct.count
+    end
   end
 
   def kill

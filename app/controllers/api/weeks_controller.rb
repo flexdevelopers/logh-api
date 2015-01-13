@@ -3,8 +3,15 @@ class API::WeeksController < API::BaseController
   before_action :_set_week, only: [:show]
 
   # GET /api/seasons/:season_id/weeks
+  # GET /api/seasons/:season_id/weeks?league_id=:league_id
   def index
-    @weeks = @season.weeks.order(starts_at: :asc)
+    if params[:league_id]
+      league = League.find(params[:league_id])
+      start_week = league.start_week
+      @weeks = @season.weeks.started.where('starts_at >= ?', start_week[:starts_at]).order(starts_at: :desc)
+    else
+      @weeks = @season.weeks.order(starts_at: :asc)
+    end
     respond_with @weeks # rendered via app/views/api/weeks/index.json.rabl
   end
 

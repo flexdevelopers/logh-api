@@ -3,7 +3,7 @@ module.exports = angular.module('loghApp.league.view', [])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.league.view', {
-        url: '/{leagueId}',
+        url: '/{leagueId}?week',
         views: {
           leagueContent: {
             templateUrl: 'modules/private/league/view/league.view.tpl.html',
@@ -14,8 +14,11 @@ module.exports = angular.module('loghApp.league.view', [])
           league: function(leagueService, $stateParams) {
             return leagueService.getLeague($stateParams.seasonId, $stateParams.leagueId);
           },
-          leagueTeams: function(league, teamService) {
-            return teamService.getAllLeagueTeams({ seasonId: league.data.season_id, leagueId: league.data.id });
+          leagueWeeks: function(league, weekService) {
+            return weekService.getLeagueWeeks({ seasonId: league.data.season_id, leagueId: league.data.id });
+          },
+          leagueTeams: function(league, teamService, $stateParams) {
+            return teamService.getAllLeagueTeams({ seasonId: league.data.season_id, leagueId: league.data.id, weekId: $stateParams.week });
           }
         }
       });

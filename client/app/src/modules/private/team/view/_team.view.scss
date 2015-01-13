@@ -38,6 +38,12 @@
   .losers-tab {
     position: relative;
     margin-bottom: -1px;
+    .weeks {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+    }
   }
 
   .team-picks {
@@ -172,14 +178,28 @@
   }
 
   @media all and (max-width: 550px) {
+
     .pick-squad {
       font-size: 11px;
     }
+
     .team-picks {
       .game, .game-start {
         font-size: 10px !important;
       }
     }
+
+    .losers-tab {
+      position: relative;
+      margin-bottom: -1px;
+      .weeks {
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        background-color: #ddd;
+      }
+    }
+
   }
 
 }

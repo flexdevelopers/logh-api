@@ -41,7 +41,11 @@
   <ul class="nav nav-tabs">
     <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{leagueData.alive_team_count}} / </span>{{leagueData.team_count}} ]</a></li>
   </ul>
-  <a class="join-times" ng-show="!leagueData.start_week_complete && leagueData.max_teams_per_user > 1" ng-click="joinLeague(leagueData)">[ join up to {{leagueData.max_teams_per_user}}Xs ]</a>
+  <div class="weeks">
+    <select class="form-control" ng-change="changeWeek(selectedWeekId)" ng-model="selectedWeekId" ng-options="leagueWeek.id as leagueWeek.display for leagueWeek in leagueWeeks">
+      <option value="">All Weeks</option>
+    </select>
+  </div>
 </div>
 <div class="input-group custom-search-form filter-league-join">
   <input type="text" class="form-control" placeholder="Search..." ng-model="teamQuery">

@@ -2,9 +2,11 @@ object @team
 attributes :id, :name, :active, :alive, :paid, :message
 node(:started) { |team| team.league.started? }
 node(:start_week) { |team| team.league.start_week.display }
-node(:correct_picks_count) { |team| team.correct_picks_count }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
+node(:correct_picks_count) do |team|
+  team.correct_picks_count({ week_id: @week_id })
+end
 node(:last_pick) do |team|
   if team.alive
     if !team.current_pick

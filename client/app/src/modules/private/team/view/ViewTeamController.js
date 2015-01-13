@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal, $location, messageModel, userModel, userService, teamService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService, gameService, pickService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -16,6 +16,7 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
+  $scope.leagueWeeks = leagueWeeks.data;
 
   $scope.picks = picks.data;
 
@@ -23,10 +24,27 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
     isopen: false
   };
 
+  $scope.selectedWeekId = parseInt($stateParams.week);
+
+  $scope.correctPickCount = function(picks) {
+    var correctPicks = _.filter(picks, function(pick) {
+      return pick.correct;
+    });
+    return correctPicks.length;
+  };
+
   $scope.toggleDropdown = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
     $scope.teamDropdown.isopen = !$scope.teamDropdown.isopen;
+  };
+
+  $scope.changeWeek = function(weekId) {
+    if (weekId) {
+      $location.search('week', weekId); // add / replace the week query param
+    } else {
+      $location.search('week', null); // remove the week query param
+    }
   };
 
   $scope.contactCommish = function(team) {
@@ -203,6 +221,13 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
   };
 
+  $scope.$on("$destroy", function() {
+    // if navigating away from league or team view page, remove the week query param
+    if ($state.current.name != 'private.league.view' && $state.current.name != 'private.team.view') {
+      $location.search('week', null);
+    }
+  });
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -213,5 +238,5 @@ var ViewTeamController = function(team, leagueTeams, picks, $scope, $log, $modal
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'picks', '$scope', '$log', '$modal', '$location', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'leagueWeeks', 'picks', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

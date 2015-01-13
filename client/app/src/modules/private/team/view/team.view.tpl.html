@@ -1,5 +1,5 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
-<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No loser picked for this week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
+<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No loser picked for current week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick.locked">Your pick is locked for {{teamData.last_pick.week}}</div>
@@ -32,12 +32,17 @@
 <hr>
 <div class="losers-tab">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Losers [ {{teamData.pick_count}} ]</a></li>
+    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeekId))}} ]</a></li>
   </ul>
+  <div class="weeks">
+    <select class="form-control" ng-change="changeWeek(selectedWeekId)" ng-model="selectedWeekId" ng-options="leagueWeek.id as leagueWeek.display for leagueWeek in leagueWeeks">
+      <option value="">All Weeks</option>
+    </select>
+  </div>
 </div>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
-      <a ng-repeat="pick in picks" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
+      <a ng-repeat="pick in picks | weekPicksFilter:selectedWeekId" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
         <div class="row">
           <div class="week-name col-sm-7 col-md-7">
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
@@ -51,7 +56,7 @@
         </div>
       </a>
     </div>
-    <div class="no-picks-alert alert alert-info" ng-show="picks.length == 0">
+    <div class="no-picks-alert alert alert-info" ng-show="(picks | weekPicksFilter:selectedWeekId).length == 0">
       No picks
     </div>
 </div>
