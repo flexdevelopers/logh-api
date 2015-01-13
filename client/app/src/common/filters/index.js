@@ -9,4 +9,5 @@ module.exports = angular.module('loghApp.filters', [])
     .filter('openLeagueFilter', require('./OpenLeagueFilter'))
     .filter('managedLeagueFilter', require('./ManagedLeagueFilter'))
     .filter('timeFilter', require('./TimeFilter'))
+    .filter('weekPicksFilter', require('./WeekPicksFilter'))
 ;
