@@ -42,13 +42,16 @@ class Team < ActiveRecord::Base
     @coach_names ||= coaches.map(&:display_name)
   end
 
-  def current_pick
+  def current_pick(options)
     # this can be nil
-    self.current_week.picks.find_by(team: self) if self.current_week
+    if options[:week_id]
+      self.picks.where('week_id = ?', options[:week_id]).where(team: self)[0]
+    else
+      self.current_week.picks.where(team: self)[0]
+    end
   end
 
   def current_week
-    # this can be nil
     self.league.season.current_week
   end
 
