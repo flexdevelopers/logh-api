@@ -25,8 +25,12 @@ class Season < ActiveRecord::Base
   end
 
   def current_week
-    # this can be nil if no weeks have started for the season
-    self.weeks.started.order(starts_at: :desc)[0]
+    # the last week to start or the first week of the season
+    if self.weeks.started.length > 0
+      self.weeks.started.order(starts_at: :desc)[0]
+    else
+      self.weeks.order(starts_at: :asc)[0]
+    end
   end
 
 end
