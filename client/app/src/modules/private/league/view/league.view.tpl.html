@@ -52,7 +52,7 @@
 </div>
 <div class="league-container">
   <div class="league-teams list-group">
-    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in leagueTeams | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
+    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in leagueTeams | orderBy:predicate:reverse | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
       <div class="row">
         <div class="league-name col-sm-5 col-md-5">
           <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i><i class="fa fa-dollar fa-fw" ng-show="!isCoach(team) && isCommish(leagueData) && team.paid == true" title="Paid"></i> <span class="team-name" ng-class="{'inactive': !team.active || !team.alive}">{{team.name}}</span><br><span class="coach-name">Coach: {{coachName(team)}}</span>
