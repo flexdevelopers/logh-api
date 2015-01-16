@@ -9,7 +9,32 @@ node(:correct_picks_count) do |team|
 end
 node(:last_pick) do |team|
   current_pick = team.current_pick({ week_id: @week_id })
-  if !current_pick
+  if current_pick
+    if current_pick.locked? || team.coach_ids.include?(@user.id)
+      if current_pick.game
+        {
+            name: "#{current_pick.squad.short} | #{current_pick.week.name} | #{current_pick.game.start_display_short}",
+            abbrev: "#{current_pick.squad.abbrev} | #{current_pick.week.name} | #{current_pick.game.start_display_short}",
+            correct: current_pick.correct,
+            locked: current_pick.locked?
+        }
+      else
+        {
+            name: "#{current_pick.squad.short} | #{current_pick.week.name}",
+            abbrev: "#{current_pick.squad.abbrev} | #{current_pick.week.name}",
+            correct: current_pick.correct,
+            locked: current_pick.locked?
+        }
+      end
+    else
+      {
+          name: "Hidden | #{current_pick.week.name}",
+          abbrev: "Hidden | #{current_pick.week.name}",
+          correct: current_pick.correct,
+          locked: current_pick.locked?
+      }
+    end
+  else
     if team.alive
       {
           name: "No Pick | #{team.current_week.name}",
@@ -34,31 +59,6 @@ node(:last_pick) do |team|
             correct: false
         }
       end
-    end
-  else
-    if current_pick.locked? || team.coach_ids.include?(@user.id)
-      if current_pick.game
-        {
-            name: "#{current_pick.squad.short} | #{current_pick.week.name} | #{current_pick.game.start_display_short}",
-            abbrev: "#{current_pick.squad.abbrev} | #{current_pick.week.name} | #{current_pick.game.start_display_short}",
-            correct: current_pick.correct,
-            locked: current_pick.locked?
-        }
-      else
-        {
-            name: "#{current_pick.squad.short} | #{current_pick.week.name}",
-            abbrev: "#{current_pick.squad.abbrev} | #{current_pick.week.name}",
-            correct: current_pick.correct,
-            locked: current_pick.locked?
-        }
-      end
-    else
-      {
-          name: "Hidden | #{current_pick.week.name}",
-          abbrev: "Hidden | #{current_pick.week.name}",
-          correct: current_pick.correct,
-          locked: current_pick.locked?
-      }
     end
   end
 end
