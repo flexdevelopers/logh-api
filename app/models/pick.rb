@@ -11,7 +11,7 @@ class Pick < ActiveRecord::Base
   validates :squad_id, presence: true
   validates :squad_id, uniqueness: { scope: [:team_id, :week_type_id] }, unless: Proc.new { |pick| pick.squad.none? }
 
-  default_scope { includes(:week).order('weeks.starts_at ASC') }
+  default_scope { includes(:week).order('weeks.starts_at DESC') }
 
   scope :correct, -> { where(correct: true) }
 
