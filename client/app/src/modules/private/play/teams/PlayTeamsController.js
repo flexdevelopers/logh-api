@@ -6,6 +6,10 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
   $scope.currentTeamPage = 1;
   $scope.teamsPerPage = 100;
 
+  $scope.inPlay = function(team) {
+    return (team.active && team.alive) ? 0 : 1;
+  };
+
   $scope.showTeam = function(team) {
     $location.path('/season/' + $stateParams.seasonId + '/league/' + team.league.id + '/team/' + team.id);
   };

@@ -10,12 +10,12 @@ class API::TeamsController < API::BaseController
     @week_id = params[:week_id]
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, team.name ] }
+        @teams = @league.teams.includes(:league, :picks, :coaches)
       else
-        @teams = @league.teams.active.includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, team.name ] }
+        @teams = @league.teams.active.includes(:league, :picks, :coaches)
       end
     else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches).sort_by { |team| [ (team.alive && team.active) ? 0 : 1, team.name ] }
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches)
     end
     # rendered via app/views/api/teams/all.json.rabl
   end

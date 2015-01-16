@@ -19,8 +19,9 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.selectedWeekId = parseInt($stateParams.week);
 
-  $scope.predicate = 'correct_picks_count';
-  $scope.reverse = true;
+  $scope.inPlay = function(team) {
+    return (team.active && team.alive) ? 0 : 1;
+  };
 
   $scope.toggleDropdown = function($event) {
     $event.preventDefault();

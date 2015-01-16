@@ -1,6 +1,6 @@
 <div ng-show="teams.length > 0" class="leagues-container">
   <div class="my-teams list-group">
-    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in teams | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
+    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in teams | orderBy:[inPlay, 'name'] | aliveTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
       <div class="row">
         <div class="league-name col-sm-5 col-md-5">
           <i class="fa fa-comment fa-fw" ng-show="team.message.length > 0" title="Has message from commish"></i>
