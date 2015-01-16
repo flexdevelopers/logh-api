@@ -55,7 +55,9 @@
     <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in leagueTeams | orderBy:predicate:reverse | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
       <div class="row">
         <div class="league-name col-sm-5 col-md-5">
-          <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i><i class="fa fa-dollar fa-fw" ng-show="!isCoach(team) && isCommish(leagueData) && team.paid == true" title="Paid"></i> <span class="team-name" ng-class="{'inactive': !team.active || !team.alive}">{{team.name}}</span><br><span class="coach-name">Coach: {{coachName(team)}}</span>
+          <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i><i class="fa fa-dollar fa-fw" ng-show="!isCoach(team) && isCommish(leagueData) && team.paid == true" title="Paid"></i> <span class="team-name" ng-class="{'inactive': !team.active || !team.alive}">{{team.name}}</span>
+          <br>
+          <span class="coach-name">Coach: {{coachName(team)}}</span>
         </div>
         <div class="col-sm-7 col-md-7">
           <span class="current-pick" ng-class="{'no-pick': hasNoPick(team)}" ng-show="team.active && team.started">
