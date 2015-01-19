@@ -51,6 +51,7 @@ class Week < ActiveRecord::Base
   end
 
   def remind
+    self.update!(reminder_sent_at: Time.zone.now)
     self.season.leagues.started.find_each do |started_league|
       LeagueMailer.pick_reminder(started_league, self).deliver if started_league.coach_emails.any?
     end
