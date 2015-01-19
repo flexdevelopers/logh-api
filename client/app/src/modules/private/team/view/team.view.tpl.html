@@ -7,7 +7,7 @@
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
       <button type="button" class="teams-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCoach(teamData) && !isCommish(teamData) && !isAdmin()">
-        <i class="fa fa-dollar fa-fw" ng-show="isCommish(teamData) && teamData.paid == true" title="Paid"></i> <strong><span class="team-name" ng-class="{'team-inactive': !teamData.active || !teamData.alive, 'disabled': !isCoach(teamData) && !isCommish(teamData) && !isAdmin()}">{{teamData.name}}</span> <span ng-show="isCoach(teamData) || isCommish(teamData)" class="caret"></span></strong>
+        <i class="fa fa-check fa-fw" ng-show="isCommish(teamData) && teamData.paid == true" title="Paid"></i> <strong><span class="team-name" ng-class="{'team-inactive': !teamData.active || !teamData.alive, 'disabled': !isCoach(teamData) && !isCommish(teamData) && !isAdmin()}">{{teamData.name}}</span> <span ng-show="isCoach(teamData) || isCommish(teamData)" class="caret"></span></strong>
       </button>
       <ul class="dropdown-menu teams-btn-menu" role="menu">
         <li><a ng-click="toggleDropdown($event);editTeam(teamData)">Edit {{teamData.name}}</a></li>
