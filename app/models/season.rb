@@ -2,7 +2,7 @@ class Season < ActiveRecord::Base
   has_many :weeks
   has_many :leagues
 
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: false }
   validates :starts_at, presence: true
   validates :ends_at, presence: true
 
