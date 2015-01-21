@@ -24,7 +24,7 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
     isopen: false
   };
 
-  $scope.selectedWeekId = parseInt($stateParams.week);
+  $scope.selectedWeekSlug = $stateParams.week;
 
   $scope.correctPickCount = function(picks) {
     var correctPicks = _.filter(picks, function(pick) {
@@ -39,9 +39,9 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
     $scope.teamDropdown.isopen = !$scope.teamDropdown.isopen;
   };
 
-  $scope.changeWeek = function(weekId) {
-    if (weekId) {
-      $location.search('week', weekId); // add / replace the week query param
+  $scope.changeWeek = function(slug) {
+    if (slug) {
+      $location.search('week', slug); // add / replace the week query param
     } else {
       $location.search('week', null); // remove the week query param
     }

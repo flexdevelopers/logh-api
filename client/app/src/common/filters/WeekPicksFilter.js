@@ -1,10 +1,10 @@
 var WeekPicksFilter = function() {
-  return function(picks, weekId) {
-    if (!weekId || isNaN(weekId)) {
+  return function(picks, weekSlug) {
+    if (!weekSlug) {
       return picks;
     }
     var weekPicks = _.filter(picks, function(pick) {
-      return pick.week_id == weekId;
+      return pick.week_slug == weekSlug;
     });
     return weekPicks;
   };

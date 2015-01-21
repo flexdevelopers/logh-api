@@ -18,7 +18,7 @@ module.exports = angular.module('loghApp.league.view', [])
             return weekService.getLeagueWeeks({ seasonId: league.data.season_id, leagueId: league.data.id });
           },
           leagueTeams: function(league, teamService, $stateParams) {
-            return teamService.getAllLeagueTeams({ seasonId: league.data.season_id, leagueId: league.data.id, weekId: $stateParams.week });
+            return teamService.getAllLeagueTeams({ seasonId: league.data.season_id, leagueId: league.data.id, weekSlug: $stateParams.week });
           }
         }
       });

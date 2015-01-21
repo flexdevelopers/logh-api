@@ -32,17 +32,17 @@
 <hr>
 <div class="losers-tab">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeekId))}} ]</a></li>
+    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeekSlug))}} ]</a></li>
   </ul>
   <div class="weeks">
-    <select class="form-control" ng-change="changeWeek(selectedWeekId)" ng-model="selectedWeekId" ng-options="leagueWeek.id as leagueWeek.display for leagueWeek in leagueWeeks">
+    <select class="form-control" ng-change="changeWeek(selectedWeekSlug)" ng-model="selectedWeekSlug" ng-options="leagueWeek.slug as leagueWeek.display for leagueWeek in leagueWeeks">
       <option value="">All Weeks</option>
     </select>
   </div>
 </div>
 <div class="team-container" style="clear:both;">
     <div class="team-picks list-group">
-      <a ng-repeat="pick in picks | weekPicksFilter:selectedWeekId" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
+      <a ng-repeat="pick in picks | weekPicksFilter:selectedWeekSlug" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
         <div class="row">
           <div class="week-name col-sm-7 col-md-7">
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
@@ -56,7 +56,7 @@
         </div>
       </a>
     </div>
-    <div class="no-picks-alert alert alert-info" ng-show="(picks | weekPicksFilter:selectedWeekId).length == 0">
+    <div class="no-picks-alert alert alert-info" ng-show="(picks | weekPicksFilter:selectedWeekSlug).length == 0">
       No picks
     </div>
 </div>

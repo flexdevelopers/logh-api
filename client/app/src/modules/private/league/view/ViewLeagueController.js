@@ -17,7 +17,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     isopen: false
   };
 
-  $scope.selectedWeekId = parseInt($stateParams.week);
+  $scope.selectedWeekSlug = $stateParams.week;
 
   $scope.inPlay = function(team) {
     return (team.active && team.alive) ? 0 : 1;
@@ -29,13 +29,12 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     $scope.leagueDropdown.isopen = !$scope.leagueDropdown.isopen;
   };
 
-  $scope.changeWeek = function(weekId) {
-    if (weekId) {
-      $location.search('week', weekId); // add / replace the week query param
+  $scope.changeWeek = function(slug) {
+    if (slug) {
+      $location.search('week', slug); // add / replace the week query param
     } else {
       $location.search('week', null); // remove the week query param
     }
-    $location.path($location.path());
   };
 
   $scope.search = function(item) {

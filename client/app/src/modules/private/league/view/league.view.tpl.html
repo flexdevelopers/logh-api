@@ -42,7 +42,7 @@
     <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{leagueData.alive_team_count}} / </span>{{leagueData.team_count}} ]</a></li>
   </ul>
   <div class="weeks">
-    <select class="form-control" ng-change="changeWeek(selectedWeekId)" ng-model="selectedWeekId" ng-options="leagueWeek.id as leagueWeek.display for leagueWeek in leagueWeeks">
+    <select class="form-control" ng-change="changeWeek(selectedWeekSlug)" ng-model="selectedWeekSlug" ng-options="leagueWeek.slug as leagueWeek.display for leagueWeek in leagueWeeks">
       <option value="">All Weeks</option>
     </select>
   </div>

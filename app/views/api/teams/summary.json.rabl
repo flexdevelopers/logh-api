@@ -5,10 +5,10 @@ node(:start_week) { |team| team.league.start_week.display }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
 node(:correct_picks_count) do |team|
-  team.correct_picks_count({ week_id: @week_id })
+  team.correct_picks_count({ week_id: (@week) ? @week.id : nil })
 end
 node(:last_pick) do |team|
-  current_pick = team.current_pick({ week_id: @week_id })
+  current_pick = team.current_pick({ week_id: (@week) ? @week.id : nil })
   if current_pick
     if current_pick.locked? || team.coach_ids.include?(@user.id)
       if current_pick.game

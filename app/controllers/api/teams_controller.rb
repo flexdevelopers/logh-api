@@ -5,9 +5,9 @@ class API::TeamsController < API::BaseController
   before_action :_verify_league_acceptance, only: [:create]
 
   # GET /api/seasons/:season_id/teams/all
-  # GET /api/seasons/:season_id/teams/all?league_id=:league_id&week_id=:week_id
+  # GET /api/seasons/:season_id/teams/all?league_id=:league_id&week_slug=:week_slug
   def all
-    @week_id = params[:week_id]
+    @week = Season.find(params[:season_id]).weeks.where(slug: params[:week_slug])[0] if params[:week_slug]
     if params[:league_id]
       if _is_commish_of?(@league)
         @teams = @league.teams.includes(:league, :picks, :coaches)
