@@ -7,7 +7,7 @@ var EditLeagueController = function(weeks, league, $scope, $log, $location, $mod
     $scope.leagueData = angular.copy(league);
 
     $scope.showLeague = function(league) {
-      $location.path('/season/' + league.season_id + '/league/' + league.id);
+      $location.url('/season/' + league.season_id + '/league/' + league.id);
     };
 
     $scope.updateLeague = function(league) {

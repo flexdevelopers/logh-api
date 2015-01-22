@@ -3,7 +3,7 @@ var PrivateLeaguesController = function(privateLeagues, $scope, $log, $location)
     $scope.privateLeagues = privateLeagues.data;
 
     $scope.showLeague = function(league) {
-      $location.path('/season/' + league.season_id + '/league/' + league.id);
+      $location.url('/season/' + league.season_id + '/league/' + league.id);
     };
 
     /**

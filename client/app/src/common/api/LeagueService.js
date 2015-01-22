@@ -90,7 +90,7 @@ var LeagueService = function($http, $log, $location, $q, $state, apiConfig, mess
             .success(function(data) {
                 $log.debug("LeagueService: createLeague success");
                 messageModel.setMessage(data.message, true);
-                $location.path('/season/' + leagueParams.season_id + '/league/' + data.league_id);
+                $location.url('/season/' + leagueParams.season_id + '/league/' + data.league_id);
                 return data;
             })
             .error(function(data) {

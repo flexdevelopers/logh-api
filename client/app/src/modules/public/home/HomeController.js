@@ -25,7 +25,7 @@ var HomeController = function($scope, $log, $location, $modal, weekService, leag
     };
 
     $scope.joinLeague = function(seasonId) {
-      $location.path('/season/' + seasonId + '/leagues/public');
+      $location.url('/season/' + seasonId + '/leagues/public');
     };
 
     /**

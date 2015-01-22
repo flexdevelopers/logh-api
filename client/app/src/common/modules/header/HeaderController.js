@@ -30,7 +30,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     };
 
     $scope.home = function() {
-        $location.path('/');
+        $location.url('/');
     };
 
     $scope.faq = function() {
@@ -75,11 +75,11 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     };
 
     $scope.play = function(seasonId) {
-      $location.path('/season/' + seasonId + '/my/teams');
+      $location.url('/season/' + seasonId + '/my/teams');
     };
 
     $scope.joinLeague = function(seasonId) {
-      $location.path('/season/' + seasonId + '/leagues/public');
+      $location.url('/season/' + seasonId + '/leagues/public');
     };
 
     $scope.createLeague = function(seasonId) {
@@ -105,7 +105,7 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
     };
 
     $scope.userProfile = function() {
-        $location.path('/user');
+        $location.url('/user');
     };
 
     $scope.signin = function(credentials) {

@@ -12,15 +12,15 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
   $scope.changeSeason = function(seasonId) {
     seasonModel.setSelectedSeasonId(seasonId);
     var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + seasonId);
-    $location.path(newPath);
+    $location.url(newPath);
   };
 
   $scope.myTeams = function(seasonId) {
-    $location.path('/season/' + seasonId + '/my/teams');
+    $location.url('/season/' + seasonId + '/my/teams');
   };
 
   $scope.myLeagues = function(seasonId) {
-    $location.path('/season/' + seasonId + '/my/leagues');
+    $location.url('/season/' + seasonId + '/my/leagues');
   };
 
   $scope.resetSearch = function() {
@@ -57,7 +57,7 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
   };
 
   $scope.joinLeague = function(seasonId) {
-    $location.path('/season/' + seasonId + '/leagues/public');
+    $location.url('/season/' + seasonId + '/leagues/public');
   };
 
     /**

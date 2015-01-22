@@ -123,7 +123,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
   };
 
   $scope.showTeam = function(team) {
-    $location.path($location.path() + '/team/' + team.id);
+    $location.path($location.path() + '/team/' + team.id); // path will retain query params
   };
 
   $scope.contactCommish = function(league) {

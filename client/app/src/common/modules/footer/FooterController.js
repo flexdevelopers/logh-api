@@ -1,7 +1,7 @@
 var FooterController = function($scope, $log, $location) {
 
   $scope.home = function() {
-    $location.path('/');
+    $location.url('/');
   };
 
   /**

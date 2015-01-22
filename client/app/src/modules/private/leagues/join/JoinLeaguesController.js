@@ -9,17 +9,17 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
   $scope.leagueQuery = '';
 
   $scope.publicLeagues = function(seasonId) {
-    $location.path('/season/' + seasonId + '/leagues/public');
+    $location.url('/season/' + seasonId + '/leagues/public');
   };
 
   $scope.privateLeagues = function(seasonId) {
-    $location.path('/season/' + seasonId + '/leagues/private');
+    $location.url('/season/' + seasonId + '/leagues/private');
   };
 
   $scope.changeSeason = function(seasonId) {
     seasonModel.setSelectedSeasonId(seasonId);
     var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + seasonId);
-    $location.path(newPath);
+    $location.url(newPath);
   };
 
   $scope.search = function(item) {

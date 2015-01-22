@@ -11,7 +11,7 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
   };
 
   $scope.showTeam = function(team) {
-    $location.path('/season/' + $stateParams.seasonId + '/league/' + team.league.id + '/team/' + team.id);
+    $location.url('/season/' + $stateParams.seasonId + '/league/' + team.league.id + '/team/' + team.id);
   };
 
   $scope.hasNoPick = function(team) {

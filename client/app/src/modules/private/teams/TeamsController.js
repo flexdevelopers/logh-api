@@ -15,19 +15,19 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
     };
 
     $scope.createTeam = function(seasonId) {
-        $location.path('/season/' + seasonId + '/leagues/public');
+        $location.url('/season/' + seasonId + '/leagues/public');
     };
 
     $scope.aliveTeams = function(seasonId) {
-      $location.path('/season/' + seasonId + '/teams/alive');
+      $location.url('/season/' + seasonId + '/teams/alive');
     };
 
     $scope.deadTeams = function(seasonId) {
-      $location.path('/season/' + seasonId + '/teams/dead');
+      $location.url('/season/' + seasonId + '/teams/dead');
     };
 
     $scope.showTeam = function(seasonId, team) {
-      $location.path('/season/' + seasonId + '/league/' + team.league.id + '/team/' + team.id);
+      $location.url('/season/' + seasonId + '/league/' + team.league.id + '/team/' + team.id);
     };
 
     /**

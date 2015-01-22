@@ -163,7 +163,7 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
   $scope.showTeam = function(team) {
     var teamPath = $location.path().replace(/[^\/]*$/, team.id);
-    $location.path(teamPath);
+    $location.url(teamPath);
   };
 
   $scope.showLeague = function(team) {

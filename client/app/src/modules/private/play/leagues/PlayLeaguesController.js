@@ -32,11 +32,11 @@ var PlayLeaguesController = function(leagues, $scope, $log, $location, $modal, u
   };
 
   $scope.joinLeague = function(season) {
-    $location.path('/season/' + season.id + '/leagues/public');
+    $location.url('/season/' + season.id + '/leagues/public');
   };
 
   $scope.viewLeague = function(league) {
-    $location.path('/season/' + league.season_id + '/league/' + league.id);
+    $location.url('/season/' + league.season_id + '/league/' + league.id);
   };
 
   $scope.starts = function(league) {

@@ -17,11 +17,11 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location) {
   });
 
   $scope.showWeek = function(week) {
-    $location.path($location.path() + '/weeks/' + week.id);
+    $location.url($location.path() + '/weeks/' + week.id);
   };
 
   $scope.showLeague = function(league) {
-    $location.path('/season/' + league.season_id + '/league/' + league.id);
+    $location.url('/season/' + league.season_id + '/league/' + league.id);
   };
 
   /**
