@@ -221,13 +221,6 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
   };
 
-  $scope.$on("$destroy", function() {
-    // if navigating away from league or team view page, remove the week query param
-    if ($state.current.name != 'private.league.view' && $state.current.name != 'private.team.view') {
-      $location.search('week', null);
-    }
-  });
-
   /**
    * Invoked on startup, like a constructor.
    */
