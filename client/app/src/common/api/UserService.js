@@ -13,7 +13,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
-                    $location.path(redirect);
+                    $location.url(redirect);
                     if (['/', '/signin', '/register'].indexOf(redirect) !== -1) {
                       userService.getCurrentUser();
                     }
@@ -98,7 +98,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param
-                    $location.path(redirect);
+                    $location.url(redirect);
                     if (['/', '/signin', '/register'].indexOf(redirect) !== -1) {
                       userService.getCurrentUser();
                     }

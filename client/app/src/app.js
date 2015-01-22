@@ -177,7 +177,7 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
         responseError: function (rejection) {
           var message;
           if (rejection.status === 401) {
-                var path = $location.path();
+                var url = $location.url();
                 message = rejection.data.message;
                 $timeout(function () {
                   userModel.resetUser();
@@ -185,14 +185,14 @@ loghApp.factory('authInterceptor', function ($q, $window, $location, $timeout, u
                         messageModel.setMessage(message, false);
                     } else {
                         messageModel.setMessage(message, true);
-                        $location.path('/signin').search({ redirect: encodeURIComponent(path) });
+                        $location.url('/signin').search({ redirect: encodeURIComponent(url) });
                     }
                 }, 200);
           } else if (rejection.status === 404) {
               message = { type: 'danger', content: 'Houston, we have a problem. Page not found.' };
               $timeout(function () {
                   messageModel.setMessage(message, true);
-                  $location.path('/');
+                  $location.url('/');
               }, 200);
           } else if (rejection.status.toString().match(/^5\d{2}$/)) {
             // matches 5xx
