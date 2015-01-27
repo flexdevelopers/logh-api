@@ -41,5 +41,5 @@ node(:last_pick) do |team|
   end
 end
 child :league do
-  attributes :id, :name, :season_id
+  attributes :id, :name, :season_id, :max_picks_per_week
 end
