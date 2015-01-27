@@ -195,30 +195,10 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
   };
 
   $scope.makePick = function(team, pick) {
-
-    if (!$scope.isCoach(team) || (pick && pick.locked)) return;
-
-    var modalInstance = $modal.open({
-      templateUrl: 'modules/private/pick/make/pick.make.tpl.html',
-      controller: 'PickMakeController',
-      resolve: {
-        picks: function() {
-          return $scope.picks;
-        },
-        currentGames: function() {
-          return gameService.getCurrentGames(team.league.id);
-        }
-      }
-    });
-
-    modalInstance.result.then(function(pick) {
-      pick.team_id = $scope.teamData.id;
-      pickService.createPick(pick);
-    }, function () {
-      $log.debug('Make pick modal dismissed...');
-      messageModel.setMessage({ type: 'warning', content: 'Pick loser cancelled' }, false);
-    });
-
+    if (!$scope.isCoach(team) || (pick && pick.locked)) {
+      return;
+    }
+    $location.url($location.path() + '/pick');
   };
 
   /**

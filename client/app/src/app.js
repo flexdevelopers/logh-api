@@ -59,6 +59,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/team/view').name,
     require('./modules/private/team/edit').name,
     require('./modules/private/team/message').name,
+    require('./modules/private/team/pick').name,
 
     // teams
     require('./modules/private/teams').name,
@@ -69,9 +70,6 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/play').name,
     require('./modules/private/play/leagues').name,
     require('./modules/private/play/teams').name,
-
-    // pick
-    require('./modules/private/pick/make').name,
 
     // admin
     require('./modules/private/admin').name,

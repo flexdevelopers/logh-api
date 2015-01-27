@@ -1,8 +1,7 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
-<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No loser picked for this week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
+<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNoPick(teamData)">No losers picked for this week. <span ng-show="isCoach(teamData)"><a class="alert-link" ng-click="makePick(teamData)">Pick</a> now.</span></div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
-<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can make your first pick when the league starts - {{teamData.start_week_display}}</div>
-<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && teamData.alive && teamData.last_pick.locked">Your pick is locked for {{teamData.last_pick.week}}</div>
+<div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can pick losers when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
   <div class="col-sm-8 col-md-8">
     <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
@@ -24,7 +23,7 @@
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span></button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span><span ng-show="teamData.league.max_picks_per_week !== 1">s</span></button>
     <h3 class="team-meta" ng-show="!isCoach(teamData)"><small>Coach [ {{teamData.coach_names.join(', ')}} ]</small></h3>
   </div>
 </div>

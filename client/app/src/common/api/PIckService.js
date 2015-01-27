@@ -1,4 +1,4 @@
-var PickService = function($http, $log, $state, apiConfig, messageModel) {
+var PickService = function($http, $log, $q, apiConfig, messageModel) {
 
   this.getPicks = function(params) {
     var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks";
@@ -17,27 +17,25 @@ var PickService = function($http, $log, $state, apiConfig, messageModel) {
   };
 
   this.createPick = function(pickParams) {
-    var apiUrl = apiConfig.baseURL + "teams/" + pickParams.team_id + "/picks";
+    var deferred = $q.defer(),
+        apiUrl = apiConfig.baseURL + "teams/" + pickParams.team_id + "/picks";
 
-    var promise = $http.post(apiUrl, { pick: pickParams })
+    $http.post(apiUrl, { pick: pickParams })
       .success(function(data) {
         $log.debug("PickService: createPick success");
-        // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
-        // but may be resolved with future releases of angular-ui-router
-        $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
-        messageModel.setMessage(data.message, false);
-        return data;
+        messageModel.setMessage(data.message, true);
+        deferred.resolve(data);
       })
       .error(function(data) {
         $log.debug("PickService: createPick failed");
-        messageModel.setMessage(data.message, false);
-        return data;
+        messageModel.setMessage(data.message, true);
+        deferred.reject();
       });
 
-    return promise;
+    return deferred.promise;
   };
 
 };
 
-PickService.$inject = ['$http', '$log', '$state', 'apiConfig', 'messageModel'];
+PickService.$inject = ['$http', '$log', '$q', 'apiConfig', 'messageModel'];
 module.exports = PickService;

@@ -1,0 +1,60 @@
+.week-desc {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.make-picks-header-row {
+  margin-bottom: 15px;
+}
+
+.make-picks-btn-group {
+  padding-top: 20px;
+  float: right;
+}
+
+.week-games {
+
+  .game-row {
+    padding: 0 10px 0 10px;
+  }
+
+  .invalid-game {
+    .game-display {
+      text-decoration: line-through;
+    }
+  }
+
+  .is-picked {
+    background-color: #f5f5f5;
+  }
+
+  .invalid-squad {
+    text-decoration: line-through;
+  }
+
+  .list-group-item {
+
+    &.disabled {
+      cursor: not-allowed;
+      background-color: #f5f5f5;
+    }
+
+    .game-display, .start-time {
+      font-size: 11px;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .record-score {
+      font-size: 11px;
+      color: #999;
+    }
+
+    .badge {
+      float: right;
+    }
+
+  }
+
+}
+
