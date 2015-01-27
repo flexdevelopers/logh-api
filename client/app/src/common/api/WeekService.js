@@ -56,6 +56,20 @@ var WeekService = function($http, $log, $q, $state, apiConfig, messageModel) {
         return promise;
     };
 
+    this.getCurrentWeek = function(seasonId, leagueId) {
+        var promise = $http.get(apiConfig.baseURL + "seasons/" + seasonId + "/weeks/current?league_id=" + leagueId)
+            .success(function(data) {
+                $log.debug("WeekService: getCurrentWeek success");
+                return data;
+            })
+            .error(function(data) {
+                $log.debug("WeekService: getCurrentWeek failed");
+                return data;
+            });
+
+        return promise;
+    };
+
     this.getWeekTypes = function() {
         var apiUrl = apiConfig.baseURL + "admin/week_types";
 

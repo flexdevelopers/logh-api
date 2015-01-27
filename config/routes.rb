@@ -34,6 +34,7 @@ LoghApi::Application.routes.draw do
       end
       resources :weeks, only: [:index, :show] do
         get 'available', on: :collection, to: 'weeks#available'
+        get 'current', on: :collection, to: 'weeks#current'
       end
     end
 

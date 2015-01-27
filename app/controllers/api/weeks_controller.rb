@@ -1,5 +1,6 @@
 class API::WeeksController < API::BaseController
   before_action :_set_season
+  before_action :_set_league, only: [:current]
   before_action :_set_week, only: [:show]
 
   # GET /api/seasons/:season_id/weeks
@@ -21,6 +22,16 @@ class API::WeeksController < API::BaseController
     respond_with @weeks # rendered via app/views/api/weeks/available.json.rabl
   end
 
+  # GET /api/seasons/:season_id/weeks/current?league_id=27
+  def current
+    if @league.started?
+      @week = @league.season.current_week
+    else
+      @week = @league.start_week
+    end
+    respond_with @week # rendered via app/views/api/weeks/show.json.rabl
+  end
+
   # GET /api/seasons/:season_id/weeks/:id
   def show
     respond_with @week # rendered via app/views/api/weeks/show.json.rabl
@@ -34,6 +45,10 @@ class API::WeeksController < API::BaseController
 
   def _set_season
     @season = Season.find(params[:season_id])
+  end
+
+  def _set_league
+    @league = League.find(params[:league_id])
   end
 
   def _set_week
