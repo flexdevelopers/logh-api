@@ -24,6 +24,10 @@ class Week < ActiveRecord::Base
     "#{self.name} [ #{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")} ]"
   end
 
+  def date_range
+    "#{self.starts_at.strftime("%b %-d")} - #{self.ends_at.strftime("%b %-d")}"
+  end
+
   def started?
     self.starts_at <= Time.zone.now
   end
