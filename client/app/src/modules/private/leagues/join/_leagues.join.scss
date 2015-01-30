@@ -5,12 +5,6 @@
 .public-league-meta, .private-league-meta {
   font-size: 11px;
   color: #999;
-  .loseorgohome {
-    display: inline;
-  }
-  .logh {
-    display: none;
-  }
 }
 
 .public-leagues, .private-leagues {
@@ -79,15 +73,6 @@
   .public-leagues, .private-leagues {
     .league-commish {
       display: none;
-    }
-  }
-
-  .public-league-meta, .private-league-meta {
-    .loseorgohome {
-      display: none;
-    }
-    .logh {
-      display: inline;
     }
   }
 

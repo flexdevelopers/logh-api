@@ -6,9 +6,9 @@ League details:
 
 Commish: <%= @invitation.league.commish_names.join(', ') %>
 <% if @invitation.league.elimination  %>
-Format: LoseOrGoHome [ single elimination ]
+Format: Survivor [ single elimination ]
 <% else %>
-Format: Biggest Loser [ no elimination ]
+Format: Pick'em [ no elimination ]
 <% end %>
 Starts: <%= @invitation.league.start_week.display %>
 

@@ -34,7 +34,7 @@
     <div class="row">
       <div class="league-name col-sm-6 col-md-6">{{publicLeague.name}}<br><span class="team-count league-commish">Commish: {{publicLeague.commish_names.join(', ')}}</span></div>
       <div class="col-sm-6 col-md-6">
-        <span class="public-league-meta"><span ng-show="publicLeague.elimination"><span class="loseorgohome">LoseOrGoHome</span><span class="logh">LOGH</span> [ single elimination ]</span><span ng-show="!publicLeague.elimination">Biggest Loser [ no elimination ]</span><br>Starts {{publicLeague.start_week}}</span>
+        <span class="public-league-meta"><span ng-show="publicLeague.elimination">Survivor [ single elimination ]</span><span ng-show="!publicLeague.elimination">Pick'em [ no elimination ]</span><br>Starts {{publicLeague.start_week}}</span>
         <span class="badge"><span ng-show="publicLeague.elimination">{{publicLeague.alive_team_count}}/</span>{{publicLeague.team_count}} team<span ng-show="publicLeague.team_count !== 1">s</span></span>
       </div>
     </div>
@@ -56,7 +56,7 @@
     <div class="row">
       <div class="league-name col-sm-6 col-md-6">{{privateLeague.name}}<br><span class="team-count league-commish">Commish: {{privateLeague.commish_names.join(', ')}}</span></div>
       <div class="col-sm-6 col-md-6">
-        <span class="private-league-meta"><span ng-show="privateLeague.elimination"><span class="loseorgohome">LoseOrGoHome</span><span class="logh">LOGH</span> [ single elimination ]</span><span ng-show="!privateLeague.elimination">Biggest Loser [ no elimination ]</span><br>Starts {{privateLeague.start_week}}</span>
+        <span class="private-league-meta"><span ng-show="privateLeague.elimination">Survivor [ single elimination ]</span><span ng-show="!privateLeague.elimination">Pick'em [ no elimination ]</span><br>Starts {{privateLeague.start_week}}</span>
         <span class="badge"><span ng-show="privateLeague.elimination">{{privateLeague.alive_team_count}}/</span>{{privateLeague.team_count}} team<span ng-show="privateLeague.team_count !== 1">s</span></span>
       </div>
     </div>
