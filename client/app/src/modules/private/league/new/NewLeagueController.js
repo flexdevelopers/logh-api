@@ -11,7 +11,8 @@ var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance
         start_week_id: $scope.weeks[0].id,
         public: true,
         elimination: true,
-        max_teams_per_user: ''
+        max_teams_per_user: '',
+        max_picks_per_week: 1
     };
 
     $scope.getSeasonWeeks = function() {
