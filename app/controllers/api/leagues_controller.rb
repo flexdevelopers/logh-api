@@ -48,6 +48,7 @@ class API::LeaguesController < API::BaseController
       return forbidden()
     end
     @league = @season.leagues.new(_league_params.except(:nickname))
+    @league[:allow_dups] = true if _league_params[:max_picks_per_week] != 1
     @league.commishes << current_user
     if @league.save
       render json: { league_id: @league.id, message: { type: SUCCESS, content: "#{@league[:name]} league created" } }, status: :ok
@@ -63,6 +64,7 @@ class API::LeaguesController < API::BaseController
     else
       league_params = _league_params
     end
+    @league[:allow_dups] = true if _league_params[:max_picks_per_week] != 1
     if @league.update(league_params)
       render json: { message: { type: SUCCESS, content: "#{@league[:name]} league updated" } }, status: :ok
     else
@@ -118,7 +120,7 @@ class API::LeaguesController < API::BaseController
   private
 
     def _league_params
-      params.require(:league).permit(:name, :nickname, :public, :elimination, :start_week_id, :max_teams_per_user, :max_picks_per_week, :message)
+      params.require(:league).permit(:name, :nickname, :public, :elimination, :start_week_id, :max_teams_per_user, :max_picks_per_week, :allow_dups, :message)
     end
 
     def _set_season
