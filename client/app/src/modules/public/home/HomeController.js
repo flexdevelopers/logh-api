@@ -16,8 +16,9 @@ var HomeController = function($scope, $log, $location, $modal, leagueService, me
       });
     };
 
-    $scope.joinLeague = function(seasonId) {
-      $location.url('/season/' + seasonId + '/leagues/public');
+    $scope.joinLeague = function() {
+      var season = seasonModel.getCurrentSeason();
+      $location.url('/season/' + season.id + '/leagues/public');
     };
 
     /**

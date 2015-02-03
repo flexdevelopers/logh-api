@@ -47,8 +47,9 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
   };
 
-  $scope.joinLeague = function(seasonId) {
-    $location.url('/season/' + seasonId + '/leagues/public');
+  $scope.joinLeague = function() {
+    var season = seasonModel.getCurrentSeason();
+    $location.url('/season/' + season.id + '/leagues/public');
   };
 
     /**

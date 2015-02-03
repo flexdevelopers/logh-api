@@ -1,4 +1,4 @@
-var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, messageModel, leagueService) {
+var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, messageModel, seasonModel, leagueService) {
 
   $scope.leagues = leagues.data;
 
@@ -18,7 +18,8 @@ var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, mes
 
   };
 
-  $scope.joinLeague = function(season) {
+  $scope.joinLeague = function() {
+    var season = seasonModel.getCurrentSeason();
     $location.url('/season/' + season.id + '/leagues/public');
   };
 
@@ -41,6 +42,6 @@ var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, mes
 
 };
 
-MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'leagueService'];
+MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'seasonModel', 'leagueService'];
 module.exports = MyLeaguesController;
 

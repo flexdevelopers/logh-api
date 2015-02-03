@@ -11,7 +11,7 @@
   <div collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
       <li ng-class="{'active': isState(['private.play.teams', 'private.play.leagues'])}"><a ng-click="play(selectedSeasonId)">My Teams & Leagues</a></li>
-      <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague(selectedSeasonId)">Join League</a></li>
+      <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague()">Join League</a></li>
       <li><a ng-click="createLeague()">Create League</a></li>
       <li><a ng-click="faq()">FAQ</a></li>
       <li class="dropdown">
