@@ -4,13 +4,9 @@ Your job, if you accept, is to pick a different <%= @invitation.league.season.se
 
 League details:
 
-Commish: <%= @invitation.league.commish_names.join(', ') %>
-<% if @invitation.league.elimination  %>
-Format: Survivor [ single elimination ]
-<% else %>
-Format: Pick'em [ no elimination ]
-<% end %>
 Starts: <%= @invitation.league.start_week.display %>
+Commish: <%= @invitation.league.commish_names.join(', ') %>
+<%= "Format: #{@invitation.league.format}" %>
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included from <%= @user.display_name %>:

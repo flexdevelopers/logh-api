@@ -34,6 +34,20 @@ class League < ActiveRecord::Base
     start_week.started?
   end
 
+  def format
+    if self.elimination
+      "Survivor [ 1 loser per week, no dups ]"
+    elsif !self.elimination && self.max_picks_per_week == 1 && !self.allow_dups
+      "Pick'em [ 1 loser per week, no dups ]"
+    elsif !self.elimination && self.max_picks_per_week == 1 && self.allow_dups
+      "Pick'em [ 1 loser per week ]"
+    elsif !self.elimination && self.max_picks_per_week == 0
+      "Pick'em [ Pick all games ]"
+    elsif !self.elimination && self.max_picks_per_week > 1
+      "Pick'em [ #{self.max_picks_per_week} losers per week ]"
+    end
+  end
+
   def coach_emails
     emails = teams.active.alive.map(&:coach_emails)
     emails.flatten.uniq

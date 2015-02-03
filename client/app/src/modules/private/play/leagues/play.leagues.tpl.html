@@ -7,7 +7,7 @@
           <i class="fa fa-user fa-fw" title="My league" ng-show="isCommish(league)"></i> {{league.name}}<br><span class="team-count league-commish">Commish: {{league.commish_names.join(', ')}}</span>
         </div>
         <div class="col-sm-7 col-md-7">
-          <span class="my-league-meta"><span ng-show="league.elimination">Survivor [ single elimination ]</span><span ng-show="!league.elimination">Pick'em [ no elimination ]</span><br>{{starts(league)}}</span>
+          <span class="my-league-meta">{{league.format}}<br>{{starts(league)}}</span>
           <span class="badge"><span ng-show="league.elimination">{{league.alive_team_count}}/</span>{{league.team_count}} team<span ng-show="league.team_count !== 1">s</span></span>
         </div>
       </div>

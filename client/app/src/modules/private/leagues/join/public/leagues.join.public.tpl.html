@@ -3,7 +3,7 @@
         <div class="row">
             <div class="league-name col-sm-5 col-md-5" ng-class="{'closed': !league.open}"><i class="fa fa-times fa-fw" title="Closed league" ng-show="!league.open"></i> {{league.name}}<br><span class="team-count league-commish">Commish: {{league.commish_names.join(', ')}}</span></div>
             <div class="col-sm-7 col-md-7">
-                <span class="public-league-meta"><span ng-show="league.elimination">Survivor [ single elimination ]</span><span ng-show="!league.elimination">Pick'em [ no elimination ]</span><br>Starts {{league.start_week}}</span>
+                <span class="public-league-meta">{{league.format}}<br>Starts {{league.start_week}}</span>
                 <span class="badge">{{league.team_count}} team<span ng-show="league.team_count !== 1">s</span></span>
             </div>
         </div>
