@@ -19,9 +19,9 @@
     <h3 style="margin-top: 0;">
       <div class="league-meta" ng-class="{'show-meta': !leagueData.start_week_complete}">
         <small>{{leagueData.format}}</small><br>
-        <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
+        <small>{{starts(leagueData)}}</small>
       </div>
-      <small >{{starts(leagueData)}}</small>
+      <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
       <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
@@ -31,7 +31,7 @@
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
       <small>{{leagueData.format}}</small><br>
-      <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
+      <small>{{starts(leagueData)}}</small>
     </h3>
   </div>
 </div>
