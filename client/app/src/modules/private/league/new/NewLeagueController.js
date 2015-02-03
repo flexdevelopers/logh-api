@@ -11,7 +11,7 @@ var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance
       { number: 10, display: 'Pick 10 games' },
       { number: 5, display: 'Pick 5 games' },
       { number: 2, display: 'Pick 2 games' },
-      { number: 1, display: 'Pick 1 game (no duplicates)' }
+      { number: 1, display: 'Pick 1 game' }
     ];
 
     $scope.newLeagueData = {
@@ -20,8 +20,9 @@ var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance
         season_id: seasonId,
         start_week_id: $scope.weeks[0].id,
         public: true,
-        elimination: true,
         max_teams_per_user: '',
+        elimination: true,
+        allow_dups: false,
         max_picks_per_week: $scope.maxPicksPerWeek[0].number
     };
 

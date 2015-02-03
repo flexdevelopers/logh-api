@@ -16,7 +16,7 @@ var TeamPickController = function(team, week, games, picks, $stateParams, $scope
 
   $scope.numPicks = function(team) {
     if (team.league.max_picks_per_week == 0) {
-      return 'Pick losers';
+      return 'Pick all games';
     }
     var msg = 'Pick ' + team.league.max_picks_per_week + ' loser'
     if (team.league.max_picks_per_week > 1) {
