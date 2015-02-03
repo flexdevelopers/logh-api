@@ -14,6 +14,10 @@ var SeasonModel = function($log) {
   this.selectedSeasonId = selectedSeasonId;
   this.loaded = loaded;
 
+  this.getCurrentSeason = function() {
+    return model.currentSeasons[model.currentSeasons.length - 1];
+  };
+
   this.setSeasons = function(seasonsArray) {
     if (!angular.isArray(seasonsArray)) return;
     model.seasons = seasonsArray;
@@ -23,7 +27,7 @@ var SeasonModel = function($log) {
     model.startedSeasons = _.filter(seasonsArray, function(season) {
       return season.started;
     });
-    model.setSelectedSeasonId(model.currentSeasons[model.currentSeasons.length - 1].id);
+    model.setSelectedSeasonId(model.getCurrentSeason().id);
     model.loaded = true;
   };
 
