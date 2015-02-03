@@ -19,7 +19,7 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
     $scope.newLeagueData = {
         name: '',
         nickname: '',
-        season_id: $scope.seasons[0].id,
+        season_id: $scope.seasons[$scope.seasons.length - 1].id,
         start_week_id: '',
         public: true,
         max_teams_per_user: '',
