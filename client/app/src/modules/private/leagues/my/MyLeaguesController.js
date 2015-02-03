@@ -1,21 +1,12 @@
-var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, messageModel, weekService, leagueService) {
+var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, messageModel, leagueService) {
 
   $scope.leagues = leagues.data;
 
-  $scope.createLeague = function(season) {
+  $scope.createLeague = function() {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
-      controller: 'NewLeagueController',
-      resolve: {
-        seasonId: function() {
-          return season.id;
-        },
-        weeks: function() {
-          return weekService.getAvailableWeeks(season.id);
-        }
-      }
-
+      controller: 'NewLeagueController'
     });
 
     modalInstance.result.then(function(league) {
@@ -50,6 +41,6 @@ var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, mes
 
 };
 
-MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'weekService', 'leagueService'];
+MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'leagueService'];
 module.exports = MyLeaguesController;
 

@@ -1,6 +1,4 @@
-var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance, weekService, seasonModel) {
-
-    $scope.weeks = weeks.data;
+var NewLeagueController = function($scope, $log, $modalInstance, weekService, seasonModel) {
 
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
@@ -21,8 +19,8 @@ var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance
     $scope.newLeagueData = {
         name: '',
         nickname: '',
-        season_id: seasonId,
-        start_week_id: $scope.weeks[0].id,
+        season_id: $scope.seasons[0].id,
+        start_week_id: '',
         public: true,
         max_teams_per_user: '',
         elimination: true,
@@ -59,10 +57,11 @@ var NewLeagueController = function(seasonId, weeks, $scope, $log, $modalInstance
      */
     var init = function () {
         $log.debug("new league controller");
+        $scope.getSeasonWeeks();
     };
     init();
 
 };
 
-NewLeagueController.$inject = ['seasonId', 'weeks', '$scope', '$log', '$modalInstance', 'weekService', 'seasonModel'];
+NewLeagueController.$inject = ['$scope', '$log', '$modalInstance', 'weekService', 'seasonModel'];
 module.exports = NewLeagueController;
