@@ -56,7 +56,7 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <label class="control-label" for="startWeek">Start week:</label>
-          <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks"></select>
+          <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks" required></select>
         </div>
       </div>
     </div>
@@ -103,5 +103,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="newLeagueForm.$invalid" ng-click="createLeague(newLeagueData)">Create</button>
+  <button class="btn btn-primary" ng-disabled="newLeagueForm.$invalid || createBtnDisabled" ng-click="createLeague(newLeagueData)">Create</button>
 </div>
