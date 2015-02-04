@@ -17,6 +17,7 @@ class League < ActiveRecord::Base
   validates :elimination, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
+  validates :max_picks_per_week, allow_nil: true, numericality: { greater_than: 0 }
   validates :allow_dups, inclusion: { in: [true] }, if: Proc.new { |league| league.max_picks_per_week != 1 }
   validates :message, allow_nil: true, length: { maximum: 500 }
 
