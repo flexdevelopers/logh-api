@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.leagueName), 'has-feedback': hasError(newLeagueForm.leagueName)}">
-          <label class="control-label" for="leagueName">League name:
+          <label class="control-label" for="leagueName">League name
             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.leagueName, 'maxlength')">[ Too Long ]</small>
           </label>
@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="control-label" for="season">Season:</label>
+          <label class="control-label" for="season">Season</label>
           <select id="season" name="season" class="form-control" ng-change="getSeasonWeeks()" ng-model="newLeagueData.season_id" ng-options="season.id as season.name for season in seasons"></select>
         </div>
       </div>
@@ -55,7 +55,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="control-label" for="startWeek">Start week:</label>
+          <label class="control-label" for="startWeek">Start week</label>
           <select id="startWeek" name="startWeek" class="form-control" ng-model="newLeagueData.start_week_id" ng-options="week.id as week.display for week in weeks" required></select>
         </div>
       </div>
@@ -63,7 +63,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.maxTeams), 'has-feedback': hasError(newLeagueForm.maxTeams)}">
-          <label class="control-label" for="maxTeams">How many times can a user join:
+          <label class="control-label" for="maxTeams">How many times can a user join?
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'required')">[ Number Required ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
             <small ng-show="hasPropertyError(newLeagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
@@ -76,21 +76,23 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="control-label" for="maxPicks">Max picks per week:</label>
-          <select id="maxPicks" name="maxPicks" class="form-control" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
+          <label class="control-label" for="maxPicks">How many losers can I pick per week?</label>
+          <select id="maxPicks" name="maxPicks" class="form-control" ng-change="foo(newLeagueData)" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
         </div>
       </div>
     </div>
-    <!--<div class="row">-->
-      <!--<div class="col-sm-12 col-md-12">-->
-        <!--<div class="form-group">-->
-          <!--<div class="btn-group league-type-btn-group">-->
-            <!--<label class="btn btn-default league-type-btn" ng-model="newLeagueData.allow_dups" btn-radio="true" uncheckable>Dups</label>-->
-            <!--<label class="btn btn-default league-type-btn" ng-model="newLeagueData.allow_dups" btn-radio="false" uncheckable>No Dups</label>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="control-label">Can I pick the same loser more than once?</label>
+          <div class="btn-group league-type-btn-group">
+            <button class="btn btn-default league-type-btn" ng-disabled="dupsDisabled" ng-model="newLeagueData.allow_dups" ng-checked="newLeagueData.allow_dups" btn-radio="true" uncheckable>Yes</button>
+            <button class="btn btn-default league-type-btn" ng-disabled="dupsDisabled" ng-model="newLeagueData.allow_dups" ng-checked="newLeagueData.allow_dups" btn-radio="false" uncheckable>No</button>
+          </div>
+          <small>Note: Duplicate picks are allowed if picking more than one loser a week</small>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">

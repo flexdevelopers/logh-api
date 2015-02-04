@@ -2,18 +2,14 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
 
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
-//    $scope.maxPicksPerWeek = [
-//      { number: 0, display: 'Pick all games' },
-//      { number: 25, display: 'Pick 25 games' },
-//      { number: 15, display: 'Pick 15 games' },
-//      { number: 10, display: 'Pick 10 games' },
-//      { number: 5, display: 'Pick 5 games' },
-//      { number: 2, display: 'Pick 2 games' },
-//      { number: 1, display: 'Pick 1 game' }
-//    ];
-
     $scope.maxPicksPerWeek = [
-      { number: 1, display: 'Pick 1 game' }
+      { number: 1, display: 'Pick 1 loser' },
+      { number: 2, display: 'Pick up 2 losers' },
+      { number: 5, display: 'Pick up to 5 losers' },
+      { number: 10, display: 'Pick up to 10 losers' },
+      { number: 15, display: 'Pick up to 15 losers' },
+      { number: 25, display: 'Pick up to 25 losers' },
+      { number: 500, display: 'Pick a loser for every game' }
     ];
 
     $scope.newLeagueData = {
@@ -36,6 +32,16 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
           $scope.newLeagueData.start_week_id = $scope.weeks[0].id;
           $scope.createBtnDisabled = false;
         });
+    };
+
+    $scope.foo = function(league) {
+      $log.debug('number: ' + league.max_picks_per_week);
+      if (league.max_picks_per_week > 1) {
+        $scope.newLeagueData.allow_dups = true;
+        $scope.dupsDisabled = true;
+      } else if (league.max_picks_per_week == 1) {
+        $scope.dupsDisabled = false;
+      }
     };
 
     $scope.createLeague = function(league) {
