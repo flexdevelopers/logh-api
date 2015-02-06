@@ -16,6 +16,22 @@ var PickService = function($http, $log, $q, apiConfig, messageModel) {
     return promise;
   };
 
+  this.getSelectedPicks = function(params) {
+    var apiUrl = apiConfig.baseURL + "teams/" + params.teamId + "/picks/selected";
+
+    var promise = $http.get(apiUrl)
+      .success(function(data) {
+        $log.debug("PickService: getSelectedPicks success");
+        return data;
+      })
+      .error(function(data) {
+        $log.debug("PickService: getSelectedPicks failed");
+        return data;
+      });
+
+    return promise;
+  };
+
   this.savePick = function(pickParams) {
     var deferred = $q.defer(),
         apiUrl = apiConfig.baseURL + "teams/" + pickParams.team_id + "/picks";

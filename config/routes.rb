@@ -53,7 +53,9 @@ LoghApi::Application.routes.draw do
     end
 
     resources :teams, only: [] do
-      resources :picks, only: [:index, :show, :create, :destroy]
+      resources :picks, only: [:index, :show, :create, :destroy] do
+        get 'selected', on: :collection, to: 'picks#selected'
+      end
     end
 
     resources :weeks, only:[] do

@@ -12,7 +12,7 @@ module.exports = angular.module('loghApp.team.pick.one', [])
         },
         resolve: {
           picks: function($stateParams, pickService) {
-            return pickService.getPicks({ teamId: $stateParams.teamId });
+            return pickService.getSelectedPicks({ teamId: $stateParams.teamId });
           }
         }
       });

@@ -1,6 +1,6 @@
 class API::PicksController < API::BaseController
-  before_action :_set_user, only: [:regular, :playoff, :index, :show]
-  before_action :_set_team, only: [:regular, :playoff, :index, :show, :create]
+  before_action :_set_user, only: [:regular, :playoff, :index, :selected, :show]
+  before_action :_set_team, only: [:regular, :playoff, :index, :selected, :show, :create]
   before_action :_set_pick, only: [:show]
   before_action :_verify_team_management, only: [:create]
   before_action :_verify_team_is_active, only: [:create]
@@ -12,6 +12,19 @@ class API::PicksController < API::BaseController
   def index
     @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
     respond_with @picks # rendered via app/views/api/picks/index.json.rabl
+  end
+
+  # GET /api/teams/:team_id/picks/selected
+  def selected
+    allow_dups = @team.league.allow_dups
+    if allow_dups
+      # if dups allowed, then only current picks are needed
+      @picks = @team.current_picks({}).includes(:team, :game, :squad, :week, :week_type)
+    else
+      # if no dups, then we need all picks
+      @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
+    end
+    respond_with @picks # rendered via app/views/api/picks/selected.json.rabl
   end
 
   # GET /api/teams/:team_id/picks/1
