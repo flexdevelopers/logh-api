@@ -14,8 +14,10 @@
             <i class="fa fa-times fa-fw" ng-show="team.current_pick.correct === false" title="Pick wrong"></i>
             <i class="fa fa-check fa-fw" ng-show="team.current_pick.correct === true" title="Pick correct"></i>
             [ <span class="current-loser-name">{{team.current_pick.name}}</span><span class="current-loser-abbrev">{{team.current_pick.abbrev}}</span> ]
+            <br>
+            <span class="current-pick">{{team.league.format}}</span>
           </span>
-          <span class="current-pick" ng-show="team.active && !team.started">Starts {{team.start_week}}</span>
+          <span class="current-pick" ng-show="team.active && !team.started">Starts {{team.start_week}}<br>{{team.league.format}}</span>
           <span class="inactive-team current-pick" ng-show="!team.active">Team has been deactivated</span>
           <span class="badge">{{team.correct_picks_count}} loser<span ng-show="team.correct_picks_count !== 1">s</span></span>
         </div>

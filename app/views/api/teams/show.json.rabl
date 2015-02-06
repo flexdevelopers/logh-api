@@ -11,4 +11,5 @@ node(:current_picks_count) do |team|
 end
 child :league do
   attributes :id, :name, :season_id, :max_picks_per_week, :allow_dups
+  node(:format) { |league| league.format }
 end
