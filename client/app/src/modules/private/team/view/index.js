@@ -28,7 +28,7 @@ module.exports = angular.module('loghApp.team.view', [])
             return pickService.getPicks({ teamId: team.data.id });
           }
         },
-        reloadOnSearch: false
+        reloadOnSearch: true
       });
     $urlRouterProvider.otherwise('/');
   });
