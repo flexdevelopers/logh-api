@@ -8,4 +8,5 @@ node(:week_type) { |game| game.week.week_type.description }
 node(:start_display) { |game| game.start_display }
 node(:week_type_id) { |game| game.week_type_id }
 node(:squads) { |game| game.squads }
+node(:pick_count) { |game| game.picks.count }
 
