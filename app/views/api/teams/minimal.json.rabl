@@ -1,22 +1,31 @@
 object @team
 attributes :id, :name, :active, :alive, :paid
-node(:last_pick) do |team|
-  current_pick = team.current_pick({})
+node(:current_pick) do |team|
+  current_picks = team.current_picks({})
   if team.alive
-    if !current_pick
-      {
-          name: "No Pick | #{team.current_week.name}",
-          abbrev: "No Pick | #{team.current_week.name}"
-      }
-    else
-      if current_pick.locked? || team.coach_ids.include?(@user.id)
-        {
-            name: current_pick.squad.name,
-            abbrev: current_pick.squad.abbrev
-        }
+    if team.league.max_picks_per_week == 1
+      if current_picks.any?
+        if current_picks[0].locked? || team.coach_ids.include?(@user.id)
+          {
+              name: current_picks[0].squad.name,
+              abbrev: current_picks[0].squad.abbrev
+          }
+        else
+          { name: "Hidden", abbrev: "Hidden" }
+        end
       else
-        { name: "Hidden", abbrev: "Hidden" }
+        {
+            name: "No Pick | #{team.current_week.name}",
+            abbrev: "No Pick | #{team.current_week.name}",
+            warning: true
+        }
       end
+    else
+      {
+          name: "#{pluralize(current_picks.count, 'pick')} | #{team.current_week.name}",
+          abbrev: "#{pluralize(current_picks.count, 'pick')} | #{team.current_week.name}",
+          warning: (current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
+      }
     end
   end
 end

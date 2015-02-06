@@ -14,10 +14,6 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
     $location.url('/season/' + $stateParams.seasonId + '/league/' + team.league.id + '/team/' + team.id);
   };
 
-  $scope.hasNoPick = function(team) {
-    return team.last_pick.name.indexOf('No Pick') > -1;
-  };
-
   $scope.search = function(item) {
     if (item.name.indexOf($scope.query.toLowerCase()) != -1 || item.league.name.indexOf($scope.query.toLowerCase()) != -1) {
       return true;

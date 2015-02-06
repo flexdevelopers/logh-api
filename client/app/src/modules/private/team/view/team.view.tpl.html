@@ -17,13 +17,13 @@
         <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="toggleDropdown($event);confirmDeactivate(teamData)">Deactivate this team</a></li>
         <li ng-show="!isCommish(teamData)"><a ng-click="toggleDropdown($event);contactCommish(teamData)">Contact the commish</a></li>
         <li class="divider" ng-show="leagueTeams.length > 1"></li>
-        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.last_pick.abbrev}}</span></a></li>
+        <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.current_pick.abbrev}}</span></a></li>
       </ul>
     </div>
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
   <div class="col-sm-4 col-md-4">
-    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.last_pick.locked || !teamData.started"><span ng-show="hasNoPick(teamData)">Pick Loser</span><span ng-show="!hasNoPick(teamData)">Change Loser</span><span ng-show="teamData.league.max_picks_per_week !== 1">s</span></button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.current_pick.locked || !teamData.started"><span>Pick Loser</span><span ng-show="teamData.league.max_picks_per_week > 1">s</span></button>
     <h3 class="team-meta" ng-show="!isCoach(teamData)"><small>Coach [ {{teamData.coach_names.join(', ')}} ]</small></h3>
   </div>
 </div>

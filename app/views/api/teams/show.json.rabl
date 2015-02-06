@@ -5,41 +5,10 @@ node(:start_week_display) { |team| team.league.start_week.display }
 node(:commish_ids) { |team| team.commish_ids }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
-node(:last_pick) do |team|
-  current_pick = team.current_pick({})
-  if current_pick
-    if current_pick.locked? || team.coach_ids.include?(@user.id)
-      {
-          name: "#{current_pick.squad.short} | #{current_pick.week.name}",
-          abbrev: "#{current_pick.squad.abbrev} | #{current_pick.week.name}",
-          locked: current_pick.locked?,
-          week: current_pick.week.display
-      }
-    else
-      {
-          name: "Hidden | #{current_pick.week.name}",
-          abbrev: "Hidden | #{current_pick.week.name}",
-          locked: current_pick.locked?,
-          week: current_pick.week.display
-      }
-    end
-  else
-    if team.alive
-      {
-          name: "No Pick | #{team.current_week.name}",
-          abbrev: "No Pick | #{team.current_week.name}",
-          locked: false
-      }
-    else
-      incorrect_pick = team.picks.where(correct: false)[0]
-      {
-          name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name}",
-          abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
-          locked: true
-      }
-    end
-  end
+node(:current_picks_count) do |team|
+  current_picks = team.current_picks({ week_id: (@week) ? @week.id : nil })
+  current_picks.count
 end
 child :league do
-  attributes :id, :name, :season_id, :max_picks_per_week
+  attributes :id, :name, :season_id, :max_picks_per_week, :allow_dups
 end

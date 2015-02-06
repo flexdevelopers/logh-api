@@ -16,7 +16,7 @@ var PickService = function($http, $log, $q, apiConfig, messageModel) {
     return promise;
   };
 
-  this.createPick = function(pickParams) {
+  this.savePick = function(pickParams) {
     var deferred = $q.defer(),
         apiUrl = apiConfig.baseURL + "teams/" + pickParams.team_id + "/picks";
 

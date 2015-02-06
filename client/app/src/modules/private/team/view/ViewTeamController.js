@@ -146,7 +146,7 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
   };
 
   $scope.hasNoPick = function(team) {
-    return team.last_pick.name.indexOf('No Pick') > -1;
+    return team.current_picks_count == 0;
   };
 
   $scope.isCommish = function(team) {
@@ -198,7 +198,11 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
     if (!$scope.isCoach(team) || (pick && pick.locked)) {
       return;
     }
-    $location.url($location.path() + '/pick');
+    if (team.league.max_picks_per_week == 1) {
+      $location.url($location.path() + '/pick');
+    } else {
+      $location.url($location.path() + '/picks');
+    }
   };
 
   /**

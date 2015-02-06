@@ -85,10 +85,6 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     return team.coach_names.join(', ');
   };
 
-  $scope.hasNoPick = function(team) {
-    return team.last_pick.name.indexOf('No Pick') > -1;
-  };
-
   $scope.editLeague = function(league) {
 
     var modalInstance = $modal.open({

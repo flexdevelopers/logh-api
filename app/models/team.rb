@@ -42,12 +42,12 @@ class Team < ActiveRecord::Base
     @coach_names ||= coaches.map(&:display_name)
   end
 
-  def current_pick(options)
+  def current_picks(options)
     # this can be nil
     if options[:week_id]
-      self.picks.where('week_id = ?', options[:week_id]).where(team: self)[0]
+      self.picks.where('week_id = ?', options[:week_id]).where(team: self)
     else
-      self.current_week.picks.where(team: self)[0]
+      self.current_week.picks.where(team: self)
     end
   end
 

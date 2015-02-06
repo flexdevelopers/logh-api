@@ -3,7 +3,8 @@ module.exports = angular.module('loghApp.team.pick', [])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('private.team.pick', {
-        url: '/{teamId}/pick',
+        url: '/{teamId}',
+        abstract: true,
         views: {
           teamContent: {
             templateUrl: 'modules/private/team/pick/team.pick.tpl.html',
@@ -19,9 +20,6 @@ module.exports = angular.module('loghApp.team.pick', [])
           },
           games: function($stateParams, gameService) {
             return gameService.getCurrentGames($stateParams.leagueId);
-          },
-          picks: function($stateParams, pickService) {
-            return pickService.getPicks({ teamId: $stateParams.teamId });
           }
         }
       });

@@ -10,10 +10,6 @@ var TeamsController = function($scope, $log, $state, $location, $stateParams) {
         return $state.current.name == 'private.teams.alive';
     };
 
-    $scope.hasNoPick = function(team) {
-      return team.last_pick.name.indexOf('No Pick') > -1;
-    };
-
     $scope.createTeam = function(seasonId) {
         $location.url('/season/' + seasonId + '/leagues/public');
     };
