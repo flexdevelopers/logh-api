@@ -26,8 +26,8 @@
     </h3>
   </div>
   <div class="col-sm-5 col-md-5">
-    <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join</button>
-    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Invite</button>
+    <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.start_week_complete" ng-click="joinLeague(leagueData)">Join League ({{leagueData.max_teams_per_user}}X Max)</button>
+    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.start_week_complete)">Invite People</button>
     <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.start_week_complete && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.start_week_complete">
       <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
