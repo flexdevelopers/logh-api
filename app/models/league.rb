@@ -1,4 +1,6 @@
 class League < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
+
   before_save { name.downcase! }
 
   belongs_to :season
@@ -36,14 +38,11 @@ class League < ActiveRecord::Base
   def format
     if self.elimination
       "Survivor [ 1 loser/week, no dups ]"
-    elsif !self.elimination && self.max_picks_per_week == 1 && !self.allow_dups
-      "Pick'em [ 1 loser/week, no dups ]"
-    elsif !self.elimination && self.max_picks_per_week == 1 && self.allow_dups
-      "Pick'em [ 1 loser/week ]"
-    elsif !self.elimination && self.max_picks_per_week == 0
+    elsif !self.elimination && !self.max_picks_per_week
       "Pick'em [ Pick all games ]"
-    elsif !self.elimination && self.max_picks_per_week > 1
-      "Pick'em [ #{self.max_picks_per_week} losers/week ]"
+    elsif !self.elimination && self.max_picks_per_week
+      "Pick'em [ #{pluralize(self.max_picks_per_week, 'loser')}/week ]"
+      # "Pick'em [ #{self.max_picks_per_week} losers/week ]"
     end
   end
 
