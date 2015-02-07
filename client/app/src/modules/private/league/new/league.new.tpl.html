@@ -18,7 +18,7 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <div class="btn-group league-format-btn-group">
-            <label class="btn btn-default league-format-btn" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Pick'em<br><span class="small-gray">[ no elimination ]</span></label>
+            <label class="btn btn-default league-format-btn" ng-click="leagueData.max_picks_per_week = null" ng-model="leagueData.elimination" btn-radio="false" uncheckable>Pick'em<br><span class="small-gray">[ no elimination ]</span></label>
             <label class="btn btn-default league-format-btn" ng-click="leagueData.max_picks_per_week = 1" ng-model="leagueData.elimination" btn-radio="true" uncheckable>Survivor<br><span class="small-gray">[ single elimination ]</span></label>
           </div>
         </div>
