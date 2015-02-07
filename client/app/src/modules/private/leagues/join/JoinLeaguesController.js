@@ -4,8 +4,6 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
 
   $scope.currentSeasons = angular.copy(seasonModel.currentSeasons);
 
-  $scope.leagueOptions = { closed: false };
-
   $scope.leagueQuery = '';
 
   $scope.publicLeagues = function(seasonId) {

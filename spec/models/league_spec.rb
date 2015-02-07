@@ -8,9 +8,6 @@ describe League do
   it { should respond_to(:elimination) }
   its(:elimination) { should be_false }
 
-  it { should respond_to(:open) }
-  its(:open) { should be_true }
-
   it { should respond_to(:public) }
   its(:public) { should be_true }
 

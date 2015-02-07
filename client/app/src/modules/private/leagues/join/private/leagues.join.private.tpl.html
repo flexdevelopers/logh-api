@@ -1,7 +1,7 @@
 <div class="private-leagues list-group">
-    <a ng-repeat="league in privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="showLeague(league)" class="list-group-item">
+    <a ng-repeat="league in privateLeagues | filter:search:strict | offsetFilter:(currentLeaguePage-1)*leaguesPerPage | limitTo:leaguesPerPage" ng-click="showLeague(league)" class="list-group-item">
       <div class="row">
-        <div class="league-name col-sm-5 col-md-5" ng-class="{'closed': !league.open}"><i class="fa fa-times fa-fw" title="Closed league" ng-show="!league.open"></i> {{league.name}}<br><span class="private-league-meta">Starts {{league.start_week}}</span></div>
+        <div class="league-name col-sm-5 col-md-5">{{league.name}}<br><span class="private-league-meta">Starts {{league.start_week}}</span></div>
         <div class="col-sm-7 col-md-7">
           <span class="private-league-meta">Commish: {{league.commish_names.join(', ')}}<br>{{league.format}}</span>
           <span class="badge">{{league.team_count}} team<span ng-show="league.team_count !== 1">s</span></span>
@@ -10,9 +10,9 @@
     </a>
 </div>
 
-<div class="private-league-pagination" ng-show="privateLeagues.length > leaguesPerPage && (privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length > 0">
-    <pagination boundary-links="true" max-size="4" total-items="(privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+<div class="private-league-pagination" ng-show="privateLeagues.length > leaguesPerPage && (privateLeagues | filter:search:strict).length > 0">
+    <pagination boundary-links="true" max-size="4" total-items="(privateLeagues | filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
-<div class="alert alert-info" ng-show="(privateLeagues | openLeagueFilter:leagueOptions | filter:search:strict).length == 0">
+<div class="alert alert-info" ng-show="(privateLeagues | filter:search:strict).length == 0">
   No leagues found
 </div>

@@ -1,8 +1,8 @@
 class API::LeaguesController < API::BaseController
   before_action :_set_season
-  before_action :_set_league, only: [:show, :update, :open, :close, :message, :contact]
+  before_action :_set_league, only: [:show, :update, :message, :contact]
   before_action :_verify_season_is_active, only: [:create, :update]
-  before_action :_verify_league_management, only: [:update, :open, :close, :message]
+  before_action :_verify_league_management, only: [:update, :message]
   before_action :_verify_start_week, only: [:create]
 
   # GET /api/seasons/:season_id/leagues/managed
@@ -80,24 +80,6 @@ class API::LeaguesController < API::BaseController
       league_message += " and emailed to all the coaches of alive teams" if emailAlive && !emailAll && _league_params[:message].length > 0
       league_message += " and emailed to all the coaches" if emailAll && _league_params[:message].length > 0
       render json: { message: { type: SUCCESS, content: league_message } }, status: :ok
-    else
-      error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
-    end
-  end
-
-  # GET /api/seasons/:season_id/leagues/1/open
-  def open
-    if @league.update_attributes(open: true)
-      render json: { message: { type: SUCCESS, content: "League has been opened and new teams can join" } }, status: :ok
-    else
-      error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
-    end
-  end
-
-  # GET /api/seasons/:season_id/leagues/1/close
-  def close
-    if @league.update_attributes(open: false)
-      render json: { message: { type: SUCCESS, content: "League has been closed and new teams cannot join" } }, status: :ok
     else
       error(@league.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end

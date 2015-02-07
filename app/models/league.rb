@@ -14,7 +14,6 @@ class League < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false, scope: :season_id }
   validates :season, presence: true
-  validates :open, inclusion: { in: [true, false] }
   validates :public, inclusion: { in: [true, false] }
   validates :elimination, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true

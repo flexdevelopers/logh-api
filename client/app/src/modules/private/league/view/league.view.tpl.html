@@ -3,9 +3,8 @@
     <div class="btn-group leagues-dropdown" dropdown is-open="leagueDropdown.isopen">
       <button type="button" class="leagues-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCommish(leagueData) && !isAdmin()">
         <span class="league-name" ng-class="{'disabled': !isCommish(leagueData) && !isAdmin()}">
-        <i class="fa fa-times icon" title="Closed league" ng-show="!leagueData.open"></i>
-        <i class="fa fa-lock icon" title="Private league" ng-show="leagueData.open && !leagueData.public"></i>
-        <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.open && leagueData.public"></i>
+        <i class="fa fa-lock icon" title="Private league" ng-show="!leagueData.public"></i>
+        <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.public"></i>
         <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData) || isAdmin()" class="caret"></span>
       </button>
       <ul class="dropdown-menu league-actions-menu" role="menu">
@@ -22,7 +21,6 @@
         <small>{{leagueData.format}}</small>
       </div>
       <small>{{starts(leagueData)}}</small><br>
-      <small class="closed-text" ng-show="!leagueData.open">CLOSED TO NEW TEAMS</small>
     </h3>
   </div>
   <div class="col-sm-5 col-md-5">

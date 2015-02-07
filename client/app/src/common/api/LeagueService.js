@@ -122,25 +122,6 @@ var LeagueService = function($http, $log, $location, $q, $state, apiConfig, mess
         return promise;
     };
 
-    this.openLeague = function(leagueParams) {
-      var promise = $http.get(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/open")
-        .success(function(data) {
-          $log.debug("LeagueService: openLeague success");
-          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
-          // but may be resolved with future releases of angular-ui-router
-          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
-          messageModel.setMessage(data.message, false);
-          return data;
-        })
-        .error(function(data) {
-          $log.debug("LeagueService: openLeague failed");
-          messageModel.setMessage(data.message, false);
-          return data;
-        });
-
-      return promise;
-    };
-
     this.closeLeague = function(leagueParams) {
       var promise = $http.get(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id + "/close")
         .success(function(data) {

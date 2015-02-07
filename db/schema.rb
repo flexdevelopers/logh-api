@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206214119) do
+ActiveRecord::Schema.define(version: 20150207225514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20150206214119) do
     t.integer  "start_week_id",                      null: false
     t.boolean  "public",             default: true,  null: false
     t.text     "message"
-    t.boolean  "open",               default: true,  null: false
     t.boolean  "elimination",        default: false
     t.integer  "max_picks_per_week", default: 1
   end
