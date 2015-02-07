@@ -19,7 +19,6 @@ var EditLeagueController = function(league, $scope, $log, $location, $modalInsta
       weekService.getAvailableWeeks($scope.leagueData.season_id)
         .then(function(response) {
           $scope.weeks = response.data;
-          $scope.leagueData.start_week_id = $scope.weeks[0].id;
           $scope.editBtnDisabled = false;
         });
     };
