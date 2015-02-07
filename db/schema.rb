@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206015442) do
+ActiveRecord::Schema.define(version: 20150206214119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150206015442) do
     t.boolean  "open",               default: true,  null: false
     t.boolean  "elimination",        default: false
     t.integer  "max_picks_per_week", default: 1
-    t.boolean  "allow_dups",         default: false, null: false
   end
 
   add_index "leagues", ["name", "season_id"], name: "index_leagues_on_name_and_season_id", unique: true, using: :btree

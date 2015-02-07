@@ -20,7 +20,6 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
         public: true,
         max_teams_per_user: '',
         elimination: true,
-        allow_dups: false,
         max_picks_per_week: $scope.maxPicksPerWeek[0].number
     };
 
@@ -32,16 +31,6 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
           $scope.newLeagueData.start_week_id = $scope.weeks[0].id;
           $scope.createBtnDisabled = false;
         });
-    };
-
-    $scope.foo = function(league) {
-      $log.debug('number: ' + league.max_picks_per_week);
-      if (league.max_picks_per_week > 1) {
-        $scope.newLeagueData.allow_dups = true;
-        $scope.dupsDisabled = true;
-      } else if (league.max_picks_per_week == 1) {
-        $scope.dupsDisabled = false;
-      }
     };
 
     $scope.createLeague = function(league) {

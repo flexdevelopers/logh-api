@@ -20,7 +20,6 @@ class League < ActiveRecord::Base
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
   validates :max_picks_per_week, allow_nil: true, numericality: { greater_than: 0 }
-  validates :allow_dups, inclusion: { in: [true] }, if: Proc.new { |league| league.max_picks_per_week != 1 }
   validates :message, allow_nil: true, length: { maximum: 500 }
 
   default_scope -> { order(name: :asc) }
@@ -35,6 +34,10 @@ class League < ActiveRecord::Base
     start_week.started?
   end
 
+  def allow_dups
+    !self.elimination
+  end
+
   def format
     if self.elimination
       "Survivor [ 1 loser/week, no dups ]"
@@ -42,7 +45,6 @@ class League < ActiveRecord::Base
       "Pick'em [ Pick all games ]"
     elsif !self.elimination && self.max_picks_per_week
       "Pick'em [ #{pluralize(self.max_picks_per_week, 'loser')}/week ]"
-      # "Pick'em [ #{self.max_picks_per_week} losers/week ]"
     end
   end
 

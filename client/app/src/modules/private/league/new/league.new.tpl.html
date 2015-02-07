@@ -77,19 +77,7 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <label class="control-label" for="maxPicks">How many losers can I pick per week?</label>
-          <select id="maxPicks" name="maxPicks" class="form-control" ng-change="foo(newLeagueData)" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-12">
-        <div class="form-group">
-          <label class="control-label">Can I pick the same loser more than once?</label>
-          <div class="btn-group league-type-btn-group">
-            <button class="btn btn-default league-type-btn" ng-disabled="dupsDisabled" ng-model="newLeagueData.allow_dups" ng-checked="newLeagueData.allow_dups" btn-radio="true" uncheckable>Yes</button>
-            <button class="btn btn-default league-type-btn" ng-disabled="dupsDisabled" ng-model="newLeagueData.allow_dups" ng-checked="newLeagueData.allow_dups" btn-radio="false" uncheckable>No</button>
-          </div>
-          <small>Note: Duplicate picks are allowed if picking more than one loser a week</small>
+          <select id="maxPicks" name="maxPicks" class="form-control" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
         </div>
       </div>
     </div>
