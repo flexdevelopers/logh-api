@@ -12,7 +12,7 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
       { number: 1, display: 'Pick 1 loser' }
     ];
 
-    $scope.newLeagueData = {
+    $scope.leagueData = {
         name: '',
         nickname: '',
         season_id: $scope.seasons[$scope.seasons.length - 1].id,
@@ -25,10 +25,10 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
 
     $scope.getSeasonWeeks = function() {
       $scope.createBtnDisabled = true;
-      weekService.getAvailableWeeks($scope.newLeagueData.season_id)
+      weekService.getAvailableWeeks($scope.leagueData.season_id)
         .then(function(response) {
           $scope.weeks = response.data;
-          $scope.newLeagueData.start_week_id = $scope.weeks[0].id;
+          $scope.leagueData.start_week_id = $scope.weeks[0].id;
           $scope.createBtnDisabled = false;
         });
     };
