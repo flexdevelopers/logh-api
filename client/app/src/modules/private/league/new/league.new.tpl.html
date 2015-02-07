@@ -18,12 +18,22 @@
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
           <div class="btn-group league-format-btn-group">
-            <label class="btn btn-default league-format-btn" ng-model="newLeagueData.elimination" btn-radio="true" uncheckable>Survivor<br><span class="small-gray">[ single elimination ]</span></label>
             <label class="btn btn-default league-format-btn" ng-model="newLeagueData.elimination" btn-radio="false" uncheckable>Pick'em<br><span class="small-gray">[ no elimination ]</span></label>
+            <label class="btn btn-default league-format-btn" ng-click="newLeagueData.max_picks_per_week = 1" ng-model="newLeagueData.elimination" btn-radio="true" uncheckable>Survivor<br><span class="small-gray">[ single elimination ]</span></label>
           </div>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+          <label class="control-label" for="maxPicks">How many losers can I pick per week?</label>
+          <select id="maxPicks" name="maxPicks" class="form-control" ng-disabled="newLeagueData.elimination" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
+          <small class="input-error" ng-show="newLeagueData.elimination"><i class="fa fa-warning fa-fw" title="Warning"></i> Survivor leagues only allow 1 pick per week, no repeats</small>
+        </div>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newLeagueForm.leagueName), 'has-feedback': hasError(newLeagueForm.leagueName)}">
@@ -70,14 +80,6 @@
           </label>
           <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="newLeagueData.max_teams_per_user" logh-focus required>
           <span ng-show="hasError(newLeagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-12">
-        <div class="form-group">
-          <label class="control-label" for="maxPicks">How many losers can I pick per week?</label>
-          <select id="maxPicks" name="maxPicks" class="form-control" ng-model="newLeagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
         </div>
       </div>
     </div>
