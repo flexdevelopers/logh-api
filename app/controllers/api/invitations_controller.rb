@@ -52,7 +52,7 @@ class API::InvitationsController < API::BaseController
     end
 
     def _verify_league_status
-      forbidden("It is too late. The league's first week is already complete.") if @league.start_week.complete
+      forbidden("It is too late to send invitations.") if @league.closed?
     end
 
     def _is_commish_of?(league)

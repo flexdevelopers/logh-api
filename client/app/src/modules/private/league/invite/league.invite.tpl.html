@@ -1,9 +1,9 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3 class="modal-title"><span ng-show="!startWeekComplete">Invite Friends</span><span ng-show="startWeekComplete">Invitations</span></h3>
+  <h3 class="modal-title"><span ng-show="!leagueClosed">Invite Friends</span><span ng-show="leagueClosed">Invitations</span></h3>
 </div>
 <div class="modal-body">
-  <div ng-show="!startWeekComplete">
+  <div ng-show="!leagueClosed">
     <form name="inviteForm" class="invite-form" role="form" novalidate>
       <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -41,7 +41,7 @@
       <ul class="nav nav-tabs">
         <li class="active"><a>Invites [ {{invitations.length}} ]</a></li>
       </ul>
-      <span class="click-to-edit" ng-show="!startWeekComplete">[ click invite to edit ]</span>
+      <span class="click-to-edit" ng-show="!leagueClosed">[ click invite to edit ]</span>
     </div>
     <div class="league-invites">
       <div class="list-group">

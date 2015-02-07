@@ -1,8 +1,8 @@
-var LeagueInviteController = function(leagueId, isCommish, startWeekComplete, invitations, $modal, $modalInstance, $scope, $log) {
+var LeagueInviteController = function(leagueId, isCommish, leagueClosed, invitations, $modal, $modalInstance, $scope, $log) {
 
   $scope.isCommish = isCommish;
 
-  $scope.startWeekComplete = startWeekComplete;
+  $scope.leagueClosed = leagueClosed;
 
   $scope.invitations = invitations.data;
 
@@ -48,5 +48,5 @@ var LeagueInviteController = function(leagueId, isCommish, startWeekComplete, in
   init();
 };
 
-LeagueInviteController.$inject = ['leagueId', 'isCommish', 'startWeekComplete', 'invitations', '$modal', '$modalInstance', '$scope', '$log'];
+LeagueInviteController.$inject = ['leagueId', 'isCommish', 'leagueClosed', 'invitations', '$modal', '$modalInstance', '$scope', '$log'];
 module.exports = LeagueInviteController;

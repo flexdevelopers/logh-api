@@ -226,7 +226,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   };
 
-  $scope.invite = function(leagueId, isCommish, startWeekComplete) {
+  $scope.invite = function(leagueId, isCommish, leagueClosed) {
 
     var modalInstance = $modal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
@@ -238,8 +238,8 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
         isCommish: function() {
           return isCommish;
         },
-        startWeekComplete: function() {
-          return startWeekComplete;
+        leagueClosed: function() {
+          return leagueClosed;
         },
         invitations: function() {
           if (isCommish) {
