@@ -1,16 +1,11 @@
-var TeamPickOneController = function(picks, $scope, $log, messageModel, pickService) {
+var TeamPickOneController = function(picks, $scope, $log, pickService) {
 
   var picks = picks.data,
       currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
 
   $scope.makePick = function(game, squad) {
-    if (game.started || $scope.hasSquadBeenUsed(game, squad)) {
+    if ($scope.isDisabled(game, squad)) {
       // ignore it
-      return;
-    }
-    if (currentPick && currentPick.locked) {
-      $scope.scrollToTop();
-      messageModel.setMessage({ type: 'warning', content: 'Your current pick for this week [ ' + currentPick.squad.name + ' ] is locked' }, false);
       return;
     }
     currentPick = {
@@ -52,6 +47,14 @@ var TeamPickOneController = function(picks, $scope, $log, messageModel, pickServ
     return isPicked;
   };
 
+  $scope.isDisabled = function(game, squad) {
+    var isDisabled = false;
+    if (game.started || $scope.hasSquadBeenUsed(game, squad) || (currentPick && currentPick.locked)) {
+      isDisabled = true;
+    }
+    return isDisabled;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -61,5 +64,5 @@ var TeamPickOneController = function(picks, $scope, $log, messageModel, pickServ
   init();
 };
 
-TeamPickOneController.$inject = ['picks', '$scope', '$log', 'messageModel', 'pickService'];
+TeamPickOneController.$inject = ['picks', '$scope', '$log', 'pickService'];
 module.exports = TeamPickOneController;
