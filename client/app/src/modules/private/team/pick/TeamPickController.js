@@ -1,10 +1,14 @@
-var TeamPickController = function(team, week, games, $scope, $log, $location, userModel, dateUtils) {
+var TeamPickController = function(team, week, games, $scope, $log, $location, $anchorScroll, userModel, dateUtils) {
 
   $scope.team = team.data;
 
   $scope.week = week.data;
 
   $scope.games = games.data;
+
+  $scope.scrollToTop = function() {
+    $anchorScroll(); // hacky?
+  };
 
   $scope.numPicks = function(team) {
     if (team.league.max_picks_per_week >= $scope.games.length) {
@@ -49,5 +53,5 @@ var TeamPickController = function(team, week, games, $scope, $log, $location, us
   init();
 };
 
-TeamPickController.$inject = ['team', 'week', 'games', '$scope', '$log', '$location', 'userModel', 'dateUtils'];
+TeamPickController.$inject = ['team', 'week', 'games', '$scope', '$log', '$location', '$anchorScroll', 'userModel', 'dateUtils'];
 module.exports = TeamPickController;

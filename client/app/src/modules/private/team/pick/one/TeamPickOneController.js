@@ -1,23 +1,30 @@
-var TeamPickOneController = function(picks, $scope, $log, pickService) {
+var TeamPickOneController = function(picks, $scope, $log, messageModel, pickService) {
 
-  var picks = picks.data;
-
-  var currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
+  var picks = picks.data,
+      currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
 
   $scope.makePick = function(game, squad) {
-    if (game.started || $scope.hasSquadBeenUsed(game, squad)) return;
+    if (game.started || $scope.hasSquadBeenUsed(game, squad)) {
+      // ignore it
+      return;
+    }
+    if (currentPick && currentPick.locked) {
+      $scope.scrollToTop();
+      messageModel.setMessage({ type: 'warning', content: 'Your current pick for this week [ ' + currentPick.squad.name + ' ] is locked' }, false);
+      return;
+    }
     currentPick = {
       game: game,
       squad: squad
     };
-    var pick = {
+    var pickParams = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
       game_id: game.id,
       team_id: $scope.team.id,
       squad_id: squad.id
     };
-    pickService.savePick(pick)
+    pickService.savePick(pickParams)
       .finally(function() {
         $scope.showTeam($scope.team, false);
       });
@@ -37,9 +44,9 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
     }
   };
 
-  $scope.isPicked = function(game, squad) {
+  $scope.isPicked = function(game, squad, gameStarted) {
     var isPicked = false;
-    if (currentPick && currentPick.squad.id == squad.id && currentPick.game.id == game.id) {
+    if (currentPick && currentPick.squad.id == squad.id && currentPick.game.id == game.id && (gameStarted === null || game.started === gameStarted)) {
       isPicked = true;
     }
     return isPicked;
@@ -54,5 +61,5 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
   init();
 };
 
-TeamPickOneController.$inject = ['picks', '$scope', '$log', 'pickService'];
+TeamPickOneController.$inject = ['picks', '$scope', '$log', 'messageModel', 'pickService'];
 module.exports = TeamPickOneController;
