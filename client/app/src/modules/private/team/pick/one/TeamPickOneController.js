@@ -1,9 +1,15 @@
-var TeamPickOneController = function(picks, $scope, $log, $anchorScroll, pickService) {
+var TeamPickOneController = function(picks, $scope, $log, pickService) {
 
   var picks = picks.data;
 
+  var currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
+
   $scope.makePick = function(game, squad) {
     if (game.started || $scope.hasSquadBeenUsed(game, squad)) return;
+    currentPick = {
+      game: game,
+      squad: squad
+    };
     var pick = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
@@ -31,6 +37,14 @@ var TeamPickOneController = function(picks, $scope, $log, $anchorScroll, pickSer
     }
   };
 
+  $scope.isPicked = function(game, squad) {
+    var isPicked = false;
+    if (currentPick && currentPick.squad.id == squad.id && currentPick.game.id == game.id) {
+      isPicked = true;
+    }
+    return isPicked;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -40,5 +54,5 @@ var TeamPickOneController = function(picks, $scope, $log, $anchorScroll, pickSer
   init();
 };
 
-TeamPickOneController.$inject = ['picks', '$scope', '$log', '$anchorScroll', 'pickService'];
+TeamPickOneController.$inject = ['picks', '$scope', '$log', 'pickService'];
 module.exports = TeamPickOneController;

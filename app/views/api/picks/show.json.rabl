@@ -23,6 +23,17 @@ node(:game_display) do |pick|
     ""
   end
 end
+node(:game) do |pick|
+  if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
+    {
+        id: pick.game.id
+    }
+  else
+    {
+        id: 0
+    }
+  end
+end
 node(:squad) do |pick|
   if pick.locked? || pick.coach_ids.include?(@user.id)
     {
