@@ -1,16 +1,16 @@
 <div class="make-picks-header-row row">
-  <div class="col-sm-9 col-md-9">
+  <div class="col-sm-7 col-md-7">
     <h3 class="week-display">
-      {{week.name}} [ {{week.type}} ]
+      {{week.name}}
     </h3>
     <h6><a ng-click="showTeam(team)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{team.name}}</span></a></h6>
   </div>
-  <div class="col-sm-3 col-md-3">
-    <h3 class="pick-meta-right">
-      <small>{{week.date_range}}</small>
-    </h3>
+  <div class="col-sm-5 col-md-5">
+    <button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-click="savePicks()">Save</button>
   </div>
 </div>
-<div class="team-message alert alert-info" ng-show="isCoach(team)"><p class="team-message-text">{{week.description}} [ {{numPicks(team)}} ]</p></div>
+<div class="team-message alert alert-info" ng-show="isCoach(team)"><p class="team-message-text">{{numPicks(team)}} for {{week.name}} | {{week.type}} [ {{week.date_range}} ]</p></div>
 <hr>
 <div ui-view="pickContent" class="pick-content"></div>
+<button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-click="savePicks()">Save</button>
+

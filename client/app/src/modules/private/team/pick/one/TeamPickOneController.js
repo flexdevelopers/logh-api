@@ -9,17 +9,18 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
       return;
     }
     currentPick = {
-      game: game,
-      squad: squad
-    };
-    var pickParams = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
       game_id: game.id,
       team_id: $scope.team.id,
-      squad_id: squad.id
+      squad_id: squad.id,
+      game: game,
+      squad: squad
     };
-    pickService.savePick(pickParams)
+  };
+
+  $scope.savePick = function() {
+    pickService.savePick(currentPick)
       .finally(function() {
         $scope.showTeam($scope.team, false);
       });
@@ -54,6 +55,10 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
     }
     return isDisabled;
   };
+
+  $scope.$on('TeamPickController::savePicks', function(event) {
+    $scope.savePick();
+  });
 
   /**
    * Invoked on startup, like a constructor.

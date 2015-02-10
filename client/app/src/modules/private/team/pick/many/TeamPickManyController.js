@@ -6,6 +6,10 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
 
   $scope.picks = picks.data;
 
+  $scope.savePicks = function() {
+    alert('save picks');
+  };
+
   $scope.addPick = function(game, squad) {
     if (!$scope.isCoach($scope.team) || game.started) return;
     var pick = {
@@ -18,7 +22,7 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
     $scope.picks.push(pick);
   };
 
-  $scope.savePicks = function(picks) {
+  $scope.savePicksFooo = function(picks) {
     if (!picks || picks.length == 0) {
       messageModel.setMessage({ type: 'warning', content: 'No losers selected' }, false);
       scrollToTop();
@@ -36,6 +40,10 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
     }
     return false;
   };
+
+  $scope.$on('TeamPickController::savePicks', function(event) {
+    $scope.savePicks();
+  });
 
   /**
    * Invoked on startup, like a constructor.
