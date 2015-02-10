@@ -1,3 +1,5 @@
+<div class="team-message alert alert-info" ng-show="isCoach(team)"><p class="team-message-text">{{numPicks(team)}} for {{week.name}} | {{week.type}} [ {{week.date_range}} ]</p></div>
+<hr>
 <div ng-repeat-start="game in games" class="week-games list-group">
   <h5 ng-class="{'invalid-game': game.started}"><span class="game-display">{{game.display}}</span><br><small>{{starts(game)}}</small></h5>
   <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': game.started}">

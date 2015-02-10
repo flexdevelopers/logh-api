@@ -1,14 +1,15 @@
 var TeamPickOneController = function(picks, $scope, $log, pickService) {
 
-  var picks = picks.data,
-      currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
+  var picks = picks.data;
+
+  $scope.currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
 
   $scope.makePick = function(game, squad) {
     if ($scope.isDisabled(game, squad)) {
       // ignore it
       return;
     }
-    currentPick = {
+    $scope.currentPick = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
       game_id: game.id,
@@ -21,7 +22,7 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
   };
 
   $scope.savePick = function() {
-    pickService.savePick(currentPick)
+    pickService.savePick($scope.currentPick)
       .finally(function() {
         $scope.showTeam($scope.team, false);
       });
@@ -43,15 +44,19 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
 
   $scope.isPicked = function(game, squad, gameStarted) {
     var isPicked = false;
-    if (currentPick && currentPick.squad.id == squad.id && currentPick.game.id == game.id && (gameStarted === null || game.started === gameStarted)) {
+    if ($scope.currentPick && $scope.currentPick.squad.id == squad.id && $scope.currentPick.game.id == game.id && (gameStarted === null || game.started === gameStarted)) {
       isPicked = true;
     }
     return isPicked;
   };
 
+  $scope.isCurrentPickLocked = function() {
+    return $scope.currentPick && $scope.currentPick.locked;
+  };
+
   $scope.isDisabled = function(game, squad) {
     var isDisabled = false;
-    if (game.started || $scope.hasSquadBeenUsed(game, squad) || (currentPick && currentPick.locked)) {
+    if (game.started || $scope.hasSquadBeenUsed(game, squad) || $scope.isCurrentPickLocked()) {
       isDisabled = true;
     }
     return isDisabled;
