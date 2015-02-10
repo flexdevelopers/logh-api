@@ -17,6 +17,7 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
       game: game,
       squad: squad
     };
+    $scope.savePick();
   };
 
   $scope.savePick = function() {
@@ -55,10 +56,6 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
     }
     return isDisabled;
   };
-
-  $scope.$on('TeamPickController::savePicks', function(event) {
-    $scope.savePick();
-  });
 
   /**
    * Invoked on startup, like a constructor.
