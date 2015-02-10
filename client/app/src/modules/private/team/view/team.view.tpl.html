@@ -46,10 +46,10 @@
             <i class="fa fa-lock fa-fw" ng-show="pick.locked && pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="!pick.locked && pick.correct == null" title="Pick unlocked"></i>
             <i class="fa fa-times fa-fw" ng-show="pick.correct === false" title="Pick wrong"></i>
-            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pick.week_type}} | {{pick.week_name}}<span ng-show="pick.game_start.length > 0"> | {{pick.game_start}}</span></span>
+            <i class="fa fa-check fa-fw" ng-show="pick.correct === true" title="Pick correct"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pick.week_type}} | {{pick.week_name}}<span ng-show="pick.game.start.length > 0"> | {{pick.game.start}}</span></span>
           </div>
           <div class="game-column col-sm-5 col-md-5">
-            <span class="game">{{pick.game_display}}</span>
+            <span class="game">{{pick.game.display}}</span>
           </div>
         </div>
       </a>

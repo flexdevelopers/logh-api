@@ -4,33 +4,24 @@ node(:locked) { |pick| pick.locked? }
 node(:week_name) { |pick| pick.week.name }
 node(:week_slug) { |pick| pick.week.slug }
 node(:week_type) { |pick| pick.week_type.description }
-node(:game_start) do |pick|
-  if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
-    pick.game.start_display_short
-  else
-    ""
-  end
-end
-node(:game_display) do |pick|
+node(:game) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
     if pick.locked? && pick.game.complete
       ot = pick.game.overtime ? 'OT' : ''
-      "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{ot}"
+      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{ot}"
     else
-      "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
+      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
-  else
-    ""
-  end
-end
-node(:game) do |pick|
-  if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
     {
-        id: pick.game.id
+        id: pick.game.id,
+        display: display,
+        start: pick.game.start_display_short
     }
   else
     {
-        id: 0
+        id: 0,
+        display: "",
+        start: ""
     }
   end
 end
