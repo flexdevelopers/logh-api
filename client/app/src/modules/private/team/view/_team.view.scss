@@ -38,20 +38,16 @@
   .losers-tab {
     position: relative;
     margin-bottom: -1px;
-    .weeks {
+    .make-pick-btn-container {
       position: absolute;
       top: 0;
       right: 0;
-      width: 250px;
     }
-    .make-pick-btn-container {
+    .weeks {
       position: relative;
       width: 100%;
       padding: 10px;
       background-color: #ddd;
-      .make-pick-btn {
-        width: 100%;
-      }
     }
   }
 
@@ -187,11 +183,14 @@
     .losers-tab {
       position: relative;
       margin-bottom: -1px;
-      .weeks {
+      .make-pick-btn-container {
         position: relative;
         width: 100%;
-        padding: 0 10px 10px 10px;
+        padding: 10px 10px 0 10px;
         background-color: #ddd;
+        .make-pick-btn {
+          width: 100%;
+        }
       }
     }
 

@@ -22,10 +22,12 @@
   <div class="seasons">
     <select class="form-control" ng-change="changeSeason(selectedSeasonId)" ng-model="selectedSeasonId" ng-options="startedSeason.id as startedSeason.name for startedSeason in startedSeasons"></select>
   </div>
+  <div class="input-group custom-search-form filter-team-league">
+    <input type="text" class="form-control" placeholder="Search..." ng-model="query">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+    </span>
+  </div>
 </div>
-<div class="input-group custom-search-form filter-team-league">
-  <input type="text" class="form-control" placeholder="Search..." ng-model="query">
-</div>
-
 <div class="play-content" ui-view="playContent"></div>
 

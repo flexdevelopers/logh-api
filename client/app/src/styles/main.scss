@@ -325,11 +325,13 @@ body.home {
 }
 
 .custom-search-form {
-  padding: 10px;
-  background-color: #ddd;
-  margin-top: 1px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 175px;
   input {
-    border-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
   }
 }
 
