@@ -9,4 +9,6 @@
     <button type="button" class="save-pick-btn btn btn-primary" ng-show="team.league.max_picks_per_week != 1 && isCoach(team)" ng-click="savePicks()">Save Picks</button>
   </div>
 </div>
+<div class="team-message alert alert-info" ng-show="isCoach(team) && !isCurrentPickLocked()"><p class="team-message-text"><strong>{{numPicks(team)}}</strong> for {{week.name}} ({{week.type}}) [ {{week.date_range}} ]</p></div>
 <div ui-view="pickContent" class="pick-content"></div>
+

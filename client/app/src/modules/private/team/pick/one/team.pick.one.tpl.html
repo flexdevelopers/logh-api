@@ -1,4 +1,3 @@
-<div class="team-message alert alert-info" ng-show="isCoach(team) && !isCurrentPickLocked()"><p class="team-message-text">{{numPicks(team)}} for {{week.name}} ({{week.type}}) [ {{week.date_range}} ]</p></div>
 <div class="team-message alert alert-warning" ng-show="isCoach(team) && isCurrentPickLocked()"><p class="team-message-text">Your pick for {{week.name}} ({{week.type}}) is locked [ {{currentPick.squad.name}} ]</p></div>
 <hr>
 <div ng-repeat-start="game in games" class="week-games list-group">
