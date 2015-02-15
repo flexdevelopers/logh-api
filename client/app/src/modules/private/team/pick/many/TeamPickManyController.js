@@ -4,14 +4,29 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
     $anchorScroll(); // hacky?
   };
 
-  $scope.picks = picks.data;
-
-  $scope.savePicks = function() {
-    alert('save picks');
+  var allPicksMade = function() {
+    return $scope.picks.length == $scope.team.league.max_picks_per_week || $scope.picks.length >= $scope.games.length;
   };
 
-  $scope.addPick = function(game, squad) {
-    if (!$scope.isCoach($scope.team) || game.started) return;
+  var getPick = function(game, squad) {
+    var pick = _.find($scope.picks, function(pick) { return pick.game_id === game.id && pick.squad_id === squad.id });
+    return pick;
+  };
+
+  var removePick = function(pickToRemove) {
+    $scope.picks = _.reject($scope.picks, function(pick) { return pick.game_id === pickToRemove.game_id && pick.squad_id === pickToRemove.squad_id })
+  };
+
+  var removeGamePicks = function(game) {
+    $scope.picks = _.reject($scope.picks, function(pick) { return pick.game_id === game.id })
+  };
+
+  var addPick = function(game, squad) {
+    if (allPicksMade()) {
+      messageModel.setMessage({ type: 'danger', content: 'Maximum pick count achieved. Please unselect a pick if necessary.' }, false);
+      scrollToTop();
+      return;
+    }
     var pick = {
       week_id: game.week_id,
       week_type_id: game.week_type_id,
@@ -22,23 +37,52 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
     $scope.picks.push(pick);
   };
 
-  $scope.savePicksFooo = function(picks) {
-    if (!picks || picks.length == 0) {
-      messageModel.setMessage({ type: 'warning', content: 'No losers selected' }, false);
-      scrollToTop();
+  $scope.picks = picks.data;
+
+  $scope.togglePick = function(game, squad) {
+    if (!$scope.isCoach($scope.team) || game.started) return;
+    var pick = getPick(game, squad);
+    if (!_.isUndefined(pick) && pick.locked) {
+      return; // no toggling locked picks
     }
-    pickService.savePicks(picks)
-      .finally(function(result) {
-        $scope.showTeam($scope.team);
-      });
+    if (!_.isUndefined(pick)) {
+      // if a pick exists already, then you are attempting to de-select it
+      removePick(pick);
+    } else {
+      removeGamePicks(game); // no 2 picks for the same game
+      addPick(game, squad);
+    }
   };
 
-  $scope.isPicked = function(game, squad) {
-    if (!$scope.pick) return false;
-    if ($scope.pick.squad_id == squad.id && $scope.pick.game_id == game.id && $scope.pick.week_type_id == game.week_type_id && $scope.pick.week_id == game.week_id) {
-      return true;
+  $scope.savePicks = function() {
+    if (!$scope.picks || $scope.picks.length == 0) {
+      messageModel.setMessage({ type: 'warning', content: 'No losers selected' }, false);
+      scrollToTop();
+      return;
     }
-    return false;
+//    pickService.savePicks(picks)
+//      .finally(function(result) {
+//        $scope.showTeam($scope.team);
+//      });
+
+    alert('saving ' + $scope.picks.length + ' picks');
+  };
+
+  $scope.isPicked = function(game, squad, gameStarted) {
+    var isPicked = false,
+        pick = getPick(game, squad);
+    if (!_.isUndefined(pick) && (gameStarted === null || game.started === gameStarted)) {
+      isPicked = true;
+    }
+    return isPicked;
+  };
+
+  $scope.isDisabled = function(game) {
+    var isDisabled = false;
+    if (game.started) {
+      isDisabled = true;
+    }
+    return isDisabled;
   };
 
   $scope.$on('TeamPickController::savePicks', function(event) {
