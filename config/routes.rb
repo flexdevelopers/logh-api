@@ -52,6 +52,7 @@ LoghApi::Application.routes.draw do
 
     resources :teams, only: [] do
       resources :picks, only: [:index, :show, :create, :destroy] do
+        post 'many', on: :collection, to: 'picks#create_many'
         get 'selected', on: :collection, to: 'picks#selected'
       end
     end

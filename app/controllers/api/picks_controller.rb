@@ -1,12 +1,12 @@
 class API::PicksController < API::BaseController
   before_action :_set_user, only: [:regular, :playoff, :index, :selected, :show]
-  before_action :_set_team, only: [:regular, :playoff, :index, :selected, :show, :create]
+  before_action :_set_team, only: [:regular, :playoff, :index, :selected, :show, :create, :create_many]
   before_action :_set_pick, only: [:show]
-  before_action :_verify_team_management, only: [:create]
-  before_action :_verify_team_is_active, only: [:create]
-  before_action :_verify_team_is_alive, only: [:create]
-  before_action :_verify_league_has_started, only: [:create]
-  before_action :_verify_pick_week, only: [:create]
+  before_action :_set_current_week, only: [:create, :create_many]
+  before_action :_verify_team_management, only: [:create, :create_many]
+  before_action :_verify_team_is_active, only: [:create, :create_many]
+  before_action :_verify_team_is_alive, only: [:create, :create_many]
+  before_action :_verify_league_has_started, only: [:create, :create_many]
 
   # GET /api/teams/:team_id/picks
   def index
@@ -34,6 +34,7 @@ class API::PicksController < API::BaseController
 
   # POST /api/teams/:team_id/picks
   def create
+    _verify_pick_week(_pick_params[:week_id])
     return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(_pick_params[:game_id]).started?
     week = Week.find(_pick_params[:week_id])
     @pick = @team.picks.where(week: week).first_or_initialize
@@ -45,6 +46,27 @@ class API::PicksController < API::BaseController
     else
       error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
+  end
+
+  # POST /api/teams/:team_id/picks/many
+  def create_many
+    # first delete all unlocked picks for this week
+    @team.picks.not_locked.where(week: @current_week).readonly(false).destroy_all
+    all_picks = params[:picks] || []
+    unlocked_picks = all_picks.select do |pick|
+      !pick[:locked]
+    end
+    unlocked_picks.each do |pick|
+      pick_params = ActionController::Parameters.new(pick).permit(:week_id, :game_id, :week_type_id, :squad_id)
+      _verify_pick_week(pick_params[:week_id])
+      return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(pick_params[:game_id]).started?
+      @pick = @team.picks.new(pick_params)
+      if !@pick.save
+        error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+        return
+      end
+    end
+    render json: { message: { type: SUCCESS, content: "Your picks have been updated." } }, status: :ok
   end
 
   # DELETE /api/teams/:team_id/picks/1
@@ -66,6 +88,10 @@ class API::PicksController < API::BaseController
       @pick = @team.picks.find(params[:id])
     end
 
+    def _set_current_week
+      @current_week = @team.league.season.current_week
+    end
+
     def _verify_team_is_active
       forbidden('Cannot make picks for a deactivated team') if !@team.active
     end
@@ -82,9 +108,8 @@ class API::PicksController < API::BaseController
       forbidden("Hey, what did I say? No picks until the league starts - #{@team.league.start_week.display}") unless @team.league.started?
     end
 
-    def _verify_pick_week
-      current_week = @team.league.season.current_week
-      forbidden("You can only make picks for the current week - #{current_week.display}") if current_week && current_week.id != _pick_params[:week_id]
+    def _verify_pick_week(pick_week_id)
+      forbidden("You can only make picks for the current week - #{@current_week.display}") if @current_week && @current_week.id != pick_week_id
     end
 
     def _is_coach_of(team)
