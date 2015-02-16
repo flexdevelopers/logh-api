@@ -10,7 +10,7 @@
   </a>
 </div>
 <div ng-repeat-end></div>
-<button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-click="savePicks()">Save Picks</button>
+<button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-disabled="!savePicksEnabled" ng-click="savePicks()">Save Picks</button>
 
 
 

@@ -1,4 +1,4 @@
-var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messageModel, pickService) {
+var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorScroll, messageModel, pickService) {
 
   var scrollToTop = function() {
     $anchorScroll(); // hacky?
@@ -45,6 +45,7 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
     if (!_.isUndefined(pick) && pick.locked) {
       return; // no toggling locked picks
     }
+    $rootScope.$broadcast('TeamPickController::enableSavePicks');
     if (!_.isUndefined(pick)) {
       // if a pick exists already, then you are attempting to de-select it
       removePick(pick);
@@ -55,17 +56,10 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
   };
 
   $scope.savePicks = function() {
-    if (!$scope.picks || $scope.picks.length == 0) {
-      messageModel.setMessage({ type: 'warning', content: 'No losers selected' }, false);
-      scrollToTop();
-      return;
-    }
-//    pickService.savePicks(picks)
-//      .finally(function(result) {
-//        $scope.showTeam($scope.team);
-//      });
-
-    alert('saving ' + $scope.picks.length + ' picks');
+    pickService.savePicks($scope.team.id, $scope.picks)
+      .finally(function(result) {
+        $scope.showTeam($scope.team);
+      });
   };
 
   $scope.isPicked = function(game, squad, gameStarted) {
@@ -88,7 +82,7 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
   $scope.$on('TeamPickController::savePicks', function(event) {
     $scope.savePicks();
   });
-
+  
   /**
    * Invoked on startup, like a constructor.
    */
@@ -98,5 +92,5 @@ var TeamPickManyController = function(picks, $scope, $log, $anchorScroll, messag
   init();
 };
 
-TeamPickManyController.$inject = ['picks', '$scope', '$log', '$anchorScroll', 'messageModel', 'pickService'];
+TeamPickManyController.$inject = ['picks', '$rootScope', '$scope', '$log', '$anchorScroll', 'messageModel', 'pickService'];
 module.exports = TeamPickManyController;

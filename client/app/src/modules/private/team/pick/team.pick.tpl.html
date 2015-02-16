@@ -6,7 +6,7 @@
     <h6><a ng-click="showTeam(team)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{team.name}}</span></a></h6>
   </div>
   <div class="col-sm-5 col-md-5">
-    <button type="button" class="save-pick-btn btn btn-primary" ng-show="team.league.max_picks_per_week != 1 && isCoach(team)" ng-click="savePicks()">Save Picks</button>
+    <button type="button" class="save-pick-btn btn btn-primary" ng-show="team.league.max_picks_per_week != 1 && isCoach(team)" ng-disabled="!savePicksEnabled" ng-click="savePicks()">Save Picks</button>
   </div>
 </div>
 <div class="team-message alert alert-info" ng-show="isCoach(team)"><p class="team-message-text"><strong>{{numPicks(team)}}</strong> for {{week.name}} ({{week.type}}) [ {{week.date_range}} ]</p></div>

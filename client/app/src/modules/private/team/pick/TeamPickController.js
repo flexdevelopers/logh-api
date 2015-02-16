@@ -6,6 +6,8 @@ var TeamPickController = function(team, week, games, $rootScope, $scope, $log, $
 
   $scope.games = games.data;
 
+  $scope.savePicksEnabled = false;
+
   $scope.scrollToTop = function() {
     $anchorScroll(); // hacky?
   };
@@ -47,6 +49,10 @@ var TeamPickController = function(team, week, games, $rootScope, $scope, $log, $
   $scope.isCoach = function(team) {
     return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
+
+  $scope.$on('TeamPickController::enableSavePicks', function(event) {
+    $scope.savePicksEnabled = true;
+  });
 
   /**
    * Invoked on startup, like a constructor.
