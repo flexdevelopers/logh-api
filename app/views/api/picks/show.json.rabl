@@ -1,5 +1,5 @@
 object @pick
-attributes :id, :team_id, :week_id, :week_type_id, :correct
+attributes :id, :team_id, :week_id, :game_id, :squad_id, :week_type_id, :correct
 node(:locked) { |pick| pick.locked? }
 node(:week_name) { |pick| pick.week.name }
 node(:week_slug) { |pick| pick.week.slug }
