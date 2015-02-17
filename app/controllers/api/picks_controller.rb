@@ -53,6 +53,9 @@ class API::PicksController < API::BaseController
     # first delete all unlocked picks for this week
     @team.picks.not_locked.where(week: @current_week).readonly(false).destroy_all
     all_picks = params[:picks] || []
+    # check to make sure they're not picking too many times
+    return forbidden("You cannot make that many picks" ) if !_verify_pick_count(@team, @current_week, all_picks.length)
+    # now save the new unlocked picks
     unlocked_picks = all_picks.select do |pick|
       !pick[:locked]
     end
@@ -110,6 +113,14 @@ class API::PicksController < API::BaseController
 
     def _verify_pick_week(pick_week_id)
       forbidden("You can only make picks for the current week - #{@current_week.display}") if @current_week && @current_week.id != pick_week_id
+    end
+
+    def _verify_pick_count(team, current_week, pick_count)
+      max_picks = team.league.max_picks_per_week
+      if !max_picks
+        max_picks = current_week.games.count / 2
+      end
+      pick_count <= max_picks
     end
 
     def _is_coach_of(team)
