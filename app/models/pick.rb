@@ -14,6 +14,7 @@ class Pick < ActiveRecord::Base
   default_scope { includes(:week).order('weeks.starts_at ASC') }
 
   scope :correct, -> { where(correct: true) }
+  scope :not_locked, -> { joins(:game).where('games.starts_at > ?', Time.zone.now) }
 
   def locked?
     # no game means its a null pick and they are locked
