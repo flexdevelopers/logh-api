@@ -11,6 +11,7 @@ class API::PicksController < API::BaseController
   # GET /api/teams/:team_id/picks
   def index
     @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
+    @picks = @picks.sort_by { |pick| [ pick.week.starts_at, (pick.game) ? pick.game.starts_at : 1 ] }
     respond_with @picks # rendered via app/views/api/picks/index.json.rabl
   end
 
