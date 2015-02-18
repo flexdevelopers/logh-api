@@ -35,7 +35,7 @@ class LeagueMailer < ActionMailer::Base
     headers['X-SMTPAPI'] =  hdr.asJSON()
     puts "SMTPAPI: #{hdr.asJSON()}"
 
-    mail to: 'jeremy@loseorgohome.com', subject: "#{@week[:name]} pick reminder for the \"#{@league.name}\" league"
+    mail to: 'jeremy@loseorgohome.com', subject: "#{@week[:display]} pick reminder for the \"#{@league.name}\""
   end
 
   def team_joined(team)
