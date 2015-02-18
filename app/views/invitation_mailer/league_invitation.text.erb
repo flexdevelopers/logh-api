@@ -1,12 +1,16 @@
 Congrats! <%= @user.display_name %> has invited <%= @invitation.email %> to join the "<%= @invitation.league.name %>" league!
 
+<% if @invitation.league.elimination  %>
 Your job, if you accept, is to pick a different <%= @invitation.league.season.season_type %> loser each week. That's it!
+<% else %>
+Your job, if you accept, is to pick <%= @invitation.league.season.season_type %> losers each week. That's it!
+<% end %>
 
 League details:
 
+Format: <%= @invitation.league.format %>
 Starts: <%= @invitation.league.start_week.display %>
 Commish: <%= @invitation.league.commish_names.join(', ') %>
-<%= "Format: #{@invitation.league.format}" %>
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included from <%= @user.display_name %>:
