@@ -5,7 +5,7 @@ class API::Admin::GamesController < API::GamesController
   def create
     @game = @week.games.new(_game_params)
     if @game.save
-      render json: { message: { type: SUCCESS, content: "Game has been created" } }, status: :ok
+      render json: { message: { type: SUCCESS, content: "Created: #{@game.display} on #{@game.start_display}" } }, status: :ok
     else
       error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
