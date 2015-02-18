@@ -91,30 +91,6 @@
     text-align: right;
   }
 
-  @media all and (max-width: 550px) {
-    .team-name {
-      max-width: 235px;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .pick-squad {
-      font-size: 13px;
-      .pick-squad-name {
-        display: none;
-      }
-      .pick-squad-abbrev {
-        display: inline;
-      }
-    }
-    .team-picks {
-      .list-group-item {
-        padding: 10px 5px;
-      }
-    }
-  }
-
   .team-inactive {
     text-decoration: line-through;
   }
@@ -169,7 +145,27 @@
   }
 
   @media all and (max-width: 550px) {
-
+    .team-name {
+      max-width: 235px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pick-squad {
+      font-size: 13px;
+      .pick-squad-name {
+        display: none;
+      }
+      .pick-squad-abbrev {
+        display: inline;
+      }
+    }
+    .team-picks {
+      .list-group-item {
+        padding: 10px 5px;
+      }
+    }
     .pick-squad {
       font-size: 11px;
     }
@@ -193,7 +189,6 @@
         }
       }
     }
-
   }
 
 }
