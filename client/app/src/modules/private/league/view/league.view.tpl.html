@@ -62,7 +62,7 @@
         </div>
         <div class="col-sm-7 col-md-7">
           <span class="current-pick" ng-class="{'no-pick': team.current_pick.warning == true}" ng-show="team.active && team.started">
-            <i class="fa fa-check fa-fw" ng-show="team.current_pick.warning == false" title="All good"></i>
+            <i class="fa fa-check-circle fa-fw" ng-show="team.current_pick.warning == false" title="All good"></i>
             <i class="fa fa-warning fa-fw" ng-show="team.current_pick.warning == true" title="Warning"></i>
             <i class="fa fa-lock fa-fw" ng-show="team.current_pick.locked && team.current_pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="team.current_pick.locked == false && team.current_pick.correct == null" title="Pick unlocked"></i>
