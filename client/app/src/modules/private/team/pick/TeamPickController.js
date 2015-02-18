@@ -12,14 +12,17 @@ var TeamPickController = function(team, week, games, $rootScope, $scope, $log, $
     $anchorScroll(); // hacky?
   };
 
-  $scope.numPicks = function(team) {
-    if (team.league.max_picks_per_week >= $scope.games.length) {
-      return 'Pick all games';
+  $scope.pickMessage = function(team, week) {
+    var msg = '';
+    if (!team.league.max_picks_per_week || team.league.max_picks_per_week >= $scope.games.length) {
+      msg = 'Pick all games';
+    } else {
+      msg = 'Pick up to ' + team.league.max_picks_per_week + ' loser';
     }
-    var msg = 'Pick up to ' + team.league.max_picks_per_week + ' loser'
     if (team.league.max_picks_per_week > 1) {
       msg += 's';
     }
+    msg += ' for ' + week.name;
     return msg;
   };
 
