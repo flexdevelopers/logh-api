@@ -24,9 +24,9 @@
     </h3>
   </div>
   <div class="col-sm-5 col-md-5">
-    <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.closed" ng-click="joinLeague(leagueData)">Join League ({{leagueData.max_teams_per_user}}X Max)</button>
-    <button type="button" class="invite-btn btn btn-primary" ng-show="!leagueData.closed && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.closed)">Invite People</button>
-    <button type="button" class="request-invite-btn btn btn-primary" ng-show="!leagueData.closed && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
+    <button type="button" class="join-btn btn btn-primary" ng-show="!leagueData.closed" ng-click="joinLeague(leagueData)">Join ({{leagueData.max_teams_per_user}}X Max)</button>
+    <button type="button" class="invite-btn btn btn-default" ng-show="!leagueData.closed && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.closed)">Invite</button>
+    <button type="button" class="request-invite-btn btn btn-default" ng-show="!leagueData.closed && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.closed">
       <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
       <small>{{leagueData.format}}</small>
@@ -72,7 +72,7 @@
           </span>
           <span class="current-pick" ng-show="team.active && !team.started">Starts {{team.start_week}}</span>
           <span class="inactive-team current-pick" ng-show="!team.active">Team has been deactivated</span>
-          <span class="badge">{{team.correct_picks_count}} loser<span ng-show="team.correct_picks_count > 1">s</span></span>
+          <span class="badge">{{team.correct_picks_count}} loser<span ng-show="team.correct_picks_count != 1">s</span></span>
         </div>
       </div>
     </a>
