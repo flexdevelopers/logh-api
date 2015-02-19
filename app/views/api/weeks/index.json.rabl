@@ -1,3 +1,3 @@
 collection @weeks
 
-extends 'api/weeks/show'
+extends 'api/weeks/summary'
