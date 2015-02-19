@@ -33,7 +33,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     if (slug) {
       $location.search('week', slug); // add / replace the week query param
     } else {
-      $location.search('week', 'all'); // add all
+      $location.search('week', null); // remove week query param
     }
   };
 

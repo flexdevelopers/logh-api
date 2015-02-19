@@ -1,6 +1,6 @@
 var WeekPicksFilter = function() {
   return function(picks, weekSlug) {
-    if (!weekSlug || weekSlug == 'all') {
+    if (!weekSlug) {
       return picks;
     }
     var weekPicks = _.filter(picks, function(pick) {

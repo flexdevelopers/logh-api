@@ -24,9 +24,6 @@ module.exports = angular.module('loghApp.team.view', [])
           leagueWeeks: function(team, weekService, $stateParams) {
             return weekService.getLeagueWeeks({ seasonId: $stateParams.seasonId, leagueId: $stateParams.leagueId });
           },
-          currentWeek: function($stateParams, weekService) {
-            return weekService.getCurrentWeek($stateParams.seasonId, $stateParams.leagueId);
-          },
           picks: function(team, pickService) {
             return pickService.getPicks({ teamId: team.data.id });
           }
