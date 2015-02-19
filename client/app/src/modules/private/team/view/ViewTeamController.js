@@ -149,8 +149,9 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
   };
 
   $scope.showTeam = function(team) {
-    var teamPath = $location.path().replace(/[^\/]*$/, team.id);
-    $location.url(teamPath);
+    var teamUrl = $location.path().replace(/[^\/]*$/, team.id);
+    $location.url(teamUrl); // this does not work because of reloadOnSearch: false inside of view/picks/index.js needed to prevent controller reinit when using the week filter
+    location.reload(); // omg what a sin this is. refreshes the browser window. talk about using a big ass hammer...
   };
 
   $scope.showLeague = function(team) {
