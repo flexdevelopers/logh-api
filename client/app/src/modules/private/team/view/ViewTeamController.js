@@ -212,6 +212,20 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
     }
   };
 
+  $scope.pickStatus = function(pick) {
+    var status = '';
+    if (pick.correct === true) {
+      status = 'check';
+    } else if (pick.correct === false) {
+      status = 'times';
+    } else if (pick.locked) {
+      status = 'lock';
+    } else {
+      status = 'unlock';
+    }
+    return status;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */

@@ -62,13 +62,21 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
       });
   };
 
-  $scope.isPicked = function(game, squad, gameStarted) {
-    var isPicked = false,
+  $scope.pickStatus = function(game, squad) {
+    var status = '',
         pick = getPick(game, squad);
-    if (!_.isUndefined(pick) && (gameStarted === null || game.started === gameStarted)) {
-      isPicked = true;
+    if (!_.isUndefined(pick)) {
+      if (pick.correct === true) {
+        status = 'check';
+      } else if (pick.correct === false) {
+        status = 'times';
+      } else if (pick.locked) {
+        status = 'lock';
+      } else {
+        status = 'unlock';
+      }
     }
-    return isPicked;
+    return status;
   };
 
   $scope.isDisabled = function(game) {
