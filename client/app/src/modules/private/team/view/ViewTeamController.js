@@ -26,6 +26,13 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
   $scope.selectedWeekSlug = $stateParams.week;
 
+  $scope.openMessage = function(open) {
+    $scope.message = {
+      open: open
+    };
+  };
+  $scope.openMessage($scope.teamData.message && $scope.teamData.message.length > 0);
+
   $scope.correctPickCount = function(picks) {
     var correctPicks = _.filter(picks, function(pick) {
       return pick.correct;

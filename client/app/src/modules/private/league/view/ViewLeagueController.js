@@ -19,6 +19,13 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.selectedWeekSlug = $stateParams.week;
 
+  $scope.openMessage = function(open) {
+    $scope.message = {
+      open: open
+    };
+  };
+  $scope.openMessage($scope.leagueData.message && $scope.leagueData.message.length > 0);
+
   $scope.inPlay = function(team) {
     return (team.active && team.alive) ? 0 : 1;
   };

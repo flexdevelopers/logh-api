@@ -26,8 +26,18 @@
     <h3 class="team-meta"><small>Coach [ {{teamData.coach_names.join(', ')}} ]<br>{{teamData.league.format}}</small></h3>
   </div>
 </div>
-<div class="team-message alert alert-info" ng-show="isCommish(teamData) || isCoach(teamData)"><strong>Commish to team:</strong> <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">nothing</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a></div>
 <hr>
+<div class="team-message" ng-show="isCommish(teamData) || isCoach(teamData)">
+  <accordion close-others="true">
+    <accordion-group is-open="message.open">
+      <accordion-heading>
+        <i class="fa fa-comment fa-fw"></i> Commish messages to team [ <span ng-show="teamData.message.length > 0">1</span><span ng-show="!teamData.message || teamData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': message.open, 'glyphicon-chevron-right': !message.open}"></i>
+      </accordion-heading>
+      <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a>
+    </accordion-group>
+  </accordion>
+  <hr>
+</div>
 <div class="losers-tab">
   <ul class="nav nav-tabs">
     <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeekSlug))}} ]</a></li>
