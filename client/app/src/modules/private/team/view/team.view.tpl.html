@@ -56,7 +56,7 @@
       <a ng-repeat="pick in picks | weekPicksFilter:selectedWeekSlug" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
         <div class="row">
           <div class="week-name col-sm-7 col-md-7">
-            <i class="fa fa-{{pickStatus(pick)}} pick-{{pickStatus(pick)}} fa-fw"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pick.week_type}} | {{pick.week_name}}<span ng-show="pick.game.start.length > 0"> | {{pick.game.start}}</span></span>
+            <i class="fa fa-{{pickStatus(pick)}} fa-fw"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pick.week_type}} | {{pick.week_name}}<span ng-show="pick.game.start.length > 0"> | {{pick.game.start}}</span></span>
           </div>
           <div class="game-column col-sm-5 col-md-5">
             <span class="game">{{pick.game.display}}</span>
