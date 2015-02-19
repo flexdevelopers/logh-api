@@ -44,6 +44,7 @@ $icon-font-path: "../assets/fonts/";
 // team
 @import "../modules/private/team/team";
 @import "../modules/private/team/view/team.view";
+@import "../modules/private/team/view/picks/team.view.picks";
 @import "../modules/private/team/edit/team.edit";
 @import "../modules/private/team/message/team.message";
 @import "../modules/private/team/pick/team.pick";

@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -16,15 +16,10 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
-  $scope.leagueWeeks = leagueWeeks.data;
-
-  $scope.picks = picks.data;
 
   $scope.teamDropdown = {
     isopen: false
   };
-
-  $scope.selectedWeekSlug = $stateParams.week;
 
   $scope.openMessage = function(open) {
     $scope.message = {
@@ -33,25 +28,10 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
   };
   $scope.openMessage($scope.teamData.message && $scope.teamData.message.length > 0);
 
-  $scope.correctPickCount = function(picks) {
-    var correctPicks = _.filter(picks, function(pick) {
-      return pick.correct;
-    });
-    return correctPicks.length;
-  };
-
   $scope.toggleDropdown = function($event) {
     $event.preventDefault();
     $event.stopPropagation();
     $scope.teamDropdown.isopen = !$scope.teamDropdown.isopen;
-  };
-
-  $scope.changeWeek = function(slug) {
-    if (slug) {
-      $location.search('week', slug); // add / replace the week query param
-    } else {
-      $location.search('week', null); // remove week query param
-    }
   };
 
   $scope.contactCommish = function(team) {
@@ -201,31 +181,6 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
   };
 
-  $scope.makePick = function(team, pick) {
-    if (!$scope.isCoach(team) || (pick && pick.locked)) {
-      return;
-    }
-    if (team.league.max_picks_per_week == 1) {
-      $location.url($location.path() + '/pick');
-    } else {
-      $location.url($location.path() + '/picks');
-    }
-  };
-
-  $scope.pickStatus = function(pick) {
-    var status = '';
-    if (pick.correct === true) {
-      status = 'check';
-    } else if (pick.correct === false) {
-      status = 'times';
-    } else if (pick.locked) {
-      status = 'lock';
-    } else {
-      status = 'unlock';
-    }
-    return status;
-  };
-
   /**
    * Invoked on startup, like a constructor.
    */
@@ -236,5 +191,5 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'leagueWeeks', 'picks', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService'];
 module.exports = ViewTeamController;
