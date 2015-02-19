@@ -1,4 +1,4 @@
 object @week
-attributes :id, :slug
+attributes :id, :name, :slug
 node(:display) { |week| week.display }
 
