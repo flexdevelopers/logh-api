@@ -9,11 +9,6 @@ module.exports = angular.module('loghApp.team.pick.many', [])
             templateUrl: 'modules/private/team/pick/many/team.pick.many.tpl.html',
             controller: 'TeamPickManyController'
           }
-        },
-        resolve: {
-          picks: function($stateParams, pickService) {
-            return pickService.getSelectedPicks({ teamId: $stateParams.teamId });
-          }
         }
       });
     $urlRouterProvider.otherwise('/');

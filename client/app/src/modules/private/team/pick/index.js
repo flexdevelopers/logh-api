@@ -20,6 +20,9 @@ module.exports = angular.module('loghApp.team.pick', [])
           },
           games: function($stateParams, gameService) {
             return gameService.getCurrentGames($stateParams.leagueId);
+          },
+          picks: function($stateParams, pickService) {
+            return pickService.getSelectedPicks({ teamId: $stateParams.teamId });
           }
         }
       });

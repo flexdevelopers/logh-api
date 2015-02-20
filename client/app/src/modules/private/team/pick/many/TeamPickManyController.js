@@ -1,4 +1,4 @@
-var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorScroll, messageModel, pickService) {
+var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, messageModel, pickService) {
 
   var scrollToTop = function() {
     $anchorScroll(); // hacky?
@@ -37,8 +37,6 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
     $scope.picks.push(pick);
   };
 
-  $scope.picks = picks.data;
-
   $scope.togglePick = function(game, squad) {
     if (!$scope.isCoach($scope.team) || game.started) return;
     var pick = getPick(game, squad);
@@ -62,9 +60,17 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
       });
   };
 
+  $scope.isDisabled = function(game) {
+    var isDisabled = false;
+    if (game.started) {
+      isDisabled = true;
+    }
+    return isDisabled;
+  };
+
   $scope.pickStatus = function(game, squad) {
     var status = '',
-        pick = getPick(game, squad);
+      pick = getPick(game, squad);
     if (!_.isUndefined(pick)) {
       if (pick.correct === true) {
         status = 'check';
@@ -77,14 +83,6 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
       }
     }
     return status;
-  };
-
-  $scope.isDisabled = function(game) {
-    var isDisabled = false;
-    if (game.started) {
-      isDisabled = true;
-    }
-    return isDisabled;
   };
 
   $scope.$on('TeamPickController::savePicks', function(event) {
@@ -100,5 +98,5 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
   init();
 };
 
-TeamPickManyController.$inject = ['picks', '$rootScope', '$scope', '$log', '$anchorScroll', 'messageModel', 'pickService'];
+TeamPickManyController.$inject = ['$rootScope', '$scope', '$log', '$anchorScroll', 'messageModel', 'pickService'];
 module.exports = TeamPickManyController;

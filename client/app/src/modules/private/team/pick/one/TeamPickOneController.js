@@ -1,8 +1,6 @@
-var TeamPickOneController = function(picks, $scope, $log, pickService) {
+var TeamPickOneController = function($scope, $log, pickService) {
 
-  var picks = picks.data;
-
-  $scope.currentPick = _.find(picks, function(pick){ return pick.week_id === $scope.week.id });
+  $scope.currentPick = _.find($scope.picks, function(pick){ return pick.week_id === $scope.week.id });
 
   $scope.makePick = function(game, squad) {
     if ($scope.isDisabled(game, squad)) {
@@ -33,21 +31,13 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
       return false;
     } else {
       var squadHasBeenUsed = false;
-      _.each(picks, function(pick) {
+      _.each($scope.picks, function(pick) {
         if (pick.squad.id == squad.id && pick.week_type_id == game.week_type_id && pick.week_id != game.week_id) {
           squadHasBeenUsed = true;
         }
       });
       return squadHasBeenUsed;
     }
-  };
-
-  $scope.isPicked = function(game, squad, gameStarted) {
-    var isPicked = false;
-    if ($scope.currentPick && $scope.currentPick.squad.id == squad.id && $scope.currentPick.game.id == game.id && (gameStarted === null || game.started === gameStarted)) {
-      isPicked = true;
-    }
-    return isPicked;
   };
 
   $scope.isCurrentPickLocked = function() {
@@ -62,6 +52,22 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
     return isDisabled;
   };
 
+  $scope.pickStatus = function(game, squad) {
+    var status = '';
+    if (!_.isUndefined($scope.currentPick) && $scope.currentPick.game_id == game.id && $scope.currentPick.squad_id == squad.id) {
+      if ($scope.currentPick.correct === true) {
+        status = 'check';
+      } else if ($scope.currentPick.correct === false) {
+        status = 'times';
+      } else if ($scope.currentPick.locked) {
+        status = 'lock';
+      } else {
+        status = 'unlock';
+      }
+    }
+    return status;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -71,5 +77,5 @@ var TeamPickOneController = function(picks, $scope, $log, pickService) {
   init();
 };
 
-TeamPickOneController.$inject = ['picks', '$scope', '$log', 'pickService'];
+TeamPickOneController.$inject = ['$scope', '$log', 'pickService'];
 module.exports = TeamPickOneController;
