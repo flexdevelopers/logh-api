@@ -9,28 +9,29 @@ node(:correct_picks_count) do |team|
 end
 node(:current_pick) do |team|
   current_picks = team.current_picks({ week_id: (@week) ? @week.id : nil })
+  week = @week || team.current_week
   if team.league.max_picks_per_week == 1
     if current_picks.any?
       if current_picks[0].locked? || team.coach_ids.include?(@user.id)
         if current_picks[0].game
           {
-              name: "#{current_picks[0].squad.short} | #{current_picks[0].week.name} | #{current_picks[0].game.start_display_short}",
-              abbrev: "#{current_picks[0].squad.abbrev} | #{current_picks[0].week.name} | #{current_picks[0].game.start_display_short}",
+              name: "#{current_picks[0].squad.short} | #{week.name} | #{current_picks[0].game.start_display_short}",
+              abbrev: "#{current_picks[0].squad.abbrev} | #{week.name} | #{current_picks[0].game.start_display_short}",
               correct: current_picks[0].correct,
               locked: current_picks[0].locked?
           }
         else
           {
-              name: "#{current_picks[0].squad.short} | #{current_picks[0].week.name}",
-              abbrev: "#{current_picks[0].squad.abbrev} | #{current_picks[0].week.name}",
+              name: "#{current_picks[0].squad.short} | #{week.name}",
+              abbrev: "#{current_picks[0].squad.abbrev} | #{week.name}",
               correct: current_picks[0].correct,
               locked: current_picks[0].locked?
           }
         end
       else
         {
-            name: "Hidden | #{current_picks[0].week.name}",
-            abbrev: "Hidden | #{current_picks[0].week.name}",
+            name: "Hidden | #{week.name}",
+            abbrev: "Hidden | #{week.name}",
             correct: current_picks[0].correct,
             locked: current_picks[0].locked?
         }
@@ -38,8 +39,8 @@ node(:current_pick) do |team|
     else
       if team.alive
         {
-            name: "No Pick | #{team.current_week.name}",
-            abbrev: "No Pick | #{team.current_week.name}",
+            name: "No Pick | #{week.name}",
+            abbrev: "No Pick | #{week.name}",
             warning: true
         }
       else
@@ -63,9 +64,9 @@ node(:current_pick) do |team|
     end
   else
     {
-        name: "#{pluralize(current_picks.count, 'pick')} | #{team.current_week.name}",
-        abbrev: "#{pluralize(current_picks.count, 'pick')} | #{team.current_week.name}",
-        warning: (current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
+        name: "#{pluralize(current_picks.count, 'pick')} | #{week.name}",
+        abbrev: "#{pluralize(current_picks.count, 'pick')} | #{week.name}",
+        warning: (!@week && current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
     }
   end
 end
