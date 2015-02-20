@@ -1,5 +1,11 @@
 var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, userModel, messageModel, userService, weekService, teamService, leagueService) {
 
+  var setMessageState = function() {
+    if (!_.has($scope.userModel.leagueMessageOpen, $scope.leagueData.id)) {
+      $scope.userModel.leagueMessageOpen[$scope.leagueData.id] = $scope.leagueData.message && $scope.leagueData.message.length > 0;
+    }
+  };
+
   $scope.leagueData = league.data;
 
   $scope.leagueWeeks = leagueWeeks.data;
@@ -19,12 +25,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.selectedWeekSlug = $stateParams.week;
 
-  $scope.openMessage = function(open) {
-    $scope.message = {
-      open: open
-    };
-  };
-  $scope.openMessage($scope.leagueData.message && $scope.leagueData.message.length > 0);
+  $scope.userModel = userModel;
 
   $scope.inPlay = function(team) {
     return (team.active && team.alive) ? 0 : 1;
@@ -284,6 +285,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
    */
   var init = function () {
     $log.debug("view league controller");
+    setMessageState();
   };
   init();
 

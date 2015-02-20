@@ -36,11 +36,11 @@
 <hr>
 <div class="league-message" ng-show="!leagueData.closed || hasTeamInLeague() || isCommish(leagueData)">
   <accordion close-others="true">
-    <accordion-group is-open="message.open">
+    <accordion-group is-open="userModel.leagueMessageOpen[leagueData.id]">
       <accordion-heading>
-        <i class="fa fa-comment fa-fw"></i> Commish messages to league [ <span ng-show="leagueData.message.length > 0">1</span><span ng-show="!leagueData.message || leagueData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': message.open, 'glyphicon-chevron-right': !message.open}"></i>
+        <i class="fa fa-comment fa-fw"></i> Messages to league [ <span ng-show="leagueData.message.length > 0">1</span><span ng-show="!leagueData.message || leagueData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': message.open, 'glyphicon-chevron-right': !message.open}"></i>
       </accordion-heading>
-      <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">nothing</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a>
+      <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">no messages</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a>
     </accordion-group>
   </accordion>
   <hr>
@@ -72,7 +72,6 @@
         </div>
         <div class="col-sm-7 col-md-7">
           <span class="current-pick" ng-class="{'no-pick': team.current_pick.warning == true}" ng-show="team.active && team.started">
-            <i class="fa fa-check-circle fa-fw" ng-show="team.current_pick.warning == false" title="All good"></i>
             <i class="fa fa-warning fa-fw" ng-show="team.current_pick.warning == true" title="Warning"></i>
             <i class="fa fa-lock fa-fw" ng-show="team.current_pick.locked && team.current_pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="team.current_pick.locked == false && team.current_pick.correct == null" title="Pick unlocked"></i>

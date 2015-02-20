@@ -14,6 +14,12 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
       });
   };
 
+  var setMessageState = function() {
+    if (!_.has($scope.userModel.teamMessageOpen, $scope.teamData.id)) {
+      $scope.userModel.teamMessageOpen[$scope.teamData.id] = $scope.teamData.message && $scope.teamData.message.length > 0;
+    }
+  };
+
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
 
@@ -21,12 +27,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
     isopen: false
   };
 
-  $scope.openMessage = function(open) {
-    $scope.message = {
-      open: open
-    };
-  };
-  $scope.openMessage($scope.teamData.message && $scope.teamData.message.length > 0);
+  $scope.userModel = userModel;
 
   $scope.toggleDropdown = function($event) {
     $event.preventDefault();
@@ -187,6 +188,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
    */
   var init = function () {
     $log.debug("view team controller");
+    setMessageState();
   };
   init();
 

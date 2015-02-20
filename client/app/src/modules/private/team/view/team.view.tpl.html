@@ -29,11 +29,11 @@
 <hr>
 <div class="team-message" ng-show="isCommish(teamData) || isCoach(teamData)">
   <accordion close-others="true">
-    <accordion-group is-open="message.open">
+    <accordion-group is-open="userModel.teamMessageOpen[teamData.id]">
       <accordion-heading>
-        <i class="fa fa-comment fa-fw"></i> Commish messages to team [ <span ng-show="teamData.message.length > 0">1</span><span ng-show="!teamData.message || teamData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': message.open, 'glyphicon-chevron-right': !message.open}"></i>
+        <i class="fa fa-comment fa-fw"></i> Messages to team [ <span ng-show="teamData.message.length > 0">1</span><span ng-show="!teamData.message || teamData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': message.open, 'glyphicon-chevron-right': !message.open}"></i>
       </accordion-heading>
-      <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no message</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a>
+      <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no messages</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact ]</a>
     </accordion-group>
   </accordion>
   <hr>

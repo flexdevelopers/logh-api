@@ -8,8 +8,13 @@ var UserModel = function($rootScope, $window, $log) {
     user.first_name = '';
     user.last_name = '';
     user.admin = false;
-
     this.user = user;
+
+    var teamMessageOpen = {};
+    this.teamMessageOpen = teamMessageOpen;
+
+    var leagueMessageOpen = {};
+    this.leagueMessageOpen = leagueMessageOpen;
 
     this.setUser = function(userData) {
         user.loaded = true;
