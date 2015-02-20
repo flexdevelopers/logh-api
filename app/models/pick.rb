@@ -16,6 +16,8 @@ class Pick < ActiveRecord::Base
   scope :correct, -> { where(correct: true) }
   scope :not_locked, -> { joins(:game).where('games.starts_at > ?', Time.zone.now) }
 
+  scope :not_none, -> { joins(:squad).where('squads.none = ?', false) }
+
   def locked?
     # no game means its a null pick and they are locked
     !game || game.started?

@@ -45,9 +45,9 @@ class Team < ActiveRecord::Base
   def current_picks(options)
     # this can be nil
     if options[:week_id]
-      self.picks.where('week_id = ?', options[:week_id]).where(team: self)
+      self.picks.not_none.where('week_id = ?', options[:week_id])
     else
-      self.current_week.picks.where(team: self)
+      self.current_week.picks.not_none.where(team: self)
     end
   end
 
