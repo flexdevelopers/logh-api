@@ -1,12 +1,18 @@
 <hr>
 <div ng-repeat-start="game in games" class="week-games list-group">
-  <h5 ng-class="{'invalid-game': game.started}"><span class="game-display">{{game.display}}</span><br><small>{{starts(game)}}</small></h5>
-  <a ng-repeat="squad in game.squads" ng-click="togglePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad)}">
-    <div class="row game-row">
-      <span>{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
-      <i class="fa fa-{{pickStatus(game, squad)}} pull-right"></i>
+  <div class="row">
+    <div class="col-sm-12 col-md-12"><h5 class="start-date"><small>{{starts(game)}}</small></h5></div>
+  </div>
+  <div class="row game-squads">
+    <div class="col-sm-6 col-md-6" ng-repeat="squad in game.squads">
+      <a ng-click="togglePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad)}">
+        <div class="row game-row">
+          <span><span ng-show="($index === 1)">@ </span>{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
+          <i class="fa fa-{{pickStatus(game, squad)}} pull-right"></i>
+        </div>
+      </a>
     </div>
-  </a>
+  </div>
 </div>
 <div ng-repeat-end></div>
 <button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-disabled="!savePicksEnabled" ng-click="savePicks()">Save Picks</button>

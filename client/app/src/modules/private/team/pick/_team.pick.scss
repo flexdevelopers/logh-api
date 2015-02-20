@@ -24,10 +24,20 @@
       padding: 0 10px 0 10px;
     }
 
-    .invalid-game {
-      .game-display {
-        text-decoration: line-through;
+    .start-date {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+
+    &.list-group {
+      margin-bottom: 0;
+    }
+
+    .game-squads {
+      .list-group-item {
+        margin-bottom: 5px;
       }
+
     }
 
     .invalid-squad {

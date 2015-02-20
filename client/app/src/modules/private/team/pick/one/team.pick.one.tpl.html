@@ -1,14 +1,20 @@
 <div class="team-message alert alert-warning" ng-show="isCoach(team) && isCurrentPickLocked()"><p class="team-message-text">Your pick for {{week.name}} ({{week.type}}) is locked [ {{currentPick.squad.name}} ]</p></div>
 <hr>
 <div ng-repeat-start="game in games" class="week-games list-group">
-  <h5 ng-class="{'invalid-game': game.started}"><span class="game-display">{{game.display}}</span><br><small>{{starts(game)}}</small></h5>
-  <a ng-repeat="squad in game.squads" ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad), 'is-picked': isPicked(game, squad, null)}">
-    <div class="row game-row">
-      <span ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
-      <i class="fa fa-lock pull-right" ng-show="isPicked(game, squad, true)"></i>
-      <i class="fa fa-unlock pull-right" ng-show="isPicked(game, squad, false)"></i>
+  <div class="row">
+    <div class="col-sm-12 col-md-12"><h5 class="start-date"><small>{{starts(game)}}</small></h5></div>
+  </div>
+  <div class="row game-squads">
+    <div class="col-sm-6 col-md-6" ng-repeat="squad in game.squads">
+      <a ng-click="makePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad), 'is-picked': isPicked(game, squad, null)}">
+        <div class="row game-row">
+          <span ng-class="{'invalid-squad': hasSquadBeenUsed(game, squad)}">{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
+          <i class="fa fa-lock pull-right" ng-show="isPicked(game, squad, true)"></i>
+          <i class="fa fa-unlock pull-right" ng-show="isPicked(game, squad, false)"></i>
+        </div>
+      </a>
     </div>
-  </a>
+  </div>
 </div>
 <div ng-repeat-end></div>
 
