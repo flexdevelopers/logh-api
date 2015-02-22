@@ -5,6 +5,7 @@ node(:start_week_display) { |team| team.league.start_week.display }
 node(:commish_ids) { |team| team.commish_ids }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
+node(:current_week_name) { |team| team.current_week.name }
 node(:current_picks_count) do |team|
   current_picks = team.current_picks({ week_id: (@week) ? @week.id : nil })
   current_picks.count
