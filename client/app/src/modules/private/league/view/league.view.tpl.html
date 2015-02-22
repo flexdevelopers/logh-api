@@ -40,7 +40,7 @@
       <accordion-heading>
         <i class="fa fa-comment fa-fw"></i> Messages to league [ <span ng-show="leagueData.message.length > 0">1</span><span ng-show="!leagueData.message || leagueData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': userModel.leagueMessageOpen[leagueData.id], 'glyphicon-chevron-right': !userModel.leagueMessageOpen[leagueData.id]}"></i>
       </accordion-heading>
-      <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">no messages</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact ]</a>
+      <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">no messages</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact commish ]</a>
     </accordion-group>
   </accordion>
   <hr>
