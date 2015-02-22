@@ -23,7 +23,12 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
 
   var addPick = function(game, squad) {
     if (allPicksMade()) {
-      messageModel.setMessage({ type: 'danger', content: 'Maximum pick count achieved. Please unselect a pick if necessary.' }, false);
+      var message = 'No more picks allowed. Unselect a pick if necessary.';
+      var maxPicks = $scope.team.league.max_picks_per_week;
+      if (maxPicks) {
+        message = 'Only ' + maxPicks + ' picks allowed. Unselect a pick if necessary.';
+      }
+      messageModel.setMessage({ type: 'danger', content: message }, false);
       scrollToTop();
       return;
     }
