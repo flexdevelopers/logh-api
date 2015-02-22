@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService) {
+var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $window, $timeout, $location, $state, $stateParams, messageModel, userModel, userService, teamService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -150,9 +150,12 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
   };
 
   $scope.showTeam = function(team) {
-    var teamUrl = $location.path().replace(/[^\/]*$/, team.id);
-    $location.url(teamUrl); // this does not work because of reloadOnSearch: false inside of view/picks/index.js needed to prevent controller reinit when using the week filter
-    location.reload(); // omg what a sin this is. refreshes the browser window. talk about using a big ass hammer...
+    // omg what a sin this is. refreshes the browser window. talk about using a big ass hammer...
+    // have to do this because of reloadOnSearch: false inside of view/picks/index.js needed to prevent controller reinit when using the week filter
+    $timeout(function () {
+      $window.location.href = $location.absUrl().replace(/[^\/]*$/, team.id);
+      location.reload();
+    }, 200);
   };
 
   $scope.showLeague = function(team) {
@@ -194,5 +197,5 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $loca
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$log', '$modal', '$window', '$timeout', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService'];
 module.exports = ViewTeamController;
