@@ -41,7 +41,7 @@ node(:current_pick) do |team|
         {
             name: "No Pick | #{week.name}",
             abbrev: "No Pick | #{week.name}",
-            warning: true
+            warning: !@week || @week.id == team.current_week.id
         }
       else
         incorrect_pick = team.picks.where(correct: false)[0]
@@ -66,7 +66,7 @@ node(:current_pick) do |team|
     {
         name: "#{pluralize(current_picks.count, 'pick')} | #{week.name}",
         abbrev: "#{pluralize(current_picks.count, 'pick')} | #{week.name}",
-        warning: (!@week && current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
+        warning: ((!@week || @week.id == team.current_week.id) && current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
     }
   end
 end
