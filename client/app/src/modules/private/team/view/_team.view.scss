@@ -1,4 +1,4 @@
-.team-content, .play-content, .picks-content {
+.team-content, .play-content {
 
   .team-league-name {
     margin-top: 10px;
@@ -35,60 +35,8 @@
     text-align: right;
   }
 
-  .losers-tab {
-    position: relative;
-    margin-bottom: -1px;
-    .make-pick-btn-container {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-    .weeks {
-      position: relative;
-      width: 100%;
-      padding: 10px;
-      background-color: #ddd;
-    }
-  }
-
-  .team-picks {
-    .list-group-item:first-child {
-      border-top-right-radius: 0px;
-      border-top-left-radius: 0px;
-    }
-  }
-  
-  .team-pick {
-    &.locked {
-      cursor: default;
-      &:hover {
-        background-color: #ffffff;
-      }
-    }
-    &.incorrect {
-      background-color: #f5f5f5;
-      &:hover {
-        background-color: #f5f5f5;
-      }
-    }
-  }
-
   .no-picks-alert {
     margin-top: 10px;
-  }
-
-  .pick-squad {
-    font-size: 13px;
-    .pick-squad-name {
-      display: inline;
-    }
-    .pick-squad-abbrev {
-      display: none;
-    }
-  }
-
-  .game-column {
-    text-align: right;
   }
 
   .team-inactive {
@@ -123,24 +71,7 @@
     position: relative;
   }
 
-  .team-picks {
-    .list-group-item {
-      .game, .game-start, .week-loser {
-        font-size: 11px;
-        color: #999;
-      }
-      .week-type {
-        float: right;
-      }
-    }
-  }
-
   @media all and (max-width: 767px) {
-    .team-picks {
-      .week-name, .game-column {
-        text-align: center;
-      }
-    }
     .team-meta {
       margin-top: 5px;
       text-align: left;
@@ -154,29 +85,6 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-    .pick-squad {
-      font-size: 13px;
-      .pick-squad-name {
-        display: none;
-      }
-      .pick-squad-abbrev {
-        display: inline;
-      }
-    }
-    .team-picks {
-      .list-group-item {
-        padding: 10px 5px;
-      }
-    }
-    .pick-squad {
-      font-size: 11px;
-    }
-
-    .team-picks {
-      .game, .game-start {
-        font-size: 10px !important;
-      }
     }
   }
 
