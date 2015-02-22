@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService, gameService, pickService) {
+var ViewTeamController = function(team, leagueTeams, leagueWeeks, currentWeek, picks, $scope, $log, $modal, $location, $state, $stateParams, messageModel, userModel, userService, teamService, gameService, pickService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -17,6 +17,8 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
   $scope.leagueWeeks = leagueWeeks.data;
+
+  $scope.currentWeek = currentWeek.data;
 
   $scope.picks = picks.data;
 
@@ -43,7 +45,7 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
     if (slug) {
       $location.search('week', slug); // add / replace the week query param
     } else {
-      $location.search('week', null); // remove the week query param
+      $location.search('week', 'all'); // add all
     }
   };
 
@@ -210,10 +212,13 @@ var ViewTeamController = function(team, leagueTeams, leagueWeeks, picks, $scope,
    */
   var init = function () {
     $log.debug("view team controller");
+    if (!$scope.selectedWeekSlug && $scope.teamData.league.max_picks_per_week != 1) {
+      $scope.changeWeek($scope.currentWeek.slug);
+    }
   };
   init();
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', 'leagueWeeks', 'picks', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', 'leagueWeeks', 'currentWeek', 'picks', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService', 'gameService', 'pickService'];
 module.exports = ViewTeamController;

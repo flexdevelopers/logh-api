@@ -58,7 +58,7 @@ var TeamPickManyController = function(picks, $rootScope, $scope, $log, $anchorSc
   $scope.savePicks = function() {
     pickService.savePicks($scope.team.id, $scope.picks)
       .finally(function(result) {
-        $scope.showTeam($scope.team, true);
+        $scope.showTeam($scope.team);
       });
   };
 
