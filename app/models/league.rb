@@ -26,6 +26,8 @@ class League < ActiveRecord::Base
   scope :public, -> { where(public: true) }
   scope :private, -> { where(public: false) }
 
+  scope :elimination, -> { where(elimination: true) }
+
   scope :started, -> { joins(:start_week).where('starts_at <= ?', Time.zone.now) }
   scope :start_week_not_complete, -> { joins(:start_week).where('complete = ?', false) }
 
