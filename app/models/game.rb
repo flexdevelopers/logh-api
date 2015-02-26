@@ -16,7 +16,7 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :complete, inclusion: { in: [true, false] }
 
-  default_scope { order(starts_at: :asc) }
+  default_scope { order(starts_at: :asc, created_at: :asc) }
 
   def display
     "#{visiting_squad.name} @ #{home_squad.name}"
