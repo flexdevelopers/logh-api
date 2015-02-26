@@ -1,4 +1,4 @@
-var HeaderController = function($scope, $log, $location, $modal, $state, $anchorScroll, $stateParams, userService, leagueService, userModel, messageModel, seasonModel) {
+var HeaderController = function($rootScope, $scope, $log, $location, $modal, $state, $anchorScroll, $stateParams, userService, leagueService, userModel, messageModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -129,16 +129,19 @@ var HeaderController = function($scope, $log, $location, $modal, $state, $anchor
       });
     };
 
+    $rootScope.$on("$viewContentLoaded", function() {
+      scrollToTop();
+    });
+
     /**
      * Invoked on startup, like a constructor.
      */
     var init = function () {
         $log.debug("header controller");
-        scrollToTop();
         checkHtml5Storage();
     };
     init();
 };
 
-HeaderController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', '$stateParams', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
+HeaderController.$inject = ['$rootScope', '$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', '$stateParams', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
 module.exports = HeaderController;
