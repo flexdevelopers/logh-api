@@ -19,7 +19,8 @@ class API::InvitationsController < API::BaseController
   # POST /leagues/:league_id/invitations
   # Create one or more invitations for a league
   def create
-    return forbidden('Only the commish can send an invite for a private league') if !@league.public && !_is_commish_of?(@league)
+    return forbidden('Only the commish can send an invite for a private league.') if !@league.public && !_is_commish_of?(@league)
+    return forbidden('You are too late. The league is closed to new teams.') if @league.closed?
     emails = _invitation_params[:email].strip.downcase.split(/[\s,]+/)
     invite_emails = []
     emails.each do |email|
