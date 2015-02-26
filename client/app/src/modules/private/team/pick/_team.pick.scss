@@ -18,6 +18,13 @@
     float: right;
   }
 
+  .pick-message {
+    text-align: center;
+    .pick-message-text {
+      font-weight: bold;
+    }
+  }
+
   .week-games {
 
     .game-row {
