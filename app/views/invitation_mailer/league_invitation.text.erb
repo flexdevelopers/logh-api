@@ -9,8 +9,10 @@ Your job, if you accept, is to pick <%= @invitation.league.season.season_type %>
 League details:
 
 Format: <%= @invitation.league.format %>
-Starts: <%= @invitation.league.start_week.display %>
 Commish: <%= @invitation.league.commish_names.join(', ') %>
+<% if @invitation.league.elimination  %>
+Starts: <%= @invitation.league.start_week.display %>
+<% end %>
 
 <% if @invitation.message && @invitation.message.length > 0  %>
 A message was also included from <%= @user.display_name %>:
