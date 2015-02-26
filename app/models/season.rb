@@ -9,11 +9,15 @@ class Season < ActiveRecord::Base
   scope :current, -> { where('starts_at <= ?', Time.zone.now).where('ends_at > ?', Time.zone.now).order(ends_at: :desc) }
 
   def current?
-    self.starts_at <= Time.zone.now && self.ends_at > Time.zone.now
+    self.started? && !self.ended?
   end
 
   def started?
     self.starts_at <= Time.zone.now
+  end
+
+  def ended?
+    self.ends_at <= Time.zone.now
   end
 
   def start_display
