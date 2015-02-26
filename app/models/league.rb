@@ -36,7 +36,7 @@ class League < ActiveRecord::Base
   end
 
   def closed?
-    self.elimination && self.start_week.complete
+    (self.elimination && self.start_week.complete) || self.season.ended?
   end
 
   def allow_dups
