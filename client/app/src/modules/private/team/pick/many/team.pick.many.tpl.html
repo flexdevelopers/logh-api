@@ -1,10 +1,10 @@
 <hr>
 <div ng-repeat-start="game in games" class="week-games list-group">
   <div class="row">
-    <div class="col-sm-12 col-md-12"><h5 class="start-date"><small>{{starts(game)}}</small></h5></div>
+    <div class="col-sm-12 col-md-12"><h5 class="game-display">{{game.display}} <small class="start-date">{{starts(game)}}</small></h5></div>
   </div>
   <div class="row game-squads">
-    <div class="col-sm-6 col-md-6" ng-repeat="squad in game.squads">
+    <div class="col-sm-6 col-md-6 game-squad" ng-repeat="squad in game.squads">
       <a ng-click="togglePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad)}">
         <div class="row game-row">
           <span><span ng-show="($index === 1)">@ </span>{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
