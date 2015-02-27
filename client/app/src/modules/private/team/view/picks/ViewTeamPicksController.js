@@ -1,4 +1,4 @@
-var ViewTeamPicksController = function(leagueWeeks, picks, $scope, $log, $location, $stateParams) {
+var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, $log, $location, $stateParams) {
 
   $scope.leagueWeeks = leagueWeeks.data;
 
@@ -51,10 +51,15 @@ var ViewTeamPicksController = function(leagueWeeks, picks, $scope, $log, $locati
    */
   var init = function () {
     $log.debug("view team picks controller");
+    // for pick'em leagues, if week not selected, select current week
+    if ($scope.teamData.league.elimination == false && !$scope.selectedWeekSlug) {
+      $scope.selectedWeekSlug = currentWeek.data.slug;
+      $scope.changeWeek($scope.selectedWeekSlug);
+    }
   };
   init();
 
 };
 
-ViewTeamPicksController.$inject = ['leagueWeeks', 'picks', '$scope', '$log', '$location', '$stateParams'];
+ViewTeamPicksController.$inject = ['leagueWeeks', 'currentWeek', 'picks', '$scope', '$log', '$location', '$stateParams'];
 module.exports = ViewTeamPicksController;
