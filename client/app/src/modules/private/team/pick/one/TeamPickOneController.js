@@ -22,7 +22,7 @@ var TeamPickOneController = function($scope, $log, pickService) {
   $scope.savePick = function() {
     pickService.savePick($scope.currentPick)
       .finally(function() {
-        $scope.showTeam($scope.team);
+        $scope.showTeam($scope.team, false);
       });
   };
 
