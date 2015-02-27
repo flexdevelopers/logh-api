@@ -51,8 +51,8 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
    */
   var init = function () {
     $log.debug("view team picks controller");
-    // for pick'em leagues, if week not selected, select current week
-    if ($scope.teamData.league.elimination == false && !$scope.selectedWeekSlug) {
+    // for pick'em leagues, use current week (if week not specified in url)
+    if ($scope.teamData.league.elimination == false && currentWeek) {
       $scope.selectedWeekSlug = currentWeek.data.slug;
       $scope.changeWeek($scope.selectedWeekSlug);
     }
