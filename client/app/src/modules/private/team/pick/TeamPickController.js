@@ -19,7 +19,7 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
     if (!team.league.max_picks_per_week || team.league.max_picks_per_week >= $scope.games.length) {
       msg = 'Pick all games';
     } else {
-      msg = 'Pick up to ' + team.league.max_picks_per_week + ' loser';
+      msg = 'Pick ' + team.league.max_picks_per_week + ' loser';
     }
     if (team.league.max_picks_per_week > 1) {
       msg += 's';

@@ -137,6 +137,22 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     return team.current_picks_count == 0;
   };
 
+  $scope.hasNotEnoughPicks = function(team) {
+    var hasNotMetPickCount = team.current_picks_count != team.league.max_picks_per_week;
+    var hasNotMetGameCount = team.current_picks_count != team.current_week_game_count;
+    return !$scope.hasNoPick(team) && hasNotMetPickCount && hasNotMetGameCount;
+  };
+
+  $scope.pickSummary = function(team) {
+    var msg = '';
+    if (team.league.max_picks_per_week && team.league.max_picks_per_week <= team.current_week_game_count) {
+      msg = team.current_picks_count + ' of ' + team.league.max_picks_per_week;
+    } else {
+      msg = team.current_picks_count + ' of ' + team.current_week_game_count;
+    }
+    return msg;
+  };
+
   $scope.isCommish = function(team) {
     return team.commish_ids.indexOf(userModel.user.id) > -1;
   };
