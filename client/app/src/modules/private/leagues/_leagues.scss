@@ -1,16 +1,3 @@
-.leagues-container {
-  position: relative;
-  .custom-search-form {
-    width: 300px;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .manage-custom-search-form {
-    margin: 5px 0 5px 0;
-  }
-}
-
 .public-leagues, .private-leagues, .managed-leagues, .my-leagues, .my-teams {
   .list-group-item {
     .team-count, .start-week {

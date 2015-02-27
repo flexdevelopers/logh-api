@@ -54,21 +54,6 @@
     }
   }
 
-  .league-container {
-    position: relative;
-    .custom-search-form {
-      width: 275px;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    
-    .manage-custom-search-form {
-      margin: 5px 0 5px 0;
-    }
-
-  }
-
   @media all and (max-width: 767px) {
     .request-invite-btn {
       float: none !important;
