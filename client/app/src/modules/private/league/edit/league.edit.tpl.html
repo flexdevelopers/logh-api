@@ -32,7 +32,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="form-group">
-          <label class="control-label" for="maxPicks">How many losers can I pick per week?</label>
+          <label class="control-label" for="maxPicks">Picks per week</label>
           <select id="maxPicks" name="maxPicks" class="form-control" ng-disabled="leagueData.elimination" ng-model="leagueData.max_picks_per_week" ng-options="maxPick.number as maxPick.display for maxPick in maxPicksPerWeek"></select>
           <small class="input-error" ng-show="leagueData.elimination"><i class="fa fa-warning fa-fw" title="Warning"></i> Survivor leagues only allow 1 pick per week, no repeats</small>
         </div>

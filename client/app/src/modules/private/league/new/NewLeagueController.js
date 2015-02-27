@@ -3,12 +3,12 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
     $scope.maxPicksPerWeek = [
-      { number: null, display: 'Pick a loser for every game' },
-      { number: 25, display: 'Pick up to 25 losers' },
-      { number: 15, display: 'Pick up to 15 losers' },
-      { number: 10, display: 'Pick up to 10 losers' },
-      { number: 5, display: 'Pick up to 5 losers' },
-      { number: 2, display: 'Pick up to 2 losers' },
+      { number: null, display: 'Pick every game' },
+      { number: 25, display: 'Pick 25 losers' },
+      { number: 15, display: 'Pick 15 losers' },
+      { number: 10, display: 'Pick 10 losers' },
+      { number: 5, display: 'Pick 5 losers' },
+      { number: 2, display: 'Pick 2 losers' },
       { number: 1, display: 'Pick 1 loser' }
     ];
 
