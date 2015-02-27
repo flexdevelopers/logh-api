@@ -1,7 +1,7 @@
-Congrats! <%= @user.display_name %> has invited <%= @invitation.email %> to join the "<%= @invitation.league.name %>" league!
+Congrats! <%= @user.display_name %> has invited <%= @invitation.email %> to join the "<%= @invitation.league.name %>" league.
 
 <% if @invitation.league.elimination  %>
-Your job, if you accept, is to pick a different <%= @invitation.league.season.season_type %> loser each week. That's it!
+Your job, if you accept, is to pick a different <%= @invitation.league.season.season_type %> loser each week. That's it! However, choose wisely or you're toast.
 <% else %>
 Your job, if you accept, is to pick <%= @invitation.league.season.season_type %> losers each week. That's it!
 <% end %>
