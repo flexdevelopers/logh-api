@@ -1,5 +1,6 @@
 class API::TeamsController < API::BaseController
   before_action :_set_user, only: [:all, :alive, :dead, :index, :show]
+  before_action :_set_season, only: [:all]
   before_action :_set_league
   before_action :_set_team, only: [:show, :update, :message, :contact, :activate, :deactivate, :paid, :unpaid]
   before_action :_verify_league_acceptance, only: [:create]
@@ -15,6 +16,7 @@ class API::TeamsController < API::BaseController
         @teams = @league.teams.active.includes(:league, :picks, :coaches)
       end
     else
+      @week ||= @season.current_week # if no week we need current week for 'My Teams'
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches)
     end
     # rendered via app/views/api/teams/all.json.rabl
@@ -164,6 +166,10 @@ class API::TeamsController < API::BaseController
 
     def _set_league
       @league = League.find(params[:league_id]) if params[:league_id]
+    end
+
+    def _set_season
+      @season = Season.find(params[:season_id]) if params[:season_id]
     end
 
     def _set_team
