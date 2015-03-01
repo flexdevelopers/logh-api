@@ -9,7 +9,7 @@ node(:correct_picks_count) do |team|
 end
 node(:current_pick) do |team|
   current_picks = team.current_picks({ week_id: (@week) ? @week.id : nil })
-  week_name = @week ? @week.name : 'All Weeks' # if no week you are looking at all weeks
+  week_name = @week ? @week.name : team.current_week.name
   if team.league.max_picks_per_week == 1
     if current_picks.any?
       if current_picks[0].locked? || team.coach_ids.include?(@user.id)
@@ -72,8 +72,8 @@ node(:current_pick) do |team|
     else
       all_picks_count = team.picks.not_none.count
       {
-          name: "#{pluralize(all_picks_count, 'pick')} | #{week_name}",
-          abbrev: "#{pluralize(all_picks_count, 'pick')} | #{week_name}",
+          name: "#{pluralize(all_picks_count, 'pick')} | All Weeks",
+          abbrev: "#{pluralize(all_picks_count, 'pick')} | All Weeks",
       }
     end
   end
