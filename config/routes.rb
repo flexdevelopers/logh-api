@@ -82,7 +82,7 @@ LoghApi::Application.routes.draw do
         resources :squads, only: [:index]
       end
 
-      resources :squads, only: [] do
+      resources :squads, only: [:show] do
         get 'all', on: :collection, to: 'squads#all'
       end
 
