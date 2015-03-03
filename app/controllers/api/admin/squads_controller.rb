@@ -1,6 +1,6 @@
 class API::Admin::SquadsController < API::SquadsController
   before_action :_verify_admin
-  before_action :_set_squad, only: [:show]
+  before_action :_set_squad, only: [:show, :update]
 
   # GET /api/admin/squads
   def all
@@ -31,14 +31,23 @@ class API::Admin::SquadsController < API::SquadsController
     end
   end
 
+  # PUT/PATCH /api/admin/squads/:id
+  def update
+    if @squad.update(_squad_params)
+      render json: { message: { type: SUCCESS, content: "Updated: #{@squad.name} [ #{@squad.abbrev} ]" } }, status: :ok
+    else
+      error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
   private
 
   def _set_squad
-    @season = Squad.find(params[:id]) if params[:id]
+    @squad = Squad.find(params[:id]) if params[:id]
   end
 
   def _squad_params
-    params.require(:squad).permit(:name, :abbrev, :short, :squad_type)
+    params.require(:squad).permit(:name, :abbrev, :short, :squad_type, :wins, :losses, :ties)
   end
 
   def _verify_admin

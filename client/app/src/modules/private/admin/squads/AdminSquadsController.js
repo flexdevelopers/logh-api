@@ -26,6 +26,28 @@ var AdminSquadsController = function(squads, $scope, $modal, squadService, messa
 
   };
 
+  $scope.editSquad = function(squad) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/admin/squads/edit/admin.squads.edit.tpl.html',
+      controller: 'AdminSquadsEditController',
+      resolve: {
+        squad: function() {
+          return squad;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(squad) {
+      squadService.updateSquad(squad);
+    }, function () {
+      $log.debug('Squad update cancelled...');
+      messageModel.setMessage({ type: 'warning', content: 'Squad update cancelled' }, false);
+    });
+
+  };
+
+
   $scope.search = function(item) {
     if (item.name.toLowerCase().indexOf($scope.query.toLowerCase()) != -1 && (!$scope.selectedSquadType || item.squad_type == $scope.selectedSquadType)) {
       return true;

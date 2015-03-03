@@ -52,6 +52,25 @@ var SquadService = function($http, $log, $state, apiConfig, messageModel) {
     return promise;
   };
 
+  this.updateSquad = function(squadParams) {
+    var promise = $http.put(apiConfig.baseURL + "admin/squads/" + squadParams.id,
+      { squad: squadParams })
+      .success(function(data) {
+        $log.debug("SquadService: updateSquad success");
+        // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+        // but may be resolved with future releases of angular-ui-router
+        $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+        messageModel.setMessage(data.message, false);
+        return data;
+      })
+      .error(function(data) {
+        $log.debug("SquadService: updateSquad failed");
+        messageModel.setMessage(data.message, false);
+        return data;
+      });
+
+    return promise;
+  };
 
 };
 

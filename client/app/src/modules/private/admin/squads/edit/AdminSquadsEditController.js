@@ -1,13 +1,8 @@
-var AdminSquadsNewController = function($scope, $modalInstance) {
+var AdminSquadsEditController = function(squad, $scope, $modalInstance) {
 
-  $scope.squadData = {
-    name: '',
-    abbrev: '',
-    short: '',
-    squad_type: ''
-  };
+  $scope.squadData = angular.copy(squad);
 
-  $scope.createSquad = function(squad) {
+  $scope.editSquad = function(squad) {
     $modalInstance.close(squad);
   };
 
@@ -31,5 +26,5 @@ var AdminSquadsNewController = function($scope, $modalInstance) {
   init();
 };
 
-AdminSquadsNewController.$inject = ['$scope', '$modalInstance'];
-module.exports = AdminSquadsNewController;
+AdminSquadsEditController.$inject = ['squad', '$scope', '$modalInstance'];
+module.exports = AdminSquadsEditController;

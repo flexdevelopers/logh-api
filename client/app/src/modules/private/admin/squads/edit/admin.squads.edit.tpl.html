@@ -1,0 +1,68 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Edit Squad</h3>
+</div>
+<div class="modal-body">
+  <form name="squadForm" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadName), 'has-feedback': hasError(squadForm.squadName)}">
+      <label class="control-label" for="squadName">Squad name
+        <small ng-show="hasPropertyError(squadForm.squadName, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadName, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadName" name="squadName" type="text" class="form-control" ng-model="squadData.name" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadShort), 'has-feedback': hasError(squadForm.squadShort)}">
+      <label class="control-label" for="squadShort">Short Name
+        <small ng-show="hasPropertyError(squadForm.squadShort, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadShort, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadShort" name="squadShort" type="text" class="form-control" ng-model="squadData.short" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadShort)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadAbbrev), 'has-feedback': hasError(squadForm.squadAbbrev)}">
+      <label class="control-label" for="squadAbbrev">Abbreviation
+        <small ng-show="hasPropertyError(squadForm.squadAbbrev, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadAbbrev, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadAbbrev" name="squadAbbrev" type="text" class="form-control" ng-model="squadData.abbrev" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadAbbrev)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadType), 'has-feedback': hasError(squadForm.squadType)}">
+      <label class="control-label" for="squadType">Type
+        <small ng-show="hasPropertyError(squadForm.squadType, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadType, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadType" name="squadType" type="text" class="form-control" ng-model="squadData.squad_type" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadType)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.wins), 'has-feedback': hasError(squadForm.wins)}">
+      <label class="control-label" for="wins">Wins
+        <small ng-show="hasPropertyError(squadForm.wins, 'required')">[ Number Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.wins, 'min')">[ Greater than zero ]</small>
+      </label>
+      <input id="wins" name="wins" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.wins" logh-focus required>
+      <span ng-show="hasError(squadForm.wins)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.losses), 'has-feedback': hasError(squadForm.losses)}">
+      <label class="control-label" for="wins">Losses
+        <small ng-show="hasPropertyError(squadForm.losses, 'required')">[ Number Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.losses, 'min')">[ Greater than zero ]</small>
+      </label>
+      <input id="losses" name="losses" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.losses" logh-focus required>
+      <span ng-show="hasError(squadForm.losses)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.ties), 'has-feedback': hasError(squadForm.ties)}">
+      <label class="control-label" for="ties">Ties
+        <small ng-show="hasPropertyError(squadForm.ties, 'required')">[ Number Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.ties, 'min')">[ Greater than zero ]</small>
+      </label>
+      <input id="ties" name="ties" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.ties" logh-focus required>
+      <span ng-show="hasError(squadForm.ties)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="squadForm.$invalid" ng-click="editSquad(squadData)">Edit</button>
+</div>
