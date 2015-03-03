@@ -1,0 +1,65 @@
+.squads-header-row {
+  margin-bottom: 15px;
+  .squads-header {
+    small {
+      font-size: 65%;
+    }
+  }
+}
+
+.squads-btn-group {
+  padding-top: 20px;
+  float: right;
+}
+
+.squads-tabs {
+  position: relative;
+  margin-bottom: -1px;
+  .squad-types {
+    padding: 10px;
+    background-color: #ddd;
+    margin-top: 1px;
+  }
+}
+
+.squads {
+  font-size: 11px;
+  color: #999;
+}
+
+.squad-display-name {
+  font-size: 14px;
+}
+
+.squad-type, .squad-record {
+  font-size: 11px;
+  color: #999;
+}
+
+@media all and (max-width: 767px) {
+
+  .squads-btn-group {
+    float: none !important;
+    padding: 0;
+  }
+
+  .create-squad-btn {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+}
+
+@media all and (max-width: 550px) {
+
+  .squads-tabs {
+    .custom-search-form {
+      position: relative;
+      width: 100%;
+      padding: 0 10px 10px 10px;
+      background-color: #ddd;
+    }
+  }
+
+}

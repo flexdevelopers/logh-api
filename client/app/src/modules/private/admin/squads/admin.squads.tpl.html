@@ -1,0 +1,35 @@
+<div class="squads-header-row row">
+  <div class="col-sm-9 col-md-9">
+    <h3 class="squads-header">Manage Squads</h3>
+  </div>
+  <div class="col-sm-3 col-md-3">
+    <div class="squads-btn-group">
+      <button type="button" class="create-squad-btn btn btn-primary" ng-click="createSquad()">Create Squad</button>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="squads-tabs">
+  <ul class="nav nav-tabs">
+    <li class="active"><a>Squads [ {{(squads | filter:search:strict).length}} ]</a></li>
+  </ul>
+  <div class="squad-types">
+    <select class="form-control" ng-change="changeSquadType(selectedSquadType)" ng-model="selectedSquadType" ng-options="squadType as squadType for squadType in squadTypes">
+      <option value="">All Squad Types</option>
+    </select>
+  </div>
+  <div class="input-group custom-search-form">
+    <input type="text" class="form-control" placeholder="Search..." ng-model="query">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+    </span>
+  </div>
+</div>
+<div class="squads list-group">
+  <a ng-repeat="squad in squads | filter:search:strict" ng-click="editSquad(squad)" class="list-group-item">
+    <div class="row">
+      <div class="squad-display-name col-sm-6 col-md-6">{{squad.name}} [ {{squad.abbrev}} ]<br><span class="squad-record">{{squad.record}}</span></div>
+      <div class="squad-type col-sm-6 col-md-6">{{squad.squad_type}}</div>
+    </div>
+  </a>
+</div>
