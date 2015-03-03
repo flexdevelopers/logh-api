@@ -1,4 +1,4 @@
-var AdminSquadsController = function(squads, $scope) {
+var AdminSquadsController = function(squads, $scope, $modal, squadService, messageModel) {
 
   $scope.squads = squads.data;
 
@@ -12,10 +12,18 @@ var AdminSquadsController = function(squads, $scope) {
 
   $scope.createSquad = function() {
 
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/admin/squads/new/admin.squads.new.tpl.html',
+      controller: 'AdminSquadsNewController'
+    });
 
-  };
+    modalInstance.result.then(function(squad) {
+      squadService.createSquad(squad);
+    }, function () {
+      $log.debug('Create squad modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Create squad cancelled' }, false);
+    });
 
-  $scope.changeSquadType = function(seasonId) {
   };
 
   $scope.search = function(item) {
@@ -33,5 +41,5 @@ var AdminSquadsController = function(squads, $scope) {
   init();
 };
 
-AdminSquadsController.$inject = ['squads', '$scope'];
+AdminSquadsController.$inject = ['squads', '$scope', '$modal', 'squadService', 'messageModel'];
 module.exports = AdminSquadsController;

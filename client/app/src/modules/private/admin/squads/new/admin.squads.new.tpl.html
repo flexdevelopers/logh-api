@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Create Squad</h3>
+</div>
+<div class="modal-body">
+  <form name="squadForm" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadName), 'has-feedback': hasError(squadForm.squadName)}">
+      <label class="control-label" for="squadName">Squad name
+        <small ng-show="hasPropertyError(squadForm.squadName, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadName, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadName" name="squadName" type="text" class="form-control" ng-model="squadData.name" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadShort), 'has-feedback': hasError(squadForm.squadShort)}">
+      <label class="control-label" for="squadShort">Short Name
+        <small ng-show="hasPropertyError(squadForm.squadShort, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadShort, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadShort" name="squadShort" type="text" class="form-control" ng-model="squadData.short" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadShort)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadAbbrev), 'has-feedback': hasError(squadForm.squadAbbrev)}">
+      <label class="control-label" for="squadAbbrev">Abbreviation
+        <small ng-show="hasPropertyError(squadForm.squadAbbrev, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadAbbrev, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadAbbrev" name="squadAbbrev" type="text" class="form-control" ng-model="squadData.abbrev" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadAbbrev)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadType), 'has-feedback': hasError(squadForm.squadType)}">
+      <label class="control-label" for="squadType">Type
+        <small ng-show="hasPropertyError(squadForm.squadType, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(squadForm.squadType, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="squadType" name="squadType" type="text" class="form-control" ng-model="squadData.squad_type" ng-maxlength="30" required>
+      <span ng-show="hasError(squadForm.squadType)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" ng-disabled="squadForm.$invalid" ng-click="createSquad(squadData)">Create</button>
+</div>

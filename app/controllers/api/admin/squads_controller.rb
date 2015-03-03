@@ -21,10 +21,24 @@ class API::Admin::SquadsController < API::SquadsController
     respond_with @squad # rendered via app/views/api/squads/show.json.rabl
   end
 
+  # POST /api/admin/squads
+  def create
+    @squad = Squad.new(_squad_params)
+    if @squad.save
+      render json: { message: { type: SUCCESS, content: "Created: #{@squad.name} [ #{@squad.abbrev} ]" } }, status: :ok
+    else
+      error(@squad.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+    end
+  end
+
   private
 
   def _set_squad
     @season = Squad.find(params[:id]) if params[:id]
+  end
+
+  def _squad_params
+    params.require(:squad).permit(:name, :abbrev, :short, :squad_type)
   end
 
   def _verify_admin

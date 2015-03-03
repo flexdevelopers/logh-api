@@ -14,7 +14,7 @@
     <li class="active"><a>Squads [ {{(squads | filter:search:strict).length}} ]</a></li>
   </ul>
   <div class="squad-types">
-    <select class="form-control" ng-change="changeSquadType(selectedSquadType)" ng-model="selectedSquadType" ng-options="squadType as squadType for squadType in squadTypes">
+    <select class="form-control" ng-model="selectedSquadType" ng-options="squadType as squadType for squadType in squadTypes">
       <option value="">All Squad Types</option>
     </select>
   </div>
