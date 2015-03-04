@@ -4,7 +4,8 @@ var AdminSeasonNewController = function($scope, $modalInstance) {
     'NBA',
     'NFL',
     'NHL',
-    'MLB'
+    'MLB',
+    'MLS'
   ];
 
   $scope.newSeasonData = {
