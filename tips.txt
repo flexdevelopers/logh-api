@@ -1,0 +1,18 @@
+Season
+
+- When creating a new season, set the start date in the future to avoid it showing up on the site before it is ready. When it is ready, change the start date.
+- The end date of a season, should be the end date of the season's last week
+
+Week
+
+- The end date of a week should ideally be the start date of the last week's game
+
+League
+
+Game
+
+- Don't create games until you are sure they will be played. i.e. playoff games
+
+Squad
+
+- When a season goes into the playoffs, maybe you should set the seed?
