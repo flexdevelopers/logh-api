@@ -1,13 +1,5 @@
 var AdminSeasonEditController = function(season, $scope, $modalInstance) {
 
-  $scope.seasonTypes = [
-    'NBA',
-    'NFL',
-    'NHL',
-    'MLB',
-    'MLS'
-  ];
-
   $scope.seasonData = angular.copy(season);
 
   $scope.closeStartsAt = function() {

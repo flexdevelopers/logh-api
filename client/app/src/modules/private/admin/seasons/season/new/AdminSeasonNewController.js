@@ -1,16 +1,8 @@
 var AdminSeasonNewController = function($scope, $modalInstance) {
 
-  $scope.seasonTypes = [
-    'NBA',
-    'NFL',
-    'NHL',
-    'MLB',
-    'MLS'
-  ];
-
   $scope.newSeasonData = {
     name: '',
-    season_type: $scope.seasonTypes[0],
+    season_type: '',
     starts_at: moment().format(),
     ends_at: moment().format()
   };

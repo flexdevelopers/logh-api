@@ -29,7 +29,7 @@ class API::Admin::SeasonsController < API::SeasonsController
     if @season.update(_season_params)
       render json: { message: { type: SUCCESS, content: "Season has been updated" } }, status: :ok
     else
-      error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+      error(@season.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 

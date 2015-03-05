@@ -9,12 +9,16 @@
         <small ng-show="hasPropertyError(seasonForm.seasonName, 'required')">[ Required ]</small>
         <small ng-show="hasPropertyError(seasonForm.seasonName, 'maxlength')">[ Too Long ]</small>
       </label>
-      <input id="seasonName" name="seasonName" type="text" class="form-control" ng-model="seasonData.name" ng-maxlength="30" required>
+      <input id="seasonName" name="seasonName" type="text" class="form-control" ng-model="seasonData.name" ng-maxlength="20" required>
       <span ng-show="hasError(seasonForm.seasonName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
-    <div class="form-group">
-      <label class="control-label" for="seasonType">Season Type:</label>
-      <select id="seasonType" name="seasonType" class="form-control" ng-model="seasonData.season_type" ng-options="seasonType as seasonType for seasonType in seasonTypes" required></select>
+    <div class="form-group" ng-class="{'has-error': hasError(seasonForm.seasonType), 'has-feedback': hasError(seasonForm.seasonType)}">
+      <label class="control-label" for="seasonType">Season type:
+        <small ng-show="hasPropertyError(seasonForm.seasonType, 'required')">[ Required ]</small>
+        <small ng-show="hasPropertyError(seasonForm.seasonType, 'maxlength')">[ Too Long ]</small>
+      </label>
+      <input id="seasonType" name="seasonType" type="text" class="form-control" ng-model="seasonData.season_type" ng-maxlength="10" required>
+      <span ng-show="hasError(seasonForm.seasonType)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
     <div class="form-group">
       <label class="control-label">Starts At (Local Time):</label>
