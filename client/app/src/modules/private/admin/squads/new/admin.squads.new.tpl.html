@@ -29,7 +29,7 @@
       <span ng-show="hasError(squadForm.squadAbbrev)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
     <div class="form-group" ng-class="{'has-error': hasError(squadForm.squadType), 'has-feedback': hasError(squadForm.squadType)}">
-      <label class="control-label" for="squadType">Type
+      <label class="control-label" for="squadType">Type (NBA, NFL, etc)
         <small ng-show="hasPropertyError(squadForm.squadType, 'required')">[ Required ]</small>
         <small ng-show="hasPropertyError(squadForm.squadType, 'maxlength')">[ Too Long ]</small>
       </label>
