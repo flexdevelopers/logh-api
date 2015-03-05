@@ -86,6 +86,26 @@ var WeekService = function($http, $log, $q, $state, apiConfig, messageModel) {
       return promise;
     };
 
+    this.createWeek = function(weekParams) {
+      var promise = $http.post(apiConfig.baseURL + "admin/seasons/" + weekParams.season_id + "/weeks",
+        { week: weekParams })
+        .success(function(data) {
+          $log.debug("WeekService: createWeek success");
+          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+          // but may be resolved with future releases of angular-ui-router
+          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("WeekService: createWeek failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
     this.updateWeek = function(weekParams) {
       var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + weekParams.season_id + "/weeks/" + weekParams.id,
         { week: weekParams })

@@ -83,6 +83,7 @@ var loghApp = angular.module('loghApp', [
     require('./modules/private/admin/seasons/season/new').name,
     require('./modules/private/admin/seasons/season/edit').name,
     require('./modules/private/admin/week').name,
+    require('./modules/private/admin/week/new').name,
     require('./modules/private/admin/week/edit').name,
     require('./modules/private/admin/squads').name,
     require('./modules/private/admin/squads/new').name,

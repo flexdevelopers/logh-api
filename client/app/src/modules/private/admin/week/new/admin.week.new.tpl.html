@@ -1,29 +1,29 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3 class="modal-title">Edit Week</h3>
+  <h3 class="modal-title">Create Week</h3>
 </div>
 <div class="modal-body">
-  <form name="editWeekForm" class="edit-week-form form-horizontal" role="form" novalidate>
-    <div class="form-group" ng-class="{'has-error': hasError(editWeekForm.weekName), 'has-feedback': hasError(editWeekForm.weekName)}">
+  <form name="weekForm" class="new-week-form form-horizontal" role="form" novalidate>
+    <div class="form-group" ng-class="{'has-error': hasError(weekForm.weekName), 'has-feedback': hasError(weekForm.weekName)}">
       <label for="weekName" class="col-sm-3 control-label">Name:</label>
       <div class="col-sm-9">
         <input id="weekName" name="weekName" type="text" class="form-control" ng-model="weekData.name" ng-maxlength="30" required>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekName, 'required')">Required</small>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekName, 'maxlength')">Too Long</small>
-        <span ng-show="hasError(editWeekForm.weekName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <small class="input-error" ng-show="hasPropertyError(weekForm.weekName, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(weekForm.weekName, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(weekForm.weekName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': hasError(editWeekForm.weekDescription), 'has-feedback': hasError(editWeekForm.weekDescription)}">
+    <div class="form-group" ng-class="{'has-error': hasError(weekForm.weekDescription), 'has-feedback': hasError(weekForm.weekDescription)}">
       <label for="weekDescription" class="col-sm-3 control-label">Description:</label>
       <div class="col-sm-9">
         <input id="weekDescription" name="weekDescription" type="text" class="form-control" ng-model="weekData.description" ng-maxlength="30" required>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'required')">Required</small>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'maxlength')">Too Long</small>
-        <span ng-show="hasError(editWeekForm.weekDescription)" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <small class="input-error" ng-show="hasPropertyError(weekForm.weekDescription, 'required')">Required</small>
+        <small class="input-error" ng-show="hasPropertyError(weekForm.weekDescription, 'maxlength')">Too Long</small>
+        <span ng-show="hasError(weekForm.weekDescription)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
     </div>
     <div class="form-group">
-      <label for="weekType" class="col-sm-3 control-label">Week Type:</label>
+      <label for="weekType" class="col-sm-3 control-label">Week Type (Use 1 & 2):</label>
       <div class="col-sm-9">
         <select id="weekType" name="weekType" class="form-control" ng-model="weekData.week_type_id" ng-options="weekType.id as weekType.description for weekType in weekTypes"></select>
         <small>week_type_id: {{weekData.week_type_id}}</small>
@@ -65,5 +65,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button class="btn btn-primary" ng-disabled="editWeekForm.$invalid" ng-click="editWeek(weekData)">Update</button>
+  <button class="btn btn-primary" ng-disabled="weekForm.$invalid" ng-click="createWeek(weekData)">Create</button>
 </div>

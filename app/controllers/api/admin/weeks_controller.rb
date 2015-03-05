@@ -21,7 +21,7 @@ class API::Admin::WeeksController < API::WeeksController
   def create
     @week = @season.weeks.new(_week_params)
     if @week.save
-      render json: @week, status: :created, location: api_admin_season_week_path(@season, @week)
+      render json: { message: { type: SUCCESS, content: "Created: #{@week.display}" } }, status: :ok
     else
       error(@week.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
