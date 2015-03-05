@@ -24,12 +24,12 @@ class API::Admin::SeasonsController < API::SeasonsController
     end
   end
 
-  # PATCH/PUT /api/admin/seasons/:id
+  # PUT/PATCH /api/admin/seasons/:id
   def update
     if @season.update(_season_params)
-      head :no_content
+      render json: { message: { type: SUCCESS, content: "Season has been updated" } }, status: :ok
     else
-      error(@season.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
+      error(@game.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
     end
   end
 

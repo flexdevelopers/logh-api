@@ -1,4 +1,4 @@
-var AdminWeeksController = function(season, weeks, leagues, $scope, $location) {
+var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $modal, seasonService) {
 
   $scope.season = season.data;
 
@@ -16,6 +16,27 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location) {
     return !league.public;
   });
 
+  $scope.editSeason = function(season) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'modules/private/admin/seasons/season/edit/admin.season.edit.tpl.html',
+      controller: 'AdminSeasonEditController',
+      resolve: {
+        season: function() {
+          return season;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(season) {
+      seasonService.updateSeason(season);
+    }, function () {
+      $log.debug('Edit season modal dismissed...');
+      messageModel.setMessage({ type: 'warning', content: 'Edit season cancelled' }, false);
+    });
+
+  };
+
   $scope.showWeek = function(week) {
     $location.url($location.path() + '/weeks/' + week.id);
   };
@@ -32,5 +53,5 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location) {
   init();
 };
 
-AdminWeeksController.$inject = ['season', 'weeks', 'leagues', '$scope', '$location'];
+AdminWeeksController.$inject = ['season', 'weeks', 'leagues', '$scope', '$location', '$modal', 'seasonService'];
 module.exports = AdminWeeksController;

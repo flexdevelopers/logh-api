@@ -57,6 +57,26 @@ var SeasonService = function($http, $log, $state, $q, apiConfig, messageModel, s
       return promise;
     };
 
+    this.updateSeason = function(seasonParams) {
+      var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + seasonParams.id,
+        { season: seasonParams })
+        .success(function(data) {
+          $log.debug("SeasonService: updateSeason success");
+          // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
+          // but may be resolved with future releases of angular-ui-router
+          $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
+          messageModel.setMessage(data.message, false);
+          return data;
+        })
+        .error(function(data) {
+          $log.debug("SeasonService: updateSeason failed");
+          messageModel.setMessage(data.message, false);
+          return data;
+        });
+
+      return promise;
+    };
+
 };
 
 SeasonService.$inject = ['$http', '$log', '$state', '$q', 'apiConfig', 'messageModel', 'seasonModel'];
