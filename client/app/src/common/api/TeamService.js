@@ -1,4 +1,4 @@
-var TeamService = function($http, $log, $location, $q, apiConfig, messageModel) {
+var TeamService = function($http, $log, $q, apiConfig, messageModel) {
 
     this.getTeam = function(leagueId, teamId) {
         var promise = $http.get(apiConfig.baseURL + "leagues/" + leagueId + "/teams/" + teamId)
@@ -103,21 +103,20 @@ var TeamService = function($http, $log, $location, $q, apiConfig, messageModel) 
 
 
     this.createTeam = function(teamParams) {
-        var promise = $http.post(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams",
+      var deferred = $q.defer();
+
+      $http.post(apiConfig.baseURL + "leagues/" + teamParams.league_id + "/teams",
             { team: teamParams })
             .success(function(data) {
                 $log.debug("TeamService: createTeam success");
-                var newTeamPath = $location.path() + '/team/' + data.team_id;
-                $location.url(newTeamPath); // navigate to the new team page
-                return data;
+                deferred.resolve(data);
             })
             .error(function(data) {
                 $log.debug("TeamService: createTeam failed");
-                messageModel.setMessage(data.message, false);
-                return data;
+                deferred.reject(data);
             });
 
-        return promise;
+        return deferred.promise;
     };
 
     this.updateTeam = function(team) {
@@ -243,5 +242,5 @@ var TeamService = function($http, $log, $location, $q, apiConfig, messageModel) 
 
 };
 
-TeamService.$inject = ['$http', '$log', '$location', '$q', 'apiConfig', 'messageModel'];
+TeamService.$inject = ['$http', '$log', '$q', 'apiConfig', 'messageModel'];
 module.exports = TeamService;
