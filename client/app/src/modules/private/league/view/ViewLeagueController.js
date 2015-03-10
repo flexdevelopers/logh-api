@@ -205,7 +205,16 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     });
 
     modalInstance.result.then(function(team) {
-      teamService.createTeam(team);
+      teamService.createTeam(team)
+        .then(
+          function(data) {
+            messageModel.setMessage(data.message, true);
+            var newTeamPath = $location.path() + '/team/' + data.team_id;
+            $location.path(newTeamPath); // navigate to the new team page
+          },
+          function(data) {
+            messageModel.setMessage(data.message, false);
+          });
     }, function () {
       $log.debug('Join league modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Join league cancelled' }, false);
