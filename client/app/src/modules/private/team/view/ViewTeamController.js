@@ -133,14 +133,10 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
       });
   };
 
-  $scope.hasNoPick = function(team) {
-    return team.current_picks_count == 0;
-  };
-
   $scope.hasNotEnoughPicks = function(team) {
     var hasNotMetPickCount = team.current_picks_count != team.league.max_picks_per_week;
     var hasNotMetGameCount = team.current_picks_count != team.current_week_game_count;
-    return !$scope.hasNoPick(team) && hasNotMetPickCount && hasNotMetGameCount;
+    return hasNotMetPickCount && hasNotMetGameCount;
   };
 
   $scope.pickSummary = function(team) {
