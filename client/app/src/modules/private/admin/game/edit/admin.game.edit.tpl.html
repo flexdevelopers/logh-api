@@ -3,7 +3,6 @@
   <h3 class="modal-title">Edit Game [ID: {{gameData.id}} ]}</h3>
 </div>
 <div class="modal-body">
-  <h4>{{gameData.display}}</h4>
   <form style="padding: 10px;" name="editGameForm" class="edit-game-form form-horizontal" role="form" novalidate>
     <div class="form-group">
       <label class="col-sm-6 control-label">Starts At (Local Time):</label>
@@ -22,31 +21,25 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="shootout" class="col-sm-6 control-label">Shootout:</label>
+      <label for="visitingSquad" class="col-sm-6 control-label">Visiting Squad:</label>
       <div class="col-sm-6">
-        <input id="shootout" name="shootout" type="checkbox" ng-model="gameData.shootout">
+        <select id="visitingSquad" name="visitingSquad" class="form-control" ng-model="gameData.visiting_squad_id" ng-options="visitingSquad.id as visitingSquad.name for visitingSquad in squads"></select>
       </div>
     </div>
     <div class="form-group">
-      <label for="overtimes" class="col-sm-6 control-label">Overtimes:</label>
+      <label for="homeSquad" class="col-sm-6 control-label" >Home Squad:</label>
       <div class="col-sm-6">
-        <input id="overtimes" name="overtimes" type="number" class="form-control" ng-model="gameData.overtimes" select-on-click required>
+        <select id="homeSquad" name="homeSquad" class="form-control" ng-model="gameData.home_squad_id" ng-options="homeSquad.id as homeSquad.name for homeSquad in squads"></select>
       </div>
     </div>
     <div class="form-group">
-      <label for="innings" class="col-sm-6 control-label">Innings:</label>
-      <div class="col-sm-6">
-        <input id="innings" name="innings" type="number" class="form-control" ng-model="gameData.innings" select-on-click required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="visitorScore" class="col-sm-6 control-label">{{gameData.squads[0].name}} Score:</label>
+      <label for="visitorScore" class="col-sm-6 control-label">{{getSquad(gameData.visiting_squad_id).name}} Score:</label>
       <div class="col-sm-6">
         <input id="visitorScore" name="visitorScore" type="number" class="form-control" ng-model="gameData.visiting_squad_score" select-on-click required>
       </div>
     </div>
     <div class="form-group">
-      <label for="homeScore" class="col-sm-6 control-label">{{gameData.squads[1].name}} Score:</label>
+      <label for="homeScore" class="col-sm-6 control-label">{{getSquad(gameData.home_squad_id).name}} Score:</label>
       <div class="col-sm-6">
         <input id="homeScore" name="homeScore" type="number" class="form-control" ng-model="gameData.home_squad_score" select-on-click required>
       </div>
@@ -57,6 +50,30 @@
         <input id="complete" name="complete" type="checkbox" ng-model="gameData.complete">
       </div>
     </div>
+    <hr>
+    <a ng-show="!showOT" ng-click="showOT = true">Show OT Options</a>
+    <a ng-show="showOT" ng-click="showOT = false">Hide OT Options</a>
+    <div ng-show="showOT">
+      <div class="form-group">
+        <label for="shootout" class="col-sm-6 control-label">Shootout:</label>
+        <div class="col-sm-6">
+          <input id="shootout" name="shootout" type="checkbox" ng-model="gameData.shootout">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="overtimes" class="col-sm-6 control-label">Overtimes:</label>
+        <div class="col-sm-6">
+          <input id="overtimes" name="overtimes" type="number" class="form-control" ng-model="gameData.overtimes" select-on-click required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="innings" class="col-sm-6 control-label">Innings:</label>
+        <div class="col-sm-6">
+          <input id="innings" name="innings" type="number" class="form-control" ng-model="gameData.innings" select-on-click required>
+        </div>
+      </div>
+    </div>
+
   </form>
 </div>
 <div class="modal-footer">

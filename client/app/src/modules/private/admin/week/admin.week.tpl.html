@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="week-games list-group">
-  <a ng-repeat="game in games" ng-click="editGame(game)" class="list-group-item">
+  <a ng-repeat="game in games" ng-click="editGame(game, weekData)" class="list-group-item">
     <div class="row">
       <div class="game-display-name col-sm-6 col-md-6"><i class="fa fa-check fa-fw" ng-show="game.complete === true" title="Game finished"></i> {{game.display}}<br><span class="game-starts">{{dateFormat(game.starts_at, "ddd, mmm d yyyy h:MM TT (Z)")}}</span></div>
       <div class="game-score col-sm-6 col-md-6">

@@ -1,6 +1,8 @@
-var AdminGameEditController = function(game, $scope, $modalInstance) {
+var AdminGameEditController = function(game, squads, $scope, $modalInstance) {
 
   $scope.gameData = angular.copy(game);
+
+  $scope.squads = squads.data;
 
   $scope.closeStartsAt = function() {
     $scope.startsAtDropdown = {
@@ -8,6 +10,11 @@ var AdminGameEditController = function(game, $scope, $modalInstance) {
     };
   };
   $scope.closeStartsAt();
+
+  $scope.getSquad = function(squadId) {
+    var squad = _.find($scope.squads, function(squad) { return squad.id === squadId });
+    return squad;
+  };
 
   $scope.editGame = function(game) {
     $modalInstance.close(game);
@@ -25,5 +32,5 @@ var AdminGameEditController = function(game, $scope, $modalInstance) {
   init();
 };
 
-AdminGameEditController.$inject = ['game', '$scope', '$modalInstance'];
+AdminGameEditController.$inject = ['game', 'squads', '$scope', '$modalInstance'];
 module.exports = AdminGameEditController;
