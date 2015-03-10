@@ -7,7 +7,7 @@
     <div class="col-sm-6 col-md-6 game-squad" ng-repeat="squad in game.squads">
       <a ng-click="togglePick(game, squad)" class="list-group-item" ng-class="{'disabled': isDisabled(game, squad)}">
         <div class="row game-row">
-          <span><span ng-show="($index === 1)">@ </span>{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.overtime === true">OT</span></span></span>
+          <span><span ng-show="($index === 1)">@ </span>{{squad.name}} <span class="record-score" ng-show="!game.complete">[ {{squad.record}} ]</span><span class="record-score" ng-show="game.complete">[ {{getScore(game, $index)}} ] <span ng-show="($index === 1) && game.shootout === true">SO</span></span></span>
           <i class="fa fa-{{pickStatus(game, squad)}} pull-right"></i>
         </div>
       </a>

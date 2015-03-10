@@ -58,7 +58,7 @@ class Game < ActiveRecord::Base
         self.update_column(:loser_squad_id, home_squad.id)
         visiting_squad.update_column(:wins, visiting_squad.wins + 1)
         if season_type == 'NHL'
-          if self.overtime
+          if self.shootout
             home_squad.update_column(:ties, home_squad.ties + 1)
           else
             home_squad.update_column(:losses, home_squad.losses + 1)
@@ -70,7 +70,7 @@ class Game < ActiveRecord::Base
         self.update_column(:loser_squad_id, visiting_squad.id)
         home_squad.update_column(:wins, home_squad.wins + 1)
         if season_type == 'NHL'
-          if self.overtime
+          if self.shootout
             visiting_squad.update_column(:ties, visiting_squad.ties + 1)
           else
             visiting_squad.update_column(:losses, visiting_squad.losses + 1)
