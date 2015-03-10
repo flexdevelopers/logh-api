@@ -30,6 +30,20 @@ class Game < ActiveRecord::Base
     "#{starts_at.strftime("%b %-d")}"
   end
 
+  def ot_display
+    if self.shootout
+      "SO"
+    elsif self.overtimes > 0
+      if self.overtimes > 1
+        "#{self.overtimes}OT"
+      else
+        "OT"
+      end
+    else
+      ""
+    end
+  end
+
   def started?
     self.starts_at <= Time.zone.now
   end
@@ -58,7 +72,7 @@ class Game < ActiveRecord::Base
         self.update_column(:loser_squad_id, home_squad.id)
         visiting_squad.update_column(:wins, visiting_squad.wins + 1)
         if season_type == 'NHL'
-          if self.shootout
+          if self.shootout || self.overtimes > 0
             home_squad.update_column(:ties, home_squad.ties + 1)
           else
             home_squad.update_column(:losses, home_squad.losses + 1)
@@ -70,7 +84,7 @@ class Game < ActiveRecord::Base
         self.update_column(:loser_squad_id, visiting_squad.id)
         home_squad.update_column(:wins, home_squad.wins + 1)
         if season_type == 'NHL'
-          if self.shootout
+          if self.shootout || self.overtimes > 0
             visiting_squad.update_column(:ties, visiting_squad.ties + 1)
           else
             visiting_squad.update_column(:losses, visiting_squad.losses + 1)

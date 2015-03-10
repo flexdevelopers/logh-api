@@ -21,8 +21,7 @@ end
 node(:game) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
     if pick.locked? && pick.game.complete
-      so = pick.game.shootout ? 'SO' : ''
-      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{so}"
+      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{pick.game.ot_display}"
     else
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
