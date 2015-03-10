@@ -28,7 +28,7 @@ class API::Admin::GamesController < API::GamesController
   private
 
     def _game_params
-      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score, :overtimes, :shootout, :complete)
+      params.require(:game).permit(:starts_at, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score, :innings, :overtimes, :shootout, :complete)
     end
 
     def _verify_admin

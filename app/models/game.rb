@@ -39,6 +39,8 @@ class Game < ActiveRecord::Base
       else
         "OT"
       end
+    elsif self.innings != 9
+      "#{self.innings.ordinalize}"
     else
       ""
     end
