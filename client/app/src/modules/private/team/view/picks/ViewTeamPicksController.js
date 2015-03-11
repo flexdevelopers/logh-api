@@ -1,10 +1,12 @@
-var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, $log, $location, $stateParams) {
+var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, $log, $location, $stateParams, dateUtils) {
 
   $scope.leagueWeeks = leagueWeeks.data;
 
   $scope.picks = picks.data;
 
   $scope.selectedWeekSlug = $stateParams.week;
+
+  $scope.dateFormat = dateUtils.dateFormat;
 
   $scope.correctPickCount = function(picks) {
     var correctPicks = _.filter(picks, function(pick) {
@@ -61,5 +63,5 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
 
 };
 
-ViewTeamPicksController.$inject = ['leagueWeeks', 'currentWeek', 'picks', '$scope', '$log', '$location', '$stateParams'];
+ViewTeamPicksController.$inject = ['leagueWeeks', 'currentWeek', 'picks', '$scope', '$log', '$location', '$stateParams', 'dateUtils'];
 module.exports = ViewTeamPicksController;
