@@ -40,7 +40,7 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
 
   $scope.starts = function(game) {
     var startsLabel = (game.started) ? 'Started ' : 'Starts ';
-    return startsLabel + dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT (Z)");
+    return startsLabel + dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT Z");
   };
 
   $scope.showTeam = function(team, showCurrentWeek) {
