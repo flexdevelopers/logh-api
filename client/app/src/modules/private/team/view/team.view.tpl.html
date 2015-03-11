@@ -1,5 +1,5 @@
 <div class="alert alert-danger" ng-show="!teamData.active">This team has been deactivated by the commish and will be unable to pick losers. <a class="alert-link" ng-click="contactCommish(teamData)">Contact the commish</a> if you have questions.</div>
-<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNotEnoughPicks(teamData)"><i class="fa fa-warning fa-fw" title="Warning"></i> {{pickSummary(teamData)}} losers picked for {{teamData.current_week_name}}</div>
+<div class="alert alert-danger" ng-show="teamData.active && teamData.alive && teamData.started && hasNotEnoughPicks(teamData)">{{pickSummary(teamData)}} losers picked for {{teamData.current_week_name}}</div>
 <div class="alert alert-danger" ng-show="teamData.active && !teamData.alive">This team is DEAD. So sorry.</div>
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can pick losers when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
