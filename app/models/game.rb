@@ -19,7 +19,11 @@ class Game < ActiveRecord::Base
   default_scope { order(starts_at: :asc, created_at: :asc) }
 
   def display
-    "#{visiting_squad.name} @ #{home_squad.name}"
+    if visiting_squad.seed > 0 && home_squad.seed > 0
+      "(#{visiting_squad.seed}) #{visiting_squad.name} @ (#{home_squad.seed}) #{home_squad.name}"
+    else
+      "#{visiting_squad.name} @ #{home_squad.name}"
+    end
   end
 
   def start_display

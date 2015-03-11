@@ -47,7 +47,7 @@ class API::Admin::SquadsController < API::SquadsController
   end
 
   def _squad_params
-    params.require(:squad).permit(:name, :abbrev, :short, :squad_type, :wins, :losses, :ties)
+    params.require(:squad).permit(:name, :abbrev, :short, :seed, :squad_type, :wins, :losses, :ties)
   end
 
   def _verify_admin

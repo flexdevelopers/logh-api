@@ -1,4 +1,4 @@
-var AdminSquadsController = function(squads, $scope, $modal, squadService, messageModel) {
+var AdminSquadsController = function(squads, $scope, $log, $modal, squadService, messageModel) {
 
   $scope.squads = squads.data;
 
@@ -63,5 +63,5 @@ var AdminSquadsController = function(squads, $scope, $modal, squadService, messa
   init();
 };
 
-AdminSquadsController.$inject = ['squads', '$scope', '$modal', 'squadService', 'messageModel'];
+AdminSquadsController.$inject = ['squads', '$scope', '$log', '$modal', 'squadService', 'messageModel'];
 module.exports = AdminSquadsController;

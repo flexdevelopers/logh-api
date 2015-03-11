@@ -7,6 +7,7 @@ class Squad < ActiveRecord::Base
   validates :wins, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :losses, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :ties, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :seed, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :none, inclusion: { in: [true, false] } # true only for the NONE squad (used when no pick is made)
 
   def record

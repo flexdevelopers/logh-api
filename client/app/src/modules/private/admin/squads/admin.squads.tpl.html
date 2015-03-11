@@ -29,7 +29,7 @@
   <a ng-repeat="squad in squads | filter:search:strict" ng-click="editSquad(squad)" class="list-group-item">
     <div class="row">
       <div class="squad-display-name col-sm-6 col-md-6">{{squad.name}} [ {{squad.abbrev}} ]<br><span class="squad-record">{{squad.record}}</span></div>
-      <div class="squad-type col-sm-6 col-md-6">{{squad.squad_type}}</div>
+      <div class="squad-type col-sm-6 col-md-6">{{squad.squad_type}}<br>Seed: {{squad.seed}}</div>
     </div>
   </a>
 </div>
