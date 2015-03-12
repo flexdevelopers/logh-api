@@ -14,15 +14,21 @@ class API::LeaguesController < API::BaseController
 
   # GET /api/seasons/:season_id/leagues/public
   def public
-    @leagues = @season.leagues.public.start_week_not_complete.includes(:teams, :start_week)
-    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
+    # include survivor leagues where start week is not complete
+    @leagues = @season.leagues.public.elimination.start_week_not_complete.includes(:teams, :start_week)
+    # include pick'em leagues where season is not complete
+    @leagues.concat(@season.leagues.public.non_elimination.season_not_complete.includes(:teams, :start_week))
+    @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/public.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/private
   def private
-    @leagues = @season.leagues.private.start_week_not_complete.includes(:teams, :start_week)
-    @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
+    # include survivor leagues where start week is not complete
+    @leagues = @season.leagues.private.elimination.start_week_not_complete.includes(:teams, :start_week)
+    # include pick'em leagues where season is not complete
+    @leagues.concat(@season.leagues.private.non_elimination.season_not_complete.includes(:teams, :start_week))
+    @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
     respond_with @leagues # rendered via app/views/api/leagues/private.json.rabl
   end
 

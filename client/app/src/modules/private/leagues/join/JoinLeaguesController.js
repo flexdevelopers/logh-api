@@ -31,6 +31,11 @@ var JoinLeaguesController = function($scope, $log, $location, $modal, $statePara
     $scope.leagueQuery = '';
   };
 
+  $scope.starts = function(league) {
+    var startsLabel = (league.started) ? 'Started ' : 'Starts ';
+    return startsLabel + league.start_week;
+  };
+
   $scope.isCommish = function(league) {
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
