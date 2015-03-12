@@ -3,7 +3,7 @@
         <div class="row">
             <div class="league-name col-sm-5 col-md-5">{{league.name}}<br><span class="public-league-meta">{{starts(league)}}</span></div>
             <div class="col-sm-7 col-md-7">
-                <span class="public-league-meta">Commish: {{league.commish_names.join(', ')}}<br>{{league.format}}</span>
+                <span class="public-league-meta">{{league.format}}<br>Commish: {{league.commish_names.join(', ')}}</span>
                 <span class="badge">{{league.team_count}} team<span ng-show="league.team_count !== 1">s</span></span>
             </div>
         </div>

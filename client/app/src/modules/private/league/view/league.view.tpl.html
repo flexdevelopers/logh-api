@@ -20,7 +20,7 @@
         <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
         <small>{{leagueData.format}}</small>
       </div>
-      <small>{{starts(leagueData)}}</small><br>
+      <small>{{starts(leagueData)}}</small>
     </h3>
   </div>
   <div class="col-sm-5 col-md-5">
@@ -28,8 +28,8 @@
     <button type="button" class="invite-btn btn btn-default" ng-show="!leagueData.closed && (leagueData.public || isCommish(leagueData))" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.closed)">Invite</button>
     <button type="button" class="request-invite-btn btn btn-default" ng-show="!leagueData.closed && !leagueData.public && !isCommish(leagueData)" ng-click="requestInvite(leagueData)">Request Invite</button>
     <h3 class="league-meta-right" ng-show="leagueData.closed">
-      <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small><br>
-      <small>{{leagueData.format}}</small>
+      <small>{{leagueData.format}}</small><br>
+      <small>Commish [ {{leagueData.commish_names.join(', ')}} ]</small>
     </h3>
   </div>
 </div>
