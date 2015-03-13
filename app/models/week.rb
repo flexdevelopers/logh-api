@@ -49,7 +49,8 @@ class Week < ActiveRecord::Base
         pick = self.picks.find_by(team: team)
         if !pick
           Pick.create!(week: self, week_type: self.week_type, team: team, game: nil, squad: null_squad, correct: false)
-          team.kill(self.starts_at)
+          # team.eliminate(self.starts_at)
+          team.kill
         end
       end
     end

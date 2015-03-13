@@ -22,6 +22,10 @@ class Team < ActiveRecord::Base
   scope :alive, -> { where(alive: true) }
   scope :dead, -> { where(alive: false) }
 
+  def eliminated?
+    self.eliminated_at
+  end
+
   def commish_ids
     league.commish_ids
   end
@@ -70,7 +74,11 @@ class Team < ActiveRecord::Base
     end
   end
 
-  def kill(killed_at)
+  def eliminate(eliminated_at)
+    self.update!(eliminated_at: eliminated_at) if self.league.elimination == true && !self.eliminated?
+  end
+
+  def kill
     self.update!(alive: false) if self.league.elimination == true
   end
 
