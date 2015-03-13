@@ -4,7 +4,6 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
   $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
 
-  $scope.teamOptions = { alive: true, dead: true };
   $scope.leagueOptions = { managed: true };
 
   $scope.query = '';

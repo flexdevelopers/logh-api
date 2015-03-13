@@ -59,8 +59,6 @@ And then you can do this, for example:
 ##### Teams
 ---
 * GET         /api/seasons/:season_id/teams/all                 [ user all teams ]
-* GET         /api/seasons/:season_id/teams/alive[?league_id=x] [ user alive teams ]
-* GET         /api/seasons/:season_id/teams/dead[?league_id=x]  [ user dead teams ]
 * GET         /api/leagues/:league_id/teams                     [ league teams ]
 * POST        /api/leagues/:league_id/teams                     [ create team ] { name* }
 * GET         /api/leagues/:league_id/teams/:id                 [ show team ]

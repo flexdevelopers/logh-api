@@ -29,44 +29,6 @@ var TeamService = function($http, $log, $q, apiConfig, messageModel) {
         return promise;
     };
 
-    this.getAliveTeams = function(params) {
-        var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/alive";
-        if (params.leagueId) {
-            apiUrl += "?league_id=" + params.leagueId;
-        }
-
-        var promise = $http.get(apiUrl)
-            .success(function(data) {
-                $log.debug("TeamService: getAliveTeams success");
-                return data;
-            })
-            .error(function(data) {
-                $log.debug("TeamService: getAliveTeams failed");
-                return data;
-            });
-
-        return promise;
-    };
-
-    this.getDeadTeams = function(params) {
-        var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/dead";
-        if (params.leagueId) {
-            apiUrl += "?league_id=" + params.leagueId;
-        }
-
-        var promise = $http.get(apiUrl)
-            .success(function(data) {
-                $log.debug("TeamService: getDeadTeams success");
-                return data;
-            })
-            .error(function(data) {
-                $log.debug("TeamService: getDeadTeams failed");
-                return data;
-            });
-
-        return promise;
-    };
-
     this.getAllLeagueTeams = function(params) {
         var apiUrl = apiConfig.baseURL + "seasons/" + params.seasonId + "/teams/all?league_id=" + params.leagueId;
         if (params.weekSlug) {

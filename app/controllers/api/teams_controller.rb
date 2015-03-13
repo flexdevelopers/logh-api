@@ -1,5 +1,5 @@
 class API::TeamsController < API::BaseController
-  before_action :_set_user, only: [:all, :alive, :dead, :index, :show]
+  before_action :_set_user, only: [:all, :index, :show]
   before_action :_set_season, only: [:all]
   before_action :_set_league
   before_action :_set_team, only: [:show, :update, :message, :contact, :activate, :deactivate, :paid, :unpaid]
@@ -20,36 +20,6 @@ class API::TeamsController < API::BaseController
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches)
     end
     # rendered via app/views/api/teams/all.json.rabl
-  end
-
-  # GET /api/seasons/:season_id/teams/alive
-  # GET /api/seasons/:season_id/teams/alive?league_id=:league_id
-  def alive
-    if params[:league_id]
-      if _is_commish_of?(@league)
-        @teams = @league.teams.alive.includes(:league, :picks, :coaches)
-      else
-        @teams = @league.teams.active.alive.includes(:league, :picks, :coaches)
-      end
-    else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).alive.includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }
-    end
-    # rendered via app/views/api/teams/alive.json.rabl
-  end
-
-  # GET /api/seasons/:season_id/teams/dead
-  # GET /api/seasons/:season_id/teams/dead?league_id=:league_id
-  def dead
-    if params[:league_id]
-      if _is_commish_of?(@league)
-        @teams = @league.teams.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count({}), team.name] }
-      else
-        @teams = @league.teams.active.dead.includes(:league, :picks, :coaches).sort_by { |team| [-team.correct_picks_count({}), team.name] }
-      end
-    else
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).dead.includes(:league, :picks, :coaches).sort_by { |team| [team.league.name, team.name] }
-    end
-    # rendered via app/views/api/teams/dead.json.rabl
   end
 
   # GET /api/leagues/:league_id/teams
