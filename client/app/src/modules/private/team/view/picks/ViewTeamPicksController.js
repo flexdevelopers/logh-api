@@ -6,6 +6,8 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
 
   $scope.selectedWeekSlug = $stateParams.week;
 
+  $scope.selectedWeek = _.find($scope.leagueWeeks, function(leagueWeek) { return leagueWeek.slug === $scope.selectedWeekSlug });
+
   $scope.dateFormat = dateUtils.dateFormat;
 
   $scope.correctPickCount = function(picks) {
@@ -18,8 +20,10 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
   $scope.changeWeek = function(slug) {
     if (slug) {
       $location.search('week', slug); // add / replace the week query param
+      $scope.selectedWeek = _.find($scope.leagueWeeks, function(leagueWeek) { return leagueWeek.slug === slug });
     } else {
       $location.search('week', null); // remove week query param
+      $scope.selectedWeek = null;
     }
   };
 
@@ -53,7 +57,6 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
    */
   var init = function () {
     $log.debug("view team picks controller");
-    // for pick'em leagues, use current week (if it was fetched because week was not specified in url)
     if (currentWeek) {
       $scope.selectedWeekSlug = currentWeek.data.slug;
       $scope.changeWeek($scope.selectedWeekSlug);

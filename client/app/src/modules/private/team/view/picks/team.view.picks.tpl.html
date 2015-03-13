@@ -1,6 +1,6 @@
 <div class="losers-tab">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeekSlug))}} ]</a></li>
+    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeek:teamData.league.elimination))}} ]</a></li>
   </ul>
   <div class="make-pick-btn-container">
     <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.current_pick.locked || !teamData.started"><span>Pick Loser</span><span ng-show="teamData.league.max_picks_per_week != 1">s</span></button>
@@ -13,7 +13,7 @@
 </div>
 <div class="team-container" style="clear:both;">
   <div class="team-picks list-group">
-    <a ng-repeat="pick in picks | weekPicksFilter:selectedWeekSlug" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
+    <a ng-repeat="pick in picks | weekPicksFilter:selectedWeek:teamData.league.elimination" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false}">
       <div class="row">
         <div class="week-name col-sm-7 col-md-7">
           <i class="fa fa-{{pickStatus(pick)}} fa-fw pick-icon"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pick.week_name}}<span ng-show="pick.game.start.length > 0"> | {{dateFormat(pick.game.start, "mmm d")}} | {{dateFormat(pick.game.start, "h:MM TT Z")}}</span></span>
@@ -24,7 +24,7 @@
       </div>
     </a>
   </div>
-  <div class="no-picks-alert alert alert-info" ng-show="(picks | weekPicksFilter:selectedWeekSlug).length == 0">
+  <div class="no-picks-alert alert alert-info" ng-show="(picks | weekPicksFilter:selectedWeek:teamData.league.elimination).length == 0">
     No picks
   </div>
 </div>

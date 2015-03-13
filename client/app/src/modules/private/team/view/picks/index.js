@@ -14,15 +14,15 @@ module.exports = angular.module('loghApp.team.view.picks', [])
           leagueWeeks: function(team, weekService, $stateParams) {
             return weekService.getLeagueWeeks({ seasonId: $stateParams.seasonId, leagueId: $stateParams.leagueId });
           },
+          picks: function(team, pickService) {
+            return pickService.getPicks({ teamId: team.data.id });
+          },
           currentWeek: function(team, $stateParams, weekService) {
-            if (team.data.league.elimination == false && !$stateParams.week) {
+            if (!$stateParams.week) {
               return weekService.getCurrentWeek($stateParams.seasonId, $stateParams.leagueId);
             } else {
               return null;
             }
-          },
-          picks: function(team, pickService) {
-            return pickService.getPicks({ teamId: team.data.id });
           }
         },
         reloadOnSearch: false
