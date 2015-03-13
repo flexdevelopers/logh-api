@@ -43,13 +43,13 @@ class Week < ActiveRecord::Base
 
     null_squad = Squad.find_by(none: true)
 
-    # for elimination leagues (that have started), give alive teams that made no pick a 'none' pick and then kill the team
+    # for elimination leagues (that have started), give teams that made no pick a 'none' pick and then kill the team (if not already dead)
     self.season.leagues.elimination.started.each do |started_elimination_league|
-      started_elimination_league.teams.alive.each do |alive_team|
-        pick = self.picks.find_by(team: alive_team)
+      started_elimination_league.teams.each do |team|
+        pick = self.picks.find_by(team: team)
         if !pick
-          Pick.create!(week: self, week_type: self.week_type, team: alive_team, game: nil, squad: null_squad, correct: false)
-          alive_team.kill
+          Pick.create!(week: self, week_type: self.week_type, team: team, game: nil, squad: null_squad, correct: false)
+          team.kill(self.starts_at)
         end
       end
     end
