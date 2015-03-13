@@ -14,6 +14,7 @@ class Pick < ActiveRecord::Base
   default_scope { includes(:week).order('weeks.starts_at ASC') }
 
   scope :correct, -> { where(correct: true) }
+  scope :incorrect, -> { where(correct: false) }
   scope :not_locked, -> { joins(:game).where('games.starts_at > ?', Time.zone.now) }
 
   scope :not_none, -> { joins(:squad).where('squads.none = ?', false) }
