@@ -1,7 +1,7 @@
 <% if @league.max_picks_per_week  %>
-    <%= "This is your friendly reminder to get your #{pluralize(@league.max_picks_per_week, 'pick')} in for #{@week.name} (#{@week.week_type.description}) for the \"#{@league.name}\" league." %>
+<%= "This is your friendly reminder to get your #{pluralize(@league.max_picks_per_week, 'pick')} in for #{@week.name} (#{@week.week_type.description}) for the \"#{@league.name}\" league." %>
 <% else %>
-    <%= "This is your friendly reminder to get your picks in for #{@week.name} (#{@week.week_type.description}) for the \"#{@league.name}\" league." %>
+<%= "This is your friendly reminder to get your picks in for #{@week.name} (#{@week.week_type.description}) for the \"#{@league.name}\" league." %>
 <% end %>
 
 Don't worry. You can always make a pick before the start of any game. Good luck, loser!
