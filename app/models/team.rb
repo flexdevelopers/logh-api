@@ -75,8 +75,4 @@ class Team < ActiveRecord::Base
     self.update!(eliminated_at: eliminated_at) if self.league.elimination == true && self.alive?
   end
 
-  def kill
-    self.update!(alive: false) if self.league.elimination == true
-  end
-
 end
