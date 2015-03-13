@@ -1,8 +1,9 @@
 object @team
-attributes :id, :name, :active, :alive, :paid
+attributes :id, :name, :active, :paid
+node(:alive) { |team| team.alive? }
 node(:current_pick) do |team|
   current_picks = team.current_picks({})
-  if team.alive
+  if team.alive?
     if team.league.max_picks_per_week == 1
       if current_picks.any?
         if current_picks[0].locked? || team.coach_ids.include?(@user.id)

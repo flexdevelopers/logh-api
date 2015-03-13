@@ -1,5 +1,6 @@
 object @team
-attributes :id, :name, :active, :alive, :paid, :message
+attributes :id, :name, :active, :paid, :message
+node(:alive) { |team| team.alive? }
 node(:started) { |team| team.league.started? }
 node(:start_week) { |team| team.league.start_week.display }
 node(:coach_ids) { |team| team.coach_ids }
@@ -38,7 +39,7 @@ node(:current_pick) do |team|
         }
       end
     else
-      if team.alive
+      if team.alive?
         {
             name: "No Pick | #{week_name}",
             abbrev: "No Pick | #{week_name}",

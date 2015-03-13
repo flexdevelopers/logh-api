@@ -101,7 +101,7 @@ class API::PicksController < API::BaseController
     end
 
     def _verify_team_is_alive
-      forbidden('Cannot make picks for a dead team') if !@team.alive
+      forbidden('Cannot make picks for a dead team') if !@team.alive?
     end
 
     def _verify_team_management

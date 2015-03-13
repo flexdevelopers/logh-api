@@ -52,7 +52,7 @@ class API::TeamsController < API::BaseController
   # PATCH/PUT /api/leagues/:league_id/teams/1
   def update
     return forbidden('Only the coach or commish can edit a team') if !_is_coach_of?(@team) && !_is_commish_of?(@league) && !current_user.admin?
-    return forbidden('Only the commish can edit a dead team') if !@team.alive && !_is_commish_of?(@league) && !current_user.admin?
+    return forbidden('Only the commish can edit a dead team') if !@team.alive? && !_is_commish_of?(@league) && !current_user.admin?
     return forbidden('Only the commish can edit an inactive team') if !@team.active && !_is_commish_of?(@league) && !current_user.admin?
     if @team.update_attributes(_team_params)
       render json: { message: { type: SUCCESS, content: "#{@team[:name]} team updated" } }, status: :ok

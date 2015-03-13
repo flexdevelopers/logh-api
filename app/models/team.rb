@@ -11,19 +11,16 @@ class Team < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { case_sensitive: false, scope: :league_id }
   validates :league, presence: true
   validates :active, inclusion: { in: [true, false] }
-  validates :alive, inclusion: { in: [true, false] }
   validates :paid, inclusion: { in: [true, false] }
   validates :message, allow_nil: true, length: { maximum: 500 }
 
   default_scope -> { order(name: :asc) }
 
   scope :active, -> { where(active: true) }
+  scope :alive, -> { where(eliminated_at: nil) }
 
-  scope :alive, -> { where(alive: true) }
-  scope :dead, -> { where(alive: false) }
-
-  def eliminated?
-    self.eliminated_at
+  def alive?
+    !self.eliminated_at
   end
 
   def commish_ids
@@ -75,7 +72,7 @@ class Team < ActiveRecord::Base
   end
 
   def eliminate(eliminated_at)
-    self.update!(eliminated_at: eliminated_at) if self.league.elimination == true && !self.eliminated?
+    self.update!(eliminated_at: eliminated_at) if self.league.elimination == true && self.alive?
   end
 
   def kill
