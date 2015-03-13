@@ -6,7 +6,7 @@ node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
 node(:correct_picks_count) do |team|
   # if survivor, we want correct picks count for ALL weeks
-  team.correct_picks_count({ week_id: (@week && !team.league.elimination) ? @week.id : nil })
+  team.correct_picks_count({ week_id: (@week) ? @week.id : nil, elimination: team.league.elimination })
 end
 node(:current_pick) do |team|
   current_picks = team.current_picks({ week_id: (@week) ? @week.id : nil })

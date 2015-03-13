@@ -56,14 +56,21 @@ class Team < ActiveRecord::Base
   end
 
   def correct_picks_count(options)
-    if options[:week_id]
-      self.picks.correct.where('week_id = ?', options[:week_id]).count
+    week_id = options[:week_id]
+    elimination = options[:elimination]
+    if week_id
+      if elimination
+        week = Week.find(week_id)
+        self.picks.correct.joins(:week).where('starts_at <= ?', week[:starts_at]).count
+      else
+        self.picks.correct.where('week_id = ?', week_id).count
+      end
     else
       self.picks.correct.count
     end
   end
 
-  def kill
+  def kill(killed_at)
     self.update!(alive: false) if self.league.elimination == true
   end
 
