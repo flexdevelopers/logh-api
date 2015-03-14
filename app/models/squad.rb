@@ -11,8 +11,12 @@ class Squad < ActiveRecord::Base
   validates :none, inclusion: { in: [true, false] } # true only for the NONE squad (used when no pick is made)
 
   def record
-    record_string = "#{self.wins}-#{self.losses}"
-    record_string += "-#{self.ties}" if self.ties > 0 || squad_type == 'NHL' || squad_type == 'MLS'
+    if squad_type == 'MLS'
+      record_string = "#{self.wins}-#{self.ties}-#{self.losses}" # weird soccer W-T-L
+    else
+      record_string = "#{self.wins}-#{self.losses}"
+      record_string += "-#{self.ties}" if self.ties > 0 || squad_type == 'NHL'
+    end
     record_string
   end
 
