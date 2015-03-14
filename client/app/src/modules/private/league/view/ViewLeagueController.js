@@ -28,7 +28,25 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
   $scope.userModel = userModel;
 
   $scope.inPlay = function(team) {
-    return (team.active && team.alive) ? 0 : 1;
+    return (team.active && !$scope.isEliminated(team)) ? 0 : 1;
+  };
+
+  $scope.isEliminated = function(team) {
+    var eliminated = false;
+    if (team.eliminated_at) {
+      eliminated = true;
+      if (team.week_starts_at) {
+        eliminated = (moment(team.eliminated_at).isBefore(team.week_starts_at) || moment(team.eliminated_at).isSame(team.week_starts_at));
+      }
+    }
+    return eliminated;
+  };
+
+  $scope.aliveTeamCount = function(teams) {
+    var aliveTeams = _.filter(teams, function(team) {
+      return team.active && !$scope.isEliminated(team);
+    });
+    return aliveTeams.length;
   };
 
   $scope.toggleDropdown = function($event) {

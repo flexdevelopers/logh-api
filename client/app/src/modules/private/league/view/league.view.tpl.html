@@ -47,7 +47,7 @@
 </div>
 <div class="teams-tab">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{leagueData.alive_team_count}} / </span>{{leagueData.team_count}} ]</a></li>
+    <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{aliveTeamCount(leagueTeams)}} / </span>{{leagueData.team_count}} ]</a></li>
   </ul>
   <div class="weeks">
     <select class="form-control" ng-change="changeWeek(selectedWeekSlug)" ng-model="selectedWeekSlug" ng-options="leagueWeek.slug as leagueWeek.display for leagueWeek in leagueWeeks">
@@ -63,10 +63,10 @@
 </div>
 <div class="league-container">
   <div class="league-teams list-group">
-    <a class="list-group-item" ng-class="{'inactive': !team.active || !team.alive}" ng-repeat="team in leagueTeams | orderBy:[inPlay, '-correct_picks_count', 'name'] | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
+    <a class="list-group-item" ng-repeat="team in leagueTeams | orderBy:[inPlay, '-correct_picks_count', 'name'] | activeTeamFilter:teamOptions | filter:search:strict | offsetFilter:(currentTeamPage-1)*teamsPerPage | limitTo:teamsPerPage" ng-click="showTeam(team)">
       <div class="row">
         <div class="league-name col-sm-5 col-md-5">
-          <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i><i class="fa fa-check fa-fw" ng-show="!isCoach(team) && isCommish(leagueData) && team.paid == true" title="Paid"></i> <span class="team-name" ng-class="{'inactive': !team.active || !team.alive}">{{team.name}}</span>
+          <i class="fa fa-user fa-fw" ng-show="isCoach(team)" title="My team"></i><i class="fa fa-check fa-fw" ng-show="!isCoach(team) && isCommish(leagueData) && team.paid == true" title="Paid"></i> <span class="team-name" ng-class="{'inactive': !team.active || isEliminated(team)}">{{team.name}}</span>
           <br>
           <span class="coach-name">Coach: {{coachName(team)}}</span>
         </div>
