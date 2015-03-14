@@ -6,6 +6,7 @@ Season
 Week
 
 - The end date of a week should ideally be the start date of the last week's game
+- When creating weeks, check the weeks first to determine if you have to combine some. Keep in mind all star weeks.
 
 League
 
