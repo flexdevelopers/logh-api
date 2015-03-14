@@ -41,7 +41,7 @@
         <small ng-show="hasPropertyError(squadForm.wins, 'required')">[ Number Required ]</small>
         <small ng-show="hasPropertyError(squadForm.wins, 'min')">[ Zero or greater ]</small>
       </label>
-      <input id="wins" name="wins" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.wins" logh-focus required>
+      <input id="wins" name="wins" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.wins" select-on-click required>
       <span ng-show="hasError(squadForm.wins)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
     <div class="form-group" ng-class="{'has-error': hasError(squadForm.losses), 'has-feedback': hasError(squadForm.losses)}">
@@ -49,7 +49,7 @@
         <small ng-show="hasPropertyError(squadForm.losses, 'required')">[ Number Required ]</small>
         <small ng-show="hasPropertyError(squadForm.losses, 'min')">[ Zero or greater ]</small>
       </label>
-      <input id="losses" name="losses" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.losses" logh-focus required>
+      <input id="losses" name="losses" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.losses" select-on-click required>
       <span ng-show="hasError(squadForm.losses)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
     <div class="form-group" ng-class="{'has-error': hasError(squadForm.ties), 'has-feedback': hasError(squadForm.ties)}">
@@ -57,7 +57,7 @@
         <small ng-show="hasPropertyError(squadForm.ties, 'required')">[ Number Required ]</small>
         <small ng-show="hasPropertyError(squadForm.ties, 'min')">[ Zero or greater ]</small>
       </label>
-      <input id="ties" name="ties" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.ties" logh-focus required>
+      <input id="ties" name="ties" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.ties" select-on-click required>
       <span ng-show="hasError(squadForm.ties)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
     <div class="form-group" ng-class="{'has-error': hasError(squadForm.seed), 'has-feedback': hasError(squadForm.seed)}">
@@ -65,7 +65,7 @@
         <small ng-show="hasPropertyError(squadForm.seed, 'required')">[ Number Required ]</small>
         <small ng-show="hasPropertyError(squadForm.seed, 'min')">[ Zero or greater ]</small>
       </label>
-      <input id="seed" name="seed" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.seed" logh-focus required>
+      <input id="seed" name="seed" type="number" placeholder="Greater than zero" min="0" class="form-control" ng-model="squadData.seed" select-on-click required>
       <span ng-show="hasError(squadForm.seed)" class="glyphicon glyphicon-remove form-control-feedback"></span>
     </div>
   </form>
