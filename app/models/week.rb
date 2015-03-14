@@ -45,11 +45,11 @@ class Week < ActiveRecord::Base
 
     # for elimination leagues (that have started), give teams that made no pick a 'none' pick and then eliminate the team (if not already eliminated)
     self.season.leagues.elimination.started.each do |started_elimination_league|
-      started_elimination_league.teams.each do |team|
-        pick = self.picks.find_by(team: team)
+      started_elimination_league.teams.alive.each do |alive_team|
+        pick = self.picks.find_by(team: alive_team)
         if !pick
-          Pick.create!(week: self, week_type: self.week_type, team: team, game: nil, squad: null_squad, correct: false)
-          team.eliminate(self.starts_at)
+          Pick.create!(week: self, week_type: self.week_type, team: alive_team, game: nil, squad: null_squad, correct: false)
+          alive_team.eliminate(self.starts_at)
         end
       end
     end
