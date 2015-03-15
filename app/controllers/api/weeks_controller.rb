@@ -9,7 +9,7 @@ class API::WeeksController < API::BaseController
     if params[:league_id]
       league = League.find(params[:league_id])
       start_week = league.start_week
-      @weeks = @season.weeks.started.where('starts_at >= ?', start_week[:starts_at]).order(starts_at: :desc)
+      @weeks = @season.weeks.started.where('starts_at >= ?', start_week[:starts_at]).order(starts_at: :asc)
     else
       @weeks = @season.weeks.order(starts_at: :asc)
     end
