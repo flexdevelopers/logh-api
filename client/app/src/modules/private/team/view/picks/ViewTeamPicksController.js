@@ -1,5 +1,31 @@
 var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, $log, $location, $stateParams, dateUtils) {
 
+  var createFakeNonePicks = function() {
+    if ($scope.picks.length < $scope.leagueWeeks.length) {
+      // important that weeks are in ascending order for this to work
+      for (i = $scope.picks.length; i < $scope.leagueWeeks.length; i++) {
+        createFakeNonePick($scope.leagueWeeks[i]);
+      }
+    }
+  };
+
+  var createFakeNonePick = function(week) {
+    var pick = {
+      squad: {
+        id: 0,
+        name: "None",
+        abbrev: "NONE",
+        short: "None"
+      },
+      correct: (!$scope.teamData.alive) ? false : null,
+      locked: (!$scope.teamData.alive) ? true : false,
+      week_name: week.name,
+      week_slug: week.slug,
+      week_date: week.starts_at
+    };
+    $scope.picks.push(pick);
+  };
+
   $scope.leagueWeeks = leagueWeeks.data;
 
   $scope.picks = picks.data;
@@ -56,14 +82,15 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
    * Invoked on startup, like a constructor.
    */
   var init = function () {
-    $log.debug("view team picks controller");
+    if ($scope.teamData.league.elimination) {
+      createFakeNonePicks();
+    }
     if (currentWeek) {
       $scope.selectedWeekSlug = currentWeek.data.slug;
       $scope.changeWeek($scope.selectedWeekSlug);
     }
   };
   init();
-
 };
 
 ViewTeamPicksController.$inject = ['leagueWeeks', 'currentWeek', 'picks', '$scope', '$log', '$location', '$stateParams', 'dateUtils'];
