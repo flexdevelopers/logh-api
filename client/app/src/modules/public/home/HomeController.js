@@ -1,24 +1,13 @@
-var HomeController = function($scope, $log, $location, $modal, leagueService, messageModel, seasonModel) {
+var HomeController = function($scope, $log, $location, leagueService, messageModel, seasonModel) {
 
-  $scope.selectedSeasonId = seasonModel.selectedSeasonId;
+    $scope.selectedSeasonId = seasonModel.selectedSeasonId;
 
-  $scope.createLeague = function(seasonId) {
-        var modalInstance = $modal.open({
-            templateUrl: 'modules/private/league/new/league.new.tpl.html',
-            controller: 'NewLeagueController'
-          });
-
-      modalInstance.result.then(function(league) {
-        leagueService.createLeague(league);
-      }, function () {
-        $log.debug('Create league modal dismissed...');
-        messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
-      });
+    $scope.createLeague = function(seasonId) {
+      $location.url('/season/' + seasonId + '/league/new');
     };
 
-    $scope.joinLeague = function() {
-      var season = seasonModel.getCurrentSeason();
-      $location.url('/season/' + season.id + '/leagues/public');
+    $scope.joinLeague = function(seasonId) {
+      $location.url('/season/' + seasonId + '/leagues/public');
     };
 
     /**
@@ -30,5 +19,5 @@ var HomeController = function($scope, $log, $location, $modal, leagueService, me
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'leagueService', 'messageModel', 'seasonModel'];
+HomeController.$inject = ['$scope', '$log', '$location', 'leagueService', 'messageModel', 'seasonModel'];
 module.exports = HomeController;

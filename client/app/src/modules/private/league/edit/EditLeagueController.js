@@ -4,6 +4,15 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
       $location.url('/season/' + league.season_id + '/league/' + league.id);
     };
 
+    var getSeasonWeeks = function() {
+      $scope.editBtnDisabled = true;
+      weekService.getAvailableWeeks($scope.leagueData.season_id)
+        .then(function(response) {
+          $scope.weeks = response.data;
+          $scope.editBtnDisabled = false;
+        });
+    };
+
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
     $scope.leagueData = angular.copy(league.data);
@@ -17,15 +26,6 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
       { number: 2, display: 'Pick 2 losers' },
       { number: 1, display: 'Pick 1 loser' }
     ];
-
-    $scope.getSeasonWeeks = function() {
-      $scope.editBtnDisabled = true;
-      weekService.getAvailableWeeks($scope.leagueData.season_id)
-        .then(function(response) {
-          $scope.weeks = response.data;
-          $scope.editBtnDisabled = false;
-        });
-    };
 
     $scope.updateLeague = function(league) {
       leagueService.updateLeague(league)
@@ -52,7 +52,7 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
     var init = function () {
         $log.debug("edit league controller");
         if (!$scope.leagueData.started) {
-          $scope.getSeasonWeeks();
+          getSeasonWeeks();
         }
     };
     init();

@@ -78,23 +78,12 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
       $location.url('/season/' + seasonId + '/my/teams');
     };
 
-    $scope.joinLeague = function() {
-      var season = seasonModel.getCurrentSeason();
-      $location.url('/season/' + season.id + '/leagues/public');
+    $scope.joinLeague = function(seasonId) {
+      $location.url('/season/' + seasonId + '/leagues/public');
     };
 
-    $scope.createLeague = function() {
-      var modalInstance = $modal.open({
-            templateUrl: 'modules/private/league/new/league.new.tpl.html',
-            controller: 'NewLeagueController'
-          });
-
-      modalInstance.result.then(function(league) {
-        leagueService.createLeague(league);
-      }, function () {
-        messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
-        $log.debug('Create league modal dismissed...');
-      });
+    $scope.createLeague = function(seasonId) {
+      $location.url('/season/' + seasonId + '/league/new');
     };
 
     $scope.userProfile = function() {

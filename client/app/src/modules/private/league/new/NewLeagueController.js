@@ -1,4 +1,14 @@
-var NewLeagueController = function($scope, $log, $modalInstance, weekService, seasonModel) {
+var NewLeagueController = function(seasonId, $scope, $log, $location, weekService, leagueService, seasonModel) {
+
+    var getSeasonWeeks = function() {
+      $scope.createBtnDisabled = true;
+      weekService.getAvailableWeeks($scope.leagueData.season_id)
+        .then(function(response) {
+          $scope.weeks = response.data;
+          $scope.leagueData.start_week_id = $scope.weeks[0].id;
+          $scope.createBtnDisabled = false;
+        });
+    };
 
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
@@ -15,7 +25,7 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
     $scope.leagueData = {
         name: '',
         nickname: '',
-        season_id: $scope.seasons[$scope.seasons.length - 1].id,
+        season_id: seasonId,
         start_week_id: '',
         public: true,
         elimination: false,
@@ -23,22 +33,16 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
         max_picks_per_week: $scope.maxPicksPerWeek[0].number
     };
 
-    $scope.getSeasonWeeks = function() {
-      $scope.createBtnDisabled = true;
-      weekService.getAvailableWeeks($scope.leagueData.season_id)
-        .then(function(response) {
-          $scope.weeks = response.data;
-          $scope.leagueData.start_week_id = $scope.weeks[0].id;
-          $scope.createBtnDisabled = false;
-        });
+    $scope.changeSeason = function() {
+      $location.path('/season/' + $scope.leagueData.season_id + '/league/new'); // will not reload page due to reloadOnSearch: false
+      getSeasonWeeks();
     };
 
     $scope.createLeague = function(league) {
-      $modalInstance.close(league);
-    };
-
-    $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
+      leagueService.createLeague(league)
+        .then(function(data) {
+          $location.url('/season/' + league.season_id + '/league/' + data.league_id);
+        });
     };
 
     $scope.hasError = function(input) {
@@ -54,11 +58,11 @@ var NewLeagueController = function($scope, $log, $modalInstance, weekService, se
      */
     var init = function () {
         $log.debug("new league controller");
-        $scope.getSeasonWeeks();
+        getSeasonWeeks();
     };
     init();
 
 };
 
-NewLeagueController.$inject = ['$scope', '$log', '$modalInstance', 'weekService', 'seasonModel'];
+NewLeagueController.$inject = ['seasonId', '$scope', '$log', '$location', 'weekService', 'leagueService', 'seasonModel'];
 module.exports = NewLeagueController;
