@@ -103,23 +103,21 @@ var LeagueService = function($http, $log, $location, $q, $state, apiConfig, mess
     };
 
     this.updateLeague = function(leagueParams) {
-        var promise = $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id,
+        var deferred = $q.defer();
+        $http.put(apiConfig.baseURL + "seasons/" + leagueParams.season_id + "/leagues/" + leagueParams.id,
             { league: leagueParams })
             .success(function(data) {
                 $log.debug("LeagueService: updateLeague success");
-            // todo: this relies on a monkey patch at the moment - https://github.com/angular-ui/ui-router/issues/582
-            // but may be resolved with future releases of angular-ui-router
-            $state.reload(); // reloads all the resolves for the view league page and reinstantiates the controller
-            messageModel.setMessage(data.message, false);
-                return data;
+                messageModel.setMessage(data.message, true);
+                deferred.resolve(data);
             })
             .error(function(data) {
                 $log.debug("LeagueService: updateLeague failed");
                 messageModel.setMessage(data.message, false);
-                return data;
+                deferred.reject(data);
             });
 
-        return promise;
+        return deferred.promise;
     };
 
     this.closeLeague = function(leagueParams) {

@@ -1,8 +1,12 @@
-var EditLeagueController = function(league, $scope, $log, $location, $modalInstance, weekService, seasonModel) {
+var EditLeagueController = function(league, $scope, $log, $location, weekService, leagueService, seasonModel) {
+
+    var showLeague = function(league) {
+      $location.url('/season/' + league.season_id + '/league/' + league.id);
+    };
 
     $scope.seasons = angular.copy(seasonModel.currentSeasons);
 
-    $scope.leagueData = angular.copy(league);
+    $scope.leagueData = angular.copy(league.data);
 
     $scope.maxPicksPerWeek = [
       { number: null, display: 'Pick every game' },
@@ -24,11 +28,14 @@ var EditLeagueController = function(league, $scope, $log, $location, $modalInsta
     };
 
     $scope.updateLeague = function(league) {
-      $modalInstance.close(league);
+      leagueService.updateLeague(league)
+        .then(function(data) {
+          showLeague(league);
+        });
     };
 
-    $scope.cancel = function() {
-      $modalInstance.dismiss('cancel');
+    $scope.cancel = function(league) {
+      showLeague(league);
     };
 
     $scope.hasError = function(input) {
@@ -52,5 +59,5 @@ var EditLeagueController = function(league, $scope, $log, $location, $modalInsta
 
 };
 
-EditLeagueController.$inject = ['league', '$scope', '$log', '$location', '$modalInstance', 'weekService', 'seasonModel'];
+EditLeagueController.$inject = ['league', '$scope', '$log', '$location', 'weekService', 'leagueService', 'seasonModel'];
 module.exports = EditLeagueController;

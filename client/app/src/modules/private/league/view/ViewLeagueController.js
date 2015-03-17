@@ -112,28 +112,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
   };
 
   $scope.editLeague = function(league) {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'modules/private/league/edit/league.edit.tpl.html',
-      controller: 'EditLeagueController',
-      resolve: {
-        weeks: function() {
-          return weekService.getAvailableWeeks(league.season_id);
-        },
-        league: function() {
-          return league;
-        }
-      }
-
-    });
-
-    modalInstance.result.then(function(league) {
-      leagueService.updateLeague(league);
-    }, function () {
-      $log.debug('Edit league modal dismissed...');
-      messageModel.setMessage({ type: 'warning', content: 'Edit league cancelled' }, false);
-    });
-
+    $location.url('/season/' + league.season_id + '/league/' + league.id + '/edit');
   };
 
   $scope.openLeague = function(league) {
