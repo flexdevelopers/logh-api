@@ -14,7 +14,7 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
       squad: {
         id: 0,
         name: "None",
-        abbrev: "NONE",
+        abbrev: "None",
         short: "None"
       },
       correct: (!$scope.teamData.alive) ? false : null,
