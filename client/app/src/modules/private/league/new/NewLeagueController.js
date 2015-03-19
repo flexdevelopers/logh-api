@@ -1,4 +1,4 @@
-var NewLeagueController = function(seasonId, $scope, $log, $location, weekService, leagueService, seasonModel) {
+var NewLeagueController = function(seasonId, $scope, $location, weekService, leagueService, seasonModel) {
 
     var getSeasonWeeks = function() {
       $scope.createBtnDisabled = true;
@@ -53,16 +53,12 @@ var NewLeagueController = function(seasonId, $scope, $log, $location, weekServic
       return !input.$focused && input.$dirty && input.$error[property];
     };
 
-    /**
-     * Invoked on startup, like a constructor.
-     */
     var init = function () {
-        $log.debug("new league controller");
         getSeasonWeeks();
     };
     init();
 
 };
 
-NewLeagueController.$inject = ['seasonId', '$scope', '$log', '$location', 'weekService', 'leagueService', 'seasonModel'];
+NewLeagueController.$inject = ['seasonId', '$scope', '$location', 'weekService', 'leagueService', 'seasonModel'];
 module.exports = NewLeagueController;

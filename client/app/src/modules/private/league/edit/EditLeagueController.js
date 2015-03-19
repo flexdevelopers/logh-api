@@ -1,4 +1,4 @@
-var EditLeagueController = function(league, $scope, $log, $location, weekService, leagueService, seasonModel) {
+var EditLeagueController = function(league, $scope, $location, weekService, leagueService, seasonModel) {
 
     var showLeague = function(league) {
       $location.url('/season/' + league.season_id + '/league/' + league.id);
@@ -34,10 +34,6 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
         });
     };
 
-    $scope.cancel = function(league) {
-      showLeague(league);
-    };
-
     $scope.hasError = function(input) {
       return !input.$focused && input.$dirty && input.$invalid;
     };
@@ -46,12 +42,8 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
       return !input.$focused && input.$dirty && input.$error[property];
     };
 
-    /**
-     * Invoked on startup, like a constructor.
-     */
     var init = function () {
-        $log.debug("edit league controller");
-        if (!$scope.leagueData.started) {
+      if (!$scope.leagueData.started) {
           getSeasonWeeks();
         }
     };
@@ -59,5 +51,5 @@ var EditLeagueController = function(league, $scope, $log, $location, weekService
 
 };
 
-EditLeagueController.$inject = ['league', '$scope', '$log', '$location', 'weekService', 'leagueService', 'seasonModel'];
+EditLeagueController.$inject = ['league', '$scope', '$location', 'weekService', 'leagueService', 'seasonModel'];
 module.exports = EditLeagueController;
