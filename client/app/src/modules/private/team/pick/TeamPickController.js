@@ -1,4 +1,4 @@
-var TeamPickController = function(team, week, games, picks, $rootScope, $scope, $log, $location, $anchorScroll, userModel, dateUtils) {
+var TeamPickController = function(team, week, games, picks, $rootScope, $scope, $log, $location, userModel, dateUtils) {
 
   $scope.team = team.data;
 
@@ -9,10 +9,6 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
   $scope.picks = picks.data;
 
   $scope.savePicksEnabled = false;
-
-  $scope.scrollToTop = function() {
-    $anchorScroll(); // hacky?
-  };
 
   $scope.pickMessage = function(team, week) {
     var msg = '';
@@ -68,5 +64,5 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
   init();
 };
 
-TeamPickController.$inject = ['team', 'week', 'games', 'picks', '$rootScope', '$scope', '$log', '$location', '$anchorScroll', 'userModel', 'dateUtils'];
+TeamPickController.$inject = ['team', 'week', 'games', 'picks', '$rootScope', '$scope', '$log', '$location', 'userModel', 'dateUtils'];
 module.exports = TeamPickController;
