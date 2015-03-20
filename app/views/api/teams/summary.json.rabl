@@ -5,7 +5,7 @@ node(:started) { |team| team.league.started? }
 node(:start_week) { |team| team.league.start_week.display }
 node(:coach_ids) { |team| team.coach_ids }
 node(:coach_names) { |team| team.coach_names }
-node(:week_starts_at) { |team| (@week) ? @week.starts_at : nil }
+node(:week_ends_at) { |team| (@week) ? @week.ends_at : nil }
 node(:correct_picks_count) do |team|
   # if survivor, we want correct picks count for ALL weeks
   team.correct_picks_count({ week_id: (@week) ? @week.id : nil, elimination: team.league.elimination })

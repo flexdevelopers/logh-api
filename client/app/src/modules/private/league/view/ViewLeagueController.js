@@ -35,8 +35,8 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     var eliminated = false;
     if (team.eliminated_at) {
       eliminated = true;
-      if (team.week_starts_at) {
-        eliminated = (moment(team.eliminated_at).isBefore(team.week_starts_at) || moment(team.eliminated_at).isSame(team.week_starts_at));
+      if (team.week_ends_at) {
+        eliminated = (moment(team.eliminated_at).isBefore(team.week_ends_at) || moment(team.eliminated_at).isSame(team.week_ends_at));
       }
     }
     return eliminated;
