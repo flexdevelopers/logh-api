@@ -78,12 +78,14 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
       $location.url('/season/' + seasonId + '/my/teams');
     };
 
-    $scope.joinLeague = function(seasonId) {
-      $location.url('/season/' + seasonId + '/leagues/public');
+    $scope.joinLeague = function() {
+      var season = seasonModel.getCurrentSeason();
+      $location.url('/season/' + season.id + '/leagues/public');
     };
 
-    $scope.createLeague = function(seasonId) {
-      $location.url('/season/' + seasonId + '/league/new');
+    $scope.createLeague = function() {
+      var season = seasonModel.getCurrentSeason();
+      $location.url('/season/' + season.id + '/league/new');
     };
 
     $scope.userProfile = function() {

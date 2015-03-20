@@ -30,8 +30,9 @@ var PlayController = function($scope, $log, $location, $state, $stateParams, mes
     return _.indexOf(states, $state.current.name) > -1;
   };
 
-  $scope.createLeague = function(seasonId) {
-    $location.url('/season/' + seasonId + '/league/new');
+  $scope.createLeague = function() {
+    var season = seasonModel.getCurrentSeason();
+    $location.url('/season/' + season.id + '/league/new');
   };
 
   $scope.joinLeague = function() {

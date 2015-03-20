@@ -40,8 +40,9 @@ var JoinLeaguesController = function($scope, $log, $location, $stateParams, user
     return league.commish_ids.indexOf(userModel.user.id) > -1;
   };
 
-  $scope.createLeague = function(seasonId) {
-    $location.url('/season/' + seasonId + '/league/new');
+  $scope.createLeague = function() {
+    var season = seasonModel.getCurrentSeason();
+    $location.url('/season/' + season.id + '/league/new');
   };
 
   /**
