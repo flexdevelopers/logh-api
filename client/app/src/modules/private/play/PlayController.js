@@ -1,4 +1,4 @@
-var PlayController = function($scope, $log, $location, $modal, $state, $stateParams, messageModel, seasonModel, leagueService) {
+var PlayController = function($scope, $log, $location, $state, $stateParams, messageModel, seasonModel) {
 
   $scope.selectedSeasonId = parseInt($stateParams.seasonId);
 
@@ -30,20 +30,8 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
     return _.indexOf(states, $state.current.name) > -1;
   };
 
-  $scope.createLeague = function() {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'modules/private/league/new/league.new.tpl.html',
-      controller: 'NewLeagueController'
-    });
-
-    modalInstance.result.then(function(league) {
-      leagueService.createLeague(league);
-    }, function () {
-      $log.debug('Create league modal dismissed...');
-      messageModel.setMessage({ type: 'warning', content: 'Create league cancelled' }, false);
-    });
-
+  $scope.createLeague = function(seasonId) {
+    $location.url('/season/' + seasonId + '/league/new');
   };
 
   $scope.joinLeague = function() {
@@ -61,5 +49,5 @@ var PlayController = function($scope, $log, $location, $modal, $state, $statePar
 
 };
 
-PlayController.$inject = ['$scope', '$log', '$location', '$modal', '$state', '$stateParams', 'messageModel', 'seasonModel', 'leagueService'];
+PlayController.$inject = ['$scope', '$log', '$location', '$state', '$stateParams', 'messageModel', 'seasonModel'];
 module.exports = PlayController;
