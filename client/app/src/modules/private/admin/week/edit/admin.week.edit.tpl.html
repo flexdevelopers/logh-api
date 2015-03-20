@@ -13,15 +13,6 @@
         <span ng-show="hasError(editWeekForm.weekName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
       </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': hasError(editWeekForm.weekDescription), 'has-feedback': hasError(editWeekForm.weekDescription)}">
-      <label for="weekDescription" class="col-sm-3 control-label">Description:</label>
-      <div class="col-sm-9">
-        <input id="weekDescription" name="weekDescription" type="text" class="form-control" ng-model="weekData.description" ng-maxlength="30" required>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'required')">Required</small>
-        <small class="input-error" ng-show="hasPropertyError(editWeekForm.weekDescription, 'maxlength')">Too Long</small>
-        <span ng-show="hasError(editWeekForm.weekDescription)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-      </div>
-    </div>
     <div class="form-group">
       <label for="weekType" class="col-sm-3 control-label">Week Type:</label>
       <div class="col-sm-9">

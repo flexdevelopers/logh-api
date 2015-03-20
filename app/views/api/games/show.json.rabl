@@ -3,7 +3,6 @@ attributes :id, :starts_at, :week_id, :home_squad_id, :visiting_squad_id, :home_
 node(:started) { |game| game.started? }
 node(:display) { |game| game.display }
 node(:week_name) { |game| game.week.name }
-node(:week_description) { |game| game.week.description }
 node(:week_type) { |game| game.week.week_type.description }
 node(:start_display) { |game| game.start_display }
 node(:week_type_id) { |game| game.week_type_id }

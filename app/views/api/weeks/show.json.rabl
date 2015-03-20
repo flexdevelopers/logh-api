@@ -1,5 +1,5 @@
 object @week
-attributes :id, :week_type_id, :name, :description, :slug, :season_id, :starts_at, :ends_at, :reminder_sent_at, :complete
+attributes :id, :week_type_id, :name, :slug, :season_id, :starts_at, :ends_at, :reminder_sent_at, :complete
 node(:display) { |week| week.display }
 node(:date_range) { |week| week.date_range }
 node(:type) { |week| week.week_type.description }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313034613) do
+ActiveRecord::Schema.define(version: 20150320035723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +183,6 @@ ActiveRecord::Schema.define(version: 20150313034613) do
     t.integer  "week_type_id",                     null: false
     t.datetime "ends_at"
     t.string   "name"
-    t.string   "description"
     t.datetime "reminder_sent_at"
     t.string   "slug"
   end

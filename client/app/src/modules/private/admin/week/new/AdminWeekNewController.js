@@ -5,7 +5,6 @@ var AdminWeekNewController = function(season, weekTypes, $scope, $modalInstance)
   $scope.weekData = {
     season_id: season.id,
     name: '',
-    description: '',
     week_type_id: weekTypes.data[0].id,
     starts_at: moment().format(),
     ends_at: moment().format()

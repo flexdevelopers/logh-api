@@ -40,7 +40,7 @@ class API::WeeksController < API::BaseController
   private
 
   def _week_params
-    params.require(:week).permit(:name, :description, :week_type_id, :starts_at, :ends_at, :complete)
+    params.require(:week).permit(:name, :week_type_id, :starts_at, :ends_at, :complete)
   end
 
   def _set_season
