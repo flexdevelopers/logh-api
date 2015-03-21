@@ -112,7 +112,7 @@ class Game < ActiveRecord::Base
       picks.each do |pick|
         pick_correct = (pick.squad == self.loser_squad)
         pick.update!(correct: pick_correct)
-        pick.team.eliminate(Time.zone.now) unless pick_correct
+        pick.team.eliminate(self.starts_at) unless pick_correct
       end
 
     end
