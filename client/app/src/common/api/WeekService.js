@@ -130,6 +130,7 @@ var WeekService = function($http, $log, $q, $state, apiConfig, messageModel) {
         var promise = $http.put(apiConfig.baseURL + "admin/seasons/" + week.season_id + "/weeks/" + week.id + "/remind")
             .success(function(data) {
                 $log.debug("WeekService: sendReminder success");
+                $state.reload();
                 messageModel.setMessage(data.message, false);
                 return data;
             })
