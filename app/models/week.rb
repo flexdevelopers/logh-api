@@ -9,7 +9,6 @@ class Week < ActiveRecord::Base
   before_save { self.slug = self.name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') }
 
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :season_id }
-  validates :description, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   validates :season, presence: true
