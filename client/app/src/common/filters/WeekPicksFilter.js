@@ -1,10 +1,9 @@
-var WeekPicksFilter = function($log) {
+var WeekPicksFilter = function() {
   return function(picks, week, elimination) {
     if (!week) {
       return picks;
     }
     var weekPicks = [];
-    $log.debug('elimination: ' + elimination);
     if (elimination) {
       // for survivor leagues, gonna show picks up to the week you selected...
       weekPicks = _.filter(picks, function(pick) {
@@ -20,5 +19,5 @@ var WeekPicksFilter = function($log) {
   };
 };
 
-WeekPicksFilter.$inject = ['$log'];
+WeekPicksFilter.$inject = [];
 module.exports = WeekPicksFilter;
