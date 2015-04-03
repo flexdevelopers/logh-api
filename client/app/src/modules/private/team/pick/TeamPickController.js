@@ -39,11 +39,8 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
     return startsLabel + dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT Z");
   };
 
-  $scope.showTeam = function(team, showCurrentWeek) {
-    var teamPath = '/season/' + team.league.season_id + '/league/' + team.league.id + '/team/' + team.id;
-    if (showCurrentWeek) {
-      teamPath += '?week=' + $scope.week.slug;
-    }
+  $scope.showTeam = function(team) {
+    var teamPath = '/season/' + team.league.season_id + '/league/' + team.league.id + '/team/' + team.id + '?week=' + $scope.week.slug;
     $location.url(teamPath);
   };
 
