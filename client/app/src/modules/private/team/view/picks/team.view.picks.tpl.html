@@ -3,7 +3,7 @@
     <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeek:teamData.league.elimination))}} ]</a></li>
   </ul>
   <div class="make-pick-btn-container">
-    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.current_pick.locked || !teamData.started"><span>Pick Loser</span><span ng-show="teamData.league.max_picks_per_week != 1">s</span></button>
+    <button type="button" class="make-pick-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.current_pick.locked || !teamData.started || !teamData.active || !teamData.alive"><span>Pick Loser</span><span ng-show="teamData.league.max_picks_per_week != 1">s</span></button>
   </div>
   <div class="weeks">
     <select class="form-control" ng-change="changeWeek(selectedWeekSlug)" ng-model="selectedWeekSlug" ng-options="leagueWeek.slug as leagueWeek.display for leagueWeek in leagueWeeks">
