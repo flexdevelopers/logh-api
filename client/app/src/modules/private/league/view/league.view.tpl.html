@@ -75,7 +75,8 @@
             <i class="fa fa-warning fa-fw" ng-show="team.current_pick.warning == true" title="Warning"></i>
             <i class="fa fa-lock fa-fw" ng-show="team.current_pick.locked && team.current_pick.correct == null" title="Pick locked"></i>
             <i class="fa fa-unlock fa-fw" ng-show="team.current_pick.locked == false && team.current_pick.correct == null" title="Pick unlocked"></i>
-            <i class="fa fa-times fa-fw" ng-show="team.current_pick.correct === false" title="Pick wrong"></i>
+            <i class="fa fa-minus fa-fw" ng-show="team.current_pick.tie === true" title="Pick tie"></i>
+            <i class="fa fa-times fa-fw" ng-show="team.current_pick.correct === false && team.current_pick.tie === false" title="Pick wrong"></i>
             <i class="fa fa-check fa-fw" ng-show="team.current_pick.correct === true" title="Pick correct"></i>
             [ <span class="current-loser-name">{{team.current_pick.name}}</span><span class="current-loser-abbrev">{{team.current_pick.abbrev}}</span> ]
           </span>

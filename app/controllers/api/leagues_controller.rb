@@ -106,7 +106,7 @@ class API::LeaguesController < API::BaseController
   private
 
     def _league_params
-      params.require(:league).permit(:name, :nickname, :public, :elimination, :start_week_id, :max_teams_per_user, :max_picks_per_week, :message)
+      params.require(:league).permit(:name, :nickname, :public, :elimination, :eliminate_on_tie, :start_week_id, :max_teams_per_user, :max_picks_per_week, :message)
     end
 
     def _set_season

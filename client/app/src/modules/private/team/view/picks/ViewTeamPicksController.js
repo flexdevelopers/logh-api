@@ -68,6 +68,8 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
     var status = '';
     if (pick.correct === true) {
       status = 'check';
+    } else if (pick.game.tie === true) {
+      status = 'minus';
     } else if (pick.correct === false) {
       status = 'times';
     } else if (pick.locked) {

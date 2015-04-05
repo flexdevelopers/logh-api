@@ -21,6 +21,7 @@ node(:current_pick) do |team|
               name: "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.start_display_short}",
               abbrev: "#{current_picks[0].squad.abbrev} | #{week_name} | #{current_picks[0].game.start_display_short}",
               correct: current_picks[0].correct,
+              tie: current_picks[0].game.tie?,
               locked: current_picks[0].locked?
           }
         else
@@ -36,6 +37,7 @@ node(:current_pick) do |team|
             name: "Hidden | #{week_name}",
             abbrev: "Hidden | #{week_name}",
             correct: current_picks[0].correct,
+            tie: false,
             locked: current_picks[0].locked?
         }
       end
@@ -53,7 +55,8 @@ node(:current_pick) do |team|
               name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
               abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
               locked: true,
-              correct: false
+              correct: false,
+              tie: incorrect_pick.game.tie?
           }
         else
           {

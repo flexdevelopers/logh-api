@@ -29,6 +29,7 @@ var NewLeagueController = function(seasonId, $scope, $location, weekService, lea
         start_week_id: '',
         public: true,
         elimination: false,
+        eliminate_on_tie: true,
         max_teams_per_user: '',
         max_picks_per_week: $scope.maxPicksPerWeek[0].number
     };

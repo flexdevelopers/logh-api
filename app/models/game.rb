@@ -50,6 +50,10 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def tie?
+    self.complete && (home_squad_score == visiting_squad_score)
+  end
+
   def started?
     self.starts_at <= Time.zone.now
   end
@@ -112,7 +116,7 @@ class Game < ActiveRecord::Base
       picks.each do |pick|
         pick_correct = (pick.squad == self.loser_squad)
         pick.update!(correct: pick_correct)
-        pick.team.eliminate(self.starts_at) unless pick_correct
+        pick.team.eliminate(self.starts_at, self.tie?) unless pick_correct
       end
 
     end

@@ -71,8 +71,8 @@ class Team < ActiveRecord::Base
     end
   end
 
-  def eliminate(eliminated_at)
-    self.update!(eliminated_at: eliminated_at) if self.league.elimination == true && self.alive?
+  def eliminate(eliminated_at, tie)
+    self.update!(eliminated_at: eliminated_at) if self.league.elimination && self.alive? && (!tie || (tie && self.league.eliminate_on_tie))
   end
 
 end

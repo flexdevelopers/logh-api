@@ -16,6 +16,7 @@ class League < ActiveRecord::Base
   validates :season, presence: true
   validates :public, inclusion: { in: [true, false] }
   validates :elimination, inclusion: { in: [true, false] }
+  validates :eliminate_on_tie, inclusion: { in: [true, false] }
   validates :start_week_id, presence: true
   validates :max_teams_per_user, allow_nil: true, numericality: { greater_than: 0 }
   validates :max_picks_per_week, allow_nil: true, numericality: { greater_than: 0 }
