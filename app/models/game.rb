@@ -14,6 +14,7 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_id, presence: true
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :postponed, inclusion: { in: [true, false] }
   validates :complete, inclusion: { in: [true, false] }
 
   default_scope { order(starts_at: :asc, created_at: :asc) }
@@ -27,11 +28,15 @@ class Game < ActiveRecord::Base
   end
 
   def start_display
-    "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
+    display = "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
+    display += " *PP" if self.postponed
+    display
   end
 
   def start_display_short
-    "#{starts_at.strftime("%b %-d")}"
+    display = "#{starts_at.strftime("%b %-d")}"
+    display += " *PP" if self.postponed
+    display
   end
 
   def ot_display

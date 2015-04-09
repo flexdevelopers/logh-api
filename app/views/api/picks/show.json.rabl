@@ -30,6 +30,7 @@ node(:game) do |pick|
         id: pick.game.id,
         display: display,
         start: pick.game.starts_at,
+        postponed: pick.game.postponed,
         tie: pick.game.tie?
     }
   else
