@@ -49,11 +49,17 @@ class League < ActiveRecord::Base
 
   def format
     if self.elimination
-      "Survivor [ 1 loser/week, no repeats ]"
-    elsif !self.elimination && !self.max_picks_per_week
-      "Pick'em [ pick all games ]"
-    elsif !self.elimination && self.max_picks_per_week
-      "Pick'em [ #{pluralize(self.max_picks_per_week, 'loser')}/week ]"
+      if self.eliminate_on_tie
+        "Survivor [ 1 loser/week, no ties ]"
+      else
+        "Survivor [ 1 loser/week, ties ok ]"
+      end
+    else
+      if self.max_picks_per_week
+        "Pick'em [ #{pluralize(self.max_picks_per_week, 'loser')}/week ]"
+      else
+        "Pick'em [ pick all games ]"
+      end
     end
   end
 
