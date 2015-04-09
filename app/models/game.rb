@@ -19,6 +19,8 @@ class Game < ActiveRecord::Base
 
   default_scope { order(starts_at: :asc, created_at: :asc) }
 
+  scope :complete, -> { where(complete: true) }
+
   def display
     if visiting_squad.seed > 0 && home_squad.seed > 0
       "(#{visiting_squad.seed}) #{visiting_squad.name} @ (#{home_squad.seed}) #{home_squad.name}"

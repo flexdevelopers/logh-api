@@ -4,5 +4,6 @@ node(:display) { |week| week.display }
 node(:date_range) { |week| week.date_range }
 node(:type) { |week| week.week_type.description }
 node(:game_count) { |week| week.games.count }
+node(:game_complete_count) { |week| week.games.complete.count }
 node(:season_type) { |week| week.season.season_type }
 
