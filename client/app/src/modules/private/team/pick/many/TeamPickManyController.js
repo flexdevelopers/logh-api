@@ -67,7 +67,7 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
 
   $scope.isDisabled = function(game) {
     var isDisabled = false;
-    if (game.started) {
+    if (game.started || game.postponed) {
       isDisabled = true;
     }
     return isDisabled;

@@ -21,7 +21,7 @@ class Pick < ActiveRecord::Base
 
   def locked?
     # no game means its a null pick and they are locked
-    !game || game.started?
+    !game || game.started? || game.postponed
   end
 
   def coach_ids

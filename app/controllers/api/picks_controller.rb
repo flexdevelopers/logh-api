@@ -36,7 +36,9 @@ class API::PicksController < API::BaseController
   # POST /api/teams/:team_id/picks
   def create
     _verify_pick_week(_pick_params[:week_id])
-    return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(_pick_params[:game_id]).started?
+    pick_game = Game.find(_pick_params[:game_id])
+    return forbidden("You cannot make a pick for a game that has already started" ) if pick_game.started?
+    return forbidden("You cannot make a pick for a postponed game" ) if pick_game.postponed
     week = Week.find(_pick_params[:week_id])
     @pick = @team.picks.where(week: week).first_or_initialize
     if @pick.persisted? # existing pick
@@ -63,7 +65,9 @@ class API::PicksController < API::BaseController
     unlocked_picks.each do |pick|
       pick_params = ActionController::Parameters.new(pick).permit(:week_id, :game_id, :week_type_id, :squad_id)
       _verify_pick_week(pick_params[:week_id])
-      return forbidden("You cannot make a pick for a game that has already started" ) if Game.find(pick_params[:game_id]).started?
+      pick_game = Game.find(pick_params[:game_id])
+      return forbidden("You cannot make a pick for a game that has already started" ) if pick_game.started?
+      return forbidden("You cannot make a pick for a postponed game" ) if pick_game.postponed
       @pick = @team.picks.new(pick_params)
       if !@pick.save
         error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)
