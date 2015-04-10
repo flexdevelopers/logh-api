@@ -1,4 +1,4 @@
-Congrats! <%= @user.display_name %> has invited <%= @invitation.email %> to join the "<%= @invitation.league.name %>" league.
+<%= "Congrats! #{@user.display_name} has invited #{@invitation.email} to join the '#{@invitation.league.name}' league (#{pluralize(@invitation.league.max_teams_per_user, 'entry')} max). " %>
 
 <% if @invitation.league.elimination  %>
 Your job, if you accept, is to pick a different <%= @invitation.league.season.season_type %> loser each week. That's it! However, choose wisely or you're toast.
@@ -22,6 +22,6 @@ A message was also included from <%= @user.display_name %>:
 *****
 
 <% end %>
-To join the "<%= @invitation.league.name %>" league, follow this link and hit the 'Join' button:
+To join the '<%= @invitation.league.name %>' league, follow this link and hit the 'Join' button:
 
 <%= "https://www.loseorgohome.com/#/season/#{@invitation.league.season_id}/league/#{@invitation.league.id}" %>
