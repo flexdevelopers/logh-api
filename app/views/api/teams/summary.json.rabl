@@ -73,7 +73,7 @@ node(:current_pick) do |team|
       {
           name: "#{pluralize(current_picks.count, 'pick')} | #{week_name}",
           abbrev: "#{pluralize(current_picks.count, 'pick')} | #{week_name}",
-          warning: ((@week && @week.id == team.current_week.id) && current_picks.count != team.league.max_picks_per_week && current_picks.count != team.current_week.games.count)
+          warning: ((@week && @week.id == team.current_week.id) && current_picks.count == 0)
       }
     else
       all_picks_count = team.picks.not_none.count
