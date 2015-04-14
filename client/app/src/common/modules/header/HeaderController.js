@@ -121,7 +121,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
     };
 
     $rootScope.$on("$viewContentLoaded", function() {
-      scrollToTop();
+//      scrollToTop();
     });
 
     /**
