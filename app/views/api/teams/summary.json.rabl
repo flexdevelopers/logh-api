@@ -17,8 +17,13 @@ node(:current_pick) do |team|
     if current_picks.any?
       if current_picks[0].locked? || team.coach_ids.include?(@user.id)
         if current_picks[0].game
+          if current_picks[0].game.note && current_picks[0].game.note.length > 0
+            name = "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.note}"
+          else
+            name = "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.start_display_short}"
+          end
           {
-              name: "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.start_display_short}",
+              name: name,
               abbrev: "#{current_picks[0].squad.abbrev} | #{week_name} | #{current_picks[0].game.start_display_short}",
               correct: current_picks[0].correct,
               tie: current_picks[0].game.tie?,
@@ -51,8 +56,13 @@ node(:current_pick) do |team|
       else
         incorrect_pick = team.picks.where(correct: false)[0]
         if incorrect_pick.game
+          if incorrect_pick.game.note && incorrect_pick.game.note.length > 0
+            name = "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.note}"
+          else
+            name = "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}"
+          end
           {
-              name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
+              name: name,
               abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
               locked: true,
               correct: false,

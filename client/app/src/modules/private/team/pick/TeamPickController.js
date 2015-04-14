@@ -35,8 +35,19 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
   };
 
   $scope.starts = function(game) {
-    var startsLabel = (game.started) ? 'Started ' : 'Starts ';
-    startsLabel += dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT Z");
+    var startsLabel = '';
+    if (game.note && game.note.length > 0) {
+      startsLabel += game.note + ' - ';
+    }
+    if (game.tbd) {
+      startsLabel += 'TBD';
+    } else {
+      startsLabel += (game.started) ? 'Started ' : 'Starts ';
+      startsLabel += dateUtils.dateFormat(game.starts_at, "ddd, mmm d h:MM TT Z");
+    }
+    if (game.if_necessary) {
+      startsLabel += ' *If Necessary';
+    }
     if (game.postponed) {
       startsLabel += ' [ *PP ]';
     }

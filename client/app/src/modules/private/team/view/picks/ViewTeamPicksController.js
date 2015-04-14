@@ -34,8 +34,6 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
 
   $scope.selectedWeek = _.find($scope.leagueWeeks, function(leagueWeek) { return leagueWeek.slug === $scope.selectedWeekSlug });
 
-  $scope.dateFormat = dateUtils.dateFormat;
-
   $scope.correctPickCount = function(picks) {
     var correctPicks = _.filter(picks, function(pick) {
       return pick.correct;
@@ -78,6 +76,22 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
       status = 'unlock';
     }
     return status;
+  };
+
+  $scope.pickMeta = function(pick) {
+    var meta = pick.week_name;
+    if (pick.game.tbd) {
+      meta += ' | TBD';
+    } else {
+      meta += ' | ' + dateUtils.dateFormat(pick.game.start, "mmm d") + ' | ' + dateUtils.dateFormat(pick.game.start, "h:MM TT Z");
+    }
+    if (pick.game.postponed) {
+      meta += ' | *PP';
+    }
+    if (pick.game.if_necessary) {
+      meta += ' | *If necessary';
+    }
+    return meta;
   };
 
   /**

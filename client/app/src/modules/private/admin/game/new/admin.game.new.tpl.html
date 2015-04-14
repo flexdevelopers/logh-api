@@ -7,6 +7,10 @@
   <hr>
   <form name="newGameForm" role="form" novalidate>
     <div class="form-group">
+      <label class="control-label" for="note">Note:</label>
+      <input id="note" name="note" type="text" class="form-control" ng-model="newGameData.note">
+    </div>
+    <div class="form-group">
       <label class="control-label" for="visitingSquad">Visiting Squad:</label>
       <select id="visitingSquad" name="visitingSquad" class="form-control" ng-model="newGameData.visiting_squad_id" ng-options="squad.id as squad.name for squad in squads"></select>
     </div>
@@ -27,8 +31,12 @@
           <datetimepicker data-ng-model="newGameData.starts_at" data-on-set-time="closeStartsAt()" data-datetimepicker-config="{ minuteStep: 1 }"/>
         </ul>
       </div>
-      <!--<input id="gameTime" name="gameTime" type="text" class="form-control" ng-model="newGameData.starts_at" required>-->
-      <!--<small>2014-12-07T13:00:00.000-07:00</small>-->
+    </div>
+    <div class="form-group">
+        <input id="tbd" name="tbd" type="checkbox" ng-model="newGameData.tbd"> TBD
+    </div>
+    <div class="form-group">
+        <input id="if_necessary" name="if_necessary" type="checkbox" ng-model="newGameData.if_necessary"> If Necessary
     </div>
   </form>
 </div>

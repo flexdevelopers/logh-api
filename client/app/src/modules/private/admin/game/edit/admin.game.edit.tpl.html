@@ -21,6 +21,12 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="note" class="col-sm-6 control-label">Note:</label>
+      <div class="col-sm-6">
+        <input id="note" name="note" type="text" class="form-control" ng-model="gameData.note">
+      </div>
+    </div>
+    <div class="form-group">
       <label for="visitingSquad" class="col-sm-6 control-label">Visiting Squad:</label>
       <div class="col-sm-6">
         <select id="visitingSquad" name="visitingSquad" class="form-control" ng-model="gameData.visiting_squad_id" ng-options="visitingSquad.id as visitingSquad.name for visitingSquad in squads"></select>
@@ -55,12 +61,6 @@
     <a ng-show="showOptions" ng-click="showOptions = false">Hide Options</a>
     <div ng-show="showOptions">
       <div class="form-group">
-        <label for="postponed" class="col-sm-6 control-label">Postponed:</label>
-        <div class="col-sm-6">
-          <input id="postponed" name="postponed" type="checkbox" ng-model="gameData.postponed">
-        </div>
-      </div>
-      <div class="form-group">
         <label for="shootout" class="col-sm-6 control-label">Shootout:</label>
         <div class="col-sm-6">
           <input id="shootout" name="shootout" type="checkbox" ng-model="gameData.shootout">
@@ -76,6 +76,24 @@
         <label for="innings" class="col-sm-6 control-label">Innings:</label>
         <div class="col-sm-6">
           <input id="innings" name="innings" type="number" class="form-control" ng-model="gameData.innings" select-on-click required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="postponed" class="col-sm-6 control-label">Postponed:</label>
+        <div class="col-sm-6">
+          <input id="postponed" name="postponed" type="checkbox" ng-model="gameData.postponed">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="tbd" class="col-sm-6 control-label">TBD:</label>
+        <div class="col-sm-6">
+          <input id="tbd" name="tbd" type="checkbox" ng-model="gameData.tbd">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="if_necessary" class="col-sm-6 control-label">If Necessary:</label>
+        <div class="col-sm-6">
+          <input id="if_necessary" name="if_necessary" type="checkbox" ng-model="gameData.if_necessary">
         </div>
       </div>
     </div>

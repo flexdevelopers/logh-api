@@ -6,9 +6,12 @@ var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInst
 
   $scope.newGameData = {
     week_id: week.id,
+    note: '',
     home_squad_id: squads.data[0].id,
     visiting_squad_id: squads.data[0].id,
-    starts_at: (lastGame) ? lastGame.starts_at : moment().format()
+    starts_at: (lastGame) ? lastGame.starts_at : moment().format(),
+    tbd: false,
+    if_necessary: false
   };
 
   $scope.closeStartsAt = function() {

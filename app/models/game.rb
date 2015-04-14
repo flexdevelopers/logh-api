@@ -14,6 +14,8 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_id, presence: true
   validates :home_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :tbd, inclusion: { in: [true, false] }
+  validates :if_necessary, inclusion: { in: [true, false] }
   validates :postponed, inclusion: { in: [true, false] }
   validates :complete, inclusion: { in: [true, false] }
 
@@ -30,14 +32,24 @@ class Game < ActiveRecord::Base
   end
 
   def start_display
-    display = "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
+    if self.tbd
+      display = 'TBD'
+    else
+      display = "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
+    end
     display += " *PP" if self.postponed
+    display += " *If necessary" if self.if_necessary
     display
   end
 
   def start_display_short
-    display = "#{starts_at.strftime("%b %-d")}"
+    if self.tbd
+      display = 'TBD'
+    else
+      display = "#{starts_at.strftime("%b %-d")}"
+    end
     display += " *PP" if self.postponed
+    display += " *If necessary" if self.if_necessary
     display
   end
 
@@ -62,7 +74,7 @@ class Game < ActiveRecord::Base
   end
 
   def started?
-    self.starts_at <= Time.zone.now
+    self.starts_at <= Time.zone.now && !self.tbd
   end
 
   def week_type_id
