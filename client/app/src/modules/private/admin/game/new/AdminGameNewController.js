@@ -10,6 +10,7 @@ var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInst
     home_squad_id: squads.data[0].id,
     visiting_squad_id: squads.data[0].id,
     starts_at: (lastGame) ? lastGame.starts_at : moment().format(),
+    playoff: false,
     tbd: false,
     if_necessary: false
   };

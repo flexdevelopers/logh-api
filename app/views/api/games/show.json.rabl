@@ -1,5 +1,5 @@
 object @game
-attributes :id, :note, :starts_at, :week_id, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score, :innings, :overtimes, :shootout, :postponed, :tbd, :if_necessary, :complete
+attributes :id, :note, :starts_at, :week_id, :home_squad_id, :visiting_squad_id, :home_squad_score, :visiting_squad_score, :innings, :overtimes, :shootout, :postponed, :tbd, :if_necessary, :playoff, :complete
 node(:started) { |game| game.started? }
 node(:display) { |game| game.display }
 node(:week_name) { |game| game.week.name }

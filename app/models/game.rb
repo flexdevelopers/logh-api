@@ -16,6 +16,7 @@ class Game < ActiveRecord::Base
   validates :visiting_squad_score, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :tbd, inclusion: { in: [true, false] }
   validates :if_necessary, inclusion: { in: [true, false] }
+  validates :playoff, inclusion: { in: [true, false] }
   validates :postponed, inclusion: { in: [true, false] }
   validates :complete, inclusion: { in: [true, false] }
 
@@ -100,7 +101,7 @@ class Game < ActiveRecord::Base
       if home_squad_score < visiting_squad_score
         self.update_column(:loser_squad_id, home_squad.id)
         visiting_squad.update_column(:wins, visiting_squad.wins + 1)
-        if season_type == 'NHL'
+        if season_type == 'NHL' && !self.playoff
           if self.shootout || self.overtimes > 0
             home_squad.update_column(:ties, home_squad.ties + 1)
           else
