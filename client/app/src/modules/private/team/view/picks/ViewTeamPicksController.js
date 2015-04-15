@@ -80,16 +80,18 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
 
   $scope.pickMeta = function(pick) {
     var meta = pick.week_name;
-    if (pick.game.tbd) {
-      meta += ' | TBD';
-    } else {
-      meta += ' | ' + dateUtils.dateFormat(pick.game.start, "mmm d") + ' | ' + dateUtils.dateFormat(pick.game.start, "h:MM TT Z");
-    }
-    if (pick.game.postponed) {
-      meta += ' | *PP';
-    }
-    if (pick.game.if_necessary) {
-      meta += ' | *If necessary';
+    if (pick.game) {
+      if (pick.game.tbd) {
+        meta += ' | TBD';
+      } else {
+        meta += ' | ' + dateUtils.dateFormat(pick.game.start, "mmm d") + ' | ' + dateUtils.dateFormat(pick.game.start, "h:MM TT Z");
+      }
+      if (pick.game.postponed) {
+        meta += ' | *PP';
+      }
+      if (pick.game.if_necessary) {
+        meta += ' | *If necessary';
+      }
     }
     return meta;
   };
