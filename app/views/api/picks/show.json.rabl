@@ -26,7 +26,6 @@ node(:game) do |pick|
     else
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
-    display.prepend "#{pick.game.note} - " if pick.game.note && pick.game.note.length > 0
     {
         id: pick.game.id,
         display: display,
@@ -34,7 +33,8 @@ node(:game) do |pick|
         if_necessary: pick.game.if_necessary,
         start: pick.game.starts_at,
         postponed: pick.game.postponed,
-        tie: pick.game.tie?
+        tie: pick.game.tie?,
+        note: pick.game.note
     }
   else
     {
