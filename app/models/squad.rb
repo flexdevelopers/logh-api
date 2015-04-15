@@ -15,7 +15,7 @@ class Squad < ActiveRecord::Base
       record_string = "#{self.wins}-#{self.ties}-#{self.losses}" # weird soccer W-T-L
     else
       record_string = "#{self.wins}-#{self.losses}"
-      record_string += "-#{self.ties}" if self.ties > 0 || squad_type == 'NHL'
+      record_string += "-#{self.ties}" if self.ties > 0
     end
     record_string
   end
