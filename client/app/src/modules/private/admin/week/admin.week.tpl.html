@@ -17,7 +17,7 @@
       <div class="game-display-name col-sm-6 col-md-6">
         <i class="fa fa-check fa-fw" ng-show="game.complete" title="Game complete"></i>
         <i class="fa fa-clock-o fa-fw" style="color: #ff472e;" ng-show="game.postponed && !game.complete" title="Game postponed"></i>
-        {{game.display}}<br>
+        <span ng-show="game.playoff">*</span>{{game.display}}<br>
         <span class="game-starts"><span ng-show="game.tbd">TBD</span><span ng-show="!game.tbd">{{dateFormat(game.starts_at, "ddd, mmm d yyyy h:MM TT (Z)")}}</span><span ng-show="game.if_necessary"> *If Necessary</span><span ng-show="game.postponed"> | *PP</span></span></div>
       <div class="game-score col-sm-6 col-md-6">
         <span ng-show="game.note.length > 0">{{game.note}} - </span>{{game.squads[0].name}}: {{game.visiting_squad_score}} | {{game.squads[1].name}}: {{game.home_squad_score}} <span>{{game.ot_display}}</span><br>
