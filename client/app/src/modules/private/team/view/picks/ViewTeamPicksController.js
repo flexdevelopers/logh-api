@@ -81,10 +81,10 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
   $scope.pickMeta = function(pick) {
     var meta = pick.week_name;
     if (pick.game) {
-      if (pick.game.tbd) {
-        meta += ' | TBD';
-      } else if (pick.game.note && pick.game.note.length > 0) {
+      if (pick.game.note && pick.game.note.length > 0) {
         meta += ' | ' + pick.game.note;
+      } else if (pick.game.tbd) {
+        meta += ' | TBD';
       } else {
         meta += ' | ' + dateUtils.dateFormat(pick.game.start, "mmm d") + ' | ' + dateUtils.dateFormat(pick.game.start, "h:MM TT Z");
       }
