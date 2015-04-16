@@ -36,12 +36,6 @@ node(:game) do |pick|
         tie: pick.game.tie?,
         note: pick.game.note
     }
-  else
-    {
-        id: 0,
-        display: "",
-        start: ""
-    }
   end
 end
 node(:squad) do |pick|
