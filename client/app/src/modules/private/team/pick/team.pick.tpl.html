@@ -10,5 +10,16 @@
   </div>
 </div>
 <div class="pick-message alert alert-info" ng-show="isCoach(team)"><p class="pick-message-text">{{pickMessage(team, week)}}</p></div>
+<div class="picks-tab">
+  <ul class="nav nav-tabs">
+    <li class="active"><a>Picks [ {{pickCount}} ]</a></li>
+  </ul>
+  <div class="input-group custom-search-form filter-league-join">
+    <input type="text" class="form-control" placeholder="Search games..." ng-model="gameQuery">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+    </span>
+  </div>
+</div>
 <div ui-view="pickContent" class="pick-content"></div>
 

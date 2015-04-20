@@ -25,6 +25,26 @@
     }
   }
 
+  .pick-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .picks-tab {
+    position: relative;
+    margin-bottom: -1px;
+    .custom-search-form {
+      position: relative;
+      width: 100%;
+      padding: 10px;
+      background-color: #ddd;
+    }
+  }
+
+  .filter-picks {
+    width: 100%;
+  }
+
   .week-games {
 
     .game-row {
@@ -32,8 +52,8 @@
     }
 
     .game-display {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 2px;
+      margin-bottom: 2px;
+      margin-left: 2px;
     }
 
     &.list-group {
@@ -107,7 +127,6 @@
       }
     }
   }
-
 }
 
 

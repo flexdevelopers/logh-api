@@ -1,5 +1,9 @@
 var TeamPickController = function(team, week, games, picks, $rootScope, $scope, $log, $location, userModel, dateUtils) {
 
+  var updatePickCount = function(picks) {
+    $scope.pickCount = (picks) ? picks.length : 0;
+  };
+
   $scope.team = team.data;
 
   $scope.week = week.data;
@@ -7,8 +11,11 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
   $scope.games = games.data;
 
   $scope.picks = picks.data;
+  updatePickCount($scope.picks);
 
   $scope.savePicksEnabled = false;
+
+  $scope.gameQuery = '';
 
   $scope.pickMessage = function(team, week) {
     var msg = '';
@@ -63,8 +70,19 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
     return team.coach_ids.indexOf(userModel.user.id) > -1;
   };
 
-  $scope.$on('TeamPickController::enableSavePicks', function(event) {
+  $scope.search = function(game) {
+    var match = false;
+    _.each(game.squads, function(squad) {
+      if (squad.name.toLowerCase().indexOf($scope.gameQuery.toLowerCase()) != -1) {
+        match = true;
+      }
+    });
+    return match;
+  };
+
+  $scope.$on('TeamPickController::picksChanged', function(event, args) {
     $scope.savePicksEnabled = true;
+    updatePickCount(args.picks);
   });
 
   /**

@@ -1,7 +1,6 @@
-<hr>
-<div ng-repeat-start="game in games" class="week-games list-group">
+<div ng-repeat="game in games | filter:search:strict" class="week-games list-group">
   <div class="row">
-    <div class="col-sm-12 col-md-12"><h5 class="game-display">{{game.display}}<br><small class="start-date">{{starts(game)}}</small></h5></div>
+    <div class="col-sm-12 col-md-12"><h5 class="game-display"><small class="start-date">{{starts(game)}}</small></h5></div>
   </div>
   <div class="row game-squads">
     <div class="col-sm-6 col-md-6 game-squad" ng-repeat="squad in game.squads">
@@ -14,7 +13,9 @@
     </div>
   </div>
 </div>
-<div ng-repeat-end></div>
+<div class="alert alert-info" ng-show="(games | filter:search:strict).length == 0">
+  No games found
+</div>
 <button type="button" class="save-pick-btn btn btn-primary" ng-show="isCoach(team)" ng-disabled="!savePicksEnabled" ng-click="savePicks()">Save Picks</button>
 
 

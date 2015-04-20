@@ -48,7 +48,6 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
     if (!_.isUndefined(pick) && pick.locked) {
       return; // no toggling locked picks
     }
-    $rootScope.$broadcast('TeamPickController::enableSavePicks');
     if (!_.isUndefined(pick)) {
       // if a pick exists already, then you are attempting to de-select it
       removePick(pick);
@@ -56,6 +55,7 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
       removeGamePicks(game); // no 2 picks for the same game
       addPick(game, squad);
     }
+    $rootScope.$broadcast('TeamPickController::picksChanged', { picks: $scope.picks });
   };
 
   $scope.savePicks = function() {
