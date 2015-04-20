@@ -113,7 +113,7 @@ class Game < ActiveRecord::Base
       elsif visiting_squad_score < home_squad_score
         self.update_column(:loser_squad_id, visiting_squad.id)
         home_squad.update_column(:wins, home_squad.wins + 1)
-        if season_type == 'NHL'
+        if season_type == 'NHL' && !self.playoff
           if self.shootout || self.overtimes > 0
             visiting_squad.update_column(:ties, visiting_squad.ties + 1)
           else
