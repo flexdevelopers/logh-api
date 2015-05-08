@@ -11,7 +11,7 @@ All requests (except for creating a user or creating a session (aka logging in))
 
 And then you can do this, for example:
 
-- curl -X POST -H "Content-Type: application/json" -H "Authorization: biglongnastytoken" -d '{"league":{"name":"my league","start_week_id":"4","password":"foobar","password_confirmation":"foobar"}}' http://www.loseorgohome.com/api/seasons/9/leagues
+- curl -X POST -H "Content-Type: application/json" -H "Authorization: biglongnastytoken" -d '{"league":{"name":"my league","start_week_id":"4"}}' http://www.loseorgohome.com/api/seasons/9/leagues
 
 #### Non-admin endpoints:
 
@@ -116,15 +116,3 @@ And then you can do this, for example:
 * GET        /api/admin/leagues                                 [ all leagues ]
 
 
-#### Notes:
-
-We all got it coming, kid.
-
-##### Heroku
-
-'heroku config' (to see heroku config settings)
-
-##### Redis
-
-redis-cli -h my-host -p 1234 -a mypassword
-KEYS * (to see the keys)
