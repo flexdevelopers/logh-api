@@ -38,7 +38,7 @@ class Game < ActiveRecord::Base
     else
       display = "#{starts_at.strftime("%a, %b %e %l:%M %p %Z")}"
     end
-    display += " *PP" if self.postponed
+    display += " *PPD" if self.postponed
     display += " *If necessary" if self.if_necessary
     display
   end
@@ -49,7 +49,7 @@ class Game < ActiveRecord::Base
     else
       display = "#{starts_at.strftime("%b %-d")}"
     end
-    display += " *PP" if self.postponed
+    display += " *PPD" if self.postponed
     display += " *If necessary" if self.if_necessary
     display
   end

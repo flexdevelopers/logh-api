@@ -89,7 +89,7 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
         meta += ' | ' + dateUtils.dateFormat(pick.game.start, "mmm d") + ' | ' + dateUtils.dateFormat(pick.game.start, "h:MM TT Z");
       }
       if (pick.game.postponed) {
-        meta += ' | *PP';
+        meta += ' | *PPD';
       }
       if (pick.game.if_necessary) {
         meta += ' | *If necessary';

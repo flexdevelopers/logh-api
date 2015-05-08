@@ -56,7 +56,7 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
       startsLabel += ' *If Necessary';
     }
     if (game.postponed) {
-      startsLabel += ' [ *PP ]';
+      startsLabel += ' [ *PPD ]';
     }
     return startsLabel;
   };
