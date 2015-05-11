@@ -17,6 +17,8 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   $scope.dateFormat = dateUtils.dateFormat;
 
+  $scope.gameQuery = '';
+
   $scope.editWeek = function(week) {
 
     var modalInstance = $modal.open({
@@ -96,7 +98,6 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   };
 
-
   $scope.confirmSendReminder = function(week) {
     var modalInstance = $modal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
@@ -131,6 +132,16 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
       $log.debug('Complete week cancelled...');
       messageModel.setMessage({ type: 'warning', content: 'Week complete cancelled' }, false);
     });
+  };
+
+  $scope.search = function(game) {
+    var match = false;
+    _.each(game.squads, function(squad) {
+      if (squad.name.toLowerCase().indexOf($scope.gameQuery.toLowerCase()) != -1) {
+        match = true;
+      }
+    });
+    return match;
   };
 
   /**
