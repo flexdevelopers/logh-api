@@ -81,38 +81,3 @@ And then you can do this, for example:
 * GET         /api/games/current                                [ current games ]
 * GET         /api/weeks/:week_id/games                         [ week games ]
 * GET         /api/weeks/:week_id/games/:id                     [ show game ]
-
-#### Admin endpoints:
-
-##### Users
----
-* GET         /api/admin/users                                  [ all users ]
-* GET         /api/admin/users/:id                              [ show user ]
-* PATCH/PUT   /api/admin/users/:id                              [ update user ] { email*, first_name*, last_name*, password, password_confirmation }
-* DELETE      /api/admin/users/:id                              [ destroy user ]
-
-##### Seasons
----
-* GET         /api/admin/seasons/                               [ all seasons ]
-* POST        /api/admin/seasons/                               [ create season ] { name* }
-* GET         /api/admin/seasons/:id                            [ show season ]
-* PATCH/PUT   /api/admin/seasons/:id                            [ update season ] { name* }
-* DELETE      /api/admin/seasons/:id                            [ destroy season ]
-
-##### Weeks
----
-* POST        /api/admin/seasons/:season_id/weeks               [ create week ] { number*, starts_at*, week_type_id*, complete }
-* PATCH/PUT   /api/admin/seasons/:season_id/weeks/:id           [ update week ] { number*, starts_at*, week_type_id*, complete }
-* DELETE      /api/admin/seasons/:season_id/weeks/:id           [ destroy week ]
-
-##### Games
----
-* POST        /api/admin/weeks/:week_id/games                   [ create game ] { starts_at*, home_squad_id*, visiting_squad_id*, home_squad_score, visiting_squad_score }
-* PATCH/PUT   /api/admin/weeks/:week_id/games/:id               [ update game ] { starts_at*, home_squad_id*, visiting_squad_id*, home_squad_score, visiting_squad_score }
-* DELETE      /api/admin/weeks/:week_id/games/:id               [ destroy game ]
-
-##### Leagues
----
-* GET        /api/admin/leagues                                 [ all leagues ]
-
-
