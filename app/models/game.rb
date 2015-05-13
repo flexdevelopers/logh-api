@@ -72,7 +72,7 @@ class Game < ActiveRecord::Base
 
   def tie?
     # postponed games that are not made up before the week ends will be considered a tie
-    (self.complete && (home_squad_score == visiting_squad_score)) || (self.postponed && self.week.complete)
+    (self.complete && (home_squad_score == visiting_squad_score)) || (!self.complete && self.postponed && self.week.complete)
   end
 
   def started?
