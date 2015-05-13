@@ -21,8 +21,10 @@ node(:squad_id) do |pick|
 end
 node(:game) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
-    if pick.locked? && pick.game.complete
+    if pick.game.complete
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{pick.game.ot_display}"
+    elsif pick.game.tie?
+      display = "[ N/A ]" # this is a fake tie. aka a ppd game that never got resolved
     else
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
