@@ -21,6 +21,24 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
     return false;
   };
 
+  $scope.pickStatus = function(pick) {
+    var status = '';
+    if (pick.warning === true) {
+      status = 'warning';
+    } else if (pick.correct === true) {
+      status = 'check';
+    } else if (pick.tie === true) {
+      status = 'minus';
+    } else if (pick.correct === false) {
+      status = 'times';
+    } else if (pick.locked) {
+      status = 'lock';
+    } else {
+      status = 'unlock';
+    }
+    return status;
+  };
+
   /**
    * Invoked on startup, like a constructor.
    */
