@@ -20,8 +20,9 @@ class Pick < ActiveRecord::Base
   scope :not_none, -> { joins(:squad).where('squads.none = ?', false) }
 
   def locked?
-    # no game means its a null pick and they are locked
-    !game || game.started? || game.postponed
+    !game || # no game means its a null pick and those picks are locked
+    (game.started? && !game.postponed) || # people should be able to unpick postponed games
+    game.week.complete # if the week is complete, the pick is locked....end of story
   end
 
   def coach_ids

@@ -12,8 +12,7 @@ League
 
 Game
 
-- Don't create games until you are sure they will be played. i.e. playoff games
-- Don't mark games as postponed BEFORE the game's starts_at. This would lock any picks for that game. Give people the opportunity to change their pick before the game was supposed to start.
+- Once you know a game is postponed, mark it as postponed. If the game is rescheduled during that week, change the start date and remove PPD, else leave PPD and don't worry about it.
 - Make sure to mark playoff games as playoff so NHL can compute record the right way (no ties)
 - when a playoff round starts, blank out the records for teams that play in a series
 

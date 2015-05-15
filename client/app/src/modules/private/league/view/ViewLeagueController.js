@@ -287,7 +287,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
       status = 'warning';
     } else if (pick.correct === true) {
       status = 'check';
-    } else if (pick.tie === true) {
+    } else if (pick.tie === true || pick.incomplete === true) {
       status = 'minus';
     } else if (pick.correct === false) {
       status = 'times';

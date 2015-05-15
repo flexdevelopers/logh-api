@@ -23,19 +23,20 @@ node(:game) do |pick|
   if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
     if pick.game.complete
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{pick.game.ot_display}"
-    elsif pick.game.tie?
-      display = "[ N/A ]" # this is a fake tie. aka a ppd game that never got resolved
+    elsif pick.game.incomplete?
+      display = "[ Incomplete ]" # this is an incomplete game. this happens to ppd games that never get resolved.
     else
       display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
     end
     {
         id: pick.game.id,
         display: display,
-        tbd: pick.game.tbd,
-        if_necessary: pick.game.if_necessary,
         start: pick.game.starts_at,
+        tbd: pick.game.tbd,
         postponed: pick.game.postponed,
+        if_necessary: pick.game.if_necessary,
         tie: pick.game.tie?,
+        incomplete: pick.game.incomplete?,
         note: pick.game.note
     }
   end

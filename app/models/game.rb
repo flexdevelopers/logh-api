@@ -71,12 +71,15 @@ class Game < ActiveRecord::Base
   end
 
   def tie?
-    # postponed games that are not made up before the week ends will be considered a tie
-    (self.complete && (home_squad_score == visiting_squad_score)) || (!self.complete && self.postponed && self.week.complete)
+    self.complete && (home_squad_score == visiting_squad_score)
   end
 
   def started?
     self.starts_at <= Time.zone.now && !self.tbd
+  end
+
+  def incomplete?
+    !self.complete && self.week.complete
   end
 
   def week_type_id

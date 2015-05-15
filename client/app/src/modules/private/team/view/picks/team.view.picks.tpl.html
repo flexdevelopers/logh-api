@@ -13,7 +13,7 @@
 </div>
 <div class="team-container" style="clear:both;">
   <div class="team-picks list-group">
-    <a ng-repeat="pick in picks | weekPicksFilter:selectedWeek:teamData.league.elimination" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false || (pick.game && pick.game.tie === true)}">
+    <a ng-repeat="pick in picks | weekPicksFilter:selectedWeek:teamData.league.elimination" class="team-pick list-group-item" ng-click="makePick(teamData, pick)" ng-class="{'locked': !isCoach(teamData) || pick.locked, 'incorrect': pick.correct === false || (pick.game && pick.game.incomplete === true)}">
       <div class="row">
         <div class="week-name col-sm-7 col-md-7">
           <i class="fa fa-{{pickStatus(pick)}} fa-fw pick-icon"></i> <span class="pick-squad"><span class="pick-squad-name">[ {{pick.squad.name}} ]</span><span class="pick-squad-abbrev">[ {{pick.squad.abbrev}} ]</span></span> <span class="game-start">{{pickMeta(pick)}}</span></span>

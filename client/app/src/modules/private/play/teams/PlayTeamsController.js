@@ -27,7 +27,7 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
       status = 'warning';
     } else if (pick.correct === true) {
       status = 'check';
-    } else if (pick.tie === true) {
+    } else if (pick.game && (pick.game.tie === true || pick.game.incomplete === true)) {
       status = 'minus';
     } else if (pick.correct === false) {
       status = 'times';

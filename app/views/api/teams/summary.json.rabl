@@ -27,6 +27,7 @@ node(:current_pick) do |team|
               abbrev: "#{current_picks[0].squad.abbrev} | #{week_name} | #{current_picks[0].game.start_display_short}",
               correct: current_picks[0].correct,
               tie: current_picks[0].game.tie?,
+              incomplete: current_picks[0].game.incomplete?,
               locked: current_picks[0].locked?
           }
         else
@@ -42,7 +43,6 @@ node(:current_pick) do |team|
             name: "Hidden | #{week_name}",
             abbrev: "Hidden | #{week_name}",
             correct: current_picks[0].correct,
-            tie: false,
             locked: current_picks[0].locked?
         }
       end
