@@ -31,10 +31,12 @@ var PlayTeamsController = function(teams, $scope, $log, $stateParams, $location)
       status = 'minus';
     } else if (pick.correct === false) {
       status = 'times';
-    } else if (pick.locked) {
+    } else if (pick.locked === true) {
       status = 'lock';
-    } else {
+    } else if (pick.locked === false) {
       status = 'unlock';
+    } else {
+      status = 'th-list';
     }
     return status;
   };

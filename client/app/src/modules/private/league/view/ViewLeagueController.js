@@ -291,10 +291,12 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
       status = 'minus';
     } else if (pick.correct === false) {
       status = 'times';
-    } else if (pick.locked) {
+    } else if (pick.locked === true) {
       status = 'lock';
-    } else {
+    } else if (pick.locked === false) {
       status = 'unlock';
+    } else {
+      status = 'th-list';
     }
     return status;
   };
