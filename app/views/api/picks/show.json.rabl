@@ -1,13 +1,10 @@
 object @pick
 attributes :id, :team_id, :week_id, :week_type_id, :correct
 node(:locked) { |pick| pick.locked? }
-node(:week_name) { |pick| pick.week.name }
-node(:week_slug) { |pick| pick.week.slug }
-node(:week_date) { |pick| pick.week.starts_at }
-node(:week_type) { |pick| pick.week_type.description }
 node(:game_id) do |pick|
-  if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
-    pick.game.id
+  game = pick.game
+  if game && (pick.locked? || pick.coach_ids.include?(@user.id))
+    game.id
   else
     0
   end
@@ -19,35 +16,48 @@ node(:squad_id) do |pick|
     0
   end
 end
+node(:week) do |pick|
+  week = pick.week
+  week_type = pick.week_type
+  {
+      name: week.name,
+      slug: week.slug,
+      date: week.starts_at,
+      type: week_type.description
+  }
+end
 node(:game) do |pick|
-  if pick.game && (pick.locked? || pick.coach_ids.include?(@user.id))
-    if pick.game.complete
-      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad_score} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad_score} ] #{pick.game.ot_display}"
-    elsif pick.game.incomplete?
+  game = pick.game
+  if game && (pick.locked? || pick.coach_ids.include?(@user.id))
+    squads = game.squads
+    if game.complete
+      display = "#{squads[0][:short]} [ #{game.visiting_squad_score} ] @ #{squads[1][:short]} [ #{game.home_squad_score} ] #{game.ot_display}"
+    elsif game.incomplete?
       display = "[ Incomplete ]" # this is an incomplete game. this happens to ppd games that never get resolved.
     else
-      display = "#{pick.game.squads[0][:short]} [ #{pick.game.visiting_squad.record} ] @ #{pick.game.squads[1][:short]} [ #{pick.game.home_squad.record} ]"
+      display = "#{squads[0][:short]} [ #{game.visiting_squad.record} ] @ #{squads[1][:short]} [ #{game.home_squad.record} ]"
     end
     {
-        id: pick.game.id,
+        id: game.id,
         display: display,
-        start: pick.game.starts_at,
-        tbd: pick.game.tbd,
-        postponed: pick.game.postponed,
-        if_necessary: pick.game.if_necessary,
-        tie: pick.game.tie?,
-        incomplete: pick.game.incomplete?,
-        note: pick.game.note
+        start: game.starts_at,
+        tbd: game.tbd,
+        postponed: game.postponed,
+        if_necessary: game.if_necessary,
+        tie: game.tie?,
+        incomplete: game.incomplete?,
+        note: game.note
     }
   end
 end
 node(:squad) do |pick|
+  squad = pick.squad
   if pick.locked? || pick.coach_ids.include?(@user.id)
     {
-        id: pick.squad.id,
-        name: pick.squad.name,
-        abbrev: pick.squad.abbrev,
-        short: pick.squad.short
+        id: squad.id,
+        name: squad.name,
+        abbrev: squad.abbrev,
+        short: squad.short
     }
   else
     {

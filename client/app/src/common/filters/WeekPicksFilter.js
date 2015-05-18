@@ -7,12 +7,12 @@ var WeekPicksFilter = function() {
     if (elimination) {
       // for survivor leagues, gonna show picks up to the week you selected...
       weekPicks = _.filter(picks, function(pick) {
-        return moment(pick.week_date).isBefore(week.starts_at) || moment(pick.week_date).isSame(week.starts_at);
+        return moment(pick.week.date).isBefore(week.starts_at) || moment(pick.week.date).isSame(week.starts_at);
       });
     } else {
       // for pick'em leagues, gonna show ONLY picks for the week you selected...
       weekPicks = _.filter(picks, function(pick) {
-        return pick.week_slug == week.slug;
+        return pick.week.slug == week.slug;
       });
     }
     return weekPicks;

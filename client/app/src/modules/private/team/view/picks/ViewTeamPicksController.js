@@ -79,7 +79,7 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
   };
 
   $scope.pickMeta = function(pick) {
-    var meta = pick.week_name;
+    var meta = pick.week.name;
     if (pick.game) {
       if (pick.game.note && pick.game.note.length > 0) {
         meta += ' | ' + pick.game.note;
