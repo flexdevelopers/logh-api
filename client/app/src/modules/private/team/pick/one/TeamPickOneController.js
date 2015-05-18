@@ -53,15 +53,18 @@ var TeamPickOneController = function($scope, $log, pickService) {
   };
 
   $scope.pickStatus = function(game, squad) {
-    var status = '';
+    var status = '',
+      pick = getPick(game, squad);
     if (!_.isUndefined($scope.currentPick) && $scope.currentPick.game_id == game.id && $scope.currentPick.squad_id == squad.id) {
-      if ($scope.currentPick.correct === true) {
+      if (pick.correct === true) {
         status = 'check';
-      } else if ($scope.currentPick.correct === false) {
+      } else if (pick.game && (pick.game.tie === true || pick.game.incomplete === true)) {
+        status = 'minus';
+      } else if (pick.correct === false) {
         status = 'times';
-      } else if ($scope.currentPick.locked) {
+      } else if (pick.locked === true) {
         status = 'lock';
-      } else {
+      } else if (pick.locked === false) {
         status = 'unlock';
       }
     }

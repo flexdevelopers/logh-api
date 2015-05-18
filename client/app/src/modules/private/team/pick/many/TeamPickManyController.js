@@ -79,11 +79,13 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
     if (!_.isUndefined(pick)) {
       if (pick.correct === true) {
         status = 'check';
+      } else if (pick.game && (pick.game.tie === true || pick.game.incomplete === true)) {
+        status = 'minus';
       } else if (pick.correct === false) {
         status = 'times';
-      } else if (pick.locked) {
+      } else if (pick.locked === true) {
         status = 'lock';
-      } else {
+      } else if (pick.locked === false) {
         status = 'unlock';
       }
     }
