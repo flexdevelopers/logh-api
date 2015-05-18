@@ -37,8 +37,7 @@ class API::PicksController < API::BaseController
   def create
     _verify_pick_week(_pick_params[:week_id])
     pick_game = Game.find(_pick_params[:game_id])
-    return forbidden("You cannot make a pick for a game that has already started" ) if pick_game.started?
-    return forbidden("You cannot make a pick for a postponed game" ) if pick_game.postponed
+    return forbidden("You cannot make a pick for this game" ) if pick_game.locked?
     week = Week.find(_pick_params[:week_id])
     @pick = @team.picks.where(week: week).first_or_initialize
     if @pick.persisted? # existing pick
@@ -56,7 +55,7 @@ class API::PicksController < API::BaseController
     all_picks = params[:picks] || []
     # check to make sure they're not picking too many times
     return forbidden("You cannot make that many picks" ) if !_verify_pick_count(@team, @current_week, all_picks.length)
-    # delete all unlocked picks for this week
+    # delete all unlocked (this includes postponed) picks for this week
     @team.picks.not_locked.where(week: @current_week).readonly(false).destroy_all
     # now save the new unlocked picks
     unlocked_picks = all_picks.select do |pick|
@@ -66,8 +65,7 @@ class API::PicksController < API::BaseController
       pick_params = ActionController::Parameters.new(pick).permit(:week_id, :game_id, :week_type_id, :squad_id)
       _verify_pick_week(pick_params[:week_id])
       pick_game = Game.find(pick_params[:game_id])
-      return forbidden("You cannot make a pick for a game that has already started" ) if pick_game.started?
-      return forbidden("You cannot make a pick for a postponed game" ) if pick_game.postponed
+      return forbidden("You cannot make a pick for this game" ) if pick_game.locked?
       @pick = @team.picks.new(pick_params)
       if !@pick.save
         error(@pick.errors.full_messages.join(', '), WARNING, :unprocessable_entity)

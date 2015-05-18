@@ -43,7 +43,7 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
   };
 
   $scope.togglePick = function(game, squad) {
-    if (!$scope.isCoach($scope.team) || game.started) return;
+    if (!$scope.isCoach($scope.team) || game.locked) return;
     var pick = getPick(game, squad);
     if (!_.isUndefined(pick) && pick.locked) {
       return; // no toggling locked picks
@@ -67,7 +67,7 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
 
   $scope.isDisabled = function(game) {
     var isDisabled = false;
-    if (game.started || game.postponed) {
+    if (game.locked) {
       isDisabled = true;
     }
     return isDisabled;

@@ -46,7 +46,7 @@ var TeamPickOneController = function($scope, $log, pickService) {
 
   $scope.isDisabled = function(game, squad) {
     var isDisabled = false;
-    if (game.started || game.postponed || $scope.hasSquadBeenUsed(game, squad) || $scope.isCurrentPickLocked()) {
+    if (game.locked || $scope.hasSquadBeenUsed(game, squad) || $scope.isCurrentPickLocked()) {
       isDisabled = true;
     }
     return isDisabled;

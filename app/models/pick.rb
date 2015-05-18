@@ -15,14 +15,13 @@ class Pick < ActiveRecord::Base
 
   scope :correct, -> { where(correct: true) }
   scope :incorrect, -> { where(correct: false) }
-  scope :not_locked, -> { joins(:game).where('games.starts_at > ?', Time.zone.now) }
+  scope :not_locked, -> { joins(:game).where("games.starts_at > ? OR games.postponed = ?", Time.zone.now, true) }
 
   scope :not_none, -> { joins(:squad).where('squads.none = ?', false) }
 
   def locked?
     !game || # no game means its a null pick and those picks are locked
-    (game.started? && !game.postponed) || # people should be able to unpick postponed games
-    game.week.complete # if the week is complete, the pick is locked....end of story
+    game.locked? # if the game is locked...so is the pick...
   end
 
   def coach_ids

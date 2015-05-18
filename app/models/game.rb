@@ -70,6 +70,12 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def locked?
+    # people should be able to unpick postponed games that's why started games that are postponed are not locked
+    # if the week is complete, the game is locked....end of story
+    (self.started? && !self.postponed) || self.week.complete
+  end
+
   def tie?
     self.complete && (home_squad_score == visiting_squad_score)
   end
