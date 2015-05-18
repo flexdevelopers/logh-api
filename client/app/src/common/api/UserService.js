@@ -35,11 +35,11 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
       var promise = $http.delete(apiConfig.baseURL + 'sessions/destroy')
             .success(function(data) {
                 $log.debug("UserService: signout success");
-                if ($state.current.name == 'public.home') {
+                if ($state.current.name == 'public.signin') {
                     messageModel.setMessage(data.message, false);
                 } else {
                     messageModel.setMessage(data.message, true);
-                    $location.url('/');
+                    $state.go('public.signin');
                 }
                 return data;
             })
