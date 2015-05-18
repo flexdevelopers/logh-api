@@ -19,9 +19,11 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
       },
       correct: (!$scope.teamData.alive) ? false : null,
       locked: (!$scope.teamData.alive) ? true : false,
-      week_name: week.name,
-      week_slug: week.slug,
-      week_date: week.starts_at
+      week: {
+        name: week.name,
+        slug: week.slug,
+        date: week.starts_at
+      }
     };
     $scope.picks.push(pick);
   };
