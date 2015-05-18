@@ -15,35 +15,38 @@ node(:current_pick) do |team|
   week_name = @week ? @week.name : team.current_week.name
   if team.league.max_picks_per_week == 1
     if current_picks.any?
-      if current_picks[0].locked? || team.coach_ids.include?(@user.id)
-        if current_picks[0].game
-          if current_picks[0].game.note && current_picks[0].game.note.length > 0
-            name = "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.note}"
+      current_pick = current_picks[0] # can only make one pick, right?
+      current_pick_game = current_pick.game
+      current_pick_squad = current_pick.squad
+      if current_pick.locked? || team.coach_ids.include?(@user.id)
+        if current_pick_game
+          if current_pick_game.note && current_pick_game.note.length > 0
+            name = "#{current_pick_squad.short} | #{week_name} | #{current_pick_game.note}"
           else
-            name = "#{current_picks[0].squad.short} | #{week_name} | #{current_picks[0].game.start_display_short}"
+            name = "#{current_pick_squad.short} | #{week_name} | #{current_pick_game.start_display_short}"
           end
           {
               name: name,
-              abbrev: "#{current_picks[0].squad.abbrev} | #{week_name} | #{current_picks[0].game.start_display_short}",
-              correct: current_picks[0].correct,
-              tie: current_picks[0].game.tie?,
-              incomplete: current_picks[0].game.incomplete?,
-              locked: current_picks[0].locked?
+              abbrev: "#{current_pick_squad.abbrev} | #{week_name} | #{current_pick_game.start_display_short}",
+              correct: current_pick.correct,
+              tie: current_pick_game.tie?,
+              incomplete: current_pick_game.incomplete?,
+              locked: current_pick.locked?
           }
         else
           {
-              name: "#{current_picks[0].squad.short} | #{week_name}",
-              abbrev: "#{current_picks[0].squad.abbrev} | #{week_name}",
-              correct: current_picks[0].correct,
-              locked: current_picks[0].locked?
+              name: "#{current_pick_squad.short} | #{week_name}",
+              abbrev: "#{current_pick_squad.abbrev} | #{week_name}",
+              correct: current_pick.correct,
+              locked: current_pick.locked?
           }
         end
       else
         {
             name: "Hidden | #{week_name}",
             abbrev: "Hidden | #{week_name}",
-            correct: current_picks[0].correct,
-            locked: current_picks[0].locked?
+            correct: current_pick.correct,
+            locked: current_pick.locked?
         }
       end
     else
@@ -54,24 +57,27 @@ node(:current_pick) do |team|
             warning: !@week || @week.id == team.current_week.id
         }
       else
-        incorrect_pick = team.picks.where(correct: false)[0]
-        if incorrect_pick.game
-          if incorrect_pick.game.note && incorrect_pick.game.note.length > 0
-            name = "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.note}"
+        incorrect_pick = team.picks.where(correct: false)[0] # if team is dead, what's the first incorrect pick? we'll show that...
+        incorrect_pick_game = incorrect_pick.game
+        incorrect_pick_squad = incorrect_pick.squad
+        incorrect_pick_week = incorrect_pick.week
+        if incorrect_pick_game
+          if incorrect_pick_game.note && incorrect_pick_game.note.length > 0
+            name = "#{incorrect_pick_squad.short} | #{incorrect_pick_week.name} | #{incorrect_pick_game.note}"
           else
-            name = "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}"
+            name = "#{incorrect_pick_squad.short} | #{incorrect_pick_week.name} | #{incorrect_pick_game.start_display_short}"
           end
           {
               name: name,
-              abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name} | #{incorrect_pick.game.start_display_short}",
+              abbrev: "#{incorrect_pick_squad.abbrev} | #{incorrect_pick_week.name} | #{incorrect_pick_game.start_display_short}",
               locked: true,
               correct: false,
-              tie: incorrect_pick.game.tie?
+              tie: incorrect_pick_game.tie?
           }
         else
           {
-              name: "#{incorrect_pick.squad.short} | #{incorrect_pick.week.name}",
-              abbrev: "#{incorrect_pick.squad.abbrev} | #{incorrect_pick.week.name}",
+              name: "#{incorrect_pick_squad.short} | #{incorrect_pick_week.name}",
+              abbrev: "#{incorrect_pick_squad.abbrev} | #{incorrect_pick_week.name}",
               locked: true,
               correct: false
           }
