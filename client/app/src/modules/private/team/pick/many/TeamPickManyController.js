@@ -85,7 +85,7 @@ var TeamPickManyController = function($rootScope, $scope, $log, $anchorScroll, m
         status = 'times';
       } else if (pick.locked === true) {
         status = 'lock';
-      } else if (pick.locked === false) {
+      } else {
         status = 'unlock';
       }
     }

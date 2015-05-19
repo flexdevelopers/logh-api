@@ -64,7 +64,7 @@ var TeamPickOneController = function($scope, $log, pickService) {
         status = 'times';
       } else if (pick.locked === true) {
         status = 'lock';
-      } else if (pick.locked === false) {
+      } else {
         status = 'unlock';
       }
     }
