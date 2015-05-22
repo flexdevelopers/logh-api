@@ -1,5 +1,5 @@
 object @team
-attributes :id, :name, :active, :paid
+attributes :id, :name, :active
 node(:alive) { |team| team.alive? }
 node(:current_pick) do |team|
   current_picks = team.current_picks({})

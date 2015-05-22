@@ -38,8 +38,6 @@ LoghApi::Application.routes.draw do
       resources :teams, only: [:index, :show, :create, :update, :destroy] do
         put 'activate', on: :member, to: 'teams#activate'
         put 'deactivate', on: :member, to: 'teams#deactivate'
-        put 'paid', on: :member, to: 'teams#paid'
-        put 'unpaid', on: :member, to: 'teams#unpaid'
         put 'message', on: :member, to: 'teams#message'
         put 'contact', on: :member, to: 'teams#contact'
       end

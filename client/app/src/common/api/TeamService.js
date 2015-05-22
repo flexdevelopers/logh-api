@@ -168,40 +168,6 @@ var TeamService = function($http, $log, $q, apiConfig, messageModel) {
       return deferred.promise;
     };
 
-    this.paidTeam = function(team) {
-        var deferred = $q.defer();
-        $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/paid")
-            .success(function(data) {
-                $log.debug("TeamService: paidTeam success");
-                messageModel.setMessage(data.message, false);
-                deferred.resolve(true);
-            })
-            .error(function(data) {
-                $log.debug("TeamService: paidTeam failed");
-                messageModel.setMessage(data.message, false);
-                deferred.reject();
-            });
-
-        return deferred.promise;
-    };
-
-    this.unpaidTeam = function(team) {
-        var deferred = $q.defer();
-        $http.put(apiConfig.baseURL + "leagues/" + team.league.id + "/teams/" + team.id + "/unpaid")
-            .success(function(data) {
-                $log.debug("TeamService: unpaidTeam success");
-                messageModel.setMessage(data.message, false);
-                deferred.resolve(false);
-            })
-            .error(function(data) {
-                $log.debug("TeamService: unpaidTeam failed");
-                messageModel.setMessage(data.message, false);
-                deferred.reject();
-            });
-
-      return deferred.promise;
-    };
-
 };
 
 TeamService.$inject = ['$http', '$log', '$q', 'apiConfig', 'messageModel'];

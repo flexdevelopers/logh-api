@@ -119,20 +119,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     });
   };
 
-  $scope.paid = function(team) {
-    teamService.paidTeam(team)
-      .then(function(paid) {
-        team.paid = paid;
-      });
-  };
-
-  $scope.unpaid = function(team) {
-    teamService.unpaidTeam(team)
-      .then(function(paid) {
-        team.paid = paid;
-      });
-  };
-
   $scope.hasNotEnoughPicks = function(team) {
     var hasNotMetPickCount = team.current_picks_count != team.league.max_picks_per_week;
     var hasNotMetGameCount = team.current_picks_count != team.current_week_game_count;
