@@ -205,9 +205,9 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
       teamService.createTeam(team)
         .then(
           function(data) {
-            messageModel.setMessage(data.message, true);
             var newTeamPath = $location.path() + '/team/' + data.team_id;
             $location.path(newTeamPath); // navigate to the new team page
+            messageModel.setMessage(data.message, true);
           },
           function(data) {
             messageModel.setMessage(data.message, false);
