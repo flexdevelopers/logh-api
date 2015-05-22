@@ -22,6 +22,7 @@ class Game < ActiveRecord::Base
 
   default_scope { order(starts_at: :asc, created_at: :asc) }
 
+  scope :tbd, -> { where(tbd: true) }
   scope :complete, -> { where(complete: true) }
 
   def display
