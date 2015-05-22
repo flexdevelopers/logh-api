@@ -109,7 +109,7 @@
             <small ng-show="hasPropertyError(leagueForm.maxTeams, 'min')">[ 1 - 10 ]</small>
             <small ng-show="hasPropertyError(leagueForm.maxTeams, 'max')">[ 1 - 10 ]</small>
           </label>
-          <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10" min="1" max="10" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
+          <input id="maxTeams" name="maxTeams" type="number" placeholder="Between 1 and 10 times" min="1" max="10" class="form-control" ng-model="leagueData.max_teams_per_user" logh-focus required>
           <span ng-show="hasError(leagueForm.maxTeams)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
