@@ -15,15 +15,14 @@
     <meta property="og:image:secure_url" content="https://www.loseorgohome.com/resources/assets/images/background2.jpg" />
 
     <link rel="stylesheet" href="resources/styles/main.css">
-    <link rel="stylesheet" media="all" href="resources/assets/css/datetimepicker.css">
+    <link rel="stylesheet" href="resources/assets/css/datetimepicker.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
-</head>
+  </head>
 
-  <body ng-app="loghApp" ng-controller="AppController" ng-class="{'home': isHome()}">
+  <body ng-app="loghApp" ng-controller="AppController" ng-class="{'home': isHome(), 'not-home': !isHome()}">
 
     <div class="app" ui-view></div>
-
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 
@@ -35,10 +34,18 @@
     <!--<script src="//localhost:35729/livereload.js"></script>-->
 
     <script type="text/javascript">
-      function AppController($scope, $state) {
+      function AppController($scope, $state, $log) {
         $scope.isHome = function() {
-          return $state.current.name == 'public.home';
-        }
+          var home = $state.current.name == 'public.home';
+          if (home) {
+            $("html").removeClass("not-home");
+            $("html").addClass("home");
+          } else {
+            $("html").removeClass("home");
+            $("html").addClass("not-home");
+          }
+          return home;
+        };
       }
     </script>
 
