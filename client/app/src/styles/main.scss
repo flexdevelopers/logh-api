@@ -72,45 +72,35 @@ $icon-font-path: "../assets/fonts/";
 @import "../modules/private/admin/squads/edit/admin.squads.edit";
 
 
-html {
+html.home {
+  height: 100%;
+  width: 100%;
+}
+
+html.not-home {
   //  for sticky footer
   position: relative;
   min-height: 100%;
 }
 
 body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body.home {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+body.not-home {
   //  for sticky footer
   margin-bottom: 80px;
 }
 
-
-body.home {
-  background: url(/resources/assets/images/background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-@media screen and (max-width: 1200px) {
-  body.home {
-    background: url(/resources/assets/images/background2.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  // phone
-  body.home {
-    background: url(/resources/assets/images/background3.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+.app {
+  height: 100%;
+  width: 100%;
 }
 
 .navbar-brand {
@@ -154,19 +144,6 @@ body.home {
       }
     }
   }
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
-  width: 220px;
-  margin: 5px;
 }
 
 /*!

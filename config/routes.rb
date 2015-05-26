@@ -6,6 +6,8 @@ LoghApi::Application.routes.draw do
 
     match '/docs', to: 'docs#index', via: 'get'
 
+    resources :stats, only: [:index]
+
     resources :sessions, only: [:create] do
       post 'reset', on: :collection, to: 'sessions#reset'
       delete 'destroy', on: :collection, to: 'sessions#destroy'

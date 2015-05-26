@@ -1,32 +1,110 @@
-.home-content-container {
-  color: white;
-  position: relative;
-  text-align: center;
-  padding: 60px 20px;
-  max-width: 650px;
-  margin: 0 auto;
+.landing {
+  width: 100%;
+  height: 100%;
+  margin-top: -20px;
+  .text-vertical-center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+  }
+
+  .text-vertical-center h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4.5em;
+    font-weight: 700;
+  }
+
+  /* Custom Button Styles */
+
+  .btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .btn-dark:hover,
+  .btn-dark:focus,
+  .btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.9);
+  }
+
+  .btn-light {
+    border-radius: 0;
+    color: #333;
+    background-color: rgb(255,255,255);
+  }
+
+  .btn-light:hover,
+  .btn-light:focus,
+  .btn-light:active {
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+  }
+
+  /* Custom Horizontal Rule */
+
+  hr.small {
+    max-width: 100px;
+  }
+
+  .header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(/resources/assets/images/bg.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    .tagline {
+      font-size: 20px;
+      font-weight: 300;
+    }
+  }
+
+  .about {
+    padding: 30px 0;
+    .format-desc {
+      padding: 0 40px;
+    }
+  }
+
+  .services {
+    padding: 50px 0;
+  }
+
+  .service-item {
+    margin-bottom: 30px;
+  }
+
+  .call-to-action {
+    padding: 50px 0;
+  }
+
+  .call-to-action .btn {
+    margin: 10px;
+  }
+
+  @media(max-width:500px) {
+    .text-vertical-center h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 3.5em;
+      font-weight: 500;
+    }
+  }
+
+  footer {
+    padding: 100px 0;
+  }
+
 }
 
 .cta {
   margin: 10px 20px;
   width: 200px;
-}
-
-.header-jumbo {
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 1;
-  margin: 0 0 .2em;
-}
-
-@media screen and (min-width: 767px) {
-  .header-jumbo {
-    font-size: 56px;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .header-jumbo {
-    font-size: 62px;
-  }
 }

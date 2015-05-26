@@ -1,10 +1,85 @@
-<div class="home-content-container">
-    <h1 class="header-jumbo">Losing is Everything.</h1>
-    <p class="lead">NFL, NBA, NHL, MLB or MLS survivor and pick'em leagues are waiting for you. Join anytime for free and start picking losers today!</p>
-  <div>
-    <a class="cta btn btn-primary btn-lg" role="button" ng-click="joinLeague(selectedSeasonId)">Join League</a>
+<header class="header">
+  <div class="text-vertical-center">
+    <h1>Losing is Everything.</h1>
+    <h4 class="tagline">NFL, NBA, NHL, MLB or MLS survivor and pick'em leagues are waiting for you.</h4>
+    <br>
+    <a class="cta btn btn-light btn-lg" role="button" ng-click="joinLeague(selectedSeasonId)">Join League</a>
+    <a class="cta btn btn-dark btn-lg" role="button" ng-click="createLeague(selectedSeasonId)">Create League</a>
   </div>
-  <div>
-    <a class="cta btn btn-primary btn-lg" role="button" ng-click="createLeague(selectedSeasonId)">Create League</a>
+</header>
+<section class="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 text-center format-desc">
+        <h2>Survivor Leagues</h2>
+        <p class="lead">Pick a different loser each week. Get one wrong, and you are eliminated. The most correct picks wins.</p>
+      </div>
+      <div class="col-lg-6 text-center format-desc">
+        <h2>Pick'em Leagues</h2>
+        <p class="lead">Pick one or more losers each week. No elimination. The most correct picks for the week wins.</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+<section class="services bg-primary">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-10 col-lg-offset-1">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item">
+              <h1>{{stats.public}}</h1>
+              <h4><strong>Public Leagues</strong></h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item">
+              <h1>{{stats.private}}</h1>
+              <h4><strong>Private Leagues</strong></h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item">
+              <h1>{{stats.teams}}</h1>
+              <h4><strong>Teams</strong></h4>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="service-item">
+              <h1>{{stats.picks}}</h1>
+              <h4><strong>Picks</strong></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="call-to-action bg-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h3>Quit being a baby. It's free.</h3>
+        <a class="cta btn btn-dark btn-lg" role="button" ng-click="register()">Register</a>
+      </div>
+    </div>
+  </div>
+</aside>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 text-center">
+        <ul class="list-inline">
+          <li>
+            <a href="https://www.facebook.com/loseorgohome" target="_blank"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+          </li>
+          <li>
+            <a href="https://twitter.com/loseorgohome" target="_blank"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+          </li>
+        </ul>
+        <hr class="small">
+        <p class="text-muted">Copyright &copy; FlexDevelopers.com LLC 2015</p>
+      </div>
+    </div>
+  </div>
+</footer>

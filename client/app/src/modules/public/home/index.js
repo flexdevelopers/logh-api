@@ -14,13 +14,9 @@ module.exports = angular.module('loghApp.public.home', [])
                         templateUrl: 'common/modules/message/message.tpl.html',
                         controller: 'MessageController'
                     },
-                    content: {
+                    landing: {
                         templateUrl: 'modules/public/home/home.tpl.html',
                         controller: 'HomeController'
-                    },
-                    footer: {
-                        templateUrl: 'common/modules/footer/footer.tpl.html',
-                        controller: 'FooterController'
                     }
                 }
             });
