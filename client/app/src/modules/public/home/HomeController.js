@@ -1,4 +1,4 @@
-var HomeController = function($scope, $log, $location, $modal, statsService, userService, messageModel, seasonModel) {
+var HomeController = function($scope, $log, $location, $modal, statsService, userService, seasonModel) {
 
     var getStats = function() {
       statsService.getStats()
@@ -34,7 +34,6 @@ var HomeController = function($scope, $log, $location, $modal, statsService, use
       modalInstance.result.then(function(newUser) {
         userService.createUser(newUser);
       }, function () {
-        messageModel.setMessage({ type: 'warning', content: 'Register cancelled' }, false);
         $log.debug('Register modal dismissed...');
       });
 
@@ -50,5 +49,5 @@ var HomeController = function($scope, $log, $location, $modal, statsService, use
     init();
 };
 
-HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'statsService', 'userService', 'messageModel', 'seasonModel'];
+HomeController.$inject = ['$scope', '$log', '$location', '$modal', 'statsService', 'userService', 'seasonModel'];
 module.exports = HomeController;

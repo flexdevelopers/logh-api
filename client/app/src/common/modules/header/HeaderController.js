@@ -68,7 +68,6 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
       modalInstance.result.then(function(newUser) {
         userService.createUser(newUser);
       }, function () {
-        messageModel.setMessage({ type: 'warning', content: 'Register cancelled' }, false);
         $log.debug('Register modal dismissed...');
       });
 
