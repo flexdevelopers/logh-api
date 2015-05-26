@@ -1,12 +1,12 @@
 var NewLeagueController = function(seasonId, $scope, $location, weekService, leagueService, seasonModel) {
 
     var getSeasonWeeks = function() {
-      $scope.createBtnDisabled = true;
+      $scope.fetchingSeasonWeeks = true;
       weekService.getAvailableWeeks($scope.leagueData.season_id)
         .then(function(response) {
           $scope.weeks = response.data;
           $scope.leagueData.start_week_id = $scope.weeks[0].id;
-          $scope.createBtnDisabled = false;
+          $scope.fetchingSeasonWeeks = false;
         });
     };
 
