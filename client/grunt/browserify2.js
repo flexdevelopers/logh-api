@@ -23,7 +23,9 @@ module.exports = {
                         'es5-shim/es5-shim.js',
                         'jquery/jquery.js',
                         'jquery-ui/ui/jquery-ui.js',
-                        'json3/lib/json3.js'
+                        'json3/lib/json3.js',
+                        'angulartics/dist/angulartics.min.js',
+                        'angulartics/dist/angulartics-ga.min.js'
                       ]
                     }
                 ]
@@ -54,7 +56,9 @@ module.exports = {
                         'es5-shim/es5-shim.min.js',
                         'jquery/jquery.min.js',
                         'jquery-ui/ui/minified/jquery-ui.min.js',
-                        'json3/lib/json3.min.js'
+                        'json3/lib/json3.min.js',
+                        'angulartics/dist/angulartics.min.js',
+                        'angulartics/dist/angulartics-ga.min.js'
                       ]
                     }
                 ]

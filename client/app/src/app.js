@@ -21,6 +21,8 @@ var loghApp = angular.module('loghApp', [
     'app.templates',
     'ui.router.stateHelper',
     'angular-loading-bar',
+    'angulartics',
+    'angulartics.google.analytics',
 
     // public modules
     require('./modules/public/home').name,

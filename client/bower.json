@@ -17,6 +17,7 @@
     "jquery": "~2.0.3",
     "jquery-ui": "~1.10.3",
     "json3": "~3.2.6",
-    "angular-bootstrap-datetimepicker": "latest"
+    "angular-bootstrap-datetimepicker": "latest",
+    "angulartics": "~0.17.2"
   }
 }

@@ -18,3 +18,5 @@ require('es5-shim');
 require('jquery');
 require('jquery-ui');
 require('json3');
+require('angulartics');
+require('angulartics-ga');
