@@ -10,6 +10,10 @@ module.exports = angular.module('loghApp.public.home', [])
                         templateUrl: 'common/modules/header/header.tpl.html',
                         controller: 'HeaderController'
                     },
+                    landingMessage: {
+                        templateUrl: 'common/modules/message/message.tpl.html',
+                        controller: 'MessageController'
+                    },
                     landing: {
                         templateUrl: 'modules/public/home/home.tpl.html',
                         controller: 'HomeController'

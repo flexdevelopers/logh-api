@@ -107,6 +107,14 @@ body.not-home {
   font-size: 17px;
 }
 
+.landing-message {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
 .footer {
   //  for sticky footer
   #menu {
