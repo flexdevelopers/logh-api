@@ -17,7 +17,7 @@ class API::SessionsController < API::BaseController
     access_token = current_access_token
     access_token.user = @user
     UserMailer.reset(@user, access_token.token).deliver
-    render json: { message: { type: SUCCESS, content: "Password reset link has been sent to #{@user.email}" } }, status: :ok
+    render json: { message: { type: SUCCESS, content: "Password reset link has been sent to #{@user.email} from no-reply@loseorgohome.com" } }, status: :ok
   end
 
   # DELETE /api/sessions/destroy
