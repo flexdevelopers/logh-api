@@ -1,16 +1,15 @@
-var RegisterController = function($scope, $log, $modal, $modalInstance) {
+var RegisterController = function($scope, $modal, $modalInstance) {
 
     $scope.newUserData = {
         first_name: '',
         last_name: '',
         nickname: '',
         email: '',
-        email_confirmation: '',
-        password: '',
-        password_confirmation: ''
+        password: ''
     };
 
     $scope.register = function (newUser) {
+      $scope.newUserData.password_confirmation = $scope.newUserData.password;
       $modalInstance.close(newUser);
     };
 
@@ -34,22 +33,16 @@ var RegisterController = function($scope, $log, $modal, $modalInstance) {
       });
 
       modalInstance.result.then(function () {
-        // do nada
       }, function () {
-        $log.debug('Terms and conditions modal closed...');
       });
 
     };
 
-  /**
-     * Invoked on startup, like a constructor.
-     */
     var init = function () {
-        $log.debug("register controller");
     };
     init();
 
 };
 
-RegisterController.$inject = ['$scope', '$log', '$modal', '$modalInstance'];
+RegisterController.$inject = ['$scope', '$modal', '$modalInstance'];
 module.exports = RegisterController;

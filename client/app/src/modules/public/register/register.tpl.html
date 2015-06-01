@@ -5,9 +5,9 @@
 <div class="modal-body">
   <form name="newUserForm" role="form" novalidate>
     <div class="row">
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.firstName), 'has-feedback': hasError(newUserForm.firstName)}">
-          <label class="control-label" for="firstName">First Name
+          <label class="control-label" for="firstName">First name
             <small ng-show="hasPropertyError(newUserForm.firstName, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newUserForm.firstName, 'maxlength')">[ Too Long ]</small>
           </label>
@@ -15,9 +15,11 @@
           <span ng-show="hasError(newUserForm.firstName)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6">
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.lastName), 'has-feedback': hasError(newUserForm.lastName)}">
-          <label class="control-label" for="lastName">Last Name
+          <label class="control-label" for="lastName">Last name
             <small ng-show="hasPropertyError(newUserForm.lastName, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newUserForm.lastName, 'maxlength')">[ Too Long ]</small>
           </label>
@@ -35,9 +37,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.email), 'has-feedback': hasError(newUserForm.email)}">
-          <label class="control-label" for="email">Email
+          <label class="control-label" for="email">Email address
             <small ng-show="hasPropertyError(newUserForm.email, 'required')">[ Required ]</small>
             <small ng-show="hasPropertyError(newUserForm.email, 'email')">[ Invalid Email ]</small>
           </label>
@@ -45,19 +47,9 @@
           <span ng-show="hasError(newUserForm.email)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="form-group" ng-class="{'has-error': hasError(newUserForm.confirmEmail), 'has-feedback': hasError(newUserForm.confirmEmail)}">
-          <label class="control-label" for="confirmEmail">Confirm Email
-            <small ng-show="hasPropertyError(newUserForm.confirmEmail, 'match')">[ No Match ]</small>
-          </label>
-          <input id="confirmEmail" name="confirmEmail" type="email" class="form-control" ng-model="newUserData.email_confirmation" match="newUserData.email">
-          <span ng-show="hasError(newUserForm.confirmEmail)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-      </div>
-
     </div>
     <div class="row">
-      <div class="col-sm-6 col-md-6">
+      <div class="col-sm-12 col-md-12">
         <div class="form-group" ng-class="{'has-error': hasError(newUserForm.password), 'has-feedback': hasError(newUserForm.password)}">
           <label class="control-label" for="password">Password
             <small ng-show="hasPropertyError(newUserForm.password, 'required')">[ Required ]</small>
@@ -68,20 +60,11 @@
           <span ng-show="hasError(newUserForm.password)" class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="form-group" ng-class="{'has-error': hasError(newUserForm.confirmPassword), 'has-feedback': hasError(newUserForm.confirmPassword)}">
-          <label class="control-label" for="confirmPassword">Confirm Password
-            <small ng-show="hasPropertyError(newUserForm.confirmPassword, 'match')">[ No Match ]</small>
-          </label>
-          <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" ng-model="newUserData.password_confirmation" match="newUserData.password">
-          <span ng-show="hasError(newUserForm.confirmPassword)" class="glyphicon glyphicon-remove form-control-feedback"></span>
-        </div>
-      </div>
     </div>
-    <div class="terms well well-sm"><strong>By clicking register, you agree to the <a ng-click="showTerms()">terms of use.</a></strong></div>
+    <!--<div class="terms well well-sm"><strong>By clicking register, you agree to the <a ng-click="showTerms()">terms of use.</a></strong></div>-->
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-  <button type="submit" class="btn btn-primary" ng-disabled="newUserForm.$invalid" ng-click="register(newUserData)">Register</button>
+  <!--<button class="btn btn-default" ng-click="cancel()">Cancel</button>-->
+  <button type="submit" class="btn btn-block btn-primary" ng-disabled="newUserForm.$invalid" ng-click="register(newUserData)">Play Now</button>
 </div>

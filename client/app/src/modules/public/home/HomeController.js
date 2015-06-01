@@ -28,7 +28,8 @@ var HomeController = function($scope, $log, $location, $modal, statsService, use
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
-        controller: 'RegisterController'
+        controller: 'RegisterController',
+        size: 'sm'
       });
 
       modalInstance.result.then(function(newUser) {

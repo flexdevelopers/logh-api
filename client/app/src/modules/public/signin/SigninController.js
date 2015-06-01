@@ -34,7 +34,8 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
-        controller: 'RegisterController'
+        controller: 'RegisterController',
+        size: 'sm'
       });
 
       modalInstance.result.then(function(newUser) {

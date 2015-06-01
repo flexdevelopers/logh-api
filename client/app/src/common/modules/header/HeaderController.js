@@ -62,7 +62,8 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
 
       var modalInstance = $modal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
-        controller: 'RegisterController'
+        controller: 'RegisterController',
+        size: 'sm'
       });
 
       modalInstance.result.then(function(newUser) {
