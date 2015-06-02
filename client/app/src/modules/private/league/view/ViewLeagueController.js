@@ -309,16 +309,24 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
   };
 
   $scope.$on('messageController::shareLeagueFB', function(event, args) {
-    FB.ui(
-      {
-        method: 'feed',
-        name: $scope.leagueData.name,
-        link: $location.absUrl(),
-        picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
-        caption: $scope.starts($scope.leagueData),
+    var options = {
+      method: 'feed',
+      link: $location.absUrl(),
+      picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg"
+    };
+    if ($scope.leagueData.elimination) {
+      options = angular.extend(options, {
+        name: $scope.leagueData.name + ' [ ' + $scope.leagueData.season_name + ' ]',
         description: $scope.leagueData.format,
-        message: 'Enter your message here'
+        caption: $scope.starts($scope.leagueData)
       });
+    } else {
+      options = angular.extend(options, {
+        name: $scope.leagueData.name + ' [ ' + $scope.leagueData.season_name + ' ]',
+        description: $scope.leagueData.format
+      });
+    }
+    FB.ui(options);
   });
 
   /**
