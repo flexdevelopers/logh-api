@@ -188,21 +188,11 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     var options = {
       method: 'feed',
       link: $location.absUrl(),
-      picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg"
+      picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+      name: $scope.teamData.name + ' [ ' + $scope.teamData.league.name + ' ]',
+      description: $scope.teamData.league.format,
+      caption: $scope.teamData.league.season_name
     };
-    if ($scope.teamData.league.elimination) {
-      options = angular.extend(options, {
-        name: $scope.teamData.name + ' [ ' + $scope.teamData.league.name + ' ]',
-        description: $scope.leagueData.format,
-        caption: $scope.starts($scope.leagueData) + ' - ' + $scope.teamData.league.season_name
-      });
-    } else {
-      options = angular.extend(options, {
-        name: $scope.teamData.name + ' [ ' + $scope.teamData.league.name + ' ]',
-        description: $scope.leagueData.format,
-        caption: $scope.teamData.league.season_name
-      });
-    }
     FB.ui(options);
   });
 

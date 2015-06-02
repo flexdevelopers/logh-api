@@ -16,4 +16,5 @@ child :league do
   attributes :id, :name, :season_id, :elimination, :max_picks_per_week
   node(:allow_dups) { |league| league.allow_dups }
   node(:format) { |league| league.format }
+  node(:season_name) { |league| league.season.name }
 end
