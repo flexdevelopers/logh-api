@@ -1,4 +1,6 @@
 <div class="alert alert-dismissable alert-{{messageData.message.type}}" ng-show="messageData.message.loaded">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="dismissMessage(messageData)">&times;</button>
-  {{messageData.message.content}} <a ng-show="messageData.message.share === true" ng-click="share()" class="alert-link">[ share on facebook ]</a>
+  {{messageData.message.content}}
+  <a ng-show="messageData.message.shareLeague" ng-click="shareLeagueFB()" class="alert-link">[ share on facebook ]</a>
+  <a ng-show="messageData.message.shareTeam" ng-click="shareTeamFB()" class="alert-link">[ share on facebook ]</a>
 </div>

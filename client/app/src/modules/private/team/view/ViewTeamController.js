@@ -184,6 +184,18 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
 
   };
 
+  $scope.$on('messageController::shareTeamFB', function(event, args) {
+    FB.ui(
+      {
+        method: 'feed',
+        name: $scope.teamData.name + '( ' + $scope.teamData.league.name + ' )',
+        link: $location.absUrl(),
+        picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+        description: $scope.teamData.league.format,
+        message: 'Enter your message here'
+      });
+  });
+
   /**
    * Invoked on startup, like a constructor.
    */

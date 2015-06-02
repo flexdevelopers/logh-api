@@ -1,4 +1,4 @@
-var MessageController = function($scope, $log, messageModel) {
+var MessageController = function($rootScope, $scope, $log, messageModel) {
 
     $scope.messageData = messageModel;
 
@@ -6,17 +6,12 @@ var MessageController = function($scope, $log, messageModel) {
         message.resetMessage();
     };
 
-    $scope.share = function() {
-      FB.ui(
-        {
-          method: 'feed',
-          name: 'name field',
-          link: 'https://www.loseorgohome.com',
-          picture: 'https://www.loseorgohome.com/resources/assets/images/background2.jpg',
-          caption: "hi there",
-          description: 'description field',
-          message: 'here is the message field'
-        });
+    $scope.shareLeagueFB = function() {
+      $rootScope.$broadcast('messageController::shareLeagueFB');
+    };
+
+    $scope.shareTeamFB = function() {
+      $rootScope.$broadcast('messageController::shareTeamFB');
     };
 
     /**
@@ -28,5 +23,5 @@ var MessageController = function($scope, $log, messageModel) {
     init();
 };
 
-MessageController.$inject = ['$scope', '$log', 'messageModel'];
+MessageController.$inject = ['$rootScope', '$scope', '$log', 'messageModel'];
 module.exports = MessageController;

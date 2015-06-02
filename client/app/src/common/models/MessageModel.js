@@ -8,7 +8,8 @@ var MessageModel = function($rootScope, $log) {
     message.loaded = false;
     message.type = ''; // can be success, info, warning or danger
     message.content = '';
-    message.share = false;
+    message.shareLeague = false;
+    message.shareTeam = false;
 
     this.message = message;
 
@@ -30,7 +31,8 @@ var MessageModel = function($rootScope, $log) {
         message.loaded = false;
         message.type = '';
         message.content = '';
-        message.share = false;
+        message.shareLeague = false;
+        message.shareTeam = false;
 
         this.message = message;
     };

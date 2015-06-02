@@ -90,7 +90,7 @@ var LeagueService = function($http, $log, $q, $state, apiConfig, messageModel) {
             { league: leagueParams })
             .success(function(data) {
                 $log.debug("LeagueService: createLeague success");
-                messageModel.setMessage({ type: data.message.type, content: data.message.content, share: true  }, true);
+                messageModel.setMessage({ type: data.message.type, content: data.message.content, shareLeague: true  }, true);
                 deferred.resolve(data);
             })
             .error(function(data) {

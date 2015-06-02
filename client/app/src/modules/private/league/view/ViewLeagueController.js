@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, userModel, messageModel, userService, weekService, teamService, leagueService) {
+var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, $timeout, userModel, messageModel, userService, weekService, teamService, leagueService) {
 
   var setMessageState = function() {
     if (!_.has($scope.userModel.leagueMessageOpen, $scope.leagueData.id)) {
@@ -207,7 +207,9 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
           function(data) {
             var newTeamPath = $location.path() + '/team/' + data.team_id;
             $location.path(newTeamPath); // navigate to the new team page
-            messageModel.setMessage(data.message, true);
+            $timeout(function () {
+              messageModel.setMessage({ type: data.message.type, content: data.message.content, shareTeam: true  }, true);
+            }, 500);
           },
           function(data) {
             messageModel.setMessage(data.message, false);
@@ -306,6 +308,19 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     $scope.currentTeamPage = 1;
   };
 
+  $scope.$on('messageController::shareLeagueFB', function(event, args) {
+    FB.ui(
+      {
+        method: 'feed',
+        name: $scope.leagueData.name,
+        link: $location.absUrl(),
+        picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+        caption: $scope.starts($scope.leagueData),
+        description: $scope.leagueData.format,
+        message: 'Enter your message here'
+      });
+  });
+
   /**
    * Invoked on startup, like a constructor.
    */
@@ -317,5 +332,5 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
 };
 
-ViewLeagueController.$inject = ['league','leagueWeeks', 'leagueTeams', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league','leagueWeeks', 'leagueTeams', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', '$timeout', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;
