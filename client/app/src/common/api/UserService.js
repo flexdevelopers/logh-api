@@ -94,7 +94,7 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
             .success(function(data) {
                 $log.debug("UserService: createUser success");
                 $window.sessionStorage.token = data.token;
-                messageModel.setMessage(data.message, true);
+                messageModel.setMessage({ type: data.message.type, content: data.message.content, shareUser: true  }, true);
                 var redirect = decodeURIComponent($location.search().redirect);
                 if (redirect !== 'undefined') {
                     $location.search('redirect', null); // remove the redirect query param

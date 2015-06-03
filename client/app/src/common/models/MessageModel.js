@@ -10,6 +10,7 @@ var MessageModel = function($rootScope, $log) {
     message.content = '';
     message.shareLeague = false;
     message.shareTeam = false;
+    message.shareUser = false;
 
     this.message = message;
 
@@ -33,6 +34,7 @@ var MessageModel = function($rootScope, $log) {
         message.content = '';
         message.shareLeague = false;
         message.shareTeam = false;
+        message.shareUser = false;
 
         this.message = message;
     };

@@ -14,6 +14,17 @@ var MessageController = function($rootScope, $scope, $log, messageModel) {
       $rootScope.$broadcast('messageController::shareTeamFB');
     };
 
+    $scope.shareUserFB = function() {
+      var options = {
+        method: "feed",
+        link: "https://www.loseorgohome.com",
+        picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+        name: "Losing is Everything",
+        description: "Free NFL, NBA, NHL, MLB or MLS survivor and pick'em leagues are waiting for you."
+      };
+      FB.ui(options);
+    };
+
     /**
      * Invoked on startup, like a constructor.
      */
