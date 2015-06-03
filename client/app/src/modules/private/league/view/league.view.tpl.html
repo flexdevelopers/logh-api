@@ -48,6 +48,14 @@
 <div class="teams-tab">
   <ul class="nav nav-tabs">
     <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{aliveTeamCount(leagueTeams)}} / </span>{{leagueData.team_count}} ]</a></li>
+    <li class="dropdown" ng-show="hasTeamInLeague() || isCommish(leagueData)">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+        Share <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="shareLeagueFB()">Share on Facebook</a></li>
+      </ul>
+    </li>
   </ul>
   <div class="weeks">
     <select class="form-control" ng-change="changeWeek(selectedWeekSlug)" ng-model="selectedWeekSlug" ng-options="leagueWeek.slug as leagueWeek.display for leagueWeek in leagueWeeks">

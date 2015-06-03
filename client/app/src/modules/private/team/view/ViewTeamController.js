@@ -184,7 +184,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
 
   };
 
-  $scope.$on('messageController::shareTeamFB', function(event, args) {
+  $scope.shareTeamFB = function() {
     var options = {
       method: 'feed',
       link: $location.absUrl(),
@@ -194,6 +194,10 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
       caption: $scope.teamData.league.season_name
     };
     FB.ui(options);
+  };
+
+  $scope.$on('messageController::shareTeamFB', function(event, args) {
+    $scope.shareTeamFB();
   });
 
   /**

@@ -308,7 +308,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     $scope.currentTeamPage = 1;
   };
 
-  $scope.$on('messageController::shareLeagueFB', function(event, args) {
+  $scope.shareLeagueFB = function() {
     var options = {
       method: 'feed',
       link: $location.absUrl(),
@@ -318,6 +318,10 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
       caption: $scope.leagueData.season_name
     };
     FB.ui(options);
+  };
+
+  $scope.$on('messageController::shareLeagueFB', function(event, args) {
+    $scope.shareLeagueFB();
   });
 
   /**
