@@ -1,6 +1,6 @@
 <div class="losers-tab">
   <ul class="nav nav-tabs">
-    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeek:teamData.league.elimination))}} ]</a></li>
+    <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeek:teamData.league.elimination))}} / {{(picks | weekPicksFilter:selectedWeek:teamData.league.elimination).length}} ]</a></li>
     <li class="dropdown" ng-show="isCoach(teamData)">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
         Share <span class="caret"></span>
