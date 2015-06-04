@@ -1,5 +1,7 @@
 $icon-font-path: "../assets/fonts/";
 
+@import url(http://fonts.googleapis.com/css?family=Raleway:700,400,500,600,300);
+
 @import "variables";
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/bootstrap";
 
@@ -84,7 +86,7 @@ html.not-home {
 }
 
 body {
-  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 body.home {
