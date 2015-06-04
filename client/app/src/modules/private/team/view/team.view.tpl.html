@@ -20,8 +20,8 @@
     </div>
     <h6><a ng-click="showLeague(teamData)"><i class="fa fa-chevron-left fa-fw"></i> <span class="team-league-name">{{teamData.league.name}}</span></a></h6>
   </div>
-  <div class="col-sm-5 col-md-5 hidden-xs">
-    <h3 class="team-meta"><small>{{teamData.league.format}}<br>Coach [ {{teamData.coach_names.join(', ')}} ]</small></h3>
+  <div class="col-sm-5 col-md-5">
+    <button type="button" class="make-picks-btn btn btn-primary" ng-show="isCoach(teamData)" ng-click="makePick(teamData)" ng-disabled="teamData.current_pick.locked || !teamData.started || !teamData.active || !teamData.alive"><span>Pick Loser</span><span ng-show="teamData.league.max_picks_per_week != 1">s</span></button>
   </div>
 </div>
 <hr>

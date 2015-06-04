@@ -179,6 +179,17 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
 
   };
 
+  $scope.makePick = function(team, pick) {
+    if (!$scope.isCoach(team) || (pick && pick.locked)) {
+      return;
+    }
+    if (team.league.max_picks_per_week == 1) {
+      $location.url($location.path() + '/pick');
+    } else {
+      $location.url($location.path() + '/picks');
+    }
+  };
+
   $scope.shareTeamFB = function() {
     var options = {
       method: 'feed',

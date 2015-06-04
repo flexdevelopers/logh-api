@@ -5,6 +5,12 @@
     font-size: 17px;
   }
 
+  .make-picks-btn {
+    float: right;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+
   .other-team-name {
     font-size: 18px;
   }
@@ -75,6 +81,14 @@
     .team-meta {
       margin-top: 5px;
       text-align: left;
+    }
+    .make-picks-btn {
+      float: none !important;
+      padding: 0;
+      margin-left: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 100%;
     }
   }
 

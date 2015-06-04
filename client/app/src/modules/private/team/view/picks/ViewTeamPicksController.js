@@ -53,17 +53,6 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
     }
   };
 
-  $scope.makePick = function(team, pick) {
-    if (!$scope.isCoach(team) || (pick && pick.locked)) {
-      return;
-    }
-    if (team.league.max_picks_per_week == 1) {
-      $location.url($location.path() + '/pick');
-    } else {
-      $location.url($location.path() + '/picks');
-    }
-  };
-
   $scope.pickStatus = function(pick) {
     var status = '';
     if (pick.correct === true) {
