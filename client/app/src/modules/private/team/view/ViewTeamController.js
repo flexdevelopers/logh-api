@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $window, $timeout, $location, $state, $stateParams, messageModel, userModel, userService, teamService) {
+var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $timeout, $location, $state, $stateParams, $anchorScroll, messageModel, userModel, userService, teamService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -50,7 +50,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     modalInstance.result.then(function(params) {
       teamService.sendCommishMessage(team, params.message)
     }, function () {
-      $log.debug('Contact league modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Contact commish cancelled' }, false);
     });
 
@@ -75,7 +74,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
         });
 
     }, function () {
-      $log.debug('Team message modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Update team message cancelled' }, false);
     });
 
@@ -95,7 +93,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     modalInstance.result.then(function() {
       activate(team);
     }, function () {
-      $log.debug('Activate team cancelled...');
       messageModel.setMessage({ type: 'warning', content: 'Team reactivation cancelled' }, false);
     });
   };
@@ -114,7 +111,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     modalInstance.result.then(function() {
       deactivate(team);
     }, function () {
-      $log.debug('Deactivate team cancelled...');
       messageModel.setMessage({ type: 'warning', content: 'Team deactivation cancelled' }, false);
     });
   };
@@ -178,7 +174,6 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
           $scope.teamData = team;
         });
     }, function () {
-      $log.debug('Edit team modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Edit team cancelled' }, false);
     });
 
@@ -200,16 +195,13 @@ var ViewTeamController = function(team, leagueTeams, $scope, $log, $modal, $wind
     $scope.shareTeamFB();
   });
 
-  /**
-   * Invoked on startup, like a constructor.
-   */
   var init = function () {
-    $log.debug("view team controller");
+    $anchorScroll(); // makes sure page loads at the top
     setMessageState();
   };
   init();
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$log', '$modal', '$window', '$timeout', '$location', '$state', '$stateParams', 'messageModel', 'userModel', 'userService', 'teamService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$modal', '$window', '$timeout', '$location', '$state', '$stateParams', '$anchorScroll', 'messageModel', 'userModel', 'userService', 'teamService'];
 module.exports = ViewTeamController;
