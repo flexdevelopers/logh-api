@@ -18,7 +18,7 @@ var MessageController = function($rootScope, $scope, $log, messageModel) {
       var options = {
         method: "feed",
         link: "https://www.loseorgohome.com",
-        picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+        picture: "https://www.loseorgohome.com/resources/assets/images/background-small.jpg",
         name: "Losing is Everything",
         description: "Free NFL, NBA, NHL, MLB or MLS survivor and pick'em leagues are waiting for you."
       };

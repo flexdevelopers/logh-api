@@ -312,7 +312,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
     var options = {
       method: 'feed',
       link: $location.absUrl(),
-      picture: "https://www.loseorgohome.com/resources/assets/images/background2.jpg",
+      picture: "https://www.loseorgohome.com/resources/assets/images/background-small.jpg",
       name: $scope.leagueData.name,
       description: $scope.leagueData.format,
       caption: $scope.leagueData.season_name
