@@ -22,12 +22,14 @@ node(:current_pick) do |team|
         if current_pick_game
           if current_pick_game.note && current_pick_game.note.length > 0
             name = "#{current_pick_squad.short} | #{week_name} | #{current_pick_game.note}"
+            abbrev = "#{current_pick_squad.abbrev} | #{week_name} | #{current_pick_game.note}"
           else
             name = "#{current_pick_squad.short} | #{week_name} | #{current_pick_game.start_display_short}"
+            abbrev = "#{current_pick_squad.abbrev} | #{week_name} | #{current_pick_game.start_display_short}"
           end
           {
               name: name,
-              abbrev: "#{current_pick_squad.abbrev} | #{week_name} | #{current_pick_game.start_display_short}",
+              abbrev: abbrev,
               correct: current_pick.correct,
               tie: current_pick_game.tie?,
               incomplete: current_pick_game.incomplete?,
