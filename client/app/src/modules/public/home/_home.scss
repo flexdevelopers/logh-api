@@ -17,6 +17,10 @@
     font-weight: 700;
   }
 
+  .format-divider {
+    display: none;
+  }
+
   .more-arrow {
     position: absolute;
     width: 28px;
@@ -56,12 +60,6 @@
     background-color: rgba(255,255,255,0.8);
   }
 
-  /* Custom Horizontal Rule */
-
-  hr.small {
-    max-width: 100px;
-  }
-
   .header {
     display: table;
     position: relative;
@@ -99,6 +97,13 @@
 
   .call-to-action .btn {
     margin: 10px;
+  }
+
+  @media(max-width:1200px) {
+    .format-divider {
+      display: block;
+      max-width: 100px;
+    }
   }
 
   @media(max-width:765px) {
