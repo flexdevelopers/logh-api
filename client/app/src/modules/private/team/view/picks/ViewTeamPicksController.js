@@ -93,9 +93,6 @@ var ViewTeamPicksController = function(leagueWeeks, currentWeek, picks, $scope, 
       if (pick.game.postponed) {
         meta += ' | *PPD';
       }
-      if (pick.game.if_necessary) {
-        meta += ' | *If necessary';
-      }
     }
     return meta;
   };
