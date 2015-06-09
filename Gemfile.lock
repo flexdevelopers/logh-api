@@ -55,6 +55,8 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.2)
+    oj (2.12.9)
+    oj_mimic_json (1.0.1)
     pg (0.17.1)
     polyglot (0.3.4)
     rabl (0.9.3)
@@ -139,6 +141,8 @@ DEPENDENCIES
   figaro
   jbuilder (~> 1.2)
   micro_token
+  oj
+  oj_mimic_json
   pg
   rabl
   rails (= 4.0.2)
