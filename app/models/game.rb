@@ -96,8 +96,8 @@ class Game < ActiveRecord::Base
   def squads
     # visiting squad first, followed by home squad
     [
-        Rabl.render(self.visiting_squad, 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') }),
-        Rabl.render(self.home_squad, 'api/squads/show', { format: :hash, view_path: Rails.root.join('app/views') })
+        Rabl.render(self.visiting_squad, 'api/squads/show', { format: :hash }),
+        Rabl.render(self.home_squad, 'api/squads/show', { format: :hash })
     ]
   end
 
