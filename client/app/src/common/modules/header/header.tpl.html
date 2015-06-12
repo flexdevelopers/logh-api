@@ -44,14 +44,12 @@
                   <input type="password" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" rc-verify-set required>
                 </div>
               </div>
-              <div>
-                <a class="forgot-password btn btn-link pull-left" role="button" ng-click="resetPassword()">Forgot Password?</a>
-                <button type="submit" class="sign-in-btn btn btn-primary pull-right" ng-disabled="inlineSigninForm.$invalid">Sign in</button>
-              </div>
-              <div style="clear: both;"></div>
-              <hr>
-              <div class="register"><a ng-click="register()">Don't have an account? <strong>Register</strong></a></div>
+              <button type="submit" class="btn btn-block btn-primary">Sign in with email</button>
+              <div class="orDiv"><span>or</span></div>
             </form>
+            <button class="btn btn-block btn-primary" ng-click="signinGuest()">Sign in as guest</button>
+            <hr>
+            <div class="signin-other-container"><a ng-click="register()">Register</a> | <a ng-click="resetPassword()">Reset Password</a></div>
           </div>
         </div>
       </li>

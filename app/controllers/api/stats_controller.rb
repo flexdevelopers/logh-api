@@ -1,5 +1,6 @@
 class API::StatsController < API::BaseController
   skip_before_filter :authenticate
+  skip_before_filter :check_guest
 
   # GET /api/stats
   def index

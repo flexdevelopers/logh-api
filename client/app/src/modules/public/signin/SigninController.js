@@ -6,13 +6,11 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
     };
 
     $scope.signin = function(credentials) {
-        $log.debug("signin credentials: " + credentials);
         $scope.dispatch("SigninEvent", credentials);
     };
 
-    $scope.forgotPassword = function() {
-        // todo: implement this
-        alert('tough shit');
+    $scope.signinGuest = function() {
+      userService.signinGuest();
     };
 
     $scope.resetPassword = function() {
@@ -25,7 +23,6 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
       modalInstance.result.then(function (email) {
         userService.resetUser(email);
       }, function () {
-        $log.debug('Reset password modal dismissed...');
         messageModel.setMessage({ type: 'warning', content: 'Reset password cancelled' }, false);
       });
     };
@@ -47,11 +44,7 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
 
     };
 
-    /**
-     * Invoked on startup, like a constructor.
-     */
     var init = function () {
-        $log.debug("signin controller");
     };
     init();
 

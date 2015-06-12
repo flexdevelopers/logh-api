@@ -1,10 +1,19 @@
 class API::SessionsController < API::BaseController
   skip_before_filter :authenticate
+  skip_before_filter :check_guest
 
   # POST /api/sessions
   def create
     @user = User.find_by(email: _session_params[:email])
     return not_authorized('Invalid email or password. Please try again.') unless _password_valid?
+    access_token = current_access_token
+    access_token.user = @user
+    render json: { token: access_token.token }
+  end
+
+  # POST /api/sessions/guest
+  def guest
+    @user = User.find_by(email: 'guest@loseorgohome.com')
     access_token = current_access_token
     access_token.user = @user
     render json: { token: access_token.token }

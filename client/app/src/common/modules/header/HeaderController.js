@@ -53,7 +53,6 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
         userService.contactUs(message);
       }, function () {
         messageModel.setMessage({ type: 'warning', content: 'Contact us cancelled' }, false);
-        $log.debug('contact us dismissed...');
       });
 
     };
@@ -93,8 +92,11 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
     };
 
     $scope.signin = function(credentials) {
-        $log.debug("signin credentials: " + credentials);
         $scope.dispatch("SigninEvent", credentials);
+    };
+
+    $scope.signinGuest = function() {
+        userService.signinGuest();
     };
 
     $scope.signout = function() {
@@ -116,7 +118,6 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
         userService.resetUser(email);
       }, function () {
         messageModel.setMessage({ type: 'warning', content: 'Reset password cancelled' }, false);
-        $log.debug('Reset password modal dismissed...');
       });
     };
 
@@ -124,11 +125,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
 //      scrollToTop();
     });
 
-    /**
-     * Invoked on startup, like a constructor.
-     */
     var init = function () {
-        $log.debug("header controller");
         checkHtml5Storage();
     };
     init();

@@ -9,6 +9,7 @@ LoghApi::Application.routes.draw do
     resources :stats, only: [:index]
 
     resources :sessions, only: [:create] do
+      post 'guest', on: :collection, to: 'sessions#guest'
       post 'reset', on: :collection, to: 'sessions#reset'
       delete 'destroy', on: :collection, to: 'sessions#destroy'
     end

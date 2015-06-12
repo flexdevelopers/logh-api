@@ -285,11 +285,11 @@ body.not-home {
   }
 }
 
-.register {
+.signin-other-container {
   text-align: center;
   margin-top: -10px;
   a {
-    color: #666;
+    color: #428bca;
     font-size: 12px;
     text-decoration: underline;
     &:hover, &:focus {
@@ -299,18 +299,27 @@ body.not-home {
   }
 }
 
-.forgot-password {
-  color: #428bca !important;
+.orDiv {
+  border-bottom: 1px solid #dcd7d3;
+  text-align: center;
+  margin: 10px 0 20px;
+  height: 11px;
+  span {
+    display: inline-block;
+    background-color: #fffef8;
+    padding: 0 10px;
+  }
 }
 
-.forgot-password:hover, .forgot-password:focus {
-  color: #2a6496 !important;
-  text-decoration: underline !important;
-  background-color: transparent !important;
-}
-
-.sign-in-btn {
-  width: 75px;
+@media all and (max-width: 767px) {
+  .navbar {
+    .orDiv {
+      span {
+        color: #fff;
+        background-color: #222;
+      }
+    }
+  }
 }
 
 .custom-search-form {

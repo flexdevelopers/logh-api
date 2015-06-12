@@ -1,5 +1,6 @@
 class API::UsersController < API::BaseController
   skip_before_filter :authenticate, only: [:create]
+  skip_before_filter :check_guest, only: [:create]
 
   # GET /api/users/current
   def current

@@ -1,5 +1,6 @@
 class API::SeasonsController < API::BaseController
   skip_before_filter :authenticate
+  skip_before_filter :check_guest
 
   # GET /api/seasons
   def index

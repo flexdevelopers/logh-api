@@ -7,11 +7,16 @@ class API::BaseController < ApplicationController
   respond_to :json
 
   before_action :authenticate
+  before_action :check_guest
 
   private
 
     def authenticate
       not_authorized("Please sign in or register.", WARNING) unless access_token_validated && signed_in?
+    end
+
+    def check_guest
+      forbidden("Forbidden action. Please sign out, then sign in with email or register.", DANGER) if current_access_token.user.guest && !request.get?
     end
 
     def access_token_validated

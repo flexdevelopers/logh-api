@@ -29,6 +29,9 @@ describe User do
   it { should respond_to(:managed_leagues) }
   its(:managed_leagues) { should be_empty }
 
+  it { should respond_to(:guest) }
+  its(:guest) { should be_false }
+
   it { should respond_to(:authenticate) }
 
   context 'when first name is not present' do

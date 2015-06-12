@@ -26,7 +26,30 @@ var UserService = function($http, $log, $state, $location, $window, $timeout, ap
                 $log.debug("UserService: signin failure");
                 return data;
             });
+        return promise;
+    };
 
+    this.signinGuest = function() {
+      userModel.resetUser();
+      var promise = $http.post(
+            apiConfig.baseURL + "sessions/guest")
+            .success(function(data) {
+                $window.sessionStorage.token = data.token;
+                var redirect = decodeURIComponent($location.search().redirect);
+                if (redirect !== 'undefined') {
+                    $location.search('redirect', null); // remove the redirect query param
+                    $location.url(redirect);
+                    if (['/', '/signin', '/register'].indexOf(redirect) !== -1) {
+                      userService.getCurrentUser();
+                    }
+                } else  {
+                  $location.url('/season/' + seasonModel.selectedSeasonId + '/my/teams');
+                }
+                return data;
+            })
+            .error(function(data) {
+                return data;
+            });
         return promise;
     };
 
