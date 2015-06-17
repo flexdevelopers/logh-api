@@ -1,5 +1,4 @@
 object @season
-cache @season
 attributes :id, :name, :season_type, :starts_at, :ends_at
 node(:current) { |season| season.current? }
 node(:started) { |season| season.started? }
