@@ -1,4 +1,5 @@
 object @team
+cache @team
 attributes :id, :name, :active, :eliminated_at, :message
 node(:alive) { |team| team.alive? }
 node(:started) { |team| team.league.started? }

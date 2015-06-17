@@ -1,4 +1,5 @@
 object @pick
+cache @pick
 attributes :id, :team_id, :week_id, :week_type_id, :correct
 node(:locked) { |pick| pick.locked? }
 node(:game_id) do |pick|
