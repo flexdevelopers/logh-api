@@ -1,4 +1,5 @@
 object @invitation
+cache @invitation
 attributes :id, :league_id, :email, :message
 node(:invitee) do |invitation|
   user = User.find_by(email: invitation.email)
