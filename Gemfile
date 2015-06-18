@@ -20,6 +20,9 @@ gem 'uglifier'
 # Postgres
 gem 'pg'
 
+# New Relic
+gem 'newrelic_rpm'
+
 # optimized json parser - https://github.com/ohler55/oj
 gem 'oj'
 gem 'oj_mimic_json'
