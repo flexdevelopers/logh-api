@@ -1,5 +1,4 @@
 object @team
-cache @team
 attributes :id, :name, :active
 node(:alive) { |team| team.alive? }
 node(:current_pick) do |team|

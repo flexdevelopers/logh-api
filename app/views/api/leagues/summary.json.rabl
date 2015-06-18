@@ -1,5 +1,4 @@
 object @league
-cache @league
 attributes :id, :name, :public, :elimination, :eliminate_on_tie, :season_id, :start_week_id, :max_teams_per_user, :max_picks_per_week, :message
 node(:started) { |league| league.started? }
 node(:format) { |league| league.format }
