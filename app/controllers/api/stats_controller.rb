@@ -4,7 +4,7 @@ class API::StatsController < API::BaseController
 
   # GET /api/stats
   def index
-    render json: { public: League.public.count, private: League.private.count, teams: Team.count, picks: Pick.count }
+    render json: { pickem: League.non_elimination.count, survivor: League.elimination.count, teams: Team.count, picks: Pick.count }
   end
 
 end

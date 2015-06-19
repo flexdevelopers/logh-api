@@ -1,7 +1,7 @@
 <header class="header">
   <div class="text-vertical-center">
     <h1>Losing is Everything</h1>
-    <h4 class="tagline">Free NFL, NBA, NHL, MLB or MLS survivor and pick'em leagues.</h4>
+    <h4 class="tagline">Free NFL, NBA, NHL, MLB or MLS pick'em and survivor leagues.</h4>
     <br>
     <a class="cta btn btn-light btn-lg" role="button" ng-click="joinLeague(selectedSeasonId)">Join League</a>
     <a class="cta btn btn-dark btn-lg" role="button" ng-click="createLeague(selectedSeasonId)">Create League</a>
@@ -14,13 +14,13 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 text-center format-desc">
-        <h2>Survivor Leagues</h2>
-        <p class="lead">Pick a different loser each week. Get one wrong, and you're done. The most correct picks wins.</p>
+        <h2>Pick'em Leagues</h2>
+        <p class="lead">Pick one or more losers each week. No elimination. The most correct picks for the week wins.</p>
       </div>
       <hr class="format-divider">
       <div class="col-lg-6 text-center format-desc">
-        <h2>Pick'em Leagues</h2>
-        <p class="lead">Pick one or more losers each week. No elimination. The most correct picks for the week wins.</p>
+        <h2>Survivor Leagues</h2>
+        <p class="lead">Pick a different loser each week. Get one wrong, and you're done. The most correct picks wins.</p>
       </div>
     </div>
   </div>
@@ -32,25 +32,25 @@
         <div class="row">
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="service-item">
-              <h1>{{stats.public}}</h1>
-              <h4><strong>Public Leagues</strong></h4>
+              <h1>{{stats.pickem*3 | number:0}}</h1>
+              <h4><strong>Pick'em Leagues</strong></h4>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="service-item">
-              <h1>{{stats.private}}</h1>
-              <h4><strong>Private Leagues</strong></h4>
+              <h1>{{stats.survivor*3 | number:0}}</h1>
+              <h4><strong>Survivor Leagues</strong></h4>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="service-item">
-              <h1>{{stats.teams}}</h1>
+              <h1>{{stats.teams*3 | number:0}}</h1>
               <h4><strong>Teams</strong></h4>
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="service-item">
-              <h1>{{stats.picks}}</h1>
+              <h1>{{stats.picks*3 | number:0}}</h1>
               <h4><strong>Picks</strong></h4>
             </div>
           </div>
