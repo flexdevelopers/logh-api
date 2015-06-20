@@ -34,12 +34,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
     };
 
     $scope.faq = function() {
-
-      $modal.open({
-        templateUrl: 'modules/public/faq/faq.tpl.html',
-        controller: 'FaqController'
-      });
-
+        $state.go('public.faq.general');
     };
 
     $scope.contactUs = function() {

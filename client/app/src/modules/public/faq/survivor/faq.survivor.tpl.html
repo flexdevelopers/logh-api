@@ -1,0 +1,36 @@
+<div class="section">
+  <h3 class="section-header">Survivor Leagues</h3>
+  <accordion close-others="false">
+    <accordion-group heading="How do I play?">
+      <ol>
+        <li><a ng-click="joinLeague(selectedSeasonId)">Join</a> an existing Survivor league or <a ng-click="createLeague(selectedSeasonId)">create</a> your own.</li>
+        <li>Pick a different loser each week.</li>
+        <li>Root for your loser to lose...duh</li>
+        <li>If you are wrong, you are out.</li>
+        <li>If you are right, you move on to the next week.</li>
+        <li>Have fun!</li>
+      </ol>
+    </accordion-group>
+    <accordion-group heading="How do I win?">
+      The team with the most losers at the end of the season wins.
+    </accordion-group>
+    <accordion-group heading="What do I win?">
+      That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
+    </accordion-group>
+    <accordion-group heading="When is the deadline to make my pick?">
+      As long as a game hasn't started, you can make a pick for that game. But make sure you make a pick before the week ends.
+    </accordion-group>
+    <accordion-group heading="Can I pick the same loser twice?">
+      Nope. Unless you make the playoffs where all losers are once again available to pick.
+    </accordion-group>
+    <accordion-group heading="Do ties count as a loss?">
+      Negative. But, in some Survivor leagues you will not get eliminated for a tie. Check your league rules.
+    </accordion-group>
+    <accordion-group heading="When is the deadline to join a Survivor league?">
+      <a ng-click="joinLeague(selectedSeasonId)">Join</a> before the end of the league's first week.
+    </accordion-group>
+    <accordion-group heading="What if I fail to make a pick for a week?">
+      Pack your bags. You're going home.
+    </accordion-group>
+  </accordion>
+</div>

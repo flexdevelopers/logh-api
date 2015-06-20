@@ -14,6 +14,9 @@ $icon-font-path: "../assets/fonts/";
 // public
 @import "../modules/public/home/home";
 @import "../modules/public/faq/faq";
+@import "../modules/public/faq/general/faq.general";
+@import "../modules/public/faq/pickem/faq.pickem";
+@import "../modules/public/faq/survivor/faq.survivor";
 @import "../modules/public/abuse/abuse";
 @import "../modules/public/signin/signin";
 @import "../modules/public/register/register";

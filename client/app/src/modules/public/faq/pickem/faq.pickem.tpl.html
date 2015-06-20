@@ -1,0 +1,37 @@
+<div class="section">
+  <h3 class="section-header">Pick'em Leagues</h3>
+  <accordion close-others="false">
+    <accordion-group heading="How do I play?">
+      <ol>
+        <li><a ng-click="joinLeague(selectedSeasonId)">Join</a> an existing Pick'em league or <a ng-click="createLeague(selectedSeasonId)">create</a> your own.</li>
+        <li>Pick losers each week.</li>
+        <li>Root for your losers to lose...duh</li>
+        <li>Have fun!</li>
+      </ol>
+    </accordion-group>
+    <accordion-group heading="How do I win?">
+      Pick the most losers for the week and win the week.
+    </accordion-group>
+    <accordion-group heading="What do I win?">
+      That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
+    </accordion-group>
+    <accordion-group heading="How many losers do I pick each week?">
+      That is up to the commish. Check your league rules.
+    </accordion-group>
+    <accordion-group heading="When is the deadline to make my picks?">
+      As long as the game hasn't started, you can make a pick for that game.
+    </accordion-group>
+    <accordion-group heading="Can I pick the same loser twice?">
+      Yes sir.
+    </accordion-group>
+    <accordion-group heading="Do ties count as a loss?">
+      No ma'am. But, for NHL, overtime or shootout losses will be treated as a loss and not a tie.
+    </accordion-group>
+    <accordion-group heading="When is the deadline to join a Pick'em league?">
+      <a ng-click="joinLeague(selectedSeasonId)">Join</a> anytime.
+    </accordion-group>
+    <accordion-group heading="What if I fail to make picks for a week?">
+      I'm guessing you won't win that week.
+    </accordion-group>
+  </accordion>
+</div>

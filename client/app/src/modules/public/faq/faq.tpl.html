@@ -1,68 +1,16 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="close()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3 class="modal-title">FAQ</h3>
+<div class="container faq-container">
+  <div class="page-header"><h2>FAQ</h2></div>
+  <div class="row">
+    <div class="col-md-3 column topic-column">
+      <ul class="nav nav-pills nav-stacked">
+        <li><a ng-class="{'selected-topic': isState('public.faq.general')}" ui-sref="public.faq.general"><i class="fa fa-chevron-right fa-fw"></i> General</a></li>
+        <li><a ng-class="{'selected-topic': isState('public.faq.pickem')}" ui-sref="public.faq.pickem"><i class="fa fa-chevron-right fa-fw"></i> Pick'em Leagues</a></li>
+        <li><a ng-class="{'selected-topic': isState('public.faq.survivor')}" ui-sref="public.faq.survivor"><i class="fa fa-chevron-right fa-fw"></i> Survivor Leagues</a></li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="faq-section" ui-view="faqContent"></div>
+    </div>
+  </div>
 </div>
-<div class="modal-body">
-  <dl class="faq">
-    <dt>Which sports are available?</dt>
-    <dd>NFL, NBA, NHL, MLB or MLS.</dd>
-    <dt>How much does it cost?</dt>
-    <dd>Zip. Zilch. Nada. Freeeeeeeeeeee...</dd>
-    <dt>How do I play?</dt>
-    <dd>
-      <p>- Join an existing Survivor or Pick'em league or create your own.</p>
-      <p>- Pick losers each week. (Only 1 pick/week for Survivor leagues)</p>
-      <p>- Root for your losers to lose...duh</p>
-      <p>- In a Survivor league, last the longest and win.</p>
-      <p>- In a Pick'em league, get the most picks right and win.</p>
-      <p>- Have fun!</p>
-    </dd>
-    <dt>Can I pick the same loser twice?</dt>
-    <dd>In a Survivor league, no...until you make it to the playoffs. In a Pick'em league, yes.</dd>
-    <dt>When is the deadline to make my pick?</dt>
-    <dd>Just get it in before a game starts.</dd>
-    <dt>Do ties count as a loss?</dt>
-    <dd>No sir. But, in some Survivor leagues you will not get eliminated for a tie. Also, for NHL, overtime or shootout losses will be treated as a loss and not a tie.</dd>
-    <dt>What is the difference between a public and private league?</dt>
-    <dd>Public leagues allow anyone to join. Private leagues require an invitation from the commish.</dd>
-    <dt>The season has already started, can I still play?</dt>
-    <dd>Yep. There’s always an open league or create your own league to start anytime during the season.</dd>
-    <dt>When is the deadline to join a league?</dt>
-    <dd>For Survivor leagues, join before the end of the league's first week. For Pick'em leagues, join anytime.</dd>
-    <dt>What if I fail to make picks for a week?</dt>
-    <dd>In a Survivor league, you’re toast. In a Pick'em league, you've just missed an opportunity. Don't let it happen again.</dd>
-    <dt>Can the commish make picks for me?</dt>
-    <dd>Negative.</dd>
-    <dt>How many times can I join a league?</dt>
-    <dd>As much as the commish allows (with a max of 10 times).</dd>
-    <dt>How do I win?</dt>
-    <dd>In a Survivor league, don’t be wrong. (Or at least be the last one in your league to be wrong.) In a Pick'em league, get the most picks right to win.</dd>
-    <dt>What do I win?</dt>
-    <dd>That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.</dd>
-    <dt>Can I see the picks of others in my league?</dt>
-    <dd>Only after the games have started.</dd>
-    <dt>Can the commish see my picks?</dt>
-    <dd>Only after the games have started.</dd>
-    <dt>Can I create my own league?</dt>
-    <dd>You betcha. Create a Survivor or Pick'em league anytime.</dd>
-    <dt>How do I invite my friends to join my league?</dt>
-    <dd>On your league page you’ll find an 'Invite' button. Use it. You’ll just need their email address.</dd>
-    <dt>How many friends can join my league?</dt>
-    <dd>As many as you like.</dd>
-    <dt>Can I set a limit on how many times a friend can join my league?</dt>
-    <dd>You sure can. 1 - 10 times.</dd>
-    <dt>How do I stop people from joining my league?</dt>
-    <dd>Change the league to private.</dd>
-    <dt>How can I remove people from my league?</dt>
-    <dd>You can’t but you can deactivate (or reactivate) their team. A deactivated team is hidden from view and can’t make any picks.</dd>
-    <dt>Can I edit my league?</dt>
-    <dd>Yes, but you can't change the sport, start week or format (Survivor or Pick'em) after the league starts.</dd>
-    <dt>Can I edit a team name in my league?</dt>
-    <dd>Yes, the team's coach or the commish can edit a team name at any time.</dd>
-    <dt>What if i still have questions?</dt>
-    <dd>Find the Contact Us button. We'll get right back to you.</dd>
-  </dl>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-default" ng-click="close()">Close</button>
-</div>
+  
