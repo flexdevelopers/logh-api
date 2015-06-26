@@ -12,6 +12,7 @@ class API::PicksController < API::BaseController
   def index
     @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
     @picks = @picks.sort_by { |pick| [ pick.week.starts_at, (pick.game) ? pick.game.starts_at : 1, (pick.game) ? pick.game.created_at : 1 ] }
+    @picks = @picks.map { |pick| PickDecorator.decorate(pick, @user) }
     respond_with @picks # rendered via app/views/api/picks/index.json.rabl
   end
 
@@ -25,11 +26,13 @@ class API::PicksController < API::BaseController
       # if no dups, then we need all picks
       @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
     end
+    @picks = @picks.map { |pick| PickDecorator.decorate(pick, @user) }
     respond_with @picks # rendered via app/views/api/picks/selected.json.rabl
   end
 
   # GET /api/teams/:team_id/picks/1
   def show
+    @pick = PickDecorator.decorate(@pick, @user)
     respond_with @pick # rendered via app/views/api/picks/show.json.rabl
   end
 

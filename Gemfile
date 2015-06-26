@@ -23,10 +23,6 @@ gem 'pg'
 # New Relic
 gem 'newrelic_rpm'
 
-# optimized json parser - https://github.com/ohler55/oj
-gem 'oj'
-gem 'oj_mimic_json'
-
 group :development, :test do
   gem 'rspec-rails'
 end
@@ -54,8 +50,15 @@ gem 'micro_token'
 # Figaro provides a clean and simple way to configure your app and keep the private stuff… private
 gem 'figaro'
 
+# decorates models
+gem 'draper', '~> 1.3'
+
 # RABL (Ruby API Builder Language)
 gem 'rabl'
+
+# optimized json parser - https://github.com/ohler55/oj
+gem 'oj'
+gem 'oj_mimic_json'
 
 group :production do
   # Use unicorn as the app server

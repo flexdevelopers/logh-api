@@ -9,6 +9,7 @@ class API::LeaguesController < API::BaseController
   def managed
     @leagues = current_user.managed_leagues.includes(:teams, :start_week)
     @leagues = @leagues.sort_by { |league| [ league.start_week.starts_at, league.name ] }
+    @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/managed.json.rabl
   end
 
@@ -19,6 +20,7 @@ class API::LeaguesController < API::BaseController
     # include pick'em leagues where season is not complete
     @leagues.concat(@season.leagues.public.non_elimination.season_not_complete.includes(:teams, :start_week))
     @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
+    @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/public.json.rabl
   end
 
@@ -29,6 +31,7 @@ class API::LeaguesController < API::BaseController
     # include pick'em leagues where season is not complete
     @leagues.concat(@season.leagues.private.non_elimination.season_not_complete.includes(:teams, :start_week))
     @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
+    @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/private.json.rabl
   end
 
@@ -39,11 +42,13 @@ class API::LeaguesController < API::BaseController
     managed_leagues = current_user.managed_leagues.select { |managed_league| managed_league.season_id == @season.id }
     @leagues = (teams.map(&:league) + managed_leagues)
     @leagues = @leagues.uniq.sort_by { |league| [ league.name ] }
+    @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/index.json.rabl
   end
 
   # GET /api/seasons/:season_id/leagues/1
   def show
+    @league = LeagueDecorator.decorate(@league)
     respond_with @league # rendered via app/views/api/leagues/show.json.rabl
   end
 

@@ -5,7 +5,7 @@ class API::GamesController < API::BaseController
 
   # GET /api/weeks/:week_id/games
   def index
-    @games = @week.games.includes(:visiting_squad, :home_squad, :week)
+    @games = @week.games.includes(:visiting_squad, :home_squad, :week).map { |game| GameDecorator.decorate(game) }
     respond_with @games
   end
 
@@ -16,12 +16,13 @@ class API::GamesController < API::BaseController
     else
       week = @league.start_week
     end
-    @games = week.games.includes(:visiting_squad, :home_squad, :week) # rendered via app/views/api/games/current.json.rabl
+    @games = week.games.includes(:visiting_squad, :home_squad, :week).map { |game| GameDecorator.decorate(game) }
     respond_with @games
   end
 
   # GET /api/weeks/:week_id/games/:id
   def show
+    @game = GameDecorator.decorate(@game)
     respond_with @game # rendered via app/views/api/games/show.json.rabl
   end
 

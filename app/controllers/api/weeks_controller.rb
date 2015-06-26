@@ -13,12 +13,14 @@ class API::WeeksController < API::BaseController
     else
       @weeks = @season.weeks.order(starts_at: :asc)
     end
+    @weeks = @weeks.map { |week| WeekDecorator.decorate(week) }
     respond_with @weeks # rendered via app/views/api/weeks/index.json.rabl
   end
 
   # GET /api/seasons/:season_id/weeks/available
   def available
     @weeks = @season.weeks.not_complete.order(starts_at: :asc)
+    @weeks = @weeks.map { |week| WeekDecorator.decorate(week) }
     respond_with @weeks # rendered via app/views/api/weeks/available.json.rabl
   end
 
@@ -29,11 +31,13 @@ class API::WeeksController < API::BaseController
     else
       @week = @league.start_week
     end
+    @week = WeekDecorator.decorate(@week)
     respond_with @week # rendered via app/views/api/weeks/show.json.rabl
   end
 
   # GET /api/seasons/:season_id/weeks/:id
   def show
+    @week = WeekDecorator.decorate(@week)
     respond_with @week # rendered via app/views/api/weeks/show.json.rabl
   end
 

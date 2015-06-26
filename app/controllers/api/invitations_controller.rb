@@ -13,6 +13,7 @@ class API::InvitationsController < API::BaseController
   def index
     return forbidden('Only the commish can retrieve invites for a league') unless _is_commish_of?(@league)
     @invitations = @league.invitations.sort_by { |invite| [ invite.email ] }
+    @invitations = @invitations.map { |invite| InvitationDecorator.decorate(invite, User.find_by(email: invite.email)) }
     respond_with @invitations
   end
 

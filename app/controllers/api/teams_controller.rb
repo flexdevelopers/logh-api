@@ -19,17 +19,20 @@ class API::TeamsController < API::BaseController
       @week ||= @season.current_week # if no week we need current week for 'My Teams'
       @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches)
     end
-    # rendered via app/views/api/teams/all.json.rabl
+    @teams = @teams.map { |team| TeamDecorator.decorate(team, @user, @week) }
+    respond_with @teams # rendered via app/views/api/teams/all.json.rabl
   end
 
   # GET /api/leagues/:league_id/teams
   def index
     @teams = current_user.teams.where(league: @league).includes(:league, :picks, :coaches)
+    @teams = @teams.map { |team| TeamDecorator.decorate(team, @user, @week) }
     respond_with @teams # rendered via app/views/api/teams/index.json.rabl
   end
 
   # GET /api/leagues/:league_id/teams/1
   def show
+    @team = TeamDecorator.decorate(@team, @user, @week)
     respond_with @team # rendered via app/views/api/teams/show.json.rabl
   end
 
