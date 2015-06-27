@@ -1,6 +1,10 @@
 class GameDecorator < Draper::Decorator
   delegate_all
 
+  def display
+    object.display
+  end
+
   def started
     object.started?
   end
