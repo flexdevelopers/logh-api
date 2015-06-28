@@ -9,12 +9,12 @@ class LeagueDecorator < Draper::Decorator
     object.started?
   end
 
-  def closed
-    object.closed?
-  end
-
   def format
     object.format
+  end
+
+  def closed
+    object.closed?
   end
 
   def team_count
