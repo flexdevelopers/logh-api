@@ -23,6 +23,10 @@ gem 'pg'
 # New Relic
 gem 'newrelic_rpm'
 
+group :development do
+  gem 'bullet'
+end
+
 group :development, :test do
   gem 'rspec-rails'
 end
