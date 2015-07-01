@@ -16,9 +16,9 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues/public
   def public
     # include survivor leagues where start week is not complete
-    @leagues = @season.leagues.public.elimination.start_week_not_complete.includes(:teams, :start_week)
+    @leagues = @season.leagues.public.elimination.start_week_not_complete.includes(:start_week, :commishes)
     # include pick'em leagues where season is not complete
-    @leagues.concat(@season.leagues.public.non_elimination.season_not_complete.includes(:teams, :start_week))
+    @leagues.concat(@season.leagues.public.non_elimination.season_not_complete.includes(:start_week, :commishes))
     @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
     @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/public.json.rabl
@@ -27,9 +27,9 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues/private
   def private
     # include survivor leagues where start week is not complete
-    @leagues = @season.leagues.private.elimination.start_week_not_complete.includes(:teams, :start_week)
+    @leagues = @season.leagues.private.elimination.start_week_not_complete.includes(:start_week, :commishes)
     # include pick'em leagues where season is not complete
-    @leagues.concat(@season.leagues.private.non_elimination.season_not_complete.includes(:teams, :start_week))
+    @leagues.concat(@season.leagues.private.non_elimination.season_not_complete.includes(:start_week, :commishes))
     @leagues = @leagues.sort_by { |league| [ Time.zone.now - league.start_week.starts_at, league.name ] }
     @leagues = @leagues.map { |league| LeagueDecorator.decorate(league) }
     respond_with @leagues # rendered via app/views/api/leagues/private.json.rabl
@@ -38,7 +38,7 @@ class API::LeaguesController < API::BaseController
   # GET /api/seasons/:season_id/leagues
   def index
     # get the leagues that you have a team in AND the leagues that you manage for the given season
-    teams = current_user.teams.joins(:league).where('season_id = ?', @season.id).includes(:league)
+    teams = current_user.teams.joins(:league).where('season_id = ?', @season.id).includes(league: [ :start_week, :commishes ])
     managed_leagues = current_user.managed_leagues.select { |managed_league| managed_league.season_id == @season.id }
     @leagues = (teams.map(&:league) + managed_leagues)
     @leagues = @leagues.uniq.sort_by { |league| [ league.name ] }

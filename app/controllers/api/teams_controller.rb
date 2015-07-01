@@ -11,13 +11,13 @@ class API::TeamsController < API::BaseController
     @week = Season.find(params[:season_id]).weeks.where(slug: params[:week_slug])[0] if params[:week_slug]
     if params[:league_id]
       if _is_commish_of?(@league)
-        @teams = @league.teams.includes(:league, :picks, :coaches)
+        @teams = @league.teams.includes(:league, :coaches)
       else
-        @teams = @league.teams.active.includes(:league, :picks, :coaches)
+        @teams = @league.teams.active.includes(:league, :coaches)
       end
     else
       @week ||= @season.current_week # if no week we need current week for 'My Teams'
-      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(:league, :picks, :coaches)
+      @teams = current_user.teams.joins(:league).where('season_id = ?', params[:season_id]).includes(league: [ :start_week, :season ]).includes(:coaches)
     end
     @teams = @teams.map { |team| TeamDecorator.decorate(team, @user, @week) }
     respond_with @teams # rendered via app/views/api/teams/all.json.rabl
@@ -25,7 +25,7 @@ class API::TeamsController < API::BaseController
 
   # GET /api/leagues/:league_id/teams
   def index
-    @teams = current_user.teams.where(league: @league).includes(:league, :picks, :coaches)
+    @teams = current_user.teams.where(league: @league).includes(:league)
     @teams = @teams.map { |team| TeamDecorator.decorate(team, @user, @week) }
     respond_with @teams # rendered via app/views/api/teams/index.json.rabl
   end

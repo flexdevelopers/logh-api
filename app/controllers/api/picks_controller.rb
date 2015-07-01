@@ -10,7 +10,7 @@ class API::PicksController < API::BaseController
 
   # GET /api/teams/:team_id/picks
   def index
-    @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
+    @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type).includes(game: [ :visiting_squad, :home_squad, :week ])
     @picks = @picks.sort_by { |pick| [ pick.week.starts_at, (pick.game) ? pick.game.starts_at : 1, (pick.game) ? pick.game.created_at : 1 ] }
     @picks = @picks.map { |pick| PickDecorator.decorate(pick, @user) }
     respond_with @picks # rendered via app/views/api/picks/index.json.rabl
@@ -21,10 +21,10 @@ class API::PicksController < API::BaseController
     allow_dups = @team.league.allow_dups
     if allow_dups
       # if dups allowed, then only current picks are needed
-      @picks = @team.current_picks({}).includes(:team, :game, :squad, :week, :week_type)
+      @picks = @team.current_picks({}).includes(:team, :squad, :week, :week_type).includes(game: [ :visiting_squad, :home_squad, :week ])
     else
       # if no dups, then we need all picks
-      @picks = @team.picks.includes(:team, :game, :squad, :week, :week_type)
+      @picks = @team.picks.includes(:team, :squad, :week, :week_type).includes(game: [ :visiting_squad, :home_squad, :week ])
     end
     @picks = @picks.map { |pick| PickDecorator.decorate(pick, @user) }
     respond_with @picks # rendered via app/views/api/picks/selected.json.rabl
