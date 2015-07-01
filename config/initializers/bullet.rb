@@ -1,6 +1,6 @@
 if defined? Bullet
   Bullet.enable = true
-  Bullet.bullet_logger = true
+  # Bullet.bullet_logger = true
   # Bullet.alert = true
   # Bullet.console = true
   # Bullet.growl = true
@@ -8,7 +8,7 @@ if defined? Bullet
   #                 :password => 'bullets_password_for_jabber',
   #                 :receiver => 'your_account@jabber.org',
   #                 :show_online_status => true }
-  # Bullet.rails_logger = true
+  Bullet.rails_logger = true
   # Bullet.honeybadger = true
   # Bullet.bugsnag = true
   # Bullet.airbrake = true
