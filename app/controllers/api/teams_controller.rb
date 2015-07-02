@@ -153,7 +153,7 @@ class API::TeamsController < API::BaseController
     def _can_add_team_to?(league)
       return true if !league.max_teams_per_user
       current_user_teams_in_league = current_user.teams.select do |team|
-        team.league.id == league.id
+        team.league_id == league.id
       end
       current_user_teams_in_league.count < league.max_teams_per_user
     end
