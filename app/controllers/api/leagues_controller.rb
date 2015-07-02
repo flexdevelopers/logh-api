@@ -119,7 +119,7 @@ class API::LeaguesController < API::BaseController
     end
 
     def _set_league
-      @league = @season.leagues.includes(:teams, :start_week).find(params[:id])
+      @league = @season.leagues.includes(:start_week).find(params[:id])
     end
 
     def _verify_season_is_active
