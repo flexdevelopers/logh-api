@@ -1,3 +1,3 @@
 collection @leagues
 
-extends 'api/leagues/summary'
+extends 'api/leagues/minimal'
