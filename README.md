@@ -13,19 +13,19 @@ And then you can do this, for example:
 
 - curl -X POST -H "Content-Type: application/json" -H "Authorization: biglongnastytoken" -d '{"league":{"name":"my league","start_week_id":"4"}}' http://www.loseorgohome.com/api/seasons/9/leagues
 
-#### Non-admin endpoints:
+#### API endpoints:
 
 ##### Sessions (sign in/out)
 ---
-* POST        /api/sessions                                   [ create session ] { email*, password* }
-* DELETE      /api/sessions/destroy                           [ destroy session ]
+* POST        /api/sessions                                   [ create session / login ]
+* DELETE      /api/sessions/destroy                           [ destroy session / logout ]
 
 ##### Users
 ---
-* POST        /api/users                                       [ create user ] { email*, first_name*, last_name*, password*, password_confirmation* }
+* POST        /api/users                                       [ create user ]
 * GET         /api/users/current                               [ show current user ]
-* PATCH       /api/users/current                               [ update current user ] { email*, first_name*, last_name*, password, password_confirmation }
-* PUT         /api/users/contact                               [ contact us ] { message* }
+* PATCH       /api/users/current                               [ update current user ]
+* PUT         /api/users/contact                               [ contact us ]
 
 ##### Seasons
 ---
@@ -42,27 +42,27 @@ And then you can do this, for example:
 * GET         /api/seasons/:season_id/leagues                   [ season leagues ]
 * GET         /api/seasons/:season_id/leagues/public            [ season public leagues ]
 * GET         /api/seasons/:season_id/leagues/private           [ season private leagues ]
-* POST        /api/seasons/:season_id/leagues                   [ create league ] { name*, start_week_id*, password*, public, max_teams_per_user, message }
+* POST        /api/seasons/:season_id/leagues                   [ create league ]
 * GET         /api/seasons/:season_id/leagues/:id               [ show league ]
-* PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ] { name*, start_week_id*, password, public, max_teams_per_user, message }
-* PUT         /api/seasons/:season_id/leagues/:id/message       [ update league message ] { message* }
-* PUT         /api/seasons/:season_id/leagues/:id/contact       [ sends commish a message ] { contact* }
+* PATCH/PUT   /api/seasons/:season_id/leagues/:id               [ update league ]
+* PUT         /api/seasons/:season_id/leagues/:id/message       [ update league message ]
+* PUT         /api/seasons/:season_id/leagues/:id/contact       [ sends commish a message ]
 * DELETE      /api/seasons/:season_id/leagues/:id               [ destroy league ]
 
 ##### Invitations
 ---
 * GET         /api/leagues/:league_id/invitations               [ league invitations ]
-* POST        /api/leagues/:league_id/invitations               [ create invitation ] { email* }
-* POST        /api/leagues/:league_id/invitations/new           [ request invitation ] { email* }
+* POST        /api/leagues/:league_id/invitations               [ create invitation ]
+* POST        /api/leagues/:league_id/invitations/new           [ request invitation ]
 * DELETE      /api/leagues/:league_id/invitations/:id           [ destroy invitation ]
 
 ##### Teams
 ---
 * GET         /api/seasons/:season_id/teams/all                 [ user all teams ]
 * GET         /api/leagues/:league_id/teams                     [ league teams ]
-* POST        /api/leagues/:league_id/teams                     [ create team ] { name* }
+* POST        /api/leagues/:league_id/teams                     [ create team ]
 * GET         /api/leagues/:league_id/teams/:id                 [ show team ]
-* PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ] { name* }
+* PATCH/PUT   /api/leagues/:league_id/teams/:id                 [ update team ]
 * PATCH/PUT   /api/leagues/:league_id/teams/:id/activate        [ activate team ]
 * PATCH/PUT   /api/leagues/:league_id/teams/:id/deactivate      [ deactivate team ]
 * DELETE      /api/leagues/:league_id/teams/:id                 [ destroy team ]
@@ -70,7 +70,7 @@ And then you can do this, for example:
 ##### Picks
 ---
 * GET         /api/teams/:team_id/picks                         [ team picks ]
-* POST        /api/teams/:team_id/picks                         [ create pick ] { week_id*, week_type_id*, squad_id* }
+* POST        /api/teams/:team_id/picks                         [ create pick ]
 * GET         /api/teams/:team_id/picks/:id                     [ show pick ]
 * DELETE      /api/teams/:team_id/picks/:id                     [ destroy pick ]
 
