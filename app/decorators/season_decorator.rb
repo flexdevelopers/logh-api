@@ -9,6 +9,10 @@ class SeasonDecorator < Draper::Decorator
     object.started?
   end
 
+  def ended
+    object.ended?
+  end
+
   def week_count
     object.weeks.count
   end

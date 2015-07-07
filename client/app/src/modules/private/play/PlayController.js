@@ -1,8 +1,15 @@
-var PlayController = function($scope, $log, $location, $state, $stateParams, messageModel, seasonModel) {
+var PlayController = function($scope, $location, $state, $stateParams, messageModel, seasonModel) {
 
-  $scope.selectedSeasonId = parseInt($stateParams.seasonId);
+	var setStartedSeasons = function() {
+		var seasons = angular.copy(seasonModel.currentSeasons.concat(seasonModel.endedSeasons));
+		_.each(seasons, function(season) {
+			$scope.startedSeasons.push({ id: season.id, ended: !season.current ? 'Previous' : 'Current', name: season.name })
+		});
+	};
 
-  $scope.startedSeasons = angular.copy(seasonModel.startedSeasons);
+	$scope.selectedSeasonId = parseInt($stateParams.seasonId);
+
+  $scope.startedSeasons = [];
 
   $scope.leagueOptions = { managed: true };
 
@@ -40,15 +47,12 @@ var PlayController = function($scope, $log, $location, $state, $stateParams, mes
     $location.url('/season/' + season.id + '/leagues/public');
   };
 
-    /**
-   * Invoked on startup, like a constructor.
-   */
   var init = function () {
-    $log.debug("play controller");
+    setStartedSeasons();
   };
   init();
 
 };
 
-PlayController.$inject = ['$scope', '$log', '$location', '$state', '$stateParams', 'messageModel', 'seasonModel'];
+PlayController.$inject = ['$scope', '$location', '$state', '$stateParams', 'messageModel', 'seasonModel'];
 module.exports = PlayController;

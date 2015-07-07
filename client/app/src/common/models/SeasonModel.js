@@ -1,16 +1,18 @@
-var SeasonModel = function($log) {
+var SeasonModel = function() {
 
   var model = this;
 
   var seasons = [];
   var currentSeasons = [];
   var startedSeasons = [];
+  var endedSeasons = [];
   var selectedSeasonId;
   var loaded = false;
 
   this.seasons = seasons;
   this.currentSeasons = currentSeasons;
   this.startedSeasons = startedSeasons;
+  this.endedSeasons = endedSeasons;
   this.selectedSeasonId = selectedSeasonId;
   this.loaded = loaded;
 
@@ -27,6 +29,9 @@ var SeasonModel = function($log) {
     model.startedSeasons = _.filter(seasonsArray, function(season) {
       return season.started;
     });
+    model.endedSeasons = _.filter(seasonsArray, function(season) {
+      return season.ended;
+    });
     model.setSelectedSeasonId(model.getCurrentSeason().id);
     model.loaded = true;
   };
@@ -35,15 +40,10 @@ var SeasonModel = function($log) {
     model.selectedSeasonId = seasonId;
   };
 
-  /**
-   * Invoked on startup, like a constructor.
-   */
-  var init = function () {
-    $log.debug("creating season model...");
-  };
+  var init = function() {};
   init();
 
 };
 
-SeasonModel.$inject = ['$log'];
+SeasonModel.$inject = [];
 module.exports = SeasonModel;
