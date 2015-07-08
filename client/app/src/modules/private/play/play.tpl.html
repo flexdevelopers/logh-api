@@ -20,7 +20,7 @@
     </li>
   </ul>
   <div class="seasons">
-    <select class="form-control" ng-change="changeSeason(selectedSeasonId)" ng-model="selectedSeasonId" ng-options="startedSeason.id as startedSeason.name group by startedSeason.ended for startedSeason in startedSeasons"></select>
+    <select class="form-control" ng-change="changeSeason(selectedSeasonId)" ng-model="selectedSeasonId" ng-options="startedSeason.id as startedSeason.name for startedSeason in startedSeasons"></select>
   </div>
   <div class="input-group custom-search-form filter-team-league">
     <input type="text" class="form-control" placeholder="Search..." ng-model="query">
