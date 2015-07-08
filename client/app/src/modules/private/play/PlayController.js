@@ -1,23 +1,36 @@
 var PlayController = function($scope, $location, $state, $stateParams, messageModel, seasonModel) {
 
-	var setStartedSeasons = function() {
-		var seasons = angular.copy(seasonModel.startedSeasons);
-		_.each(seasons, function(season) {
-			$scope.startedSeasons.push({ id: season.id, ended: !season.current ? 'Previous' : 'Current', name: season.name })
+	var buildSeasonDropdown = function() {
+		var currentSeasons = angular.copy(seasonModel.currentSeasons),
+		    endedSeasons = angular.copy(seasonModel.endedSeasons);
+    // first push in current seasons
+		_.each(currentSeasons, function(currentSeason) {
+			$scope.startedSeasons.push({ name: currentSeason.name, value: currentSeason.id });
 		});
+    // then a divider
+    $scope.startedSeasons.push({ divider: true });
+    // and then ended seasons
+    _.each(endedSeasons, function(endedSeason) {
+      $scope.startedSeasons.push({ name: endedSeason.name, value: endedSeason.id });
+    });
+    // and set the selected season based on what is in url
+    $scope.selectedSeason = _.find($scope.startedSeasons, function(startedSeason) { return startedSeason.value === $scope.selectedSeasonId });
 	};
 
 	$scope.selectedSeasonId = parseInt($stateParams.seasonId);
 
   $scope.startedSeasons = [];
 
+  $scope.selectedSeason = {};
+
   $scope.leagueOptions = { managed: true };
 
   $scope.query = '';
 
-  $scope.changeSeason = function(seasonId) {
-    seasonModel.setSelectedSeasonId(seasonId);
-    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + seasonId);
+  $scope.changeSeason = function(season) {
+    $scope.selectedSeasonId = season.value;
+    seasonModel.setSelectedSeasonId(season.value);
+    var newPath = $location.path().replace(/(\/season\/)\d*/, '$1' + season.value);
     $location.url(newPath);
   };
 
@@ -48,7 +61,7 @@ var PlayController = function($scope, $location, $state, $stateParams, messageMo
   };
 
   var init = function () {
-    setStartedSeasons();
+    buildSeasonDropdown();
   };
   init();
 

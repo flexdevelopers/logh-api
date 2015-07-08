@@ -14,6 +14,7 @@ var loghApp = angular.module('loghApp', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
+    'ngDropdowns',
     'commangular',
     'ui.router',
     'ui.bootstrap',

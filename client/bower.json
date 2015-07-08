@@ -6,6 +6,7 @@
     "angular-bootstrap": "~0.11.0",
     "angular-cookies": "1.2.26",
     "angular-loading-bar": "~0.4.2",
+    "angular-dropdowns": "1.1.0",
     "angular-resource": "1.2.26",
     "angular-route": "1.2.26",
     "angular-sanitize": "1.2.26",
