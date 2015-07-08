@@ -1,7 +1,7 @@
 var PlayController = function($scope, $location, $state, $stateParams, messageModel, seasonModel) {
 
 	var setStartedSeasons = function() {
-		var seasons = angular.copy(seasonModel.currentSeasons.concat(seasonModel.endedSeasons));
+		var seasons = angular.copy(seasonModel.startedSeasons);
 		_.each(seasons, function(season) {
 			$scope.startedSeasons.push({ id: season.id, ended: !season.current ? 'Previous' : 'Current', name: season.name })
 		});
