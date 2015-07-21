@@ -13,4 +13,5 @@ attributes :id,
            :format,
            :team_count,
            :start_week,
+           :commish_names,
            :commish_ids
