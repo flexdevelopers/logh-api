@@ -164,6 +164,10 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   };
 
+  $scope.readFaq = function() {
+    $location.url('/faq');
+  };
+
   $scope.updateMessage = function(league) {
 
     var modalInstance = $modal.open({

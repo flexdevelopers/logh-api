@@ -46,6 +46,14 @@
   .teams-tab {
     position: relative;
     margin-bottom: -1px;
+    .rules-panel {
+      width: 400px;
+    }
+    .scrollable-rules-panel {
+      height: auto;
+      max-height: 500px;
+      overflow-y: auto;
+    }
     .weeks {
       position: relative;
       width: 100%;
