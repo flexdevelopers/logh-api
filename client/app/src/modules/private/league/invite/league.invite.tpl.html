@@ -19,7 +19,7 @@
         <div class="col-sm-12 col-md-12">
           <div class="form-group" ng-class="{'has-error': hasError(inviteForm.message), 'has-feedback': hasError(inviteForm.message)}">
             <label for="message" class="control-label">Message:</label>
-            <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="400" ng-model="invitation.message"></textarea>
+            <textarea id="message" name="message" class="form-control" placeholder="Enter a optional message to deliver with the invitation..." rows="3" maxlength="500" ng-model="invitation.message"></textarea>
             <small class="input-error" ng-show="hasPropertyError(inviteForm.message, 'maxlength')">Too Long</small>
             <span ng-show="hasError(inviteForm.message)" class="glyphicon glyphicon-remove form-control-feedback"></span>
           </div>
