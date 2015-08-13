@@ -7,6 +7,8 @@ var HomeController = function($scope, $location, $modal, statsService, userServi
         });
     };
 
+    $scope.tagline = '';
+
     $scope.selectedSeasonId = seasonModel.selectedSeasonId;
 
     $scope.stats = {
@@ -39,7 +41,16 @@ var HomeController = function($scope, $location, $modal, statsService, userServi
 
     };
 
+    var generateRandomTagline = function() {
+      var taglines = [];
+      taglines[0] = 'Losing is Everything';
+      taglines[1] = 'Sprinkles are for Losers';
+
+      $scope.tagline = taglines[Math.round(Math.random()*(taglines.length - 1))];
+    };
+
     var init = function () {
+      generateRandomTagline();
       getStats();
   };
     init();
