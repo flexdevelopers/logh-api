@@ -26,6 +26,10 @@ var HomeController = function($scope, $location, $modal, statsService, userServi
       $location.url('/season/' + seasonId + '/leagues/public');
     };
 
+    $scope.joinPromoLeague = function(path) {
+      $location.url(path);
+    };
+
     $scope.register = function() {
 
       var modalInstance = $modal.open({
