@@ -476,6 +476,24 @@ body.not-home {
       }
     }
   }
+  .nav {
+    li {
+      a {
+        padding: 10px 10px !important;
+      }
+    }
+  }
+
+}
+
+@media all and (max-width: 550px) {
+  .nav {
+    li {
+      a {
+        padding: 10px 8px !important;
+      }
+    }
+  }
 }
 
 .custom-search-form {
