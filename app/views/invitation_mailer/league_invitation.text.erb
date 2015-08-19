@@ -1,4 +1,4 @@
-<%= "Congrats! #{@user.display_name} has invited #{@invitation.email} to join the '#{@invitation.league.name}' league (#{pluralize(@invitation.league.max_teams_per_user, 'entry')} max). " %>
+<%= "#{@user.display_name} has invited #{@invitation.email} to join the '#{@invitation.league.name}' league (#{pluralize(@invitation.league.max_teams_per_user, 'entry')} max). " %>
 
 <% if @invitation.league.elimination  %>
 Your job, if you accept, is to pick a different <%= @invitation.league.season.season_type %> loser each week. That's it! Get one wrong, and you're done. The most correct picks wins.
