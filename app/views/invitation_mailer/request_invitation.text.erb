@@ -1,4 +1,4 @@
-<%= @requestor_email %> would like an invitation to the "<%= @league.name %>" private league.
+<%= "#{@user.display_name} has requested an invitation for #{@requestor_email} for the #{@league.name} private league." %>
 
 <% if @requestor_message && @requestor_message.length > 0  %>
 A message was also attached:

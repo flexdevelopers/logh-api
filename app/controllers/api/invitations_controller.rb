@@ -5,7 +5,7 @@ class API::InvitationsController < API::BaseController
   # POST /leagues/:league_id/invitations/new
   # Create an invitation request for a league
   def new
-    InvitationMailer.request_invitation(@league, _invitation_params[:email], _invitation_params[:message]).deliver
+    InvitationMailer.request_invitation(@league, current_user, _invitation_params[:email], _invitation_params[:message]).deliver
     render json: { message: { type: SUCCESS, content: "An invite request for #{_invitation_params[:email]} has been sent to the commish" } }, status: :ok
   end
 
