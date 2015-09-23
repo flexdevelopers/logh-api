@@ -17,7 +17,7 @@ var SeasonModel = function() {
   this.loaded = loaded;
 
   this.getCurrentSeason = function() {
-    return model.currentSeasons[model.currentSeasons.length - 1];
+    return model.currentSeasons[0];
   };
 
   this.setSeasons = function(seasonsArray) {
@@ -39,9 +39,6 @@ var SeasonModel = function() {
   this.setSelectedSeasonId = function(seasonId) {
     model.selectedSeasonId = seasonId;
   };
-
-  var init = function() {};
-  init();
 
 };
 
