@@ -5,8 +5,10 @@ class Season < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }, uniqueness: { case_sensitive: false }
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+  validates :archive, inclusion: { in: [true, false] }
 
   scope :current, -> { where('starts_at <= ?', Time.zone.now).where('ends_at > ?', Time.zone.now).order(ends_at: :desc) }
+  scope :not_archived, -> { where(archive: false) }
 
   def current?
     self.started? && !self.ended?
