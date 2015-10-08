@@ -1,7 +1,10 @@
 var TeamPickController = function(team, week, games, picks, $rootScope, $scope, $log, $location, userModel, dateUtils) {
 
   var updatePickCount = function(picks) {
-    $scope.pickCount = (picks) ? picks.length : 0;
+    var weekPicks = _.filter(picks, function(pick) {
+      return pick.week_id === $scope.week.id;
+    });
+    $scope.pickCount = weekPicks.length;
   };
 
   $scope.team = team.data;
@@ -85,13 +88,6 @@ var TeamPickController = function(team, week, games, picks, $rootScope, $scope, 
     updatePickCount(args.picks);
   });
 
-  /**
-   * Invoked on startup, like a constructor.
-   */
-  var init = function () {
-    $log.debug("make pick controller");
-  };
-  init();
 };
 
 TeamPickController.$inject = ['team', 'week', 'games', 'picks', '$rootScope', '$scope', '$log', '$location', 'userModel', 'dateUtils'];
