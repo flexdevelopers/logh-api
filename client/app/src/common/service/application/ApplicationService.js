@@ -1,4 +1,4 @@
-var ApplicationService = function($window, $location, $log) {
+var ApplicationService = function($window, $location) {
 
         /**
          *  Application Startup Process
@@ -8,7 +8,7 @@ var ApplicationService = function($window, $location, $log) {
         };
 
         var startupProcess = function() {
-          forceSsl();
+//          forceSsl();
         };
 
         var forceSsl = function () {
@@ -18,15 +18,7 @@ var ApplicationService = function($window, $location, $log) {
           }
         };
 
-        /**
-         * Invoked on startup, like a constructor.
-         */
-        var init = function () {
-            $log.debug("ApplicationService init application service");
-        };
-        init();
-
     };
 
-ApplicationService.$inject = ['$window', '$location', '$log'];
+ApplicationService.$inject = ['$window', '$location'];
 module.exports = ApplicationService;
