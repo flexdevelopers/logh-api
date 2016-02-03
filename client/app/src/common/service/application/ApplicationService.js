@@ -8,7 +8,7 @@ var ApplicationService = function($window, $location) {
         };
 
         var startupProcess = function() {
-//          forceSsl();
+          forceSsl();
         };
 
         var forceSsl = function () {
