@@ -1,4 +1,4 @@
-var LeagueInviteRequestController = function(leagueId, $modalInstance, $scope, $log, userModel) {
+var LeagueInviteRequestController = function(leagueId, $uibModalInstance, $scope, $log, userModel) {
 
   $scope.invitation = {
     league_id: leagueId,
@@ -7,11 +7,11 @@ var LeagueInviteRequestController = function(leagueId, $modalInstance, $scope, $
   };
 
   $scope.requestInvite = function (invitation) {
-    $modalInstance.close(invitation);
+    $uibModalInstance.close(invitation);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -31,5 +31,5 @@ var LeagueInviteRequestController = function(leagueId, $modalInstance, $scope, $
   init();
 };
 
-LeagueInviteRequestController.$inject = ['leagueId', '$modalInstance', '$scope', '$log', 'userModel'];
+LeagueInviteRequestController.$inject = ['leagueId', '$uibModalInstance', '$scope', '$log', 'userModel'];
 module.exports = LeagueInviteRequestController;

@@ -1,4 +1,4 @@
-var HomeController = function($scope, $location, $modal, statsService, userService, seasonModel) {
+var HomeController = function($scope, $location, $uibModal, statsService, userService, seasonModel) {
 
     var getStats = function() {
       statsService.getStats()
@@ -32,7 +32,7 @@ var HomeController = function($scope, $location, $modal, statsService, userServi
 
     $scope.register = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
         controller: 'RegisterController',
         size: 'sm'
@@ -60,5 +60,5 @@ var HomeController = function($scope, $location, $modal, statsService, userServi
     init();
 };
 
-HomeController.$inject = ['$scope', '$location', '$modal', 'statsService', 'userService', 'seasonModel'];
+HomeController.$inject = ['$scope', '$location', '$uibModal', 'statsService', 'userService', 'seasonModel'];
 module.exports = HomeController;

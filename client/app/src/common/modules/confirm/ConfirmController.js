@@ -1,13 +1,13 @@
-var ConfirmController = function(message, $scope, $log, $modalInstance) {
+var ConfirmController = function(message, $scope, $log, $uibModalInstance) {
 
   $scope.message = message;
 
   $scope.confirm = function() {
-    $modalInstance.close();
+    $uibModalInstance.close();
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   /**
@@ -20,5 +20,5 @@ var ConfirmController = function(message, $scope, $log, $modalInstance) {
 
 };
 
-ConfirmController.$inject = ['message', '$scope', '$log', '$modalInstance'];
+ConfirmController.$inject = ['message', '$scope', '$log', '$uibModalInstance'];
 module.exports = ConfirmController;

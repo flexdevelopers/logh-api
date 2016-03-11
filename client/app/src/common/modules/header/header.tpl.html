@@ -8,13 +8,13 @@
     </button>
     <a class="navbar-brand" ng-click="home()"><b>LOSE</b>OR<b>GO</b>HOME</a>
   </div>
-  <div collapse="isCollapsed" class="navbar-collapse">
+  <div uib-collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
       <li ng-class="{'active': isState(['private.play.teams', 'private.play.leagues'])}"><a ng-click="play(selectedSeasonId)">My Teams & Leagues</a></li>
       <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague()">Join League</a></li>
       <li><a ng-click="createLeague()">Create League</a></li>
       <li><a ng-click="faq()">FAQ</a></li>
-      <li class="dropdown">
+      <li class="uib-dropdown">
         <div class="btn-group" uib-dropdown is-open="settings.isopen">
           <button id="settings-button" type="button" class="btn btn-link" uib-dropdown-toggle><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></button>
           <ul class="uib-dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-button">
@@ -29,7 +29,7 @@
     <ul ng-show="!userData.user.loaded" class="nav navbar-nav navbar-right">
       <li><a ng-click="faq()">FAQ</a></li>
       <li><a ng-click="register()">Register</a></li>
-      <li class="dropdown">
+      <li class="uib-dropdown">
         <div class="btn-group" uib-dropdown is-open="signin.isopen">
           <button id="signin-button" type="button" class="btn btn-link" uib-dropdown-toggle>Sign In</button>
           <div class="uib-dropdown-menu dropdown-menu-right panel panel-default">

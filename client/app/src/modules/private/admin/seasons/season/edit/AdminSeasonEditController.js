@@ -1,4 +1,4 @@
-var AdminSeasonEditController = function(season, $scope, $modalInstance) {
+var AdminSeasonEditController = function(season, $scope, $uibModalInstance) {
 
   $scope.seasonData = angular.copy(season);
 
@@ -17,11 +17,11 @@ var AdminSeasonEditController = function(season, $scope, $modalInstance) {
   $scope.closeEndsAt();
 
   $scope.updateSeason = function(season) {
-    $modalInstance.close(season);
+    $uibModalInstance.close(season);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -40,5 +40,5 @@ var AdminSeasonEditController = function(season, $scope, $modalInstance) {
   init();
 };
 
-AdminSeasonEditController.$inject = ['season', '$scope', '$modalInstance'];
+AdminSeasonEditController.$inject = ['season', '$scope', '$uibModalInstance'];
 module.exports = AdminSeasonEditController;

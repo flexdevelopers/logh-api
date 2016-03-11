@@ -4,16 +4,16 @@
 <div class="alert alert-warning" ng-show="isCoach(teamData) && teamData.active && !teamData.started">You can pick losers when the league starts - {{teamData.start_week_display}}</div>
 <div class="header-row row">
   <div class="col-sm-7 col-md-7">
-    <div class="btn-group teams-dropdown" dropdown is-open="teamDropdown.isopen">
-      <button type="button" class="teams-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCoach(teamData) && !isCommish(teamData) && !isAdmin()">
+    <div class="btn-group teams-dropdown" uib-dropdown is-open="teamDropdown.isopen">
+      <button type="button" class="teams-btn-link btn btn-link uib-dropdown-toggle" uib-dropdown-toggle ng-disabled="!isCoach(teamData) && !isCommish(teamData) && !isAdmin()">
         <strong><span class="team-name" ng-class="{'team-inactive': !teamData.active || !teamData.alive, 'disabled': !isCoach(teamData) && !isCommish(teamData) && !isAdmin()}">{{teamData.name}}</span> <span ng-show="isCoach(teamData) || isCommish(teamData) || isAdmin()" class="caret"></span></strong>
       </button>
-      <ul class="dropdown-menu teams-btn-menu" role="menu">
-        <li><a ng-click="toggleDropdown($event);editTeam(teamData)">Edit {{teamData.name}}</a></li>
-        <li><a ng-show="isCommish(teamData)" ng-click="toggleDropdown($event);updateMessage(teamData)">Edit team message</a></li>
-        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="toggleDropdown($event);confirmActivate(teamData)">Reactivate this team</a></li>
-        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="toggleDropdown($event);confirmDeactivate(teamData)">Deactivate this team</a></li>
-        <li ng-show="!isCommish(teamData)"><a ng-click="toggleDropdown($event);contactCommish(teamData)">Contact the commish</a></li>
+      <ul class="uib-dropdown-menu teams-btn-menu" role="menu">
+        <li><a ng-click="editTeam(teamData)">Edit {{teamData.name}}</a></li>
+        <li><a ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">Edit team message</a></li>
+        <li ng-show="isCommish(teamData) && !teamData.active"><a ng-click="confirmActivate(teamData)">Reactivate this team</a></li>
+        <li ng-show="isCommish(teamData) && teamData.active"><a ng-click="confirmDeactivate(teamData)">Deactivate this team</a></li>
+        <li ng-show="!isCommish(teamData)"><a ng-click="contactCommish(teamData)">Contact the commish</a></li>
         <li class="divider" ng-show="leagueTeams.length > 1"></li>
         <li ng-repeat="team in leagueTeams" ng-show="team.id != teamData.id"><a ng-click="showTeam(team)"><span class="other-team-name" ng-class="{'team-inactive': !team.active || !team.alive}">{{team.name}}</span> <span class="other-team-pick">{{team.current_pick.abbrev}}</span></a></li>
       </ul>
@@ -26,14 +26,14 @@
 </div>
 <hr>
 <div class="team-message" ng-show="isCommish(teamData) || isCoach(teamData)">
-  <accordion close-others="true">
-    <accordion-group is-open="userModel.teamMessageOpen[teamData.id]">
-      <accordion-heading>
+  <uib-accordion close-others="true">
+    <uib-accordion-group is-open="userModel.teamMessageOpen[teamData.id]">
+      <uib-accordion-heading>
         <i class="fa fa-comment fa-fw"></i> Messages to team [ <span ng-show="teamData.message.length > 0">1</span><span ng-show="!teamData.message || teamData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': userModel.teamMessageOpen[teamData.id], 'glyphicon-chevron-right': !userModel.teamMessageOpen[teamData.id]}"></i>
-      </accordion-heading>
+      </uib-accordion-heading>
       <p class="team-message-text" ng-show="!teamData.message || teamData.message.length == 0">no messages</p><p class="team-message-text" ng-show="teamData.message.length > 0" ng-bind-html="teamData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(teamData)" ng-click="updateMessage(teamData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(teamData)" ng-click="contactCommish(teamData)">[ contact commish ]</a>
-    </accordion-group>
-  </accordion>
+    </uib-accordion-group>
+  </uib-accordion>
   <hr>
 </div>
 <div ui-view="teamPicksContent" class="picks-content"></div>

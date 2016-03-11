@@ -1,4 +1,4 @@
-var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils, gameService, squadService, weekService, messageModel) {
+var AdminWeekController = function(week, games, $scope, $log, $uibModal, dateUtils, gameService, squadService, weekService, messageModel) {
 
   var completeWeek = function(week) {
     weekService.completeWeek(week)
@@ -21,7 +21,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   $scope.editWeek = function(week) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/week/edit/admin.week.edit.tpl.html',
       controller: 'AdminWeekEditController',
       resolve: {
@@ -45,7 +45,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   $scope.editGame = function(game, week) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/game/edit/admin.game.edit.tpl.html',
       controller: 'AdminGameEditController',
       resolve: {
@@ -69,7 +69,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
 
   $scope.createGame = function(week, games) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/game/new/admin.game.new.tpl.html',
       controller: 'AdminGameNewController',
       resolve: {
@@ -99,7 +99,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
   };
 
   $scope.confirmSendReminder = function(week) {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
       resolve: {
@@ -117,7 +117,7 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
   };
 
   $scope.confirmWeekComplete = function(week) {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
       resolve: {
@@ -152,5 +152,5 @@ var AdminWeekController = function(week, games, $scope, $log, $modal, dateUtils,
   init();
 };
 
-AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$modal', 'dateUtils', 'gameService', 'squadService', 'weekService', 'messageModel'];
+AdminWeekController.$inject = ['week', 'games', '$scope', '$log', '$uibModal', 'dateUtils', 'gameService', 'squadService', 'weekService', 'messageModel'];
 module.exports = AdminWeekController;

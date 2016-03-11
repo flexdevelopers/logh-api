@@ -1,14 +1,14 @@
-var EditTeamController = function(team, $scope, $log, $modalInstance) {
+var EditTeamController = function(team, $scope, $log, $uibModalInstance) {
 
     $scope.teamData = angular.copy(team);
 
     $scope.editTeam = function(team) {
       team.name = team.name.toLowerCase();
-      $modalInstance.close(team);
+      $uibModalInstance.close(team);
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
 
     $scope.hasError = function(input) {
@@ -29,5 +29,5 @@ var EditTeamController = function(team, $scope, $log, $modalInstance) {
 
 };
 
-EditTeamController.$inject = ['team', '$scope', '$log', '$modalInstance'];
+EditTeamController.$inject = ['team', '$scope', '$log', '$uibModalInstance'];
 module.exports = EditTeamController;

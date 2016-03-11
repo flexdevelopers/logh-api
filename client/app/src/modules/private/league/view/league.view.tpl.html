@@ -1,18 +1,18 @@
 <div class="header-row row">
   <div class="col-sm-7 col-md-7">
-    <div class="btn-group leagues-dropdown" dropdown is-open="leagueDropdown.isopen">
-      <button type="button" class="leagues-btn-link btn btn-link dropdown-toggle" ng-disabled="!isCommish(leagueData) && !isAdmin()">
-        <span class="league-name" ng-class="{'disabled': !isCommish(leagueData) && !isAdmin()}">
-        <i class="fa fa-lock icon" title="Private league" ng-show="!leagueData.public"></i>
-        <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.public"></i>
-        <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData) || isAdmin()" class="caret"></span>
+    <div class="btn-group leagues-dropdown" uib-dropdown is-open="leagueDropdown.isopen">
+      <button type="button" class="leagues-btn-link btn btn-link uib-dropdown-toggle" uib-dropdown-toggle ng-disabled="!isCommish(leagueData) && !isAdmin()">
+          <span class="league-name" ng-class="{'disabled': !isCommish(leagueData) && !isAdmin()}">
+          <i class="fa fa-lock icon" title="Private league" ng-show="!leagueData.public"></i>
+          <i class="fa fa-unlock icon" title="Public league" ng-show="leagueData.public"></i>
+          <strong>{{leagueData.name}}</strong></span> <span ng-show="isCommish(leagueData) || isAdmin()" class="caret"></span>
       </button>
-      <ul class="dropdown-menu league-actions-menu" role="menu">
-        <li><a ng-show="isCommish(leagueData) || isAdmin()" ng-click="toggleDropdown($event);editLeague(leagueData)">Edit league</a></li>
-        <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);updateMessage(leagueData)">Edit league message</a></li>
-        <li><a ng-show="isCommish(leagueData)" ng-click="toggleDropdown($event);invite(leagueData.id, isCommish(leagueData), leagueData.closed)">Manage invitations</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="toggleDropdown($event);showDeactivatedTeams(false);">Hide deactivated teams</a></li>
-        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="toggleDropdown($event);showDeactivatedTeams(true);">Show deactivated teams</a></li>
+      <ul class="uib-dropdown-menu league-actions-menu" role="menu">
+        <li><a ng-show="isCommish(leagueData) || isAdmin()" ng-click="editLeague(leagueData)">Edit league</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">Edit league message</a></li>
+        <li><a ng-show="isCommish(leagueData)" ng-click="invite(leagueData.id, isCommish(leagueData), leagueData.closed)">Manage invitations</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == true" ng-click="showDeactivatedTeams(false);">Hide deactivated teams</a></li>
+        <li><a ng-show="isCommish(leagueData) && teamOptions.inactive == false" ng-click="showDeactivatedTeams(true);">Show deactivated teams</a></li>
       </ul>
     </div>
     <h3 style="margin-top: 0;">
@@ -35,107 +35,107 @@
 </div>
 <hr>
 <div class="league-message" ng-show="!leagueData.closed || hasTeamInLeague() || isCommish(leagueData)">
-  <accordion close-others="true">
-    <accordion-group is-open="userModel.leagueMessageOpen[leagueData.id]">
-      <accordion-heading>
+  <uib-accordion close-others="true">
+    <uib-accordion-group is-open="userModel.leagueMessageOpen[leagueData.id]">
+      <uib-accordion-heading>
         <i class="fa fa-comment fa-fw"></i> Messages to league [ <span ng-show="leagueData.message.length > 0">1</span><span ng-show="!leagueData.message || leagueData.message.length == 0">0</span> ] <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': userModel.leagueMessageOpen[leagueData.id], 'glyphicon-chevron-right': !userModel.leagueMessageOpen[leagueData.id]}"></i>
-      </accordion-heading>
+      </uib-accordion-heading>
       <p class="league-message-text" ng-show="!leagueData.message || leagueData.message.length == 0">no messages</p><p class="league-message-text" ng-show="leagueData.message.length > 0" ng-bind-html="leagueData.message | linky:'_blank'"></p> <a class="alert-link" ng-show="isCommish(leagueData)" ng-click="updateMessage(leagueData)">[ edit ]</a><a class="alert-link" ng-show="!isCommish(leagueData) && hasTeamInLeague()" ng-click="contactCommish(leagueData)">[ contact commish ]</a>
-    </accordion-group>
-  </accordion>
+    </uib-accordion-group>
+  </uib-accordion>
   <hr>
 </div>
 <div class="teams-tab">
   <ul class="nav nav-tabs">
     <li class="active"><a>Teams [ <span ng-show="leagueData.elimination">{{aliveTeamCount(leagueTeams)}} / </span>{{leagueData.team_count}} ]</a></li>
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-        Rules <span class="caret"></span>
-      </a>
-      <div class="dropdown-menu panel panel-default">
-        <div class="panel-body rules-panel scrollable-rules-panel scrollable" ng-click="$event.stopPropagation()">
-          <accordion close-others="true" ng-show="!leagueData.elimination">
-            <accordion-group heading="How do I play?">
-              <ol>
-                <li>{{(leagueData.max_picks_per_week) ? 'Pick ' + leagueData.max_picks_per_week + ' loser(s) each week.' : 'Each week, pick one loser for every game.'}}</li>
-                <li>Root for your losers to lose...duh</li>
-              </ol>
-            </accordion-group>
-            <accordion-group heading="How do I win?">
-              Pick the most correct losers for the week and win the week.
-            </accordion-group>
-            <accordion-group heading="What do I win?">
-              That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
-            </accordion-group>
-            <accordion-group heading="How many losers do I pick each week?">
-              {{(leagueData.max_picks_per_week) ? leagueData.max_picks_per_week : 'Pick one loser for every game.'}}
-            </accordion-group>
-            <accordion-group heading="When is the deadline to make my picks?">
-              As long as a game hasn't started, you can make a pick for that game.
-            </accordion-group>
-            <accordion-group heading="Can I pick the same loser twice?">
-              Yes sir.
-            </accordion-group>
-            <accordion-group heading="Do ties count as a loss?">
-              No ma'am.
-            </accordion-group>
-            <accordion-group heading="When is the deadline to join this league?">
-              Join anytime.
-            </accordion-group>
-            <accordion-group heading="What if I fail to make picks for a week?">
-              I'm guessing you won't win that week.
-            </accordion-group>
-            <accordion-group heading="Is there anything else I should know?">
-              Not really, but you can read the general <a ng-click="readFaq()">faq</a> if you like.
-            </accordion-group>
-          </accordion>
-          <accordion close-others="true" ng-show="leagueData.elimination">
-            <accordion-group heading="How do I play?">
-              <ol>
-                <li>Pick a different loser each week.</li>
-                <li>Root for your loser to lose...duh</li>
-                <li>If you are wrong, you are out.</li>
-                <li>If you are right, you move on to the next week.</li>
-              </ol>
-            </accordion-group>
-            <accordion-group heading="How do I win?">
-              {{(leagueData.eliminate_on_tie) ? 'The team that last the longest wins.' : 'The team with the most correct losers at the end of the season wins.'}}
-            </accordion-group>
-            <accordion-group heading="What do I win?">
-              That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
-            </accordion-group>
-            <accordion-group heading="How many losers do I pick each week?">
-              1
-            </accordion-group>
-            <accordion-group heading="When is the deadline to make my pick?">
-              As long as a game hasn't started, you can make a pick for that game. Make sure you make a pick before the end of the week.
-            </accordion-group>
-            <accordion-group heading="During the season, can I pick the same loser twice?">
-              Nope. Unless you make the playoffs where all losers are once again available to pick.
-            </accordion-group>
-            <accordion-group heading="Do ties count as a loss?">
-              Negative. {{(leagueData.eliminate_on_tie) ? 'A tie will result in elimination.' : 'However, a tie will not result in elimination.'}}
-            </accordion-group>
-            <accordion-group heading="When is the deadline to join the league?">
-              Join before the end of this league's start week.
-            </accordion-group>
-            <accordion-group heading="What if I fail to make a pick for a week?">
-              Pack your bags. You're going home.
-            </accordion-group>
-            <accordion-group heading="Is there anything else I should know?">
-              Not really, but you can read the general <a ng-click="readFaq()">faq</a> if you like.
-            </accordion-group>
-          </accordion>
+    <li class="uib-dropdown">
+      <div class="rules-dropdown" uib-dropdown is-open="rules.isopen">
+        <button type="button" class="rules-button btn btn-link" uib-dropdown-toggle>Rules <span class="caret"></span></button>
+        <div class="uib-dropdown-menu panel panel-default">
+          <div class="panel-body rules-panel scrollable-rules-panel scrollable" ng-click="$event.stopPropagation()">
+            <uib-accordion close-others="true" ng-show="!leagueData.elimination">
+              <uib-accordion-group heading="How do I play?">
+                <ol>
+                  <li>{{(leagueData.max_picks_per_week) ? 'Pick ' + leagueData.max_picks_per_week + ' loser(s) each week.' : 'Each week, pick one loser for every game.'}}</li>
+                  <li>Root for your losers to lose...duh</li>
+                </ol>
+              </uib-accordion-group>
+              <uib-accordion-group heading="How do I win?">
+                Pick the most correct losers for the week and win the week.
+              </uib-accordion-group>
+              <uib-accordion-group heading="What do I win?">
+                That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
+              </uib-accordion-group>
+              <uib-accordion-group heading="How many losers do I pick each week?">
+                {{(leagueData.max_picks_per_week) ? leagueData.max_picks_per_week : 'Pick one loser for every game.'}}
+              </uib-accordion-group>
+              <uib-accordion-group heading="When is the deadline to make my picks?">
+                As long as a game hasn't started, you can make a pick for that game.
+              </uib-accordion-group>
+              <uib-accordion-group heading="Can I pick the same loser twice?">
+                Yes sir.
+              </uib-accordion-group>
+              <uib-accordion-group heading="Do ties count as a loss?">
+                No ma'am.
+              </uib-accordion-group>
+              <uib-accordion-group heading="When is the deadline to join this league?">
+                Join anytime.
+              </uib-accordion-group>
+              <uib-accordion-group heading="What if I fail to make picks for a week?">
+                I'm guessing you won't win that week.
+              </uib-accordion-group>
+              <uib-accordion-group heading="Is there anything else I should know?">
+                Not really, but you can read the general <a ng-click="readFaq()">faq</a> if you like.
+              </uib-accordion-group>
+            </uib-accordion>
+            <uib-accordion close-others="true" ng-show="leagueData.elimination">
+              <uib-accordion-group heading="How do I play?">
+                <ol>
+                  <li>Pick a different loser each week.</li>
+                  <li>Root for your loser to lose...duh</li>
+                  <li>If you are wrong, you are out.</li>
+                  <li>If you are right, you move on to the next week.</li>
+                </ol>
+              </uib-accordion-group>
+              <uib-accordion-group heading="How do I win?">
+                {{(leagueData.eliminate_on_tie) ? 'The team that last the longest wins.' : 'The team with the most correct losers at the end of the season wins.'}}
+              </uib-accordion-group>
+              <uib-accordion-group heading="What do I win?">
+                That is between you and the commish of the league. However, please be careful when dealing with money. Don’t send money to anyone you don’t know. Common sense, please.
+              </uib-accordion-group>
+              <uib-accordion-group heading="How many losers do I pick each week?">
+                1
+              </uib-accordion-group>
+              <uib-accordion-group heading="When is the deadline to make my pick?">
+                As long as a game hasn't started, you can make a pick for that game. Make sure you make a pick before the end of the week.
+              </uib-accordion-group>
+              <uib-accordion-group heading="During the season, can I pick the same loser twice?">
+                Nope. Unless you make the playoffs where all losers are once again available to pick.
+              </uib-accordion-group>
+              <uib-accordion-group heading="Do ties count as a loss?">
+                Negative. {{(leagueData.eliminate_on_tie) ? 'A tie will result in elimination.' : 'However, a tie will not result in elimination.'}}
+              </uib-accordion-group>
+              <uib-accordion-group heading="When is the deadline to join the league?">
+                Join before the end of this league's start week.
+              </uib-accordion-group>
+              <uib-accordion-group heading="What if I fail to make a pick for a week?">
+                Pack your bags. You're going home.
+              </uib-accordion-group>
+              <uib-accordion-group heading="Is there anything else I should know?">
+                Not really, but you can read the general <a ng-click="readFaq()">faq</a> if you like.
+              </uib-accordion-group>
+            </uib-accordion>
+          </div>
         </div>
       </div>
     </li>
-    <li class="dropdown" ng-show="hasTeamInLeague() || isCommish(leagueData)">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-        Share <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a ng-click="shareLeagueFB()">Share on Facebook</a></li>
-      </ul>
+    <li class="uib-dropdown" ng-show="hasTeamInLeague() || isCommish(leagueData)">
+      <div class="share-dropdown" uib-dropdown is-open="share.isopen">
+        <button type="button" class="share-button btn btn-link" uib-dropdown-toggle>Share <span class="caret"></span></button>
+        <ul class="uib-dropdown-menu" role="menu">
+          <li><a ng-click="shareLeagueFB()">Share on Facebook</a></li>
+        </ul>
+      </div>
     </li>
   </ul>
   <div class="weeks">
@@ -176,7 +176,7 @@
       No teams found
     </div>
     <div class="league-teams-pagination" ng-show="leagueTeams.length > teamsPerPage && (leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length > 0">
-      <pagination boundary-links="true" max-size="4" total-items="(leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+      <uib-pagination boundary-links="true" max-size="4" total-items="(leagueTeams | activeTeamFilter:teamOptions | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
     </div>
   </div>
 </div>

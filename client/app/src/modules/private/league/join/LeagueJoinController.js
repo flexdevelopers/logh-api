@@ -1,4 +1,4 @@
-var LeagueJoinController = function(league, $modalInstance, $scope, $log) {
+var LeagueJoinController = function(league, $uibModalInstance, $scope, $log) {
 
   $scope.leagueData = league;
 
@@ -9,11 +9,11 @@ var LeagueJoinController = function(league, $modalInstance, $scope, $log) {
   };
 
   $scope.joinLeague = function (newTeam) {
-    $modalInstance.close(newTeam);
+    $uibModalInstance.close(newTeam);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -33,5 +33,5 @@ var LeagueJoinController = function(league, $modalInstance, $scope, $log) {
   init();
 };
 
-LeagueJoinController.$inject = ['league', '$modalInstance', '$scope', '$log'];
+LeagueJoinController.$inject = ['league', '$uibModalInstance', '$scope', '$log'];
 module.exports = LeagueJoinController;

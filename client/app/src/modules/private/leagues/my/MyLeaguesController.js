@@ -1,10 +1,10 @@
-var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, messageModel, seasonModel, leagueService) {
+var MyLeaguesController = function(leagues, $scope, $log, $location, $uibModal, messageModel, seasonModel, leagueService) {
 
   $scope.leagues = leagues.data;
 
   $scope.createLeague = function() {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/new/league.new.tpl.html',
       controller: 'NewLeagueController'
     });
@@ -42,6 +42,6 @@ var MyLeaguesController = function(leagues, $scope, $log, $location, $modal, mes
 
 };
 
-MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$modal', 'messageModel', 'seasonModel', 'leagueService'];
+MyLeaguesController.$inject = ['leagues', '$scope', '$log', '$location', '$uibModal', 'messageModel', 'seasonModel', 'leagueService'];
 module.exports = MyLeaguesController;
 

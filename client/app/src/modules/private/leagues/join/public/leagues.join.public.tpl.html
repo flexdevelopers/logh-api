@@ -11,7 +11,7 @@
 </div>
 
 <div class="public-league-pagination" ng-show="publicLeagues.length > leaguesPerPage && (publicLeagues | filter:search:strict).length > 0">
-    <pagination boundary-links="true" max-size="4" total-items="(publicLeagues |filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <uib-pagination boundary-links="true" max-size="4" total-items="(publicLeagues |filter:search:strict).length" items-per-page="leaguesPerPage" ng-model="currentLeaguePage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 </div>
 <div class="alert alert-info" ng-show="(publicLeagues | filter:search:strict).length == 0">
   No leagues found

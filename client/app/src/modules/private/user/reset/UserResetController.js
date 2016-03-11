@@ -1,15 +1,15 @@
-var UserResetController = function($modalInstance, $scope, $log) {
+var UserResetController = function($uibModalInstance, $scope, $log) {
 
   $scope.userData = {
     email: ""
   };
 
   $scope.reset = function (email) {
-    $modalInstance.close(email);
+    $uibModalInstance.close(email);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -29,5 +29,5 @@ var UserResetController = function($modalInstance, $scope, $log) {
   init();
 };
 
-UserResetController.$inject = ['$modalInstance', '$scope', '$log'];
+UserResetController.$inject = ['$uibModalInstance', '$scope', '$log'];
 module.exports = UserResetController;

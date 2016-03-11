@@ -1,4 +1,4 @@
-var AdminWeekNewController = function(season, weekTypes, $scope, $modalInstance) {
+var AdminWeekNewController = function(season, weekTypes, $scope, $uibModalInstance) {
 
   $scope.weekTypes = weekTypes.data;
 
@@ -25,11 +25,11 @@ var AdminWeekNewController = function(season, weekTypes, $scope, $modalInstance)
   $scope.closeEndsAt();
 
   $scope.createWeek = function(week) {
-    $modalInstance.close(week);
+    $uibModalInstance.close(week);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -48,5 +48,5 @@ var AdminWeekNewController = function(season, weekTypes, $scope, $modalInstance)
   init();
 };
 
-AdminWeekNewController.$inject = ['season', 'weekTypes', '$scope', '$modalInstance'];
+AdminWeekNewController.$inject = ['season', 'weekTypes', '$scope', '$uibModalInstance'];
 module.exports = AdminWeekNewController;

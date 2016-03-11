@@ -1,4 +1,4 @@
-var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $modal, seasonService, weekService) {
+var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $uibModal, seasonService, weekService) {
 
   $scope.season = season.data;
 
@@ -18,7 +18,7 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $
 
   $scope.editSeason = function(season) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/seasons/season/edit/admin.season.edit.tpl.html',
       controller: 'AdminSeasonEditController',
       resolve: {
@@ -39,7 +39,7 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $
 
   $scope.createWeek = function(season) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/week/new/admin.week.new.tpl.html',
       controller: 'AdminWeekNewController',
       resolve: {
@@ -77,5 +77,5 @@ var AdminWeeksController = function(season, weeks, leagues, $scope, $location, $
   init();
 };
 
-AdminWeeksController.$inject = ['season', 'weeks', 'leagues', '$scope', '$location', '$modal', 'seasonService', 'weekService'];
+AdminWeeksController.$inject = ['season', 'weeks', 'leagues', '$scope', '$location', '$uibModal', 'seasonService', 'weekService'];
 module.exports = AdminWeeksController;

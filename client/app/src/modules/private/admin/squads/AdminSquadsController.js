@@ -1,4 +1,4 @@
-var AdminSquadsController = function(squads, $scope, $log, $modal, squadService, messageModel) {
+var AdminSquadsController = function(squads, $scope, $log, $uibModal, squadService, messageModel) {
 
   $scope.squads = squads.data;
 
@@ -12,7 +12,7 @@ var AdminSquadsController = function(squads, $scope, $log, $modal, squadService,
 
   $scope.createSquad = function() {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/squads/new/admin.squads.new.tpl.html',
       controller: 'AdminSquadsNewController'
     });
@@ -28,7 +28,7 @@ var AdminSquadsController = function(squads, $scope, $log, $modal, squadService,
 
   $scope.editSquad = function(squad) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/squads/edit/admin.squads.edit.tpl.html',
       controller: 'AdminSquadsEditController',
       resolve: {
@@ -63,5 +63,5 @@ var AdminSquadsController = function(squads, $scope, $log, $modal, squadService,
   init();
 };
 
-AdminSquadsController.$inject = ['squads', '$scope', '$log', '$modal', 'squadService', 'messageModel'];
+AdminSquadsController.$inject = ['squads', '$scope', '$log', '$uibModal', 'squadService', 'messageModel'];
 module.exports = AdminSquadsController;

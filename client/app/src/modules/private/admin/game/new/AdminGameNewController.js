@@ -1,4 +1,4 @@
-var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInstance) {
+var AdminGameNewController = function(week, lastGame, squads, $scope, $uibModalInstance) {
 
   $scope.weekData = week;
 
@@ -23,11 +23,11 @@ var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInst
   $scope.closeStartsAt();
 
   $scope.createGame = function(game) {
-    $modalInstance.close(game);
+    $uibModalInstance.close(game);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   /**
@@ -38,5 +38,5 @@ var AdminGameNewController = function(week, lastGame, squads, $scope, $modalInst
   init();
 };
 
-AdminGameNewController.$inject = ['week', 'lastGame', 'squads', '$scope', '$modalInstance'];
+AdminGameNewController.$inject = ['week', 'lastGame', 'squads', '$scope', '$uibModalInstance'];
 module.exports = AdminGameNewController;

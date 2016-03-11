@@ -1,4 +1,4 @@
-var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $timeout, $location, $state, $stateParams, $anchorScroll, messageModel, userModel, userService, teamService) {
+var ViewTeamController = function(team, leagueTeams, $scope, $uibModal, $window, $timeout, $location, $state, $stateParams, $anchorScroll, messageModel, userModel, userService, teamService) {
 
   var activate = function(team) {
     teamService.activateTeam(team)
@@ -23,21 +23,11 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
   $scope.teamData = team.data;
   $scope.leagueTeams = leagueTeams.data;
 
-  $scope.teamDropdown = {
-    isopen: false
-  };
-
   $scope.userModel = userModel;
-
-  $scope.toggleDropdown = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.teamDropdown.isopen = !$scope.teamDropdown.isopen;
-  };
 
   $scope.contactCommish = function(team) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/contact/league.contact.tpl.html',
       controller: 'LeagueContactController',
       resolve: {
@@ -57,7 +47,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
 
   $scope.updateMessage = function(team) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/team/message/team.message.tpl.html',
       controller: 'TeamMessageController',
       resolve: {
@@ -80,7 +70,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
   };
 
   $scope.confirmActivate = function(team) {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
       size: 'sm',
@@ -98,7 +88,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
   };
 
   $scope.confirmDeactivate = function(team) {
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'common/modules/confirm/confirm.tpl.html',
       controller: 'ConfirmController',
       size: 'sm',
@@ -158,7 +148,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
 
   $scope.editTeam = function(team) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/team/edit/team.edit.tpl.html',
       controller: 'EditTeamController',
       resolve: {
@@ -214,5 +204,5 @@ var ViewTeamController = function(team, leagueTeams, $scope, $modal, $window, $t
 
 };
 
-ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$modal', '$window', '$timeout', '$location', '$state', '$stateParams', '$anchorScroll', 'messageModel', 'userModel', 'userService', 'teamService'];
+ViewTeamController.$inject = ['team', 'leagueTeams', '$scope', '$uibModal', '$window', '$timeout', '$location', '$state', '$stateParams', '$anchorScroll', 'messageModel', 'userModel', 'userService', 'teamService'];
 module.exports = ViewTeamController;

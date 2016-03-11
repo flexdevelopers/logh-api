@@ -1,4 +1,4 @@
-var AdminSeasonNewController = function($scope, $modalInstance) {
+var AdminSeasonNewController = function($scope, $uibModalInstance) {
 
   $scope.newSeasonData = {
     name: '',
@@ -22,11 +22,11 @@ var AdminSeasonNewController = function($scope, $modalInstance) {
   $scope.closeEndsAt();
 
   $scope.createSeason = function(season) {
-    $modalInstance.close(season);
+    $uibModalInstance.close(season);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -45,5 +45,5 @@ var AdminSeasonNewController = function($scope, $modalInstance) {
   init();
 };
 
-AdminSeasonNewController.$inject = ['$scope', '$modalInstance'];
+AdminSeasonNewController.$inject = ['$scope', '$uibModalInstance'];
 module.exports = AdminSeasonNewController;

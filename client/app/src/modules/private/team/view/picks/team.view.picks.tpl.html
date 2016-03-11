@@ -1,13 +1,13 @@
 <div class="losers-tab">
   <ul class="nav nav-tabs">
     <li class="active"><a>Losers [ {{correctPickCount((picks | weekPicksFilter:selectedWeek:teamData.league.elimination))}} / {{(picks | weekPicksFilter:selectedWeek:teamData.league.elimination).length}} ]</a></li>
-    <li class="dropdown" ng-show="isCoach(teamData)">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-        Share <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a ng-click="shareTeamFB()">Share on Facebook</a></li>
-      </ul>
+    <li class="uib-dropdown" ng-show="isCoach(teamData)">
+      <div class="share-dropdown" uib-dropdown is-open="share.isopen">
+        <button type="button" class="share-button btn btn-link" uib-dropdown-toggle>Share <span class="caret"></span></button>
+        <ul class="uib-dropdown-menu" role="menu">
+          <li><a ng-click="shareTeamFB()">Share on Facebook</a></li>
+        </ul>
+      </div>
     </li>
   </ul>
   <div class="weeks">

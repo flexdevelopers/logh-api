@@ -1,15 +1,15 @@
-var LeagueContactController = function(league, $modalInstance, $scope, $log) {
+var LeagueContactController = function(league, $uibModalInstance, $scope, $log) {
 
   $scope.leagueData = league;
 
   $scope.commishMessage = '';
 
   $scope.contactCommish = function(league, message) {
-    $modalInstance.close({ league: league, message: message });
+    $uibModalInstance.close({ league: league, message: message });
   };
 
   $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -29,5 +29,5 @@ var LeagueContactController = function(league, $modalInstance, $scope, $log) {
   init();
 };
 
-LeagueContactController.$inject = ['league', '$modalInstance', '$scope', '$log'];
+LeagueContactController.$inject = ['league', '$uibModalInstance', '$scope', '$log'];
 module.exports = LeagueContactController;

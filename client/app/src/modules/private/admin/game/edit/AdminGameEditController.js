@@ -1,4 +1,4 @@
-var AdminGameEditController = function(game, squads, $scope, $modalInstance) {
+var AdminGameEditController = function(game, squads, $scope, $uibModalInstance) {
 
   $scope.gameData = angular.copy(game);
 
@@ -17,11 +17,11 @@ var AdminGameEditController = function(game, squads, $scope, $modalInstance) {
   };
 
   $scope.editGame = function(game) {
-    $modalInstance.close(game);
+    $uibModalInstance.close(game);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   /**
@@ -32,5 +32,5 @@ var AdminGameEditController = function(game, squads, $scope, $modalInstance) {
   init();
 };
 
-AdminGameEditController.$inject = ['game', 'squads', '$scope', '$modalInstance'];
+AdminGameEditController.$inject = ['game', 'squads', '$scope', '$uibModalInstance'];
 module.exports = AdminGameEditController;
