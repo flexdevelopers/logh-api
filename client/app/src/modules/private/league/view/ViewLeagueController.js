@@ -1,4 +1,4 @@
-var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $log, $modal, $location, $state, $stateParams, $timeout, userModel, messageModel, userService, weekService, teamService, leagueService) {
+var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $log, $uibModal, $location, $state, $stateParams, $timeout, userModel, messageModel, userService, weekService, teamService, leagueService) {
 
   var setMessageState = function() {
     if (!_.has($scope.userModel.leagueMessageOpen, $scope.leagueData.id)) {
@@ -18,10 +18,6 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
   $scope.teamOptions = { active: true, inactive: false };
 
   $scope.teamQuery = '';
-
-  $scope.leagueDropdown = {
-    isopen: false
-  };
 
   $scope.selectedWeekSlug = $stateParams.week;
 
@@ -47,12 +43,6 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
       return team.active && !$scope.isEliminated(team);
     });
     return aliveTeams.length;
-  };
-
-  $scope.toggleDropdown = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    $scope.leagueDropdown.isopen = !$scope.leagueDropdown.isopen;
   };
 
   $scope.changeWeek = function(slug) {
@@ -129,7 +119,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.contactCommish = function(league) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/contact/league.contact.tpl.html',
       controller: 'LeagueContactController',
       resolve: {
@@ -150,7 +140,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.reportAbuse = function() {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/public/abuse/abuse.tpl.html',
       controller: 'AbuseController'
     });
@@ -170,7 +160,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.updateMessage = function(league) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/message/league.message.tpl.html',
       controller: 'LeagueMessageController',
       resolve: {
@@ -195,7 +185,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.joinLeague = function(league) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/join/league.join.tpl.html',
       controller: 'LeagueJoinController',
       resolve: {
@@ -227,7 +217,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.requestInvite = function(league) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/invite/request/league.invite.request.tpl.html',
       controller: 'LeagueInviteRequestController',
       resolve: {
@@ -248,7 +238,7 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
   $scope.invite = function(leagueId, isCommish, leagueClosed) {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/league/invite/league.invite.tpl.html',
       controller: 'LeagueInviteController',
       resolve: {
@@ -339,5 +329,5 @@ var ViewLeagueController = function(league, leagueWeeks, leagueTeams, $scope, $l
 
 };
 
-ViewLeagueController.$inject = ['league','leagueWeeks', 'leagueTeams', '$scope', '$log', '$modal', '$location', '$state', '$stateParams', '$timeout', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
+ViewLeagueController.$inject = ['league','leagueWeeks', 'leagueTeams', '$scope', '$log', '$uibModal', '$location', '$state', '$stateParams', '$timeout', 'userModel', 'messageModel', 'userService', 'weekService', 'teamService', 'leagueService'];
 module.exports = ViewLeagueController;

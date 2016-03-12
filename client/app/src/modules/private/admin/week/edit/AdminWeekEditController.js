@@ -1,4 +1,4 @@
-var AdminWeekEditController = function(week, weekTypes, $scope, $modalInstance) {
+var AdminWeekEditController = function(week, weekTypes, $scope, $uibModalInstance) {
 
   $scope.weekData = angular.copy(week);
 
@@ -19,11 +19,11 @@ var AdminWeekEditController = function(week, weekTypes, $scope, $modalInstance) 
   $scope.closeEndsAt();
 
   $scope.editWeek = function(week) {
-    $modalInstance.close(week);
+    $uibModalInstance.close(week);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -42,5 +42,5 @@ var AdminWeekEditController = function(week, weekTypes, $scope, $modalInstance) 
   init();
 };
 
-AdminWeekEditController.$inject = ['week', 'weekTypes', '$scope', '$modalInstance'];
+AdminWeekEditController.$inject = ['week', 'weekTypes', '$scope', '$uibModalInstance'];
 module.exports = AdminWeekEditController;

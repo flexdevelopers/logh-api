@@ -1,13 +1,13 @@
-var AbuseController = function($modalInstance, $scope, $log) {
+var AbuseController = function($uibModalInstance, $scope, $log) {
 
   $scope.abuseMessage = '';
 
   $scope.contactUs = function(message) {
-    $modalInstance.close(message);
+    $uibModalInstance.close(message);
   };
 
   $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -27,5 +27,5 @@ var AbuseController = function($modalInstance, $scope, $log) {
   init();
 };
 
-AbuseController.$inject = ['$modalInstance', '$scope', '$log'];
+AbuseController.$inject = ['$uibModalInstance', '$scope', '$log'];
 module.exports = AbuseController;

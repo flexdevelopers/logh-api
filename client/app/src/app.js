@@ -23,7 +23,7 @@ var loghApp = angular.module('loghApp', [
     'ui.router.stateHelper',
     'angular-loading-bar',
     'angulartics',
-    'angulartics.google.analytics',
+//    'angulartics.google.analytics',
 
     // public modules
     require('./modules/public/home').name,
@@ -120,7 +120,9 @@ var loghApp = angular.module('loghApp', [
 
     ], App)
 
-    .config(function($stateProvider, $locationProvider, $logProvider, $uiViewScrollProvider, $anchorScrollProvider) {
+    .config(function($stateProvider, $locationProvider, $logProvider, $uiViewScrollProvider, $anchorScrollProvider, $controllerProvider) {
+        $controllerProvider.allowGlobals();
+
         // use the HTML5 History API
         $locationProvider.html5Mode(false);
 

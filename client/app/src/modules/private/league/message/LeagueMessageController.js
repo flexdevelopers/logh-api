@@ -1,4 +1,4 @@
-var LeagueMessageController = function(league, $modalInstance, $scope, $log) {
+var LeagueMessageController = function(league, $uibModalInstance, $scope, $log) {
 
   $scope.leagueData = angular.copy(league);
 
@@ -8,11 +8,11 @@ var LeagueMessageController = function(league, $modalInstance, $scope, $log) {
   };
 
   $scope.updateMessage = function(league, sendAlive, sendAll) {
-    $modalInstance.close({ league: league, sendAlive: sendAlive, sendAll: sendAll });
+    $uibModalInstance.close({ league: league, sendAlive: sendAlive, sendAll: sendAll });
   };
 
   $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -32,5 +32,5 @@ var LeagueMessageController = function(league, $modalInstance, $scope, $log) {
   init();
 };
 
-LeagueMessageController.$inject = ['league', '$modalInstance', '$scope', '$log'];
+LeagueMessageController.$inject = ['league', '$uibModalInstance', '$scope', '$log'];
 module.exports = LeagueMessageController;

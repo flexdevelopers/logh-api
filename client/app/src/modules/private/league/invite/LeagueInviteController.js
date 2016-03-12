@@ -1,4 +1,4 @@
-var LeagueInviteController = function(leagueId, isCommish, leagueClosed, invitations, $modal, $modalInstance, $scope, $log) {
+var LeagueInviteController = function(leagueId, isCommish, leagueClosed, invitations, $uibModal, $uibModalInstance, $scope, $log) {
 
   $scope.isCommish = isCommish;
 
@@ -24,11 +24,11 @@ var LeagueInviteController = function(leagueId, isCommish, leagueClosed, invitat
   };
 
   $scope.sendInvite = function(invitation) {
-    $modalInstance.close(invitation);
+    $uibModalInstance.close(invitation);
   };
 
   $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -48,5 +48,5 @@ var LeagueInviteController = function(leagueId, isCommish, leagueClosed, invitat
   init();
 };
 
-LeagueInviteController.$inject = ['leagueId', 'isCommish', 'leagueClosed', 'invitations', '$modal', '$modalInstance', '$scope', '$log'];
+LeagueInviteController.$inject = ['leagueId', 'isCommish', 'leagueClosed', 'invitations', '$uibModal', '$uibModalInstance', '$scope', '$log'];
 module.exports = LeagueInviteController;

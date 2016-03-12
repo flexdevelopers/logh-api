@@ -1,4 +1,4 @@
-var SigninController = function($scope, $log, $location, $modal, messageModel, userService) {
+var SigninController = function($scope, $log, $location, $uibModal, messageModel, userService) {
 
     $scope.credentials = {
         email: '',
@@ -15,7 +15,7 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
 
     $scope.resetPassword = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/private/user/reset/user.reset.tpl.html',
         controller: 'UserResetController'
       });
@@ -29,7 +29,7 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
 
     $scope.register = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
         controller: 'RegisterController',
         size: 'sm'
@@ -50,5 +50,5 @@ var SigninController = function($scope, $log, $location, $modal, messageModel, u
 
 };
 
-SigninController.$inject = ['$scope', '$log', '$location', '$modal', 'messageModel', 'userService'];
+SigninController.$inject = ['$scope', '$log', '$location', '$uibModal', 'messageModel', 'userService'];
 module.exports = SigninController;

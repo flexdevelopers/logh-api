@@ -1,13 +1,13 @@
-var AdminSquadsEditController = function(squad, $scope, $modalInstance) {
+var AdminSquadsEditController = function(squad, $scope, $uibModalInstance) {
 
   $scope.squadData = angular.copy(squad);
 
   $scope.editSquad = function(squad) {
-    $modalInstance.close(squad);
+    $uibModalInstance.close(squad);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -26,5 +26,5 @@ var AdminSquadsEditController = function(squad, $scope, $modalInstance) {
   init();
 };
 
-AdminSquadsEditController.$inject = ['squad', '$scope', '$modalInstance'];
+AdminSquadsEditController.$inject = ['squad', '$scope', '$uibModalInstance'];
 module.exports = AdminSquadsEditController;

@@ -1,15 +1,15 @@
-var TeamMessageController = function(team, $modalInstance, $scope, $log) {
+var TeamMessageController = function(team, $uibModalInstance, $scope, $log) {
 
   $scope.teamData = angular.copy(team);
 
   $scope.messageOptions = { sendEmail: false };
 
   $scope.updateMessage = function(team, sendEmail) {
-    $modalInstance.close({ team: team, sendEmail: sendEmail});
+    $uibModalInstance.close({ team: team, sendEmail: sendEmail});
   };
 
   $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -29,5 +29,5 @@ var TeamMessageController = function(team, $modalInstance, $scope, $log) {
   init();
 };
 
-TeamMessageController.$inject = ['team', '$modalInstance', '$scope', '$log'];
+TeamMessageController.$inject = ['team', '$uibModalInstance', '$scope', '$log'];
 module.exports = TeamMessageController;

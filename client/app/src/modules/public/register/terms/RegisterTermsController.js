@@ -1,7 +1,7 @@
-var RegisterTermsController = function($modalInstance, $scope, $log) {
+var RegisterTermsController = function($uibModalInstance, $scope, $log) {
 
   $scope.close = function () {
-    $modalInstance.dismiss('close');
+    $uibModalInstance.dismiss('close');
   };
 
   /**
@@ -13,5 +13,5 @@ var RegisterTermsController = function($modalInstance, $scope, $log) {
   init();
 };
 
-RegisterTermsController.$inject = ['$modalInstance', '$scope', '$log'];
+RegisterTermsController.$inject = ['$uibModalInstance', '$scope', '$log'];
 module.exports = RegisterTermsController;

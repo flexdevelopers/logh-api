@@ -1,4 +1,4 @@
-var AdminSeasonsController = function($scope, $location, $modal, seasonModel, seasonService) {
+var AdminSeasonsController = function($scope, $location, $uibModal, seasonModel, seasonService) {
 
   $scope.seasons = seasonModel.seasons;
 
@@ -8,7 +8,7 @@ var AdminSeasonsController = function($scope, $location, $modal, seasonModel, se
 
   $scope.createSeason = function() {
 
-    var modalInstance = $modal.open({
+    var modalInstance = $uibModal.open({
       templateUrl: 'modules/private/admin/seasons/season/new/admin.season.new.tpl.html',
       controller: 'AdminSeasonNewController'
     });
@@ -30,5 +30,5 @@ var AdminSeasonsController = function($scope, $location, $modal, seasonModel, se
   init();
 };
 
-AdminSeasonsController.$inject = ['$scope', '$location', '$modal', 'seasonModel', 'seasonService'];
+AdminSeasonsController.$inject = ['$scope', '$location', '$uibModal', 'seasonModel', 'seasonService'];
 module.exports = AdminSeasonsController;

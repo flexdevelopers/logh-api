@@ -1,4 +1,4 @@
-var AdminSquadsNewController = function($scope, $modalInstance) {
+var AdminSquadsNewController = function($scope, $uibModalInstance) {
 
   $scope.squadData = {
     name: '',
@@ -8,11 +8,11 @@ var AdminSquadsNewController = function($scope, $modalInstance) {
   };
 
   $scope.createSquad = function(squad) {
-    $modalInstance.close(squad);
+    $uibModalInstance.close(squad);
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    $uibModalInstance.dismiss('cancel');
   };
 
   $scope.hasError = function(input) {
@@ -31,5 +31,5 @@ var AdminSquadsNewController = function($scope, $modalInstance) {
   init();
 };
 
-AdminSquadsNewController.$inject = ['$scope', '$modalInstance'];
+AdminSquadsNewController.$inject = ['$scope', '$uibModalInstance'];
 module.exports = AdminSquadsNewController;

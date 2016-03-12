@@ -1,4 +1,4 @@
-var HeaderController = function($rootScope, $scope, $log, $location, $modal, $state, $anchorScroll, $stateParams, userService, leagueService, userModel, messageModel, seasonModel) {
+var HeaderController = function($rootScope, $scope, $log, $location, $uibModal, $state, $anchorScroll, $stateParams, userService, leagueService, userModel, messageModel, seasonModel) {
 
     var scrollToTop = function() {
       $anchorScroll(); // hacky?
@@ -39,7 +39,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
 
     $scope.contactUs = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/public/abuse/abuse.tpl.html',
         controller: 'AbuseController'
       });
@@ -54,7 +54,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
 
     $scope.register = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/public/register/register.tpl.html',
         controller: 'RegisterController',
         size: 'sm'
@@ -104,7 +104,7 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
 
     $scope.resetPassword = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/private/user/reset/user.reset.tpl.html',
         controller: 'UserResetController'
       });
@@ -126,5 +126,5 @@ var HeaderController = function($rootScope, $scope, $log, $location, $modal, $st
     init();
 };
 
-HeaderController.$inject = ['$rootScope', '$scope', '$log', '$location', '$modal', '$state', '$anchorScroll', '$stateParams', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
+HeaderController.$inject = ['$rootScope', '$scope', '$log', '$location', '$uibModal', '$state', '$anchorScroll', '$stateParams', 'userService', 'leagueService', 'userModel', 'messageModel', 'seasonModel'];
 module.exports = HeaderController;

@@ -1,4 +1,4 @@
-var RegisterController = function($scope, $modal, $modalInstance) {
+var RegisterController = function($scope, $uibModal, $uibModalInstance) {
 
     $scope.newUserData = {
         first_name: '',
@@ -10,11 +10,11 @@ var RegisterController = function($scope, $modal, $modalInstance) {
 
     $scope.register = function (newUser) {
       $scope.newUserData.password_confirmation = $scope.newUserData.password;
-      $modalInstance.close(newUser);
+      $uibModalInstance.close(newUser);
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+      $uibModalInstance.dismiss('cancel');
     };
 
     $scope.hasError = function(input) {
@@ -27,7 +27,7 @@ var RegisterController = function($scope, $modal, $modalInstance) {
 
     $scope.showTerms = function() {
 
-      var modalInstance = $modal.open({
+      var modalInstance = $uibModal.open({
         templateUrl: 'modules/public/register/terms/register.terms.tpl.html',
         controller: 'RegisterTermsController'
       });
@@ -44,5 +44,5 @@ var RegisterController = function($scope, $modal, $modalInstance) {
 
 };
 
-RegisterController.$inject = ['$scope', '$modal', '$modalInstance'];
+RegisterController.$inject = ['$scope', '$uibModal', '$uibModalInstance'];
 module.exports = RegisterController;

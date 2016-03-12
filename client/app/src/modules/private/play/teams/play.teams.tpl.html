@@ -21,7 +21,7 @@
   </div>
 
   <div class="my-league-pagination" ng-show="teams.length > teamsPerPage && (teams | filter:search:strict).length > 0">
-    <pagination boundary-links="true" max-size="4" total-items="(teams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    <uib-pagination boundary-links="true" max-size="4" total-items="(teams | filter:search:strict).length" items-per-page="teamsPerPage" ng-model="currentTeamPage" class="pagination-md" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
   </div>
   <div style="clear: both;"></div>
 </div>

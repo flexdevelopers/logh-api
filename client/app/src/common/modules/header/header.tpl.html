@@ -8,48 +8,52 @@
     </button>
     <a class="navbar-brand" ng-click="home()"><b>LOSE</b>OR<b>GO</b>HOME</a>
   </div>
-  <div collapse="isCollapsed" class="navbar-collapse">
+  <div uib-collapse="isCollapsed" class="navbar-collapse">
     <ul ng-show="userData.user.loaded" class="nav navbar-nav navbar-right">
       <li ng-class="{'active': isState(['private.play.teams', 'private.play.leagues'])}"><a ng-click="play(selectedSeasonId)">My Teams & Leagues</a></li>
       <li ng-class="{'active': isState(['private.leagues.join.public', 'private.leagues.join.private'])}"><a ng-click="joinLeague()">Join League</a></li>
       <li><a ng-click="createLeague()">Create League</a></li>
       <li><a ng-click="faq()">FAQ</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a ng-click="contactUs()">Contact Us</a></li>
-          <li class="divider"></li>
-          <li><a ng-click="userProfile()">User Profile</a></li>
-          <li><a ng-click="signout()">Sign Out</a></li>
-        </ul>
+      <li class="uib-dropdown">
+        <div class="btn-group" uib-dropdown is-open="settings.isopen">
+          <button id="settings-button" type="button" class="btn btn-link" uib-dropdown-toggle><i class="fa fa-cog fa-fw settings-icon" title="User Settings"></i> <b class="caret"></b></button>
+          <ul class="uib-dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="settings-button">
+            <li><a ng-click="contactUs()">Contact Us</a></li>
+            <li class="divider"></li>
+            <li><a ng-click="userProfile()">User Profile</a></li>
+            <li><a ng-click="signout()">Sign Out</a></li>
+          </ul>
+        </div>
       </li>
     </ul>
     <ul ng-show="!userData.user.loaded" class="nav navbar-nav navbar-right">
       <li><a ng-click="faq()">FAQ</a></li>
       <li><a ng-click="register()">Register</a></li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In</strong></a>
-        <div class="dropdown-menu panel panel-default">
-          <div class="inline-signin-form panel-body">
-            <form name="inlineSigninForm" role="form" ng-submit="signin({ email: credentials.email.toLowerCase(), password: credentials.password }); $event.stopPropagation();" novalidate>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
-                  <input type="email" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();" rc-verify-set autofocus required>
+      <li class="uib-dropdown">
+        <div class="btn-group" uib-dropdown is-open="signin.isopen">
+          <button id="signin-button" type="button" class="btn btn-link" uib-dropdown-toggle>Sign In</button>
+          <div class="uib-dropdown-menu dropdown-menu-right panel panel-default">
+            <div class="inline-signin-form panel-body">
+              <form name="inlineSigninForm" role="form" ng-submit="signin({ email: credentials.email.toLowerCase(), password: credentials.password }); $event.stopPropagation();" novalidate>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+                    <input type="email" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Email" ng-model="credentials.email" ng-click="$event.stopPropagation();" rc-verify-set autofocus required>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                  <input type="password" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" rc-verify-set required>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    <input type="password" class="form-control" autocomplete="off" style="cursor:auto;" placeholder="Password" ng-model="credentials.password" ng-click="$event.stopPropagation();" rc-verify-set required>
+                  </div>
                 </div>
-              </div>
-              <button type="submit" class="btn btn-block btn-primary">Sign in with email</button>
-              <div class="orDiv"><span>or</span></div>
-            </form>
-            <button class="btn btn-block btn-primary" ng-click="signinGuest()">Sign in as guest</button>
-            <hr>
-            <div class="signin-other-container"><a ng-click="register()">Register</a> | <a ng-click="resetPassword()">Reset Password</a></div>
+                <button type="submit" class="btn btn-block btn-primary">Sign in with email</button>
+                <div class="orDiv"><span>or</span></div>
+              </form>
+              <button class="btn btn-block btn-primary" ng-click="signinGuest()">Sign in as guest</button>
+              <hr>
+              <div class="signin-other-container"><a ng-click="register()">Register</a> | <a ng-click="resetPassword()">Reset Password</a></div>
+            </div>
           </div>
         </div>
       </li>
