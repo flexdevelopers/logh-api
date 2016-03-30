@@ -10,20 +10,16 @@ var App = function($urlRouterProvider) {
 App.$inject = ['$urlRouterProvider'];
 
 var loghApp = angular.module('loghApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngRoute',
-    'ngDropdowns',
+    'app.templates',
+    'angular-loading-bar',
     'commangular',
+    'ngAnimate',
+    'ngDropdowns',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize',
     'ui.router',
     'ui.bootstrap',
-    'ui.bootstrap.datetimepicker',
-    'app.templates',
-    'ui.router.stateHelper',
-    'angular-loading-bar',
-    'angulartics',
-//    'angulartics.google.analytics',
 
     // public modules
     require('./modules/public/home').name,
