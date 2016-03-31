@@ -20,6 +20,7 @@ var loghApp = angular.module('loghApp', [
     'ngSanitize',
     'ui.router',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
 
     // public modules
     require('./modules/public/home').name,
