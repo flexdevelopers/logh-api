@@ -1,4 +1,4 @@
-var AdminSeasonsController = function($scope, $location, $uibModal, seasonModel, seasonService) {
+var AdminSeasonsController = function($scope, $location, $uibModal, messageModel, seasonModel, seasonService) {
 
   $scope.seasons = seasonModel.seasons;
 
@@ -16,7 +16,6 @@ var AdminSeasonsController = function($scope, $location, $uibModal, seasonModel,
     modalInstance.result.then(function(season) {
       seasonService.createSeason(season);
     }, function () {
-      $log.debug('Create season modal dismissed...');
       messageModel.setMessage({ type: 'warning', content: 'Create season cancelled' }, false);
     });
 
@@ -30,5 +29,5 @@ var AdminSeasonsController = function($scope, $location, $uibModal, seasonModel,
   init();
 };
 
-AdminSeasonsController.$inject = ['$scope', '$location', '$uibModal', 'seasonModel', 'seasonService'];
+AdminSeasonsController.$inject = ['$scope', '$location', '$uibModal', 'messageModel', 'seasonModel', 'seasonService'];
 module.exports = AdminSeasonsController;
