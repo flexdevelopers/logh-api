@@ -1,10 +1,16 @@
-var ApplicationService = function() {
+var ApplicationService = function($window, $location) {
 
         this.startup = function() {
-          // stuff to do when app starts up
+          forceHttp();
+        };
+
+        var forceHttp = function () {
+          if ($location.protocol() == 'https') {
+            $window.location.href = $location.absUrl().replace('https', 'http');
+          }
         };
 
     };
 
-ApplicationService.$inject = [];
+ApplicationService.$inject = ['$window', '$location'];
 module.exports = ApplicationService;
