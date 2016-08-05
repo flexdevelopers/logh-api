@@ -17,8 +17,8 @@ var MessageController = function($rootScope, $scope, $log, messageModel) {
     $scope.shareUserFB = function() {
       var options = {
         method: "feed",
-        link: "https://www.loseorgohome.com",
-        picture: "https://www.loseorgohome.com/resources/assets/images/background-small.jpg",
+        link: "http://www.loseorgohome.com",
+        picture: "http://www.loseorgohome.com/resources/assets/images/background-small.jpg",
         name: "Losing is Everything",
         description: "Free NFL survivor and pick'em leagues are waiting for you."
       };

@@ -184,7 +184,7 @@ var ViewTeamController = function(team, leagueTeams, $scope, $uibModal, $window,
     var options = {
       method: 'feed',
       link: $location.absUrl(),
-      picture: "https://www.loseorgohome.com/resources/assets/images/background-small.jpg",
+      picture: "http://www.loseorgohome.com/resources/assets/images/background-small.jpg",
       name: $scope.teamData.name + ' [ ' + $scope.teamData.league.name + ' ]',
       description: $scope.teamData.league.format,
       caption: $scope.teamData.league.season_name
